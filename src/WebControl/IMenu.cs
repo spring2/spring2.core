@@ -30,5 +30,15 @@ namespace Spring2.Core.WebControl {
 	MenuItem PreviousItem {
 	    get;
 	}
+
+	MenuItem FirstItem {
+	    get;
+	}
+
+	MenuItem LastItem {
+	    get;
+	}
+
+	MenuItem SetSelectedItemByUrl(String url);
     }
 }

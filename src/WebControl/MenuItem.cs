@@ -8,77 +8,83 @@ namespace Spring2.Core.WebControl {
     /// <summary>
     /// Summary description for MenuItem.
     /// </summary>
-//    [DefaultProperty("Text"), ToolboxData("<{0}:MenuItem runat=server></{0}:MenuItem>")]
+    //    [DefaultProperty("Text"), ToolboxData("<{0}:MenuItem runat=server></{0}:MenuItem>")]
     [ParseChildren(true, "Items")]
-    public class MenuItem : System.Web.UI.WebControls.WebControl, IMenu {
+    public class MenuItem : Menu {
 
-	private String label;
-	private String navigateUrl;
-	private Boolean selected;
-	private Boolean expanded;
-	private IList items = new ArrayList();
-	private MenuItem selectedItem;
-	private IMenu parentMenu;
+	public static readonly MenuItem EMPTY = new MenuItem();
+
+	private Menu parentMenu;
 	
-	//	[Bindable(true), Category("Appearance"), DefaultValue("")] 
-	public String Label {
-	    get { return label; }
-	    set { label = value; }
-	}
-
-	public String NavigateUrl {
-	    get { return navigateUrl; }
-	    set { navigateUrl = value; }
-	}
-
-	public Boolean Selected {
-	    get { return selected; }
-	    set { selected = value; }
-	}
-
-	public Boolean Expanded {
-	    get { return expanded; }
-	    set { expanded = value; }
-	}
-
-	public IList Items {
-	    get { return items; }
-	}
-
-	public IMenu ParentMenu {
+	public Menu ParentMenu {
 	    get { return parentMenu; }
 	    set { parentMenu = value; }
 	}
 
-	public MenuItem SelectedItem {
-	    get { return selectedItem; }
-	    set { selectedItem = value; }
-	}
-
-	public MenuItem NextItem {
-	    get { return selectedItem; }
-	}
-
-	public MenuItem PreviousItem {
-	    get { return selectedItem; }
-	}
-
+//	public MenuItem SelectedItem {
+//	    get { 
+//		foreach (MenuItem item in items) {
+//		    if (item.Selected) {
+//			return item;
+//		    }
+//		}
+//		return EMPTY;
+//	    }
+//	    set {
+//		foreach (MenuItem item in items) {
+//		    item.Selected = item.Equals(value);
+//		}
+//	    }
+//	}
+//
+//	public MenuItem NextItem {
+//	    get {
+//		Int32 selectedItemIndex = items.IndexOf(SelectedItem);
+//		return ++selectedItemIndex >= items.Count ? EMPTY : items[selectedItemIndex];
+//	    }
+//	}
+//
+//	public MenuItem PreviousItem {
+//	    get { 
+//		Int32 selectedItemIndex = items.IndexOf(SelectedItem);
+//		return --selectedItemIndex < 0 ? EMPTY : items[selectedItemIndex];
+//	    }
+//	}
+//
+//	public MenuItem FirstItem {
+//	    get { return items.Count > 0 ? items[0] : EMPTY; }
+//	}
+//
+//	public MenuItem LastItem {
+//	    get { return items.Count > 0 ? items[items.Count - 1] : EMPTY; }
+//	}
+//
 	public String SelectedItemImageUrl {
 	    get { return ParentMenu.SelectedItemImageUrl; }
 	}
-
-	public Unit Indent {
-	    get { return ParentMenu.Indent; }
-	}
-
-	public Unit Space {
-	    get { return ParentMenu.Space; }
-	}
-
+//
+//	public MenuItem SetSelectedItemByUrl(String url) {
+//	    foreach (MenuItem item in items) {
+//	        if (item.NavigateUrl.Equals(url)) {
+//		    SelectedItem = item;
+//		    return item;
+//		}
+//	    }
+//	    return EMPTY;
+//	}
+//
+//	public Unit Indent {
+//	    get { return ParentMenu.Indent; }
+//	}
+//
+//	public Unit Space {
+//	    get { return ParentMenu.Space; }
+//	}
+//
 	public Int32 Depth {
 	    get {
 		Int32 maxDepth = 0, depth = 0;
-		foreach(MenuItem item in items) {
+		foreach(MenuItem item in Items) {
 		    item.ParentMenu = this;
 		    depth = item.Depth;
 		    if (depth > maxDepth) {
@@ -91,7 +97,7 @@ namespace Spring2.Core.WebControl {
 	}
 
 	public void AddItem(MenuItem item) {
-	    this.Items.Add(item);
+	    Items.Add(item);
 	}
 
 	public void CreateItemControls(Table table, Unit indent, Unit space, Int32 level, Int32 depth) {
@@ -108,7 +114,6 @@ namespace Spring2.Core.WebControl {
 	    if (Selected && !String.Empty.Equals(SelectedItemImageUrl)) {
 		Image img = new Image();
 		img.ImageUrl = SelectedItemImageUrl;
-		cell.Width = 0;
 		cell.Controls.Add(img);
 	    } else {
 		cell.Width = indent;
@@ -126,7 +131,7 @@ namespace Spring2.Core.WebControl {
 
 	    table.Rows.Add(row);
 
-	    if (expanded) {
+	    if (Expanded) {
 		foreach (MenuItem item in Items) {
 		    if (item.Visible) {
 			item.CreateItemControls(table, indent, space, level + 1, depth);
@@ -135,12 +140,12 @@ namespace Spring2.Core.WebControl {
 	    }
 	}
 
-//	/// <summary> 
-//	/// Render this control to the output parameter specified.
-//	/// </summary>
-//	/// <param name="output"> The HTML writer to write out to </param>
-//	protected override void Render(HtmlTextWriter output) {
-//	    output.Write(Text);
-//	}
+	//	/// <summary> 
+	//	/// Render this control to the output parameter specified.
+	//	/// </summary>
+	//	/// <param name="output"> The HTML writer to write out to </param>
+	//	protected override void Render(HtmlTextWriter output) {
+	//	    output.Write(Text);
+	//	}
     }
 }
