@@ -15,28 +15,35 @@ namespace Spring2.Core.WebControl {
     [Description("Menu Control")]
     public class Menu : System.Web.UI.WebControls.WebControl, INamingContainer {
 	
-	private String label;
-	private String navigateUrl;
+	private HyperLink link = new HyperLink();
+
 	private Boolean selected;
 	private Boolean expanded;
+	private Boolean expandSelected = true;
+	private Boolean showSelectedImage;
+	private HorizontalAlign horizontalAlign = HorizontalAlign.Center;
 	private MenuItemCollection items = new MenuItemCollection();
 
 	private String selectedItemImageUrl;
 	private String completedItemImageUrl;
-	private Unit indent;
+	private Int32 indent;
 	private Unit space;
 
+	protected HyperLink Link {
+	    get { return link; }
+	}
+
 	public String Label {
-	    get { return label; }
-	    set { label = value; }
+	    get { return link.Text; }
+	    set { link.Text = value; }
 	}
 
 	public String NavigateUrl {
-	    get { return navigateUrl; }
-	    set { navigateUrl = value; }
+	    get { return link.NavigateUrl; }
+	    set { link.NavigateUrl = value; }
 	}
 
-	public Boolean Selected {
+	public virtual Boolean Selected {
 	    get { return selected; }
 	    set { selected = value; }
 	}
@@ -46,18 +53,34 @@ namespace Spring2.Core.WebControl {
 	    set { expanded = value; }
 	}
 
-	public MenuItem SelectedItem {
+	public Boolean ExpandSelected {
+	    get { return expandSelected; }
+	    set { expandSelected = value; }
+	}
+
+	public Boolean ShowSelectedImage {
+	    get { return showSelectedImage; }
+	    set { showSelectedImage = value; }
+	}
+
+	public HorizontalAlign HorizontalAlign {
+	    get { return horizontalAlign; }
+	    set { horizontalAlign = value; }
+	}
+
+	public virtual MenuItem SelectedItem {
 	    get { 
 		foreach (MenuItem item in items) {
-		    if (item.Selected) {
-			return item;
+		    MenuItem selectedItem = item.SelectedItem;
+		    if (!MenuItem.EMPTY.Equals(selectedItem)) {
+			return selectedItem;
 		    }
 		}
 		return MenuItem.EMPTY;
 	    }
 	    set {
 		foreach (MenuItem item in items) {
-		    item.Selected = item.Equals(value);
+		    item.SelectedItem = value;
 		}
 	    }
 	}
@@ -84,12 +107,13 @@ namespace Spring2.Core.WebControl {
 	    get { return items.Count > 0 ? items[items.Count - 1] : MenuItem.EMPTY; }
 	}
 
-	public MenuItem SetSelectedItemByUrl(String url) {
+	public virtual MenuItem SetSelectedItemByUrl(String url) {
 	    if (url != null) {
 		foreach (MenuItem item in items) {
-		    if (url.Equals(item.NavigateUrl)) {
-			SelectedItem = item;
-			return item;
+		    MenuItem selectedItem = item.SetSelectedItemByUrl(url);
+		    if (!MenuItem.EMPTY.Equals(selectedItem)) {	
+			this.SelectedItem = selectedItem;
+			return selectedItem;
 		    }
 		}
 	    }
@@ -110,7 +134,7 @@ namespace Spring2.Core.WebControl {
 	    get { return items; }
 	}
 
-	public Unit Indent {
+	public virtual Int32 Indent {
 	    get { return indent; }
 	    set { indent = value; }
 	}
@@ -120,51 +144,49 @@ namespace Spring2.Core.WebControl {
 	    set { space = value; }
 	}
 
-	public Int32 MaxDepth {
-	    get {
-		Int32 depth, maxDepth = 0;
-		foreach (MenuItem item in Items) {
-		    item.ParentMenu = this;
-		    depth = item.Depth;
-		    if (depth > maxDepth) {
-			maxDepth = depth;
-		    }
-		}
-		return maxDepth;
+	protected override void OnLoad(EventArgs e) 
+	{
+	    base.OnLoad(e);
+	    foreach (MenuItem item in Items) 
+	    {
+		item.ParentMenu = this;
 	    }
 	}
 
-	protected override void CreateChildControls() {
+	protected override void Render(HtmlTextWriter writer) {
 
-	    Table table = new Table();
-	    table.CellPadding = 0;
-	    table.CellSpacing = 0;
-	    table.Width = this.Width;
+	    if (Visible) {
+		Table table = new Table();
+		table.CellPadding = 0;
+		table.CellSpacing = 0;
+		table.Width = this.Width;
 
-	    TableRow row = new TableRow();
-	    TableHeaderCell cell = new TableHeaderCell();
+		table.RenderBeginTag(writer);
 
-	    cell.CssClass = CssClass;
-	    cell.BackColor = this.BackColor;
-	    cell.HorizontalAlign = HorizontalAlign.Center;
-	    cell.Text = this.Label;
+		TableRow row = new TableRow();
+		row.RenderBeginTag(writer);
 
-	    this.CssClass = String.Empty;
-	    this.BackColor = System.Drawing.Color.Transparent;
+		TableCell cell = new TableCell();
+		cell.BackColor = this.BackColor;
+		cell.HorizontalAlign = this.HorizontalAlign;
+		cell.RenderBeginTag(writer);
 
-	    row.Cells.Add(cell);
-	    table.Rows.Add(row);
-
-	    Int32 maxDepth = MaxDepth;
-	    foreach (MenuItem item in Items) {
-		if (item.Visible) {
-		    item.CreateItemControls(table, Indent, Space, 1, maxDepth);
+		if (Selected) {
+		    link.CssClass = "selectedmenu";
+		} else {
+		    link.CssClass = "menu";
 		}
+		link.RenderControl(writer);
+
+		cell.RenderEndTag(writer);
+		row.RenderEndTag(writer);
+
+		foreach (MenuItem item in Items) {
+		    item.Render(writer, 0);
+		}
+
+		table.RenderEndTag(writer);
 	    }
-
-	    cell.ColumnSpan = maxDepth + 1;
-
-	    Controls.Add(table);
 	}
     }
 }

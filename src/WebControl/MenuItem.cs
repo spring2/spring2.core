@@ -10,76 +10,147 @@ namespace Spring2.Core.WebControl {
     /// Summary description for MenuItem.
     /// </summary>
     [ParseChildren(true, "Items")]
-    public class MenuItem : Menu {
+    public class MenuItem : Menu 
+    {
 
 	public static readonly MenuItem EMPTY = new MenuItem();
 
 	private Menu parentMenu;
 	
-	public Menu ParentMenu {
+	public Menu ParentMenu 
+	{
 	    get { return parentMenu; }
-	    set { parentMenu = value; }
+	    set 
+	    {
+		parentMenu = value; 
+		foreach (MenuItem item in Items) 
+		{
+		    item.ParentMenu = this;
+		}
+	    }
 	}
 
-	public new String SelectedItemImageUrl {
+	public new String SelectedItemImageUrl 
+	{
 	    get { return ParentMenu.SelectedItemImageUrl; }
 	}
 
-	public Int32 Depth {
-	    get {
-		Int32 maxDepth = 0, depth = 0;
-		foreach(MenuItem item in Items) {
-		    item.ParentMenu = this;
-		    depth = item.Depth;
-		    if (depth > maxDepth) {
-			maxDepth = depth;
+	public new Boolean ShowSelectedImage 
+	{
+	    get { return ParentMenu.ShowSelectedImage; }
+	}
+
+	public override Int32 Indent 
+	{
+	    get { return ParentMenu.Indent; }
+	}
+
+	public override Boolean Selected 
+	{
+	    get { return base.Selected; }
+	    set 
+	    { 
+		base.Selected = value;
+		if (value) 
+		{
+		    ParentMenu.Expanded = true;
+		}
+	    }
+	}
+
+	public override MenuItem SelectedItem {
+	    get 
+	    {
+		if (this.Selected) 
+		{
+		    return this;
+		}
+		foreach (MenuItem item in Items) 
+		{
+		    MenuItem selectedItem = item.SelectedItem;
+		    if (!MenuItem.EMPTY.Equals(selectedItem)) 
+		    {
+			return selectedItem;
 		    }
 		}
-
-		return maxDepth + 1;
+		return MenuItem.EMPTY;
+	    }
+	    set 
+	    {
+		this.Selected = this.Equals(value);
+		this.Expanded = this.ExpandSelected && this.Selected;
+		foreach (MenuItem item in Items) 
+		{
+		    item.SelectedItem = value;
+		}
 	    }
 	}
 
-	public void AddItem(MenuItem item) {
-	    Items.Add(item);
+	public override MenuItem SetSelectedItemByUrl(String url) 
+	{
+	    if (url != null) 
+	    {
+		if (this.NavigateUrl.Equals(url)) {
+		    return this;
+		}
+
+		foreach (MenuItem item in Items) 
+		{
+		    MenuItem selectedItem = item.SetSelectedItemByUrl(url);
+		    if (!MenuItem.EMPTY.Equals(selectedItem)) 
+		    {		
+			return selectedItem;
+		    }
+		}
+	    }
+	    return MenuItem.EMPTY;
 	}
 
-	public void CreateItemControls(Table table, Unit indent, Unit space, Int32 level, Int32 depth) {
+	public void Render(HtmlTextWriter writer, Int32 indentLevel) {
 
-	    TableRow row = new TableRow();
+	    if (Visible) {
+		TableRow row = new TableRow();
+		row.RenderBeginTag(writer);
 
-	    for (Int32 i = 1; i < level; i++) {
-		TableCell indentCell = new TableCell();
-		indentCell.Width = indent;
-		row.Cells.Add(indentCell);
-	    }
+		//	    for (Int32 i = 1; i < level; i++) {
+		//		TableCell indentCell = new TableCell();
+		//		indentCell.Width = indent;
+		//		indentCell.Text = "&nbsp";
+		//		row.Cells.Add(indentCell);
+		//	    }
 
-	    TableCell cell = new TableCell();
-	    if (Selected && !String.Empty.Equals(SelectedItemImageUrl)) {
-		Image img = new Image();
-		img.ImageUrl = SelectedItemImageUrl;
-		cell.Controls.Add(img);
-	    } else {
-		cell.Width = indent;
-		cell.Text = "&nbsp;";
-	    }
+		//	    if (ShowSelectedImage) {
+		//		TableCell imageCell = new TableCell();
+		//		if (Selected && !String.Empty.Equals(SelectedItemImageUrl)) {
+		//		    Image img = new Image();
+		//		    img.ImageUrl = SelectedItemImageUrl;
+		//		    imageCell.Controls.Add(img);
+		//		} else {
+		//		    imageCell.Width = indent;
+		//		    imageCell.Text = "&nbsp;";
+		//		}
+		//
+		//		row.Cells.Add(imageCell);
+		//	    }
 
-	    row.Cells.Add(cell);
+		TableCell cell = new TableCell();
+		cell.RenderBeginTag(writer);
 
-	    cell = new TableCell();
-	    cell.Text = this.Label;
-	    cell.CssClass = this.CssClass;
-	    cell.ColumnSpan = depth - level + 1;
-	    cell.Width = Unit.Percentage(100);
-	    row.Cells.Add(cell);
-	    row.Height = space;
+		Link.Style["margin-left"] = new Unit(Indent * indentLevel, UnitType.Pixel).ToString();
+		if (this.Selected) {
+		    Link.CssClass = "selectedmenuitem";
+		} else {
+		    Link.CssClass = "menuitem";
+		}
 
-	    table.Rows.Add(row);
+		Link.RenderControl(writer);
 
-	    if (Expanded) {
-		foreach (MenuItem item in Items) {
-		    if (item.Visible) {
-			item.CreateItemControls(table, indent, space, level + 1, depth);
+		cell.RenderEndTag(writer);
+		row.RenderEndTag(writer);
+
+		if (Expanded) {
+		    foreach (MenuItem item in Items) {
+			item.Render(writer, indentLevel + 1);
 		    }
 		}
 	    }
