@@ -89,5 +89,14 @@ namespace Spring2.Core.DAO {
 	    return cmd;
 	}
 
+	protected static SqlCommand GetSqlCommand(String key, String commandText, CommandType commandType, Int32 commandTimeout) {
+	    SqlCommand cmd = GetSqlCommand(key);
+	    cmd.CommandText = commandText;
+	    cmd.CommandType = commandType;
+	    cmd.CommandTimeout = commandTimeout;
+	    return cmd;
+	}
+
+
     }
 }
