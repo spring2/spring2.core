@@ -806,5 +806,14 @@ namespace Spring2.Core.Types {
 	}
 
 	#endregion
+
+	public Decimal ToDecimal() {
+	    if (!IsValid) {
+		throw new InvalidStateException(myState);
+	    }
+
+	    return myValue;
+	}
+
     }
 }
