@@ -104,6 +104,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "DAO\BaseEntityDAO.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "DAO\DaoException.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -140,6 +145,11 @@
                 />
                 <File
                     RelPath = "DAO\OrderByClause.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DAO\SqlEntityDAO.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
