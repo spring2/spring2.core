@@ -8,11 +8,11 @@ namespace Spring2.Core.DAO {
  
     public abstract class EntityDAO { 
 
-	protected static SqlDataReader GetListReader(String viewName) { 
-	    return GetListReader(viewName, null, null); 
+	protected static SqlDataReader GetListReader(String key, String viewName) { 
+	    return GetListReader(key, viewName, null, null); 
 	} 
 		 
-	protected static SqlDataReader GetListReader(String viewName, IWhere whereClause, IOrderBy orderByClause) { 
+	protected static SqlDataReader GetListReader(String key, String viewName, IWhere whereClause, IOrderBy orderByClause) { 
 	    try { 
 		String sql = "select * from " + viewName;
 		if (whereClause != null) { 
@@ -22,15 +22,15 @@ namespace Spring2.Core.DAO {
 		    sql = sql + orderByClause.FormatSql(); 
 		} 
 			 
-		return ExecuteReader(sql);
+		return ExecuteReader(key, sql);
 	    } catch (Exception ex) { 
 		// log exception
 		throw ex;
 	    } 
 	}
 
-	protected static SqlDataReader ExecuteReader(String sql) { 
-	    SqlCommand cmd = GetSqlCommand();
+	protected static SqlDataReader ExecuteReader(String key, String sql) { 
+	    SqlCommand cmd = GetSqlCommand(key);
 			 
 	    try { 
 		cmd.CommandType = CommandType.Text;
@@ -42,23 +42,22 @@ namespace Spring2.Core.DAO {
 	    } 
 	}
 
-	protected static SqlCommand GetSqlCommand() {
-
-	    SqlConnection conn = new SqlConnection(ConfigurationSettings.AppSettings["ConnectionString"]);
+	protected static SqlCommand GetSqlCommand(String key) {
+	    SqlConnection conn = new SqlConnection(ConfigurationSettings.AppSettings[key]);
 	    conn.Open();
 
-	    // Create and execute the command
 	    SqlCommand cmd = new SqlCommand();
 	    cmd.Connection = conn;
 
 	    return cmd;
 	}
 
-	protected static SqlCommand GetSqlCommand(String commandText, CommandType commandType) {
-	    SqlCommand cmd = GetSqlCommand();
+	protected static SqlCommand GetSqlCommand(String key, String commandText, CommandType commandType) {
+	    SqlCommand cmd = GetSqlCommand(key);
 	    cmd.CommandText = commandText;
 	    cmd.CommandType = commandType;
 	    return cmd;
 	}
+
     }
 }
