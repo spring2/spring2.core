@@ -24,11 +24,11 @@ namespace Spring2.Core.Types {
 
 	private StringType() {}
 
-	private StringType(String value) {
+	public StringType(String value) {
 	    this.value = value;
 	}
 
-	protected override Object DBValue {
+	protected override Object Value {
 	    get {
 		return value;
 	    }
@@ -41,5 +41,22 @@ namespace Spring2.Core.Types {
 	public override Boolean IsUnset {
 	    get { return Object.ReferenceEquals(this, UNSET); }
 	}
+
+	public override Boolean Equals(Object o) {
+	    if (this == o) {
+		return true;
+	    } else if (value == null || !(o is StringType)) {
+		return false;
+	    } else {
+		return value.Equals(((StringType)o).value);
+	    }
+	}
+
+	public override int GetHashCode() {
+	    return value == null ? 0 : value.GetHashCode();
+	}
+
+
+
     }
 }
