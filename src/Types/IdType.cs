@@ -16,6 +16,22 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
+	public static IdType NewInstance(Int32 value) {
+	    return new IdType(value);
+	}
+
+	public static IdType NewInstance(String value) {
+	    if (value==null) {
+		return UNSET;
+	    }
+
+	    try {
+		return new IdType(Int32.Parse(value));
+	    } catch (FormatException) {
+		return UNSET;
+	    }
+	}
+
 	private Int32 value;
 
 	private IdType() {}
