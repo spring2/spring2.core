@@ -1,5 +1,11 @@
 2003-05-09 Friday 17:46  cort
 
+	* ChangeLog.txt:
+	
+	update change log
+
+2003-05-09 Friday 17:46  cort
+
 	* src/Makefile:
 	
 	update helper script to add new release binary
