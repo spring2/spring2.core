@@ -1,15 +1,22 @@
 using System;
+using System.Collections;
 
 namespace Spring2.Core.Types {
     public abstract class EnumDataType : DataType {
 
+	protected static readonly IList OPTIONS = new ArrayList();
+
 	protected String code;
 	protected String name;
-		
+	
 	protected override Object Value {
 	    get { return code; }
 	}
-		
+	
+	public static IList Options {
+	    get { return OPTIONS; }
+	}
+
 	public override String ToString() {
 	    if (IsDefault) {
 		return DEFAULT;
@@ -33,6 +40,5 @@ namespace Spring2.Core.Types {
 	public override int GetHashCode() {
 	    return code == null ? 0 : code.GetHashCode();
 	}
-
     }
 }
