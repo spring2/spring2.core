@@ -89,20 +89,17 @@ namespace Spring2.Core.WebControl {
 	    if (Visible) {
 
 		// Insert a break between menu item.
-		Literal lineBreak = new Literal();
-		lineBreak.Text = "<br>";
-		lineBreak.RenderControl(writer);
+		Literal beginHeader = new Literal();
+		beginHeader.Text = "<h" + (indentLevel + 2) +  (this.Selected ? " id=\"selected\">" : ">");
 
-		// Indent the left margin based on the indentation size and level.  Set the 
-		// style to be applied based on the selected status.  Then, render the 
-		// link.
-		Link.Style["margin-left"] = new Unit(Indent * indentLevel, UnitType.Pixel).ToString();
-		if (this.Selected) {
-		    Link.CssClass = SelectedItemStyle;
-		} else {
-		    Link.CssClass = MenuItemStyle;
-		}
+		Literal endHeader = new Literal();
+		endHeader.Text = "</h" + (indentLevel + 2) + ">";
+
+		beginHeader.RenderControl(writer);
+
 		Link.RenderControl(writer);
+
+		endHeader.RenderControl(writer);
 
 		// If this menu item is expanded, render its child menu items.
 		if (Expanded) {

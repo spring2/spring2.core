@@ -158,12 +158,25 @@ namespace Spring2.Core.WebControl {
 
 	    if (Visible) {
 		
-		link.CssClass = this.CssClass;
+		Panel panel = new Panel();
+		panel.CssClass = this.CssClass;
+		panel.RenderBeginTag(writer);
+
+		Literal beginHeader = new Literal();
+		beginHeader.Text = "<h1>";
+
+		Literal endHeader = new Literal();
+		endHeader.Text = "</h1>";
+
+		beginHeader.RenderControl(writer);
 		link.RenderControl(writer);
+		endHeader.RenderControl(writer);
 
 		foreach (MenuItem item in Items) {
 		    item.Render(writer, 0);
 		}
+
+		panel.RenderEndTag(writer);
 	    }
 	}
     }
