@@ -222,6 +222,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Util\ExceptionError.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Util\MissingRequiredFieldError.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
