@@ -1,12 +1,25 @@
+2003-05-09 Friday 17:49  cort
+
+	* bin/cvsadd.sh:
+	
+	fix parameters to cvs calls
+
+2003-05-09 Friday 17:49  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
 2003-05-09 Friday 17:48  cort
 
-	* release/Spring2.Core.1.1.2.5588.zip:
+	* release/: Spring2.Core.1.1.2.5588.zip,
+	Spring2.Core.1.1.2.5588.zip:
 	
 	new release version
 
 2003-05-09 Friday 17:46  cort
 
-	* ChangeLog.txt, ChangeLog.txt:
+	* ChangeLog.txt, ChangeLog.txt, ChangeLog.txt:
 	
 	update change log
 
