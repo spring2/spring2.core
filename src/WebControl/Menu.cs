@@ -176,9 +176,7 @@ namespace Spring2.Core.WebControl {
 
 	    if (Visible) {
 		
-		Panel panel = new Panel();
-		panel.CssClass = this.CssClass;
-		panel.RenderBeginTag(writer);
+		writer.Write("<div id=\"left\" class=\"" + this.CssClass + "\">");
 
 		Literal beginHeader = new Literal();
 		beginHeader.Text = "<h1>";
@@ -194,7 +192,7 @@ namespace Spring2.Core.WebControl {
 		    item.Render(writer, 0);
 		}
 
-		panel.RenderEndTag(writer);
+		writer.Write("</div>");
 	    }
 	}
     }
