@@ -36,7 +36,7 @@
                     NoStdLib = "false"
                     NoWarn = ""
                     Optimize = "false"
-                    OutputPath = "..\build\"
+                    OutputPath = "..\build\Core\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
@@ -84,6 +84,11 @@
                     AssemblyName = "System.Drawing"
                     HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.0.3705\System.Drawing.dll"
                 />
+                <Reference
+                    Name = "System.Data.OracleClient"
+                    AssemblyName = "System.Data.OracleClient"
+                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.OracleClient.dll"
+                />
             </References>
         </Build>
         <Files>
@@ -120,6 +125,11 @@
                 />
                 <File
                     RelPath = "DAO\IWhere.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DAO\OracleEntityDAO.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
