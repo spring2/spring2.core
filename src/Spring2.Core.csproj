@@ -117,6 +117,21 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "DataObject\DataObjectCompareDetail.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DataObject\DataObjectCompareList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DataObject\DataObjectCompareOptionEnum.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "DataObject\EntityDataObject.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
