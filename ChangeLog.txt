@@ -1,3 +1,28 @@
+2004-07-29 Thursday 15:17  cort
+
+	* src/Types/DateType.cs:
+	
+	add instance methods to get the date part as both a DateType and a
+	DateTime as well as a method to add days to an instance
+
+2004-07-29 Thursday 13:23  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2004-07-29 Thursday 13:23  cort
+
+	* release/Spring2.Core.1.1.9.6653.zip:
+	
+	new release version
+
+2004-07-29 Thursday 13:23  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2004-07-29 Thursday 13:19  cort
 
 	* src/Spring2.Core.FxCop:
