@@ -294,6 +294,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Types\Formatter\DataTypeFormatter.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Util\ApplicationError.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
