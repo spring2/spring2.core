@@ -5,8 +5,6 @@ namespace Spring2.Core.Types {
 
     public class USStateCodeEnum : EnumDataType {
 
-	private static readonly IList OPTIONS = new ArrayList();
-
 	public static readonly new USStateCodeEnum DEFAULT = new USStateCodeEnum();
 	public static readonly new USStateCodeEnum UNSET = new USStateCodeEnum();
 
@@ -61,10 +59,6 @@ namespace Spring2.Core.Types {
 	public static readonly USStateCodeEnum WEST_VIRGINIA = new USStateCodeEnum("WV", "WV");
 	public static readonly USStateCodeEnum WISCONSIN = new USStateCodeEnum("WI", "WI");
 	public static readonly USStateCodeEnum WYOMING = new USStateCodeEnum("WY", "WY");
-
-	public static IList Options {
-	    get { return OPTIONS; }
-	}
 
 	public static USStateCodeEnum GetInstance(Object value) {
 	    if (value is String) {

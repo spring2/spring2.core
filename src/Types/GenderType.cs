@@ -5,8 +5,6 @@ namespace Spring2.Core.Types {
 
     public class GenderType : EnumDataType {
 
-	private static readonly IList OPTIONS = new ArrayList();
-
 	public static readonly new GenderType DEFAULT = new GenderType();
 	public static readonly new GenderType UNSET = new GenderType();
 
@@ -26,10 +24,6 @@ namespace Spring2.Core.Types {
 	}
 
 	private GenderType() {
-	}
-
-	public static IList Options {
-	    get { return OPTIONS; }
 	}
 
 	private GenderType(String code, String name) {
