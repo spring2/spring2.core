@@ -34,12 +34,12 @@
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
                     NoStdLib = "false"
-                    NoWarn = ""
+                    NoWarn = "1591"
                     Optimize = "false"
                     OutputPath = "..\build\Core\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
+                    TreatWarningsAsErrors = "true"
                     WarningLevel = "4"
                 />
                 <Config
@@ -56,7 +56,7 @@
                     NoStdLib = "false"
                     NoWarn = ""
                     Optimize = "true"
-                    OutputPath = "bin\Release\"
+                    OutputPath = "..\build\Release\Core\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
@@ -255,6 +255,11 @@
                 />
                 <File
                     RelPath = "Types\DecimalType.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Types\DecimalTypeList.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
