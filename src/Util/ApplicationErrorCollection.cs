@@ -23,5 +23,9 @@ namespace Spring2.Core.Util {
 	public void Remove(int index) {
 	    List.RemoveAt(index); 
 	}
+
+	public void AddRange(ApplicationErrorCollection c) {
+	   InnerList.AddRange(c);
+	}
     }
 }

@@ -15,11 +15,17 @@ namespace Spring2.Core.Util {
 	/// </summary>
 	/// <param name="propertyName">the name of the property associated with the error.</param>
 	public ApplicationError(String propertyName) {
-	    if (propertyName == null) {
-		this.propertyName = String.Empty;
-	    } else {
-		this.propertyName = propertyName;
-	    }
+	    this.propertyName = propertyName == null ? String.Empty : propertyName;
+	}
+
+	/// <summary>
+	/// Creates an application error given a property name and a message.
+	/// </summary>
+	/// <param name="properyName">the name of the property associated with the error.</param>
+	/// <param name="message">a message describing the error.</param>
+	public ApplicationError(String propertyName, String message) {
+	    this.propertyName = propertyName == null ? String.Empty : propertyName;
+	    this.message = message == null ? String.Empty : message;
 	}
 
 	/// <summary>
@@ -34,7 +40,7 @@ namespace Spring2.Core.Util {
 	/// </summary>
 	public String Message {
 	    get { return message; }
-	    set { message = value; }
+	    set { message = value == null ? String.Empty : value; }
 	}
 
 	public abstract String FormatMessage(String displayName);
