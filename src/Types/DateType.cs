@@ -7,6 +7,7 @@ namespace Spring2.Core.Types {
 	public static readonly new DateType DEFAULT = new DateType();
 	public static readonly new DateType UNSET = new DateType();
 
+	[Obsolete("Use appropriate constructor instead.")]
 	public static DateType NewInstance(DateTime value) {
 	    return new DateType(value);
 	}

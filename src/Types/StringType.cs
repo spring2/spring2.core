@@ -12,6 +12,7 @@ namespace Spring2.Core.Types {
 	public static readonly new StringType UNSET = new StringType();
 	public static readonly StringType EMPTY = new StringType(String.Empty);
 
+	[Obsolete("Use Parse method instead.")]
 	public static StringType NewInstance(String value) {
 	    return value == null ? UNSET : new StringType(value);
 	}

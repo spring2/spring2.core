@@ -3,15 +3,17 @@ using System.Globalization;
 
 namespace Spring2.Core.Types {
 
-    public class IdType : NumberType {
+    public class IdType : IntegerType {
 
 	public static readonly new IdType DEFAULT = new IdType();
 	public static readonly new IdType UNSET = new IdType();
 	
-	public static new IdType NewInstance(Int32 value) {
+	[Obsolete("Use appropriate constructor instead.")]
+	public static IdType NewInstance(Int32 value) {
 	    return new IdType(value);
 	}
 
+	[Obsolete("Use Parse method instead.")]
 	public static IdType NewInstance(String value) {
 	    if (value == null) {
 		return UNSET;

@@ -10,6 +10,7 @@ namespace Spring2.Core.Types {
 
 	protected Decimal value;
 
+	[Obsolete("Use appropriate constructor instead.")]
 	public static DecimalType NewInstance(Decimal value) {
 	    return new DecimalType(value);
 	}
@@ -37,6 +38,10 @@ namespace Spring2.Core.Types {
 	}
 
 	public DecimalType(Double value) {
+	    this.value = new Decimal(value);
+	}
+
+	public DecimalType(Int32 value) {
 	    this.value = new Decimal(value);
 	}
 

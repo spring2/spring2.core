@@ -3,29 +3,28 @@ using System.Globalization;
 
 namespace Spring2.Core.Types {
 
-    public class NumberType : DataType	{
+    /// <summary>
+    /// Data type for wrapping integers.  This class is to replace the soon to be 
+    /// obsolete NumberType class.
+    /// </summary>
+    public class IntegerType : DataType	{
 
-	public static readonly new NumberType DEFAULT = new NumberType();
-	public static readonly new NumberType UNSET = new NumberType();
+	public static readonly new IntegerType DEFAULT = new IntegerType();
+	public static readonly new IntegerType UNSET = new IntegerType();
 
-	[Obsolete("Use appropriate constructor instead.")]
-	public static NumberType NewInstance(Int32 value) {
-	    return new NumberType(value);
+	public static IntegerType Parse(String value) {
+	    return new IntegerType(Int32.Parse(value, NumberStyles.Number));
 	}
 
-	public static NumberType Parse(String value) {
-	    return new NumberType(Int32.Parse(value, NumberStyles.Number));
-	}
-
-	public static NumberType Parse(String value, IFormatProvider provider) {
-	    return new NumberType(Int32.Parse(value, NumberStyles.Integer,  provider));
+	public static IntegerType Parse(String value, IFormatProvider provider) {
+	    return new IntegerType(Int32.Parse(value, NumberStyles.Integer,  provider));
 	}
 
 	private Int32 value;
 
-	protected NumberType() {}
+	protected IntegerType() {}
 
-	public NumberType(Int32 value) {
+	public IntegerType(Int32 value) {
 	    this.value = value;
 	}
 
@@ -49,7 +48,7 @@ namespace Spring2.Core.Types {
 
 	public Int32 ToInt32() {
 	    if (IsUnset || IsDefault) {
-		throw new InvalidCastException("UNSET and DEFAULT NumberTypes have no integer value.");
+		throw new InvalidCastException("UNSET and DEFAULT IntegerTypes have no integer value.");
 	    } else {
 		return value;
 	    }

@@ -8,6 +8,7 @@ namespace Spring2.Core.Types {
 	public static readonly new CurrencyType DEFAULT = new CurrencyType();
 	public static readonly new CurrencyType UNSET = new CurrencyType();
 
+	[Obsolete("Use appropriate constructor instead.")]
 	public static new CurrencyType NewInstance(Decimal value) {
 	    return new CurrencyType(value);
 	}
@@ -25,6 +26,8 @@ namespace Spring2.Core.Types {
 	public CurrencyType(Decimal value) : base(value) {}
 
 	public CurrencyType(Double value) : base(value) {}
+
+	public CurrencyType(Int32 value) : base(value) {}
 
 	public override Boolean IsDefault {
 	    get {
