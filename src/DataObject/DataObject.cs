@@ -43,50 +43,39 @@ namespace Spring2.Core.DataObject {
 	/// </summary>
 	/// <param name="obj">Object to compare current object with.</param>
 	/// <returns>True if objects are equal, false otherwise.</returns>
-	public override Boolean Equals(Object obj) 
-	{
-	    if (obj == null) 
-	    {
+	public override Boolean Equals(Object obj) {
+	    if (obj == null) {
 		return false;
 	    }
 
-	    if (obj == this)
-	    {
+	    if (obj == this) {
 		return true;
 	    }
 
-	    if (!GetType().Equals(obj.GetType()))
-	    {
+	    if (!GetType().Equals(obj.GetType())) {
 		return false;
 	    }
 
-	    foreach (PropertyInfo p in GetType().GetProperties()) 
-	    {
+	    foreach (PropertyInfo p in GetType().GetProperties()) {
 		Object value1 = p.GetValue(this, null);
 		Object value2 = p.GetValue(obj, null);
-		if (value1 is ICollection) 
-		{
+		if (value1 is ICollection) {
 		    ICollection collection1 = (ICollection)value1;
 		    ICollection collection2 = (ICollection)value2;
-		    if (collection1.Count != collection2.Count)
-		    {
+		    if (collection1.Count != collection2.Count) {
 			return false;
 		    }
 		    
 		    IEnumerator enumerator1 = collection1.GetEnumerator();
 		    IEnumerator enumerator2 = collection2.GetEnumerator();
-		    while (enumerator1.MoveNext() && enumerator2.MoveNext())
-		    {
-			if (!enumerator1.Current.Equals(enumerator2.Current))
-			{
+		    while (enumerator1.MoveNext() && enumerator2.MoveNext()) {
+			if (!enumerator1.Current.Equals(enumerator2.Current)) {
 			    return false;
 			}
 		    }
 		}
-		else
-		{
-		    if (!value1.Equals(value2))
-		    {
+		else {
+		    if (!value1.Equals(value2)) {
 			return false;
 		    }
 		}
@@ -100,8 +89,7 @@ namespace Spring2.Core.DataObject {
 	/// </summary>
 	/// <param name="obj">Object to compare current object with.</param>
 	/// <returns>List of differences between the objects.</returns>
-	public DataObjectCompareList Compare(DataObject obj)
-	{
+	public DataObjectCompareList Compare(DataObject obj) {
 	    return Compare(obj, this.GetType().Name, DataObjectCompareOptionEnum.COMPARE_ALL);
 	}
 
@@ -111,8 +99,7 @@ namespace Spring2.Core.DataObject {
 	/// <param name="obj">Object to compare current object with.</param>
 	/// <param name="option">Allows customization of how DEFAULT values are compared.</param>
 	/// <returns>List of differences between the objects.</returns>
-	public DataObjectCompareList Compare(DataObject obj, DataObjectCompareOptionEnum option)
-	{
+	public DataObjectCompareList Compare(DataObject obj, DataObjectCompareOptionEnum option) {
 	    return Compare(obj, this.GetType().Name, option);
 	}
 
@@ -124,77 +111,63 @@ namespace Spring2.Core.DataObject {
 	/// <param name="option">Allows customization of how DEFAULT values are compared.</param>
 	/// <returns>List of differences between the objects.</returns>
 	public DataObjectCompareList Compare(DataObject obj, String prefix,
-					     DataObjectCompareOptionEnum option) 
-	{
+	    DataObjectCompareOptionEnum option) {
 	    DataObjectCompareList returnValue = new DataObjectCompareList();
-	    if (obj == null) 
-	    {
+	    if (obj == null) {
 		returnValue.Add(new DataObjectCompareDetail(prefix, 
 		    StringType.NewInstance("Data Object"), StringType.NewInstance("Null Data Object")));
 		return returnValue;
 	    }
 
-	    if (obj == this)
-	    {
+	    if (obj == this) {
 		return returnValue;
 	    }
 
-	    if (!GetType().Equals(obj.GetType()))
-	    {
+	    if (!GetType().Equals(obj.GetType())) {
 		returnValue.Add(new DataObjectCompareDetail(prefix, 
-			StringType.NewInstance("different types"), 
-			StringType.NewInstance("different types")));
+		    StringType.NewInstance("different types"), 
+		    StringType.NewInstance("different types")));
 		return returnValue;
 	    }
 
-	    foreach (PropertyInfo p in GetType().GetProperties()) 
-	    {
+	    foreach (PropertyInfo p in GetType().GetProperties()) {
 		Object value1 = p.GetValue(this, null);
 		Object value2 = p.GetValue(obj, null);
 		String valuePrefix = prefix + "." + p.Name;
-		if (value1 is ICollection && value2 is ICollection) 
-		{
+		if (value1 is ICollection && value2 is ICollection) {
 		    ICollection collection1 = (ICollection)value1;
 		    ICollection collection2 = (ICollection)value2;
-		    if (collection1.Count != collection2.Count)
-		    {
+		    if (collection1.Count != collection2.Count) {
 			returnValue.Add(new DataObjectCompareDetail(
 			    valuePrefix
 			    + ".Count", 
 			    new NumberType(collection1.Count), 
 			    new NumberType(collection2.Count)));
-			}
-		    else
-		    {
+		    }
+		    else {
 			IEnumerator enumerator1 = collection1.GetEnumerator();
 			IEnumerator enumerator2 = collection2.GetEnumerator();
 			int whichOccurrence = 0;
-			while (enumerator1.MoveNext() && enumerator2.MoveNext())
-			{
+			while (enumerator1.MoveNext() && enumerator2.MoveNext()) {
 			    String collectionPrefix = valuePrefix
 				+ "[" + whichOccurrence.ToString() + "]";
-			    if (enumerator1.Current is DataObject && enumerator2.Current is DataObject)
-			    {
+			    if (enumerator1.Current is DataObject && enumerator2.Current is DataObject) {
 				returnValue.Append(((DataObject)(enumerator1.Current)).Compare(
 				    (DataObject)(enumerator2.Current), 
 				    collectionPrefix, option));
 			    } 
 			    else  if (enumerator1.Current is DataType 
-					&& enumerator2.Current is DataType)
-			    {
+				&& enumerator2.Current is DataType) {
 				if (!CompareDataTypes((DataType)(enumerator1.Current),
-						      (DataType)(enumerator2.Current),
-						      option))
-				{
+				    (DataType)(enumerator2.Current),
+				    option)) {
 				    returnValue.Add(new DataObjectCompareDetail(collectionPrefix,
 					(DataType)(enumerator1.Current),
 					(DataType)(enumerator2.Current)));
 				}
 			    }
-			    else
-			    {
-				if (!enumerator1.Current.Equals(enumerator2.Current))
-				{
+			    else {
+				if (!enumerator1.Current.Equals(enumerator2.Current)) {
 				    returnValue.Add(new DataObjectCompareDetail(
 					collectionPrefix,
 					StringType.NewInstance("Not DataType"),
@@ -205,43 +178,33 @@ namespace Spring2.Core.DataObject {
 			}
 		    }
 		}
-		else if (value1 is DataObject && value2 is DataObject)
-		{
+		else if (value1 is DataObject && value2 is DataObject) {
 		    returnValue.Append(((DataObject)value1).Compare(
 			(DataObject)value2,
 			valuePrefix, option));
 		}
-		else
-		{
-		    if (!value1.Equals(value2))
-		    { 
-			if (value1 is DataType && value2 is DataType)
-			{
-			    if (!CompareDataTypes((DataType)value1, (DataType)value2, option))
-			    {
+		else {
+		    if (!value1.Equals(value2)) { 
+			if (value1 is DataType && value2 is DataType) {
+			    if (!CompareDataTypes((DataType)value1, (DataType)value2, option)) {
 				returnValue.Add(new DataObjectCompareDetail(valuePrefix,
 				    (DataType)value1,
 				    (DataType)value2));
 			    }
 			}
-			else
-			{
+			else {
 			    DataType v1;
 			    DataType v2;
-			    if (value1 is DataType)
-			    {
+			    if (value1 is DataType) {
 				v1 = (DataType)value1;
 			    }
-			    else
-			    {
+			    else {
 				v1 = StringType.NewInstance("Not DataType");
 			    }
-			    if (value2 is DataType)
-			    {
+			    if (value2 is DataType) {
 				v2 = (DataType)value2;
 			    }
-			    else
-			    {
+			    else {
 				v2 = StringType.NewInstance("Not DataType");
 			    }
 			    returnValue.Add(new DataObjectCompareDetail(valuePrefix, v1, v2));
@@ -257,11 +220,9 @@ namespace Spring2.Core.DataObject {
 	/// Returns a hash code.
 	/// </summary>
 	/// <returns>Hash code value</returns>
-	public override int GetHashCode() 
-	{
+	public override int GetHashCode() {
 	    int hashCode = 0;
-	    foreach (PropertyInfo p in GetType().GetProperties()) 
-	    {
+	    foreach (PropertyInfo p in GetType().GetProperties()) {
 		hashCode = (hashCode + p.GetValue(this, null).GetHashCode()) % 2000000000;
 	    }
 
@@ -275,21 +236,17 @@ namespace Spring2.Core.DataObject {
 	/// DataObject are ignored.
 	/// </summary>
 	/// <param name="that">Object to copy from.</param>
-	public void Update(DataObject that) 
-	{
+	public void Update(DataObject that) {
 
 	    if (GetType().IsInstanceOfType(that)) {
 		foreach (PropertyInfo p in GetType().GetProperties()) {
 		    Object value = p.GetValue(that, null);
-		    if (value is DataType) 
-		    {
-			if (!((DataType)value).IsDefault)
-			{
+		    if (value is DataType) {
+			if (!((DataType)value).IsDefault) {
 			    p.SetValue(this, value, null);
 			}
 		    } 
-		    else if (value is DataObject) 
-		    {
+		    else if (value is DataObject) {
 			((DataObject)(p.GetValue(this, null))).Update((DataObject)value);
 		    }
 		}
@@ -303,24 +260,19 @@ namespace Spring2.Core.DataObject {
 	/// <param name="v2">Second Value</param>
 	/// <param name="option">option value to use</param>
 	private bool CompareDataTypes(DataType v1, DataType v2,
-				      DataObjectCompareOptionEnum option)
-	{
+	    DataObjectCompareOptionEnum option) {
 	    bool found = false;
-	    if (v1.Equals(v2))
-	    {
+	    if (v1.Equals(v2)) {
 		found = true;
 	    }
-	    if (!found)
-	    {
+	    if (!found) {
 		if (option.Equals(DataObjectCompareOptionEnum.IGNORE_DEFAULT)
-		    && (v1.IsDefault || v2.IsDefault))
-		{
+		    && (v1.IsDefault || v2.IsDefault)) {
 		    found = true;
 		}
 		else if (option.Equals(DataObjectCompareOptionEnum.DEFAULT_EQUALS_UNSET)
 		    && ((v1.IsUnset && v2.IsDefault)
-		    || (v1.IsDefault && v2.IsUnset)))
-		{
+		    || (v1.IsDefault && v2.IsUnset))) {
 		    found = true;
 		}
 	    }
