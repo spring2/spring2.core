@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-/// derived from: Sample ASPX C# LineChart Class, Steve Hall, 2002
+// derived from: Sample ASPX C# LineChart Class, Steve Hall, 2002
 
 namespace Spring2.Core.Drawing.Graphing {
 
@@ -51,7 +51,6 @@ namespace Spring2.Core.Drawing.Graphing {
 	/// </summary>
 	/// <param name="myWidth"></param>
 	/// <param name="myHeight"></param>
-	/// <param name="myPage"></param>
 	public LineChart(int myWidth, int myHeight) {
 	    Width = myWidth; 
 	    Height = myHeight;
@@ -160,6 +159,7 @@ namespace Spring2.Core.Drawing.Graphing {
 	/// Save output to a stream
 	/// </summary>
 	/// <param name="stream"></param>
+	/// <param name="format"></param>
 	public void Save(Stream stream, ImageFormat format) {
 	    Draw();
 	    bitmap.Save(stream, format);

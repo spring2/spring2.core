@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Spring2.Core.Globalization {
 
-/**
+/*
  * TODO:
  * 
  * support friendly standard and daylight names
@@ -81,7 +81,7 @@ namespace Spring2.Core.Globalization {
 	/// </summary>
 	/// <param name="code">shorthand for the database</param>
 	/// <param name="name">friendly, descriptive name</param>
-	/// <param name="daylightTime">period of time that is "daylight savings time"</param>
+	/// <param name="daylightTimeRule">period of time that is "daylight savings time"</param>
 	/// <param name="utcOffset">hours offset from UTC</param>
 	private RegionalTimeZone(String code, String name, DaylightTimeRule daylightTimeRule, TimeSpan utcOffset) {
 	    this.code = code;

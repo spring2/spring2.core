@@ -21,6 +21,7 @@ namespace Spring2.Core.Types.Formatter {
 	/// format a currency type using format string or blank if not valid
 	/// </summary>
 	/// <param name="val"></param>
+	/// <param name="format"></param>
 	/// <returns></returns>
 	public String FormatDefault(DecimalType val, String format) {
 	    return val.IsValid ? val.ToString(format) : String.Empty;
@@ -41,6 +42,7 @@ namespace Spring2.Core.Types.Formatter {
 	/// format a currency type using format string or blank if not valid
 	/// </summary>
 	/// <param name="val"></param>
+	/// <param name="format"></param>
 	/// <returns></returns>
 	public String FormatDefault(IntegerType val, String format) {
 	    return val.IsValid ? val.ToString(format) : String.Empty;
@@ -50,6 +52,7 @@ namespace Spring2.Core.Types.Formatter {
 	/// format a currency type using format string or blank if not valid
 	/// </summary>
 	/// <param name="val"></param>
+	/// <param name="format"></param>
 	/// <returns></returns>
 	public String FormatDefault(DateType val, String format) {
 	    return val.IsValid ? val.ToString(format) : String.Empty;

@@ -25,7 +25,8 @@ namespace Spring2.Core.Util {
 	/// <summary>
 	/// Return the last day of the year/month represented by the mmyy date string.
 	/// </summary>
-	/// <param name="mmyy"></param>
+	/// <param name="mm"></param>
+	/// <param name="yy"></param>
 	/// <returns></returns>
 	public static DateTime ToDateTimeFromCreditCardDate(Int32 mm, Int32 yy) {
 	    if (yy<100) {

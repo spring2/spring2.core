@@ -17,7 +17,7 @@ namespace Spring2.Core.DataObject {
 	/// </summary>
 	/// <param name="propertyName">Fully qualified name of property with difference - such as EventPageData.Events[2].EventId</param>
 	/// <param name="value1">Value of first object.  This is the object the Compare method was called on.</param>
-	/// <param name="vallue2">Value of second object.  This is the object passed as a paramter to the Compare method.</param>
+	/// <param name="value2">Value of second object.  This is the object passed as a paramter to the Compare method.</param>
 	public DataObjectCompareDetail(String propertyName, DataType value1, DataType value2) {
 	    this.propertyName = propertyName;
 	    this.value1 = value1;

@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-/// derived from: Sample ASPX C# LineChart Class, Steve Hall, 2002
+// derived from: Sample ASPX C# LineChart Class, Steve Hall, 2002
 
 namespace Spring2.Core.Drawing.Graphing {
 

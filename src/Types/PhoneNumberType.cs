@@ -244,7 +244,7 @@ namespace Spring2.Core.Types {
 	/// Uses the App.config 'PhoneNumberExtensionDisplayFormat' setting if it exists
 	/// </summary>
 	/// </summary>
-	/// <param name="format"></param>
+	/// <param name="phoneNumberFormat"></param>
 	/// <returns>Formatted Phone Number string </returns>
 	public override String ToString(String phoneNumberFormat) {
 	    String extensionFormat;
@@ -349,6 +349,7 @@ namespace Spring2.Core.Types {
 	/// Removes all non-numeric digits from a string except specified characters
 	/// </summary>
 	/// <param name="messyString"></param>
+	/// <param name="except"></param>
 	/// <returns></returns>
 	private static String RemoveNonNumeric(String messyString, char[] except){
 	    char[] digits = messyString.ToCharArray();

@@ -21,7 +21,7 @@ namespace Spring2.Core.Util {
 	/// <summary>
 	/// Creates an application error given a property name and a message.
 	/// </summary>
-	/// <param name="properyName">the name of the property associated with the error.</param>
+	/// <param name="propertyName">the name of the property associated with the error.</param>
 	/// <param name="message">a message describing the error.</param>
 	public ApplicationError(String propertyName, String message) {
 	    this.propertyName = propertyName == null ? String.Empty : propertyName;
