@@ -1,3 +1,109 @@
+2003-05-09 Friday 15:29  cort
+
+	* src/: Test/DataTypeTest.cs, Types/DateType.cs:
+	
+	add IComparable interface to DateType add tests to make sure that
+	CompareTo works
+
+2003-05-09 Friday 15:29  cort
+
+	* .cvsignore:
+	
+	remove bin
+
+2003-05-09 Friday 15:28  cort
+
+	* bin/cvs2cl.pl:
+	
+	create change log from CVS script
+
+2003-05-09 Friday 15:28  cort
+
+	* bin/UpdateVersion.exe:
+	
+	utility to update the version inside of a AssemblyVersionInfo.cs
+
+2003-05-09 Friday 15:28  cort
+
+	* bin/NDoc/: MSDN.css, NDoc.Core.dll, NDoc.Documenter.JavaDoc.dll,
+	NDoc.Documenter.Latex.dll, NDoc.Documenter.Msdn.dll,
+	NDoc.Documenter.Xml.dll, NDoc.VisualStudio.dll, NDocConsole.exe,
+	NDocGui.exe, NDocGui.exe.manifest, tags.html:
+	
+	NDoc
+
+2003-05-09 Friday 15:27  cort
+
+	* bin/NUnit/: NUnit V2.0 ReadMe.pdf, nunit-console.exe,
+	nunit-console.exe.config, nunit-gui.exe, nunit-gui.exe.config,
+	nunit.extensions.dll, nunit.framework.dll, nunit.util.dll:
+	
+	NUnit 2.0
+
+2003-05-09 Friday 15:27  cort
+
+	* bin/NAnt/: NAnt.Console.Tests.dll, NAnt.Console.Tests.pdb,
+	NAnt.Core.Tests.dll, NAnt.Core.Tests.pdb, NAnt.Core.dll,
+	NAnt.Core.pdb, NAnt.DotNetTasks.Tests.dll,
+	NAnt.DotNetTasks.Tests.pdb, NAnt.DotNetTasks.dll,
+	NAnt.DotNetTasks.pdb, NAnt.NUnit1Tasks.dll, NAnt.NUnit1Tasks.pdb,
+	NAnt.NUnit2Tasks.dll, NAnt.NUnit2Tasks.pdb,
+	NAnt.NUnitFormatters.dll, NAnt.NUnitFormatters.pdb,
+	NAnt.VisualCppTasks.dll, NAnt.VisualCppTasks.pdb,
+	NAnt.ZipTasks.Tests.dll, NAnt.ZipTasks.Tests.pdb,
+	NAnt.ZipTasks.dll, NAnt.ZipTasks.pdb, NAnt.exe, NAnt.exe.config,
+	NAnt.pdb, NDoc.Core.dll, NDoc.Documenter.Msdn.dll,
+	NDoc.Documenter.NAnt.dll, NDoc.Documenter.NAnt.pdb, NUnitCore.dll,
+	SharpZipLib.dll, nunit.framework.dll, taskdef.Tasks.dll,
+	taskdef.Tasks.pdb:
+	
+	NAnt 2.0
+
+2003-05-09 Friday 15:24  cort
+
+	* release/: Spring2.Core.1.1.1.4578.zip,
+	Spring2.Core.1.1.12.5126.zip:
+	
+	remove versions created while testing make script
+
+2003-05-09 Friday 15:21  cort
+
+	* src/Makefile:
+	
+	add support for making a release that includes updating the change
+	log, building and committing the new release and updating the
+	version number for the next release.
+
+2003-05-09 Friday 15:20  cort
+
+	* src/updatechangelog.sh:
+	
+	shell script to update change log and commit
+
+2003-05-09 Friday 15:19  cort
+
+	* src/Spring2.Core.WebControl.csproj:
+	
+	remove unneeded references
+
+2003-05-09 Friday 15:18  cort
+
+	* src/getversion.sh:
+	
+	shell script to get version from AssemblyVersionInfo.cs
+
+2003-05-09 Friday 15:11  cort
+
+	* release/Spring2.Core.1.1.1.4578.zip:
+	
+	new release version
+
+2003-05-09 Friday 15:11  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2003-05-09 Friday 14:36  cort
 
 	* ChangeLog.txt:
