@@ -1,3 +1,9 @@
+2004-01-08 Thursday 16:38  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2004-01-08 Thursday 16:34  cort
 
 	* src/DAO/EntityDao.cs:
