@@ -14,7 +14,7 @@ namespace Spring2.Core.Test {
 	public void TestParse() {
 
 	    // Currency type tests.
-	    CurrencyType c1 = new CurrencyType(100);
+	    CurrencyType c1 = new CurrencyType((Double)100);
 	    String s1 = c1.ToString();
 	    CurrencyType c2 = CurrencyType.Parse(s1);
 	    Assertion.AssertEquals(c1, c2);
@@ -102,9 +102,9 @@ namespace Spring2.Core.Test {
 	    Assertion.Assert(!BooleanType.TRUE.Equals(new DateType()));
 
 	    // Currency type tests.
-	    CurrencyType c1 = new CurrencyType(100);
-	    CurrencyType c2 = new CurrencyType(100);
-	    CurrencyType c3 = new CurrencyType(50);
+	    CurrencyType c1 = new CurrencyType((Double)100);
+	    CurrencyType c2 = new CurrencyType((Double)100);
+	    CurrencyType c3 = new CurrencyType((Double)50);
 
 	    Assertion.AssertEquals(CurrencyType.UNSET, CurrencyType.UNSET);
 	    Assertion.AssertEquals(CurrencyType.DEFAULT, CurrencyType.DEFAULT);
@@ -124,9 +124,9 @@ namespace Spring2.Core.Test {
 	    Assertion.Assert(!c1.Equals(null));
 
 	    // Quantity type tests.
-	    QuantityType q1 = new QuantityType(100);
-	    QuantityType q2 = new QuantityType(100);
-	    QuantityType q3 = new QuantityType(50);
+	    QuantityType q1 = new QuantityType((Double)100);
+	    QuantityType q2 = new QuantityType((Double)100);
+	    QuantityType q3 = new QuantityType((Double)50);
 
 	    Assertion.AssertEquals(QuantityType.UNSET, QuantityType.UNSET);
 	    Assertion.AssertEquals(QuantityType.DEFAULT, QuantityType.DEFAULT);
@@ -146,9 +146,9 @@ namespace Spring2.Core.Test {
 	    Assertion.Assert(!q1.Equals(null));
 
 	    // Decimal type tests.
-	    DecimalType d1 = new DecimalType(100);
-	    DecimalType d2 = new DecimalType(100);
-	    DecimalType d3 = new DecimalType(50);
+	    DecimalType d1 = new DecimalType((Double)100);
+	    DecimalType d2 = new DecimalType((Double)100);
+	    DecimalType d3 = new DecimalType((Double)50);
 
 	    Assertion.AssertEquals(DecimalType.UNSET, DecimalType.UNSET);
 	    Assertion.AssertEquals(DecimalType.DEFAULT, DecimalType.DEFAULT);
