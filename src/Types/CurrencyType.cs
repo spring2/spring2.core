@@ -42,11 +42,11 @@ namespace Spring2.Core.Types {
 	}
 
 	public override String ToString() {
-	    return value.ToString("c");
+	    return IsValid ? value.ToString("c") : base.ToString();
 	}
 
 	public override String ToString(String format) {
-	    return value.ToString(format);
+	    return IsValid ? value.ToString(format) : base.ToString();
 	}
     }
 }

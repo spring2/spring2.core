@@ -54,23 +54,23 @@ namespace Spring2.Core.Types {
 	}
 
 	public DateTime ToDateTime() {
-	    if (IsUnset || IsDefault) {
-		throw new InvalidCastException("UNSET and DEFAULT DateTypes have no decimal value.");
-	    } else {
+	    if (IsValid) {
 		return value;
+	    } else {
+		throw new InvalidCastException("UNSET and DEFAULT DateTypes have no decimal value.");
 	    }
 	}
 
 	public String ToString(String format) {
-	    return value.ToString(format);
+	    return IsValid ? value.ToString(format) : base.ToString();
 	}
 
 	public String ToShortDateString() {
-	    return value.ToShortDateString();
+	    return IsValid ? value.ToShortDateString() : base.ToString();
 	}
 
 	public String ToShortTimeString() {
-	    return value.ToShortTimeString();
+	    return IsValid ? value.ToShortTimeString() : base.ToString();
 	}
 
 	public override Boolean Equals(Object o) {

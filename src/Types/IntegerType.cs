@@ -55,15 +55,15 @@ namespace Spring2.Core.Types {
 	}
 
 	public String ToString(String format) {
-	    return value.ToString(format);
+	    return IsValid ? value.ToString(format) : base.ToString();
 	}
 
 	public String ToString(IFormatProvider provider) {
-	    return value.ToString(provider);
+	    return IsValid ? value.ToString(provider) : base.ToString();
 	}
 
 	public String ToString(String format, IFormatProvider provider) {
-	    return value.ToString(format, provider);
+	    return IsValid ? value.ToString(format, provider) : base.ToString();
 	}
 
 	public Int32 CompareTo(Object o) {

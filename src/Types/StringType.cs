@@ -6,7 +6,7 @@ namespace Spring2.Core.Types {
     /// <summary>
     /// Summary description for StringType.
     /// </summary>
-    public class StringType : DataType {
+    public class StringType : DataType, IComparable {
 
 	public static readonly new StringType DEFAULT = new StringType();
 	public static readonly new StringType UNSET = new StringType();

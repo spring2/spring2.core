@@ -72,11 +72,11 @@ namespace Spring2.Core.Types {
 	}
 
 	public override String ToString() {
-	    return value.ToString();
+	    return IsValid ? value.ToString() : base.ToString();
 	}
 
 	public virtual String ToString(String format) {
-	    return value.ToString(format);
+	    return IsValid ? value.ToString(format) : base.ToString();
 	}
 
 	public Int32 CompareTo(Object o) {
