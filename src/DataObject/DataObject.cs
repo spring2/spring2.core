@@ -96,6 +96,138 @@ namespace Spring2.Core.DataObject {
 	}
 
 	/// <summary>
+	/// Does a deep compare of the current object with the passed object.
+	/// </summary>
+	/// <param name="obj">Object to compare current object with.</param>
+	/// <param name="prefix">Prefix to use when identifying properties.</param>
+	/// <returns>List of differences between the objects.</returns>
+	public DataObjectCompareList Compare(DataObject obj)
+	{
+	    return Compare(obj, this.GetType().Name);
+	}
+
+	/// <summary>
+	/// Does a deep compare of the current object with the passed object.
+	/// </summary>
+	/// <param name="obj">Object to compare current object with.</param>
+	/// <param name="prefix">Prefix to use when identifying properties.</param>
+	/// <returns>List of differences between the objects.</returns>
+	public DataObjectCompareList Compare(DataObject obj, String prefix) 
+	{
+	    DataObjectCompareList returnValue = new DataObjectCompareList();
+	    if (obj == null) 
+	    {
+		returnValue.Add(new DataObjectCompareDetail(prefix, 
+		    new StringType("Data Object"), new StringType("Null Data Object")));
+		return returnValue;
+	    }
+
+	    if (obj == this)
+	    {
+		return returnValue;
+	    }
+
+	    if (!GetType().Equals(obj.GetType()))
+	    {
+		returnValue.Add(new DataObjectCompareDetail(prefix, 
+			new StringType("different types"), 
+			new StringType("different types")));
+		return returnValue;
+	    }
+
+	    foreach (PropertyInfo p in GetType().GetProperties()) 
+	    {
+		Object value1 = p.GetValue(this, null);
+		Object value2 = p.GetValue(obj, null);
+		String valuePrefix = prefix + "." + p.Name;
+		if (value1 is ICollection && value2 is ICollection) 
+		{
+		    ICollection collection1 = (ICollection)value1;
+		    ICollection collection2 = (ICollection)value2;
+		    if (collection1.Count != collection2.Count)
+		    {
+			returnValue.Add(new DataObjectCompareDetail(
+			    valuePrefix
+			    + ".Count", 
+			    new NumberType(collection1.Count), 
+			    new NumberType(collection2.Count)));
+			}
+		    else
+		    {
+			IEnumerator enumerator1 = collection1.GetEnumerator();
+			IEnumerator enumerator2 = collection2.GetEnumerator();
+			int whichOccurrence = 0;
+			while (enumerator1.MoveNext() && enumerator2.MoveNext())
+			{
+			    String collectionPrefix = valuePrefix
+				+ "[" + whichOccurrence.ToString() + "]";
+			    if (enumerator1.Current is DataObject && enumerator2.Current is DataObject)
+			    {
+				returnValue.Append(((DataObject)(enumerator1.Current)).Compare(
+				    (DataObject)(enumerator2.Current), 
+				    collectionPrefix));
+			    } 
+			    else  if (enumerator1.Current is DataType 
+					&& enumerator2.Current is DataType)
+			    {
+				if (!enumerator1.Current.Equals(enumerator2.Current))
+				{
+				    returnValue.Add(new DataObjectCompareDetail(collectionPrefix,
+					(DataType)(enumerator1.Current),
+					(DataType)(enumerator2.Current)));
+				}
+			    }
+			    else
+			    {
+				if (!enumerator1.Current.Equals(enumerator2.Current))
+				{
+				    returnValue.Add(new DataObjectCompareDetail(
+					collectionPrefix,
+					new StringType("Not DataType"),
+					new StringType("Not DataType")));
+				}
+			    }
+			    whichOccurrence++;
+			}
+		    }
+		}
+		else if (value1 is DataObject && value2 is DataObject)
+		{
+		    returnValue.Append(((DataObject)value1).Compare(
+			(DataObject)value2,
+			valuePrefix));
+		}
+		else
+		{
+		    if (!value1.Equals(value2))
+		    { 
+			DataType v1;
+			DataType v2;
+			if (value1 is DataType)
+			{
+			    v1 = (DataType)value1;
+			}
+			else
+			{
+			    v1 = new StringType("Not DataType");
+			}
+			if (value2 is DataType)
+			{
+			    v2 = (DataType)value2;
+			}
+			else
+			{
+			    v2 = new StringType("Not DataType");
+			}
+			returnValue.Add(new DataObjectCompareDetail(valuePrefix, v1, v2));
+		    }
+		}
+	    }
+
+	    return returnValue;
+	}
+
+	/// <summary>
 	/// Returns a hash code.
 	/// </summary>
 	/// <returns>Hash code value</returns>
