@@ -152,5 +152,23 @@ namespace Spring2.Core.Types {
 		return new DateType(result);
 	    }
 	}
+
+	/// <summary>
+	/// Returns an instance that represents the current date and time
+	/// </summary>
+	public static DateType Now {
+	    get {
+		return new DateType();
+	    }
+	}
+
+	/// <summary>
+	/// Returns and instance that represents the current date
+	/// </summary>
+	public static DateType Today {
+	    get {
+		return new DateType(DateTime.Today);
+	    }
+	}
     }
 }
