@@ -10,7 +10,7 @@
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
                 AssemblyName = "Spring2.Core"
-                AssemblyOriginatorKeyFile = "spring2.snk"
+                AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Flow"
                 DefaultTargetSchema = "IE50"
@@ -83,6 +83,16 @@
             <Include>
                 <File
                     RelPath = "AssemblyInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "AssemblyVersionInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DAO\DaoException.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

@@ -29,7 +29,7 @@
                     DocumentationFile = ""
                     DebugSymbols = "true"
                     FileAlignment = "4096"
-                    IncrementalBuild = "true"
+                    IncrementalBuild = "false"
                     Optimize = "false"
                     OutputPath = "..\build\"
                     RegisterForComInterop = "false"
@@ -96,6 +96,11 @@
         </Build>
         <Files>
             <Include>
+                <File
+                    RelPath = "AssemblyVersionInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
                 <File
                     RelPath = "Test\AssemblyInfo.cs"
                     SubType = "Code"
