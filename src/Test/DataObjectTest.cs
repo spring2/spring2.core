@@ -3,6 +3,7 @@ using System.Collections;
 
 using NUnit.Framework;
 
+using Spring2.Core.DataObject;
 using Spring2.Core.Types;
 
 namespace Spring2.Core.Test
@@ -24,6 +25,7 @@ namespace Spring2.Core.Test
 
 	private static readonly string UPDATE = "Update";
 	private static readonly string EQUALS = "Equals";
+	private static readonly string COMPARE = "Compare";
 
 	public DataObjectTest(string name) : base(name) {}
 
@@ -35,6 +37,7 @@ namespace Spring2.Core.Test
 		TestSuite suite= new TestSuite(); 
 		suite.AddTest(new DataObjectTest(UPDATE)); 
 		suite.AddTest(new DataObjectTest(EQUALS)); 
+		suite.AddTest(new DataObjectTest(COMPARE));
 		return suite;
 	    }
 	}
@@ -47,6 +50,10 @@ namespace Spring2.Core.Test
 	    if (Name.Equals(EQUALS))
 	    {
 		TestEquals();
+	    }
+	    if (Name.Equals(COMPARE))
+	    {
+		TestCompare();
 	    }
 	}
 
@@ -101,6 +108,89 @@ namespace Spring2.Core.Test
 	    Assert("Equals doesn't notice datatype in list object change", !data.Equals(data2));
 	}
 
+	/// <summary>
+	/// Test the Compare method
+	/// </summary>
+	protected void TestCompare()
+	{
+	    TestData data = GetTestData();
+	    DataObjectCompareList list = data.Compare(data);
+	    Assert("Object does not equal itself\n" + list.ToString(), list.Count == 0);
+	    TestData data2 = GetTestData();
+	    list = data.Compare(data2);
+	    Assert("Equal objects not equal", list.Count == 0);
+
+	    data2.Prop1 = PROP1_AFTER_CHANGE;
+	    list = data.Compare(data2);
+	    Assert("Only change in one top level object - saw none\n" + list.ToString(), list.Count != 0);
+	    Assert("Only change in one top level object - saw more\n" + list.ToString(), list.Count == 1);
+	    Assert("One Change in top level object - properties incorrect\n" + list.ToString(), 
+		list[0].PropertyName.Equals("TestData.Prop1")
+		&& list[0].Value1.Equals(PROP1_BEFORE_CHANGE) 
+		&& list[0].Value2.Equals(PROP1_AFTER_CHANGE));
+
+	    data2.Prop1 = data.Prop1;
+	    data2.DataObject1.Prop1 = CONTAINED_PROP1_AFTER_CHANGE;
+	    list = data.Compare(data2);
+	    Assert("Only change in one contained object - saw none\n" + list.ToString(), list.Count != 0);
+	    Assert("Only change in one contained object - saw more\n" + list.ToString(), list.Count == 1);
+	    Assert("One Change in contained object - properties incorrect\n" + list.ToString(), 
+		list[0].PropertyName.Equals("TestData.DataObject1.Prop1")
+		&& list[0].Value1.Equals(CONTAINED_PROP1_BEFORE_CHANGE) 
+		&& list[0].Value2.Equals(CONTAINED_PROP1_AFTER_CHANGE));
+
+	    data2.DataObject1.Prop1 = data.DataObject1.Prop1;
+	    ((Test2Data)(data2.TestCollection1[1])).Prop1 = ARRAY_CHANGE_ATTEMPT;
+	    list = data.Compare(data2);
+	    Assert("Only change in one array object - saw none\n" + list.ToString(), list.Count != 0);
+	    Assert("Only change in one array object - saw more\n" + list.ToString(), list.Count == 1);
+	    Assert("One Change in array object - properties incorrect\n" + list.ToString(), 
+		list[0].PropertyName.Equals("TestData.TestCollection1[1].Prop1")
+		&& list[0].Value1.Equals(ARRAY_2_VALUE) 
+		&& list[0].Value2.Equals(ARRAY_CHANGE_ATTEMPT));
+
+	    ((Test2Data)(data2.TestCollection1[1])).Prop1 = 
+		((Test2Data)(data.TestCollection1[1])).Prop1;
+	    data2.Prop1 = PROP1_AFTER_CHANGE;
+	    data2.DataObject1.Prop1 = CONTAINED_PROP1_AFTER_CHANGE;
+	    ((Test2Data)(data2.TestCollection1[1])).Prop1 = ARRAY_CHANGE_ATTEMPT;
+	    list = data.Compare(data2);
+	    Assert("Expected 3 changes did not get them\n" + list.ToString(),
+		list.Count == 3);
+	    bool foundTop = false;
+	    bool foundContained = false;
+	    bool foundArray = false;
+	    for (int i=0;i<3;i++)
+	    {
+		if (list[i].PropertyName.Equals("TestData.Prop1")
+		    && list[i].Value1.Equals(PROP1_BEFORE_CHANGE) 
+		    && list[i].Value2.Equals(PROP1_AFTER_CHANGE))
+		{
+		    foundTop = true;
+		}
+		if (list[i].PropertyName.Equals("TestData.TestCollection1[1].Prop1")
+		    && list[i].Value1.Equals(ARRAY_2_VALUE) 
+		    && list[i].Value2.Equals(ARRAY_CHANGE_ATTEMPT))
+		{
+		    foundArray = true;
+		}
+		if (list[i].PropertyName.Equals("TestData.DataObject1.Prop1")
+		    && list[i].Value1.Equals(CONTAINED_PROP1_BEFORE_CHANGE) 
+		    && list[i].Value2.Equals(CONTAINED_PROP1_AFTER_CHANGE))
+		{
+		    foundContained = true;
+		}
+	    }
+	    
+	    Assert("Top level change in multi change not found\n" + list.ToString(), foundTop);
+	    Assert("Contained change in multi change not found\n" + list.ToString(), foundContained);
+	    Assert("Array change in multi change not found\n" + list.ToString(), foundArray);
+	}
+
+	/// <summary>
+	/// Get a generic test data item with values set.
+	/// </summary>
+	/// <returns>Item to test against.</returns>
 	private TestData GetTestData()
 	{
 	    TestData data = new TestData();
