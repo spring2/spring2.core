@@ -1,3 +1,52 @@
+2004-01-08 Thursday 16:34  cort
+
+	* src/DAO/EntityDao.cs:
+	
+	add support to GetListReader to get TOP x rows add support using
+	DaoTransaction for manual transaction
+
+2004-01-08 Thursday 16:33  cort
+
+	* src/Spring2.Core.csproj:
+	
+	add DaoException to project
+
+2004-01-08 Thursday 16:31  cort
+
+	* src/DAO/DaoTransaction.cs:
+	
+	wrapper for SqlTransaction for handling exceptions
+
+2004-01-08 Thursday 16:30  cort
+
+	* src/DAO/DaoException.cs:
+	
+	complete implementation of exception
+
+2004-01-08 Thursday 16:30  cort
+
+	* src/IO/ResourceLocator.cs:
+	
+	ignore any of the problems trying to load assemblies
+
+2004-01-05 Monday 10:02  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2004-01-05 Monday 10:02  cort
+
+	* release/Spring2.Core.1.1.7.3589.zip:
+	
+	new release version
+
+2004-01-05 Monday 10:01  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2004-01-05 Monday 08:59  cort
 
 	* src/AssemblyVersionInfo.cs:
