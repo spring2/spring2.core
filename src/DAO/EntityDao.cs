@@ -66,6 +66,9 @@ namespace Spring2.Core.DAO {
 		connectionString = rkey.GetValue(value).ToString();
 	    } else {
 		connectionString = ConfigurationSettings.AppSettings[key];
+		if (connectionString == null) {
+		    throw new ConfigurationException("No app setting found for key: " + key + ".  Check Web.config for this value.");
+		}
 	    }
 
 	    connectionString = connectionString.ToUpper();
