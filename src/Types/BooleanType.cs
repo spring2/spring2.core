@@ -17,6 +17,16 @@ namespace Spring2.Core.Types {
 	    return value ? TRUE : FALSE;
 	}
 
+	public static BooleanType GetInstance(Int32 value) {
+	    if (value == 1) {
+		return TRUE;
+	    }
+	    if (value == 0) {
+		return FALSE;
+	    }
+	    return UNSET;
+	}
+
 	public static BooleanType GetInstance(Object value) {
 	    if (value is String) {
 		foreach (BooleanType b in OPTIONS) {
@@ -57,8 +67,26 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
+	public Boolean IsTrue {
+	    get {
+		return Object.ReferenceEquals(this, TRUE);
+	    }
+	}
+
+	public Boolean IsFalse {
+	    get {
+		return Object.ReferenceEquals(this, FALSE);
+	    }
+	}
+
 	public Boolean ToBoolean() {
-	    return Object.ReferenceEquals(this, TRUE);
+	    if (Object.ReferenceEquals(this, TRUE)) {
+		return true;
+	    }
+	    if (Object.ReferenceEquals(this, FALSE)) {
+		return false;
+	    }
+	    throw new InvalidCastException("UNSET and DEFAULT cannot be cast to a Boolean.");
 	}
     }
 }
