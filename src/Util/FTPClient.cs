@@ -36,12 +36,14 @@ namespace Spring2.Core.Util {
 
 	private bool loggedIn;
 
+	private int receiveTimeout = DEFAULT_RECEIVE_TIMEOUT;
+
 	//Set the size of the packet that is used to read and to write data to the FTP server 
 	//to the following specified size.
 	private static readonly int BLOCK_SIZE = 512;
 	private byte[] buffer = new byte[BLOCK_SIZE];
 	private static readonly Encoding ASCII = Encoding.ASCII;
-	private static readonly int RECEIVE_TIMEOUT = 1000; // in milliseconds.
+	private static readonly int DEFAULT_RECEIVE_TIMEOUT = 1000; // in milliseconds.
 
 	//General variable declaration
 	private string messageString;
@@ -150,6 +152,14 @@ namespace Spring2.Core.Util {
 	public string MessageString {
 	    get { return messageString; }
 	    set { messageString = value; }
+	}
+
+	/// <summary>
+	/// Get or set the amount of time to wait for an ftp receive (in milliseconds).
+	/// </summary>
+	public int ReceiveTimeout {
+	    get { return this.receiveTimeout; }
+	    set { receiveTimeout = value; }
 	}
 
 	#endregion
@@ -796,7 +806,7 @@ namespace Spring2.Core.Util {
 	    Char seperator = '\n';
 	    string[] mess;
 
-	    clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, RECEIVE_TIMEOUT);
+	    clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, receiveTimeout);
 
 	    if (bClearMes) {
 		message = "";
