@@ -1,3 +1,21 @@
+2003-05-09 Friday 14:26  cort
+
+	* release/Spring2.Core.1.1.12.5126.zip:
+	
+	new release version
+
+2003-05-09 Friday 14:06  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2003-05-09 Friday 13:59  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2003-05-09 Friday 13:49  cort
 
 	* ChangeLog.txt:
