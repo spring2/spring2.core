@@ -20,6 +20,14 @@ namespace Spring2.Core.Test {
 	    // make sure that apostrophe is properly escaped
 	    filter = new WhereClause("column", "foo'bar");
 	    Assertion.AssertEquals(" WHERE column='foo''bar'", filter.FormatSql());
+
+	    // Check building where clause from string
+	    filter = new WhereClause("c1 = 57 and [user].[plan] = 'goodone'");
+	    Assertion.Assert(filter.FormatSql(), filter.FormatSql().Equals(" WHERE c1 = 57 and [user].[plan] = 'goodone'"));
+
+	    // Check building where clause from where clause
+	    WhereClause filter1 = new WhereClause(filter);
+	    Assertion.Assert(filter.FormatSql() + " doesn't equal " + filter1.FormatSql(), filter1.FormatSql().Equals(" WHERE (c1 = 57 and [user].[plan] = 'goodone') "));
 	}
 
 	[Test]
