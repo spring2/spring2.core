@@ -41,8 +41,13 @@ namespace Spring2.Core.DataObject {
 		sb.Append(indent);
 		sb.Append(p.Name + ": ");
 		if (value is DataObject) {
-		    sb.Append(Environment.NewLine);
-		    sb.Append(((DataObject)value).ToString(indentLevel+1));
+		    DataObject o = value as DataObject;
+		    if (o.IsEmpty()) {
+			sb.Append("EMPTY").Append(Environment.NewLine);
+		    } else {
+			sb.Append(Environment.NewLine);
+			sb.Append(((DataObject)value).ToString(indentLevel+1));
+		    }
 		} else if (value is ICollection) {
 		    ICollection collection = (ICollection)value;
 		    sb.Append(value.GetType().Name).Append(" (count=").Append(collection.Count).Append(")").Append(Environment.NewLine);
@@ -62,6 +67,10 @@ namespace Spring2.Core.DataObject {
 	    }
 
 	    return sb.ToString();
+	}
+
+	public virtual Boolean IsEmpty() {
+	    return false;
 	}
 
 	/// <summary>
