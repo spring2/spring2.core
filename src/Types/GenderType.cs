@@ -30,6 +30,10 @@ namespace Spring2.Core.Types {
 	private GenderType() {
 	}
 
+	public static IList Options {
+	    get { return OPTIONS; }
+	}
+
 	private GenderType(String code) {
 	    this.code = code;
 	    OPTIONS.Add(this);

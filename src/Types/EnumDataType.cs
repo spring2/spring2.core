@@ -19,6 +19,5 @@ namespace Spring2.Core.Types {
 		return name;
 	    }
 	}
-
     }
 }
