@@ -5,81 +5,60 @@ using System.Configuration;
 using System.Collections;
 
 namespace Spring2.Core.DAO {
-	public abstract class EntityDAO { 
+ 
+    public abstract class EntityDAO { 
 
-		public EntityDAO() {
-		}
-
-		protected abstract String GetViewName();
-
-		protected SqlDataReader GetListReader(SqlConnection connection) { 
-			return GetListReader(null, null, connection); 
-		} 
+	protected static SqlDataReader GetListReader(String viewName) { 
+	    return GetListReader(viewName, null, null); 
+	} 
 		 
-		protected SqlDataReader GetListReader(IWhere whereClause, IOrderBy orderByClause, SqlConnection connection) { 
-			try { 
-				String sql = "select * from " + GetViewName();
-				if (whereClause != null) { 
-					sql = sql + whereClause.FormatSql(); 
-				} 
-				if (orderByClause != null) { 
-					sql = sql + orderByClause.FormatSql(); 
-				} 
+	protected static SqlDataReader GetListReader(String viewName, IWhere whereClause, IOrderBy orderByClause) { 
+	    try { 
+		String sql = "select * from " + viewName;
+		if (whereClause != null) { 
+		    sql = sql + whereClause.FormatSql(); 
+		} 
+		if (orderByClause != null) { 
+		    sql = sql + orderByClause.FormatSql(); 
+		} 
 			 
-				return ExecuteReader(sql, connection);
-			} catch (Exception ex) { 
-				// log exception
-				throw ex;
-			} 
-		}
-
-		protected SqlDataReader ExecuteReader(String sql, SqlConnection connection) { 
-			SqlCommand cmd = GetSqlCommand(connection);
-			 
-			try { 
-				cmd.CommandType = CommandType.Text;
-				cmd.CommandText = sql;
-				return cmd.ExecuteReader(CommandBehavior.CloseConnection);
-			} catch (Exception ex) { 
-				// log exception
-				throw ex;
-			} 
-		}
-
-
-		public ICollection GetList(SqlConnection connection) {
-			return GetList(null, null, connection);
-		}
-
-		public ICollection GetList(IWhere whereClause, SqlConnection connection) {
-			return GetList(whereClause, null, connection);
-		}
-
-		public abstract ICollection GetList(IWhere whereClause, IOrderBy orderByClause, SqlConnection connection);
-
-
-		protected SqlCommand GetSqlCommand(SqlConnection conn) {
-			SqlCommand cmd;
-
-			// Create and open the database connection - if the one passed in was not null
-			if (conn == null) {
-				conn = new SqlConnection(ConfigurationSettings.AppSettings["ConnectionString"]);
-				conn.Open();
-			}
-
-			// Create and execute the command
-			cmd = new SqlCommand();
-			cmd.Connection = conn;
-
-			return cmd;
-		}
-
-		protected SqlCommand GetSqlCommand(SqlConnection conn, String commandText, CommandType commandType) {
-			SqlCommand cmd = GetSqlCommand(conn);
-			cmd.CommandText = commandText;
-			cmd.CommandType = commandType;
-			return cmd;
-		}
-
+		return ExecuteReader(sql);
+	    } catch (Exception ex) { 
+		// log exception
+		throw ex;
+	    } 
 	}
+
+	protected static SqlDataReader ExecuteReader(String sql) { 
+	    SqlCommand cmd = GetSqlCommand();
+			 
+	    try { 
+		cmd.CommandType = CommandType.Text;
+		cmd.CommandText = sql;
+		return cmd.ExecuteReader(CommandBehavior.CloseConnection);
+	    } catch (Exception ex) { 
+		// log exception
+		throw ex;
+	    } 
+	}
+
+	protected static SqlCommand GetSqlCommand() {
+
+	    SqlConnection conn = new SqlConnection(ConfigurationSettings.AppSettings["ConnectionString"]);
+	    conn.Open();
+
+	    // Create and execute the command
+	    SqlCommand cmd = new SqlCommand();
+	    cmd.Connection = conn;
+
+	    return cmd;
+	}
+
+	protected static SqlCommand GetSqlCommand(String commandText, CommandType commandType) {
+	    SqlCommand cmd = GetSqlCommand();
+	    cmd.CommandText = commandText;
+	    cmd.CommandType = commandType;
+	    return cmd;
+	}
+    }
 }
