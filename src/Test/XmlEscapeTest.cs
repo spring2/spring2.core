@@ -13,11 +13,11 @@ namespace Spring2.Core.Test {
 
 	[Test]
 	public void XmlEscape() {
-	    Assertion.AssertEquals("&lt;", Escape.GetText("<"));
-	    Assertion.AssertEquals("&gt;", Escape.GetText(">"));
-	    Assertion.AssertEquals("&amp;", Escape.GetText("&"));
-	    Assertion.AssertEquals("&quot;", Escape.GetText("\""));
-	    Assertion.AssertEquals("My name is Inigo Montoya", Escape.GetText("My name is Inigo Montoya"));
+	    Assert.AreEqual("&lt;", Escape.GetText("<"));
+	    Assert.AreEqual("&gt;", Escape.GetText(">"));
+	    Assert.AreEqual("&amp;", Escape.GetText("&"));
+	    Assert.AreEqual("&quot;", Escape.GetText("\""));
+	    Assert.AreEqual("My name is Inigo Montoya", Escape.GetText("My name is Inigo Montoya"));
 	}
     }
 }

@@ -10,10 +10,10 @@ namespace Spring2.Core.Test {
 
 	[Test]
 	public void TestSameDateAs() {
-	    Assertion.Assert("Should not be equal.", !DateType.Today.Equals(DateType.Now));
-	    Assertion.Assert("Should have same dates.", DateType.Today.SameDayAs(DateType.Now));
-	    Assertion.Assert("Should not have same date as UNSET.", !DateType.Today.SameDayAs(DateType.UNSET));
-	    Assertion.Assert("Should not have same date as DEFAULT.", !DateType.Today.SameDayAs(DateType.DEFAULT));
+	    Assert.IsTrue(!DateType.Today.Equals(DateType.Now), "Should not be equal.");
+	    Assert.IsTrue(DateType.Today.SameDayAs(DateType.Now), "Should have same dates.");
+	    Assert.IsTrue(!DateType.Today.SameDayAs(DateType.UNSET), "Should not have same date as UNSET.");
+	    Assert.IsTrue(!DateType.Today.SameDayAs(DateType.DEFAULT), "Should not have same date as DEFAULT.");
 	}
     }
 }

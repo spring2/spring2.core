@@ -32,15 +32,15 @@ namespace Spring2.Core.Test.Test {
 		int bytes1 = file1.Read(buffer1, 0, COMPAREBUFFERSIZE);
 		int bytes2 = file2.Read(buffer2, 0, COMPAREBUFFERSIZE);
 		while(bytes1 > 0) {
-		    Assertion.Assert(filename1 + " has different length than " + filename2 + ".", bytes1 == bytes2);
+		    Assert.IsTrue(bytes1 == bytes2, filename1 + " has different length than " + filename2 + ".");
 		    for(int i=0;i<bytes1;i++) {
-			Assertion.Assert(filename1 + " and " + filename2 + " differ.", buffer1[i] == buffer2[i]);
+			Assert.IsTrue(buffer1[i] == buffer2[i], filename1 + " and " + filename2 + " differ.");
 		    }
 		    bytes1 = file1.Read(buffer1, 0, COMPAREBUFFERSIZE);
 		    bytes2 = file2.Read(buffer2, 0, COMPAREBUFFERSIZE);
 		}
 
-		Assertion.Assert(filename1 + " has different length than " + filename2 + ".", bytes1 == bytes2);
+		Assert.IsTrue(bytes1 == bytes2, filename1 + " has different length than " + filename2 + ".");
 	    }
 	    finally {
 		file1.Close();

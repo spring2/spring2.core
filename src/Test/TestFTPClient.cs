@@ -38,14 +38,14 @@ namespace Spring2.Core.Test.Test {
 
 	    FTPClient fc = new FTPClient(SERVER, STARTDIRECTORY, USER, PASSWORD);
 
-	    Assertion.Assert("Unable to log in to server" + fc.MessageString, fc.Login());
+	    Assert.IsTrue(fc.Login(), "Unable to log in to server" + fc.MessageString);
 
-	    Assertion.Assert("Unable to change directory to " + DIRECTORY + "." + fc.MessageString, fc.ChangeDirectory(DIRECTORY));
+	    Assert.IsTrue(fc.ChangeDirectory(DIRECTORY), "Unable to change directory to " + DIRECTORY + "." + fc.MessageString);
 
-	    Assertion.Assert("Unable to create new directory." + fc.MessageString, fc.CreateDirectory(NEWDIRECTORY));
+	    Assert.IsTrue(fc.CreateDirectory(NEWDIRECTORY), "Unable to create new directory." + fc.MessageString);
 
 	    try {
-		Assertion.Assert("Unable to change to the new directory." + fc.MessageString, fc.ChangeDirectory(NEWDIRECTORY));
+		Assert.IsTrue(fc.ChangeDirectory(NEWDIRECTORY), "Unable to change to the new directory." + fc.MessageString);
 
 		fc.SetBinaryMode(true);
 
@@ -61,33 +61,34 @@ namespace Spring2.Core.Test.Test {
 
 		TestUtilities.CompareFiles(ORIGINALDLLFILE, LOCALDLLFILE);
 
-		Assertion.Assert("Unable to delete remote file" + REMOTEDLLFILE + "." + fc.MessageString, fc.DeleteFile(REMOTEDLLFILE));
+		Assert.IsTrue(fc.DeleteFile(REMOTEDLLFILE), "Unable to delete remote file" + REMOTEDLLFILE + "." + fc.MessageString);
 
-		Assertion.Assert("Unable to rename remote file." + fc.MessageString, fc.RenameFile(REMOTEXMLFILE, REMOTEXMLFILERENAMED));
+		Assert.IsTrue(fc.RenameFile(REMOTEXMLFILE, REMOTEXMLFILERENAMED), "Unable to rename remote file." + fc.MessageString);
 
 		string[] files = fc.GetFileList("");
 		bool found = false;
 		foreach(string file in files) {
-		    Assertion.Assert("Unexpected file " + file + " found in file list.",
-			file.Equals("") || file.StartsWith(".") || file.StartsWith(REMOTEXMLFILERENAMED));
+		    Assert.IsTrue(file.Equals("") || 
+				  file.StartsWith(".") || 
+				  file.StartsWith(REMOTEXMLFILERENAMED),
+				  "Unexpected file " + file + " found in file list.");
 		    found = found || file.StartsWith(REMOTEXMLFILERENAMED);
 		}
-		Assertion.Assert("File " + REMOTEXMLFILERENAMED + " not found in getlist.", found);
+		Assert.IsTrue(found, "File " + REMOTEXMLFILERENAMED + " not found in getlist.");
 
 		fc.UploadFromString(REMOTETEXTFILE, STRINGTOUPLOAD);
 
 		string txt = fc.DownloadToString(REMOTETEXTFILE);
 
-		Assertion.Assert("Upload or download of string didn't work.", txt.Equals(STRINGTOUPLOAD));
+		Assert.IsTrue(txt.Equals(STRINGTOUPLOAD), "Upload or download of string didn't work.");
 
-		Assertion.Assert("Unable to delete remote file " + REMOTEXMLFILERENAMED + "." + fc.MessageString, fc.DeleteFile(REMOTEXMLFILERENAMED));
+		Assert.IsTrue(fc.DeleteFile(REMOTEXMLFILERENAMED), "Unable to delete remote file " + REMOTEXMLFILERENAMED + "." + fc.MessageString);
 
-		Assertion.Assert("Unable to delete remote file " + REMOTETEXTFILE + "." + fc.MessageString,
-		    fc.DeleteFile(REMOTETEXTFILE));
+		Assert.IsTrue(		    fc.DeleteFile(REMOTETEXTFILE), "Unable to delete remote file " + REMOTETEXTFILE + "." + fc.MessageString);
 
-		Assertion.Assert("Unable to change back to parent directory" + fc.MessageString, fc.ChangeDirectory(".."));
+		Assert.IsTrue(fc.ChangeDirectory(".."), "Unable to change back to parent directory" + fc.MessageString);
 
-		Assertion.Assert("Unable to delete directory." + fc.MessageString,  fc.RemoveDirectory(NEWDIRECTORY));
+		Assert.IsTrue( fc.RemoveDirectory(NEWDIRECTORY), "Unable to delete directory." + fc.MessageString);
 	    }
 	    finally {
 		fc.CloseConnection();

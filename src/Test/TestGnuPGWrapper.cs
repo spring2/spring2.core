@@ -83,7 +83,7 @@ namespace Spring2.Core.Test.Test {
 	    string decryptedString = "";
 	    gpg.ExecuteCommand(encryptedString, out decryptedString);
 
-	    Assertion.Assert("Encryption or decryption messed something up", TEST_STRING.Equals(decryptedString));
+	    Assert.IsTrue(TEST_STRING.Equals(decryptedString), "Encryption or decryption messed something up");
 	}
 
 	/// <summary>
@@ -120,7 +120,7 @@ namespace Spring2.Core.Test.Test {
 		string origString = r.ReadToEnd();
 		r.Close();
 
-		Assertion.Assert("Encryption messed something up", decryptString.Equals(origString));
+		Assert.IsTrue(decryptString.Equals(origString), "Encryption messed something up");
 	    }
 	    finally {
 		CleanFiles();

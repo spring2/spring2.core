@@ -1,60 +1,37 @@
-#
-# Location of the source and destination folders.
-#
-SRCDIR :=	../src
-LIBDIR :=	../lib
-BUILDDIR :=     ../build
-BINDIR :=	../bin
-RELEASEDIR :=	../release
+RM		:= rm -rf
+MKDIR		:= mkdir -p
+NUNIT		:= nunit-console.exe
 
-CORE := $(BUILDDIR)/Spring2.Core.dll
-TEST := $(BUILDDIR)/Spring2.Core.Test.dll
-WEBCONTROL := $(BUILDDIR)/Spring2.Core.WebControl.dll
-NUNIT := $(LIBDIR)/nunit.framework.dll
+SRCDIR		:= ../src
+LIBDIR		:= ../lib
+BINDIR		:= ../bin
+DOCDIR		:= ../docs
+RELEASEDIR	:= ../release
+BUILDDIR	:= ../build
 
-MODULES := $(shell /usr/bin/find -name module.mk)
-include $(MODULES)
+all: build
 
 .DELETE_ON_ERROR:
 
-all: $(CORE) $(TEST) $(WEBCONTROL)
-
-$(CORE): $(SRC) AssemblyInfo.cs
-	csc /target:library /out:$@ /debug+ $(SRC) AssemblyInfo.cs AssemblyVersionInfo.cs
-
-$(TEST): $(TEST_SRC) $(CORE) $(NUNIT)
-	csc /target:library /out:$@ /debug+ /reference:$(NUNIT),$(CORE) $(TEST_SRC) AssemblyVersionInfo.cs
-
-$(WEBCONTROL): $(WEBCONTROL_SRC)
-	csc /target:library /out:$@ /debug+ $(WEBCONTROL_SRC) AssemblyVersionInfo.cs
-
-solution:
-	@touch build.log
-	@rm build.log
-	@-devenv Spring2.Core.sln /rebuild Debug /out build.log /nologo
-	@cat build.log
-
-gen:
-	../../../../work/Spring2/DataTierGenerator/build/DataTierGenerator.exe DataTierGenerator.config.xml
-
-dtgcompare:
-	../../../../work/Spring2/DataTierGenerator/build/DataTierGenerator.exe dtg-dbcompare.config.xml
-
-regress:
-	@../bin/NUnit/nunit-console.exe /assembly:$(TEST)
-
+.PHONY: clean
 clean:
-	@rm -rf $(BUILDDIR)/*
-	@rm -rf ../docs/api
+	$(RM) $(BUILDDIR)/*
+	$(RM) $(DOCDIR)/*
 
-debug:
-	@echo MODULES = $(MODULES)
-	@echo SRC = $(SRC)
-	@echo TEST_SRC = $(TEST_SRC)
+.PHONY: build
+build:
+	nant
+
+.PHONY: regress
+regress: build
+	cd $(BUILDDIR); $(NUNIT) Spring2.Core.Test.dll
+
+.PHONY: precommit
+precommit: build regress
 
 changelog:
 	@updatechangelog.sh
-	@cp ../ChangeLog.txt ${BUILDDIR}
+	@cp ../ChangeLog.txt $(BUILDDIR)
 
 docs:
 	@chmod a+x ../bin/NDoc/*
@@ -62,13 +39,15 @@ docs:
 	../bin/NDoc/NDocConsole.exe -documenter=MSDN -project=Spring2.Core.ndoc
 
 
-package: clean solution regress changelog docs
+package: clean build regress changelog docs
 	rm -rf ${BUILDDIR}/Core
-	cp ../docs/api/Spring2.Core.chm ${BUILDDIR}
-	jar -cMvf ${RELEASEDIR}/Spring2.Core.$(shell getversion.sh).zip -C ${BUILDDIR} .
+	cp $(DOCDIR)/api/Spring2.Core.chm $(BUILDDIR)
+	jar -cMvf $(RELEASEDIR)/Spring2.Core.$(shell getversion.sh).zip -C $(BUILDDIR) .
 
 release: package
 	cvs tag RELEASE_$(subst .,_,$(shell ./getversion.sh))
-	../bin/cvsadd.sh ${RELEASEDIR} Spring2.Core.$(shell getversion.sh).zip "new release version"
-	${BINDIR}/UpdateVersion -b Increment -i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs
+	../bin/cvsadd.sh $(RELEASEDIR) Spring2.Core.$(shell getversion.sh).zip "new release version"
+	$(BINDIR)/UpdateVersion -b Increment -i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs
 	cvs commit -m "update to next version" AssemblyVersionInfo.cs
+
+
