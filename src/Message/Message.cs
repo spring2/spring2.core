@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 
-using Spring2.Core.Types;
-
 namespace Spring2.Core.Message {
  
     /// <summary>
