@@ -41,11 +41,10 @@ namespace Spring2.Types {
 	    get {return myState;}
 	    set {myState = value;}
 	}
-       #endregion
+	#endregion
 
 	#region Constructors
-	private RowVersionType(TypeState state)
-	{
+	private RowVersionType(TypeState state) {
 	    myValue = null;
 	    myState = state;
 	}
@@ -61,8 +60,7 @@ namespace Spring2.Types {
 	    return new RowVersionType(value);
 	}
 
-	public byte[] Value 
-	{
+	public byte[] Value {
 	    get {
 		if (myState != TypeState.VALID) {
 		    throw new InvalidValueException(myState);

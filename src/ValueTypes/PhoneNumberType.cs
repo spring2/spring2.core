@@ -329,7 +329,7 @@ namespace Spring2.Types {
 	public static StringType RemoveNonNumeric(StringType messyString){
 	    if (messyString.IsValid){
 		return RemoveNonNumeric(messyString.ToString(), new char[0] {});
-//		return StringType.Parse(RemoveNonNumeric(messyString.ToString(), new char[0] {}));
+		//		return StringType.Parse(RemoveNonNumeric(messyString.ToString(), new char[0] {}));
 	    }else{
 		return messyString;
 	    }

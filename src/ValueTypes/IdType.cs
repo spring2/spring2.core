@@ -11,8 +11,7 @@ namespace Spring2.Types {
 	public static readonly IdType UNSET   = new IdType(TypeState.UNSET);
 
 	#region State management
-	public bool IsValid 
-	{
+	public bool IsValid {
 	    get {return myValue.IsValid;}
 	}
 
@@ -40,7 +39,7 @@ namespace Spring2.Types {
 	    get {return myValue.State;}
 	    set {myValue.State = value;}
 	}
-       #endregion
+	#endregion
 
 	#region Constructors
 	private IdType(TypeState state) {

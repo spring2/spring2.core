@@ -1,7 +1,6 @@
 using System;
 
-namespace Spring2.Types
-{
+namespace Spring2.Types {
     [System.Serializable, System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
     public struct IntegerType :	System.IComparable, System.IFormattable {
 	private System.Int32 myValue;
@@ -99,7 +98,7 @@ namespace Spring2.Types
 		throw new InvalidArgumentException("parseString");
 	    }
 
-    	    IntegerType parsedInt32;
+	    IntegerType parsedInt32;
 
 	    parsedInt32.myValue = System.Int32.Parse(parseString);
 	    parsedInt32.myState = TypeState.VALID;
@@ -112,7 +111,7 @@ namespace Spring2.Types
 		throw new InvalidArgumentException("parseString");
 	    }
 
-    	    IntegerType parsedInt32;
+	    IntegerType parsedInt32;
 
 	    parsedInt32.myValue = System.Int32.Parse(parseString, style);
 	    parsedInt32.myState = TypeState.VALID;
@@ -126,7 +125,7 @@ namespace Spring2.Types
 		throw new InvalidArgumentException("parseString");
 	    }
 
-    	    IntegerType parsedInt32;
+	    IntegerType parsedInt32;
 
 	    parsedInt32.myValue = System.Int32.Parse(parseString, formatProvider);
 	    parsedInt32.myState = TypeState.VALID;
@@ -223,8 +222,7 @@ namespace Spring2.Types
 	    return returnType;
 	}
 
-	public static explicit operator byte(IntegerType castFrom) 
-	{
+	public static explicit operator byte(IntegerType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -234,8 +232,7 @@ namespace Spring2.Types
 	#endregion
 
 	#region short
-	public static explicit operator short(IntegerType castFrom) 
-	{
+	public static explicit operator short(IntegerType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -251,8 +248,7 @@ namespace Spring2.Types
 	#endregion
 
 	#region int
-	public static implicit operator int(IntegerType castFrom) 
-	{
+	public static implicit operator int(IntegerType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -268,8 +264,7 @@ namespace Spring2.Types
 	#endregion
 
 	#region long
-	public static implicit operator long(IntegerType castFrom) 
-	{
+	public static implicit operator long(IntegerType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -285,8 +280,7 @@ namespace Spring2.Types
 	#endregion
 
 	#region Decimal	and DecimalType
-	public static explicit operator Decimal(IntegerType castFrom) 
-	{
+	public static explicit operator Decimal(IntegerType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -300,8 +294,7 @@ namespace Spring2.Types
 	    return returnType;
 	}
 
-	public static explicit operator DecimalType(IntegerType castFrom) 
-	{
+	public static explicit operator DecimalType(IntegerType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -318,8 +311,7 @@ namespace Spring2.Types
 	#endregion
 
 	#region Equality operators and methods
-	public static int Compare(IntegerType leftHand, IntegerType rightHand) 
-	{
+	public static int Compare(IntegerType leftHand, IntegerType rightHand) {
 	    if (leftHand.myState == TypeState.VALID && rightHand.myState == TypeState.VALID) {
 		if (leftHand.myValue < rightHand.myValue) {
 		    return -1;
@@ -349,8 +341,7 @@ namespace Spring2.Types
 		    return 0;
 		}
 
-		if (leftHand.myState == TypeState.UNSET)
-		{
+		if (leftHand.myState == TypeState.UNSET) {
 		    return 1;
 		}
 
@@ -363,13 +354,11 @@ namespace Spring2.Types
 
 
 	#region Equality operators
-	public static bool operator == (IntegerType leftHand, IntegerType rightHand) 
-	{
+	public static bool operator == (IntegerType leftHand, IntegerType rightHand) {
 	    return Compare(leftHand, rightHand) == 0;
 	}
 
-	public static bool operator != (IntegerType leftHand, IntegerType rightHand) 
-	{
+	public static bool operator != (IntegerType leftHand, IntegerType rightHand) {
 	    return Compare(leftHand, rightHand) != 0;
 	}
 
@@ -392,13 +381,11 @@ namespace Spring2.Types
 	#endregion
 
 	#region < and > operators
-	public static bool operator < (IntegerType leftHand, IntegerType rightHand) 
-	{
+	public static bool operator < (IntegerType leftHand, IntegerType rightHand) {
 	    return Compare(leftHand, rightHand) < 0;
 	}
 
-	public static bool operator > (IntegerType leftHand, IntegerType rightHand) 
-	{
+	public static bool operator > (IntegerType leftHand, IntegerType rightHand) {
 	    return Compare(leftHand, rightHand) > 0;
 	}
 
@@ -420,13 +407,11 @@ namespace Spring2.Types
 	#endregion    
 
 	#region <= and >= operators
-	public static bool operator <= (IntegerType leftHand, IntegerType rightHand) 
-	{
+	public static bool operator <= (IntegerType leftHand, IntegerType rightHand) {
 	    return Compare(leftHand, rightHand) <= 0;
 	}
 
-	public static bool operator >= (IntegerType leftHand, IntegerType rightHand) 
-	{
+	public static bool operator >= (IntegerType leftHand, IntegerType rightHand) {
 	    return Compare(leftHand, rightHand) >= 0;
 	}
 
@@ -448,7 +433,7 @@ namespace Spring2.Types
 	#endregion    
 	    
 	#region Addition operators and methods
-        public static IntegerType Add(IntegerType augend, IntegerType addend) {
+	public static IntegerType Add(IntegerType augend, IntegerType addend) {
 	    if (!augend.IsValid || !addend.IsValid) {
 		throw new InvalidStateException(augend.myState, addend.myState);
 	    }
@@ -456,7 +441,7 @@ namespace Spring2.Types
 	    IntegerType result = new IntegerType(augend.myValue + addend.myValue);
 
 	    return result;
-        }
+	}
 
 	public static IntegerType operator +(IntegerType augend, IntegerType addend) {
 	    if (!augend.IsValid || !addend.IsValid) {
@@ -488,11 +473,11 @@ namespace Spring2.Types
 	    return result;
 	}
 
-//	public static IntegerType operator ++(int augend) {
-//	    IntegerType result = new IntegerType(augend + 1);
+	//	public static IntegerType operator ++(int augend) {
+	//	    IntegerType result = new IntegerType(augend + 1);
 
-//	    return result;
-//	}
+	//	    return result;
+	//	}
 	#endregion
 
 	#region Subtraction operators and methods
@@ -526,11 +511,11 @@ namespace Spring2.Types
 	    return result;
 	}
 
-//	public static IntegerType operator --(int subtrahend) {
-//	    IntegerType result = new IntegerType(subtrahend - 1);
+	//	public static IntegerType operator --(int subtrahend) {
+	//	    IntegerType result = new IntegerType(subtrahend - 1);
 
-//	    return result;
-//	}
+	//	    return result;
+	//	}
 
 	#endregion
 
@@ -631,45 +616,41 @@ namespace Spring2.Types
 	#endregion
 
 	#region IComparable method
-        int IComparable.CompareTo(Object value)
-        {
+	int IComparable.CompareTo(Object value) {
 	    if (!(value is IntegerType)) {
 		throw new InvalidTypeException("IntegerType");
 	    }
 
-	    if (value == null)
-	    {
+	    if (value == null) {
 		throw new InvalidArgumentException("value");
 	    }
 
-            IntegerType compareTo = (IntegerType) value;
+	    IntegerType compareTo = (IntegerType) value;
 
 	    return Compare(this, compareTo);
-        }
+	}
 	#endregion
 
 	#region Object support and other stuff
-        public override bool Equals(Object value) 
-	{
-            if (value is IntegerType) {
-                return Compare(this, (IntegerType) value) == 0;
-            }
+	public override bool Equals(Object value) {
+	    if (value is IntegerType) {
+		return Compare(this, (IntegerType) value) == 0;
+	    }
 
-            return false;
-        }
+	    return false;
+	}
 
-        public static bool Equals(IntegerType leftHand, IntegerType rightHand) {
-            return Compare(leftHand, rightHand) == 0;
-        }
+	public static bool Equals(IntegerType leftHand, IntegerType rightHand) {
+	    return Compare(leftHand, rightHand) == 0;
+	}
 
-        public override int GetHashCode() {
+	public override int GetHashCode() {
 	    return myValue.GetHashCode();
 	}
 	
-        public TypeCode GetTypeCode() 
-	{
-            return TypeCode.Int32;
-        }
+	public TypeCode GetTypeCode() {
+	    return TypeCode.Int32;
+	}
 	#endregion
     }
 }

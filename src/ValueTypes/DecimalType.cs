@@ -6,19 +6,18 @@ using System.Runtime.CompilerServices;
 namespace Spring2.Types {
 
     [System.Serializable, System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
-    public struct DecimalType : IFormattable, IComparable, IConvertible
-    {
+    public struct DecimalType : IFormattable, IComparable, IConvertible {
 
 	private Decimal   myValue;
 	private TypeState myState;
 
-        public static readonly DecimalType Zero = new DecimalType(Decimal.Zero, TypeState.VALID);
+	public static readonly DecimalType Zero = new DecimalType(Decimal.Zero, TypeState.VALID);
     
-        public static readonly DecimalType One = new DecimalType(Decimal.One, TypeState.VALID);
+	public static readonly DecimalType One = new DecimalType(Decimal.One, TypeState.VALID);
     
-        public static readonly DecimalType MinusOne = new DecimalType(Decimal.MinusOne, TypeState.VALID);
+	public static readonly DecimalType MinusOne = new DecimalType(Decimal.MinusOne, TypeState.VALID);
     
-        public static readonly DecimalType MaxValue = new DecimalType(Decimal.MaxValue, TypeState.VALID);
+	public static readonly DecimalType MaxValue = new DecimalType(Decimal.MaxValue, TypeState.VALID);
 
 	public static readonly DecimalType MinValue = new DecimalType(Decimal.MinValue, TypeState.VALID);
 
@@ -54,26 +53,25 @@ namespace Spring2.Types {
 	    get {return myState;}
 	    set {myState = value;}
 	}
-       #endregion
+	#endregion
        
 	#region Constructors
-        public DecimalType(byte value) 
-	{
+	public DecimalType(byte value) {
 	    myValue = new decimal(value);
 	    myState = TypeState.VALID;
-        }
+	}
 
-        public DecimalType(short value) {
+	public DecimalType(short value) {
 	    myValue = new decimal(value);
 	    myState = TypeState.VALID;
-        }
+	}
     
 	public DecimalType(int value) {
 	    myValue = new decimal(value);
 	    myState = TypeState.VALID;
-        }
+	}
 
-        public DecimalType(long value) {
+	public DecimalType(long value) {
 	    myValue = new decimal(value);
 	    myState = TypeState.VALID;
 	}
@@ -83,28 +81,28 @@ namespace Spring2.Types {
 	    myState = TypeState.VALID;
 	}
 
-        public DecimalType(double value) {
+	public DecimalType(double value) {
 	    myValue = new decimal(value);
 	    myState = TypeState.VALID;
 	}        
         
-        public DecimalType(Decimal value) {
+	public DecimalType(Decimal value) {
 	    myValue = value;
 	    myState = TypeState.VALID;
 	}
 
-        public DecimalType(int[] bits) {
+	public DecimalType(int[] bits) {
 	    myValue = new decimal(bits);
 	    myState = TypeState.VALID;
-        }
+	}
     
-        public DecimalType(int lo, int mid, int hi, bool isNegative, byte scale) {
+	public DecimalType(int lo, int mid, int hi, bool isNegative, byte scale) {
 	    myValue = new decimal(lo, mid, hi, isNegative, scale);
 	    myState = TypeState.VALID;
-        }
+	}
 
 	public DecimalType(CurrencyType value) {
-//	    myValue = value.
+	    //	    myValue = value.
 	}
 
 	private DecimalType(decimal value, TypeState state) {
@@ -114,8 +112,7 @@ namespace Spring2.Types {
 	#endregion
 
 	#region Cast operators
-	public static explicit operator Decimal(DecimalType castFrom) 
-	{
+	public static explicit operator Decimal(DecimalType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -129,36 +126,34 @@ namespace Spring2.Types {
 	#endregion
 
 	#region General math methods
-        public static DecimalType Negate(DecimalType value) {
+	public static DecimalType Negate(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
 	    }
 
 	    DecimalType result = new DecimalType(Decimal.Negate(value.myValue), TypeState.VALID);
 	    return result;
-        }
+	}
 
 
 	//min/max aren't decimal methods but might be handy
-        public static DecimalType Max(DecimalType leftHand, DecimalType rightHand)
-	{
+	public static DecimalType Max(DecimalType leftHand, DecimalType rightHand) {
 	    if (Compare(leftHand, rightHand) >= 0) {
 		return leftHand;
 	    }
 
 	    return rightHand;
-        }
+	}
 
-        public static DecimalType Min(DecimalType leftHand, DecimalType rightHand)
-	{
+	public static DecimalType Min(DecimalType leftHand, DecimalType rightHand) {
 	    if (Compare(leftHand, rightHand) < 0) {
 		return leftHand;
 	    }
 
 	    return rightHand;
-        }
+	}
 
-        public static DecimalType Round(DecimalType value, int decimals) {
+	public static DecimalType Round(DecimalType value, int decimals) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
 	    }
@@ -167,7 +162,7 @@ namespace Spring2.Types {
 	    return result;
 	}
 
-        public static DecimalType Floor(DecimalType value) {
+	public static DecimalType Floor(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
 	    }
@@ -176,7 +171,7 @@ namespace Spring2.Types {
 	    return result;
 	}
 
-        public static DecimalType Truncate(DecimalType value) {
+	public static DecimalType Truncate(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
 	    }
@@ -189,58 +184,56 @@ namespace Spring2.Types {
     
 	#region ToString and Parsing
 
-        public override String ToString() 
-	{
+	public override String ToString() {
 	    return myValue.ToString(null, null);
-        }
+	}
 
 
-        public String ToString(String format) {
-            return ToString(format, null);
-        }
+	public String ToString(String format) {
+	    return ToString(format, null);
+	}
 
-        public String ToString(IFormatProvider provider) {
-            return ToString(null, provider);
-        }    
+	public String ToString(IFormatProvider provider) {
+	    return ToString(null, provider);
+	}    
 
-        public String ToString(String format, IFormatProvider provider) {
+	public String ToString(String format, IFormatProvider provider) {
 	    if (myState != TypeState.VALID) {
 		throw new InvalidStateException(myState);
 	    }
 
-            return myValue.ToString(format, provider);
-        }
+	    return myValue.ToString(format, provider);
+	}
 
 
-        public static DecimalType Parse(String from) {
-            return Parse(from, NumberStyles.Number, null);
-        }
+	public static DecimalType Parse(String from) {
+	    return Parse(from, NumberStyles.Number, null);
+	}
     
-        public static DecimalType Parse(String from, NumberStyles style) {
-            return Parse(from, style, null);
-        }
+	public static DecimalType Parse(String from, NumberStyles style) {
+	    return Parse(from, style, null);
+	}
 
-        public static DecimalType Parse(String from, IFormatProvider provider) {
+	public static DecimalType Parse(String from, IFormatProvider provider) {
 	    DecimalType result;
 	    result.myValue = Decimal.Parse(from, provider);
 	    result.myState = TypeState.VALID;
 
 	    return result;
-        }
+	}
     
-        public static DecimalType Parse(String from, NumberStyles style, IFormatProvider provider) {
+	public static DecimalType Parse(String from, NumberStyles style, IFormatProvider provider) {
 	    DecimalType result;
 	    result.myValue = Decimal.Parse(from, style, provider);
 	    result.myState = TypeState.VALID;
 
 	    return result;
-        }
+	}
 
 	#endregion
    
 	#region To<type> conversion methods
-        public static byte ToByte(DecimalType value) 
-	{
+	public static byte ToByte(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
 	    }
@@ -250,11 +243,10 @@ namespace Spring2.Types {
 	    } catch (OverflowException) {
 		throw new ValueOverflowException("DecimalType", "byte");
 	    }
-        }
+	}
     
-        [CLSCompliant(false)]
-        public static sbyte ToSByte(DecimalType value) 
-	{
+	[CLSCompliant(false)]
+	public static sbyte ToSByte(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
 	    }
@@ -264,7 +256,7 @@ namespace Spring2.Types {
 	    } catch (OverflowException) {
 		throw new ValueOverflowException("DecimalType", "sbyte");
 	    }
-        }
+	}
 
 	public static short ToInt16(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
@@ -276,9 +268,9 @@ namespace Spring2.Types {
 	    } catch (OverflowException) {
 		throw new ValueOverflowException("DecimalType", "short");
 	    }
-        }
+	}
 
-        [CLSCompliant(false)]
+	[CLSCompliant(false)]
 	public static ushort ToUInt16(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
@@ -289,9 +281,9 @@ namespace Spring2.Types {
 	    } catch (OverflowException) {
 		throw new ValueOverflowException("DecimalType", "ushort");
 	    }
-        }
+	}
 
-        public static int ToInt32(DecimalType value) {
+	public static int ToInt32(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
 	    }
@@ -301,10 +293,10 @@ namespace Spring2.Types {
 	    } catch (OverflowException) {
 		throw new ValueOverflowException("DecimalType", "int");
 	    }
-        }
+	}
     
-        [CLSCompliant(false)]
-        public static uint ToUInt32(DecimalType value) {
+	[CLSCompliant(false)]
+	public static uint ToUInt32(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
 	    }
@@ -314,7 +306,7 @@ namespace Spring2.Types {
 	    } catch (OverflowException) {
 		throw new ValueOverflowException("DecimalType", "uint");
 	    }
-        }
+	}
 
 	public static long ToInt64(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
@@ -326,10 +318,10 @@ namespace Spring2.Types {
 	    } catch (OverflowException) {
 		throw new ValueOverflowException("DecimalType", "long");
 	    }
-        }
+	}
 
-        [CLSCompliant(false)]
-        public static ulong ToUInt64(DecimalType value) {
+	[CLSCompliant(false)]
+	public static ulong ToUInt64(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
 	    }
@@ -339,7 +331,7 @@ namespace Spring2.Types {
 	    } catch (OverflowException) {
 		throw new ValueOverflowException("DecimalType", "ulong");
 	    }
-        }
+	}
     
 #if no
         public static Currency ToCurrency(DecimalType value) {
@@ -355,7 +347,7 @@ namespace Spring2.Types {
         }
 #endif
 
-        public static double ToDouble(DecimalType value) {
+	public static double ToDouble(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
 	    }
@@ -367,7 +359,7 @@ namespace Spring2.Types {
 	    }
 	}
     
-        public static float ToSingle(DecimalType value) {
+	public static float ToSingle(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
 	    }
@@ -383,109 +375,108 @@ namespace Spring2.Types {
 
 	#region Conversion Operators
 
-        public static implicit operator DecimalType(byte value) 
-	{
-            return new DecimalType(value);
-        }
+	public static implicit operator DecimalType(byte value) {
+	    return new DecimalType(value);
+	}
     
-        [CLSCompliant(false)]
-        public static implicit operator DecimalType(sbyte value) {
-            return new DecimalType(value);
-        }
+	[CLSCompliant(false)]
+	public static implicit operator DecimalType(sbyte value) {
+	    return new DecimalType(value);
+	}
     
-        public static implicit operator DecimalType(short value) {
-            return new DecimalType(value);
-        }
+	public static implicit operator DecimalType(short value) {
+	    return new DecimalType(value);
+	}
     
-        [CLSCompliant(false)]
-        public static implicit operator DecimalType(ushort value) {
-            return new DecimalType(value);
-        }
+	[CLSCompliant(false)]
+	public static implicit operator DecimalType(ushort value) {
+	    return new DecimalType(value);
+	}
 
-        public static implicit operator DecimalType(char value) {
-            return new DecimalType(value);
-        }
+	public static implicit operator DecimalType(char value) {
+	    return new DecimalType(value);
+	}
     
-        public static implicit operator DecimalType(int value) {
-            return new DecimalType(value);
-        }
+	public static implicit operator DecimalType(int value) {
+	    return new DecimalType(value);
+	}
     
-        [CLSCompliant(false)]
-        public static implicit operator DecimalType(uint value) {
-            return new DecimalType(value);
-        }
+	[CLSCompliant(false)]
+	public static implicit operator DecimalType(uint value) {
+	    return new DecimalType(value);
+	}
     
-        public static implicit operator DecimalType(long value) {
-            return new DecimalType(value);
-        }
+	public static implicit operator DecimalType(long value) {
+	    return new DecimalType(value);
+	}
     
-        [CLSCompliant(false)]
-        public static implicit operator DecimalType(ulong value) {
-            return new DecimalType(value);
-        }
+	[CLSCompliant(false)]
+	public static implicit operator DecimalType(ulong value) {
+	    return new DecimalType(value);
+	}
         
     
-        public static explicit operator DecimalType(float value) {
-            return new DecimalType(value);
-        }
+	public static explicit operator DecimalType(float value) {
+	    return new DecimalType(value);
+	}
     
-        public static explicit operator DecimalType(double value) {
-            return new DecimalType(value);
-        }
+	public static explicit operator DecimalType(double value) {
+	    return new DecimalType(value);
+	}
     
-        public static explicit operator byte(DecimalType value) {
-            return ToByte(value);
-        }
+	public static explicit operator byte(DecimalType value) {
+	    return ToByte(value);
+	}
     
-        [CLSCompliant(false)]
-        public static explicit operator sbyte(DecimalType value) {
-            return ToSByte(value);
-        }
+	[CLSCompliant(false)]
+	public static explicit operator sbyte(DecimalType value) {
+	    return ToSByte(value);
+	}
     
-        public static explicit operator char(DecimalType value) {
-            return (char) ToUInt16(value);
-        }
+	public static explicit operator char(DecimalType value) {
+	    return (char) ToUInt16(value);
+	}
 
-        public static explicit operator short(DecimalType value) {
-            return ToInt16(value);
-        }
+	public static explicit operator short(DecimalType value) {
+	    return ToInt16(value);
+	}
     
-        [CLSCompliant(false)]
-        public static explicit operator ushort(DecimalType value) {
-            return ToUInt16(value);
-        }
+	[CLSCompliant(false)]
+	public static explicit operator ushort(DecimalType value) {
+	    return ToUInt16(value);
+	}
     
-        public static explicit operator int(DecimalType value) {
-            return ToInt32(value);
-        }
+	public static explicit operator int(DecimalType value) {
+	    return ToInt32(value);
+	}
 		
-        [CLSCompliant(false)]
-        public static explicit operator uint(DecimalType value) {
-            return ToUInt32(value);
-        }
+	[CLSCompliant(false)]
+	public static explicit operator uint(DecimalType value) {
+	    return ToUInt32(value);
+	}
     
-        public static explicit operator long(DecimalType value) {
-            return ToInt64(value);
-        }
+	public static explicit operator long(DecimalType value) {
+	    return ToInt64(value);
+	}
     
-        [CLSCompliant(false)]
-        public static explicit operator ulong(DecimalType value) {
-            return ToUInt64(value);
-        }
+	[CLSCompliant(false)]
+	public static explicit operator ulong(DecimalType value) {
+	    return ToUInt64(value);
+	}
     
-        public static explicit operator float(DecimalType value) {
-            return ToSingle(value);
-        }
+	public static explicit operator float(DecimalType value) {
+	    return ToSingle(value);
+	}
     
-        public static explicit operator double(DecimalType value) {
-            return ToDouble(value);
-        }
+	public static explicit operator double(DecimalType value) {
+	    return ToDouble(value);
+	}
     
 	#endregion
 
-    	#region Addition operators and methods
+	#region Addition operators and methods
 
-        public static DecimalType Add(DecimalType augend, DecimalType addend) {
+	public static DecimalType Add(DecimalType augend, DecimalType addend) {
 	    if (augend.myState != TypeState.VALID || addend.myState != TypeState.VALID) {
 		throw new InvalidStateException(augend.myState, addend.myState);
 	    }
@@ -495,26 +486,25 @@ namespace Spring2.Types {
 	    result.myValue = decimal.Add(augend.myValue, addend.myValue);
 	    result.myState = TypeState.VALID;
 	    return result;
-        }
+	}
 
-        public static DecimalType operator ++(DecimalType augend) {
-            return Add(augend, One);
-        }
+	public static DecimalType operator ++(DecimalType augend) {
+	    return Add(augend, One);
+	}
 
 	public static DecimalType operator +(DecimalType augend, DecimalType addend) {
-            return Add(augend, addend);
-        }
+	    return Add(augend, addend);
+	}
 	
-        public static DecimalType operator +(DecimalType augend) {
-            return augend;
-        }
+	public static DecimalType operator +(DecimalType augend) {
+	    return augend;
+	}
 
 	#endregion
 
 	#region Subtraction operators and methods
 
-        public static DecimalType Subtract(DecimalType minuend, DecimalType subtrahend)
-	{
+	public static DecimalType Subtract(DecimalType minuend, DecimalType subtrahend) {
 	    if (minuend.myState != TypeState.VALID || subtrahend.myState != TypeState.VALID) {
 		throw new InvalidStateException(minuend.myState, subtrahend.myState);
 	    }
@@ -524,21 +514,20 @@ namespace Spring2.Types {
 	    return result;
 	}
 
-        public static DecimalType operator --(DecimalType minuend) {
-            return Subtract(minuend, One);
-        }
+	public static DecimalType operator --(DecimalType minuend) {
+	    return Subtract(minuend, One);
+	}
     
     
-        public static DecimalType operator -(DecimalType minuend, DecimalType subtrahend) {
-            return Subtract(minuend, subtrahend);
-        }
+	public static DecimalType operator -(DecimalType minuend, DecimalType subtrahend) {
+	    return Subtract(minuend, subtrahend);
+	}
 
 	#endregion
 
 	#region Multiplication operators and methods
 	
-	public static DecimalType Multiply(DecimalType multiplier, DecimalType multiplicand) 
-	{
+	public static DecimalType Multiply(DecimalType multiplier, DecimalType multiplicand) {
 	    if (multiplier.myState != TypeState.VALID || multiplicand.myState != TypeState.VALID) {
 		throw new InvalidStateException(multiplier.myState, multiplicand.myState);
 	    }
@@ -548,16 +537,15 @@ namespace Spring2.Types {
 	    return quotient;
 	}
 
-        public static DecimalType operator *(DecimalType multiplier, DecimalType multiplicand) {
-            return Multiply(multiplier, multiplicand);
-        }
+	public static DecimalType operator *(DecimalType multiplier, DecimalType multiplicand) {
+	    return Multiply(multiplier, multiplicand);
+	}
 
 	#endregion
 
 	#region Division operators and methods
 
-	public static DecimalType Divide(DecimalType dividend, DecimalType divisor) 
-	{
+	public static DecimalType Divide(DecimalType dividend, DecimalType divisor) {
 	    if (dividend.myState != TypeState.VALID || divisor.myState != TypeState.VALID) {
 		throw new InvalidStateException(dividend.myState, divisor.myState);
 	    }
@@ -567,16 +555,15 @@ namespace Spring2.Types {
 	    return quotient;
 	}
 
-        public static DecimalType operator/ (DecimalType dividend, DecimalType divisor) {
-            return Divide(dividend, divisor);
-        }
+	public static DecimalType operator/ (DecimalType dividend, DecimalType divisor) {
+	    return Divide(dividend, divisor);
+	}
 
 	#endregion
 
 	#region Modulus operators and methods
 
-	public static DecimalType Remainder(DecimalType dividend, DecimalType divisor) 
-	{
+	public static DecimalType Remainder(DecimalType dividend, DecimalType divisor) {
 	    if (dividend.myState != TypeState.VALID || divisor.myState != TypeState.VALID) {
 		throw new InvalidStateException(dividend.myState, divisor.myState);
 	    }
@@ -588,10 +575,9 @@ namespace Spring2.Types {
 	    return remainder;
 	}
 
-	public static DecimalType operator %(DecimalType dividend, DecimalType divisor) 
-	{
-            return Remainder(dividend, divisor);
-        }
+	public static DecimalType operator %(DecimalType dividend, DecimalType divisor) {
+	    return Remainder(dividend, divisor);
+	}
     
 	#endregion
 
@@ -626,8 +612,7 @@ namespace Spring2.Types {
 		    return 0;
 		}
 
-		if (leftHand.myState == TypeState.UNSET)
-		{
+		if (leftHand.myState == TypeState.UNSET) {
 		    return 1;
 		}
 
@@ -638,154 +623,149 @@ namespace Spring2.Types {
 	    return 0;
 	}
 
-        public static bool operator ==(DecimalType leftHand, DecimalType rightHand) {
-            return Compare(leftHand, rightHand) == 0;
-        }
+	public static bool operator ==(DecimalType leftHand, DecimalType rightHand) {
+	    return Compare(leftHand, rightHand) == 0;
+	}
 
-        public static bool operator !=(DecimalType leftHand, DecimalType rightHand) {
-            return Compare(leftHand, rightHand) != 0;
-        }
+	public static bool operator !=(DecimalType leftHand, DecimalType rightHand) {
+	    return Compare(leftHand, rightHand) != 0;
+	}
 
-        public static bool operator <(DecimalType leftHand, DecimalType rightHand) {
-            return Compare(leftHand, rightHand) < 0;
-        }
+	public static bool operator <(DecimalType leftHand, DecimalType rightHand) {
+	    return Compare(leftHand, rightHand) < 0;
+	}
 
-        public static bool operator <=(DecimalType leftHand, DecimalType rightHand) {
-            return Compare(leftHand, rightHand) <= 0;
-        }
+	public static bool operator <=(DecimalType leftHand, DecimalType rightHand) {
+	    return Compare(leftHand, rightHand) <= 0;
+	}
 
-        public static bool operator >(DecimalType leftHand, DecimalType rightHand) {
-            return Compare(leftHand, rightHand) > 0;
-        }
+	public static bool operator >(DecimalType leftHand, DecimalType rightHand) {
+	    return Compare(leftHand, rightHand) > 0;
+	}
 
-        public static bool operator >=(DecimalType leftHand, DecimalType rightHand) {
-            return Compare(leftHand, rightHand) >= 0;
-        }
+	public static bool operator >=(DecimalType leftHand, DecimalType rightHand) {
+	    return Compare(leftHand, rightHand) >= 0;
+	}
 
 	#endregion
 
 	#region IConvertible and other conversions
 
-        bool IConvertible.ToBoolean(IFormatProvider provider) 
-	{
-            return Convert.ToBoolean(this);
-        }
+	bool IConvertible.ToBoolean(IFormatProvider provider) {
+	    return Convert.ToBoolean(this);
+	}
 
 
-        char IConvertible.ToChar(IFormatProvider provider) {
-            throw new InvalidCastException("Decimal", "Char");
-        }
+	char IConvertible.ToChar(IFormatProvider provider) {
+	    throw new InvalidCastException("Decimal", "Char");
+	}
 
-        [CLSCompliant(false)]
-        sbyte IConvertible.ToSByte(IFormatProvider provider) {
-            return Convert.ToSByte(this);
-        }
+	[CLSCompliant(false)]
+	sbyte IConvertible.ToSByte(IFormatProvider provider) {
+	    return Convert.ToSByte(this);
+	}
 
-        byte IConvertible.ToByte(IFormatProvider provider) {
-            return Convert.ToByte(this);
-        }
+	byte IConvertible.ToByte(IFormatProvider provider) {
+	    return Convert.ToByte(this);
+	}
 
-        short IConvertible.ToInt16(IFormatProvider provider) {
-            return Convert.ToInt16(this);
-        }
+	short IConvertible.ToInt16(IFormatProvider provider) {
+	    return Convert.ToInt16(this);
+	}
 
-        [CLSCompliant(false)]
-        ushort IConvertible.ToUInt16(IFormatProvider provider) {
-            return Convert.ToUInt16(this);
-        }
+	[CLSCompliant(false)]
+	ushort IConvertible.ToUInt16(IFormatProvider provider) {
+	    return Convert.ToUInt16(this);
+	}
 
-        int IConvertible.ToInt32(IFormatProvider provider) {
-            return Convert.ToInt32(this);
-        }
+	int IConvertible.ToInt32(IFormatProvider provider) {
+	    return Convert.ToInt32(this);
+	}
 
-        [CLSCompliant(false)]
-        uint IConvertible.ToUInt32(IFormatProvider provider) {
-            return Convert.ToUInt32(this);
-        }
+	[CLSCompliant(false)]
+	uint IConvertible.ToUInt32(IFormatProvider provider) {
+	    return Convert.ToUInt32(this);
+	}
 
-        long IConvertible.ToInt64(IFormatProvider provider) {
-            return Convert.ToInt64(this);
-        }
+	long IConvertible.ToInt64(IFormatProvider provider) {
+	    return Convert.ToInt64(this);
+	}
 
-        [CLSCompliant(false)]
-        ulong IConvertible.ToUInt64(IFormatProvider provider) {
-            return Convert.ToUInt64(this);
-        }
+	[CLSCompliant(false)]
+	ulong IConvertible.ToUInt64(IFormatProvider provider) {
+	    return Convert.ToUInt64(this);
+	}
 
-        float IConvertible.ToSingle(IFormatProvider provider) {
-            return Convert.ToSingle(this);
-        }
+	float IConvertible.ToSingle(IFormatProvider provider) {
+	    return Convert.ToSingle(this);
+	}
 
-        double IConvertible.ToDouble(IFormatProvider provider) {
-            return Convert.ToDouble(this);
-        }
+	double IConvertible.ToDouble(IFormatProvider provider) {
+	    return Convert.ToDouble(this);
+	}
 
-        Decimal IConvertible.ToDecimal(IFormatProvider provider) {
+	Decimal IConvertible.ToDecimal(IFormatProvider provider) {
 	    Decimal d = Convert.ToDecimal(this.myValue);
-            return d;
-        }
+	    return d;
+	}
 
-        DateTime IConvertible.ToDateTime(IFormatProvider provider) {
-            throw new InvalidCastException("Decimal", "DateTime");
-        }
+	DateTime IConvertible.ToDateTime(IFormatProvider provider) {
+	    throw new InvalidCastException("Decimal", "DateTime");
+	}
 
-        Object IConvertible.ToType(Type type, IFormatProvider provider) {
+	Object IConvertible.ToType(Type type, IFormatProvider provider) {
 	    return null;
-//            return Convert.DefaultToType((IConvertible)this, type, provider);
-        }
+	    //            return Convert.DefaultToType((IConvertible)this, type, provider);
+	}
 
 	#endregion
 
 	#region Object Support and other stuff
-        int IComparable.CompareTo(Object value)
-        {
+	int IComparable.CompareTo(Object value) {
 	    if (!(value is DecimalType)) {
 		throw new InvalidTypeException("DecimalType");
 	    }
 
-	    if (value == null)
-	    {
+	    if (value == null) {
 		throw new InvalidArgumentException("value");
 	    }
 
-            DecimalType compareTo = (DecimalType) value;
+	    DecimalType compareTo = (DecimalType) value;
 
 	    return Compare(this, compareTo);
-        }
+	}
 
-        public int CompareTo(DecimalType value)
-        {
+	public int CompareTo(DecimalType value) {
 	    return Compare(this, value);
-        }
+	}
     	
-        public override bool Equals(Object value) {
-            if (value is DecimalType) {
-                return Compare(this, (DecimalType) value) == 0;
-            }
+	public override bool Equals(Object value) {
+	    if (value is DecimalType) {
+		return Compare(this, (DecimalType) value) == 0;
+	    }
 
-            return false;
-        }
+	    return false;
+	}
 
-        public static bool Equals(DecimalType leftHand, DecimalType rightHand) {
-            return Compare(leftHand, rightHand) == 0;
-        }
-        public override int GetHashCode() {
+	public static bool Equals(DecimalType leftHand, DecimalType rightHand) {
+	    return Compare(leftHand, rightHand) == 0;
+	}
+	public override int GetHashCode() {
 	    return myValue.GetHashCode();
 	}
     
-        public static int[] GetBits(DecimalType value) {
+	public static int[] GetBits(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
 	    }
 
 	    return decimal.GetBits(value.myValue);
-//	    return new int[] {value.myValue.lo, value.myValue.mid, value.myValue.hi, value.myValue.flags};
-        }
+	    //	    return new int[] {value.myValue.lo, value.myValue.mid, value.myValue.hi, value.myValue.flags};
+	}
 
-        public TypeCode GetTypeCode() 
-	{
-            return TypeCode.Decimal;
-        }
+	public TypeCode GetTypeCode() {
+	    return TypeCode.Decimal;
+	}
 
 	#endregion
     }

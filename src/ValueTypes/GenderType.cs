@@ -53,8 +53,7 @@ namespace Spring2.Types {
 	#endregion
 
 	#region Constructors
-	private GenderType(TypeState state) 
-	{
+	private GenderType(TypeState state) {
 	    myState = state;
 	    myValue = GenderCode.Male;
 	}
@@ -66,8 +65,7 @@ namespace Spring2.Types {
 	#endregion
 
 	#region Accessors
-	public GenderCode Code 
-	{
+	public GenderCode Code {
 	    get {
 		if (!IsValid) {
 		    throw new InvalidStateException(myState);
@@ -114,8 +112,7 @@ namespace Spring2.Types {
 	#endregion
 
 	#region Parse and ToString methods
-	public static GenderType Parse(string valueToParse) 
-	{
+	public static GenderType Parse(string valueToParse) {
 	    if (valueToParse != "M" && valueToParse != "F") {
 		throw new InvalidValueException(string.Format("GenderType.Parse() value must be 'M' or 'F', not '{0}'", valueToParse));
 	    }
@@ -181,8 +178,7 @@ namespace Spring2.Types {
 		    return 0;
 		}
 
-		if (leftHand.myState == TypeState.UNSET)
-		{
+		if (leftHand.myState == TypeState.UNSET) {
 		    return 1;
 		}
 
@@ -193,73 +189,69 @@ namespace Spring2.Types {
 	    return 0;
 	}
 
-        public static bool operator ==(GenderType leftHand, GenderType  rightHand) {
-            return Compare(leftHand, rightHand) == 0;
-        }
+	public static bool operator ==(GenderType leftHand, GenderType  rightHand) {
+	    return Compare(leftHand, rightHand) == 0;
+	}
 
-        public static bool operator !=(GenderType leftHand, GenderType rightHand) {
-            return Compare(leftHand, rightHand) != 0;
-        }
+	public static bool operator !=(GenderType leftHand, GenderType rightHand) {
+	    return Compare(leftHand, rightHand) != 0;
+	}
 
-        public static bool operator <(GenderType  leftHand, GenderType rightHand) {
-            return Compare(leftHand, rightHand) < 0;
-        }
+	public static bool operator <(GenderType  leftHand, GenderType rightHand) {
+	    return Compare(leftHand, rightHand) < 0;
+	}
 
-        public static bool operator <=(GenderType leftHand, GenderType rightHand) {
-            return Compare(leftHand, rightHand) <= 0;
-        }
+	public static bool operator <=(GenderType leftHand, GenderType rightHand) {
+	    return Compare(leftHand, rightHand) <= 0;
+	}
 
-        public static bool operator >(GenderType leftHand, GenderType rightHand) {
-            return Compare(leftHand, rightHand) > 0;
-        }
+	public static bool operator >(GenderType leftHand, GenderType rightHand) {
+	    return Compare(leftHand, rightHand) > 0;
+	}
 
-        public static bool operator >=(GenderType leftHand, GenderType rightHand) {
-            return Compare(leftHand, rightHand) >= 0;
-        }
+	public static bool operator >=(GenderType leftHand, GenderType rightHand) {
+	    return Compare(leftHand, rightHand) >= 0;
+	}
 	#endregion
 
 	#region Object Support, IComparable and other stuff
-        int IComparable.CompareTo(Object value)
-        {
+	int IComparable.CompareTo(Object value) {
 	    if (!(value is GenderType)) {
 		throw new InvalidTypeException("GenderType");
 	    }
 
-	    if (value == null)
-	    {
+	    if (value == null) {
 		throw new InvalidArgumentException("value");
 	    }
 
-            GenderType compareTo = (GenderType) value;
+	    GenderType compareTo = (GenderType) value;
 
 	    return Compare(this, compareTo);
-        }
+	}
 
-        public int CompareTo(GenderType value)
-        {
+	public int CompareTo(GenderType value) {
 	    return Compare(this, value);
-        }
+	}
     	
-        public override bool Equals(Object value) {
-            if (value is GenderType) {
-                return Compare(this, (GenderType) value) == 0;
-            }
+	public override bool Equals(Object value) {
+	    if (value is GenderType) {
+		return Compare(this, (GenderType) value) == 0;
+	    }
 
-            return false;
-        }
+	    return false;
+	}
 
-        public static bool Equals(GenderType leftHand, GenderType rightHand) {
-            return Compare(leftHand, rightHand) == 0;
-        }
-        public override int GetHashCode() {
+	public static bool Equals(GenderType leftHand, GenderType rightHand) {
+	    return Compare(leftHand, rightHand) == 0;
+	}
+	public override int GetHashCode() {
 	    return myValue.GetHashCode();
 	}
     
-        public TypeCode GetTypeCode() 
-	{
+	public TypeCode GetTypeCode() {
 	    //i have NO idea what this should be
-            return TypeCode.Decimal;
-        }
+	    return TypeCode.Decimal;
+	}
 
 	#endregion
     }

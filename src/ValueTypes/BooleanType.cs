@@ -1,7 +1,6 @@
 using System;
 
-namespace Spring2.Core.Types
-{
+namespace Spring2.Core.Types {
     [Serializable()] 
     public struct BooleanType : IComparable {
 	
@@ -46,11 +45,10 @@ namespace Spring2.Core.Types
 	    get {return myState;}
 	    set {myState = value;}
 	}
-       #endregion
+	#endregion
 
 	#region Constructors
-	private BooleanType(bool value, TypeState state) 
-	{
+	private BooleanType(bool value, TypeState state) {
 	    myValue = value;
 	    myState = state;
 	}
@@ -63,18 +61,17 @@ namespace Spring2.Core.Types
 
 	#region ToString and Parsing
 
-	public override String ToString() 
-	{
+	public override String ToString() {
 	    if (myState != TypeState.VALID) {
 		throw new InvalidValueException(myState);
 	    }
 
 	    return myValue.ToString();
-//	    if (myValue) {
-//		return TrueString;
-//	    }
+	    //	    if (myValue) {
+	    //		return TrueString;
+	    //	    }
 
-//	    return FalseString;
+	    //	    return FalseString;
 	}
 
 	String IConvertible.ToString(IFormatProvider provider) {
@@ -90,18 +87,16 @@ namespace Spring2.Core.Types
 
 	#region IConvertible and other conversions
 	
-        int IComparable.CompareTo(Object value)
-        {
+	int IComparable.CompareTo(Object value) {
 	    if (!(value is BooleanType)) {
 		throw new InvalidTypeException("BooleanType");
 	    }
 
-	    if (value == null)
-	    {
+	    if (value == null) {
 		throw new InvalidArgumentException("value");
 	    }
 
-            BooleanType compareTo = (BooleanType) value;
+	    BooleanType compareTo = (BooleanType) value;
 
 	    if (IsValid && compareTo.IsValid) {
 		if (myValue == compareTo.myValue) {
@@ -128,8 +123,7 @@ namespace Spring2.Core.Types
 		    return 0;
 		}
 
-		if (myState == TypeState.UNSET)
-		{
+		if (myState == TypeState.UNSET) {
 		    return 1;
 		}
 
@@ -138,7 +132,7 @@ namespace Spring2.Core.Types
 
 	    //should this throw an exception?
 	    return 0;
-        }
+	}
 
 	
 	public bool ToBoolean(IFormatProvider provider) {
@@ -147,15 +141,14 @@ namespace Spring2.Core.Types
 	    }
 
 	    return myValue;
-        }
+	}
 	#endregion
 
 	#region Object support methods
 	//what to do here?? we aren't really a string
-        public TypeCode GetTypeCode() 
-	{
-            return TypeCode.Boolean;
-        }
+	public TypeCode GetTypeCode() {
+	    return TypeCode.Boolean;
+	}
 
 	//should this worry about validity?
 	public override int GetHashCode() {

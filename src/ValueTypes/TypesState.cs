@@ -1,7 +1,6 @@
-namespace Spring2.Types
-{
+namespace Spring2.Types {
     public enum TypeState : short {
-        DEFAULT,
+	DEFAULT,
 	VALID,
 	UNSET
     }

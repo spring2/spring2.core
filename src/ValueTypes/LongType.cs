@@ -1,7 +1,6 @@
 using System;
 
-namespace Spring2.Types
-{
+namespace Spring2.Types {
     [System.Serializable, System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
     public struct LongType : System.IComparable, System.IFormattable {
 	private System.Int64 myValue;
@@ -108,7 +107,7 @@ namespace Spring2.Types
 		throw new InvalidArgumentException("parseString");
 	    }
 
-    	    LongType parsedInt64;
+	    LongType parsedInt64;
 
 	    parsedInt64.myValue = System.Int64.Parse(parseString);
 	    parsedInt64.myState = TypeState.VALID;
@@ -121,7 +120,7 @@ namespace Spring2.Types
 		throw new InvalidArgumentException("parseString");
 	    }
 
-    	    LongType parsedInt64;
+	    LongType parsedInt64;
 
 	    parsedInt64.myValue = System.Int64.Parse(parseString, style);
 	    parsedInt64.myState = TypeState.VALID;
@@ -135,7 +134,7 @@ namespace Spring2.Types
 		throw new InvalidArgumentException("parseString");
 	    }
 
-    	    LongType parsedInt64;
+	    LongType parsedInt64;
 
 	    parsedInt64.myValue = System.Int64.Parse(parseString, formatProvider);
 	    parsedInt64.myState = TypeState.VALID;
@@ -247,8 +246,7 @@ namespace Spring2.Types
 
 	#region Cast operators
 	#region byte and sbyte
-	public static explicit operator byte(LongType castFrom) 
-	{
+	public static explicit operator byte(LongType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -272,8 +270,7 @@ namespace Spring2.Types
 	}
 
 	[System.CLSCompliant(false)]
-	public static implicit operator LongType(sbyte castFrom) 
-	{
+	public static implicit operator LongType(sbyte castFrom) {
 	    LongType returnType = new LongType(castFrom);
 
 	    return returnType;
@@ -281,8 +278,7 @@ namespace Spring2.Types
 	#endregion
 
 	#region short and ushort
-	public static explicit operator short(LongType castFrom) 
-	{
+	public static explicit operator short(LongType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -306,8 +302,7 @@ namespace Spring2.Types
 	}
 	
 	[System.CLSCompliant(false)]
-	public static implicit operator LongType(ushort castFrom) 
-	{
+	public static implicit operator LongType(ushort castFrom) {
 	    LongType returnType = new LongType(castFrom);
 
 	    return returnType;
@@ -315,8 +310,7 @@ namespace Spring2.Types
 	#endregion
 
 	#region int and uint
-	public static explicit operator int(LongType castFrom) 
-	{
+	public static explicit operator int(LongType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -340,8 +334,7 @@ namespace Spring2.Types
 	}
 	
 	[System.CLSCompliant(false)]
-	public static implicit operator LongType(uint castFrom) 
-	{
+	public static implicit operator LongType(uint castFrom) {
 	    LongType returnType = new LongType(castFrom);
 
 	    return returnType;
@@ -349,8 +342,7 @@ namespace Spring2.Types
 	#endregion
 
 	#region long and ulong
-	public static explicit operator long(LongType castFrom) 
-	{
+	public static explicit operator long(LongType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -374,8 +366,7 @@ namespace Spring2.Types
 	}
 	
 	[System.CLSCompliant(false)]
-	public static implicit operator LongType(ulong castFrom) 
-	{
+	public static implicit operator LongType(ulong castFrom) {
 	    LongType returnType = new LongType(castFrom);
 
 	    return returnType;
@@ -390,8 +381,7 @@ namespace Spring2.Types
 	    return returnType;
 	}
 
-	public static explicit operator bool(LongType castFrom) 
-	{
+	public static explicit operator bool(LongType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -407,8 +397,7 @@ namespace Spring2.Types
 	#endregion
 
 	#region Equality operators and methods
-	public static int Compare(LongType leftHand, LongType rightHand) 
-	{
+	public static int Compare(LongType leftHand, LongType rightHand) {
 	    if (leftHand.myState == TypeState.VALID && rightHand.myState == TypeState.VALID) {
 		if (leftHand.myValue < rightHand.myValue) {
 		    return -1;
@@ -438,8 +427,7 @@ namespace Spring2.Types
 		    return 0;
 		}
 
-		if (leftHand.myState == TypeState.UNSET)
-		{
+		if (leftHand.myState == TypeState.UNSET) {
 		    return 1;
 		}
 
@@ -452,13 +440,11 @@ namespace Spring2.Types
 
 
 	#region Equality operators
-	public static bool operator == (LongType leftHand, LongType rightHand) 
-	{
+	public static bool operator == (LongType leftHand, LongType rightHand) {
 	    return Compare(leftHand, rightHand) == 0;
 	}
 
-	public static bool operator != (LongType leftHand, LongType rightHand) 
-	{
+	public static bool operator != (LongType leftHand, LongType rightHand) {
 	    return Compare(leftHand, rightHand) != 0;
 	}
 
@@ -481,13 +467,11 @@ namespace Spring2.Types
 	#endregion
 
 	#region < and > operators
-	public static bool operator < (LongType leftHand, LongType rightHand) 
-	{
+	public static bool operator < (LongType leftHand, LongType rightHand) {
 	    return Compare(leftHand, rightHand) < 0;
 	}
 
-	public static bool operator > (LongType leftHand, LongType rightHand) 
-	{
+	public static bool operator > (LongType leftHand, LongType rightHand) {
 	    return Compare(leftHand, rightHand) > 0;
 	}
 
@@ -509,13 +493,11 @@ namespace Spring2.Types
 	#endregion    
 
 	#region <= and >= operators
-	public static bool operator <= (LongType leftHand, LongType rightHand) 
-	{
+	public static bool operator <= (LongType leftHand, LongType rightHand) {
 	    return Compare(leftHand, rightHand) <= 0;
 	}
 
-	public static bool operator >= (LongType leftHand, LongType rightHand) 
-	{
+	public static bool operator >= (LongType leftHand, LongType rightHand) {
 	    return Compare(leftHand, rightHand) >= 0;
 	}
 
@@ -537,7 +519,7 @@ namespace Spring2.Types
 	#endregion    
 	    
 	#region Addition operators and methods
-        public static LongType Add(LongType augend, LongType addend) {
+	public static LongType Add(LongType augend, LongType addend) {
 	    if (!augend.IsValid || !addend.IsValid) {
 		throw new InvalidStateException(augend.myState, addend.myState);
 	    }
@@ -545,7 +527,7 @@ namespace Spring2.Types
 	    LongType result = new LongType(augend.myValue + addend.myValue);
 
 	    return result;
-        }
+	}
 
 	public static LongType operator +(LongType augend, LongType addend) {
 	    if (!augend.IsValid || !addend.IsValid) {
@@ -577,11 +559,11 @@ namespace Spring2.Types
 	    return result;
 	}
 
-//	public static LongType operator ++(LongType augend) {
-//	    LongType result = new LongType(augend.myValue + 1);
- //
-//	    return result;
-//	}
+	//	public static LongType operator ++(LongType augend) {
+	//	    LongType result = new LongType(augend.myValue + 1);
+	//
+	//	    return result;
+	//	}
 	#endregion
 
 	#region Subtraction operators and methods
@@ -615,11 +597,11 @@ namespace Spring2.Types
 	    return result;
 	}
 
-//	public static LongType operator --(long subtrahend) {
-//	    LongType result = new LongType(subtrahend - 1);
- //
-//	    return result;
-//	}
+	//	public static LongType operator --(long subtrahend) {
+	//	    LongType result = new LongType(subtrahend - 1);
+	//
+	//	    return result;
+	//	}
 
 	#endregion
 
@@ -720,45 +702,41 @@ namespace Spring2.Types
 	#endregion
 
 	#region IComparable method
-        int IComparable.CompareTo(Object value)
-        {
+	int IComparable.CompareTo(Object value) {
 	    if (!(value is LongType)) {
 		throw new InvalidTypeException("LongType");
 	    }
 
-	    if (value == null)
-	    {
+	    if (value == null) {
 		throw new InvalidArgumentException("value");
 	    }
 
-            LongType compareTo = (LongType) value;
+	    LongType compareTo = (LongType) value;
 
 	    return Compare(this, compareTo);
-        }
+	}
 	#endregion
 
 	#region Object support and other stuff
-        public override bool Equals(Object value) 
-	{
-            if (value is LongType) {
-                return Compare(this, (LongType) value) == 0;
-            }
+	public override bool Equals(Object value) {
+	    if (value is LongType) {
+		return Compare(this, (LongType) value) == 0;
+	    }
 
-            return false;
-        }
+	    return false;
+	}
 
-        public static bool Equals(LongType leftHand, LongType rightHand) {
-            return Compare(leftHand, rightHand) == 0;
-        }
+	public static bool Equals(LongType leftHand, LongType rightHand) {
+	    return Compare(leftHand, rightHand) == 0;
+	}
 
-        public override int GetHashCode() {
+	public override int GetHashCode() {
 	    return myValue.GetHashCode();
 	}
 	
-        public TypeCode GetTypeCode() 
-	{
-            return TypeCode.Int64;
-        }
+	public TypeCode GetTypeCode() {
+	    return TypeCode.Int64;
+	}
 	#endregion
     }
 }

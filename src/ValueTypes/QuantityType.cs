@@ -10,8 +10,7 @@ namespace Spring2.Types {
 	public static readonly QuantityType UNSET   = new QuantityType(TypeState.UNSET);
 
 	#region State management
-	public bool IsValid 
-	{
+	public bool IsValid {
 	    get {return myValue.IsValid;}
 	}
 
@@ -39,7 +38,7 @@ namespace Spring2.Types {
 	    get {return myValue.State;}
 	    set {myValue.State = value;}
 	}
-       #endregion
+	#endregion
 
 	#region Constructors
 	private QuantityType(TypeState state) {
@@ -65,8 +64,7 @@ namespace Spring2.Types {
 	#endregion
 
 	#region Parse and ToString()
-	public static QuantityType Parse(String value) 
-	{
+	public static QuantityType Parse(String value) {
 	    if (value == null) {
 		return UNSET;
 	    }
@@ -85,72 +83,68 @@ namespace Spring2.Types {
 	    return DecimalType.Compare(leftHand.myValue, rightHand.myValue);
 	}
 
-        public static bool operator ==(QuantityType leftHand, QuantityType  rightHand) {
-            return Compare(leftHand, rightHand) == 0;
-        }
+	public static bool operator ==(QuantityType leftHand, QuantityType  rightHand) {
+	    return Compare(leftHand, rightHand) == 0;
+	}
 
-        public static bool operator !=(QuantityType leftHand, QuantityType rightHand) {
-            return Compare(leftHand, rightHand) != 0;
-        }
+	public static bool operator !=(QuantityType leftHand, QuantityType rightHand) {
+	    return Compare(leftHand, rightHand) != 0;
+	}
 
-        public static bool operator <(QuantityType  leftHand, QuantityType rightHand) {
-            return Compare(leftHand, rightHand) < 0;
-        }
+	public static bool operator <(QuantityType  leftHand, QuantityType rightHand) {
+	    return Compare(leftHand, rightHand) < 0;
+	}
 
-        public static bool operator <=(QuantityType leftHand, QuantityType rightHand) {
-            return Compare(leftHand, rightHand) <= 0;
-        }
+	public static bool operator <=(QuantityType leftHand, QuantityType rightHand) {
+	    return Compare(leftHand, rightHand) <= 0;
+	}
 
-        public static bool operator >(QuantityType leftHand, QuantityType rightHand) {
-            return Compare(leftHand, rightHand) > 0;
-        }
+	public static bool operator >(QuantityType leftHand, QuantityType rightHand) {
+	    return Compare(leftHand, rightHand) > 0;
+	}
 
-        public static bool operator >=(QuantityType leftHand, QuantityType rightHand) {
-            return Compare(leftHand, rightHand) >= 0;
-        }
+	public static bool operator >=(QuantityType leftHand, QuantityType rightHand) {
+	    return Compare(leftHand, rightHand) >= 0;
+	}
 	#endregion
 
 	#region Object Support, IComparable and other stuff
-        int IComparable.CompareTo(Object value)
-        {
+	int IComparable.CompareTo(Object value) {
 	    if (!(value is QuantityType)) {
 		throw new InvalidTypeException("QuantityType");
 	    }
 
-	    if (value == null)
-	    {
+	    if (value == null) {
 		throw new InvalidArgumentException("value");
 	    }
 
-            QuantityType compareTo = (QuantityType) value;
+	    QuantityType compareTo = (QuantityType) value;
 
 	    return Compare(this, compareTo);
-        }
+	}
 
-        public int CompareTo(QuantityType value)
-        {
+	public int CompareTo(QuantityType value) {
 	    return Compare(this, value);
-        }
+	}
     	
-        public override bool Equals(Object value) {
-            if (value is QuantityType) {
-                return Compare(this, (QuantityType) value) == 0;
-            }
+	public override bool Equals(Object value) {
+	    if (value is QuantityType) {
+		return Compare(this, (QuantityType) value) == 0;
+	    }
 
-            return false;
-        }
+	    return false;
+	}
 
-        public static bool Equals(QuantityType leftHand, QuantityType rightHand) {
-            return Compare(leftHand, rightHand) == 0;
-        }
-        public override int GetHashCode() {
+	public static bool Equals(QuantityType leftHand, QuantityType rightHand) {
+	    return Compare(leftHand, rightHand) == 0;
+	}
+	public override int GetHashCode() {
 	    return myValue.GetHashCode();
 	}
     
-        public TypeCode GetTypeCode() 
-	{
-            return TypeCode.Decimal;
-        }
+	public TypeCode GetTypeCode() {
+	    return TypeCode.Decimal;
+	}
 	#endregion
     }
 }

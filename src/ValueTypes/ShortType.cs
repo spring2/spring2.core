@@ -1,7 +1,6 @@
 using System;
 
-namespace Spring2.Core.Types
-{
+namespace Spring2.Core.Types {
     [System.Serializable, System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
     public struct ShortType : System.IComparable, System.IFormattable {
 	private System.Int16 myValue;
@@ -92,7 +91,7 @@ namespace Spring2.Core.Types
 		throw new InvalidArgumentException("parseString");
 	    }
 
-    	    ShortType parsedInt32;
+	    ShortType parsedInt32;
 
 	    parsedInt32.myValue = System.Int16.Parse(parseString);
 	    parsedInt32.myState = TypeState.VALID;
@@ -105,7 +104,7 @@ namespace Spring2.Core.Types
 		throw new InvalidArgumentException("parseString");
 	    }
 
-    	    ShortType parsedInt32;
+	    ShortType parsedInt32;
 
 	    parsedInt32.myValue = System.Int16.Parse(parseString, style);
 	    parsedInt32.myState = TypeState.VALID;
@@ -119,7 +118,7 @@ namespace Spring2.Core.Types
 		throw new InvalidArgumentException("parseString");
 	    }
 
-    	    ShortType parsedInt32;
+	    ShortType parsedInt32;
 
 	    parsedInt32.myValue = System.Int16.Parse(parseString, formatProvider);
 	    parsedInt32.myState = TypeState.VALID;
@@ -211,8 +210,7 @@ namespace Spring2.Core.Types
 
 	#region Cast operators
 	#region byte
-	public static explicit operator byte(ShortType castFrom) 
-	{
+	public static explicit operator byte(ShortType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -228,8 +226,7 @@ namespace Spring2.Core.Types
 	#endregion
 
 	#region short
-	public static implicit operator short(ShortType castFrom) 
-	{
+	public static implicit operator short(ShortType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -245,8 +242,7 @@ namespace Spring2.Core.Types
 	#endregion
 
 	#region int
-	public static implicit operator int(ShortType castFrom) 
-	{
+	public static implicit operator int(ShortType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -262,8 +258,7 @@ namespace Spring2.Core.Types
 	#endregion
 
 	#region long
-	public static implicit operator long(ShortType castFrom) 
-	{
+	public static implicit operator long(ShortType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -279,8 +274,7 @@ namespace Spring2.Core.Types
 	#endregion
 
 	#region float
-	public static explicit operator float(ShortType castFrom) 
-	{
+	public static explicit operator float(ShortType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -296,8 +290,7 @@ namespace Spring2.Core.Types
 	#endregion
 
 	#region double
-	public static explicit operator double(ShortType castFrom) 
-	{
+	public static explicit operator double(ShortType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -313,8 +306,7 @@ namespace Spring2.Core.Types
 	#endregion
 
 	#region Decimal
-	public static explicit operator Decimal(ShortType castFrom) 
-	{
+	public static explicit operator Decimal(ShortType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -331,8 +323,7 @@ namespace Spring2.Core.Types
 	#endregion
 
 	#region Equality operators and methods
-	public static int Compare(ShortType leftHand, ShortType rightHand) 
-	{
+	public static int Compare(ShortType leftHand, ShortType rightHand) {
 	    if (leftHand.myState == TypeState.VALID && rightHand.myState == TypeState.VALID) {
 		if (leftHand.myValue < rightHand.myValue) {
 		    return -1;
@@ -362,8 +353,7 @@ namespace Spring2.Core.Types
 		    return 0;
 		}
 
-		if (leftHand.myState == TypeState.UNSET)
-		{
+		if (leftHand.myState == TypeState.UNSET) {
 		    return 1;
 		}
 
@@ -376,13 +366,11 @@ namespace Spring2.Core.Types
 
 
 	#region Equality operators
-	public static bool operator == (ShortType leftHand, ShortType rightHand) 
-	{
+	public static bool operator == (ShortType leftHand, ShortType rightHand) {
 	    return Compare(leftHand, rightHand) == 0;
 	}
 
-	public static bool operator != (ShortType leftHand, ShortType rightHand) 
-	{
+	public static bool operator != (ShortType leftHand, ShortType rightHand) {
 	    return Compare(leftHand, rightHand) != 0;
 	}
 
@@ -405,13 +393,11 @@ namespace Spring2.Core.Types
 	#endregion
 
 	#region < and > operators
-	public static bool operator < (ShortType leftHand, ShortType rightHand) 
-	{
+	public static bool operator < (ShortType leftHand, ShortType rightHand) {
 	    return Compare(leftHand, rightHand) < 0;
 	}
 
-	public static bool operator > (ShortType leftHand, ShortType rightHand) 
-	{
+	public static bool operator > (ShortType leftHand, ShortType rightHand) {
 	    return Compare(leftHand, rightHand) > 0;
 	}
 
@@ -433,13 +419,11 @@ namespace Spring2.Core.Types
 	#endregion    
 
 	#region <= and >= operators
-	public static bool operator <= (ShortType leftHand, ShortType rightHand) 
-	{
+	public static bool operator <= (ShortType leftHand, ShortType rightHand) {
 	    return Compare(leftHand, rightHand) <= 0;
 	}
 
-	public static bool operator >= (ShortType leftHand, ShortType rightHand) 
-	{
+	public static bool operator >= (ShortType leftHand, ShortType rightHand) {
 	    return Compare(leftHand, rightHand) >= 0;
 	}
 
@@ -461,7 +445,7 @@ namespace Spring2.Core.Types
 	#endregion    
 	    
 	#region Addition operators and methods
-        public static ShortType Add(ShortType augend, ShortType addend) {
+	public static ShortType Add(ShortType augend, ShortType addend) {
 	    if (!augend.IsValid || !addend.IsValid) {
 		throw new InvalidStateException(augend.myState, addend.myState);
 	    }
@@ -469,7 +453,7 @@ namespace Spring2.Core.Types
 	    ShortType result = new ShortType(augend.myValue + addend.myValue);
 
 	    return result;
-        }
+	}
 
 	public static ShortType operator +(ShortType augend, ShortType addend) {
 	    if (!augend.IsValid || !addend.IsValid) {
@@ -501,11 +485,11 @@ namespace Spring2.Core.Types
 	    return result;
 	}
 
-//	public static ShortType operator ++(short augend) {
-//	    ShortType result = new ShortType(augend + 1);
+	//	public static ShortType operator ++(short augend) {
+	//	    ShortType result = new ShortType(augend + 1);
 
-//	    return result;
-//	}
+	//	    return result;
+	//	}
 	#endregion
 
 	#region Subtraction operators and methods
@@ -539,11 +523,11 @@ namespace Spring2.Core.Types
 	    return result;
 	}
 
-//	public static ShortType operator --(short subtrahend) {
-//	    ShortType result = new ShortType(subtrahend - 1);
+	//	public static ShortType operator --(short subtrahend) {
+	//	    ShortType result = new ShortType(subtrahend - 1);
 
-//	    return result;
-//	}
+	//	    return result;
+	//	}
 
 	#endregion
 
@@ -644,45 +628,41 @@ namespace Spring2.Core.Types
 	#endregion
 
 	#region IComparable method
-        int IComparable.CompareTo(Object value)
-        {
+	int IComparable.CompareTo(Object value) {
 	    if (!(value is ShortType)) {
 		throw new InvalidTypeException("ShortType");
 	    }
 
-	    if (value == null)
-	    {
+	    if (value == null) {
 		throw new InvalidArgumentException("value");
 	    }
 
-            ShortType compareTo = (ShortType) value;
+	    ShortType compareTo = (ShortType) value;
 
 	    return Compare(this, compareTo);
-        }
+	}
 	#endregion
 
 	#region Object support and other stuff
-        public override bool Equals(Object value) 
-	{
-            if (value is ShortType) {
-                return Compare(this, (ShortType) value) == 0;
-            }
+	public override bool Equals(Object value) {
+	    if (value is ShortType) {
+		return Compare(this, (ShortType) value) == 0;
+	    }
 
-            return false;
-        }
+	    return false;
+	}
 
-        public static bool Equals(ShortType leftHand, ShortType rightHand) {
-            return Compare(leftHand, rightHand) == 0;
-        }
+	public static bool Equals(ShortType leftHand, ShortType rightHand) {
+	    return Compare(leftHand, rightHand) == 0;
+	}
 
-        public override int GetHashCode() {
+	public override int GetHashCode() {
 	    return myValue.GetHashCode();
 	}
 	
-        public TypeCode GetTypeCode() 
-	{
-            return TypeCode.Int16;
-        }
+	public TypeCode GetTypeCode() {
+	    return TypeCode.Int16;
+	}
 	#endregion
     }
 }
