@@ -38,7 +38,7 @@ namespace Spring2.Core.DAO {
 	/// <param name="viewName">View name to use.</param>
 	/// <param name="whereClause">Where clause to use or null.</param>
 	/// <param name="orderByClause">Order by clause to use or null</param>
-	/// <param name="maxRows">Maximum number of rows to return or < 1</param>
+	/// <param name="maxRows">Maximum number of rows to return or </param>
 	/// <returns>DataReader containing selected data</returns>
 	protected static SqlDataReader GetListReader(String key, String viewName, IWhere whereClause, IOrderBy orderByClause, Int32 maxRows) 
 	{
