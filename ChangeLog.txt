@@ -1,3 +1,41 @@
+2003-11-14 Friday 09:23  cort
+
+	* src/Spring2.Core.ndoc:
+	
+	NDoc project file - set attributes for MSDN style documentation
+
+2003-11-14 Friday 09:22  cort
+
+	* src/Makefile:
+	
+	add documentation generation to package target
+
+2003-11-14 Friday 09:16  cort
+
+	* src/: Spring2.Core.Test.csproj, Spring2.Core.WebControl.csproj,
+	Spring2.Core.csproj:
+	
+	output xml comments to documentation file (for use by NDoc)
+
+2003-11-14 Friday 09:15  cort
+
+	* src/DAO/EntityDao.cs:
+	
+	add Ben's code to support mapping of property names to sql column
+	names
+
+2003-11-14 Friday 09:14  cort
+
+	* docs/.cvsignore:
+	
+	ignore generated api docs folder
+
+2003-11-14 Friday 09:10  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2003-11-11 Tuesday 08:23  cort
 
 	* src/Test/WhereClauseTest.cs:
