@@ -149,6 +149,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "DAO\SqlDaoTransaction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "DAO\SqlEntityDAO.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
