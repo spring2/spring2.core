@@ -16,6 +16,18 @@ namespace Spring2.Core.Types {
 	    return value == null ? UNSET : new DateType(DateTime.Parse(value));
 	}
 
+	public static DateType Today {
+	    get {
+		return new DateType(DateTime.Today);
+	    }
+	}
+
+	public static DateType Now {
+	    get {
+		return new DateType();
+	    }
+	}
+
 	private DateTime value;
 
 	/// <summary>
