@@ -1,3 +1,9 @@
+2003-05-09 Friday 14:36  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2003-05-09 Friday 14:28  cort
 
 	* ChangeLog.txt:
