@@ -1,6 +1,26 @@
 <?xml version="1.0" ?>
 <project name="Spring2.Core" default="build" xmlnds="http://tempuri.org/nant-vs.xsd">
+    <property name="build.dir" value="..\build" />
     <target name="build">
-	<solution solutionfile="Spring2.Core.sln" configuration="debug" />
+	<delete dir="obj" failonerror="false" />
+	<delete dir="bin" failonerror="false" />
+	<solution configuration="debug">
+	    <projects>
+	        <include name="Spring2.Core.csproj" />
+	        <include name="Spring2.Core.Types.csproj" />
+	        <include name="Spring2.Core.Test.csproj" />
+	        <include name="Spring2.Core.WebControl.csproj" />
+	    </projects>
+	</solution>	
+
+	<delete dir="obj" failonerror="false" />
+	<delete dir="bin" failonerror="false" />
+	<solution configuration="debug">
+	    <projects>
+	        <include name="Spring2.Core.WithTypes.csproj" />
+	        <include name="Spring2.Core.WithTypesTest.csproj" />
+	    </projects>
+	</solution>	
+
     </target>
 </project>
