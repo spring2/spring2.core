@@ -6,13 +6,12 @@ using NUnit.Framework;
 using Spring2.Core.DataObject;
 using Spring2.Core.Types;
 
-namespace Spring2.Core.Test
-{
+namespace Spring2.Core.Test {
     /// <summary>
     /// Test suite for data objects.
     /// </summary>
-    public class DataObjectTest : NUnit.Framework.TestCase
-    {
+    public class DataObjectTest : NUnit.Framework.TestCase {
+
 	private static readonly StringType PROP1_BEFORE_CHANGE = new StringType("before change");
 	private static readonly StringType PROP1_AFTER_CHANGE = new StringType("after change");
 	private static readonly IdType ID_VALUE = new IdType(1);
@@ -30,10 +29,8 @@ namespace Spring2.Core.Test
 	public DataObjectTest(string name) : base(name) {}
 
 	
-	public static ITest Suite 
-	{ 
-	    get 
-	    {
+	public static ITest Suite { 
+	    get {
 		TestSuite suite= new TestSuite(); 
 		suite.AddTest(new DataObjectTest(UPDATE)); 
 		suite.AddTest(new DataObjectTest(EQUALS)); 
@@ -41,18 +38,15 @@ namespace Spring2.Core.Test
 		return suite;
 	    }
 	}
-	protected override void RunTest()
-	{
-	    if (Name.Equals(UPDATE))
-	    {
+
+	protected override void RunTest() {
+	    if (Name.Equals(UPDATE)) {
 		TestUpdate();
 	    }
-	    if (Name.Equals(EQUALS))
-	    {
+	    if (Name.Equals(EQUALS)) {
 		TestEquals();
 	    }
-	    if (Name.Equals(COMPARE))
-	    {
+	    if (Name.Equals(COMPARE)) {
 		TestCompare();
 	    }
 	}
@@ -60,8 +54,7 @@ namespace Spring2.Core.Test
 	/// <summary>
 	/// Test the Update method
 	/// </summary>
-	protected void TestUpdate()
-	{
+	protected void TestUpdate() {
 	    TestData data = GetTestData();
 
 	    TestData updateData = new TestData();
@@ -89,8 +82,7 @@ namespace Spring2.Core.Test
 	/// <summary>
 	/// Test the Equals method
 	/// </summary>
-	protected void TestEquals()
-	{
+	protected void TestEquals() {
 	    TestData data = GetTestData();
 	    Assert("Object does not equal itself", data.Equals(data));
 	    TestData data2 = GetTestData();
@@ -111,8 +103,7 @@ namespace Spring2.Core.Test
 	/// <summary>
 	/// Test the Compare method
 	/// </summary>
-	protected void TestCompare()
-	{
+	protected void TestCompare() {
 	    TestData data = GetTestData();
 	    DataObjectCompareList list = data.Compare(data);
 	    Assert("Object does not equal itself\n" + list.ToString(), list.Count == 0);
@@ -160,24 +151,20 @@ namespace Spring2.Core.Test
 	    bool foundTop = false;
 	    bool foundContained = false;
 	    bool foundArray = false;
-	    for (int i=0;i<3;i++)
-	    {
+	    for (int i=0;i<3;i++) {
 		if (list[i].PropertyName.Equals("TestData.Prop1")
 		    && list[i].Value1.Equals(PROP1_BEFORE_CHANGE) 
-		    && list[i].Value2.Equals(PROP1_AFTER_CHANGE))
-		{
+		    && list[i].Value2.Equals(PROP1_AFTER_CHANGE)) {
 		    foundTop = true;
 		}
 		if (list[i].PropertyName.Equals("TestData.TestCollection1[1].Prop1")
 		    && list[i].Value1.Equals(ARRAY_2_VALUE) 
-		    && list[i].Value2.Equals(ARRAY_CHANGE_ATTEMPT))
-		{
+		    && list[i].Value2.Equals(ARRAY_CHANGE_ATTEMPT)) {
 		    foundArray = true;
 		}
 		if (list[i].PropertyName.Equals("TestData.DataObject1.Prop1")
 		    && list[i].Value1.Equals(CONTAINED_PROP1_BEFORE_CHANGE) 
-		    && list[i].Value2.Equals(CONTAINED_PROP1_AFTER_CHANGE))
-		{
+		    && list[i].Value2.Equals(CONTAINED_PROP1_AFTER_CHANGE)) {
 		    foundContained = true;
 		}
 	    }
@@ -192,24 +179,23 @@ namespace Spring2.Core.Test
 	    data2.Prop1 = StringType.UNSET;
 	    list = data.Compare(data2);
 	    Assert("Default Matched Unset on COMPARE_ALL\n" + list.ToString(), 
-		   list.Count != 0);
+		list.Count != 0);
 
 	    list = data.Compare(data2, DataObjectCompareOptionEnum.DEFAULT_EQUALS_UNSET);
 	    Assert("Default didn't match Unset on DEFAULT_EQUALS_UNSET\n" + list.ToString(),
-		   list.Count == 0);
+		list.Count == 0);
 
 	    data2.Prop1 = PROP1_BEFORE_CHANGE;
 	    list = data.Compare(data2, DataObjectCompareOptionEnum.IGNORE_DEFAULT);
 	    Assert("Default didn't match value on IgnoreDefault\n" + list.ToString(),
-		   list.Count == 0);
+		list.Count == 0);
 	}
 
 	/// <summary>
 	/// Get a generic test data item with values set.
 	/// </summary>
 	/// <returns>Item to test against.</returns>
-	private TestData GetTestData()
-	{
+	private TestData GetTestData() {
 	    TestData data = new TestData();
 	    data.Id = new IdType(1);
 	    data.Prop1 = PROP1_BEFORE_CHANGE;
