@@ -19,8 +19,14 @@ namespace Spring2.Core.Xml {
     public class XIncludeReader : XmlTextReader {
 	// nested reader for processing XInclude elements
 	XIncludeReader m_NestedReader;
+	String root = String.Empty;
+	String filename = String.Empty;
   
 	public XIncludeReader(String sURI) : base(sURI) {
+	    // TODO: hack - what if the uri is not a file uri?
+	    FileInfo f = new FileInfo(sURI);
+	    this.root = f.DirectoryName;
+	    this.filename = sURI;
 	    m_NestedReader=null;
 	}
 
@@ -28,42 +34,55 @@ namespace Spring2.Core.Xml {
 	    m_NestedReader=null;
 	}
 
-	// custom implementation of Read: if a nested reader exists, delegate
-	// otherwise, Read the next node and check for xinc:href
-	// if one exists create another nested reader and continue
+	/// <summary>
+	/// custom implementation of Read: if a nested reader exists, delegate
+	/// otherwise, Read the next node and check for xinc:href
+	/// if one exists create another nested reader and continue
+	/// </summary>
+	/// <returns></returns>
 	public override bool Read() {
 	    bool bMore;
-	    String strHref = null;
 
 	    // if nested reader exists, delegate
 	    if (m_NestedReader != null) {
-		bMore = m_NestedReader.Read();
-		// if done with nested reader, free resources & reset state
-		if (!bMore) {
-		    m_NestedReader.Close();
-		    m_NestedReader = null;
-		    // re-use this read implementation, just in case there are multiple include statements after each other.
-		    return this.Read();
-		}
-		else return true;
-	    }
-	    else {
-		// read the next node and check for xinc:href
-		bMore = base.Read();
-		strHref = base.GetAttribute("href", "http://www.w3.org/1999/XML/xinclude");
-		// if found, create a new nested reader and move to the first node
-		if (strHref != null) {
-		    // TODO: use ResourceLocator to get stream and use that constructor
-		    ResourceLocator rl = new ResourceLocator(strHref);
-		    m_NestedReader = new XIncludeReader(rl.OpenRead());
-		    m_NestedReader.Read();
-		    // move past XmlDeclaration if present
-		    if (m_NestedReader.NodeType == XmlNodeType.XmlDeclaration)
+		    bMore = m_NestedReader.Read();
+		    // if done with nested reader, free resources & reset state
+		    if (!bMore) {
+			m_NestedReader.Close();
+			m_NestedReader = null;
+			// re-use this read implementation, just in case there are multiple include statements after each other.
+			return this.Read();
+		    } else {
+			return true;
+		    }
+	    } else {
+		try {
+		    // read the next node and check for xinc:href
+		    bMore = base.Read();
+		    String href = base.GetAttribute("href", "http://www.w3.org/1999/XML/xinclude");
+		    // if found, create a new nested reader and move to the first node
+		    if (href != null) {
+			// TODO: use ResourceLocator to get stream and use that constructor
+			// use the root if the include file can be found based on the root
+			if (File.Exists(Path.Combine(root, href))) {
+			    href = Path.Combine(root, href);
+			    m_NestedReader = new XIncludeReader(href);
+			} else {
+			    ResourceLocator rl = new ResourceLocator(href);
+			    m_NestedReader = new XIncludeReader(rl.OpenRead());
+			}
 			m_NestedReader.Read();
-		    return true;
+			// move past XmlDeclaration if present
+			if (m_NestedReader.NodeType == XmlNodeType.XmlDeclaration)
+			    m_NestedReader.Read();
+			return true;
+		    } else {
+			return bMore;
+		    }
+		} catch (XmlException ex) {
+		    // try to report back the filename if possible
+		    throw new XmlException("Error while reading from " + this.filename + " :: " + ex.Message, ex);
 		}
-		else
-		    return bMore;
 	    }
 	}
 
@@ -71,116 +90,127 @@ namespace Spring2.Core.Xml {
 	// to nested reader if one exists
 	public override string Name {
 	    get {
-		if (m_NestedReader != null)
+		if (m_NestedReader != null) {
 		    return m_NestedReader.Name;
-		else
+		} else {
 		    return base.Name;
+		}
 	    }
 	}
 
 	public override XmlNodeType NodeType {
 	    get {
-		if (m_NestedReader != null)
+		if (m_NestedReader != null) {
 		    return m_NestedReader.NodeType;
-		else
+		} else {
 		    return base.NodeType;
+		}
 	    }
 	}
   
 	public override string NamespaceURI {
 	    get {
-		if (m_NestedReader != null)
+		if (m_NestedReader != null) {
 		    return m_NestedReader.NamespaceURI;
-		else
+		} else {
 		    return base.NamespaceURI;
+		}
 	    }
 	}
 
 	public override string LocalName {
 	    get {
-		if (m_NestedReader != null)
+		if (m_NestedReader != null) {
 		    return m_NestedReader.LocalName;
-		else
+		} else {
 		    return base.LocalName;
+		}
 	    }
 	}
 
 	public override string Prefix {
 	    get {
-		if (m_NestedReader != null)
+		if (m_NestedReader != null) {
 		    return m_NestedReader.Prefix;
-		else
+		} else {
 		    return base.Prefix;
+		}
 	    }
 	}
   
 	public override string Value {
 	    get {
-		if (m_NestedReader != null)
+		if (m_NestedReader != null) {
 		    return m_NestedReader.Value;
-		else
+		} else {
 		    return base.Value;
+		}
 	    }
 	}
 
 	public override int AttributeCount {
 	    get {
-		if (m_NestedReader != null)
+		if (m_NestedReader != null) {
 		    return m_NestedReader.AttributeCount;
-		else
+		} else {
 		    return base.AttributeCount;
+		}
 	    }
 	}
 
 	public override bool MoveToNextAttribute() {
-	    if (m_NestedReader != null)
+	    if (m_NestedReader != null) {
 		return m_NestedReader.MoveToNextAttribute();
-	    else
+	    } else {
 		return base.MoveToNextAttribute();
+	    }
 	}
 
 	public override bool MoveToElement() {
-	    if (m_NestedReader != null)
+	    if (m_NestedReader != null) {
 		return m_NestedReader.MoveToElement();
-	    else
+	    } else {
 		return base.MoveToElement();
+	    }
 	}
 
 	public override bool HasAttributes {
 	    get {
-		if (m_NestedReader != null)
+		if (m_NestedReader != null) {
 		    return m_NestedReader.HasAttributes;
-		else
+		} else {
 		    return base.HasAttributes;
+		}
 	    }
 	}
 
 	public override String ReadInnerXml() {
-	    if (m_NestedReader != null)
+	    if (m_NestedReader != null) {
 		return m_NestedReader.ReadInnerXml();
-	    else
+	    } else {
 		return base.ReadInnerXml();
+	    }
 	}
 
 	public override String ReadString() {
-	    if (m_NestedReader != null)
+	    if (m_NestedReader != null) {
 		return m_NestedReader.ReadString();
-	    else
+	    } else {
 		return base.ReadString();
+	    }
 	}
   
 	public override bool IsEmptyElement {
 	    get {
-		if (m_NestedReader != null)
+		if (m_NestedReader != null) {
 		    return m_NestedReader.IsEmptyElement;
-		else
+		} else {
 		    return base.IsEmptyElement;
+		}
 	    }
 	}
 
 	// TODO: make sure that all methods that actually read get overridden.  Methods needed by this implementation have been done.
-
-
 
 
 	public static void SerializeNode(XmlReader reader, XmlWriter w) {
@@ -233,8 +263,9 @@ namespace Spring2.Core.Xml {
 	    XmlTextWriter tw = new XmlTextWriter(ms, System.Text.Encoding.Default);
 	    tw.Formatting = Formatting.Indented;
 	    tw.WriteStartDocument();
-	    while (r.Read())
+	    while (r.Read()) {
 		XIncludeReader.SerializeNode(r, tw);
+	    }
 	    tw.WriteEndDocument();
 	    tw.Flush();
 	    ms.Position = 0;
@@ -258,8 +289,9 @@ namespace Spring2.Core.Xml {
 	    XmlTextWriter tw = new XmlTextWriter(ms, System.Text.Encoding.Default);
 	    tw.Formatting = Formatting.Indented;
 	    tw.WriteStartDocument();
-	    while (r.Read())
+	    while (r.Read()) {
 		XIncludeReader.SerializeNode(r, tw);
+	    }
 	    tw.WriteEndDocument();
 	    tw.Flush();
 	    ms.Position = 0;
