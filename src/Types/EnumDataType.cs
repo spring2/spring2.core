@@ -1,19 +1,24 @@
 using System;
 
-namespace Spring2.Core.Types
-{
-	/// <summary>
-	/// Summary description for EnumDataType.
-	/// </summary>
-	public class EnumDataType
-	{
-		public EnumDataType()
-		{
-			//
-			// TODO: Add constructor logic here
-			//
-		}
+namespace Spring2.Core.Types {
+    public abstract class EnumDataType : DataType {
 
-        // implement to string that uses internal value
+	protected String code;
+	protected String name;
+		
+	protected override Object Value {
+	    get { return code; }
 	}
+		
+	public override String ToString() {
+	    if (IsDefault) {
+		return DEFAULT;
+	    } else if (IsUnset) {
+		return UNSET;
+	    } else {
+		return name;
+	    }
+	}
+
+    }
 }
