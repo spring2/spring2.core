@@ -22,7 +22,7 @@ namespace Spring2.Core.WebControl {
 	private String selectedItemStyle = String.Empty;
 	private String completedItemStyle = String.Empty;
 	private Int32 indent;
-	private String navigateUrl;
+	private String navigateUrl = String.Empty;
 	private Boolean active;
 
 	private MenuItemCollection items = new MenuItemCollection();
