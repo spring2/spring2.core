@@ -41,5 +41,29 @@ namespace Spring2.Core.Types {
 		return Value.ToString();
 	    }
 	}
+
+	public override Boolean Equals(Object o) {
+	    DataType that = o as DataType;
+	    if (that == null) {
+		return false;
+	    }
+	    if (ReferenceEquals(this, that)) {
+		return true;
+	    }
+	    if (!this.GetType().Equals(that.GetType())) {
+		return false;
+	    }
+	    if (this.IsDefault || that.IsDefault) {
+		return this.IsDefault && that.IsDefault;
+	    }
+	    if (this.IsUnset || that.IsUnset) {
+		return this.IsUnset && that.IsUnset;
+	    }
+	    return this.Value.Equals(that.Value);
+	}
+
+	public override Int32 GetHashCode() {
+	    return Value == null ? 0 : Value.GetHashCode();
+	}
     }
 }

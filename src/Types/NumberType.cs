@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace Spring2.Core.Types {
 
@@ -7,18 +8,21 @@ namespace Spring2.Core.Types {
 	public static readonly new NumberType DEFAULT = new NumberType();
 	public static readonly new NumberType UNSET = new NumberType();
 
-	public static NumberType NewInstance(Object value) {
+	public static NumberType NewInstance(Int32 value) {
+	    return new NumberType(value);
+	}
 
-	    if (value is Int32) {
-		return new NumberType((Int32)value);
-	    } else {
-		return UNSET;
-	    }
+	public static NumberType Parse(String value) {
+	    return new NumberType(Int32.Parse(value, NumberStyles.Number));
+	}
+
+	public static NumberType Parse(String value, IFormatProvider provider) {
+	    return new NumberType(Int32.Parse(value, NumberStyles.Integer,  provider));
 	}
 
 	private Int32 value;
 
-	private NumberType() {}
+	protected NumberType() {}
 
 	public NumberType(Int32 value) {
 	    this.value = value;
@@ -54,20 +58,12 @@ namespace Spring2.Core.Types {
 	    return value.ToString(format);
 	}
 
-	public override Boolean Equals(Object o) {
-	    if (this == o) {
-		return true;
-	    } else if (!(o is NumberType)) {
-		return false;
-	    } else {
-		return value.Equals(((NumberType)o).value);
-	    }
+	public String ToString(IFormatProvider provider) {
+	    return value.ToString(provider);
 	}
 
-	public override int GetHashCode() {
-	    return value.GetHashCode();
+	public String ToString(String format, IFormatProvider provider) {
+	    return value.ToString(format, provider);
 	}
-
-
     }
 }

@@ -38,13 +38,7 @@ namespace Spring2.Core.Types {
 	}
 
 	public override Boolean Equals(Object o) {
-	    if (this == o) {
-		return true;
-	    } else if (code == null || !(o is StringType)) {
-		return false;
-	    } else {
-		return code.Equals(((EnumDataType)o).code);
-	    }
+	    return ReferenceEquals(this, o);
 	}
 
 	public override int GetHashCode() {

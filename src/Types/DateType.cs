@@ -7,13 +7,12 @@ namespace Spring2.Core.Types {
 	public static readonly new DateType DEFAULT = new DateType();
 	public static readonly new DateType UNSET = new DateType();
 
-	public static DateType NewInstance(Object value) {
+	public static DateType NewInstance(DateTime value) {
+	    return new DateType(value);
+	}
 
-	    if (value is DateTime) {
-		return new DateType((DateTime)value);
-	    } else {
-		return UNSET;
-	    }
+	public static DateType Parse(String value) {
+	    return new DateType(DateTime.Parse(value));
 	}
 
 	private DateTime value;
@@ -27,13 +26,11 @@ namespace Spring2.Core.Types {
 
 	/// <summary>
 	/// Contructs a new instance of a DateType with
-	/// the given date as its internal value.  This constructor
-	/// should be private to avoid creating DateType objects with
-	/// a null internal value.
+	/// the given date as its internal value.
 	/// </summary>
 	/// <param name="value">a DateTime object for the internal 
 	/// value of the date type.</param>
-	private DateType(DateTime value) {
+	public DateType(DateTime value) {
 	    this.value = value;
 	}
 
@@ -76,22 +73,28 @@ namespace Spring2.Core.Types {
 	}
 
 	public override Boolean Equals(Object o) {
-	    if (this == o) {
-		return true;
-	    } else if (!(o is DateType)) {
+	    DateType that = o as DateType;
+	    if (that == null) {
 		return false;
-	    } else {
-		// it appears that loading a DateTime for Sql Server will not get you the last 4 significant digits
-		// this is in an attempt to say that those last 4 digits do not matter
-		// the last 4 digits represent the portion of a 1000th of a second (ie. 5h 3m 4s 456ms xxxx)
-		long difference = value.Ticks - ((DateType)o).value.Ticks;
-		return (difference < 10000 && difference > -10000);
 	    }
+	    if (ReferenceEquals(this, that)) {
+		return true;
+	    }
+	    if (this.IsDefault || that.IsDefault) {
+		return this.IsDefault && that.IsDefault;
+	    }
+	    if (this.IsUnset || that.IsUnset) {
+		return this.IsUnset && that.IsUnset;
+	    }
+	    // it appears that loading a DateTime for Sql Server will not get you the last 4 significant digits
+	    // this is in an attempt to say that those last 4 digits do not matter
+	    // the last 4 digits represent the portion of a 1000th of a second (ie. 5h 3m 4s 456ms xxxx)
+	    long difference = this.value.Ticks - that.value.Ticks;
+	    return (difference < 10000 && difference > -10000);
 	}
 
 	public override int GetHashCode() {
 	    return value.GetHashCode();
 	}
-
     }
 }

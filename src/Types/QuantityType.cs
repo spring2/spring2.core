@@ -2,39 +2,22 @@ using System;
 
 namespace Spring2.Core.Types {
 
-    public class QuantityType : DataType {
+    public class QuantityType : DecimalType {
 
 	public static readonly new QuantityType DEFAULT = new QuantityType();
 	public static readonly new QuantityType UNSET = new QuantityType();
 
-	public static QuantityType NewInstance(Object value) {
-
-	    if (value is Decimal) {
-		return new QuantityType((Decimal)value);
-	    } else {
-		return UNSET;
-	    }
+	public static new QuantityType NewInstance(Decimal value) {
+	    return new QuantityType(value);
 	}
 
-	private Decimal value;
+	public static new QuantityType Parse(String value) {
+	    return new QuantityType(Decimal.Parse(value));
+	}
 
 	private QuantityType() {}
 
-	public QuantityType(Decimal value) {
-	    this.value = value;
-	}
-
-	public QuantityType(Double value) {
-	    this.value = (Decimal)value;
-	}
-
-
-
-	protected override Object Value {
-	    get {
-		return value;
-	    }
-	}
+	public QuantityType(Decimal value) : base(value) {}
 
 	public override Boolean IsDefault {
 	    get {
@@ -47,33 +30,5 @@ namespace Spring2.Core.Types {
 		return Object.ReferenceEquals(this, UNSET);
 	    }
 	}
-
-	public Decimal ToDecimal() {
-	    if (IsUnset || IsDefault) {
-		throw new InvalidCastException("UNSET and DEFAULT QuantityTypes have no decimal value.");
-	    } else {
-		return value;
-	    }
-	}
-
-	public String ToString(String format) {
-	    return value.ToString(format);
-	}
-
-	public override Boolean Equals(Object o) {
-	    if (this == o) {
-		return true;
-	    } else if (!(o is QuantityType)) {
-		return false;
-	    } else {
-		return value.Equals(((QuantityType)o).value);
-	    }
-	}
-
-	public override int GetHashCode() {
-	    return value.GetHashCode();
-	}
-
-
     }
 }

@@ -1,34 +1,28 @@
 using System;
+using System.Globalization;
 
 namespace Spring2.Core.Types {
 
-    public class CurrencyType : DataType	{
+    public class CurrencyType : DecimalType {
 
 	public static readonly new CurrencyType DEFAULT = new CurrencyType();
 	public static readonly new CurrencyType UNSET = new CurrencyType();
 
-	public static CurrencyType NewInstance(Object value) {
-
-	    if (value is Decimal) {
-		return new CurrencyType((Decimal)value);
-	    } else {
-		return UNSET;
-	    }
+	public static new CurrencyType NewInstance(Decimal value) {
+	    return new CurrencyType(value);
 	}
 
-	private Decimal value;
+	public static new CurrencyType Parse(String value) {
+	    return new CurrencyType(Decimal.Parse(value, NumberStyles.Currency));
+	}
+
+	public static new CurrencyType Parse(String value, IFormatProvider provider) {
+	    return new CurrencyType(Decimal.Parse(value, NumberStyles.Currency, provider));
+	}
 
 	private CurrencyType() {}
 
-	public CurrencyType(Decimal value) {
-	    this.value = value;
-	}
-
-	protected override Object Value {
-	    get {
-		return value;
-	    }
-	}
+	public CurrencyType(Decimal value) : base(value) {}
 
 	public override Boolean IsDefault {
 	    get {
@@ -42,31 +36,12 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
-	public Decimal ToDecimal() {
-	    if (IsUnset || IsDefault) {
-		throw new InvalidCastException("UNSET and DEFAULT DecimalTypes have no decimal value.");
-	    } else {
-		return value;
-	    }
+	public override String ToString() {
+	    return value.ToString("c");
 	}
 
-	public String ToString(String format) {
+	public override String ToString(String format) {
 	    return value.ToString(format);
 	}
-
-	public override Boolean Equals(Object o) {
-	    if (this == o) {
-		return true;
-	    } else if (!(o is CurrencyType)) {
-		return false;
-	    } else {
-		return value.Equals(((CurrencyType)o).value);
-	    }
-	}
-
-	public override int GetHashCode() {
-	    return value.GetHashCode();
-	}
-
     }
 }

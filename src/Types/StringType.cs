@@ -12,13 +12,12 @@ namespace Spring2.Core.Types {
 	public static readonly new StringType UNSET = new StringType();
 	public static readonly StringType EMPTY = new StringType(String.Empty);
 
-	public static StringType NewInstance(Object value) {
+	public static StringType NewInstance(String value) {
+	    return value == null ? UNSET : new StringType(value);
+	}
 
-	    if (value is String) {
-		return new StringType((String)value);
-	    } else {
-		return UNSET;
-	    }
+	public static StringType Parse(String value) {
+	    return value == null ? UNSET : new StringType(value);
 	}
 
 	private String value;
@@ -53,20 +52,6 @@ namespace Spring2.Core.Types {
 
 	public Boolean IsEmpty {
 	    get { return !IsValid || String.Empty.Equals(value.Trim()); }
-	}
-
-	public override Boolean Equals(Object o) {
-	    if (this == o) {
-		return true;
-	    } else if (value == null || !(o is StringType)) {
-		return false;
-	    } else {
-		return value.Equals(((StringType)o).value);
-	    }
-	}
-
-	public override int GetHashCode() {
-	    return value == null ? 0 : value.GetHashCode();
 	}
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace Spring2.Core.Types {
 
@@ -7,16 +8,27 @@ namespace Spring2.Core.Types {
 	public static readonly new DecimalType DEFAULT = new DecimalType();
 	public static readonly new DecimalType UNSET = new DecimalType();
 
-	public static DecimalType NewInstance(Object value) {
+	protected Decimal value;
 
-	    if (value is Decimal) {
-		return new DecimalType((Decimal)value);
-	    } else {
-		return UNSET;
-	    }
+	public static DecimalType NewInstance(Decimal value) {
+	    return new DecimalType(value);
 	}
 
-	protected Decimal value;
+	public static DecimalType Parse(String value) {
+	    return new DecimalType(Decimal.Parse(value));
+	}
+
+	public static DecimalType Parse(String value, NumberStyles style) {
+	    return new DecimalType(Decimal.Parse(value, style));
+	}
+
+	public static DecimalType Parse(String value, IFormatProvider provider) {
+	    return new DecimalType(Decimal.Parse(value, provider));
+	}
+
+	public static DecimalType Parse(String value, NumberStyles style, IFormatProvider provider) {
+	    return new DecimalType(Decimal.Parse(value, style, provider));
+	}
 
 	protected DecimalType() {}
 
@@ -50,23 +62,12 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
+	public override String ToString() {
+	    return value.ToString();
+	}
+
 	public virtual String ToString(String format) {
 	    return value.ToString(format);
 	}
-
-	public override Boolean Equals(Object o) {
-	    if (this == o) {
-		return true;
-	    } else if (!(o is DecimalType)) {
-		return false;
-	    } else {
-		return value.Equals(((DecimalType)o).value);
-	    }
-	}
-
-	public override int GetHashCode() {
-	    return value.GetHashCode();
-	}
-
     }
 }
