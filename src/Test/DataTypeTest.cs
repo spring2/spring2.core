@@ -76,6 +76,31 @@ namespace Spring2.Core.Test {
 	[Test]
 	public void TestEquals() {
 
+	    // BooleanType tests.
+	    Assertion.AssertEquals(BooleanType.UNSET, BooleanType.UNSET);
+	    Assertion.AssertEquals(BooleanType.DEFAULT, BooleanType.DEFAULT);
+	    Assertion.AssertEquals(BooleanType.TRUE, BooleanType.TRUE);
+	    Assertion.AssertEquals(BooleanType.FALSE, BooleanType.FALSE);
+
+	    Assertion.Assert(!BooleanType.UNSET.Equals(BooleanType.DEFAULT));
+	    Assertion.Assert(!BooleanType.UNSET.Equals(BooleanType.TRUE));
+	    Assertion.Assert(!BooleanType.UNSET.Equals(BooleanType.FALSE));
+
+	    Assertion.Assert(!BooleanType.DEFAULT.Equals(BooleanType.UNSET));
+	    Assertion.Assert(!BooleanType.DEFAULT.Equals(BooleanType.TRUE));
+	    Assertion.Assert(!BooleanType.DEFAULT.Equals(BooleanType.FALSE));
+
+	    Assertion.Assert(!BooleanType.TRUE.Equals(BooleanType.UNSET));
+	    Assertion.Assert(!BooleanType.TRUE.Equals(BooleanType.DEFAULT));
+	    Assertion.Assert(!BooleanType.TRUE.Equals(BooleanType.FALSE));
+
+	    Assertion.Assert(!BooleanType.FALSE.Equals(BooleanType.UNSET));
+	    Assertion.Assert(!BooleanType.FALSE.Equals(BooleanType.DEFAULT));
+	    Assertion.Assert(!BooleanType.FALSE.Equals(BooleanType.TRUE));
+
+	    Assertion.Assert(!BooleanType.TRUE.Equals(null));
+	    Assertion.Assert(!BooleanType.TRUE.Equals(new DateType()));
+
 	    // Currency type tests.
 	    CurrencyType c1 = new CurrencyType(100);
 	    CurrencyType c2 = new CurrencyType(100);
