@@ -186,7 +186,6 @@
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
-                <Folder RelPath = "Util\" />
             </Include>
         </Files>
     </CSHARP>
