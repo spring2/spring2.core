@@ -2,7 +2,7 @@ using System;
 
 namespace Spring2.Core.Types {
 
-    public class QuantityType : DataType	{
+    public class QuantityType : DataType {
 
 	public static readonly new QuantityType DEFAULT = new QuantityType();
 	public static readonly new QuantityType UNSET = new QuantityType();
