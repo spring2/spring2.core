@@ -48,24 +48,24 @@ namespace Spring2.Core.DAO {
 	    // determine where the connection string comes from and what it is
 	    String connectionString;
 	    if (key.ToLower().StartsWith("registry")) {
-			String subkey = key.Substring(key.LastIndexOf(":")+1);
-			subkey = subkey.Substring(0, subkey.LastIndexOf("\\"));
-			String value = key.Substring(key.LastIndexOf("\\")+1);
-			String hive = key.Substring(9,4).ToUpper();
-			RegistryKey rkey;
-			if (hive.Equals("HKLM")) {
-				rkey = Registry.LocalMachine.OpenSubKey(subkey);
-			} else if (hive.Equals("HKCU")) {
-				rkey = Registry.CurrentUser.OpenSubKey(subkey);
-			} else {
-				throw new Exception("Unable to determine hive from registry type connection key.  Hive understood: " + hive + "  Key used was: " + key);
-			}
-			if (rkey == null) {
-				throw new Exception("Specified subkey was not found.  Subkey: " + subkey);
-			}
-			connectionString = rkey.GetValue(value).ToString();
+		String subkey = key.Substring(key.LastIndexOf(":")+1);
+		subkey = subkey.Substring(0, subkey.LastIndexOf("\\"));
+		String value = key.Substring(key.LastIndexOf("\\")+1);
+		String hive = key.Substring(9,4).ToUpper();
+		RegistryKey rkey;
+		if (hive.Equals("HKLM")) {
+		    rkey = Registry.LocalMachine.OpenSubKey(subkey);
+		} else if (hive.Equals("HKCU")) {
+		    rkey = Registry.CurrentUser.OpenSubKey(subkey);
+		} else {
+		    throw new Exception("Unable to determine hive from registry type connection key.  Hive understood: " + hive + "  Key used was: " + key);
+		}
+		if (rkey == null) {
+		    throw new Exception("Specified subkey was not found.  Subkey: " + subkey);
+		}
+		connectionString = rkey.GetValue(value).ToString();
 	    } else {
-			connectionString = ConfigurationSettings.AppSettings[key];
+		connectionString = ConfigurationSettings.AppSettings[key];
 	    }
 
 	    connectionString = connectionString.ToUpper();
@@ -96,7 +96,5 @@ namespace Spring2.Core.DAO {
 	    cmd.CommandTimeout = commandTimeout;
 	    return cmd;
 	}
-
-
     }
 }
