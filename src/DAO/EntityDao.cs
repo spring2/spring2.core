@@ -59,7 +59,7 @@ namespace Spring2.Core.DAO {
 
 
 		protected SqlCommand GetSqlCommand(SqlConnection conn) {
-			SqlCommand objCommand;
+			SqlCommand cmd;
 
 			// Create and open the database connection - if the one passed in was not null
 			if (conn == null) {
@@ -68,11 +68,17 @@ namespace Spring2.Core.DAO {
 			}
 
 			// Create and execute the command
-			objCommand = new SqlCommand();
-			objCommand.Connection = conn;
-			objCommand.CommandType = CommandType.StoredProcedure;
+			cmd = new SqlCommand();
+			cmd.Connection = conn;
 
-			return objCommand;
+			return cmd;
+		}
+
+		protected SqlCommand GetSqlCommand(SqlConnection conn, String commandText, CommandType commandType) {
+			SqlCommand cmd = GetSqlCommand(conn);
+			cmd.CommandText = commandText;
+			cmd.CommandType = commandType;
+			return cmd;
 		}
 
 	}
