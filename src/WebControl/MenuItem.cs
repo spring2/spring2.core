@@ -17,6 +17,7 @@ namespace Spring2.Core.WebControl {
 	private Boolean selected;
 	private Boolean expanded;
 	private IList items = new ArrayList();
+	private MenuItem selectedItem;
 	private IMenu parentMenu;
 	
 	//	[Bindable(true), Category("Appearance"), DefaultValue("")] 
@@ -47,6 +48,19 @@ namespace Spring2.Core.WebControl {
 	public IMenu ParentMenu {
 	    get { return parentMenu; }
 	    set { parentMenu = value; }
+	}
+
+	public MenuItem SelectedItem {
+	    get { return selectedItem; }
+	    set { selectedItem = value; }
+	}
+
+	public MenuItem NextItem {
+	    get { return selectedItem; }
+	}
+
+	public MenuItem PreviousItem {
+	    get { return selectedItem; }
 	}
 
 	public String SelectedItemImageUrl {

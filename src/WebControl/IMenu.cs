@@ -18,5 +18,17 @@ namespace Spring2.Core.WebControl {
 	Unit Space {
 	    get;
 	}
+
+	MenuItem SelectedItem {
+	    get; set;
+	}
+
+	MenuItem NextItem {
+	    get;
+	}
+
+	MenuItem PreviousItem {
+	    get;
+	}
     }
 }

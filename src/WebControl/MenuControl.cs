@@ -17,10 +17,9 @@ namespace Spring2.Core.WebControl {
 	
 	private IList items = new ArrayList();
 	private String text;
-	private String cssClass;
+	private MenuItem selectedItem;
 	private String selectedItemImageUrl;
 	private String completedItemImageUrl;
-	private Unit width;
 	private Unit indent;
 	private Unit space;
 
@@ -35,6 +34,19 @@ namespace Spring2.Core.WebControl {
 	    set { text = value; }
 	}
 
+	public MenuItem SelectedItem {
+	    get { return selectedItem; }
+	    set { selectedItem = value; }
+	}
+
+	public MenuItem NextItem {
+	    get { return selectedItem; }
+	}
+
+	public MenuItem PreviousItem {
+	    get { return selectedItem; }
+	}
+
 	public String SelectedItemImageUrl {
 	    get { return selectedItemImageUrl; }
 	    set { selectedItemImageUrl = value; }
@@ -47,16 +59,6 @@ namespace Spring2.Core.WebControl {
 
 	public IList Items {
 	    get { return items; }
-	}
-
-	public override String CssClass {
-	    get { return cssClass; }
-	    set { cssClass = value; }
-	}
-
-	public override Unit Width { 
-	    get { return width; }
-	    set { width = value; }
 	}
 
 	public Unit Indent {
@@ -90,7 +92,7 @@ namespace Spring2.Core.WebControl {
 	    TableCell cell = new TableCell();
 	    table.Width = this.Width;
 
-	    cell.CssClass = this.cssClass;
+	    cell.CssClass = CssClass;
 	    cell.HorizontalAlign = HorizontalAlign.Center;
 	    cell.Text = this.Label;
 
@@ -108,13 +110,5 @@ namespace Spring2.Core.WebControl {
 
 	    Controls.Add(table);
 	}
-
-//	/// <summary>
-//	/// Render this control to the output parameter specified.
-//	/// </summary>
-//	/// <param name="output"> The HTML writer to write out to </param>
-//	protected override void Render(HtmlTextWriter output) {
-//	    output.Write(Text);
-//	}
     }
 }
