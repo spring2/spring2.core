@@ -47,10 +47,10 @@ namespace Spring2.Core.Globalization {
 	public static readonly RegionalTimeZone M = new RegionalTimeZone("M", "Mike", null, new TimeSpan(12,0,0));
 
 	// Time zones that use North American daylight time rules
-	public static readonly RegionalTimeZone V_US = new RegionalTimeZone("V-US", "US Alaska Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-7,0,0));
-	public static readonly RegionalTimeZone U_US = new RegionalTimeZone("U-US", "US Pacific Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-7,0,0));
+	public static readonly RegionalTimeZone V_US = new RegionalTimeZone("V-US", "US Alaska Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-9,0,0));
+	public static readonly RegionalTimeZone U_US = new RegionalTimeZone("U-US", "US Pacific Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-8,0,0));
 	public static readonly RegionalTimeZone T_US = new RegionalTimeZone("T-US", "US Mountain Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-7,0,0));
-	public static readonly RegionalTimeZone S_US = new RegionalTimeZone("S-US", "US Central Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-7,0,0));
+	public static readonly RegionalTimeZone S_US = new RegionalTimeZone("S-US", "US Central Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-6,0,0));
 	public static readonly RegionalTimeZone R_US = new RegionalTimeZone("R-US", "US Eastern Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-5,0,0));
 
 	// Time zones that use EU daylight time rules
