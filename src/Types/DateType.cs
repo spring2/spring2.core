@@ -184,23 +184,5 @@ namespace Spring2.Core.Types {
 	public DateType AddDays(Double days) {
 	    return new DateType(ToDateTime().AddDays(days));
 	}
-
-	/// <summary>
-	/// Returns an instance that represents the current date and time
-	/// </summary>
-	public static DateType Now {
-	    get {
-		return new DateType();
-	    }
-	}
-
-	/// <summary>
-	/// Returns and instance that represents the current date
-	/// </summary>
-	public static DateType Today {
-	    get {
-		return new DateType(DateTime.Today);
-	    }
-	}
     }
 }
