@@ -99,11 +99,21 @@ namespace Spring2.Core.DataObject {
 	/// Does a deep compare of the current object with the passed object.
 	/// </summary>
 	/// <param name="obj">Object to compare current object with.</param>
-	/// <param name="prefix">Prefix to use when identifying properties.</param>
 	/// <returns>List of differences between the objects.</returns>
 	public DataObjectCompareList Compare(DataObject obj)
 	{
-	    return Compare(obj, this.GetType().Name);
+	    return Compare(obj, this.GetType().Name, DataObjectCompareOptionEnum.COMPARE_ALL);
+	}
+
+	/// <summary>
+	/// Does a deep compare of the current object with the passed object.
+	/// </summary>
+	/// <param name="obj">Object to compare current object with.</param>
+	/// <param name="option">Allows customization of how DEFAULT values are compared.</param>
+	/// <returns>List of differences between the objects.</returns>
+	public DataObjectCompareList Compare(DataObject obj, DataObjectCompareOptionEnum option)
+	{
+	    return Compare(obj, this.GetType().Name, option);
 	}
 
 	/// <summary>
@@ -111,8 +121,10 @@ namespace Spring2.Core.DataObject {
 	/// </summary>
 	/// <param name="obj">Object to compare current object with.</param>
 	/// <param name="prefix">Prefix to use when identifying properties.</param>
+	/// <param name="option">Allows customization of how DEFAULT values are compared.</param>
 	/// <returns>List of differences between the objects.</returns>
-	public DataObjectCompareList Compare(DataObject obj, String prefix) 
+	public DataObjectCompareList Compare(DataObject obj, String prefix,
+					     DataObjectCompareOptionEnum option) 
 	{
 	    DataObjectCompareList returnValue = new DataObjectCompareList();
 	    if (obj == null) 
@@ -165,12 +177,14 @@ namespace Spring2.Core.DataObject {
 			    {
 				returnValue.Append(((DataObject)(enumerator1.Current)).Compare(
 				    (DataObject)(enumerator2.Current), 
-				    collectionPrefix));
+				    collectionPrefix, option));
 			    } 
 			    else  if (enumerator1.Current is DataType 
 					&& enumerator2.Current is DataType)
 			    {
-				if (!enumerator1.Current.Equals(enumerator2.Current))
+				if (!CompareDataTypes((DataType)(enumerator1.Current),
+						      (DataType)(enumerator2.Current),
+						      option))
 				{
 				    returnValue.Add(new DataObjectCompareDetail(collectionPrefix,
 					(DataType)(enumerator1.Current),
@@ -195,31 +209,43 @@ namespace Spring2.Core.DataObject {
 		{
 		    returnValue.Append(((DataObject)value1).Compare(
 			(DataObject)value2,
-			valuePrefix));
+			valuePrefix, option));
 		}
 		else
 		{
 		    if (!value1.Equals(value2))
 		    { 
-			DataType v1;
-			DataType v2;
-			if (value1 is DataType)
+			if (value1 is DataType && value2 is DataType)
 			{
-			    v1 = (DataType)value1;
+			    if (!CompareDataTypes((DataType)value1, (DataType)value2, option))
+			    {
+				returnValue.Add(new DataObjectCompareDetail(valuePrefix,
+				    (DataType)value1,
+				    (DataType)value2));
+			    }
 			}
 			else
 			{
-			    v1 = new StringType("Not DataType");
+			    DataType v1;
+			    DataType v2;
+			    if (value1 is DataType)
+			    {
+				v1 = (DataType)value1;
+			    }
+			    else
+			    {
+				v1 = new StringType("Not DataType");
+			    }
+			    if (value2 is DataType)
+			    {
+				v2 = (DataType)value2;
+			    }
+			    else
+			    {
+				v2 = new StringType("Not DataType");
+			    }
+			    returnValue.Add(new DataObjectCompareDetail(valuePrefix, v1, v2));
 			}
-			if (value2 is DataType)
-			{
-			    v2 = (DataType)value2;
-			}
-			else
-			{
-			    v2 = new StringType("Not DataType");
-			}
-			returnValue.Add(new DataObjectCompareDetail(valuePrefix, v1, v2));
 		    }
 		}
 	    }
@@ -270,8 +296,36 @@ namespace Spring2.Core.DataObject {
 	    }
 	}
 
-	private void SetValue(PropertyInfo p, Object value) 
+	/// <summary>
+	/// Compares two data types based on the enum passed.
+	/// </summary>
+	/// <param name="v1">First Value</param>
+	/// <param name="v2">Second Value</param>
+	/// <param name="option">option value to use</param>
+	private bool CompareDataTypes(DataType v1, DataType v2,
+				      DataObjectCompareOptionEnum option)
 	{
+	    bool found = false;
+	    if (v1.Equals(v2))
+	    {
+		found = true;
+	    }
+	    if (!found)
+	    {
+		if (option.Equals(DataObjectCompareOptionEnum.IGNORE_DEFAULT)
+		    && (v1.IsDefault || v2.IsDefault))
+		{
+		    found = true;
+		}
+		else if (option.Equals(DataObjectCompareOptionEnum.DEFAULT_EQUALS_UNSET)
+		    && ((v1.IsUnset && v2.IsDefault)
+		    || (v1.IsDefault && v2.IsUnset)))
+		{
+		    found = true;
+		}
+	    }
+
+	    return found;
 	}
     }
 }
