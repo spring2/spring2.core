@@ -43,7 +43,15 @@ namespace Spring2.Core.Types {
 	}
 
 	public Int32 ToInt32() {
-	    return value;
+	    if (IsUnset || IsDefault) {
+		throw new InvalidCastException("UNSET and DEFAULT IdTypes have no integer value.");
+	    } else {
+		return value;
+	    }
+	}
+
+	public String ToString(String format) {
+	    return value.ToString(format);
 	}
 
     }

@@ -43,5 +43,17 @@ namespace Spring2.Core.Types {
 		return Object.ReferenceEquals(this, UNSET);
 	    }
 	}
+
+	public DateTime ToDateTime() {
+	    if (IsUnset || IsDefault) {
+		throw new InvalidCastException("UNSET and DEFAULT DateTypes have no decimal value.");
+	    } else {
+		return value;
+	    }
+	}
+
+	public String ToString(String format) {
+	    return value.ToString(format);
+	}
     }
 }

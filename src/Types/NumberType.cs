@@ -49,5 +49,10 @@ namespace Spring2.Core.Types {
 		return value;
 	    }
 	}
+
+	public String ToString(String format) {
+	    return value.ToString(format);
+	}
+
     }
 }
