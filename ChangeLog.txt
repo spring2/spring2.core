@@ -1,3 +1,33 @@
+2003-11-11 Tuesday 08:23  cort
+
+	* src/Test/WhereClauseTest.cs:
+	
+	add some additional checks that Ben had committed to SU version
+
+2003-11-11 Tuesday 08:17  cort
+
+	* src/AssemblyInfo.cs:
+	
+	use recommended path to signing key (..\..\)
+
+2003-10-28 Tuesday 14:10  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2003-10-28 Tuesday 14:10  cort
+
+	* release/Spring2.Core.1.1.4.5383.zip:
+	
+	new release version
+
+2003-10-28 Tuesday 14:10  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2003-10-28 Tuesday 14:09  cort
 
 	* src/DAO/WhereClause.cs:
