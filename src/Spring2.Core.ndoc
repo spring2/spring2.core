@@ -1,0 +1,117 @@
+<project>
+    <assemblies>
+        <assembly location="C:\Data\work\spring2\Core\build\Spring2.Core.dll" documentation="C:\Data\work\spring2\Core\build\Spring2.Core.xml" />
+        <assembly location="C:\Data\work\spring2\Core\build\Spring2.Core.WebControl.dll" documentation="C:\Data\work\spring2\Core\build\Spring2.Core.WebControl.xml" />
+    </assemblies>
+    <namespaces>
+        <namespace name="Spring2.Core.DAO">Data access</namespace>
+        <namespace name="Spring2.Core.DataObject"></namespace>
+        <namespace name="Spring2.Core.Drawing.Graphing"></namespace>
+        <namespace name="Spring2.Core.Globalization"></namespace>
+        <namespace name="Spring2.Core.IO"></namespace>
+        <namespace name="Spring2.Core.Types"></namespace>
+        <namespace name="Spring2.Core.Util"></namespace>
+        <namespace name="Spring2.Core.WebControl"></namespace>
+        <namespace name="Spring2.Core.Xml"></namespace>
+    </namespaces>
+    <documenters>
+        <documenter name="JavaDoc">
+            <property name="OutputDirectory" value=".\docs\JavaDoc\" />
+            <property name="ShowMissingSummaries" value="False" />
+            <property name="ShowMissingRemarks" value="False" />
+            <property name="ShowMissingParams" value="False" />
+            <property name="ShowMissingReturns" value="False" />
+            <property name="ShowMissingValues" value="False" />
+            <property name="DocumentInternals" value="False" />
+            <property name="DocumentProtected" value="True" />
+            <property name="DocumentPrivates" value="False" />
+            <property name="DocumentEmptyNamespaces" value="False" />
+            <property name="IncludeAssemblyVersion" value="False" />
+            <property name="CopyrightText" value="" />
+            <property name="CopyrightHref" value="" />
+            <property name="SkipNamespacesWithoutSummaries" value="False" />
+            <property name="AutoPropertyBackerSummaries" value="False" />
+            <property name="AutoDocumentConstructors" value="True" />
+            <property name="DocumentAttributes" value="False" />
+            <property name="DocumentedAttributes" value="" />
+            <property name="GetExternalSummaries" value="True" />
+        </documenter>
+        <documenter name="Latex">
+            <property name="OutputDirectory" value="Tex" />
+            <property name="TextFileFullName" value="Documentation.tex" />
+            <property name="TexFileBaseName" value="Documentation" />
+            <property name="LatexCompiler" value="latex" />
+            <property name="TexFileFullPath" value="Tex\Documentation.tex" />
+            <property name="ShowMissingSummaries" value="False" />
+            <property name="ShowMissingRemarks" value="False" />
+            <property name="ShowMissingParams" value="False" />
+            <property name="ShowMissingReturns" value="False" />
+            <property name="ShowMissingValues" value="False" />
+            <property name="DocumentInternals" value="False" />
+            <property name="DocumentProtected" value="True" />
+            <property name="DocumentPrivates" value="False" />
+            <property name="DocumentEmptyNamespaces" value="False" />
+            <property name="IncludeAssemblyVersion" value="False" />
+            <property name="CopyrightText" value="" />
+            <property name="CopyrightHref" value="" />
+            <property name="SkipNamespacesWithoutSummaries" value="False" />
+            <property name="AutoPropertyBackerSummaries" value="False" />
+            <property name="AutoDocumentConstructors" value="True" />
+            <property name="DocumentAttributes" value="False" />
+            <property name="DocumentedAttributes" value="" />
+            <property name="GetExternalSummaries" value="True" />
+        </documenter>
+        <documenter name="MSDN">
+            <property name="OutputDirectory" value="..\docs\api\" />
+            <property name="HtmlHelpName" value="Spring2.Core" />
+            <property name="IncludeFavorites" value="False" />
+            <property name="Title" value="Spring2 Core Class Libraries" />
+            <property name="SplitTOCs" value="False" />
+            <property name="DefaulTOC" value="" />
+            <property name="IncludeHierarchy" value="False" />
+            <property name="ShowVisualBasic" value="False" />
+            <property name="OmitObjectTags" value="False" />
+            <property name="RootPageContainsNamespaces" value="False" />
+            <property name="SortTOCByNamespace" value="True" />
+            <property name="ShowMissingSummaries" value="False" />
+            <property name="ShowMissingRemarks" value="False" />
+            <property name="ShowMissingParams" value="False" />
+            <property name="ShowMissingReturns" value="False" />
+            <property name="ShowMissingValues" value="False" />
+            <property name="DocumentInternals" value="False" />
+            <property name="DocumentProtected" value="True" />
+            <property name="DocumentPrivates" value="False" />
+            <property name="DocumentEmptyNamespaces" value="False" />
+            <property name="IncludeAssemblyVersion" value="True" />
+            <property name="CopyrightText" value="Spring2 Technologies, Inc." />
+            <property name="CopyrightHref" value="" />
+            <property name="SkipNamespacesWithoutSummaries" value="False" />
+            <property name="AutoPropertyBackerSummaries" value="False" />
+            <property name="AutoDocumentConstructors" value="True" />
+            <property name="DocumentAttributes" value="False" />
+            <property name="DocumentedAttributes" value="" />
+            <property name="GetExternalSummaries" value="True" />
+        </documenter>
+        <documenter name="XML">
+            <property name="OutputFile" value=".\doc\doc.xml" />
+            <property name="ShowMissingSummaries" value="False" />
+            <property name="ShowMissingRemarks" value="False" />
+            <property name="ShowMissingParams" value="False" />
+            <property name="ShowMissingReturns" value="False" />
+            <property name="ShowMissingValues" value="False" />
+            <property name="DocumentInternals" value="False" />
+            <property name="DocumentProtected" value="True" />
+            <property name="DocumentPrivates" value="False" />
+            <property name="DocumentEmptyNamespaces" value="False" />
+            <property name="IncludeAssemblyVersion" value="False" />
+            <property name="CopyrightText" value="" />
+            <property name="CopyrightHref" value="" />
+            <property name="SkipNamespacesWithoutSummaries" value="False" />
+            <property name="AutoPropertyBackerSummaries" value="False" />
+            <property name="AutoDocumentConstructors" value="True" />
+            <property name="DocumentAttributes" value="False" />
+            <property name="DocumentedAttributes" value="" />
+            <property name="GetExternalSummaries" value="True" />
+        </documenter>
+    </documenters>
+</project>
