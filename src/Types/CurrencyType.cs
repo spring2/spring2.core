@@ -48,5 +48,25 @@ namespace Spring2.Core.Types {
 	public override String ToString(String format) {
 	    return IsValid ? value.ToString(format) : base.ToString();
 	}
+
+	public new CurrencyType Round(Int32 decimals) {
+	    return IsValid ? new CurrencyType(Decimal.Round(value, decimals)) : this;
+	}
+
+	public static CurrencyType operator + (CurrencyType c1, CurrencyType c2) {
+	    return new CurrencyType(c1.ToDecimal() + c2.ToDecimal());
+	}
+
+	public static CurrencyType operator * (CurrencyType c1, CurrencyType c2) {
+	    return new CurrencyType(c1.ToDecimal() * c2.ToDecimal());
+	}
+
+	public static CurrencyType operator * (CurrencyType c, DecimalType d) {
+	    return new CurrencyType(c.ToDecimal() * d.ToDecimal());
+	}
+
+	public static CurrencyType operator - (CurrencyType c1, CurrencyType c2) {
+	    return new CurrencyType(c1.ToDecimal() - c2.ToDecimal());
+	}
     }
 }
