@@ -185,6 +185,23 @@ namespace Spring2.Core.Test
 	    Assert("Top level change in multi change not found\n" + list.ToString(), foundTop);
 	    Assert("Contained change in multi change not found\n" + list.ToString(), foundContained);
 	    Assert("Array change in multi change not found\n" + list.ToString(), foundArray);
+
+	    data = GetTestData();
+	    data2 = GetTestData();
+	    data.Prop1 = StringType.DEFAULT;
+	    data2.Prop1 = StringType.UNSET;
+	    list = data.Compare(data2);
+	    Assert("Default Matched Unset on COMPARE_ALL\n" + list.ToString(), 
+		   list.Count != 0);
+
+	    list = data.Compare(data2, DataObjectCompareOptionEnum.DEFAULT_EQUALS_UNSET);
+	    Assert("Default didn't match Unset on DEFAULT_EQUALS_UNSET\n" + list.ToString(),
+		   list.Count == 0);
+
+	    data2.Prop1 = PROP1_BEFORE_CHANGE;
+	    list = data.Compare(data2, DataObjectCompareOptionEnum.IGNORE_DEFAULT);
+	    Assert("Default didn't match value on IgnoreDefault\n" + list.ToString(),
+		   list.Count == 0);
 	}
 
 	/// <summary>
