@@ -56,7 +56,7 @@ changelog:
 	@cp ../ChangeLog.txt ${BUILDDIR}
 
 package: clean solution regress changelog
-	jar -cMf ${RELEASEDIR}/Spring2.Core.$(shell ./getversion.sh).zip ${BUILDDIR}/*
+	jar -cMvf ${RELEASEDIR}/Spring2.Core.$(shell getversion.sh).zip -C ${BUILDDIR} .
 
 release: package
 	cvs tag RELEASE_$(subst .,_,$(shell ./getversion.sh))
