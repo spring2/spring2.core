@@ -459,13 +459,58 @@ namespace Spring2.Core.DAO {
 	#region OrNotIn
 	#endregion
 
+	#region AndLike
+	public void AndLike(String field, String value) 
+	{
+	    if (!sql.Equals(String.Empty)) 
+	    {
+		sql += " AND ";
+	    }
+	    sql += field + " like '" + value.Replace("'", "''") + "'";
+	}
+	#endregion
+
+	#region OrLike
+	public void OrLike(String field, String value) 
+	{
+	    if (!sql.Equals(String.Empty)) 
+	    {
+		sql += " OR ";
+	    }
+	    sql += field + " like '" + value.Replace("'", "''") + "'";
+	}
+	#endregion
+
+	#region AndNotLike
+	public void AndNotLike(String field, String value) 
+	{
+	    if (!sql.Equals(String.Empty)) 
+	    {
+		sql += " AND ";
+	    }
+	    sql += field + " not like '" + value.Replace("'", "''") + "'";
+	}
+	#endregion
+
+	#region OrNotLike
+	public void OrNotLike(String field, String value) 
+	{
+	    if (!sql.Equals(String.Empty)) 
+	    {
+		sql += " OR ";
+	    }
+	    sql += field + " not like '" + value.Replace("'", "''") + "'";
+	}
+	#endregion
+
 	/// <summary>
 	/// Format the clause for inclusion in sql statement    
 	/// </summary>
 	/// <remarks>
 	/// WHERE &lt;sql&gt;
 	/// </remarks>
-	public String FormatSql() {
+	public String FormatSql() 
+	{
 	    if (!sql.Equals(String.Empty)) {
 		return " WHERE " + sql;
 	    } else {

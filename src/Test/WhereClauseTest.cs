@@ -58,6 +58,9 @@ namespace Spring2.Core.Test {
 	    filter = new WhereClause("columnA", 1);
 	    filter.AndEquals("columnB", 2);
 	    Assertion.AssertEquals(" WHERE columnA=1 AND columnB=2", filter.FormatSql());
+
+	    filter = new WhereClause("columnA", "foo'bar");
+	    Assertion.AssertEquals(" WHERE columnA='foo''bar'", filter.FormatSql());
 	}
 
 	[Test]
@@ -67,6 +70,10 @@ namespace Spring2.Core.Test {
 	    filter = new WhereClause("columnA", 1);
 	    filter.And("columnB", 2);
 	    Assertion.AssertEquals(" WHERE columnA=1 AND columnB=2", filter.FormatSql());
+
+	    filter = new WhereClause("columnA", "foo'bar");
+	    filter.And("columnB", "fee'fie");
+	    Assertion.AssertEquals(" WHERE columnA='foo''bar' AND columnB='fee''fie'", filter.FormatSql());
 	}
 
 	[Test]
@@ -76,6 +83,52 @@ namespace Spring2.Core.Test {
 	    filter = new WhereClause("columnA", 1);
 	    filter.AndEquals("columnB", 2);
 	    Assertion.AssertEquals(" WHERE columnA=1 AND columnB=2", filter.FormatSql());
+
+	    filter = new WhereClause("columnA", "foo'bar");
+	    filter.AndEquals("columnB", "fee'fie");
+	    Assertion.AssertEquals(" WHERE columnA='foo''bar' AND columnB='fee''fie'", filter.FormatSql());
+	}
+
+	[Test]
+	public void AndLike() 
+	{
+	    WhereClause filter = new WhereClause();
+
+	    filter = new WhereClause("columnA", "a'%");
+	    filter.AndLike("columnB", "b'%");
+	    Assertion.AssertEquals(" WHERE columnA='a''%' AND columnB like 'b''%'", filter.FormatSql());
+	}
+
+	[Test]
+	public void OrLike() 
+	{
+	    WhereClause filter = new WhereClause();
+
+	    filter = new WhereClause("columnA", "a'%");
+	    filter.OrLike("columnB", "b'%");
+	    Assertion.AssertEquals(" WHERE columnA='a''%' OR columnB like 'b''%'", filter.FormatSql());
+	}
+
+
+	[Test]
+	public void AndNotLike() 
+	{
+	    WhereClause filter = new WhereClause();
+
+	    filter = new WhereClause("columnA", "a'%");
+	    filter.AndNotLike("columnB", "b'%");
+	    Assertion.AssertEquals(" WHERE columnA='a''%' AND columnB not like 'b''%'", filter.FormatSql());
+	}
+
+
+	[Test]
+	public void OrNotLike() 
+	{
+	    WhereClause filter = new WhereClause();
+
+	    filter = new WhereClause("columnA", "a'%");
+	    filter.OrNotLike("columnB", "b'%");
+	    Assertion.AssertEquals(" WHERE columnA='a''%' OR columnB not like 'b''%'", filter.FormatSql());
 	}
 
 	[Test]
@@ -128,9 +181,9 @@ namespace Spring2.Core.Test {
 	    filter.AndNotBetween("columnA", 1, 2);
 	    Assertion.AssertEquals(" WHERE foo='bar' AND columnA NOT between 1 and 2", filter.FormatSql());
 
-	    filter = new WhereClause("foo", "bar");
-	    filter.AndNotBetween("columnA", "1", "2");
-	    Assertion.AssertEquals(" WHERE foo='bar' AND columnA NOT between '1' and '2'", filter.FormatSql());
+	    filter = new WhereClause("foo", "foo'bar");
+	    filter.AndNotBetween("columnA", "fee'fie", "fo'fum");
+	    Assertion.AssertEquals(" WHERE foo='foo''bar' AND columnA NOT between 'fee''fie' and 'fo''fum'", filter.FormatSql());
 
 	    filter = new WhereClause("foo", "bar");
 	    filter.AndNotBetween("columnA", new DateTime(1969, 12, 18), new DateTime(2000, 2, 8));
@@ -158,8 +211,8 @@ namespace Spring2.Core.Test {
 	    Assertion.AssertEquals(" WHERE foo='bar' OR columnA between 1 and 2", filter.FormatSql());
 
 	    filter = new WhereClause("foo", "bar");
-	    filter.OrBetween("columnA", "1", "2");
-	    Assertion.AssertEquals(" WHERE foo='bar' OR columnA between '1' and '2'", filter.FormatSql());
+	    filter.OrBetween("columnA", "fee'fie", "fo'fum");
+	    Assertion.AssertEquals(" WHERE foo='bar' OR columnA between 'fee''fie' and 'fo''fum'", filter.FormatSql());
 
 	    filter = new WhereClause("foo", "bar");
 	    filter.OrBetween("columnA", new DateTime(1969, 12, 18), new DateTime(2000, 2, 8));
@@ -187,8 +240,8 @@ namespace Spring2.Core.Test {
 	    Assertion.AssertEquals(" WHERE foo='bar' OR columnA NOT between 1 and 2", filter.FormatSql());
 
 	    filter = new WhereClause("foo", "bar");
-	    filter.OrNotBetween("columnA", "1", "2");
-	    Assertion.AssertEquals(" WHERE foo='bar' OR columnA NOT between '1' and '2'", filter.FormatSql());
+	    filter.OrNotBetween("columnA", "fee'fie", "fo'fum");
+	    Assertion.AssertEquals(" WHERE foo='bar' OR columnA NOT between 'fee''fie' and 'fo''fum'", filter.FormatSql());
 
 	    filter = new WhereClause("foo", "bar");
 	    filter.OrNotBetween("columnA", new DateTime(1969, 12, 18), new DateTime(2000, 2, 8));
