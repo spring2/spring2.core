@@ -2,6 +2,8 @@ using System;
 using System.IO;
 using System.Xml;
 
+using Spring2.Core.IO;
+
 namespace Spring2.Core.Xml {
     /// <summary>
     /// XmlTextReader that supports syntaxt for XInclude.
@@ -19,6 +21,10 @@ namespace Spring2.Core.Xml {
 	XIncludeReader m_NestedReader;
   
 	public XIncludeReader(String sURI) : base(sURI) {
+	    m_NestedReader=null;
+	}
+
+	public XIncludeReader(Stream stream) : base(stream) {
 	    m_NestedReader=null;
 	}
 
@@ -47,7 +53,9 @@ namespace Spring2.Core.Xml {
 		strHref = base.GetAttribute("href", "http://www.w3.org/1999/XML/xinclude");
 		// if found, create a new nested reader and move to the first node
 		if (strHref != null) {
-		    m_NestedReader = new XIncludeReader(strHref);
+		    // TODO: use ResourceLocator to get stream and use that constructor
+		    ResourceLocator rl = new ResourceLocator(strHref);
+		    m_NestedReader = new XIncludeReader(rl.OpenRead());
 		    m_NestedReader.Read();
 		    // move past XmlDeclaration if present
 		    if (m_NestedReader.NodeType == XmlNodeType.XmlDeclaration)
@@ -235,9 +243,17 @@ namespace Spring2.Core.Xml {
 	}
 
 	public static XmlTextReader GetXmlTextReader(String filename) {
-	    MemoryStream ms = new MemoryStream();
-
 	    XIncludeReader r = new XIncludeReader(filename);
+	    return GetXmlTextReader(r);    
+	}
+
+	public static XmlTextReader GetXmlTextReader(Stream stream) {
+	    XIncludeReader r = new XIncludeReader(stream);
+	    return GetXmlTextReader(r);    
+	}
+
+	private static XmlTextReader GetXmlTextReader(XIncludeReader r) {
+	    MemoryStream ms = new MemoryStream();
 	    r.WhitespaceHandling = WhitespaceHandling.None;
 	    XmlTextWriter tw = new XmlTextWriter(ms, System.Text.Encoding.Default);
 	    tw.Formatting = Formatting.Indented;
