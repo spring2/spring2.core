@@ -78,10 +78,14 @@ namespace Spring2.Core.Types {
 	public override Boolean Equals(Object o) {
 	    if (this == o) {
 		return true;
-	    } else if (!(o is IdType)) {
+	    } else if (!(o is DateType)) {
 		return false;
 	    } else {
-		return value.Equals(((DateType)o).value);
+		// it appears that loading a DateTime for Sql Server will not get you the last 4 significant digits
+		// this is in an attempt to say that those last 4 digits do not matter
+		// the last 4 digits represent the portion of a 1000th of a second (ie. 5h 3m 4s 456ms xxxx)
+		long difference = value.Ticks - ((DateType)o).value.Ticks;
+		return (difference < 10000 && difference > -10000);
 	    }
 	}
 
