@@ -12,15 +12,15 @@ namespace Spring2.Core.Test {
     /// </summary>
     public class DataObjectTest : NUnit.Framework.TestCase {
 
-	private static readonly StringType PROP1_BEFORE_CHANGE = new StringType("before change");
-	private static readonly StringType PROP1_AFTER_CHANGE = new StringType("after change");
+	private static readonly StringType PROP1_BEFORE_CHANGE = StringType.NewInstance("before change");
+	private static readonly StringType PROP1_AFTER_CHANGE = StringType.NewInstance("after change");
 	private static readonly IdType ID_VALUE = new IdType(1);
-	private static readonly StringType CONTAINED_PROP1_BEFORE_CHANGE = new StringType("contained before change");
-	private static readonly StringType CONTAINED_PROP1_AFTER_CHANGE =  new StringType("contained aftger change");
-	private static readonly StringType ARRAY_1_VALUE = new StringType("Array #1");
-	private static readonly StringType ARRAY_2_VALUE = new StringType("Array #2");
-	private static readonly StringType ARRAY_3_VALUE = new StringType("Array #3");
-	private static readonly StringType ARRAY_CHANGE_ATTEMPT = new StringType("Shouldn't See");
+	private static readonly StringType CONTAINED_PROP1_BEFORE_CHANGE = StringType.NewInstance("contained before change");
+	private static readonly StringType CONTAINED_PROP1_AFTER_CHANGE =  StringType.NewInstance("contained aftger change");
+	private static readonly StringType ARRAY_1_VALUE = StringType.NewInstance("Array #1");
+	private static readonly StringType ARRAY_2_VALUE = StringType.NewInstance("Array #2");
+	private static readonly StringType ARRAY_3_VALUE = StringType.NewInstance("Array #3");
+	private static readonly StringType ARRAY_CHANGE_ATTEMPT = StringType.NewInstance("Shouldn't See");
 
 	private static readonly string UPDATE = "Update";
 	private static readonly string EQUALS = "Equals";

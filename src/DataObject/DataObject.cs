@@ -130,7 +130,7 @@ namespace Spring2.Core.DataObject {
 	    if (obj == null) 
 	    {
 		returnValue.Add(new DataObjectCompareDetail(prefix, 
-		    new StringType("Data Object"), new StringType("Null Data Object")));
+		    StringType.NewInstance("Data Object"), StringType.NewInstance("Null Data Object")));
 		return returnValue;
 	    }
 
@@ -142,8 +142,8 @@ namespace Spring2.Core.DataObject {
 	    if (!GetType().Equals(obj.GetType()))
 	    {
 		returnValue.Add(new DataObjectCompareDetail(prefix, 
-			new StringType("different types"), 
-			new StringType("different types")));
+			StringType.NewInstance("different types"), 
+			StringType.NewInstance("different types")));
 		return returnValue;
 	    }
 
@@ -197,8 +197,8 @@ namespace Spring2.Core.DataObject {
 				{
 				    returnValue.Add(new DataObjectCompareDetail(
 					collectionPrefix,
-					new StringType("Not DataType"),
-					new StringType("Not DataType")));
+					StringType.NewInstance("Not DataType"),
+					StringType.NewInstance("Not DataType")));
 				}
 			    }
 			    whichOccurrence++;
@@ -234,7 +234,7 @@ namespace Spring2.Core.DataObject {
 			    }
 			    else
 			    {
-				v1 = new StringType("Not DataType");
+				v1 = StringType.NewInstance("Not DataType");
 			    }
 			    if (value2 is DataType)
 			    {
@@ -242,7 +242,7 @@ namespace Spring2.Core.DataObject {
 			    }
 			    else
 			    {
-				v2 = new StringType("Not DataType");
+				v2 = StringType.NewInstance("Not DataType");
 			    }
 			    returnValue.Add(new DataObjectCompareDetail(valuePrefix, v1, v2));
 			}
