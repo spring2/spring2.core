@@ -16,9 +16,9 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
-	private Decimal value;
+	protected Decimal value;
 
-	private DecimalType() {}
+	protected DecimalType() {}
 
 	public DecimalType(Decimal value) {
 	    this.value = value;
@@ -50,7 +50,7 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
-	public String ToString(String format) {
+	public virtual String ToString(String format) {
 	    return value.ToString(format);
 	}
 
