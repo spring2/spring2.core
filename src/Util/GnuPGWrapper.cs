@@ -1,6 +1,6 @@
 //**************************************************************
 // Copyright (c) Emmanuel KARTMANN 2002 (emmanuel@kartmann.org)
-// $Revision: 1.1 $ $Date: 2004-08-16 22:19:56 $
+// $Revision: 1.2 $ $Date: 2004-08-24 01:05:20 $
 //**************************************************************
 
 using System;
@@ -253,13 +253,13 @@ namespace Spring2.Core.Util {
 	    }
 	}
 
-	    /// <summary>
-	    /// Generate a string of GnuPG command line arguments, based on the properties
-	    /// set in this object (e.g. if the <see cref="armor">armor</see> property is true, 
-	    /// this method generates the "--armor" argument).
-	    /// </summary>
-	    /// <returns>GnuPG command line arguments</returns>
-	    protected string BuildOptions() {
+	/// <summary>
+	/// Generate a string of GnuPG command line arguments, based on the properties
+	/// set in this object (e.g. if the <see cref="armor">armor</see> property is true, 
+	/// this method generates the "--armor" argument).
+	/// </summary>
+	/// <returns>GnuPG command line arguments</returns>
+	protected string BuildOptions() {
 	    StringBuilder optionsBuilder = new StringBuilder("", 255);
 	    bool recipientNeeded = false;
 	    bool passphraseNeeded = false;
@@ -382,6 +382,18 @@ namespace Spring2.Core.Util {
 	    }
 
 	    return(optionsBuilder.ToString());
+	}
+
+	/// <summary>
+	/// Decrypts or encrypts the file specified by the inputfile property.
+	/// </summary>
+	/// <param name="outputText">Decrypted or encrypted text.</param>
+	public void ExecuteCommand(out string outputText) {
+	    StreamReader i = new StreamReader(this._inputfile);
+	    string inputText = i.ReadToEnd();
+	    i.Close();
+	    this._inputfile = null;
+	    ExecuteCommand(inputText, out outputText);
 	}
 
 	/// <summary>
@@ -625,7 +637,5 @@ namespace Spring2.Core.Util {
 		}
 	    }
 	}
-
     }
-
 }

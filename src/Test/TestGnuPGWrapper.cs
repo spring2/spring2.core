@@ -24,33 +24,36 @@ namespace Spring2.Core.Test.Test {
 
 	    CleanFiles();
 
-	    // Encrypt file
-	    GnuPGWrapper gpg = new GnuPGWrapper();
-	    gpg.command = Commands.Encrypt;
+	    try {
+		// Encrypt file
+		GnuPGWrapper gpg = new GnuPGWrapper();
+		gpg.command = Commands.Encrypt;
 
-	    gpg.homedirectory = gpgDirectory.FullName;
-	    gpg.recipient = "\"Spring2 Core Test\"";
-	    gpg.inputfile = testDirectory.FullName + "\\GnuPGTest.txt";
-	    gpg.outputfile = testDirectory.FullName + "\\GnuPGTest.pgp";
-	    gpg.keyringfile = gpgDirectory.FullName + "\\pubring.gpg";
+		gpg.homedirectory = gpgDirectory.FullName;
+		gpg.recipient = "\"Spring2 Core Test\"";
+		gpg.inputfile = testDirectory.FullName + "\\GnuPGTest.txt";
+		gpg.outputfile = testDirectory.FullName + "\\GnuPGTest.pgp";
+		gpg.keyringfile = gpgDirectory.FullName + "\\pubring.gpg";
 
-	    gpg.ExecuteCommand();
+		gpg.ExecuteCommand();
 
-	    // Decrypt file
-	    gpg = new GnuPGWrapper();
-	    gpg.command = Commands.Decrypt;
+		// Decrypt file
+		gpg = new GnuPGWrapper();
+		gpg.command = Commands.Decrypt;
 
-	    gpg.homedirectory = gpgDirectory.FullName;
-	    gpg.passphrase = "Used to unit test GnuPG";
-	    gpg.inputfile = testDirectory.FullName + "\\GnuPGTest.pgp";
-	    gpg.outputfile = testDirectory.FullName + "\\NewGnuPGTest.txt";
-	    gpg.keyringfile = gpgDirectory.FullName + "\\pubring.gpg";
+		gpg.homedirectory = gpgDirectory.FullName;
+		gpg.passphrase = "Used to unit test GnuPG";
+		gpg.inputfile = testDirectory.FullName + "\\GnuPGTest.pgp";
+		gpg.outputfile = testDirectory.FullName + "\\NewGnuPGTest.txt";
+		gpg.keyringfile = gpgDirectory.FullName + "\\pubring.gpg";
 
-	    gpg.ExecuteCommand();
+		gpg.ExecuteCommand();
 
-	    TestUtilities.CompareFiles(testDirectory.FullName + "\\GnuPGTest.txt", testDirectory.FullName + "\\NewGnuPGTest.txt");
-
-	    CleanFiles();
+		TestUtilities.CompareFiles(testDirectory.FullName + "\\GnuPGTest.txt", testDirectory.FullName + "\\NewGnuPGTest.txt");
+	    }
+	    finally {
+		CleanFiles();
+	    }
 	}
 
 	/// <summary>
@@ -81,6 +84,47 @@ namespace Spring2.Core.Test.Test {
 	    gpg.ExecuteCommand(encryptedString, out decryptedString);
 
 	    Assertion.Assert("Encryption or decryption messed something up", TEST_STRING.Equals(decryptedString));
+	}
+
+	/// <summary>
+	/// Test of file decrypting to string with wrapper.
+	/// </summary>
+	[Test]
+	public void FileToStringTest() {
+	    // Encrypt to file
+	    try {
+		// Encrypt to String
+		GnuPGWrapper gpg = new GnuPGWrapper();
+		gpg.command = Commands.Encrypt;
+
+		gpg.homedirectory = gpgDirectory.FullName;
+		gpg.recipient = "\"Spring2 Core Test\"";
+		gpg.inputfile = testDirectory.FullName + "\\GnuPGTest.txt";
+		gpg.keyringfile = gpgDirectory.FullName + "\\pubring.gpg";
+
+		string encryptString = "";
+		gpg.ExecuteCommand(out encryptString);
+
+		// Decrypt the strings.
+		gpg = new GnuPGWrapper();
+		gpg.command = Commands.Decrypt;
+
+		gpg.homedirectory = gpgDirectory.FullName;
+		gpg.passphrase = "Used to unit test GnuPG";
+		gpg.keyringfile = gpgDirectory.FullName + "\\pubring.gpg";
+
+		string decryptString = "";
+		gpg.ExecuteCommand(encryptString, out decryptString);
+
+		StreamReader r = new StreamReader(testDirectory.FullName + "\\GnuPGTest.txt");
+		string origString = r.ReadToEnd();
+		r.Close();
+
+		Assertion.Assert("Encryption messed something up", decryptString.Equals(origString));
+	    }
+	    finally {
+		CleanFiles();
+	    }
 	}
 
 	/// <summary>
