@@ -234,12 +234,22 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Types\CurrencyTypeList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Types\DataType.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Types\DateType.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Types\DateTypeList.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -264,12 +274,27 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Types\IdTypeList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Types\IntegerType.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Types\IntegerTypeList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Types\NumberType.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Types\PhoneNumberType.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -285,6 +310,11 @@
                 />
                 <File
                     RelPath = "Types\StringTypeConverter.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Types\StringTypeList.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

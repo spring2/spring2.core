@@ -12,8 +12,7 @@ namespace Spring2.Core.Types {
 	protected const String UNSET = "UNSET";
 
 	protected abstract Object Value { get; }
-
-	public Object DBValue { 
+	public virtual Object DBValue { 
 	    get {
 		if (IsValid) {
 		    return Value;

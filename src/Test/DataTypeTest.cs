@@ -95,7 +95,42 @@ namespace Spring2.Core.Test {
 	    Assertion.AssertEquals(date1, date2);
 	    date2 = DateType.Parse("11-01-01");
 	    Assertion.AssertEquals(date1, date2);
+
+	    //PhoneNumber tests
+	    //test the constructor
+	    PhoneNumberType phone1 = new PhoneNumberType("801", "825", "6264", String.Empty);
+	    Assertion.AssertEquals("(801) 825-6264", phone1.ToString());
+	    //test the parse method
+	    PhoneNumberType phone2 = PhoneNumberType.Parse("8018256264");
+	    Assertion.AssertEquals(phone1.ToString(), phone2.ToString());
+	    phone2 = PhoneNumberType.Parse("(801)8256264");
+	    Assertion.AssertEquals(phone1.ToString(), phone2.ToString());
+	    phone2 = PhoneNumberType.Parse("(801)825-6264");
+	    Assertion.AssertEquals(phone1.ToString(), phone2.ToString());
+	    phone2 = PhoneNumberType.Parse("801.825.6264");
+	    Assertion.AssertEquals(phone1.ToString(), phone2.ToString());
+	    phone2 = PhoneNumberType.Parse("801 825 6264");
+	    Assertion.AssertEquals(phone1.ToString(), phone2.ToString());
+	    phone2 = PhoneNumberType.Parse("801.825.6264");
+	    Assertion.AssertEquals(phone1.ToString(), phone2.ToString());
+	    //test the international capabilities
+	    phone1 = new PhoneNumberType("34","8256264", String.Empty);
+	    phone2 = PhoneNumberType.Parse("+34 8256-264");
+	    Assertion.AssertEquals(phone1.ToString(), phone2.ToString());
+	    //test the extension capabilities
+	    phone1 = new PhoneNumberType("801","825","6264","107");
+	    phone2 = PhoneNumberType.Parse("1-801-825-6264 extension 107");
+	    Assertion.AssertEquals(phone1.ToString(), phone2.ToString());
+	    Assertion.AssertEquals("(801) 825-6264 x107", phone2.ToString());
+	    //test the dbvalue
+	    Assertion.AssertEquals("8018256264 x107", phone2.DBValue);
+	    phone2 = PhoneNumberType.Parse("+34 8256-264 ext. 107");
+	    Assertion.AssertEquals("+34 8256264 x107", phone2.DBValue);
+	    //test local number functionality
+	    phone2 = PhoneNumberType.Parse("825-6264");
+	    Assertion.AssertEquals("8256264", phone2.DBValue);
 	}
+
 
 	[Test]
 	public void TestEquals() {
