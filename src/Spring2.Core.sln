@@ -11,6 +11,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Test", "Spring
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Types", "Spring2.Core.Types.csproj", "{FB2D9DAA-2340-468C-8018-138748DA2EAE}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.WithTypes", "Spring2.Core.WithTypes.csproj", "{C44F21C0-6817-4C95-BBFF-58661814D2B9}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.WithTypesTest", "Spring2.Core.WithTypesTest.csproj", "{51EA5868-FD70-4349-A7F3-0520E2891A85}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -29,6 +41,18 @@ Global
 		{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}.Debug.Build.0 = Debug|.NET
 		{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}.Release.ActiveCfg = Release|.NET
 		{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}.Release.Build.0 = Release|.NET
+		{FB2D9DAA-2340-468C-8018-138748DA2EAE}.Debug.ActiveCfg = Debug|.NET
+		{FB2D9DAA-2340-468C-8018-138748DA2EAE}.Debug.Build.0 = Debug|.NET
+		{FB2D9DAA-2340-468C-8018-138748DA2EAE}.Release.ActiveCfg = Release|.NET
+		{FB2D9DAA-2340-468C-8018-138748DA2EAE}.Release.Build.0 = Release|.NET
+		{C44F21C0-6817-4C95-BBFF-58661814D2B9}.Debug.ActiveCfg = Debug|.NET
+		{C44F21C0-6817-4C95-BBFF-58661814D2B9}.Debug.Build.0 = Debug|.NET
+		{C44F21C0-6817-4C95-BBFF-58661814D2B9}.Release.ActiveCfg = Release|.NET
+		{C44F21C0-6817-4C95-BBFF-58661814D2B9}.Release.Build.0 = Release|.NET
+		{51EA5868-FD70-4349-A7F3-0520E2891A85}.Debug.ActiveCfg = Debug|.NET
+		{51EA5868-FD70-4349-A7F3-0520E2891A85}.Debug.Build.0 = Debug|.NET
+		{51EA5868-FD70-4349-A7F3-0520E2891A85}.Release.ActiveCfg = Release|.NET
+		{51EA5868-FD70-4349-A7F3-0520E2891A85}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
