@@ -2,7 +2,7 @@ using System;
 
 namespace Spring2.Core.Types {
 
-    public class IdType : DataType	{
+    public class IdType : DataType {
 
 	public static readonly new IdType DEFAULT = new IdType();
 	public static readonly new IdType UNSET = new IdType();
