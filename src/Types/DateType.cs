@@ -170,7 +170,11 @@ namespace Spring2.Core.Types {
 	/// </summary>
 	public DateType Date {
 	    get {
-		return new DateType(new DateTime(ToDateTime().Year, ToDateTime().Month, ToDateTime().Day));
+		if (this.IsValid) {
+		    return new DateType(new DateTime(ToDateTime().Year, ToDateTime().Month, ToDateTime().Day));
+		} else {
+		    return this;
+		}
 	    }
 	}
 
@@ -183,6 +187,10 @@ namespace Spring2.Core.Types {
 
 	public DateType AddDays(Double days) {
 	    return new DateType(ToDateTime().AddDays(days));
+	}
+
+	public Boolean SameDayAs(DateType that) {
+	    return this.Date.Equals(that.Date);
 	}
     }
 }
