@@ -7,6 +7,15 @@ namespace Spring2.Core.Types {
 	public static readonly new DateType DEFAULT = new DateType();
 	public static readonly new DateType UNSET = new DateType();
 
+	public static DateType NewInstance(Object value) {
+
+	    if (value is DateTime) {
+		return new DateType((DateTime)value);
+	    } else {
+		return UNSET;
+	    }
+	}
+
 	private DateTime value;
 
 	public DateType() {
@@ -17,7 +26,7 @@ namespace Spring2.Core.Types {
 	    this.value = value;
 	}
 
-	protected override Object Value {
+	protected override Object DBValue {
 	    get {
 		return value;
 	    }

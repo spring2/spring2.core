@@ -7,6 +7,15 @@ namespace Spring2.Core.Types {
 	public static readonly new IdType DEFAULT = new IdType();
 	public static readonly new IdType UNSET = new IdType();
 
+	public static IdType NewInstance(Object value) {
+
+	    if (value is Int32) {
+		return new IdType((Int32)value);
+	    } else {
+		return UNSET;
+	    }
+	}
+
 	private Int32 value;
 
 	private IdType() {}
@@ -15,7 +24,7 @@ namespace Spring2.Core.Types {
 	    this.value = value;
 	}
 
-	protected override Object Value {
+	protected override Object DBValue {
 	    get {
 		return value;
 	    }

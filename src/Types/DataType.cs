@@ -11,7 +11,17 @@ namespace Spring2.Core.Types {
 	protected const String DEFAULT = "DEFAULT";
 	protected const String UNSET = "UNSET";
 
-	protected abstract Object Value { get; }
+	protected abstract Object DBValue { get; }
+
+	public Object Value { 
+	    get {
+		if (IsValid) {
+		    return DBValue;
+		} else {
+		    return DBNull.Value;
+		}
+	    }
+	}
 
 	public abstract Boolean IsDefault { get; }
 	public abstract Boolean IsUnset { get; }

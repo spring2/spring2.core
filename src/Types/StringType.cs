@@ -11,11 +11,12 @@ namespace Spring2.Core.Types {
 	public static readonly new StringType DEFAULT = new StringType();
 	public static readonly new StringType UNSET = new StringType();
 
-	public static StringType NewInstance(String value) {
-	    if (value == null) {
-		return UNSET;
+	public static StringType NewInstance(Object value) {
+
+	    if (value is String) {
+		return new StringType((String)value);
 	    } else {
-		return new StringType(value);
+		return UNSET;
 	    }
 	}
 
@@ -27,7 +28,7 @@ namespace Spring2.Core.Types {
 	    this.value = value;
 	}
 
-	protected override Object Value {
+	protected override Object DBValue {
 	    get {
 		return value;
 	    }
