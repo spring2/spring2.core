@@ -62,7 +62,15 @@ namespace Spring2.Core.DAO {
 	    }
 	}
 
-	protected abstract IDbCommand GetDbCommand(String key);
+	protected abstract IDbCommand CreateCommand();
+
+	protected IDbCommand GetDbCommand(String key) {
+	    IDbConnection conn = GetDbConnection(key);
+	    IDbCommand cmd = CreateCommand();
+	    cmd.Connection = conn;	    
+	    return cmd;
+	}
+
 
 	protected abstract IDbCommand GetDbCommand(String key, IDbTransaction transaction);
 
@@ -89,15 +97,39 @@ namespace Spring2.Core.DAO {
 	    return cmd;
 	}
 
-	protected abstract IDbDataParameter CreateDataParameter(String parameterName, ParameterDirection direction, Object value);
+	protected abstract IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, ParameterDirection direction, Object value);
 
 	protected abstract IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, ParameterDirection direction);
 
-	protected abstract IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, Int32 size, ParameterDirection direction, Boolean isNullable, Byte precision, Byte scale, String sourceColumn, DataRowVersion sourceVersion, Object value);
+//	protected abstract IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, Int32 size, ParameterDirection direction, Boolean isNullable, Byte precision, Byte scale, String sourceColumn, DataRowVersion sourceVersion, Object value);
 
-	protected abstract IDbConnection GetDbConnection(String connectionString);
+	protected IDbConnection GetDbConnection(String key) {
+	    String connectionString = GetConnectionString(key);
+	    IDbConnection conn = CreateConnection(connectionString);
+	    conn.Open();
+	    return conn;
+	}
 
-	protected static String GetConnectionString(String key) {
+	protected abstract IDbConnection CreateConnection(String connectionString);
+
+	protected IDbConnection GetDbConnection() {
+	    return GetDbConnection(ConnectionStringKey);
+	}
+
+	protected DaoTransaction GetDbTransaction(String key) {
+	    IDbConnection conn = GetDbConnection(key);
+	    return new DaoTransaction(conn.BeginTransaction());
+	}
+
+	public DaoTransaction GetDbTransaction() {
+	    return GetDbTransaction(ConnectionStringKey);
+	}
+
+	protected abstract String ConnectionStringKey {
+	    get;
+	}
+
+	private static String GetConnectionString(String key) {
 	    String connectionString;
 
 	    // Try cache first

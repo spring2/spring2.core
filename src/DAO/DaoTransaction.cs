@@ -1,30 +1,34 @@
 using System;
-using System.Data.SqlClient;
+using System.Data;
 
 namespace Spring2.Core.DAO {
 
-    /// <summary>
-    /// Wrapper of SqlTransaction to ensure that the connection associated with a transaction is closed when Commit()
-    /// or Rollback() is called.
-    /// </summary>
     public class DaoTransaction {
 
-	private SqlTransaction transaction;
+	protected IDbTransaction transaction;
 
-	/// <summary>
-	/// Initialize a new instance of DaoTransaction class with an existing SqlTransaction.
-	/// </summary>
-	/// <param name="transaction"></param>
-	public DaoTransaction(SqlTransaction transaction) {
+	public DaoTransaction(IDbTransaction transaction) {
 	    this.transaction = transaction;
 	}
 
-	/// <summary>
-	/// Commit the transaction
-	/// </summary>
-	public void Commit() {
-	    SqlConnection conn = transaction.Connection;
+	public IDbConnection Connection {
+	    get {
+		return transaction.Connection;
+	    }
+	}
 
+	public IsolationLevel IsolationLevel {
+	    get {
+		return transaction.IsolationLevel;
+	    }
+	}
+
+	public void Dispose() {
+	    transaction.Dispose();
+	}
+
+	public void Commit() {
+	    IDbConnection conn = transaction.Connection;
 	    try {
 		transaction.Commit();
 	    } finally {
@@ -32,12 +36,8 @@ namespace Spring2.Core.DAO {
 	    }
 	}
 
-	/// <summary>
-	/// Rollback the transaction
-	/// </summary>
 	public void Rollback() {
-	    SqlConnection conn = transaction.Connection;
-
+	    IDbConnection conn = transaction.Connection;
 	    try {
 		transaction.Rollback();
 	    } finally {
@@ -45,26 +45,10 @@ namespace Spring2.Core.DAO {
 	    }
 	}
 
-	/// <summary>
-	/// Rollback the transaction to a named point
-	/// </summary>
-	/// <param name="transactionName"></param>
-	public void Rollback(String transactionName) {
-	    SqlConnection conn = transaction.Connection;
-	    
-	    try {
-		transaction.Rollback(transactionName);
-	    } finally {
-		conn.Close();
+	public IDbTransaction DbTransaction {
+	    get {
+		return transaction;
 	    }
 	}
-
-	/// <summary>
-	/// Expose the wrapped internal SqlTransaction.
-	/// </summary>
-	public SqlTransaction SqlTransaction {
-	    get { return this.transaction; }
-	}
-
     }
 }

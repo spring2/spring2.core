@@ -4,12 +4,10 @@ using System.Data.SqlClient;
 
 namespace Spring2.Core.DAO {
 
-    public class SqlEntityDAO : BaseEntityDAO {
+    public abstract class SqlEntityDAO : BaseEntityDAO {
 
 	protected override IDbCommand GetDbCommand(String key, IDbTransaction transaction) {
 
-	    String connectionString = GetConnectionString(key);
-	    
 	    if (transaction == null) {
 		return GetDbCommand(key);
 	    } else {
@@ -27,18 +25,13 @@ namespace Spring2.Core.DAO {
 	    }
 	}
 
-	protected override IDbCommand GetDbCommand(String key) {
-	    String connectionString = GetConnectionString(key);	    
-	    SqlConnection conn = new SqlConnection(connectionString);
-	    conn.Open();
-	    SqlCommand cmd = new SqlCommand();
-	    cmd.Connection = conn;
-	    
-	    return cmd;
+	protected override IDbCommand CreateCommand() {
+	    return new SqlCommand();
 	}
 
-	protected override IDbDataParameter CreateDataParameter(String parameterName, ParameterDirection direction, Object value) {
+	protected override IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, ParameterDirection direction, Object value) {
 	    SqlParameter param = new SqlParameter(parameterName, value);
+	    param.DbType = dbType;
 	    param.Direction = direction;
 	    return param;
 	}
@@ -50,16 +43,14 @@ namespace Spring2.Core.DAO {
 	    return param;
 	}
 
-	protected override IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, Int32 size, ParameterDirection direction, Boolean isNullable, Byte precision, Byte scale, String sourceColumn, DataRowVersion sourceVersion, Object value) {
-	    SqlParameter param = new SqlParameter(parameterName, SqlDbType.NVarChar, size, direction, isNullable, precision, scale, sourceColumn, sourceVersion, value);
-	    param.DbType = dbType;
-	    return param;
-	}
+//	protected override IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, Int32 size, ParameterDirection direction, Boolean isNullable, Byte precision, Byte scale, String sourceColumn, DataRowVersion sourceVersion, Object value) {
+//	    SqlParameter param = new SqlParameter(parameterName, SqlDbType.NVarChar, size, direction, isNullable, precision, scale, sourceColumn, sourceVersion, value);
+//	    param.DbType = dbType;
+//	    return param;
+//	}
 
-	protected override IDbConnection GetDbConnection(String connectionString) {
-	    SqlConnection conn = new SqlConnection(connectionString);
-	    conn.Open();
-	    return conn;
+	protected override IDbConnection CreateConnection(String connectionString) {
+	    return new SqlConnection(connectionString);
 	}
     }
 }
