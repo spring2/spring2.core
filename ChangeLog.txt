@@ -1,3 +1,16 @@
+2003-05-09 Friday 18:05  cort
+
+	* src/Makefile:
+	
+	fix jarring up of release so that it does not create a zip file
+	that has ../build as the path inside the zip
+
+2003-05-09 Friday 17:51  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2003-05-09 Friday 17:49  cort
 
 	* bin/cvsadd.sh:
