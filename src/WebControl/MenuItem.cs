@@ -59,7 +59,7 @@ namespace Spring2.Core.WebControl {
 //	    get { return items.Count > 0 ? items[items.Count - 1] : EMPTY; }
 //	}
 //
-	public String SelectedItemImageUrl {
+	public new String SelectedItemImageUrl {
 	    get { return ParentMenu.SelectedItemImageUrl; }
 	}
 //
