@@ -42,6 +42,10 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
+	public virtual String ToString(String format) {
+	    return ToString();
+	}
+
 	public override Boolean Equals(Object o) {
 	    DataType that = o as DataType;
 	    if (that == null) {

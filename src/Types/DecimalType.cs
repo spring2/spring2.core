@@ -75,7 +75,7 @@ namespace Spring2.Core.Types {
 	    return IsValid ? value.ToString() : base.ToString();
 	}
 
-	public virtual String ToString(String format) {
+	public override String ToString(String format) {
 	    return IsValid ? value.ToString(format) : base.ToString();
 	}
 
@@ -91,6 +91,10 @@ namespace Spring2.Core.Types {
 	    }
 	    
 	    return Compare(that);
+	}
+
+	public DecimalType Round(Int32 decimals) {
+	    return IsValid ? new DecimalType(Decimal.Round(value, decimals)) : this;
 	}
     }
 }

@@ -61,7 +61,7 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
-	public String ToString(String format) {
+	public override String ToString(String format) {
 	    return IsValid ? value.ToString(format) : base.ToString();
 	}
 
