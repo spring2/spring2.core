@@ -1,3 +1,9 @@
+2003-05-09 Friday 13:49  cort
+
+	* ChangeLog.txt:
+	
+	initial version of change log
+
 2003-04-22 Tuesday 16:14  cort
 
 	* release/Spring2.Core-1.1.zip:
