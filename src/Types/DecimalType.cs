@@ -96,5 +96,13 @@ namespace Spring2.Core.Types {
 	public DecimalType Round(Int32 decimals) {
 	    return IsValid ? new DecimalType(Decimal.Round(value, decimals)) : this;
 	}
+
+	public static DecimalType operator + (DecimalType d1, DecimalType d2) {
+	    return new DecimalType(d1.ToDecimal() + d2.ToDecimal());
+	}
+
+	public static DecimalType operator - (DecimalType d) {
+	    return new DecimalType(- d.ToDecimal());
+	}
     }
 }
