@@ -5,6 +5,8 @@ namespace Spring2.Core.Types {
 
     public class USStateCodeEnum : EnumDataType {
 
+	private static readonly IList OPTIONS = new ArrayList();
+
 	public static readonly new USStateCodeEnum DEFAULT = new USStateCodeEnum();
 	public static readonly new USStateCodeEnum UNSET = new USStateCodeEnum();
 
@@ -88,5 +90,8 @@ namespace Spring2.Core.Types {
 	    get { return Object.ReferenceEquals(this, UNSET); }
 	}
 
+	public static IList Options {
+	    get { return OPTIONS; }
+	}
     }
 }
