@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
 
-    public struct IdType {
+    public struct IdType : IDataType {
 
 	private IntegerType myValue;
 
@@ -59,5 +59,10 @@ namespace Spring2.Types {
 	public static IdType Parse(String value) {
 	    return new IdType(IntegerType.Parse(value));
 	}
+
+	public override System.String ToString() {
+	    return myValue.ToString();
+	}
+
     }
 }

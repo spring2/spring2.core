@@ -3,23 +3,24 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
 
     [System.Serializable, System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
-    public struct DecimalType : IFormattable, IComparable, IConvertible {
+    public struct DecimalType : IFormattable, IComparable, IConvertible, IDataType {
 
 	private Decimal   myValue;
 	private TypeState myState;
 
-	public static readonly DecimalType Zero = new DecimalType(Decimal.Zero, TypeState.VALID);
+	// TODO: how should these be cased?
+	public static readonly DecimalType ZERO = new DecimalType(Decimal.Zero, TypeState.VALID);
     
-	public static readonly DecimalType One = new DecimalType(Decimal.One, TypeState.VALID);
+	public static readonly DecimalType ONE = new DecimalType(Decimal.One, TypeState.VALID);
     
-	public static readonly DecimalType MinusOne = new DecimalType(Decimal.MinusOne, TypeState.VALID);
+	public static readonly DecimalType MINUSONE = new DecimalType(Decimal.MinusOne, TypeState.VALID);
     
-	public static readonly DecimalType MaxValue = new DecimalType(Decimal.MaxValue, TypeState.VALID);
+	public static readonly DecimalType MAXVALUE = new DecimalType(Decimal.MaxValue, TypeState.VALID);
 
-	public static readonly DecimalType MinValue = new DecimalType(Decimal.MinValue, TypeState.VALID);
+	public static readonly DecimalType MINVALUE = new DecimalType(Decimal.MinValue, TypeState.VALID);
 
 	public static readonly DecimalType DEFAULT = new DecimalType(0, TypeState.DEFAULT);
 	public static readonly DecimalType UNSET   = new DecimalType(0, TypeState.UNSET);
@@ -101,9 +102,9 @@ namespace Spring2.Types {
 	    myState = TypeState.VALID;
 	}
 
-	public DecimalType(CurrencyType value) {
-	    //	    myValue = value.
-	}
+	//	public DecimalType(CurrencyType value) {
+	////	    myValue = value.
+	//	}
 
 	private DecimalType(decimal value, TypeState state) {
 	    myValue = value;
@@ -410,10 +411,10 @@ namespace Spring2.Types {
 	    return new DecimalType(value);
 	}
     
-	[CLSCompliant(false)]
-	public static implicit operator DecimalType(ulong value) {
-	    return new DecimalType(value);
-	}
+	//        [CLSCompliant(false)]
+	//        public static implicit operator DecimalType(ulong value) {
+	//            return new DecimalType(value);
+	//        }
         
     
 	public static explicit operator DecimalType(float value) {
@@ -489,7 +490,7 @@ namespace Spring2.Types {
 	}
 
 	public static DecimalType operator ++(DecimalType augend) {
-	    return Add(augend, One);
+	    return Add(augend, ONE);
 	}
 
 	public static DecimalType operator +(DecimalType augend, DecimalType addend) {
@@ -515,7 +516,7 @@ namespace Spring2.Types {
 	}
 
 	public static DecimalType operator --(DecimalType minuend) {
-	    return Subtract(minuend, One);
+	    return Subtract(minuend, ONE);
 	}
     
     
@@ -607,16 +608,20 @@ namespace Spring2.Types {
 		}
 	    }
 
-	    if (rightHand.myState == TypeState.DEFAULT) {
-		if (leftHand.myState == TypeState.DEFAULT) {
+	    if (leftHand.myState == TypeState.DEFAULT) {
+		if (rightHand.myState == TypeState.DEFAULT) {
 		    return 0;
 		}
 
-		if (leftHand.myState == TypeState.UNSET) {
-		    return 1;
+		if (rightHand.myState == TypeState.UNSET) {
+		    return -1;
 		}
 
 		return -1;
+	    }
+
+	    if (leftHand.myState == TypeState.VALID) {
+		return 1;
 	    }
 
 	    //should this throw an exception?
@@ -735,8 +740,41 @@ namespace Spring2.Types {
 	    return Compare(this, compareTo);
 	}
 
-	public int CompareTo(DecimalType value) {
-	    return Compare(this, value);
+	public int CompareTo(DecimalType that) {
+	    //	    if (!(o is DecimalType)) {
+	    //		throw new ArgumentException("Argument must be an instance of DecimalType");
+	    //	    }
+	    //
+	    //	    DecimalType that = (DecimalType)o;
+
+	    if (this.myState == TypeState.DEFAULT) {
+		if (that.myState == TypeState.DEFAULT) {
+		    return 0;
+		} else {
+		    return -1;
+		}
+	    }
+
+	    if (this.myState == TypeState.UNSET) {
+		if (that.myState == TypeState.UNSET) {
+		    return 0;
+		} else if (that.myState == TypeState.DEFAULT) {
+		    return 1;
+		} else {
+		    return -1;
+		}
+	    }
+
+	    if (that.myState != TypeState.VALID) {
+		return 1;
+	    }
+
+	    if (this.IsValid && that.IsValid) {
+		return myValue.CompareTo(that.myValue);
+	    }
+	    
+	    //return Compare(that);
+	    return Compare(this, that);        
 	}
     	
 	public override bool Equals(Object value) {

@@ -1,9 +1,9 @@
 using System;
 
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
 
-    public struct QuantityType : IComparable {
+    public struct QuantityType : IComparable, IDataType {
 	DecimalType myValue;
 
 	public static readonly QuantityType DEFAULT = new QuantityType(TypeState.DEFAULT);

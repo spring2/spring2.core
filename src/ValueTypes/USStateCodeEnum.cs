@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
 
-    public class USStateCodeEnum : EnumDataType {
+    public class USStateCodeEnum : EnumDataType, IDataType {
 
 	private static readonly IList OPTIONS = new ArrayList();
 

@@ -1,12 +1,12 @@
 using System;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
 
     /// <summary>
     /// Summary description for DataType.
     /// </summary>
     [Serializable()]
-    public abstract class DataType {
+    public abstract class DataType : IDataType {
 
 	protected const String DEFAULT = "DEFAULT";
 	protected const String UNSET = "UNSET";

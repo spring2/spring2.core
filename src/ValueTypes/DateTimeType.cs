@@ -6,15 +6,15 @@ using System.Runtime.CompilerServices;
 using CultureInfo = System.Globalization.CultureInfo;
 using Calendar = System.Globalization.Calendar;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
 
     [Serializable(), StructLayout(LayoutKind.Auto)]
-    public struct DateTimeType : IComparable, IFormattable, IConvertible {
+    public struct DateTimeType : IComparable, IFormattable, IConvertible, IDataType {
 	private DateTime  myValue;
 	private TypeState myState;
 
-	public static readonly DateTimeType MinValue = new DateTimeType(DateTime.MinValue);
-	public static readonly DateTimeType MaxValue = new DateTimeType(DateTime.MaxValue);
+	public static readonly DateTimeType MINVALUE = new DateTimeType(DateTime.MinValue);
+	public static readonly DateTimeType MAXVALUE = new DateTimeType(DateTime.MaxValue);
 
 	public static readonly DateTimeType DEFAULT = new DateTimeType(TypeState.DEFAULT);
 	public static readonly DateTimeType UNSET   = new DateTimeType(TypeState.UNSET);
@@ -768,16 +768,97 @@ namespace Spring2.Types {
 
 	public override bool Equals(Object value) {
 	    if (value is DateTimeType) {
-		if (!IsValid) {
-		    throw new InvalidStateException(myState);
-		}
+		// TODO: I don't think this is needed
+		//		if (!IsValid) {
+		//		    throw new InvalidStateException(myState);
+		//		}
 
-		return myValue.Ticks == ((DateTimeType)value).myValue.Ticks;
+		return myValue.Ticks == ((DateTimeType)value).myValue.Ticks && myState == ((DateTimeType)value).myState;
 	    }
 
 	    return false;
 	}
 
 	#endregion
+
+	// TODO: should these date based methods be here as well as on DateType?
+	public DateTimeType EndOfCurrentQuarter {
+	    get {
+		DateTime result = EndOfPreviousQuarter.ToDate().AddMonths(3);
+		result = result.AddDays(DateTime.DaysInMonth(result.Year, result.Month) - result.Day);
+		return new DateTimeType(result);
+	    }
+	}
+
+	public DateTimeType EndOfPreviousQuarter {
+	    get {
+		// Get to the correct month.
+		DateTime result = ToDate().AddMonths(-1);
+		result = result.AddMonths(-(result.Month % 3));
+
+		// Go to the end of the month.
+		result = result.AddDays(DateTime.DaysInMonth(result.Year, result.Month) - result.Day);
+
+		return new DateTimeType(result);
+	    }
+	}
+
+	public DateTimeType FirstOfMonth {
+	    get {
+		DateTime result = ToDate();
+		return new DateTimeType(new DateTime(result.Year, result.Month, 1));
+	    }
+	}
+
+	public DateTimeType FirstOfYear {
+	    get {
+		DateTime result = ToDate();
+		return new DateTimeType(new DateTime(result.Year, 1, 1));
+	    }
+	}
+
+	public DateTimeType OneYearAgo {
+	    get {
+		DateTime result = ToDate().AddMonths(-12);
+		return new DateTimeType(result);
+	    }
+	}
+
+	//	/// <summary>
+	//	/// Get the date part only
+	//	/// </summary>
+	//	public DateTimeType Date {
+	//	    get {
+	//		if (this.IsValid) {
+	//		    return new DateTimeType(new DateTime(ToDateTime().Year, ToDateTime().Month, ToDateTime().Day));
+	//		} else {
+	//		    return this;
+	//		}
+	//	    }
+	//	}
+
+	/// <summary>
+	/// Get the date part only
+	/// </summary>
+	public DateTime ToDate() {
+	    return myValue.Date;
+	}
+
+	// TODO: realizing that this is would be a change in signature, is this really needed?
+	public DateTime ToDateTime() {
+	    return myValue;
+	}
+	
+	//	public DateTimeType AddDays(Double days) {
+	//	    return new DateTimeType(ToDateTime().AddDays(days));
+	//	}
+
+	public Boolean SameDayAs(DateTimeType that) {
+	    // TODO: what should happen for unset and default in this method?
+	    return this.myState == TypeState.VALID && that.myState == TypeState.VALID && this.Date.Equals(that.Date);
+	}
+
+    
+    
     }
 }

@@ -1,10 +1,10 @@
 using System.Text;
 using System;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
 
     [Serializable]
-    public struct TimeType : IComparable {
+    public struct TimeType : IComparable, IDataType {
 	private TimeSpan  myValue;
 	private TypeState myState;
 

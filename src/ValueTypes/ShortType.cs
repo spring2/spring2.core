@@ -2,7 +2,7 @@ using System;
 
 namespace Spring2.Core.Types {
     [System.Serializable, System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
-    public struct ShortType : System.IComparable, System.IFormattable {
+    public struct ShortType : System.IComparable, System.IFormattable, IDataType {
 	private System.Int16 myValue;
 	private TypeState    myState;
 
@@ -44,6 +44,11 @@ namespace Spring2.Core.Types {
 	#endregion
 
 	#region Constructors
+	private ShortType(TypeState state) {
+	    myValue = 0;
+	    myState = state;
+	}
+
 	public ShortType(byte value) {
 	    myValue = (short) value;
 	    myState = TypeState.VALID;

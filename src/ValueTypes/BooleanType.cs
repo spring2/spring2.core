@@ -2,7 +2,7 @@ using System;
 
 namespace Spring2.Core.Types {
     [Serializable()] 
-    public struct BooleanType : IComparable {
+    public struct BooleanType : IComparable, IDataType {
 	
 	private bool      myValue;
 	private TypeState myState;
@@ -12,6 +12,9 @@ namespace Spring2.Core.Types {
 
 	public static string TrueString = Boolean.TrueString;
 	public static string FalseString = Boolean.FalseString;
+
+	public static readonly BooleanType TRUE = new BooleanType(true);
+	public static readonly BooleanType FALSE = new BooleanType(false);
 
 	public static readonly BooleanType DEFAULT = new BooleanType(false, TypeState.DEFAULT);
 	public static readonly BooleanType UNSET   = new BooleanType(false, TypeState.UNSET);
@@ -74,9 +77,9 @@ namespace Spring2.Core.Types {
 	    //	    return FalseString;
 	}
 
-	String IConvertible.ToString(IFormatProvider provider) {
-	    return myValue.ToString(provider);
-	}
+	//	String IConvertible.ToString(IFormatProvider provider) {
+	//	    return myValue.ToString(provider);
+	//	}
 
 	public static BooleanType Parse(String value) {
 	    bool boolVal = bool.Parse(value);
@@ -159,6 +162,6 @@ namespace Spring2.Core.Types {
 	    return 0;
 	}
 	#endregion
-    }
 
+    }
 }

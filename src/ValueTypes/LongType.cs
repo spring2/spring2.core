@@ -1,8 +1,8 @@
 using System;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
     [System.Serializable, System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
-    public struct LongType : System.IComparable, System.IFormattable {
+    public struct LongType : System.IComparable, System.IFormattable, IDataType {
 	private System.Int64 myValue;
 	private TypeState    myState;
 
@@ -375,11 +375,11 @@ namespace Spring2.Types {
 
 	#region bool
 	//these are way non standard
-	public static explicit operator LongType(bool castFrom) {
-	    LongType returnType = new LongType(castFrom);
-
-	    return returnType;
-	}
+	//	public static explicit operator LongType(bool castFrom) {
+	//	    LongType returnType = new LongType(castFrom);
+	//
+	//	    return returnType;
+	//	}
 
 	public static explicit operator bool(LongType castFrom) {
 	    if (!castFrom.IsValid) {

@@ -1,32 +1,31 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 
-namespace Spring2.Types {
-
-    [System.Serializable, System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
-    public struct CurrencyType : IFormattable, IComparable, IConvertible {
-
-	private Decimal   myValue;
+namespace Spring2.Core.Types {
+    [Serializable, StructLayout(LayoutKind.Sequential)]
+    public struct CurrencyType : IFormattable, IComparable, IConvertible, IDataType {
+	private Decimal myValue;
 	private TypeState myState;
 
-	public static readonly CurrencyType Zero = new CurrencyType(Decimal.Zero, TypeState.VALID);
-    
+	// TODO: how should these be cased?
+	public static readonly CurrencyType ZERO = new CurrencyType(Decimal.Zero, TypeState.VALID);
+
 	public static readonly CurrencyType One = new CurrencyType(Decimal.One, TypeState.VALID);
-    
+
 	public static readonly CurrencyType MinusOne = new CurrencyType(Decimal.MinusOne, TypeState.VALID);
-    
+
 	public static readonly CurrencyType MaxValue = new CurrencyType(Decimal.MaxValue, TypeState.VALID);
 
 	public static readonly CurrencyType MinValue = new CurrencyType(Decimal.MinValue, TypeState.VALID);
 
 	public static readonly CurrencyType DEFAULT = new CurrencyType(0, TypeState.DEFAULT);
-	public static readonly CurrencyType UNSET   = new CurrencyType(0, TypeState.UNSET);
+	public static readonly CurrencyType UNSET = new CurrencyType(0, TypeState.UNSET);
 
 	#region State management
+
 	public bool IsValid {
-	    get {return myState == TypeState.VALID;}
+	    get { return myState == TypeState.VALID; }
 	}
 
 	public void SetValid() {
@@ -34,7 +33,7 @@ namespace Spring2.Types {
 	}
 
 	public bool IsDefault {
-	    get {return myState == TypeState.DEFAULT;}
+	    get { return myState == TypeState.DEFAULT; }
 	}
 
 	public void SetDefault() {
@@ -42,7 +41,7 @@ namespace Spring2.Types {
 	}
 
 	public bool IsUnset {
-	    get {return myState == TypeState.UNSET;}
+	    get { return myState == TypeState.UNSET; }
 	}
 
 	public void SetUnset() {
@@ -50,12 +49,14 @@ namespace Spring2.Types {
 	}
 
 	public TypeState State {
-	    get {return myState;}
-	    set {myState = value;}
+	    get { return myState; }
+	    set { myState = value; }
 	}
+
 	#endregion
-       
+
 	#region Constructors
+
 	private CurrencyType(decimal value, TypeState state) {
 	    myValue = value;
 	    myState = state;
@@ -80,7 +81,7 @@ namespace Spring2.Types {
 	    myValue = new decimal(value);
 	    myState = TypeState.VALID;
 	}
-    
+
 	[CLSCompliant(false)]
 	public CurrencyType(ushort value) {
 	    myValue = new decimal(value);
@@ -104,7 +105,7 @@ namespace Spring2.Types {
 	    myValue = new decimal(value);
 	    myState = TypeState.VALID;
 	}
-    
+
 	// Constructs a Decimal from an unsigned long value.
 	//
 	[CLSCompliant(false)]
@@ -112,7 +113,7 @@ namespace Spring2.Types {
 	    myValue = new decimal(value);
 	    myState = TypeState.VALID;
 	}
-    
+
 	// Constructs a Decimal from a float value.
 	//
 	public CurrencyType(float value) {
@@ -125,8 +126,8 @@ namespace Spring2.Types {
 	public CurrencyType(double value) {
 	    myValue = new decimal(value);
 	    myState = TypeState.VALID;
-	}        
-        
+	}
+
 	public CurrencyType(Decimal value) {
 	    myValue = value;
 	    myState = TypeState.VALID;
@@ -136,7 +137,7 @@ namespace Spring2.Types {
 	    myValue = new decimal(bits);
 	    myState = TypeState.VALID;
 	}
-    
+
 	public CurrencyType(int lo, int mid, int hi, bool isNegative, byte scale) {
 	    myValue = new decimal(lo, mid, hi, isNegative, scale);
 	    myState = TypeState.VALID;
@@ -145,18 +146,19 @@ namespace Spring2.Types {
 	// Constructs a Decimal from a Currency value.
 	//
 #if notsure
-        internal CurrencyType(Currency value) 
-	{
-            Decimal temp = Currency.ToDecimal(value);
-            this.lo = temp.lo;
-            this.mid = temp.mid;
-            this.hi = temp.hi;
-            this.flags = temp.flags;
-        }
+		internal CurrencyType(Currency value) {
+			Decimal temp = Currency.ToDecimal(value);
+			this.lo = temp.lo;
+			this.mid = temp.mid;
+			this.hi = temp.hi;
+			this.flags = temp.flags;
+		}
 #endif
+
 	#endregion
 
 	#region Cast operators
+
 	public static explicit operator Decimal(CurrencyType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
@@ -180,6 +182,7 @@ namespace Spring2.Types {
 	public static implicit operator CurrencyType(DecimalType castFrom) {
 	    return new CurrencyType((decimal) castFrom);
 	}
+
 	#endregion
 
 	#region General math methods
@@ -239,7 +242,7 @@ namespace Spring2.Types {
 	}
 
 	#endregion
-    
+
 	#region ToString and Parsing
 
 	public override String ToString() {
@@ -253,7 +256,7 @@ namespace Spring2.Types {
 
 	public String ToString(IFormatProvider provider) {
 	    return ToString(null, provider);
-	}    
+	}
 
 	public String ToString(String format, IFormatProvider provider) {
 	    if (myState != TypeState.VALID) {
@@ -265,9 +268,9 @@ namespace Spring2.Types {
 
 
 	public static CurrencyType Parse(String from) {
-	    return Parse(from, NumberStyles.Number, null);
+	    return Parse(from, NumberStyles.Currency, null);
 	}
-    
+
 	public static CurrencyType Parse(String from, NumberStyles style) {
 	    return Parse(from, style, null);
 	}
@@ -279,7 +282,7 @@ namespace Spring2.Types {
 
 	    return result;
 	}
-    
+
 	public static CurrencyType Parse(String from, NumberStyles style, IFormatProvider provider) {
 	    CurrencyType result;
 	    result.myValue = Decimal.Parse(from, style, provider);
@@ -289,9 +292,9 @@ namespace Spring2.Types {
 	}
 
 	#endregion
-   
+
 	#region To<type> conversion methods
-    
+
 	public static byte ToByte(CurrencyType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidValueException(value.myState);
@@ -303,7 +306,7 @@ namespace Spring2.Types {
 		throw new ValueOverflowException("CurrencyType", "byte");
 	    }
 	}
-    
+
 	[CLSCompliant(false)]
 	public static sbyte ToSByte(CurrencyType value) {
 	    if (value.myState != TypeState.VALID) {
@@ -353,7 +356,7 @@ namespace Spring2.Types {
 		throw new ValueOverflowException("CurrencyType", "int");
 	    }
 	}
-    
+
 	[CLSCompliant(false)]
 	public static uint ToUInt32(CurrencyType value) {
 	    if (value.myState != TypeState.VALID) {
@@ -391,19 +394,19 @@ namespace Spring2.Types {
 		throw new ValueOverflowException("CurrencyType", "ulong");
 	    }
 	}
-    
-#if no
-        public static Currency ToCurrency(CurrencyType value) {
-	    if (value.myState != TypeState.VALID) {
-		throw new InvalidValueException(value.myState);
-	    }
 
-	    try {
-		return Decimal.ToCurrency(value.myValue);
-	    } catch (OverflowException) {
-		throw new ValueOverflowException("CurrencyType", "Currency");
-	    }
-        }
+#if no
+		public static Currency ToCurrency(CurrencyType value) {
+			if (value.myState != TypeState.VALID) {
+				throw new InvalidValueException(value.myState);
+			}
+
+			try {
+				return Decimal.ToCurrency(value.myValue);
+			} catch (OverflowException) {
+				throw new ValueOverflowException("CurrencyType", "Currency");
+			}
+		}
 #endif
 
 	public static double ToDouble(CurrencyType value) {
@@ -417,7 +420,7 @@ namespace Spring2.Types {
 		throw new ValueOverflowException("CurrencyType", "double");
 	    }
 	}
-    
+
 	public static float ToSingle(CurrencyType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidValueException(value.myState);
@@ -437,7 +440,7 @@ namespace Spring2.Types {
 
 	    return value.myValue;
 	}
-    
+
 	#endregion	      	    	
 
 	#region Conversion Operators
@@ -445,16 +448,16 @@ namespace Spring2.Types {
 	public static implicit operator CurrencyType(byte value) {
 	    return new CurrencyType(value);
 	}
-    
+
 	[CLSCompliant(false)]
 	public static implicit operator CurrencyType(sbyte value) {
 	    return new CurrencyType(value);
 	}
-    
+
 	public static implicit operator CurrencyType(short value) {
 	    return new CurrencyType(value);
 	}
-    
+
 	[CLSCompliant(false)]
 	public static implicit operator CurrencyType(ushort value) {
 	    return new CurrencyType(value);
@@ -463,43 +466,43 @@ namespace Spring2.Types {
 	public static implicit operator CurrencyType(char value) {
 	    return new CurrencyType(value);
 	}
-    
+
 	public static implicit operator CurrencyType(int value) {
 	    return new CurrencyType(value);
 	}
-    
+
 	[CLSCompliant(false)]
 	public static implicit operator CurrencyType(uint value) {
 	    return new CurrencyType(value);
 	}
-    
+
 	public static implicit operator CurrencyType(long value) {
 	    return new CurrencyType(value);
 	}
-    
+
 	[CLSCompliant(false)]
 	public static implicit operator CurrencyType(ulong value) {
 	    return new CurrencyType(value);
 	}
-        
-    
+
+
 	public static explicit operator CurrencyType(float value) {
 	    return new CurrencyType(value);
 	}
-    
+
 	public static explicit operator CurrencyType(double value) {
 	    return new CurrencyType(value);
 	}
-    
+
 	public static explicit operator byte(CurrencyType value) {
 	    return ToByte(value);
 	}
-    
+
 	[CLSCompliant(false)]
 	public static explicit operator sbyte(CurrencyType value) {
 	    return ToSByte(value);
 	}
-    
+
 	public static explicit operator char(CurrencyType value) {
 	    return (char) ToUInt16(value);
 	}
@@ -507,38 +510,38 @@ namespace Spring2.Types {
 	public static explicit operator short(CurrencyType value) {
 	    return ToInt16(value);
 	}
-    
+
 	[CLSCompliant(false)]
 	public static explicit operator ushort(CurrencyType value) {
 	    return ToUInt16(value);
 	}
-    
+
 	public static explicit operator int(CurrencyType value) {
 	    return ToInt32(value);
 	}
-		
+
 	[CLSCompliant(false)]
 	public static explicit operator uint(CurrencyType value) {
 	    return ToUInt32(value);
 	}
-    
+
 	public static explicit operator long(CurrencyType value) {
 	    return ToInt64(value);
 	}
-    
+
 	[CLSCompliant(false)]
 	public static explicit operator ulong(CurrencyType value) {
 	    return ToUInt64(value);
 	}
-    
+
 	public static explicit operator float(CurrencyType value) {
 	    return ToSingle(value);
 	}
-    
+
 	public static explicit operator double(CurrencyType value) {
 	    return ToDouble(value);
 	}
-    
+
 	#endregion
 
 	#region Addition operators and methods
@@ -549,7 +552,7 @@ namespace Spring2.Types {
 	    }
 
 	    CurrencyType result;
-	    
+
 	    result.myValue = decimal.Add(augend.myValue, addend.myValue);
 	    result.myState = TypeState.VALID;
 	    return result;
@@ -562,7 +565,7 @@ namespace Spring2.Types {
 	public static CurrencyType operator +(CurrencyType augend, CurrencyType addend) {
 	    return Add(augend, addend);
 	}
-	
+
 	public static CurrencyType operator +(CurrencyType augend) {
 	    return augend;
 	}
@@ -584,8 +587,8 @@ namespace Spring2.Types {
 	public static CurrencyType operator --(CurrencyType minuend) {
 	    return Subtract(minuend, One);
 	}
-    
-    
+
+
 	public static CurrencyType operator -(CurrencyType minuend, CurrencyType subtrahend) {
 	    return Subtract(minuend, subtrahend);
 	}
@@ -593,7 +596,7 @@ namespace Spring2.Types {
 	#endregion
 
 	#region Multiplication operators and methods
-	
+
 	public static CurrencyType Multiply(CurrencyType multiplier, CurrencyType multiplicand) {
 	    if (multiplier.myState != TypeState.VALID || multiplicand.myState != TypeState.VALID) {
 		throw new InvalidValueException(multiplier.myState, multiplicand.myState);
@@ -622,7 +625,7 @@ namespace Spring2.Types {
 	    return quotient;
 	}
 
-	public static CurrencyType operator/ (CurrencyType dividend, CurrencyType divisor) {
+	public static CurrencyType operator /(CurrencyType dividend, CurrencyType divisor) {
 	    return Divide(dividend, divisor);
 	}
 
@@ -645,10 +648,11 @@ namespace Spring2.Types {
 	public static CurrencyType operator %(CurrencyType dividend, CurrencyType divisor) {
 	    return Remainder(dividend, divisor);
 	}
-    
+
 	#endregion
 
 	#region Equality operators and methods
+
 	public static int Compare(CurrencyType leftHand, CurrencyType rightHand) {
 	    if (leftHand.myState == TypeState.VALID && rightHand.myState == TypeState.VALID) {
 		if (leftHand.myValue < rightHand.myValue) {
@@ -674,16 +678,20 @@ namespace Spring2.Types {
 		}
 	    }
 
-	    if (rightHand.myState == TypeState.DEFAULT) {
-		if (leftHand.myState == TypeState.DEFAULT) {
+	    if (leftHand.myState == TypeState.DEFAULT) {
+		if (rightHand.myState == TypeState.DEFAULT) {
 		    return 0;
 		}
 
-		if (leftHand.myState == TypeState.UNSET) {
-		    return 1;
+		if (rightHand.myState == TypeState.UNSET) {
+		    return -1;
 		}
 
 		return -1;
+	    }
+
+	    if (leftHand.myState == TypeState.VALID) {
+		return 1;
 	    }
 
 	    //should this throw an exception?
@@ -788,7 +796,7 @@ namespace Spring2.Types {
 	#endregion
 
 	#region Object Support and other stuff
-    
+
 	int IComparable.CompareTo(Object value) {
 	    if (!(value is CurrencyType)) {
 		throw new InvalidTypeException("CurrencyType");
@@ -802,7 +810,7 @@ namespace Spring2.Types {
 
 	    return Compare(this, compareTo);
 	}
-    	
+
 	public int CompareTo(CurrencyType value) {
 	    return Compare(this, value);
 	}
@@ -818,11 +826,12 @@ namespace Spring2.Types {
 	public static bool Equals(CurrencyType leftHand, CurrencyType rightHand) {
 	    return Compare(leftHand, rightHand) == 0;
 	}
+
 	public override int GetHashCode() {
 	    return myValue.GetHashCode();
 	}
-	
-    
+
+
 	public static int[] GetBits(CurrencyType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidValueException(value.myState);

@@ -6,10 +6,10 @@ using System.Runtime.CompilerServices;
 using CultureInfo = System.Globalization.CultureInfo;
 using Calendar = System.Globalization.Calendar;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
 
     [Serializable(), StructLayout(LayoutKind.Auto)]
-    public struct DateType : IComparable, IFormattable, IConvertible {
+    public struct DateType : IComparable, IFormattable, IConvertible, IDataType {
 	private DateTime  myValue;
 	private TypeState myState;
 
@@ -62,11 +62,13 @@ namespace Spring2.Types {
 	    myState = TypeState.VALID;
 	}
 
+	// TODO: why use ticks here?  what about truncation to just the date?
 	public DateType(DateTimeType newTime) {
 	    myValue = new DateTime(newTime.Date.Ticks);
 	    myState = TypeState.VALID;
 	}
 
+	// TODO: what about the truncation to just a date?
 	public DateType(long ticks) {
 	    myValue = new DateTime(ticks);
 	    myState = TypeState.VALID;
@@ -77,6 +79,7 @@ namespace Spring2.Types {
 	    myState = TypeState.VALID;
 	}
     
+	// TODO: truncation to just a date?
 	public DateType(int year, int month, int day, Calendar calendar) {
 	    myValue = new DateTime(year, month, day, calendar);
 	    myState = TypeState.VALID;
@@ -144,26 +147,63 @@ namespace Spring2.Types {
 	}
 
     
-	public int CompareTo(Object value) {
-	    if (value == null) {
+	public int CompareTo(Object o) {
+	    //            if (value == null) {
+	    //		return 1;
+	    //	    }
+	    //
+	    //	    if (!(value is DateType)) {
+	    //		throw new InvalidArgumentException("DateType.CompareTo(object) - object must be of type DateType");
+	    //	    }
+	    //
+	    //	    DateType dtValue = (DateType) value;
+	    //
+	    //	    if (myValue.Ticks > dtValue.myValue.Ticks) {
+	    //		return 1;
+	    //	    }
+	    //
+	    //	    if (myValue.Ticks < dtValue.myValue.Ticks) {
+	    //		return -1;
+	    //	    }
+	    //
+	    //            return 0;
+
+	    if (!(o is DateType)) {
+		throw new ArgumentException("Argument must be an instance of DateType");
+	    }
+    
+	    DateType that = (DateType)o;
+
+	    if (this.myState == TypeState.DEFAULT) {
+		if (that.myState == TypeState.DEFAULT) {
+		    return 0;
+		} else {
+		    return -1;
+		}
+	    }
+
+	    if (this.myState == TypeState.UNSET) {
+		if (that.myState == TypeState.UNSET) {
+		    return 0;
+		} else if (that.myState == TypeState.DEFAULT) {
+		    return 1;
+		} else {
+		    return -1;
+		}
+	    }
+
+	    if (that.myState != TypeState.VALID) {
 		return 1;
 	    }
 
-	    if (!(value is DateType)) {
-		throw new InvalidArgumentException("DateType.CompareTo(object) - object must be of type DateType");
+	    if (this.IsValid && that.IsValid) {
+		return myValue.CompareTo(that.myValue);
 	    }
-
-	    DateType dtValue = (DateType) value;
-
-	    if (myValue.Ticks > dtValue.myValue.Ticks) {
-		return 1;
-	    }
-
-	    if (myValue.Ticks < dtValue.myValue.Ticks) {
-		return -1;
-	    }
-
-	    return 0;
+	    
+	    //return Compare(that);
+	    return Compare(this, that);        
+	
+	
 	}
 	#endregion
    
@@ -627,16 +667,92 @@ namespace Spring2.Types {
 
 	public override bool Equals(Object value) {
 	    if (value is DateType) {
-		if (!IsValid) {
-		    throw new InvalidStateException(myState);
-		}
+		//		if (!IsValid) {
+		//		    throw new InvalidStateException(myState);
+		//		}
 
-		return myValue.Ticks == ((DateType)value).myValue.Ticks;
+		return myValue.Ticks == ((DateType)value).myValue.Ticks && myState == ((DateType)value).myState;
 	    }
 
 	    return false;
 	}
 
 	#endregion
+
+	public DateType EndOfCurrentQuarter {
+	    get {
+		DateTime result = EndOfPreviousQuarter.ToDate().AddMonths(3);
+		result = result.AddDays(DateTime.DaysInMonth(result.Year, result.Month) - result.Day);
+		return new DateType(result);
+	    }
+	}
+
+	public DateType EndOfPreviousQuarter {
+	    get {
+		// Get to the correct month.
+		DateTime result = ToDate().AddMonths(-1);
+		result = result.AddMonths(-(result.Month % 3));
+
+		// Go to the end of the month.
+		result = result.AddDays(DateTime.DaysInMonth(result.Year, result.Month) - result.Day);
+
+		return new DateType(result);
+	    }
+	}
+
+	public DateType FirstOfMonth {
+	    get {
+		DateTime result = ToDate();
+		return new DateType(new DateTime(result.Year, result.Month, 1));
+	    }
+	}
+
+	public DateType FirstOfYear {
+	    get {
+		DateTime result = ToDate();
+		return new DateType(new DateTime(result.Year, 1, 1));
+	    }
+	}
+
+	public DateType OneYearAgo {
+	    get {
+		DateTime result = ToDate().AddMonths(-12);
+		return new DateType(result);
+	    }
+	}
+
+	//	/// <summary>
+	//	/// Get the date part only
+	//	/// </summary>
+	//	public DateType Date {
+	//	    get {
+	//		if (this.IsValid) {
+	//		    return new DateType(new DateTime(ToDateTime().Year, ToDateTime().Month, ToDateTime().Day));
+	//		} else {
+	//		    return this;
+	//		}
+	//	    }
+	//	}
+
+	/// <summary>
+	/// Get the date part only
+	/// </summary>
+	public DateTime ToDate() {
+	    return myValue.Date;
+	}
+
+	// TODO: realizing that this is would be a change in signature, is this really needed?
+	public DateTime ToDateTime() {
+	    return myValue.Date;
+	}
+	
+	//	public DateType AddDays(Double days) {
+	//	    return new DateType(ToDateTime().AddDays(days));
+	//	}
+
+	public Boolean SameDayAs(DateType that) {
+	    return this.Date.Equals(that.Date);
+	}
+
     }
 }

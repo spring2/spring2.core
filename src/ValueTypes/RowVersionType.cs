@@ -1,11 +1,11 @@
 using System;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
     /// <summary>
     /// RowVersion type for the Timestamp values in SQL Server.
     /// </summary>
     /// 
-    public struct RowVersionType {
+    public struct RowVersionType : IDataType {
 	private byte[]    myValue;
 	private TypeState myState;
 

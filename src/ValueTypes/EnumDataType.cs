@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
     public abstract class EnumDataType : DataType {
 
 	protected String code;

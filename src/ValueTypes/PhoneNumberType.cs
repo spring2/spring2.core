@@ -3,12 +3,12 @@ using System.Globalization;
 using System.Text;
 using config = System.Configuration.ConfigurationSettings;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
 
     /// <summary>
     /// Data type for wrapping phone numbers. 
     /// </summary>
-    public class PhoneNumberType : DataType, IComparable {
+    public class PhoneNumberType : DataType, IComparable, IDataType {
 
 	public static readonly new PhoneNumberType DEFAULT = new PhoneNumberType();
 	public static readonly new PhoneNumberType UNSET = new PhoneNumberType();
@@ -269,7 +269,7 @@ namespace Spring2.Types {
 	public String ToString(String phoneNumberFormat, String extensionFormat){
 
 	    if (!IsValid) {
-		throw new Spring2.Types.InvalidCastException("UNSET and DEFAULT DateTypes have no string value.");
+		throw new Spring2.Core.Types.InvalidCastException("UNSET and DEFAULT DateTypes have no string value.");
 	    }
 
 	    String formattedPhoneNumber = String.Empty;

@@ -1,6 +1,6 @@
 using System;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
     public class TypesException : System.Exception {
 	public TypesException() {
 	}

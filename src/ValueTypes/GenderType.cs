@@ -1,14 +1,14 @@
 using System;
 using System.Collections;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
 
     public enum GenderCode {
 	Male,
 	Female
     }
 
-    public struct GenderType : IComparable {
+    public struct GenderType : IComparable, IDataType {
 	private GenderCode myValue;
 	private TypeState  myState;
 

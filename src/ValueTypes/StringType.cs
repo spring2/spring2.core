@@ -6,10 +6,10 @@ using System.Collections;
 using System.Runtime.CompilerServices;
 using va_list = System.ArgIterator;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
 
     [Serializable] 
-    public struct StringType : IComparable, ICloneable, IEnumerable {
+    public struct StringType : IComparable, ICloneable, IEnumerable, IDataType {
 
 	public static readonly StringType Empty = "";
 
@@ -58,34 +58,34 @@ namespace Spring2.Types {
 	    myValue = "";
 	}
 
-	[CLSCompliant(false)]
-	unsafe public StringType(char *value) {
-	    myState = TypeState.VALID;
-	    myValue = new string(value);
-	}
-
-	[CLSCompliant(false)]
-	unsafe public StringType(char *value, int startIndex, int length) {
-	    myState = TypeState.VALID;
-	    myValue = new string(value, startIndex, length);
-	}
-    
-	[CLSCompliant(false)]
-	unsafe public StringType(sbyte *value) {
-	    myState = TypeState.VALID;
-	    myValue = new string(value);
-	}
-
-	unsafe public StringType(sbyte *value, int startIndex, int length) {
-	    myState = TypeState.VALID;
-	    myValue = new string(value, startIndex, length);
-	}
-
-	[CLSCompliant(false)]
-	unsafe public StringType(sbyte *value, int startIndex, int length, Encoding enc) {
-	    myState = TypeState.VALID;
-	    myValue = new string(value, startIndex, length, enc);
-	}
+	//    	[CLSCompliant(false)]
+	//        unsafe public StringType(char *value) {
+	//	    myState = TypeState.VALID;
+	//	    myValue = new string(value);
+	//	}
+	//
+	//	[CLSCompliant(false)]
+	//        unsafe public StringType(char *value, int startIndex, int length) {
+	//	    myState = TypeState.VALID;
+	//	    myValue = new string(value, startIndex, length);
+	//	}
+	//    
+	//    	[CLSCompliant(false)]
+	//        unsafe public StringType(sbyte *value) {
+	//	    myState = TypeState.VALID;
+	//	    myValue = new string(value);
+	//	}
+	//
+	//	unsafe public StringType(sbyte *value, int startIndex, int length) {
+	//	    myState = TypeState.VALID;
+	//	    myValue = new string(value, startIndex, length);
+	//	}
+	//
+	//    	[CLSCompliant(false)]
+	//        unsafe public StringType(sbyte *value, int startIndex, int length, Encoding enc) {
+	//	    myState = TypeState.VALID;
+	//	    myValue = new string(value, startIndex, length, enc);
+	//	}
 
 	public StringType(char [] value, int startIndex, int length) {
 	    myState = TypeState.VALID;
@@ -184,7 +184,7 @@ namespace Spring2.Types {
 		return false;
 	    }
     
-	    return leftHand.myValue.Equals(rightHand.myValue);
+	    return leftHand.myValue.Equals(rightHand.myValue) && leftHand.myState.Equals(rightHand.myState);
 	}
 
 	public static bool operator == (StringType leftHand, StringType rightHand) {
@@ -421,33 +421,74 @@ namespace Spring2.Types {
 	}  
    
 	public int CompareTo(Object value) {
-	    StringType rightHand = (StringType) value;
-
-	    if (rightHand == null) {
-		return 1;
-	    }
-
 	    if (!(value is StringType)) {
 		throw new ArgumentException("Invalid arguement to CompareTo - value not of StringType");
 	    }
-
-	    if (this.myState == TypeState.VALID && rightHand.myState == TypeState.VALID) {
-		return string.Compare(myValue, rightHand.myValue);
-	    }
-
-	    return CompareHelper(this, rightHand);
+	    return CompareTo((StringType)value);
+	    
+	    //	    StringType rightHand = (StringType) value;
+	    //
+	    //	    if (rightHand == null) {
+	    //		return 1;
+	    //	    }
+	    //
+	    //            if (!(value is StringType)) {
+	    //                throw new ArgumentException("Invalid arguement to CompareTo - value not of StringType");
+	    //            }
+	    //
+	    //	    if (this.myState == TypeState.VALID && rightHand.myState == TypeState.VALID) {
+	    //		return string.Compare(myValue, rightHand.myValue);
+	    //	    }
+	    //
+	    //	    return CompareHelper(this, rightHand);
 	}
     
-	public int CompareTo(StringType rightHand) {
-	    if (rightHand == null) {
+	public int CompareTo(StringType that) {
+	    //	    if (rightHand == null) {
+	    //                return 1;
+	    //            }
+	    //
+	    //	    if (this.myState == TypeState.VALID && rightHand.myState == TypeState.VALID) {
+	    //		return myValue.CompareTo(rightHand.myValue);
+	    //	    }
+	    //
+	    //	    return CompareHelper(this, rightHand);
+
+	    //	    if (!(o is StringType)) {
+	    //		throw new ArgumentException("Argument must be an instance of StringType");
+	    //	    }
+	    //
+	    //	    StringType that = (StringType)o;
+
+	    if (this.myState == TypeState.DEFAULT) {
+		if (that.myState == TypeState.DEFAULT) {
+		    return 0;
+		} else {
+		    return -1;
+		}
+	    }
+
+	    if (this.myState == TypeState.UNSET) {
+		if (that.myState == TypeState.UNSET) {
+		    return 0;
+		} else if (that.myState == TypeState.DEFAULT) {
+		    return 1;
+		} else {
+		    return -1;
+		}
+	    }
+
+	    if (that.myState != TypeState.VALID) {
 		return 1;
 	    }
 
-	    if (this.myState == TypeState.VALID && rightHand.myState == TypeState.VALID) {
-		return myValue.CompareTo(rightHand.myValue);
+	    if (this.IsValid && that.IsValid) {
+		return myValue.CompareTo(that.myValue);
 	    }
-
-	    return CompareHelper(this, rightHand);
+	    
+	    //return Compare(that);
+	    return Compare(this, that); 
+	
 	}
 	#endregion
 #if notsupported
@@ -684,9 +725,9 @@ namespace Spring2.Types {
 	    return this.myValue;
 	}
 
-	string IConvertible.ToString(IFormatProvider provider) {
-	    return this.myValue;
-	}
+	//        string IConvertible.ToString(IFormatProvider provider) {
+	//            return this.myValue;
+	//        }
 	#endregion    
     
 	#region Insert, Replace and Remove methods

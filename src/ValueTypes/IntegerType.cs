@@ -1,8 +1,9 @@
 using System;
+using System.Globalization;
 
-namespace Spring2.Types {
+namespace Spring2.Core.Types {
     [System.Serializable, System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
-    public struct IntegerType :	System.IComparable, System.IFormattable {
+    public struct IntegerType :	System.IComparable, System.IFormattable, IDataType {
 	private System.Int32 myValue;
 	private TypeState    myState;
 
@@ -44,6 +45,11 @@ namespace Spring2.Types {
 	#endregion
 
 	#region Constructors
+	private IntegerType(TypeState state) {
+	    myValue = 0;
+	    myState = state;
+	}
+
 	//should this stay private?
 	private IntegerType(IntegerType value) {
 	    myValue = value.myValue;
@@ -93,17 +99,19 @@ namespace Spring2.Types {
 	    return myValue.ToString(format, formatProvider);
 	}
 
-	public static IntegerType Parse(System.String parseString) {    
-	    if (parseString == null) {
+	public static IntegerType Parse(System.String from) {    
+	    if (from == null) {
 		throw new InvalidArgumentException("parseString");
 	    }
 
-	    IntegerType parsedInt32;
-
-	    parsedInt32.myValue = System.Int32.Parse(parseString);
-	    parsedInt32.myState = TypeState.VALID;
-
-	    return parsedInt32;
+	    return Parse(from, NumberStyles.Currency, null);
+	    
+	    //	    IntegerType parsedInt32;
+	    //
+	    //	    parsedInt32.myValue = System.Int32.Parse(parseString);
+	    //	    parsedInt32.myState = TypeState.VALID;
+	    //
+	    //	    return parsedInt32;
 	}
    
 	public static IntegerType Parse(System.String parseString, System.Globalization.NumberStyles style) {
@@ -272,11 +280,11 @@ namespace Spring2.Types {
 	    return (long) castFrom.myValue;
 	}
 
-	public static explicit operator IntegerType(long castFrom) {
-	    IntegerType returnType = new IntegerType(castFrom);
-
-	    return returnType;
-	}
+	//	public static explicit operator IntegerType(long castFrom) {
+	//	    IntegerType returnType = new IntegerType(castFrom);
+	//
+	//	    return returnType;
+	//	}
 	#endregion
 
 	#region Decimal	and DecimalType
@@ -336,16 +344,20 @@ namespace Spring2.Types {
 		}
 	    }
 
-	    if (rightHand.myState == TypeState.DEFAULT) {
-		if (leftHand.myState == TypeState.DEFAULT) {
+	    if (leftHand.myState == TypeState.DEFAULT) {
+		if (rightHand.myState == TypeState.DEFAULT) {
 		    return 0;
 		}
 
-		if (leftHand.myState == TypeState.UNSET) {
+		if (rightHand.myState == TypeState.UNSET) {
 		    return 1;
 		}
 
 		return -1;
+	    }
+
+	    if (leftHand.myState == TypeState.VALID) {
+		return 1;
 	    }
 
 	    //should this throw an exception?
@@ -616,18 +628,46 @@ namespace Spring2.Types {
 	#endregion
 
 	#region IComparable method
+
+	public Int32 CompareTo(Object o) {
+	    if (!(o is IntegerType)) {
+		throw new ArgumentException("Argument must be an instance of IntegerType");
+	    }
+
+	    IntegerType that = (IntegerType)o;
+
+	    if (this.myState == TypeState.DEFAULT) {
+		if (that.myState == TypeState.DEFAULT) {
+		    return 0;
+		} else {
+		    return -1;
+		}
+	    }
+
+	    if (this.myState == TypeState.UNSET) {
+		if (that.myState == TypeState.UNSET) {
+		    return 0;
+		} else if (that.myState == TypeState.DEFAULT) {
+		    return 1;
+		} else {
+		    return -1;
+		}
+	    }
+
+	    if (that.myState != TypeState.VALID) {
+		return 1;
+	    }
+
+	    if (this.IsValid && that.IsValid) {
+		return myValue.CompareTo(that.myValue);
+	    }
+	    
+	    //return Compare(that);
+	    return Compare(this, that);
+	}
+
 	int IComparable.CompareTo(Object value) {
-	    if (!(value is IntegerType)) {
-		throw new InvalidTypeException("IntegerType");
-	    }
-
-	    if (value == null) {
-		throw new InvalidArgumentException("value");
-	    }
-
-	    IntegerType compareTo = (IntegerType) value;
-
-	    return Compare(this, compareTo);
+	    return this.CompareTo(value);
 	}
 	#endregion
 
