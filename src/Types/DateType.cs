@@ -67,6 +67,14 @@ namespace Spring2.Core.Types {
 	    return value.ToString(format);
 	}
 
+	public String ToShortDateString() {
+	    return value.ToShortDateString();
+	}
+
+	public String ToShortTimeString() {
+	    return value.ToShortTimeString();
+	}
+
 	public override Boolean Equals(Object o) {
 	    if (this == o) {
 		return true;
