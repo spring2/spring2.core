@@ -1,6 +1,6 @@
 //**************************************************************
 // Copyright (c) Emmanuel KARTMANN 2002 (emmanuel@kartmann.org)
-// $Revision: 1.2 $ $Date: 2004-08-24 01:05:20 $
+// $Revision: 1.3 $ $Date: 2004-09-16 02:59:39 $
 //**************************************************************
 
 using System;
@@ -238,6 +238,18 @@ namespace Spring2.Core.Util {
 	}
 
 	/// <summary>
+	/// Indicates you want to trust all keys.
+	/// </summary>
+	public bool alwaystrust {
+	    get {
+		return(_alwaystrust);
+	    }
+	    set {
+		_alwaystrust = value;
+	    }
+	}
+
+	/// <summary>
 	/// Timeout for GnuPG process, in milliseconds.
 	/// 
 	/// <p/>If the process doesn't exit before the end of the timeout period, the process is terminated (killed).
@@ -291,6 +303,11 @@ namespace Spring2.Core.Util {
 	    // ASCII output?
 	    if (_armor) {
 		optionsBuilder.Append("--armor ");
+	    }
+
+	    // trust all keys?
+	    if (_alwaystrust) {
+		optionsBuilder.Append("--always-trust ");
 	    }
 
 	    // Recipient?
@@ -515,6 +532,7 @@ namespace Spring2.Core.Util {
 	private string _passphrase = "";
 	private string _passphrasefd = "";
 	private VerboseLevel _verbose = VerboseLevel.NoVerbose;
+	private bool _alwaystrust = false;
 	private bool _batch = true;
 	private string _originator = "";
 	private int _ProcessTimeOutMilliseconds = 10000; // 10 seconds
