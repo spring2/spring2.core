@@ -30,7 +30,7 @@ namespace Spring2.Core.Test.Test {
 		gpg.command = Commands.Encrypt;
 
 		gpg.homedirectory = gpgDirectory.FullName;
-		gpg.recipient = "\"Spring2 Core Test\"";
+		gpg.recipient = "Spring2 Core Test";
 		gpg.inputfile = testDirectory.FullName + "\\GnuPGTest.txt";
 		gpg.outputfile = testDirectory.FullName + "\\GnuPGTest.pgp";
 		gpg.keyringfile = gpgDirectory.FullName + "\\pubring.gpg";
@@ -66,7 +66,7 @@ namespace Spring2.Core.Test.Test {
 	    gpg.command = Commands.Encrypt;
 
 	    gpg.homedirectory = gpgDirectory.FullName;
-	    gpg.recipient = "\"Spring2 Core Test\"";
+	    gpg.recipient = "Spring2 Core Test";
 	    gpg.keyringfile = gpgDirectory.FullName + "\\pubring.gpg";
 
 	    string encryptedString = "";
@@ -98,7 +98,7 @@ namespace Spring2.Core.Test.Test {
 		gpg.command = Commands.Encrypt;
 
 		gpg.homedirectory = gpgDirectory.FullName;
-		gpg.recipient = "\"Spring2 Core Test\"";
+		gpg.recipient = "Spring2 Core Test";
 		gpg.inputfile = testDirectory.FullName + "\\GnuPGTest.txt";
 		gpg.keyringfile = gpgDirectory.FullName + "\\pubring.gpg";
 

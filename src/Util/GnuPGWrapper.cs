@@ -1,6 +1,6 @@
 //**************************************************************
 // Copyright (c) Emmanuel KARTMANN 2002 (emmanuel@kartmann.org)
-// $Revision: 1.3 $ $Date: 2004-09-16 02:59:39 $
+// $Revision: 1.4 $ $Date: 2004-09-24 19:32:13 $
 //**************************************************************
 
 using System;
@@ -278,16 +278,16 @@ namespace Spring2.Core.Util {
 
 	    //output file
 	    if (_outputfile != null && _outputfile.Length > 0) {
-		optionsBuilder.Append("-o ").Append(_outputfile).Append(" ");
+		optionsBuilder.Append("-o ").Append('"').Append(_outputfile).Append('"').Append(" ");
 	    }
 
 	    // Home Directory?
 	    if (_homedirectory != null && _homedirectory != "") {
 		// WARNING: directory path is between quotes
 		// TODO replace directory path with quotes by short path (with "~" for long names) - call GetShortPathName?
-		optionsBuilder.Append("--homedir \"");
-		optionsBuilder.Append(_homedirectory);
-		optionsBuilder.Append("\" ");
+		optionsBuilder.Append("--homedir ");
+		optionsBuilder.Append('"').Append(_homedirectory).Append('"');
+		optionsBuilder.Append(" ");
 	    }
 
 	    // Answer yes to all questions?
@@ -313,7 +313,7 @@ namespace Spring2.Core.Util {
 	    // Recipient?
 	    if (_recipient != null && _recipient != "") {
 		optionsBuilder.Append("--recipient ");
-		optionsBuilder.Append(_recipient);
+		optionsBuilder.Append('"').Append(_recipient).Append('"');
 		optionsBuilder.Append(" ");
 	    }
 	    else {
@@ -326,7 +326,7 @@ namespace Spring2.Core.Util {
 	    // Originator?
 	    if (_originator != null && _originator != "") {
 		optionsBuilder.Append("--default-key ");
-		optionsBuilder.Append(_originator);
+		optionsBuilder.Append('"').Append(_originator).Append('"');
 		optionsBuilder.Append(" ");
 	    }
 
@@ -340,7 +340,7 @@ namespace Spring2.Core.Util {
 	    // Passphrase file descriptor?
 	    if (_passphrasefd != null && _passphrasefd != "") {
 		optionsBuilder.Append("--passphrase-fd ");
-		optionsBuilder.Append(_passphrasefd);
+		optionsBuilder.Append('"').Append(_passphrasefd).Append('"');
 		optionsBuilder.Append(" ");
 	    }
 	    else {
@@ -390,12 +390,12 @@ namespace Spring2.Core.Util {
 	    if (_keyringfile != null && _keyringfile.Length > 0) {
 		optionsBuilder.Append("--no-default-keyring ");
 		optionsBuilder.Append("--keyring ");
-		optionsBuilder.Append(_keyringfile + " ");
+		optionsBuilder.Append('"').Append(_keyringfile).Append('"').Append(' ');
 	    }
 
 	    //input file
 	    if (_inputfile != null && _inputfile.Length > 0) {
-		optionsBuilder.Append(_inputfile);
+		optionsBuilder.Append('"').Append(_inputfile).Append('"');
 	    }
 
 	    return(optionsBuilder.ToString());
