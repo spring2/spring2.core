@@ -419,6 +419,67 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test]
+	public void TestLessThanGreaterThan() {
+	    DecimalType d1 = new DecimalType(-1);
+	    DecimalType d2 = new DecimalType(1);
+	    DecimalType d3 = new DecimalType(1);
+	    
+	    Assertion.Assert(d1 < d2);
+	    Assertion.Assert(d2 > d1);
+	    Assertion.Assert(d2 > DecimalType.ZERO);
+	    Assertion.Assert(DecimalType.ZERO < d2);
+	    Assertion.Assert(d1 < DecimalType.ZERO);
+	    Assertion.Assert(DecimalType.ZERO > d1);
+	    Assertion.Assert(!(d2 < d3));
+	    Assertion.Assert(d2 <= d3);
+	    Assertion.Assert(d2 >= d3);
+
+	    Assertion.Assert(!(DecimalType.DEFAULT < DecimalType.DEFAULT));
+	    Assertion.Assert(DecimalType.DEFAULT <= DecimalType.DEFAULT);
+	    Assertion.Assert(!(DecimalType.DEFAULT > DecimalType.DEFAULT));
+	    Assertion.Assert(DecimalType.DEFAULT >= DecimalType.DEFAULT);
+	    
+	    Assertion.Assert(!(DecimalType.UNSET < DecimalType.UNSET));
+	    Assertion.Assert(DecimalType.UNSET <= DecimalType.UNSET);
+	    Assertion.Assert(!(DecimalType.UNSET > DecimalType.UNSET));
+	    Assertion.Assert(DecimalType.UNSET >= DecimalType.UNSET);
+
+	    Assertion.Assert(DecimalType.DEFAULT < DecimalType.UNSET);
+	    Assertion.Assert(DecimalType.DEFAULT < DecimalType.ZERO);
+	    Assertion.Assert(DecimalType.DEFAULT < d1);
+	    Assertion.Assert(DecimalType.DEFAULT < d2);
+
+	    CurrencyType c1 = new CurrencyType(-1);
+	    CurrencyType c2 = new CurrencyType(1);
+	    CurrencyType c3 = new CurrencyType(1);
+	    
+	    Assertion.Assert(c1 < c2);
+	    Assertion.Assert(c2 > c1);
+	    Assertion.Assert(c2 > CurrencyType.ZERO);
+	    Assertion.Assert(CurrencyType.ZERO < c2);
+	    Assertion.Assert(c1 < CurrencyType.ZERO);
+	    Assertion.Assert(CurrencyType.ZERO > c1);
+	    Assertion.Assert(!(c2 < c3));
+	    Assertion.Assert(c2 <= c3);
+	    Assertion.Assert(c2 >= c3);
+
+	    Assertion.Assert(!(CurrencyType.DEFAULT < CurrencyType.DEFAULT));
+	    Assertion.Assert(CurrencyType.DEFAULT <= CurrencyType.DEFAULT);
+	    Assertion.Assert(!(CurrencyType.DEFAULT > CurrencyType.DEFAULT));
+	    Assertion.Assert(CurrencyType.DEFAULT >= CurrencyType.DEFAULT);
+	    
+	    Assertion.Assert(!(CurrencyType.UNSET < CurrencyType.UNSET));
+	    Assertion.Assert(CurrencyType.UNSET <= CurrencyType.UNSET);
+	    Assertion.Assert(!(CurrencyType.UNSET > CurrencyType.UNSET));
+	    Assertion.Assert(CurrencyType.UNSET >= CurrencyType.UNSET);
+
+	    Assertion.Assert(CurrencyType.DEFAULT < CurrencyType.UNSET);
+	    Assertion.Assert(CurrencyType.DEFAULT < CurrencyType.ZERO);
+	    Assertion.Assert(CurrencyType.DEFAULT < c1);
+	    Assertion.Assert(CurrencyType.DEFAULT < c2);
+	}
+
+	[Test]
 	public void TestEndOfQuarter() {
 
 	    DateType date = DateType.Parse("2/28/2002");
