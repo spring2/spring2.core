@@ -56,10 +56,14 @@ namespace Spring2.Core.IO {
 	public static void GetReferencedAssemblies(Assembly a, IList list) {
 	    String s = a.GetName().FullName;
 	    foreach(AssemblyName an in a.GetReferencedAssemblies()) {
-		Assembly c = Assembly.Load(an);
-		if (!list.Contains(c)) {
-		    list.Add(c);
-		    GetReferencedAssemblies(c, list);
+		try {
+		    Assembly c = Assembly.Load(an);
+		    if (!list.Contains(c)) {
+			list.Add(c);
+			GetReferencedAssemblies(c, list);
+		    }
+		} catch (System.IO.FileNotFoundException) {
+		    // this can be ignored -- trying to hard to find all of the assemblies that a resource could live in
 		}
 	    }
 	    if (!list.Contains(a)) {
