@@ -211,17 +211,12 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
-	public int Length {
-	    get {
-		if (!IsValid) {
-		    //should this be an error?
-		    //throw new InvalidStateException(myState);
-
-		    return 0;
-		}
-
-		return myValue.Length;
-	    }
+	/// <summary>
+	/// Read only property to get the length of the underlying string.
+	/// Returns -1 if the instance is not valid.
+	/// </summary>
+	public Int32 Length {
+	    get { return IsValid ? myValue.Length : -1; }
 	}
 	#endregion
 
@@ -1018,6 +1013,11 @@ namespace Spring2.Core.Types {
 	    return myValue.GetEnumerator();
 	}
 	#endregion
+
+	public Boolean IsEmpty {
+	    get { return !IsValid || String.Empty.Equals(myValue.Trim()); }
+	}
+
     }
 
 }
