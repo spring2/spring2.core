@@ -141,7 +141,7 @@ namespace Spring2.Core.DataObject {
 	    DataObjectCompareList returnValue = new DataObjectCompareList();
 	    if (obj == null) {
 		returnValue.Add(new DataObjectCompareDetail(prefix, 
-		    StringType.NewInstance("Data Object"), StringType.NewInstance("Null Data Object")));
+		    StringType.Parse("Data Object"), StringType.Parse("Null Data Object")));
 		return returnValue;
 	    }
 
@@ -151,8 +151,8 @@ namespace Spring2.Core.DataObject {
 
 	    if (!GetType().Equals(obj.GetType())) {
 		returnValue.Add(new DataObjectCompareDetail(prefix, 
-		    StringType.NewInstance("different types"), 
-		    StringType.NewInstance("different types")));
+		    StringType.Parse("different types"), 
+		    StringType.Parse("different types")));
 		return returnValue;
 	    }
 
@@ -196,8 +196,8 @@ namespace Spring2.Core.DataObject {
 				if (!enumerator1.Current.Equals(enumerator2.Current)) {
 				    returnValue.Add(new DataObjectCompareDetail(
 					collectionPrefix,
-					StringType.NewInstance("Not DataType"),
-					StringType.NewInstance("Not DataType")));
+					StringType.Parse("Not DataType"),
+					StringType.Parse("Not DataType")));
 				}
 			    }
 			    whichOccurrence++;
@@ -225,13 +225,13 @@ namespace Spring2.Core.DataObject {
 				v1 = (DataType)value1;
 			    }
 			    else {
-				v1 = StringType.NewInstance("Not DataType");
+				v1 = StringType.Parse("Not DataType");
 			    }
 			    if (value2 is DataType) {
 				v2 = (DataType)value2;
 			    }
 			    else {
-				v2 = StringType.NewInstance("Not DataType");
+				v2 = StringType.Parse("Not DataType");
 			    }
 			    returnValue.Add(new DataObjectCompareDetail(valuePrefix, v1, v2));
 			}

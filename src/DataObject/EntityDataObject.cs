@@ -24,11 +24,11 @@ namespace Spring2.Core.DataObject {
 	public EntityDataObject() {}
 
 	public EntityDataObject(IDataReader reader) {
-	    creationDate = DateType.NewInstance(reader.GetDateTime(reader.GetOrdinal(CREATION_DATE)));
-	    creationUserName = StringType.NewInstance(reader.GetString(reader.GetOrdinal(CREATION_USER_NAME)));
+	    creationDate = new DateType(reader.GetDateTime(reader.GetOrdinal(CREATION_DATE)));
+	    creationUserName = StringType.Parse(reader.GetString(reader.GetOrdinal(CREATION_USER_NAME)));
 	    creationUserId = new IdType(reader.GetInt32(reader.GetOrdinal(CREATION_USER_ID)));
-	    lastModifiedDate = DateType.NewInstance(reader.GetDateTime(reader.GetOrdinal(LAST_MODIFIED_DATE)));
-	    lastModifiedUserName = StringType.NewInstance(reader.GetString(reader.GetOrdinal(LAST_MODIFIED_USER_NAME)));
+	    lastModifiedDate = new DateType(reader.GetDateTime(reader.GetOrdinal(LAST_MODIFIED_DATE)));
+	    lastModifiedUserName = StringType.Parse(reader.GetString(reader.GetOrdinal(LAST_MODIFIED_USER_NAME)));
 	    lastModifiedUserId = new IdType(reader.GetInt32(reader.GetOrdinal(LAST_MODIFIED_USER_ID)));
 	}
 
