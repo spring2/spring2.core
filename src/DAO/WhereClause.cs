@@ -24,6 +24,11 @@ namespace Spring2.Core.DAO {
 	    this.sql = sql;
 	}
 
+	public WhereClause(WhereClause wc) {
+	    // Note that this is using the internal sql string so that additional formatting is not added
+	    this.sql = "(" + wc.ToString() + ") ";
+	}
+
 	public String FormatSql() {
 	    if (!sql.Equals(String.Empty)) {
 		return " where " + sql;
@@ -53,6 +58,13 @@ namespace Spring2.Core.DAO {
 	    sql += field + "='" + value.ToString() + "'";
 	}
 
+	public void And(WhereClause wc) {
+	    if (!sql.Equals(String.Empty)) {
+		sql += " and ";
+	    }
+	    sql += " (" + wc.ToString() + ") ";
+	}
+
 	public void And(String field, Object value) {
 	    if (value is Int32) {
 		And(field, (Int32)value);
@@ -61,6 +73,52 @@ namespace Spring2.Core.DAO {
 	    } else {
 		And(field, value.ToString());
 	    }
+	}
+
+	public void Or(String field, Int32 value) {
+	    if (!sql.Equals(String.Empty)) {
+		sql += " or ";
+	    }
+	    sql += field + "=" + value.ToString();
+	}
+
+	public void Or(String field, String value) {
+	    if (!sql.Equals(String.Empty)) {
+		sql += " or ";
+	    }
+	    sql += field + "='" + value + "'";
+	}
+
+	public void Or(String field, DateTime value) {
+	    if (!sql.Equals(String.Empty)) {
+		sql += " or ";
+	    }
+	    sql += field + "='" + value.ToString() + "'";
+	}
+
+	public void Or(WhereClause wc) {
+	    if (!sql.Equals(String.Empty)) {
+		sql += " or ";
+	    }
+	    sql += " (" + wc.ToString() + ") ";
+	}
+
+	public void Or(String field, Object value) {
+	    if (value is Int32) {
+		Or(field, (Int32)value);
+	    } else if (value is DateTime) {
+		Or(field, (DateTime)value);
+	    } else {
+		Or(field, value.ToString());
+	    }
+	}
+
+	public Boolean IsEmpty {
+	    get { return sql.Equals(String.Empty); }
+	}
+
+	public override String ToString() {
+	    return sql;
 	}
 
     }
