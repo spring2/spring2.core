@@ -28,8 +28,11 @@ namespace Spring2.Core.Util {
 	/// <param name="mmyy"></param>
 	/// <returns></returns>
 	public static DateTime ToDateTimeFromCreditCardDate(Int32 mm, Int32 yy) {
+	    if (yy<100) {
+		yy+=2000;
+	    }
 	    if (mm<1 || mm >12 || yy<2000 || yy>2020) {
-		throw new ArgumentOutOfRangeException("Month or year not in valid range.  Month is expected to be between 1 and 12 and year is expected to be between 2000 and 2020.");
+		throw new ArgumentOutOfRangeException("Month or year not in valid range.  Month is expected to be between 1 and 12 and year is expected to be between 2000 and 2020 or 00 and 20.");
 	    }
 		   
 	    Int32 dd = 1;
