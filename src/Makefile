@@ -45,6 +45,7 @@ regress:
 
 clean:
 	@rm -rf $(BUILDDIR)/*
+	@rm -rf ../docs/api
 
 debug:
 	@echo MODULES = $(MODULES)
@@ -55,7 +56,15 @@ changelog:
 	@updatechangelog.sh
 	@cp ../ChangeLog.txt ${BUILDDIR}
 
-package: clean solution regress changelog
+docs:
+	@chmod a+x ../bin/NDoc/*
+	@rm -rf ../docs/api
+	../bin/NDoc/NDocConsole.exe -documenter=MSDN -project=Spring2.Core.ndoc
+
+
+package: clean solution regress changelog docs
+	rm -rf ${BUILDDIR}/Core
+	cp ../docs/api/Spring2.Core.chm ${BUILDDIR}
 	jar -cMvf ${RELEASEDIR}/Spring2.Core.$(shell getversion.sh).zip -C ${BUILDDIR} .
 
 release: package
