@@ -50,6 +50,10 @@ namespace Spring2.Core.Types {
 	    get { return Object.ReferenceEquals(this, UNSET); }
 	}
 
+	public Boolean IsEmpty {
+	    get { return !IsValid || String.Empty.Equals(value.Trim()); }
+	}
+
 	public override Boolean Equals(Object o) {
 	    if (this == o) {
 		return true;
