@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<project name="Spring2.Core" default="build" xmlnds="http://tempuri.org/nant-vs.xsd">
+    <target name="build">
+	<solution solutionfile="Spring2.Core.sln" configuration="debug" />
+    </target>
+</project>
