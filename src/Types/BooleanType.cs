@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Spring2.Core.Types {
 
-    public class BooleanType : DataType	{
+    public class BooleanType : EnumDataType {
 
 	private static readonly IList OPTIONS = new ArrayList();
 
@@ -38,8 +38,6 @@ namespace Spring2.Core.Types {
 
 	    return UNSET;
 	}
-
-	private String code;
 
 	private BooleanType() {
 	}
