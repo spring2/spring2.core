@@ -70,5 +70,22 @@ namespace Spring2.Core.Types {
 	    
 	    return Compare(that);
 	}
+
+	/// <summary>
+	/// Read only property to get the length of the underlying string.
+	/// Returns -1 if the instance is not valid.
+	/// </summary>
+	public Int32 Length {
+	    get { return IsValid ? value.Length : -1; }
+	}
+
+	/// <summary>
+	/// Removes leading and trailing whitespace from the string.
+	/// </summary>
+	/// <returns>a new StringType with leading and trailing whitespace
+	/// characters removed.</returns>
+	public StringType Trim() {
+	    return IsValid ? new StringType(value.Trim()) : this;
+	}
     }
 }
