@@ -13,7 +13,7 @@ namespace Spring2.Core.Types {
 	}
 
 	public static DateType Parse(String value) {
-	    return new DateType(DateTime.Parse(value));
+	    return value == null ? UNSET : new DateType(DateTime.Parse(value));
 	}
 
 	private DateTime value;

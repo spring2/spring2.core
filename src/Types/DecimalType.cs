@@ -16,19 +16,19 @@ namespace Spring2.Core.Types {
 	}
 
 	public static DecimalType Parse(String value) {
-	    return new DecimalType(Decimal.Parse(value));
+	    return value == null ? UNSET : new DecimalType(Decimal.Parse(value));
 	}
 
 	public static DecimalType Parse(String value, NumberStyles style) {
-	    return new DecimalType(Decimal.Parse(value, style));
+	    return value == null ? UNSET : new DecimalType(Decimal.Parse(value, style));
 	}
 
 	public static DecimalType Parse(String value, IFormatProvider provider) {
-	    return new DecimalType(Decimal.Parse(value, provider));
+	    return value == null ? UNSET : new DecimalType(Decimal.Parse(value, provider));
 	}
 
 	public static DecimalType Parse(String value, NumberStyles style, IFormatProvider provider) {
-	    return new DecimalType(Decimal.Parse(value, style, provider));
+	    return value == null ? UNSET : new DecimalType(Decimal.Parse(value, style, provider));
 	}
 
 	protected DecimalType() {}

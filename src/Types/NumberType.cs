@@ -15,11 +15,11 @@ namespace Spring2.Core.Types {
 	}
 
 	public static NumberType Parse(String value) {
-	    return new NumberType(Int32.Parse(value, NumberStyles.Number));
+	    return value == null ? UNSET : new NumberType(Int32.Parse(value, NumberStyles.Number));
 	}
 
 	public static NumberType Parse(String value, IFormatProvider provider) {
-	    return new NumberType(Int32.Parse(value, NumberStyles.Integer,  provider));
+	    return value == null ? UNSET : new NumberType(Int32.Parse(value, NumberStyles.Integer,  provider));
 	}
 
 	private Int32 value;

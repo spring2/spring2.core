@@ -26,7 +26,7 @@ namespace Spring2.Core.Types {
 	}
 
 	public static new IdType Parse(String value) {
-	    return new IdType(Int32.Parse(value));
+	    return value == null ? UNSET : new IdType(Int32.Parse(value));
 	}
 
 	private IdType() {}

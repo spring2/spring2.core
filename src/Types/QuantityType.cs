@@ -13,7 +13,7 @@ namespace Spring2.Core.Types {
 	}
 
 	public static new QuantityType Parse(String value) {
-	    return new QuantityType(Decimal.Parse(value));
+	    return value == null ? UNSET : new QuantityType(Decimal.Parse(value));
 	}
 
 	private QuantityType() {}

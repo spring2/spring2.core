@@ -14,11 +14,11 @@ namespace Spring2.Core.Types {
 	}
 
 	public static new CurrencyType Parse(String value) {
-	    return new CurrencyType(Decimal.Parse(value, NumberStyles.Currency));
+	    return value == null ? UNSET : new CurrencyType(Decimal.Parse(value, NumberStyles.Currency));
 	}
 
 	public static new CurrencyType Parse(String value, IFormatProvider provider) {
-	    return new CurrencyType(Decimal.Parse(value, NumberStyles.Currency, provider));
+	    return value == null ? UNSET : new CurrencyType(Decimal.Parse(value, NumberStyles.Currency, provider));
 	}
 
 	private CurrencyType() {}

@@ -13,11 +13,11 @@ namespace Spring2.Core.Types {
 	public static readonly new IntegerType UNSET = new IntegerType();
 
 	public static IntegerType Parse(String value) {
-	    return new IntegerType(Int32.Parse(value, NumberStyles.Number));
+	    return value == null ? UNSET : new IntegerType(Int32.Parse(value, NumberStyles.Number));
 	}
 
 	public static IntegerType Parse(String value, IFormatProvider provider) {
-	    return new IntegerType(Int32.Parse(value, NumberStyles.Integer,  provider));
+	    return value == null ? UNSET : new IntegerType(Int32.Parse(value, NumberStyles.Integer,  provider));
 	}
 
 	private Int32 value;
