@@ -1,12 +1,144 @@
-2004-08-16 Monday 17:40 ben
+2004-10-20 Wednesday 13:43  cort
 
-	* src/Util/FTPClient.cs
+	* src/: Spring2.Core.Test.csproj, Spring2.Core.csproj,
+	Test/XmlEscapeTest.cs, Test/XmlTest.cs, Xml/Escape.cs:
+	
+	Add class and tests for escaping/encoding string for use in xml
 
-	add FTP client for using FTP from a C# program.
+2004-10-12 Tuesday 17:25  crandall
 
-	* src/Util/GnuPGWrapper.cs
+	* src/Spring2.Core.csproj:
+	
+	Add new files to the project.
 
-	Add class to handle encrypting/decrypting files from a C# program.
+2004-10-12 Tuesday 17:24  crandall
+
+	* src/DAO/OracleEntityDAO.cs:
+	
+	Extend base entity dao class.
+
+2004-10-12 Tuesday 17:24  crandall
+
+	* src/DAO/SqlEntityDAO.cs:
+	
+	Add SQL Server specific entity dao class.
+
+2004-10-12 Tuesday 17:23  crandall
+
+	* src/DAO/BaseEntityDAO.cs:
+	
+	Add abstract base entity dao.
+
+2004-09-27 Monday 16:08  bspiglejr
+
+	* src/: DAO/WhereClause.cs, Test/WhereClauseTest.cs:
+	
+	Add Like and NotLike methods.  Update tests to guard against sql
+	injection.
+
+2004-09-24 Friday 19:32  bspiglejr
+
+	* src/: Test/TestGnuPGWrapper.cs, Util/GnuPGWrapper.cs:
+	
+	Wrap command line arguments in quotes.
+
+2004-09-23 Thursday 23:06  bspiglejr
+
+	* src/Util/FTPClient.cs:
+	
+	Add property for setting the receive timeout value.
+
+2004-09-16 Thursday 02:59  bspiglejr
+
+	* src/Util/GnuPGWrapper.cs:
+	
+	Add ability to set the --always-trust option on gpg call.
+
+2004-08-24 Tuesday 13:28  crandall
+
+	* src/Types/DateType.cs:
+	
+	Remove duplicate definition.
+
+2004-08-24 Tuesday 13:24  crandall
+
+	* src/Test/DataTypeTest.cs:
+	
+	Add test for comparison operators.
+
+2004-08-24 Tuesday 13:23  crandall
+
+	* src/Types/: CurrencyType.cs, DecimalType.cs:
+	
+	Add comparison operators to Decimal and Currency.
+
+2004-08-24 Tuesday 13:23  crandall
+
+	* src/Types/DateType.cs:
+	
+	Add Today and Now properties to date type.
+
+2004-08-24 Tuesday 01:05  bspiglejr
+
+	* src/: Test/TestGnuPGWrapper.cs, Test/GnuPG/random_seed,
+	Util/GnuPGWrapper.cs:
+	
+	Add method to decrypt or encrypt from a file to a string.
+
+2004-08-16 Monday 22:43  bspiglejr
+
+	* ChangeLog.txt:
+	
+	Update change log.
+
+2004-08-16 Monday 22:19  bspiglejr
+
+	* src/: Spring2.Core.Test.csproj, Spring2.Core.csproj,
+	Test/GnuPGTest.txt, Test/TestFTPClient.cs,
+	Test/TestGnuPGWrapper.cs, Test/TestUtilities.cs,
+	Test/GnuPG/gpg.exe, Test/GnuPG/pubring.gpg, Test/GnuPG/random_seed,
+	Test/GnuPG/secring.gpg, Test/GnuPG/trustdb.gpg, Util/FTPClient.cs,
+	Util/GnuPGWrapper.cs:
+	
+	Adding FTPClient and GnuPGWrapper classes.  Note that the unit test
+	in TestFTPClient has been disabled until we get a username/password
+	to an FTP server we can assume is up.
+
+2004-07-29 Thursday 17:08  dustin
+
+	* src/Types/USStateCodeEnum.cs:
+	
+	Added US territories
+
+2004-07-29 Thursday 17:08  dustin
+
+	* src/DAO/EntityDao.cs:
+	
+	Fixed broken doc tag
+
+2004-07-29 Thursday 17:08  dustin
+
+	* src/Spring2.Core.Test.csproj:
+	
+	Removed XmlTest.cs from project
+
+2004-07-29 Thursday 15:25  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2004-07-29 Thursday 15:25  cort
+
+	* release/Spring2.Core.1.1.10.3017.zip:
+	
+	new release version
+
+2004-07-29 Thursday 15:22  cort
+
+	* ChangeLog.txt:
+	
+	update change log
 
 2004-07-29 Thursday 15:17  cort
 
