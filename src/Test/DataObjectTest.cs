@@ -13,15 +13,15 @@ namespace Spring2.Core.Test {
     [TestFixture]
     public class DataObjectTest {
 
-	private static readonly StringType PROP1_BEFORE_CHANGE = StringType.NewInstance("before change");
-	private static readonly StringType PROP1_AFTER_CHANGE = StringType.NewInstance("after change");
+	private static readonly StringType PROP1_BEFORE_CHANGE = StringType.Parse("before change");
+	private static readonly StringType PROP1_AFTER_CHANGE = StringType.Parse("after change");
 	private static readonly IdType ID_VALUE = new IdType(1);
-	private static readonly StringType CONTAINED_PROP1_BEFORE_CHANGE = StringType.NewInstance("contained before change");
-	private static readonly StringType CONTAINED_PROP1_AFTER_CHANGE =  StringType.NewInstance("contained aftger change");
-	private static readonly StringType ARRAY_1_VALUE = StringType.NewInstance("Array #1");
-	private static readonly StringType ARRAY_2_VALUE = StringType.NewInstance("Array #2");
-	private static readonly StringType ARRAY_3_VALUE = StringType.NewInstance("Array #3");
-	private static readonly StringType ARRAY_CHANGE_ATTEMPT = StringType.NewInstance("Shouldn't See");
+	private static readonly StringType CONTAINED_PROP1_BEFORE_CHANGE = StringType.Parse("contained before change");
+	private static readonly StringType CONTAINED_PROP1_AFTER_CHANGE =  StringType.Parse("contained aftger change");
+	private static readonly StringType ARRAY_1_VALUE = StringType.Parse("Array #1");
+	private static readonly StringType ARRAY_2_VALUE = StringType.Parse("Array #2");
+	private static readonly StringType ARRAY_3_VALUE = StringType.Parse("Array #3");
+	private static readonly StringType ARRAY_CHANGE_ATTEMPT = StringType.Parse("Shouldn't See");
 
 
 	/// <summary>

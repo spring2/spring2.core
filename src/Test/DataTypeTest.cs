@@ -14,7 +14,7 @@ namespace Spring2.Core.Test {
 	public void TestParse() {
 
 	    // Currency type tests.
-	    CurrencyType c1 = new CurrencyType((Double)100);
+	    CurrencyType c1 = new CurrencyType(100);
 	    String s1 = c1.ToString();
 	    CurrencyType c2 = CurrencyType.Parse(s1);
 	    Assertion.AssertEquals(c1, c2);
@@ -61,6 +61,27 @@ namespace Spring2.Core.Test {
 	    number2 = NumberType.Parse(" 3,000.000 ");
 	    Assertion.AssertEquals(number1, number2);
 
+	    // Integer type tests.
+	    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+	    IntegerType integer1 = new IntegerType(3000);
+	    String IntegerString = integer1.ToString("N");
+	    IntegerType integer2 = IntegerType.Parse(IntegerString);
+	    Assertion.AssertEquals(integer1, integer2);
+	    integer2 = IntegerType.Parse("3000");
+	    Assertion.AssertEquals(integer1, integer2);
+	    integer2 = IntegerType.Parse("3,000");
+	    Assertion.AssertEquals(integer1, integer2);
+	    integer2 = IntegerType.Parse("3000.");
+	    Assertion.AssertEquals(integer1, integer2);
+	    integer2 = IntegerType.Parse("3000.00");
+	    Assertion.AssertEquals(integer1, integer2);
+	    integer2 = IntegerType.Parse("3000.000");
+	    Assertion.AssertEquals(integer1, integer2);
+	    integer2 = IntegerType.Parse(" 3000 ");
+	    Assertion.AssertEquals(integer1, integer2);
+	    integer2 = IntegerType.Parse(" 3,000.000 ");
+	    Assertion.AssertEquals(integer1, integer2);
+
 	    // Id type tests.
 	    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 	    IdType id1 = new IdType(3000);
@@ -102,9 +123,9 @@ namespace Spring2.Core.Test {
 	    Assertion.Assert(!BooleanType.TRUE.Equals(new DateType()));
 
 	    // Currency type tests.
-	    CurrencyType c1 = new CurrencyType((Double)100);
-	    CurrencyType c2 = new CurrencyType((Double)100);
-	    CurrencyType c3 = new CurrencyType((Double)50);
+	    CurrencyType c1 = new CurrencyType(100);
+	    CurrencyType c2 = new CurrencyType(100);
+	    CurrencyType c3 = new CurrencyType(50);
 
 	    Assertion.AssertEquals(CurrencyType.UNSET, CurrencyType.UNSET);
 	    Assertion.AssertEquals(CurrencyType.DEFAULT, CurrencyType.DEFAULT);
@@ -124,9 +145,9 @@ namespace Spring2.Core.Test {
 	    Assertion.Assert(!c1.Equals(null));
 
 	    // Quantity type tests.
-	    QuantityType q1 = new QuantityType((Double)100);
-	    QuantityType q2 = new QuantityType((Double)100);
-	    QuantityType q3 = new QuantityType((Double)50);
+	    QuantityType q1 = new QuantityType(100);
+	    QuantityType q2 = new QuantityType(100);
+	    QuantityType q3 = new QuantityType(50);
 
 	    Assertion.AssertEquals(QuantityType.UNSET, QuantityType.UNSET);
 	    Assertion.AssertEquals(QuantityType.DEFAULT, QuantityType.DEFAULT);
@@ -146,9 +167,9 @@ namespace Spring2.Core.Test {
 	    Assertion.Assert(!q1.Equals(null));
 
 	    // Decimal type tests.
-	    DecimalType d1 = new DecimalType((Double)100);
-	    DecimalType d2 = new DecimalType((Double)100);
-	    DecimalType d3 = new DecimalType((Double)50);
+	    DecimalType d1 = new DecimalType(100);
+	    DecimalType d2 = new DecimalType(100);
+	    DecimalType d3 = new DecimalType(50);
 
 	    Assertion.AssertEquals(DecimalType.UNSET, DecimalType.UNSET);
 	    Assertion.AssertEquals(DecimalType.DEFAULT, DecimalType.DEFAULT);
@@ -231,11 +252,38 @@ namespace Spring2.Core.Test {
 	    Assertion.Assert(!NumberType.DEFAULT.Equals(IdType.DEFAULT));
 	    Assertion.Assert(!id1.Equals(n1));
 
+	    // Integer type tests.
+	    IntegerType integer1 = new IntegerType(100);
+	    IntegerType integer2 = new IntegerType(100);
+	    IntegerType integer3 = new IntegerType(50);
+
+	    Assertion.AssertEquals(IntegerType.UNSET, IntegerType.UNSET);
+	    Assertion.AssertEquals(IntegerType.DEFAULT, IntegerType.DEFAULT);
+	    Assertion.Assert(!IntegerType.UNSET.Equals(IntegerType.DEFAULT));
+	    Assertion.Assert(!IntegerType.DEFAULT.Equals(IntegerType.UNSET));
+
+	    Assertion.Assert(!integer1.Equals(IntegerType.UNSET));
+	    Assertion.Assert(!integer1.Equals(IntegerType.DEFAULT));
+	    Assertion.Assert(!IntegerType.UNSET.Equals(integer1));
+	    Assertion.Assert(!IntegerType.DEFAULT.Equals(integer1));
+	    Assertion.AssertEquals(integer1, integer1);
+	    Assertion.AssertEquals(integer1, integer2);
+	    Assertion.AssertEquals(integer2, integer1);
+	    Assertion.Assert(!integer1.Equals(integer3));
+	    Assertion.Assert(!integer3.Equals(integer1));
+
+	    Assertion.Assert(!integer1.Equals(null));
+
+	    // Compare Integer to id.
+	    Assertion.Assert(!IntegerType.UNSET.Equals(IdType.UNSET));
+	    Assertion.Assert(!IntegerType.DEFAULT.Equals(IdType.DEFAULT));
+	    Assertion.Assert(!id1.Equals(integer1));
+
 	    // StringType tests.
-	    StringType s1 = StringType.NewInstance("foo");
-	    StringType s2 = StringType.NewInstance("foo");
-	    StringType s3 = StringType.NewInstance("bar");
-	    StringType s4 = StringType.NewInstance("");
+	    StringType s1 = StringType.Parse("foo");
+	    StringType s2 = StringType.Parse("foo");
+	    StringType s3 = StringType.Parse("bar");
+	    StringType s4 = StringType.Parse("");
 
 	    Assertion.AssertEquals(StringType.UNSET, StringType.UNSET);
 	    Assertion.AssertEquals(StringType.DEFAULT, StringType.DEFAULT);
