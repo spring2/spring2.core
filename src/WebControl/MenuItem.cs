@@ -117,6 +117,7 @@ namespace Spring2.Core.WebControl {
 		cell.Controls.Add(img);
 	    } else {
 		cell.Width = indent;
+		cell.Text = "&nbsp;";
 	    }
 
 	    row.Cells.Add(cell);
