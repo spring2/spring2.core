@@ -24,6 +24,8 @@ namespace Spring2.Core.Types {
 
 	public CurrencyType(Decimal value) : base(value) {}
 
+	public CurrencyType(Double value) : base(value) {}
+
 	public override Boolean IsDefault {
 	    get {
 		return Object.ReferenceEquals(this, DEFAULT);

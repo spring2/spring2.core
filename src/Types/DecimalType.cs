@@ -36,6 +36,10 @@ namespace Spring2.Core.Types {
 	    this.value = value;
 	}
 
+	public DecimalType(Double value) {
+	    this.value = new Decimal(value);
+	}
+
 	protected override Object Value {
 	    get {
 		return value;

@@ -19,6 +19,8 @@ namespace Spring2.Core.Types {
 
 	public QuantityType(Decimal value) : base(value) {}
 
+	public QuantityType(Double value) : base(value) {}
+
 	public override Boolean IsDefault {
 	    get {
 		return Object.ReferenceEquals(this, DEFAULT);
