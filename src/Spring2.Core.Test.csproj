@@ -134,6 +134,21 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Test\TestFTPClient.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\TestGnuPGWrapper.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\TestUtilities.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Test\TimeZoneTests.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

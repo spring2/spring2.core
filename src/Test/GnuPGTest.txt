@@ -1,0 +1,3 @@
+Testing GNUPG 
+in the 
+Spring2.Core folder.

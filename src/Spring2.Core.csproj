@@ -359,6 +359,16 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Util\FTPClient.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Util\GnuPGWrapper.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Util\MissingRequiredFieldError.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
