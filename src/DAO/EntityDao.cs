@@ -99,5 +99,57 @@ namespace Spring2.Core.DAO {
 	    cmd.CommandTimeout = commandTimeout;
 	    return cmd;
 	}
+
+	/// <summary>
+	/// Returns the sql string for a given entity property name.
+	/// </summary>
+	/// <param name="propertyToSqlMap">Mapping of property names to sql expressions.</param>
+	/// <param name="propertyName">Name of property name to map</param>
+	/// <returns>Sql string used to retrieve the property value.</returns>
+	/// <exception cref="ApplicationException">When property passed is not found.</exception>
+	protected static String GetPropertyMapping(Hashtable propertyToSqlMap, String propertyName) {
+	    if (!propertyToSqlMap.ContainsKey(propertyName)) {
+		throw new ApplicationException("Property " + propertyName + " not found for where clause.");
+	    }
+	    return "(" + (String)(propertyToSqlMap[propertyName]) + ")";
+	}
+
+	/// <summary>
+	/// Maps a string with embedded property names to a string using the sql expressions that correspond to the
+	/// property names.  The embedded property names are entity property names and must be enclosed in braces ({}).
+	/// </summary>
+	/// <param name="propertyToSqlMap">Mapping of property names to sql expressions.</param>
+	/// <param name="expression">expression containing property names to map</param>
+	/// <returns>String with property names replaced with sql expressions.</returns>
+	protected static string ProcessExpression(Hashtable propertyToSqlMap, string expression) {
+	    string checkExpression = expression;
+	    string retVal = String.Empty;
+	    int leftBrace = 0;
+	    int startPos = 0;
+	    for(leftBrace=checkExpression.IndexOf("{", startPos); startPos >=0; leftBrace=checkExpression.IndexOf("{", startPos)) {
+		if (leftBrace == -1) {
+		    // No more strings to replace.
+		    retVal += checkExpression.Substring(startPos, checkExpression.Length - startPos);
+		    break;
+		}
+		else {
+		    // Concatenate portion of string without embedded references.
+		    retVal += checkExpression.Substring(startPos, leftBrace - startPos);
+		}
+		int rightBrace = checkExpression.IndexOf("}", leftBrace);
+		if (rightBrace == -1) {
+		    throw new ApplicationException("Where clause contains a left brace ({) with no corresponding right brace(}).");
+		}
+
+		// Isolate the property reference and concatenate it's expansion.
+		string expressionReference = checkExpression.Substring(leftBrace+1, rightBrace - leftBrace - 1);
+		retVal += GetPropertyMapping(propertyToSqlMap, expressionReference);
+		
+		// On to the next reference.
+		startPos = rightBrace + 1;
+	    }
+
+	    return retVal;
+	}
     }
 }
