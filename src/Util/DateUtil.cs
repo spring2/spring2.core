@@ -17,8 +17,22 @@ namespace Spring2.Core.Util {
 	    }
 	    Int32 mm = Int32.Parse(mmyy.Substring(0,2));
 	    Int32 yy = Int32.Parse(mmyy.Substring(2,2));
-	    Int32 dd = 1;
 
+	    return ToDateTimeFromCreditCardDate(mm,yy);
+	}
+
+
+	/// <summary>
+	/// Return the last day of the year/month represented by the mmyy date string.
+	/// </summary>
+	/// <param name="mmyy"></param>
+	/// <returns></returns>
+	public static DateTime ToDateTimeFromCreditCardDate(Int32 mm, Int32 yy) {
+	    if (mm<1 || mm >12 || yy<2000 || yy>2020) {
+		throw new ArgumentOutOfRangeException("Month or year not in valid range.  Month is expected to be between 1 and 12 and year is expected to be between 2000 and 2020.");
+	    }
+		   
+	    Int32 dd = 1;
 	    if (mm<12) {
 		mm+=1;
 	    } else {
@@ -29,5 +43,6 @@ namespace Spring2.Core.Util {
 	    DateTime dt = new DateTime(yy,mm,dd);
 	    return dt.AddDays(-1);
 	}
+
     }
 }
