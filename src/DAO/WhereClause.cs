@@ -13,7 +13,7 @@ namespace Spring2.Core.DAO {
 	}
 
 	public WhereClause(String field, String value) {
-	    sql = field + "='" + value + "'";
+	    sql = field + "='" + value.Replace("'", "''") + "'";
 	}
 
 	public WhereClause(String field, DateTime value) {
@@ -48,7 +48,7 @@ namespace Spring2.Core.DAO {
 	    if (!sql.Equals(String.Empty)) {
 		sql += " and ";
 	    }
-	    sql += field + "='" + value + "'";
+	    sql += field + "='" + value.Replace("'", "''") + "'";
 	}
 
 	public void And(String field, DateTime value) {
@@ -71,7 +71,7 @@ namespace Spring2.Core.DAO {
 	    } else if (value is DateTime) {
 		And(field, (DateTime)value);
 	    } else {
-		And(field, value.ToString());
+		And(field, value.ToString().Replace("'", "''"));
 	    }
 	}
 
@@ -86,7 +86,7 @@ namespace Spring2.Core.DAO {
 	    if (!sql.Equals(String.Empty)) {
 		sql += " or ";
 	    }
-	    sql += field + "='" + value + "'";
+	    sql += field + "='" + value.Replace("'", "''") + "'";
 	}
 
 	public void Or(String field, DateTime value) {
@@ -109,7 +109,7 @@ namespace Spring2.Core.DAO {
 	    } else if (value is DateTime) {
 		Or(field, (DateTime)value);
 	    } else {
-		Or(field, value.ToString());
+		Or(field, value.ToString().Replace("'", "''"));
 	    }
 	}
 
