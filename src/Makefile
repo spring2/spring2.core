@@ -19,17 +19,17 @@ include $(MODULES)
 all: $(CORE) $(TEST) $(WEBCONTROL)
 
 $(CORE): $(SRC) AssemblyInfo.cs
-	csc /target:library /out:$@ /debug+ $(SRC) AssemblyInfo.cs
+	csc /target:library /out:$@ /debug+ $(SRC) AssemblyInfo.cs AssemblyVersionInfo.cs
 
 $(TEST): $(TEST_SRC) $(CORE) $(NUNIT)
-	csc /target:library /out:$@ /debug+ /reference:$(NUNIT),$(CORE) $(TEST_SRC)
+	csc /target:library /out:$@ /debug+ /reference:$(NUNIT),$(CORE) $(TEST_SRC) AssemblyVersionInfo.cs
 
 $(WEBCONTROL): $(WEBCONTROL_SRC)
-	csc /target:library /out:$@ /debug+ $(WEBCONTROL_SRC)
+	csc /target:library /out:$@ /debug+ $(WEBCONTROL_SRC) AssemblyVersionInfo.cs
 
 solution:
 	@-rm build.log
-	@-devenv Scorecard.sln /rebuild Debug /out build.log /nologo
+	@-devenv Spring2.Core.sln /rebuild Debug /out build.log /nologo
 	@cat build.log
 
 gen:
@@ -39,7 +39,10 @@ dtgcompare:
 	../../../../work/Spring2/DataTierGenerator/build/DataTierGenerator.exe dtg-dbcompare.config.xml
 
 regress:
-	../bin/nunit-console.exe /assembly:../build/MacCall.Scorecard.Test.dll
+	../bin/nunit-console.exe /assembly:$(TEST)
+
+clean:
+	rm -rf $(BUILDDIR)/*
 
 debug:
 	@echo MODULES = $(MODULES)
