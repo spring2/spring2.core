@@ -10,6 +10,7 @@ namespace Spring2.Core.Types {
 
 	public static readonly new StringType DEFAULT = new StringType();
 	public static readonly new StringType UNSET = new StringType();
+	public static readonly StringType EMPTY = new StringType(String.Empty);
 
 	public static StringType NewInstance(Object value) {
 
