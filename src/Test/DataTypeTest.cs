@@ -366,6 +366,22 @@ namespace Spring2.Core.Test {
 	    Assertion.Assert(StringType.DEFAULT.CompareTo(StringType.DEFAULT) == 0);
 	    Assertion.Assert(StringType.DEFAULT.CompareTo(StringType.UNSET) < 0);
 	    Assertion.Assert(StringType.UNSET.CompareTo(StringType.DEFAULT) > 0);
+
+	    DateType date1 = new DateType(new DateTime(1969,12,18));
+	    DateType date2 = new DateType(new DateTime(2001,11,01));
+	    DateType date3 = new DateType(new DateTime(2003,5,9));
+	    Assertion.Assert(date2.CompareTo(date1) > 0);
+	    Assertion.Assert(date2.CompareTo(date2) == 0);
+	    Assertion.Assert(date2.CompareTo(date3) < 0);
+	    Assertion.Assert(date2.CompareTo(DateType.UNSET) > 0);
+	    Assertion.Assert(date2.CompareTo(DateType.DEFAULT) > 0);
+	    Assertion.Assert(DateType.DEFAULT.CompareTo(date2) < 0);
+	    Assertion.Assert(DateType.UNSET.CompareTo(date2) < 0);
+	    Assertion.Assert(DateType.UNSET.CompareTo(DateType.UNSET) == 0);
+	    Assertion.Assert(DateType.DEFAULT.CompareTo(DateType.DEFAULT) == 0);
+	    Assertion.Assert(DateType.DEFAULT.CompareTo(DateType.UNSET) < 0);
+	    Assertion.Assert(DateType.UNSET.CompareTo(DateType.DEFAULT) > 0);
+
 	}
     }
 }

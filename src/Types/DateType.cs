@@ -2,7 +2,7 @@ using System;
 
 namespace Spring2.Core.Types {
 
-    public class DateType : DataType {
+    public class DateType : DataType, IComparable {
 
 	public static readonly new DateType DEFAULT = new DateType();
 	public static readonly new DateType UNSET = new DateType();
@@ -96,6 +96,19 @@ namespace Spring2.Core.Types {
 
 	public override int GetHashCode() {
 	    return value.GetHashCode();
+	}
+
+	public Int32 CompareTo(Object o) {
+	    DateType that = o as DateType;
+	    if (that == null) {
+		throw new ArgumentException("Argument must be an instance of DateType");
+	    }
+
+	    if (this.IsValid && that.IsValid) {
+		return value.CompareTo(that.Value);
+	    }
+	    
+	    return Compare(that);
 	}
     }
 }
