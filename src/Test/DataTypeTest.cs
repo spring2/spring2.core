@@ -320,21 +320,23 @@ namespace Spring2.Core.Test {
 
 	    Assert.IsTrue(!s1.Equals(null));
 
+	    // TODO: below this was all DateType before, I have changed to DateTimeType as that is what they now closely match
+	    // TODO: there should be tests for DateType as well as for TimeType too
 	    // DateType tests.
-	    DateType date1 = new DateType(new DateTime(20000));
-	    DateType date2 = new DateType(new DateTime(20000));
-	    DateType date3 = new DateType(new DateTime(10000));
-	    DateType date4 = new DateType(new DateTime(30000));
+	    DateTimeType date1 = new DateTimeType(new DateTime(20000));
+	    DateTimeType date2 = new DateTimeType(new DateTime(20000));
+	    DateTimeType date3 = new DateTimeType(new DateTime(10000));
+	    DateTimeType date4 = new DateTimeType(new DateTime(30000));
 
-	    Assert.AreEqual(DateType.UNSET, DateType.UNSET);
-	    Assert.AreEqual(DateType.DEFAULT, DateType.DEFAULT);
-	    Assert.IsTrue(!DateType.UNSET.Equals(DateType.DEFAULT));
-	    Assert.IsTrue(!DateType.DEFAULT.Equals(DateType.UNSET));
+	    Assert.AreEqual(DateTimeType.UNSET, DateTimeType.UNSET);
+	    Assert.AreEqual(DateTimeType.DEFAULT, DateTimeType.DEFAULT);
+	    Assert.IsTrue(!DateTimeType.UNSET.Equals(DateTimeType.DEFAULT));
+	    Assert.IsTrue(!DateTimeType.DEFAULT.Equals(DateTimeType.UNSET));
 
-	    Assert.IsTrue(!date1.Equals(DateType.UNSET));
-	    Assert.IsTrue(!date1.Equals(DateType.DEFAULT));
-	    Assert.IsTrue(!DateType.UNSET.Equals(date1));
-	    Assert.IsTrue(!DateType.DEFAULT.Equals(date1));
+	    Assert.IsTrue(!date1.Equals(DateTimeType.UNSET));
+	    Assert.IsTrue(!date1.Equals(DateTimeType.DEFAULT));
+	    Assert.IsTrue(!DateTimeType.UNSET.Equals(date1));
+	    Assert.IsTrue(!DateTimeType.DEFAULT.Equals(date1));
 	    Assert.AreEqual(date1, date1);
 	    Assert.AreEqual(date1, date2);
 	    Assert.AreEqual(date2, date1);
