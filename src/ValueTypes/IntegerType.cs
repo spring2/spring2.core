@@ -189,6 +189,14 @@ namespace Spring2.Core.Types {
 	    return System.Convert.ToInt32(myValue);
 	}
 
+	public int ToInt32() {
+	    if (!IsValid) {
+		throw new InvalidStateException(myState);
+	    }
+
+	    return System.Convert.ToInt32(myValue);
+	}
+
 	public long ToInt64(System.IFormatProvider formatProvider) {
 	    if (!IsValid) {
 		throw new InvalidStateException(myState);
@@ -692,5 +700,7 @@ namespace Spring2.Core.Types {
 	    return TypeCode.Int32;
 	}
 	#endregion
+
+    
     }
 }
