@@ -7,7 +7,7 @@ namespace Spring2.Core.DataObject {
     /// <summary>
     /// List of compare options available for the DataObject.Compare method
     /// </summary>
-    public class DataObjectCompareOptionEnum: EnumDataType {
+    public class DataObjectCompareOptionEnum : EnumDataType {
 
 	private static readonly IList OPTIONS = new ArrayList();
 
