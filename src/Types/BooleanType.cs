@@ -56,5 +56,9 @@ namespace Spring2.Core.Types {
 		return Object.ReferenceEquals(this, UNSET);
 	    }
 	}
+
+	public Boolean ToBoolean() {
+	    return Object.ReferenceEquals(this, TRUE);
+	}
     }
 }

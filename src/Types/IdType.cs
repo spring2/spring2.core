@@ -20,7 +20,7 @@ namespace Spring2.Core.Types {
 
 	private IdType() {}
 
-        public IdType(Int32 value) {
+	public IdType(Int32 value) {
 	    this.value = value;
 	}
 
@@ -41,5 +41,10 @@ namespace Spring2.Core.Types {
 		return Object.ReferenceEquals(this, UNSET);
 	    }
 	}
+
+	public Int32 ToInt32() {
+	    return value;
+	}
+
     }
 }
