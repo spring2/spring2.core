@@ -72,6 +72,11 @@
                     AssemblyName = "System.Xml"
                     HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.0.3705\System.XML.dll"
                 />
+                <Reference
+                    Name = "NUnitCore"
+                    AssemblyName = "NUnitCore"
+                    HintPath = "..\..\lib\NUnitCore.dll"
+                />
             </References>
         </Build>
         <Files>
@@ -118,6 +123,21 @@
                 />
                 <File
                     RelPath = "DataObject\IEntityDataObject.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\DataObjectTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\Test2Data.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\TestData.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
