@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.WebControl", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Test", "Spring2.Core.Test.csproj", "{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.NUnitRunner", "Spring2.Core.NUnitRunner.csproj", "{A49E2B8B-72CB-4C82-B09E-3424889B35C4}"
-EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		ConfigName.0 = Debug
@@ -27,10 +25,6 @@ Global
 		{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}.Debug.Build.0 = Debug|.NET
 		{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}.Release.ActiveCfg = Release|.NET
 		{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}.Release.Build.0 = Release|.NET
-		{A49E2B8B-72CB-4C82-B09E-3424889B35C4}.Debug.ActiveCfg = Debug|.NET
-		{A49E2B8B-72CB-4C82-B09E-3424889B35C4}.Debug.Build.0 = Debug|.NET
-		{A49E2B8B-72CB-4C82-B09E-3424889B35C4}.Release.ActiveCfg = Release|.NET
-		{A49E2B8B-72CB-4C82-B09E-3424889B35C4}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
