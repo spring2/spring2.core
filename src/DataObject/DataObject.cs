@@ -47,11 +47,12 @@ namespace Spring2.Core.DataObject {
 		    ICollection collection = (ICollection)value;
 		    sb.Append(value.GetType().Name).Append(" (count=").Append(collection.Count).Append(")").Append(Environment.NewLine);
 		    foreach (Object item in collection) {
-			sb.Append(indent).Append(SINGLE_INDENT).Append("Item: ").Append(Environment.NewLine);
+			sb.Append(indent).Append(SINGLE_INDENT).Append("Item: ");
 			if (item is DataObject) {
-			    sb.Append(((DataObject)item).ToString(indentLevel+2));
+			    sb.Append(Environment.NewLine).Append(((DataObject)item).ToString(indentLevel+2));
 			} else {
 			    sb.Append(item.ToString());
+			    sb.Append(Environment.NewLine);
 			}
 		    }
 		} else {
