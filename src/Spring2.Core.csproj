@@ -354,6 +354,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Types\RowVersionType.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Types\StringType.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
