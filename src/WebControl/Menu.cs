@@ -9,8 +9,6 @@ namespace Spring2.Core.WebControl {
     /// <summary>
     /// Summary description for MenuControl.
     /// </summary>
-//    [DefaultProperty("Text"),
-//    ToolboxData("<{0}:MenuControl runat=server></{0}:MenuControl>")]
     [ParseChildren(true, "Items")]
     [Description("Menu Control")]
     public class Menu : System.Web.UI.WebControls.WebControl, INamingContainer {
@@ -20,14 +18,14 @@ namespace Spring2.Core.WebControl {
 	private Boolean selected;
 	private Boolean expanded;
 	private Boolean expandSelected = true;
-	private Boolean showSelectedImage;
-	private HorizontalAlign horizontalAlign = HorizontalAlign.Center;
-	private MenuItemCollection items = new MenuItemCollection();
-
-	private String selectedItemImageUrl;
-	private String completedItemImageUrl;
+	private String menuItemStyle = String.Empty;
+	private String selectedItemStyle = String.Empty;
+	private String completedItemStyle = String.Empty;
 	private Int32 indent;
-	private Unit space;
+	private String navigateUrl;
+	private Boolean active;
+
+	private MenuItemCollection items = new MenuItemCollection();
 
 	protected HyperLink Link {
 	    get { return link; }
@@ -39,8 +37,19 @@ namespace Spring2.Core.WebControl {
 	}
 
 	public String NavigateUrl {
-	    get { return link.NavigateUrl; }
-	    set { link.NavigateUrl = value; }
+	    get { return navigateUrl; }
+	    set { navigateUrl = value; }
+	}
+
+	public virtual Boolean Active {
+	    get { return active; }
+	    set { 
+		active = value;
+		link.NavigateUrl = value ? navigateUrl : String.Empty;
+		foreach (MenuItem item in Items) {
+		    item.Active = value;
+		}
+	    }
 	}
 
 	public virtual Boolean Selected {
@@ -58,14 +67,24 @@ namespace Spring2.Core.WebControl {
 	    set { expandSelected = value; }
 	}
 
-	public Boolean ShowSelectedImage {
-	    get { return showSelectedImage; }
-	    set { showSelectedImage = value; }
+	public virtual String MenuItemStyle {
+	    get { return menuItemStyle; }
+	    set { menuItemStyle = value; }
 	}
 
-	public HorizontalAlign HorizontalAlign {
-	    get { return horizontalAlign; }
-	    set { horizontalAlign = value; }
+	public virtual String SelectedItemStyle {
+	    get { return selectedItemStyle; }
+	    set { selectedItemStyle = value; }
+	}
+
+	public virtual String CompletedItemStyle {
+	    get { return completedItemStyle; }
+	    set { completedItemStyle = value; }
+	}
+
+	public virtual Int32 Indent {
+	    get { return indent; }
+	    set { indent = value; }
 	}
 
 	public virtual MenuItem SelectedItem {
@@ -83,6 +102,19 @@ namespace Spring2.Core.WebControl {
 		    item.SelectedItem = value;
 		}
 	    }
+	}
+
+	public virtual MenuItem SetSelectedItemByUrl(String url) {
+	    if (url != null) {
+		foreach (MenuItem item in items) {
+		    MenuItem selectedItem = item.SetSelectedItemByUrl(url);
+		    if (!MenuItem.EMPTY.Equals(selectedItem)) {	
+			this.SelectedItem = selectedItem;
+			return selectedItem;
+		    }
+		}
+	    }
+	    return MenuItem.EMPTY;
 	}
 
 	public MenuItem NextItem {
@@ -107,41 +139,8 @@ namespace Spring2.Core.WebControl {
 	    get { return items.Count > 0 ? items[items.Count - 1] : MenuItem.EMPTY; }
 	}
 
-	public virtual MenuItem SetSelectedItemByUrl(String url) {
-	    if (url != null) {
-		foreach (MenuItem item in items) {
-		    MenuItem selectedItem = item.SetSelectedItemByUrl(url);
-		    if (!MenuItem.EMPTY.Equals(selectedItem)) {	
-			this.SelectedItem = selectedItem;
-			return selectedItem;
-		    }
-		}
-	    }
-	    return MenuItem.EMPTY;
-	}
-
-	public String SelectedItemImageUrl {
-	    get { return selectedItemImageUrl; }
-	    set { selectedItemImageUrl = value; }
-	}
-
-	public String CompletedItemImageUrl {
-	    get { return completedItemImageUrl; }
-	    set { completedItemImageUrl = value; }
-	}
-
 	public MenuItemCollection Items {
 	    get { return items; }
-	}
-
-	public virtual Int32 Indent {
-	    get { return indent; }
-	    set { indent = value; }
-	}
-
-	public Unit Space {
-	    get { return space; }
-	    set { space = value; }
 	}
 
 	protected override void OnLoad(EventArgs e) 
@@ -151,41 +150,20 @@ namespace Spring2.Core.WebControl {
 	    {
 		item.ParentMenu = this;
 	    }
+
+	    Active = Active;
 	}
 
 	protected override void Render(HtmlTextWriter writer) {
 
 	    if (Visible) {
-		Table table = new Table();
-		table.CellPadding = 0;
-		table.CellSpacing = 0;
-		table.Width = this.Width;
-
-		table.RenderBeginTag(writer);
-
-		TableRow row = new TableRow();
-		row.RenderBeginTag(writer);
-
-		TableCell cell = new TableCell();
-		cell.BackColor = this.BackColor;
-		cell.HorizontalAlign = this.HorizontalAlign;
-		cell.RenderBeginTag(writer);
-
-		if (Selected) {
-		    link.CssClass = "selectedmenu";
-		} else {
-		    link.CssClass = "menu";
-		}
+		
+		link.CssClass = this.CssClass;
 		link.RenderControl(writer);
-
-		cell.RenderEndTag(writer);
-		row.RenderEndTag(writer);
 
 		foreach (MenuItem item in Items) {
 		    item.Render(writer, 0);
 		}
-
-		table.RenderEndTag(writer);
 	    }
 	}
     }
