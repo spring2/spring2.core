@@ -131,5 +131,26 @@ namespace Spring2.Core.Types {
 		return new DateType(result);
 	    }
 	}
+
+	public DateType FirstOfMonth {
+	    get {
+		DateTime result = ToDateTime();
+		return new DateType(new DateTime(result.Year, result.Month, 1));
+	    }
+	}
+
+	public DateType FirstOfYear {
+	    get {
+		DateTime result = ToDateTime();
+		return new DateType(new DateTime(result.Year, 1, 1));
+	    }
+	}
+
+	public DateType OneYearAgo {
+	    get {
+		DateTime result = ToDateTime().AddMonths(-12);
+		return new DateType(result);
+	    }
+	}
     }
 }
