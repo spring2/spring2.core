@@ -18,6 +18,9 @@ namespace Spring2.Core.Types {
 
 	private DateTime value;
 
+	/// <summary>
+	/// Creates a DateType populated with current time
+	/// </summary>
 	public DateType() {
 	    this.value = DateTime.Now;
 	}
