@@ -13,26 +13,51 @@ namespace Spring2.Core.DataObject {
     [Serializable()]
     public abstract class DataObject {
 
+	private static readonly String SINGLE_INDENT = "    ";
+
 	/// <summary>
 	/// Creates a string representation of the DataObject.
 	/// </summary>
 	/// <returns>String representing the data object.</returns>
 	public override String ToString() {
+	    return ToString(0);
+	}
+
+	/// <summary>
+	/// Creates a string representation of the DataObject indented to indentLevel (for nested objects)
+	/// </summary>
+	/// <returns>String representing the data object.</returns>
+	public String ToString(Int32 indentLevel) {
+
+	    String indent = String.Empty;
+	    for (int i = 0; i < indentLevel; i++) {
+		indent += SINGLE_INDENT;
+	    }
 
 	    StringBuilder sb = new StringBuilder();
 	    foreach (PropertyInfo p in GetType().GetProperties()) {
-		
 		Object value = p.GetValue(this, null);
-		if (value is ICollection) {
-		    ICollection collection = (ICollection)value;
-		    foreach (Object item in collection) {
-			sb.Append("\tItem: ").Append(item.ToString());
-		    }
-		}
 
-		sb.Append(p.Name + ": ")
-		    .Append(p.GetValue(this, null))
-		    .Append(Environment.NewLine);
+		sb.Append(indent);
+		sb.Append(p.Name + ": ");
+		if (value is DataObject) {
+		    sb.Append(Environment.NewLine);
+		    sb.Append(((DataObject)value).ToString(indentLevel+1));
+		} else if (value is ICollection) {
+		    ICollection collection = (ICollection)value;
+		    sb.Append(value.GetType().Name).Append(" (count=").Append(collection.Count).Append(")").Append(Environment.NewLine);
+		    foreach (Object item in collection) {
+			sb.Append(indent).Append(SINGLE_INDENT).Append("Item: ").Append(Environment.NewLine);
+			if (item is DataObject) {
+			    sb.Append(((DataObject)item).ToString(indentLevel+2));
+			} else {
+			    sb.Append(item.ToString());
+			}
+		    }
+		} else {
+		    sb.Append(value.ToString());
+		    sb.Append(Environment.NewLine);
+		}
 	    }
 
 	    return sb.ToString();
