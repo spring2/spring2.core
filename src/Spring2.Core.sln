@@ -1,16 +1,20 @@
-Microsoft Visual Studio Solution File, Format Version 7.00
+Microsoft Visual Studio Solution File, Format Version 8.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core", "Spring2.Core.csproj", "{80B94045-4DE6-4BB0-BE22-C5CC0E772695}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.WebControl", "Spring2.Core.WebControl.csproj", "{848F75F0-EEBA-4C76-BF81-A41CF6B5EF98}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Test", "Spring2.Core.Test.csproj", "{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
-		ConfigName.0 = Debug
-		ConfigName.1 = Release
-	EndGlobalSection
-	GlobalSection(ProjectDependencies) = postSolution
+		Debug = Debug
+		Release = Release
 	EndGlobalSection
 	GlobalSection(ProjectConfiguration) = postSolution
 		{80B94045-4DE6-4BB0-BE22-C5CC0E772695}.Debug.ActiveCfg = Debug|.NET
