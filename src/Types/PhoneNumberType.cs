@@ -19,11 +19,10 @@ namespace Spring2.Core.Types {
 	private String number = String.Empty;
 	private String extension = String.Empty;
 
-
 	//Hard coded Defaults
 	private const string DEFAULT_PHONE_NUMBER_FORMAT = "({0}) {1}-{2}";
 	private const string DEFAULT_EXTENSION_FORMAT = "x{0}";
-	private const string DEFAULT_LOCAL_PHONE_FORMAT = "({1}-{2}";
+	private const string DEFAULT_LOCAL_PHONE_FORMAT = "{1}-{2}";
 
 	//DBValue formats
 	private const string DBVALUE_PHONE_FORMAT = "{0}{1}{2}";
@@ -114,8 +113,56 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
-	
+	public String CountryCode{
+	    get{
+		if (IsValid) {
+		    return this.countryCode;
+		} else {
+		    throw new InvalidOperationException("UNSET and DEFAULT PhoneNumberTypes have no country code.");
+		}
+	    }   
+	}
 
+	public String AreaCode{
+	    get{
+		if (IsValid) {
+		    return this.areaCode;
+		} else {
+		    throw new InvalidOperationException("UNSET and DEFAULT PhoneNumberTypes have no area code.");
+		}
+	    }   
+	}
+
+	public String Exchange{
+	    get{
+		if (IsValid) {
+		    return this.exchange;
+		} else {
+		    throw new InvalidOperationException("UNSET and DEFAULT PhoneNumberTypes have no exchange.");
+		}
+	    }   
+	}
+
+
+	public String Number{
+	    get{
+		if (IsValid) {
+		    return this.number;
+		} else {
+		    throw new InvalidOperationException("UNSET and DEFAULT PhoneNumberTypes have no number.");
+		}
+	    }   
+	}
+
+	public String Extension{
+	    get{
+		if (IsValid) {
+		    return this.extension;
+		} else {
+		    throw new InvalidOperationException("UNSET and DEFAULT PhoneNumberTypes have no extension.");
+		}
+	    }   
+	}
 	
 	protected PhoneNumberType() {}
 
@@ -219,6 +266,11 @@ namespace Spring2.Core.Types {
 	/// <param name="extensionFormat"></param>
 	/// <returns>Formatted Phone Number string</returns>
 	public String ToString(String phoneNumberFormat, String extensionFormat){
+
+	    if (!IsValid) {
+		throw new InvalidCastException("UNSET and DEFAULT DateTypes have no string value.");
+	    }
+
 	    String formattedPhoneNumber = String.Empty;
 	    //append the country code if it exists
 
