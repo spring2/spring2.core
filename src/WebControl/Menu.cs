@@ -24,6 +24,8 @@ namespace Spring2.Core.WebControl {
 	private Boolean active;
 	private String selectedImageUrl = String.Empty;
 	private String unselectedImageUrl = String.Empty;
+	private String description = String.Empty;
+	private String descriptionCssClass = String.Empty;
 
 	private MenuItemCollection items = new MenuItemCollection();
 
@@ -152,6 +154,24 @@ namespace Spring2.Core.WebControl {
 	    }
 	}
 
+	/// <summary>
+	/// Gets or sets the description to be rendered beneath the menu link.
+	/// </summary>
+	public String Description
+	{
+	    get { return description; }
+	    set { description = value == null?String.Empty:value; }
+	}
+
+	/// <summary>
+	/// Gets or sets the css class to be used with the description.
+	/// </summary>
+	public String DescriptionCssClass
+	{
+	    get { return descriptionCssClass; }
+	    set { descriptionCssClass = value == null?String.Empty:value; }
+	}
+
 	protected override void OnLoad(EventArgs e) 
 	{
 	    base.OnLoad(e);
@@ -170,6 +190,15 @@ namespace Spring2.Core.WebControl {
 		Link.NavigateUrl = String.Empty;
 	    }
 	    Link.RenderControl(writer);
+	    if (Description != String.Empty)
+	    {
+		writer.Write("<div id=\"leftdescription\" ");
+		if (DescriptionCssClass != String.Empty)
+		{
+		    writer.Write(" class=\"" + DescriptionCssClass + "\"");
+		}
+		writer.Write(">" + Description + "</div>");
+	    }
 	}
 
 	protected override void Render(HtmlTextWriter writer) {
