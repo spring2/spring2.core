@@ -39,7 +39,7 @@ namespace Spring2.Core.Types {
 	    OPTIONS.Add(this);
 	}
 
-	protected override Object DBValue {
+	protected override Object Value {
 	    get {
 		return code;
 	    }

@@ -26,7 +26,7 @@ namespace Spring2.Core.Types {
 	    this.value = value;
 	}
 
-	protected override Object DBValue {
+	protected override Object Value {
 	    get {
 		return value;
 	    }
