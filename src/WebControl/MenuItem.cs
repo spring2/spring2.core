@@ -5,10 +5,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Spring2.Core.WebControl {
+
     /// <summary>
     /// Summary description for MenuItem.
     /// </summary>
-    //    [DefaultProperty("Text"), ToolboxData("<{0}:MenuItem runat=server></{0}:MenuItem>")]
     [ParseChildren(true, "Items")]
     public class MenuItem : Menu {
 
@@ -21,66 +21,10 @@ namespace Spring2.Core.WebControl {
 	    set { parentMenu = value; }
 	}
 
-//	public MenuItem SelectedItem {
-//	    get { 
-//		foreach (MenuItem item in items) {
-//		    if (item.Selected) {
-//			return item;
-//		    }
-//		}
-//		return EMPTY;
-//	    }
-//	    set {
-//		foreach (MenuItem item in items) {
-//		    item.Selected = item.Equals(value);
-//		}
-//	    }
-//	}
-//
-//	public MenuItem NextItem {
-//	    get {
-//		Int32 selectedItemIndex = items.IndexOf(SelectedItem);
-//		return ++selectedItemIndex >= items.Count ? EMPTY : items[selectedItemIndex];
-//	    }
-//	}
-//
-//	public MenuItem PreviousItem {
-//	    get { 
-//		Int32 selectedItemIndex = items.IndexOf(SelectedItem);
-//		return --selectedItemIndex < 0 ? EMPTY : items[selectedItemIndex];
-//	    }
-//	}
-//
-//	public MenuItem FirstItem {
-//	    get { return items.Count > 0 ? items[0] : EMPTY; }
-//	}
-//
-//	public MenuItem LastItem {
-//	    get { return items.Count > 0 ? items[items.Count - 1] : EMPTY; }
-//	}
-//
 	public new String SelectedItemImageUrl {
 	    get { return ParentMenu.SelectedItemImageUrl; }
 	}
-//
-//	public MenuItem SetSelectedItemByUrl(String url) {
-//	    foreach (MenuItem item in items) {
-//	        if (item.NavigateUrl.Equals(url)) {
-//		    SelectedItem = item;
-//		    return item;
-//		}
-//	    }
-//	    return EMPTY;
-//	}
-//
-//	public Unit Indent {
-//	    get { return ParentMenu.Indent; }
-//	}
-//
-//	public Unit Space {
-//	    get { return ParentMenu.Space; }
-//	}
-//
+
 	public Int32 Depth {
 	    get {
 		Int32 maxDepth = 0, depth = 0;
@@ -140,13 +84,5 @@ namespace Spring2.Core.WebControl {
 		}
 	    }
 	}
-
-	//	/// <summary> 
-	//	/// Render this control to the output parameter specified.
-	//	/// </summary>
-	//	/// <param name="output"> The HTML writer to write out to </param>
-	//	protected override void Render(HtmlTextWriter output) {
-	//	    output.Write(Text);
-	//	}
     }
 }
