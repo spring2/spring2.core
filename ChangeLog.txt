@@ -1,6 +1,12 @@
+2003-05-09 Friday 17:48  cort
+
+	* release/Spring2.Core.1.1.2.5588.zip:
+	
+	new release version
+
 2003-05-09 Friday 17:46  cort
 
-	* ChangeLog.txt:
+	* ChangeLog.txt, ChangeLog.txt:
 	
 	update change log
 
