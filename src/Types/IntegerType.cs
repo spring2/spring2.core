@@ -7,7 +7,7 @@ namespace Spring2.Core.Types {
     /// Data type for wrapping integers.  This class is to replace the soon to be 
     /// obsolete NumberType class.
     /// </summary>
-    public class IntegerType : DataType	{
+    public class IntegerType : DataType, IComparable {
 
 	public static readonly new IntegerType DEFAULT = new IntegerType();
 	public static readonly new IntegerType UNSET = new IntegerType();
@@ -64,6 +64,20 @@ namespace Spring2.Core.Types {
 
 	public String ToString(String format, IFormatProvider provider) {
 	    return value.ToString(format, provider);
+	}
+
+	public Int32 CompareTo(Object o) {
+
+	    IntegerType that = o as IntegerType;
+	    if (that == null) {
+		throw new ArgumentException("Argument must be an instance of IntegerType");
+	    }
+
+	    if (this.IsValid && that.IsValid) {
+		return value.CompareTo(that.Value);
+	    }
+	    
+	    return Compare(that);
 	}
     }
 }

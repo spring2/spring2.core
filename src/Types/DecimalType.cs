@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace Spring2.Core.Types {
 
-    public class DecimalType : DataType {
+    public class DecimalType : DataType, IComparable {
 
 	public static readonly new DecimalType DEFAULT = new DecimalType();
 	public static readonly new DecimalType UNSET = new DecimalType();
@@ -77,6 +77,20 @@ namespace Spring2.Core.Types {
 
 	public virtual String ToString(String format) {
 	    return value.ToString(format);
+	}
+
+	public Int32 CompareTo(Object o) {
+
+	    DecimalType that = o as DecimalType;
+	    if (that == null) {
+		throw new ArgumentException("Argument must be an instance of DecimalType");
+	    }
+
+	    if (this.IsValid && that.IsValid) {
+		return value.CompareTo(that.Value);
+	    }
+	    
+	    return Compare(that);
 	}
     }
 }

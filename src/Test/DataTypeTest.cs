@@ -319,5 +319,53 @@ namespace Spring2.Core.Test {
 	    Assertion.Assert(!GenderType.MALE.Equals(GenderType.FEMALE));
 	    Assertion.Assert(!GenderType.FEMALE.Equals(GenderType.MALE));
 	}
+
+	[Test]
+	public void TestCompare() {
+	    IntegerType int1 = new IntegerType(10);
+	    IntegerType int2 = new IntegerType(20);
+	    IntegerType int3 = new IntegerType(30);
+	    Assertion.Assert(int2.CompareTo(int1) > 0);
+	    Assertion.Assert(int2.CompareTo(int2) == 0);
+	    Assertion.Assert(int2.CompareTo(int3) < 0);
+	    Assertion.Assert(int2.CompareTo(IntegerType.UNSET) > 0);
+	    Assertion.Assert(int2.CompareTo(IntegerType.DEFAULT) > 0);
+	    Assertion.Assert(IntegerType.DEFAULT.CompareTo(int2) < 0);
+	    Assertion.Assert(IntegerType.UNSET.CompareTo(int2) < 0);
+	    Assertion.Assert(IntegerType.UNSET.CompareTo(IntegerType.UNSET) == 0);
+	    Assertion.Assert(IntegerType.DEFAULT.CompareTo(IntegerType.DEFAULT) == 0);
+	    Assertion.Assert(IntegerType.DEFAULT.CompareTo(IntegerType.UNSET) < 0);
+	    Assertion.Assert(IntegerType.UNSET.CompareTo(IntegerType.DEFAULT) > 0);
+
+	    DecimalType decimal1 = new DecimalType(10.1);
+	    DecimalType decimal2 = new DecimalType(20.2);
+	    DecimalType decimal3 = new DecimalType(30.3);
+	    Assertion.Assert(decimal2.CompareTo(decimal1) > 0);
+	    Assertion.Assert(decimal2.CompareTo(decimal2) == 0);
+	    Assertion.Assert(decimal2.CompareTo(decimal3) < 0);
+	    Assertion.Assert(decimal2.CompareTo(DecimalType.UNSET) > 0);
+	    Assertion.Assert(decimal2.CompareTo(DecimalType.DEFAULT) > 0);
+	    Assertion.Assert(DecimalType.DEFAULT.CompareTo(decimal2) < 0);
+	    Assertion.Assert(DecimalType.UNSET.CompareTo(decimal2) < 0);
+	    Assertion.Assert(DecimalType.UNSET.CompareTo(DecimalType.UNSET) == 0);
+	    Assertion.Assert(DecimalType.DEFAULT.CompareTo(DecimalType.DEFAULT) == 0);
+	    Assertion.Assert(DecimalType.DEFAULT.CompareTo(DecimalType.UNSET) < 0);
+	    Assertion.Assert(DecimalType.UNSET.CompareTo(DecimalType.DEFAULT) > 0);
+
+	    StringType string1 = StringType.Parse("bar");
+	    StringType string2 = StringType.Parse("foo");
+	    StringType string3 = StringType.Parse("fubar");
+	    Assertion.Assert(string2.CompareTo(string1) > 0);
+	    Assertion.Assert(string2.CompareTo(string2) == 0);
+	    Assertion.Assert(string2.CompareTo(string3) < 0);
+	    Assertion.Assert(string2.CompareTo(StringType.UNSET) > 0);
+	    Assertion.Assert(string2.CompareTo(StringType.DEFAULT) > 0);
+	    Assertion.Assert(StringType.DEFAULT.CompareTo(string2) < 0);
+	    Assertion.Assert(StringType.UNSET.CompareTo(string2) < 0);
+	    Assertion.Assert(StringType.UNSET.CompareTo(StringType.UNSET) == 0);
+	    Assertion.Assert(StringType.DEFAULT.CompareTo(StringType.DEFAULT) == 0);
+	    Assertion.Assert(StringType.DEFAULT.CompareTo(StringType.UNSET) < 0);
+	    Assertion.Assert(StringType.UNSET.CompareTo(StringType.DEFAULT) > 0);
+	}
     }
 }

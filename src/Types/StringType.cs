@@ -54,5 +54,19 @@ namespace Spring2.Core.Types {
 	public Boolean IsEmpty {
 	    get { return !IsValid || String.Empty.Equals(value.Trim()); }
 	}
+
+	public Int32 CompareTo(Object o) {
+
+	    StringType that = o as StringType;
+	    if (that == null) {
+		throw new ArgumentException("Argument must be an instance of StringType");
+	    }
+
+	    if (this.IsValid && that.IsValid) {
+		return value.CompareTo(that.Value);
+	    }
+	    
+	    return Compare(that);
+	}
     }
 }

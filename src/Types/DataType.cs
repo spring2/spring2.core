@@ -65,5 +65,22 @@ namespace Spring2.Core.Types {
 	public override Int32 GetHashCode() {
 	    return Value == null ? 0 : Value.GetHashCode();
 	}
+
+	protected Int32 Compare(DataType that) {
+
+	    if (this.IsDefault) {
+		return that.IsDefault ? 0 : -1;
+	    }
+	    if (that.IsDefault) {
+		return 1;
+	    }
+	    if (this.IsUnset) {
+		return that.IsUnset ? 0 : -1;
+	    }
+	    if (that.IsUnset) {
+		return 1;
+	    }
+	    return 0;
+	}
     }
 }
