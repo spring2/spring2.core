@@ -60,8 +60,6 @@ package: clean solution regress changelog
 
 release: package
 	cvs tag RELEASE_$(subst .,_,$(shell ./getversion.sh))
-	$(shell cd ${RELEASEDIR}; cvs add -kb Spring2.Core.$(shell getversion.sh).zip)
-	$(shell cd ${RELEASEDIR}; cvs commit -m "new release version" Spring2.Core.$(shell getversion.sh).zip)
+	../bin/cvsadd.sh ${RELEASEDIR} Spring2.Core.$(shell getversion.sh).zip "new release version"
 	${BINDIR}/UpdateVersion -b Increment -i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs
 	cvs commit -m "update to next version" AssemblyVersionInfo.cs
-
