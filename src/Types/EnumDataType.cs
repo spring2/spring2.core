@@ -11,6 +11,22 @@ namespace Spring2.Core.Types {
 	    get { return code; }
 	}
 	
+	public String Code {
+	    get { 
+		if (IsDefault) {
+		    return DEFAULT;
+		} else if (IsUnset) {
+		    return UNSET;
+		} else {
+		    return code;
+		}
+	    }
+	}
+
+	public String Name {
+	    get { return ToString(); }
+	}
+
 	public override String ToString() {
 	    if (IsDefault) {
 		return DEFAULT;
