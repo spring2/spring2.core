@@ -42,8 +42,7 @@ namespace Spring2.Core.Util {
 	}
 
 	/// <summary>
-	/// Read the contents of a file and place them in
-	/// a string object.
+	/// Read the contents of a file and place them in a string object.
 	/// </summary>
 	/// <param name="String">path to file.</param>
 	/// <returns>String contents of the file.</returns>
