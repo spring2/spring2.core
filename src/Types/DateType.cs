@@ -22,7 +22,15 @@ namespace Spring2.Core.Types {
 	    this.value = DateTime.Now;
 	}
 
-	public DateType(DateTime value) {
+	/// <summary>
+	/// Contructs a new instance of a DateType with
+	/// the given date as its internal value.  This constructor
+	/// should be private to avoid creating DateType objects with
+	/// a null internal value.
+	/// </summary>
+	/// <param name="value">a DateTime object for the internal 
+	/// value of the date type.</param>
+	private DateType(DateTime value) {
 	    this.value = value;
 	}
 

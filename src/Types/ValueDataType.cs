@@ -6,6 +6,5 @@ namespace Spring2.Core.Types {
     /// Summary description for ValueDataType.
     /// </summary>
     public abstract class ValueDataType {
-
     }
 }

@@ -24,7 +24,15 @@ namespace Spring2.Core.Types {
 
 	private StringType() {}
 
-	public StringType(String value) {
+	/// <summary>
+	/// Constructs a new StringType object from a String.
+	/// This constructor is private to avoid creating
+	/// StringTypes with a null internal value.  Use 
+	/// NewInstance instead.
+	/// </summary>
+	/// <param name="value">the internal value of the new 
+	/// object.</param>
+	private StringType(String value) {
 	    this.value = value;
 	}
 
@@ -55,8 +63,5 @@ namespace Spring2.Core.Types {
 	public override int GetHashCode() {
 	    return value == null ? 0 : value.GetHashCode();
 	}
-
-
-
     }
 }
