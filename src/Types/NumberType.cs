@@ -57,7 +57,7 @@ namespace Spring2.Core.Types {
 	public override Boolean Equals(Object o) {
 	    if (this == o) {
 		return true;
-	    } else if (!(o is IdType)) {
+	    } else if (!(o is NumberType)) {
 		return false;
 	    } else {
 		return value.Equals(((NumberType)o).value);
