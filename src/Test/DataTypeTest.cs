@@ -381,7 +381,34 @@ namespace Spring2.Core.Test {
 	    Assertion.Assert(DateType.DEFAULT.CompareTo(DateType.DEFAULT) == 0);
 	    Assertion.Assert(DateType.DEFAULT.CompareTo(DateType.UNSET) < 0);
 	    Assertion.Assert(DateType.UNSET.CompareTo(DateType.DEFAULT) > 0);
+	}
 
+	[Test]
+	public void TestEndOfQuarter() {
+
+	    DateType date = DateType.Parse("2/28/2002");
+	    DateType lastQuarterEnd = date.EndOfPreviousQuarter;
+	    DateType thisQuarterEnd = date.EndOfCurrentQuarter;
+	    Assertion.Assert(DateTime.Parse("12/31/2001").Date.Equals(lastQuarterEnd.ToDateTime().Date));
+	    Assertion.Assert(DateTime.Parse("3/31/2002").Date.Equals(thisQuarterEnd.ToDateTime().Date));
+	    
+	    date = DateType.Parse("6/1/2002");
+	    lastQuarterEnd = date.EndOfPreviousQuarter;
+	    thisQuarterEnd = date.EndOfCurrentQuarter;
+	    Assertion.Assert(DateTime.Parse("3/31/2002").Date.Equals(lastQuarterEnd.ToDateTime().Date));
+	    Assertion.Assert(DateTime.Parse("6/30/2002").Date.Equals(thisQuarterEnd.ToDateTime().Date));
+
+	    date = DateType.Parse("7/1/2002");
+	    lastQuarterEnd = date.EndOfPreviousQuarter;
+	    thisQuarterEnd = date.EndOfCurrentQuarter;
+	    Assertion.Assert(DateTime.Parse("6/30/2002").Date.Equals(lastQuarterEnd.ToDateTime().Date));
+	    Assertion.Assert(DateTime.Parse("9/30/2002").Date.Equals(thisQuarterEnd.ToDateTime().Date));
+
+	    date = DateType.Parse("12/31/2002");
+	    lastQuarterEnd = date.EndOfPreviousQuarter;
+	    thisQuarterEnd = date.EndOfCurrentQuarter;
+	    Assertion.Assert(DateTime.Parse("9/30/2002").Date.Equals(lastQuarterEnd.ToDateTime().Date));
+	    Assertion.Assert(DateTime.Parse("12/31/2002").Date.Equals(thisQuarterEnd.ToDateTime().Date));
 	}
     }
 }
