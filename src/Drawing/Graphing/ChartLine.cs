@@ -73,6 +73,12 @@ namespace Spring2.Core.Drawing.Graphing {
 	private IList points = new ArrayList();
 	private String legendText = String.Empty;
 	private Color color = Color.Black;
+	
+	private float minX = float.MaxValue;
+	private float maxX = float.MinValue;
+	private float minY = float.MaxValue;
+	private float maxY = float.MinValue;
+	private Boolean showYValues = false;
 
 	public ChartLine() {
 	}
@@ -86,21 +92,15 @@ namespace Spring2.Core.Drawing.Graphing {
 	    this.legendText = legendText;
 
 	    points = new ArrayList();
-	    for(int i=x1;i<=x2;i++) {
+	    for(Int32 i=x1; i<=x2; i++) {
 		LineChart.datapoint pd = new LineChart.datapoint();
 		pd.x = i;
 		pd.y = y;
 		pd.valid = true;
 		points.Add(pd);
+		CalculateRange(pd);
 	    }
 	}
-
-
-//	public ScorecardLine(ResultSet rs, String xColumnName, String yColumnName, String legendText) {
-//	    this.legendText = legendText;
-//	    this.points = getpointsFromResultSet(rs, xColumnName, yColumnName);
-//	}
-//
 
 	public IList Points {
 	    get { return points; }
@@ -118,68 +118,59 @@ namespace Spring2.Core.Drawing.Graphing {
 	    set { this.color = value; }
 	}
 
-	public void AddPoint(LineChart.datapoint point) {
-	    points.Add(point);
-	}
-
 	public void AddPoint(float x, float y) {
 	    LineChart.datapoint dp = new LineChart.datapoint();
 	    dp.x = x;
 	    dp.y = y;
 	    dp.valid = true;
 	    points.Add(dp);
+	    CalculateRange(dp);
 	}
 
+	public void AddPoint(float x, float y, Boolean valid) {
+	    LineChart.datapoint dp = new LineChart.datapoint();
+	    dp.x = x;
+	    dp.y = y;
+	    dp.valid = valid;
+	    points.Add(dp);
+	    CalculateRange(dp);
+	}
 
-//	/**
-//	 * Creates a new points from columns in a ResultSet.
-//	 * TODO: actually use specified columns.
-//	 * @param rs
-//	 * @param xColumnName
-//	 * @param yColumnName
-//	 * @return
-//	 */
-//	private static points getpointsFromResultSet(ResultSet rs, String xColumnName, String yColumnName) {
-//	    points pr = new points();
-//
-//	    double lastval=0;
-//	    double resmax=0;
-//	    double resmin=2147483647;
-//	    boolean found=false;
-//	    try {
-//		// TODO: need this if you are using the same resultset over and over
-//		//rs.first();
-//		while( rs.next() ) {
-//		    int rid = rs.getInt(xColumnName);
-//		    double res = rs.getDouble(yColumnName);
-//		    if(rs.wasNull()) {
-//			res = lastval;
-//		    } else {
-//			lastval=res;
-//		    }
-//		    debug("rid=" + rid + ",res=" + res);
-//
-//		    found=true;
-//		    resmax = (res>resmax) ? res : resmax;
-//		    resmin = (res<=resmin) ? res : resmin;
-//		    PlotDatum pd = new PlotDatum(rid, res, true);
-//		    pr.add(pd);
-//		}
-//	    } catch(Exception e) {
-//		System.out.println("getSqlRun:" + e);
-//	    }
-//	    /* add points slightly outside max,min bounds for vertical scaling */
-//	    /*        if (found) {
-//			pd = new PlotDatum(rid,1.05*resmax,false);
-//			pd.setLineColor(new Color(0xFFFFFF));
-//			pr.add(pd);
-//			pd = new PlotDatum(rid,.95*resmin,false);
-//			pd.setLineColor(new Color(0xFFFFFF));
-//			pr.add(pd);
-//		    }
-//	    */
-//	    return pr;
-//	}
+	private void CalculateRange(LineChart.datapoint point) {
+	    if (point.x<minX) {
+		minX = point.x;
+	    }
+	    if (point.x>maxX) {
+		maxX = point.x;
+	    }
+	    if (point.y<minY) {
+		minY = point.y;
+	    }
+	    if (point.y>maxY) {
+		maxY = point.y;
+	    }
+	}
+
+	public float MinX {
+	    get { return minX; }
+	}
+
+	public float MaxX {
+	    get { return maxX; }
+	}
+
+	public float MinY {
+	    get { return minY; }
+	}
+
+	public float MaxY {
+	    get { return maxY; }
+	}
+
+	public Boolean ShowYValues {
+	    get { return showYValues; }
+	    set { this.showYValues = value; }
+	}
 
 
     }
