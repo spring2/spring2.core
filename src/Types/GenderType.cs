@@ -3,15 +3,15 @@ using System.Collections;
 
 namespace Spring2.Core.Types {
 
-    public class GenderType : DataType	{
+    public class GenderType : EnumDataType {
 
 	private static readonly IList OPTIONS = new ArrayList();
 
 	public static readonly new GenderType DEFAULT = new GenderType();
 	public static readonly new GenderType UNSET = new GenderType();
 
-	public static readonly GenderType MALE = new GenderType("M");
-	public static readonly GenderType FEMALE = new GenderType("F");
+	public static readonly GenderType MALE = new GenderType("M", "Male");
+	public static readonly GenderType FEMALE = new GenderType("F", "Female");
 
 	public static GenderType GetInstance(Object value) {
 	    if (value is String) {
@@ -25,8 +25,6 @@ namespace Spring2.Core.Types {
 	    return UNSET;
 	}
 
-	private String code;
-
 	private GenderType() {
 	}
 
@@ -34,15 +32,10 @@ namespace Spring2.Core.Types {
 	    get { return OPTIONS; }
 	}
 
-	private GenderType(String code) {
+	private GenderType(String code, String name) {
 	    this.code = code;
+	    this.name = name;
 	    OPTIONS.Add(this);
-	}
-
-	protected override Object Value {
-	    get {
-		return code;
-	    }
 	}
 
 	public override Boolean IsDefault {
@@ -56,5 +49,6 @@ namespace Spring2.Core.Types {
 		return Object.ReferenceEquals(this, UNSET);
 	    }
 	}
+
     }
 }
