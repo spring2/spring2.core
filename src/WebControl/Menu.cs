@@ -18,12 +18,12 @@ namespace Spring2.Core.WebControl {
 	private Boolean selected;
 	private Boolean expanded;
 	private Boolean expandSelected = true;
-	private String menuItemStyle = String.Empty;
-	private String selectedItemStyle = String.Empty;
 	private String completedItemStyle = String.Empty;
 	private Int32 indent;
 	private String navigateUrl = String.Empty;
 	private Boolean active;
+	private String selectedImageUrl = String.Empty;
+	private String unselectedImageUrl = String.Empty;
 
 	private MenuItemCollection items = new MenuItemCollection();
 
@@ -65,16 +65,6 @@ namespace Spring2.Core.WebControl {
 	public Boolean ExpandSelected {
 	    get { return expandSelected; }
 	    set { expandSelected = value; }
-	}
-
-	public virtual String MenuItemStyle {
-	    get { return menuItemStyle; }
-	    set { menuItemStyle = value; }
-	}
-
-	public virtual String SelectedItemStyle {
-	    get { return selectedItemStyle; }
-	    set { selectedItemStyle = value; }
 	}
 
 	public virtual String CompletedItemStyle {
@@ -143,6 +133,25 @@ namespace Spring2.Core.WebControl {
 	    get { return items; }
 	}
 
+	/// <summary>
+	/// Gets or sets the enabled property for the menu.
+	/// </summary>
+	public new bool Enabled 
+	{
+	    get
+	    {
+		return base.Enabled;
+	    }
+	    set
+	    {
+		base.Enabled = value;
+		foreach (MenuItem item in Items)
+		{
+		    item.Enabled = value;
+		}
+	    }
+	}
+
 	protected override void OnLoad(EventArgs e) 
 	{
 	    base.OnLoad(e);
@@ -152,6 +161,15 @@ namespace Spring2.Core.WebControl {
 	    }
 
 	    Active = Active;
+	}
+
+	protected void RenderLink(HtmlTextWriter writer)
+	{
+	    if (Selected || !Enabled)
+	    {
+		Link.NavigateUrl = String.Empty;
+	    }
+	    Link.RenderControl(writer);
 	}
 
 	protected override void Render(HtmlTextWriter writer) {
@@ -169,7 +187,7 @@ namespace Spring2.Core.WebControl {
 		endHeader.Text = "</h1>";
 
 		beginHeader.RenderControl(writer);
-		link.RenderControl(writer);
+		RenderLink(writer);
 		endHeader.RenderControl(writer);
 
 		foreach (MenuItem item in Items) {

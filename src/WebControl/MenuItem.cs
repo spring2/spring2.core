@@ -76,14 +76,6 @@ namespace Spring2.Core.WebControl {
 	    return MenuItem.EMPTY;
 	}
 
-	public override String MenuItemStyle {
-	    get { return ParentMenu.MenuItemStyle; }
-	}
-
-	public override String SelectedItemStyle {
-	    get { return ParentMenu.SelectedItemStyle; }
-	}
-
 	public void Render(HtmlTextWriter writer, Int32 indentLevel) {
 
 	    if (Visible) {
@@ -97,7 +89,7 @@ namespace Spring2.Core.WebControl {
 
 		beginHeader.RenderControl(writer);
 
-		Link.RenderControl(writer);
+		RenderLink(writer);
 
 		endHeader.RenderControl(writer);
 
