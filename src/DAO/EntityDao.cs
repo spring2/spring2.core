@@ -60,8 +60,8 @@ namespace Spring2.Core.DAO {
 			} else {
 				throw new Exception("Unable to determine hive from registry type connection key.  Hive understood: " + hive + "  Key used was: " + key);
 			}
-			if (rkey == null) {Exception
-				throw new ("Specified subkey was not found.  Subkey: " + subkey);
+			if (rkey == null) {
+				throw new Exception("Specified subkey was not found.  Subkey: " + subkey);
 			}
 			connectionString = rkey.GetValue(value).ToString();
 	    } else {
