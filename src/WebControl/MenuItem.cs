@@ -89,6 +89,10 @@ namespace Spring2.Core.WebControl {
 
 		beginHeader.RenderControl(writer);
 
+		if (!Enabled) {
+		    this.Link.Attributes["onclick"] = this.parentMenu.DisabledMenuNotice;
+		}
+
 		RenderLink(writer);
 
 		endHeader.RenderControl(writer);

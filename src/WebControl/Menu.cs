@@ -26,6 +26,7 @@ namespace Spring2.Core.WebControl {
 	private String unselectedImageUrl = String.Empty;
 	private String description = String.Empty;
 	private String descriptionCssClass = String.Empty;
+	private String disabledMenuNotice = String.Empty;
 
 	private MenuItemCollection items = new MenuItemCollection();
 
@@ -172,6 +173,14 @@ namespace Spring2.Core.WebControl {
 	    set { descriptionCssClass = value == null?String.Empty:value; }
 	}
 
+	/// <summary>
+	/// Gets or sets the css save alert function name.
+	/// </summary>
+	public String DisabledMenuNotice {
+	    get { return this.disabledMenuNotice; }
+	    set { this.disabledMenuNotice = value == null ? String.Empty : value; }
+	}
+
 	protected override void OnLoad(EventArgs e) 
 	{
 	    base.OnLoad(e);
@@ -189,10 +198,11 @@ namespace Spring2.Core.WebControl {
 	    {
 		Link.NavigateUrl = String.Empty;
 	    }
+
 	    Link.RenderControl(writer);
 	    if (Description != String.Empty)
 	    {
-		writer.Write("<div id=\"leftdescription\" ");
+		writer.Write("<div");
 		if (DescriptionCssClass != String.Empty)
 		{
 		    writer.Write(" class=\"" + DescriptionCssClass + "\"");
@@ -205,7 +215,7 @@ namespace Spring2.Core.WebControl {
 
 	    if (Visible) {
 		
-		writer.Write("<div id=\"left\" class=\"" + this.CssClass + "\">");
+		writer.Write("<div class=\"" + this.CssClass + "\">");
 
 		Literal beginHeader = new Literal();
 		beginHeader.Text = "<h1>";
