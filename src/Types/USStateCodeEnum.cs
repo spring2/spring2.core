@@ -12,6 +12,7 @@ namespace Spring2.Core.Types {
 
 	public static readonly USStateCodeEnum ALABAMA = new USStateCodeEnum("AL", "AL");
 	public static readonly USStateCodeEnum ALASKA = new USStateCodeEnum("AK", "AK");
+	public static readonly USStateCodeEnum AMERICAN_SAMOA = new USStateCodeEnum("AS", "AS");
 	public static readonly USStateCodeEnum ARIZONA = new USStateCodeEnum("AZ", "AZ");
 	public static readonly USStateCodeEnum ARKANSAS = new USStateCodeEnum("AR", "AR");
 	public static readonly USStateCodeEnum CALIFORNIA = new USStateCodeEnum("CA", "CA");
@@ -21,6 +22,7 @@ namespace Spring2.Core.Types {
 	public static readonly USStateCodeEnum DISTRICT_OF_COLUMBIA = new USStateCodeEnum("DC", "DC");
 	public static readonly USStateCodeEnum FLORIDA = new USStateCodeEnum("FL", "FL");
 	public static readonly USStateCodeEnum GEORGIA = new USStateCodeEnum("GA", "GA");
+	public static readonly USStateCodeEnum GUAM = new USStateCodeEnum("GU", "GU");
 	public static readonly USStateCodeEnum HAWAII = new USStateCodeEnum("HI", "HI");
 	public static readonly USStateCodeEnum IDAHO = new USStateCodeEnum("ID", "ID");
 	public static readonly USStateCodeEnum ILLINOIS = new USStateCodeEnum("IL", "IL");
@@ -49,6 +51,7 @@ namespace Spring2.Core.Types {
 	public static readonly USStateCodeEnum OKLAHOMA = new USStateCodeEnum("OK", "OK");
 	public static readonly USStateCodeEnum OREGON = new USStateCodeEnum("OR", "OR");
 	public static readonly USStateCodeEnum PENNSYLVANIA = new USStateCodeEnum("PA", "PA");
+	public static readonly USStateCodeEnum PUERTO_RICO = new USStateCodeEnum("PR", "PR");
 	public static readonly USStateCodeEnum RHODE_ISLAND = new USStateCodeEnum("RI", "RI");
 	public static readonly USStateCodeEnum SOUTH_CAROLINA = new USStateCodeEnum("SC", "SC");
 	public static readonly USStateCodeEnum SOUTH_DAKOTA = new USStateCodeEnum("SD", "SD");
@@ -57,6 +60,7 @@ namespace Spring2.Core.Types {
 	public static readonly USStateCodeEnum UTAH = new USStateCodeEnum("UT", "UT");
 	public static readonly USStateCodeEnum VERMONT = new USStateCodeEnum("VT", "VT");
 	public static readonly USStateCodeEnum VIRGINIA = new USStateCodeEnum("VA", "VA");
+	public static readonly USStateCodeEnum VIRGIN_ISLANDS = new USStateCodeEnum("VI", "VI");
 	public static readonly USStateCodeEnum WASHINGTON = new USStateCodeEnum("WA", "WA");
 	public static readonly USStateCodeEnum WEST_VIRGINIA = new USStateCodeEnum("WV", "WV");
 	public static readonly USStateCodeEnum WISCONSIN = new USStateCodeEnum("WI", "WI");
