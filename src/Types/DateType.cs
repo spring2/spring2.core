@@ -154,6 +154,26 @@ namespace Spring2.Core.Types {
 	}
 
 	/// <summary>
+	/// Get the date part only
+	/// </summary>
+	public DateType Date {
+	    get {
+		return new DateType(new DateTime(ToDateTime().Year, ToDateTime().Month, ToDateTime().Day));
+	    }
+	}
+
+	/// <summary>
+	/// Get the date part only
+	/// </summary>
+	public DateTime ToDate() {
+	    return new DateTime(ToDateTime().Year, ToDateTime().Month, ToDateTime().Day);
+	}
+
+	public DateType AddDays(Double days) {
+	    return new DateType(ToDateTime().AddDays(days));
+	}
+
+	/// <summary>
 	/// Returns an instance that represents the current date and time
 	/// </summary>
 	public static DateType Now {
