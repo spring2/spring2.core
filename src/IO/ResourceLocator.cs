@@ -62,8 +62,8 @@ namespace Spring2.Core.IO {
 			list.Add(c);
 			GetReferencedAssemblies(c, list);
 		    }
-		} catch (System.IO.FileNotFoundException) {
-		    // this can be ignored -- trying to hard to find all of the assemblies that a resource could live in
+		} catch {
+		    // ignore problems loading assemblies, just move on
 		}
 	    }
 	    if (!list.Contains(a)) {
