@@ -1,10 +1,11 @@
 using System;
+using System.Collections;
 
 namespace Spring2.Core.Types {
     [Serializable()] 
     public struct BooleanType : IComparable, IDataType {
 	
-	private bool      myValue;
+	private Boolean myValue;
 	private TypeState myState;
 
 	private const bool True = true;
@@ -16,8 +17,8 @@ namespace Spring2.Core.Types {
 	public static readonly BooleanType TRUE = new BooleanType(true);
 	public static readonly BooleanType FALSE = new BooleanType(false);
 
-	public static readonly BooleanType DEFAULT = new BooleanType(false, TypeState.DEFAULT);
-	public static readonly BooleanType UNSET   = new BooleanType(false, TypeState.UNSET);
+	public static readonly BooleanType DEFAULT = new BooleanType(TypeState.DEFAULT);
+	public static readonly BooleanType UNSET   = new BooleanType(TypeState.UNSET);
 
 	#region State management
 	public bool IsValid {
@@ -51,12 +52,12 @@ namespace Spring2.Core.Types {
 	#endregion
 
 	#region Constructors
-	private BooleanType(bool value, TypeState state) {
-	    myValue = value;
+	private BooleanType(TypeState state) {
+	    myValue = false;
 	    myState = state;
 	}
 
-	public BooleanType(bool value) {
+	private BooleanType(bool value) {
 	    myValue = value;
 	    myState = TypeState.VALID;
 	}
@@ -162,6 +163,40 @@ namespace Spring2.Core.Types {
 	    return 0;
 	}
 	#endregion
+
+	public static BooleanType GetInstance(Boolean value) {
+	    return value ? TRUE : FALSE;
+	}
+
+	public static BooleanType GetInstance(Int32 value) {
+	    if (value == 1) {
+		return TRUE;
+	    }
+	    if (value == 0) {
+		return FALSE;
+	    }
+	    return UNSET;
+	}
+
+	public static BooleanType GetInstance(String value) {
+	    if (value == "Y") {
+		return TRUE;
+	    }
+	    if (value == "N") {
+		return FALSE;
+	    }
+	    return UNSET;
+	}
+
+	public Boolean ToBoolean() {
+	    if (Object.ReferenceEquals(this, TRUE)) {
+		return true;
+	    }
+	    if (Object.ReferenceEquals(this, FALSE)) {
+		return false;
+	    }
+	    throw new InvalidCastException("UNSET and DEFAULT cannot be cast to a Boolean.");
+	}
 
     }
 }
