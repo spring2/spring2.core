@@ -19,8 +19,50 @@ namespace Spring2.Core.DAO {
 	    return GetListReader(key, viewName, null, null); 
 	} 
 		 
+	/// <summary>
+	/// Gets a data reader.
+	/// </summary>
+	/// <param name="key"></param>
+	/// <param name="viewName">View name to use.</param>
+	/// <param name="whereClause">Where clause to use or null.</param>
+	/// <param name="orderByClause">Order by clause to use or null</param>
+	/// <returns>DataReader containing selected data</returns>
 	protected static SqlDataReader GetListReader(String key, String viewName, IWhere whereClause, IOrderBy orderByClause) { 
-	    String sql = "select * from " + viewName;
+	    return GetListReader(key, viewName, whereClause, orderByClause, -1);
+	}
+
+	/// <summary>
+	/// Gets a data reader.
+	/// </summary>
+	/// <param name="key"></param>
+	/// <param name="viewName">View name to use.</param>
+	/// <param name="whereClause">Where clause to use or null.</param>
+	/// <param name="orderByClause">Order by clause to use or null</param>
+	/// <param name="maxRows">Maximum number of rows to return or < 1</param>
+	/// <returns>DataReader containing selected data</returns>
+	protected static SqlDataReader GetListReader(String key, String viewName, IWhere whereClause, IOrderBy orderByClause, Int32 maxRows) 
+	{
+	    return GetListReader(key, viewName, whereClause, orderByClause, maxRows, -1);
+	}
+
+	/// <summary>
+	/// Gets a data reader.
+	/// </summary>
+	/// <param name="key"></param>
+	/// <param name="viewName">View name to use.</param>
+	/// <param name="whereClause">Where clause to use or null.</param>
+	/// <param name="orderByClause">Order by clause to use or null</param>
+	/// <param name="maxRows">Maximum number of rows to return or lt 1 for unlimitted.</param>
+	/// <param name="commandTimeout">Number of seconds before command times out or lt 1 for default.</param>
+	/// <returns>DataReader containing selected data</returns>
+	protected static SqlDataReader GetListReader(String key, String viewName, IWhere whereClause, IOrderBy orderByClause, Int32 maxRows, Int32 commandTimeout) {
+	    String sql = "";
+	    if (maxRows < 1) {
+		sql = "select * from " + viewName;
+	    }
+	    else {
+		sql = "select top " + maxRows.ToString() + " * from " + viewName;
+	    }
 	    if (whereClause != null) { 
 		sql = sql + whereClause.FormatSql(); 
 	    } 
@@ -28,25 +70,20 @@ namespace Spring2.Core.DAO {
 		sql = sql + orderByClause.FormatSql(); 
 	    } 
 			 
-	    return ExecuteReader(key, sql);
+	    return ExecuteReader(key, sql, commandTimeout);
 	}
 
-	protected static SqlDataReader GetListReader(String key, String viewName, IWhere whereClause, IOrderBy orderByClause, Int32 maxRows) { 
-	    String sql = "select top " + maxRows.ToString() + " * from " + viewName;
-	    if (whereClause != null) { 
-		sql = sql + whereClause.FormatSql(); 
-	    } 
-	    if (orderByClause != null) { 
-		sql = sql + orderByClause.FormatSql(); 
-	    } 
-			 
-	    return ExecuteReader(key, sql);
+	protected static SqlDataReader ExecuteReader(String key, String sql) {
+	    return ExecuteReader(key, sql, -1);
 	}
 
-	protected static SqlDataReader ExecuteReader(String key, String sql) { 
+	protected static SqlDataReader ExecuteReader(String key, String sql, Int32 commandTimeout) {
 	    SqlCommand cmd = GetSqlCommand(key);
 	    cmd.CommandType = CommandType.Text;
 	    cmd.CommandText = sql;
+	    if (commandTimeout > 0) {
+		cmd.CommandTimeout = commandTimeout;
+	    }
 			 
 	    try { 
 		SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
