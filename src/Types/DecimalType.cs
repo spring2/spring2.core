@@ -8,6 +8,8 @@ namespace Spring2.Core.Types {
 	public static readonly new DecimalType DEFAULT = new DecimalType();
 	public static readonly new DecimalType UNSET = new DecimalType();
 
+	public static readonly DecimalType ZERO = new DecimalType(0);
+
 	protected Decimal value;
 
 	[Obsolete("Use appropriate constructor instead.")]
@@ -103,6 +105,22 @@ namespace Spring2.Core.Types {
 
 	public static DecimalType operator - (DecimalType d) {
 	    return new DecimalType(- d.ToDecimal());
+	}
+
+	public static Boolean operator > (DecimalType d1, DecimalType d2) {
+	    return d1.CompareTo(d2) > 0;
+	}
+
+	public static Boolean operator < (DecimalType d1, DecimalType d2) {
+	    return d1.CompareTo(d2) < 0;
+	}
+
+	public static Boolean operator >= (DecimalType d1, DecimalType d2) {
+	    return d1.CompareTo(d2) >= 0;
+	}
+
+	public static Boolean operator <= (DecimalType d1, DecimalType d2) {
+	    return d1.CompareTo(d2) <= 0;
 	}
     }
 }

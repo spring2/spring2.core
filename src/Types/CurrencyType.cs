@@ -77,5 +77,21 @@ namespace Spring2.Core.Types {
 	    return new CurrencyType(- c.ToDecimal());
 	}
 
+	public static Boolean operator > (CurrencyType d1, CurrencyType d2) {
+	    return d1.CompareTo(d2) > 0;
+	}
+
+	public static Boolean operator < (CurrencyType d1, CurrencyType d2) {
+	    return d1.CompareTo(d2) < 0;
+	}
+
+	public static Boolean operator >= (CurrencyType d1, CurrencyType d2) {
+	    return d1.CompareTo(d2) >= 0;
+	}
+
+	public static Boolean operator <= (CurrencyType d1, CurrencyType d2) {
+	    return d1.CompareTo(d2) <= 0;
+	}
+
     }
 }
