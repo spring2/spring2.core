@@ -1,3 +1,47 @@
+2003-10-13 Monday 12:22  crandall
+
+	* src/Test/DataTypeTest.cs:
+	
+	Add test for new date type properties.
+
+2003-10-13 Monday 12:22  crandall
+
+	* src/Types/DateType.cs:
+	
+	Add properties for getting the end of current and previous quarter
+	from a date type.
+
+2003-10-08 Wednesday 14:53  crandall
+
+	* src/: DAO/OracleEntityDAO.cs, Spring2.Core.csproj:
+	
+	Add entity DAO base class for oracle.
+
+2003-09-23 Tuesday 03:06  crandall
+
+	* src/: Spring2.Core.Test.csproj, Spring2.Core.WebControl.csproj,
+	Spring2.Core.csproj, Spring2.Core.sln:
+	
+	Convert project and solution to VS.NET 2003.
+
+2003-05-09 Friday 18:06  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2003-05-09 Friday 18:06  cort
+
+	* release/Spring2.Core.1.1.2.5588.zip:
+	
+	new release version
+
+2003-05-09 Friday 18:06  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2003-05-09 Friday 18:05  cort
 
 	* src/Makefile:
