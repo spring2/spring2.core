@@ -19,5 +19,20 @@ namespace Spring2.Core.Types {
 		return name;
 	    }
 	}
+
+	public override Boolean Equals(Object o) {
+	    if (this == o) {
+		return true;
+	    } else if (code == null || !(o is StringType)) {
+		return false;
+	    } else {
+		return code.Equals(((EnumDataType)o).code);
+	    }
+	}
+
+	public override int GetHashCode() {
+	    return code == null ? 0 : code.GetHashCode();
+	}
+
     }
 }

@@ -55,5 +55,20 @@ namespace Spring2.Core.Types {
 	public String ToString(String format) {
 	    return value.ToString(format);
 	}
+
+	public override Boolean Equals(Object o) {
+	    if (this == o) {
+		return true;
+	    } else if (!(o is IdType)) {
+		return false;
+	    } else {
+		return value.Equals(((DateType)o).value);
+	    }
+	}
+
+	public override int GetHashCode() {
+	    return value.GetHashCode();
+	}
+
     }
 }

@@ -60,5 +60,20 @@ namespace Spring2.Core.Types {
 	    return value.ToString(format);
 	}
 
+	public override Boolean Equals(Object o) {
+	    if (this == o) {
+		return true;
+	    } else if (!(o is IdType)) {
+		return false;
+	    } else {
+		return value.Equals(((QuantityType)o).value);
+	    }
+	}
+
+	public override int GetHashCode() {
+	    return value.GetHashCode();
+	}
+
+
     }
 }
