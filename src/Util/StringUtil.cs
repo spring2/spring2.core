@@ -41,6 +41,40 @@ namespace Spring2.Core.Util {
 	    return source;
 	}
 
+	/// <summary>
+	/// Read the contents of a file and place them in
+	/// a string object.
+	/// </summary>
+	/// <param name="String">path to file.</param>
+	/// <returns>String contents of the file.</returns>
+	public static System.String fileContentsToString(System.String file) {
+	    System.String contents = "";
+			
+	    System.IO.FileInfo f = new System.IO.FileInfo(file);
+			
+	    bool tmpBool;
+	    if (System.IO.File.Exists(f.FullName))
+		tmpBool = true;
+	    else
+		tmpBool = System.IO.Directory.Exists(f.FullName);
+	    if (tmpBool) {
+		//try {
+		    System.IO.StreamReader fr = new System.IO.StreamReader(f.FullName);
+		    char[] template = new char[(int) f.Length];
+		    fr.Read((System.Char[]) template, 0, template.Length);
+		    contents = new String(template);
+		    fr.Close();
+//		}
+//		catch (System.Exception e) {
+//		    System.Console.Out.WriteLine(e);
+//		    SupportClass.WriteStackTrace(e, Console.Error);
+//		}
+	    }
+			
+	    return contents;
+	}
+
+
 
     }
 }
