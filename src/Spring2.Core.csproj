@@ -177,6 +177,21 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Globalization\DaylightTimeRule.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Globalization\RegionalTimeZone.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Globalization\WeekOfMonth.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "IO\ResourceLocator.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
