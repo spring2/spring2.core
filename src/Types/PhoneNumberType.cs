@@ -319,6 +319,20 @@ namespace Spring2.Core.Types {
 
 
 	
+	/// <summary>
+	/// Removes all non-numeric digits from a string
+	/// Use this while formatting a phone number to pass into a search function as a string match against PhoneNumberType database data
+	/// </summary>
+	/// <param name="messyString"></param>
+	/// <returns></returns>
+	public static StringType RemoveNonNumeric(StringType messyString){
+	    if (messyString.IsValid){
+		return StringType.Parse(RemoveNonNumeric(messyString.ToString(), new char[0] {}));
+	    }else{
+		return messyString;
+	    }
+
+	}
 
 	/// <summary>
 	/// Removes all non-numeric digits from a string
