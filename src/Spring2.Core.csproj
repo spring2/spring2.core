@@ -399,6 +399,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Xml\Escape.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Xml\XIncludeReader.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
