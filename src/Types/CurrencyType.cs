@@ -68,5 +68,9 @@ namespace Spring2.Core.Types {
 	public static CurrencyType operator - (CurrencyType c1, CurrencyType c2) {
 	    return new CurrencyType(c1.ToDecimal() - c2.ToDecimal());
 	}
+
+	public static DecimalType operator / (CurrencyType c1, CurrencyType c2) {
+	    return new DecimalType(c1.ToDecimal() / c2.ToDecimal());
+	}
     }
 }
