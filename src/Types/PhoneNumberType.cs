@@ -95,7 +95,8 @@ namespace Spring2.Core.Types {
 		    parsedExchange = phoneNumberGuts.Substring(0,3);
 		    parsedNumber = phoneNumberGuts.Substring(phoneNumberGuts.Length - 4, 4);
 		}else{
-		    throw new System.ApplicationException("Invalid phone number string");
+		    //if the length is less than seven, leave the phone number blank rather than throw an exception - this is bad data anyway
+		    //throw new System.ApplicationException("Invalid phone number string");
 		}
 	    }else{
 		//International number - so just throw it in the 'number' property
