@@ -7,7 +7,7 @@
     >
         <Build>
             <Settings
-                ApplicationIcon = "App.ico"
+                ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
                 AssemblyName = "NUnitRunner"
                 AssemblyOriginatorKeyFile = ""
@@ -16,7 +16,7 @@
                 DefaultTargetSchema = "IE50"
                 DelaySign = "false"
                 OutputType = "Exe"
-                RootNamespace = "NUnitRunner"
+                RootNamespace = "Spring2.Core.NUnitRunner"
                 StartupObject = ""
             >
                 <Config
@@ -78,30 +78,34 @@
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
-                    Name = "NUnitGUI"
-                    AssemblyName = "NUnitGUI"
-                    HintPath = "..\..\lib\NUnitGUI.dll"
+                    Name = "Spring2.Core.Test"
+                    Project = "{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "NUnitConsole"
+                    AssemblyName = "NUnitConsole"
+                    HintPath = "..\lib\NUnitConsole.dll"
                 />
                 <Reference
                     Name = "NUnitCore"
                     AssemblyName = "NUnitCore"
-                    HintPath = "..\..\lib\NUnitCore.dll"
+                    HintPath = "..\lib\NUnitCore.dll"
                 />
             </References>
         </Build>
         <Files>
             <Include>
                 <File
-                    RelPath = "App.ico"
+                    RelPath = "Test\App.ico"
                     BuildAction = "Content"
                 />
                 <File
-                    RelPath = "AssemblyInfo.cs"
-                    SubType = "Code"
+                    RelPath = "Test\AssemblyInfo.cs"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "NUnitRunner.cs"
+                    RelPath = "Test\NUnitRunner.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
