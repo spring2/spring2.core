@@ -25,12 +25,24 @@ namespace Spring2.Core.IO {
 		this.filename = file.FullName;
 		isFile = true;
 	    } else {
-		GetReferencedAssemblies(System.Reflection.Assembly.GetEntryAssembly(), assemblies);
+		foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies()) {
+		    GetReferencedAssemblies(assembly, assemblies);
+		}
+		GetReferencedAssemblies(System.Reflection.Assembly.GetExecutingAssembly(), assemblies);
+		if (System.Reflection.Assembly.GetEntryAssembly() != null) {
+		    GetReferencedAssemblies(System.Reflection.Assembly.GetEntryAssembly(), assemblies);
+		}
+		if (System.Reflection.Assembly.GetCallingAssembly() != null) {
+		    GetReferencedAssemblies(System.Reflection.Assembly.GetCallingAssembly(), assemblies);
+		}
+
 		String fn = filename.ToLower().Replace("\\", ".");
 		foreach(Assembly a in assemblies) {
+//Console.Out.WriteLine(a.FullName);
 		    String prefix = a.FullName.Substring(0,a.FullName.IndexOf(",")).ToLower();
 		    String[] names = a.GetManifestResourceNames();
 		    foreach(String s in names) {
+//Console.Out.WriteLine(prefix + " :: " + s.ToLower() + " :: " + fn);
 			if (s.ToLower().Equals(fn) || s.ToLower().Equals(prefix + "." + fn)) {
 			    this.filename = s;
 			    assembly = a;
