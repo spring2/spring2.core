@@ -1,6 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 7.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core", "Spring2.Core.csproj", "{80B94045-4DE6-4BB0-BE22-C5CC0E772695}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.WebControl", "Spring2.Core.WebControl.csproj", "{848F75F0-EEBA-4C76-BF81-A41CF6B5EF98}"
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		ConfigName.0 = Debug
@@ -13,6 +15,10 @@ Global
 		{80B94045-4DE6-4BB0-BE22-C5CC0E772695}.Debug.Build.0 = Debug|.NET
 		{80B94045-4DE6-4BB0-BE22-C5CC0E772695}.Release.ActiveCfg = Release|.NET
 		{80B94045-4DE6-4BB0-BE22-C5CC0E772695}.Release.Build.0 = Release|.NET
+		{848F75F0-EEBA-4C76-BF81-A41CF6B5EF98}.Debug.ActiveCfg = Debug|.NET
+		{848F75F0-EEBA-4C76-BF81-A41CF6B5EF98}.Debug.Build.0 = Debug|.NET
+		{848F75F0-EEBA-4C76-BF81-A41CF6B5EF98}.Release.ActiveCfg = Release|.NET
+		{848F75F0-EEBA-4C76-BF81-A41CF6B5EF98}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
