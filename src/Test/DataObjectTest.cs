@@ -54,7 +54,7 @@ namespace Spring2.Core.Test {
 	/// <summary>
 	/// Test the Update method
 	/// </summary>
-	protected void TestUpdate() {
+	public void TestUpdate() {
 	    TestData data = GetTestData();
 
 	    TestData updateData = new TestData();
@@ -82,7 +82,7 @@ namespace Spring2.Core.Test {
 	/// <summary>
 	/// Test the Equals method
 	/// </summary>
-	protected void TestEquals() {
+	public void TestEquals() {
 	    TestData data = GetTestData();
 	    Assert("Object does not equal itself", data.Equals(data));
 	    TestData data2 = GetTestData();
@@ -103,7 +103,7 @@ namespace Spring2.Core.Test {
 	/// <summary>
 	/// Test the Compare method
 	/// </summary>
-	protected void TestCompare() {
+	public void TestCompare() {
 	    TestData data = GetTestData();
 	    DataObjectCompareList list = data.Compare(data);
 	    Assert("Object does not equal itself\n" + list.ToString(), list.Count == 0);
