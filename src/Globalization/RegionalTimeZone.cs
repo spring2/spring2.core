@@ -56,7 +56,7 @@ namespace Spring2.Core.Globalization {
 	// Time zones that use EU daylight time rules
 	public static readonly RegionalTimeZone Z_EU = new RegionalTimeZone("Z-EU", "Greenwich Mean Time", DaylightTimeRule.EUROPE, TimeSpan.Zero);
 	public static readonly RegionalTimeZone A_EU = new RegionalTimeZone("A-EU", "Europe Central Time", DaylightTimeRule.EUROPE, new TimeSpan(1,0,0));
-	public static readonly RegionalTimeZone B_EU = new RegionalTimeZone("A-EU", "Europe Eastern Time", DaylightTimeRule.EUROPE, new TimeSpan(2,0,0));
+	public static readonly RegionalTimeZone B_EU = new RegionalTimeZone("B-EU", "Europe Eastern Time", DaylightTimeRule.EUROPE, new TimeSpan(2,0,0));
 
 	// Common known timezone abbreviations
 	public static readonly RegionalTimeZone AKST = V_US;
