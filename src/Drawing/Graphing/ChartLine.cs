@@ -3,7 +3,6 @@ using System.Collections;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Web.UI;
 
 /// derived from: Sample ASPX C# LineChart Class, Steve Hall, 2002
 

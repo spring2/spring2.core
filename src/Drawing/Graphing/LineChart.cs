@@ -4,7 +4,6 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Web.UI;
 
 /// derived from: Sample ASPX C# LineChart Class, Steve Hall, 2002
 
@@ -161,19 +160,11 @@ namespace Spring2.Core.Drawing.Graphing {
 	/// Save output to a stream
 	/// </summary>
 	/// <param name="stream"></param>
-	public void Save(Stream stream) {
+	public void Save(Stream stream, ImageFormat format) {
 	    Draw();
-	    bitmap.Save(stream, ImageFormat.Jpeg);
+	    bitmap.Save(stream, format);
 	}
 
-	/// <summary>
-	/// Save image output to Page (convience for webpages)
-	/// </summary>
-	/// <param name="page"></param>
-	public void Save(Page page) {
-	    page.Response.ContentType="image/jpeg";
-	    Save(page.Response.OutputStream);
-	}
 
 	private void Draw() {
 	    Pen blackPen = new Pen(Color.Black,1);
