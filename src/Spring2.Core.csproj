@@ -217,12 +217,22 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Util\DateUtil.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Util\MissingRequiredFieldError.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Util\Timer.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Xml\XIncludeReader.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
