@@ -1,0 +1,1042 @@
+2003-04-22 Tuesday 16:14  cort
+
+	* release/Spring2.Core-1.1.zip:
+	
+	Official 1.1 release (this is the first "official" release and was
+	incremented to 1.1 so that it could be easily distinguished from
+	others that might have been created before now)
+
+2003-04-22 Tuesday 16:13  cort
+
+	* src/DAO/FinderException.cs:
+	
+	derive from Spring2.Core.DaoException
+
+2003-04-22 Tuesday 16:13  cort
+
+	* src/DAO/DaoException.cs:
+	
+	base class for all Spring2.Core DAO exceptions
+
+2003-04-22 Tuesday 16:12  cort
+
+	* src/: DAO/WhereClause.cs, Test/WhereClauseTest.cs:
+	
+	add AndEquals, OrEquals, AndNotEquals, OrNotEquals, AndBetween,
+	AndNotBetween, OrBetween, OrNotBetween methods to WhereClause
+
+2003-04-22 Tuesday 16:11  cort
+
+	* src/Makefile:
+	
+	reflect AssemblyVersionInfo change made to project files fix
+	references to solution and test assembly name
+
+2003-04-22 Tuesday 16:09  cort
+
+	* src/: AssemblyInfo.cs, AssemblyVersionInfo.cs,
+	Spring2.Core.Test.csproj, Spring2.Core.WebControl.csproj,
+	Spring2.Core.csproj, Test/AssemblyInfo.cs,
+	WebControl/AssemblyInfo.cs:
+	
+	update to use single version file
+
+2003-04-22 Tuesday 16:07  cort
+
+	* src/.cvsignore:
+	
+	ignore xml comment files
+
+2003-04-04 Friday 10:28  crandall
+
+	* src/Types/: CurrencyType.cs, DateType.cs, DecimalType.cs,
+	IntegerType.cs, NumberType.cs, StringType.cs:
+	
+	Make all ToString methods return UNSET and DEFAULT when
+	appropriate.  Make StringType implement IComparable interface.
+
+2003-03-20 Thursday 12:26  crandall
+
+	* src/: AssemblyInfo.cs, Makefile, DAO/module.mk,
+	DataObject/module.mk, Drawing/Graphing/module.mk,
+	Globalization/module.mk, IO/module.mk, Test/module.mk,
+	Types/module.mk, Util/module.mk, WebControl/module.mk,
+	Xml/module.mk:
+	
+	Add makefile and related files.
+
+2003-03-20 Thursday 12:19  cort
+
+	* .cvsignore:
+	
+	no message
+
+2003-03-20 Thursday 11:34  crandall
+
+	* src/Test/NUnitRunner.cs:
+	
+	Remove unused file.
+
+2003-03-20 Thursday 11:12  crandall
+
+	* src/DAO/AssemblyInfo.cs:
+	
+	Remove unused file.
+
+2003-03-20 Thursday 10:17  crandall
+
+	* src/: Test/DataTypeTest.cs, Types/DataType.cs,
+	Types/DecimalType.cs, Types/IntegerType.cs, Types/StringType.cs:
+	
+	Add CompareTo methods for base data types.
+
+2003-03-17 Monday 12:00  crandall
+
+	* src/Types/: CurrencyType.cs, DateType.cs, DecimalType.cs,
+	IdType.cs, IntegerType.cs, NumberType.cs, QuantityType.cs:
+	
+	Return UNSET when parse is passed a null string reference.
+
+2003-03-11 Tuesday 23:31  crandall
+
+	* src/DAO/EntityDao.cs:
+	
+	Throw an exception if a connection string key has no value.
+
+2003-03-04 Tuesday 08:37  cort
+
+	* src/: DAO/WhereClause.cs, Test/WhereClauseTest.cs,
+	Spring2.Core.Test.csproj:
+	
+	make sure that strings with apostrophes escaped properly
+
+2003-02-17 Monday 18:50  cort
+
+	* .cvsignore, src/.cvsignore:
+	
+	no message
+
+2003-02-17 Monday 18:48  cort
+
+	* src/IO/ResourceLocator.cs:
+	
+	update to search asseblies findable by the entry, calling and
+	executing assembly, plus anything that can be found in the current
+	app domain.
+
+2003-02-14 Friday 15:20  crandall
+
+	* src/: DataObject/DataObject.cs, Test/DataTypeTest.cs,
+	Types/NumberType.cs:
+	
+	Make NumberType obsolete.  Replaced by IntegerType.
+
+2003-02-13 Thursday 09:09  crandall
+
+	* src/Spring2.Core.csproj:
+	
+	Add IntegerType to the project.
+
+2003-02-13 Thursday 09:08  crandall
+
+	* src/DataObject/: DataObject.cs, EntityDataObject.cs:
+	
+	Avoid using obsolete NewInstance methods.
+
+2003-02-13 Thursday 09:07  crandall
+
+	* src/Test/: DataObjectTest.cs, DataTypeTest.cs:
+	
+	Reflect changes to data types.	Add tests for new IntegerType.
+
+2003-02-13 Thursday 09:06  crandall
+
+	* src/Types/: CurrencyType.cs, DateType.cs, DecimalType.cs,
+	IdType.cs, IntegerType.cs, NumberType.cs, QuantityType.cs,
+	StringType.cs:
+	
+	Mark NewInstance methods as obsolete.  Add IntegerType to replace
+	NumberType.  Make IdType extend IntegerType.`
+
+2003-02-13 Thursday 08:17  crandall
+
+	* src/Test/DataTypeTest.cs:
+	
+	Reflect changes to decimal types.
+
+2003-02-13 Thursday 08:12  crandall
+
+	* src/Types/: CurrencyType.cs, DecimalType.cs, QuantityType.cs:
+	
+	Add constructors to create decimal types from a double.
+
+2003-02-12 Wednesday 14:50  crandall
+
+	* src/Types/BooleanType.cs:
+	
+	BooleanType now extends EnumDataType.
+
+2003-02-12 Wednesday 14:49  crandall
+
+	* src/Test/DataTypeTest.cs:
+	
+	Add tests for boolean type.
+
+2003-02-12 Wednesday 14:37  crandall
+
+	* src/Spring2.Core.Test.csproj:
+	
+	Add the data type tests to the project.
+
+2003-02-12 Wednesday 14:37  crandall
+
+	* src/Test/DataTypeTest.cs:
+	
+	Add tests for the parse methods and equals methods of data types.
+
+2003-02-12 Wednesday 14:36  crandall
+
+	* src/Types/: CurrencyType.cs, DataType.cs, DateType.cs,
+	DecimalType.cs, EnumDataType.cs, IdType.cs, NumberType.cs,
+	QuantityType.cs, StringType.cs:
+	
+	QuantityType and CurrencyType now extend DecimalType.  IdType now
+	extends NumberType.  Add parse methods to data types.  Add ToString
+	methods that accept a format string and a format provider.  Move
+	equals and get hash code methods to the DataType base class.  These
+	methods are overriden by EnumDataType and DateType.
+
+2003-02-06 Thursday 13:57  cort
+
+	* src/Types/DateType.cs:
+	
+	-fix type comparision -on compare, ignore nanosecond differences
+
+2003-02-06 Thursday 11:01  cort
+
+	* src/Types/: CurrencyType.cs, DecimalType.cs, QuantityType.cs:
+	
+	compare apples to apples (or CurrencyType or DecimalType or
+	QuantityType) - looks like IdType must have been the template for
+	the other types :)
+
+2003-01-30 Thursday 17:09  crandall
+
+	* src/DAO/: EntityDao.cs, FinderException.cs, IOrderBy.cs:
+	
+	Minor reformatting.
+
+2003-01-30 Thursday 14:54  crandall
+
+	* src/Types/NumberType.cs:
+	
+	Change equals method to compare number types instead of an id type
+	to a number type.
+
+2003-01-28 Tuesday 11:03  cort
+
+	* src/: Spring2.Core.csproj, Drawing/Graphing/ChartLine.cs,
+	Drawing/Graphing/LineChart.cs:
+	
+	remove reference to System.Web - that was no longer needed because
+	the charting Save method became more generalized and now uses
+	streams.
+
+2003-01-22 Wednesday 15:49  cort
+
+	* src/DataObject/DataObject.cs:
+	
+	pretty up ToString a little more for collections
+
+2003-01-15 Wednesday 10:20  cort
+
+	* src/Globalization/RegionalTimeZone.cs:
+	
+	correct UTC offset for CST, PST and AKST
+
+2002-11-25 Monday 09:58  cort
+
+	* src/Spring2.Core.sln:
+	
+	remove NUnitRunner as it is no longer needed with NUnit 2.0
+
+2002-11-25 Monday 09:58  cort
+
+	* src/: Spring2.Core.WebControl.csproj, Spring2.Core.csproj:
+	
+	build to ../build folder
+
+2002-11-25 Monday 09:57  cort
+
+	* src/Spring2.Core.Test.csproj:
+	
+	change debug to use NUnit-Gui remove AllTests suite
+
+2002-11-25 Monday 09:57  cort
+
+	* src/Test/AllTests.cs:
+	
+	no longer needed with NUnit 2.0 (automatically creates a suite will
+	all tests in an assembly)
+
+2002-11-25 Monday 09:56  cort
+
+	* src/Test/DataObjectTest.cs:
+	
+	modify to comply with NUnit 2.0
+
+2002-11-25 Monday 09:56  cort
+
+	* src/Test/TimeZoneTests.cs:
+	
+	tests to ensure that time zone functionality is working
+
+2002-11-25 Monday 09:55  cort
+
+	* src/Globalization/RegionalTimeZone.cs:
+	
+	add all 25 time zone add time zones with day light rules for US and
+	Europe add commonly known abbreviate shortcuts for US and Europe
+
+2002-11-25 Monday 09:54  cort
+
+	* src/Globalization/DaylightTimeRule.cs:
+	
+	add new constructor that can take startDay and endDay instead of
+	day of week and week of month.
+
+2002-11-25 Monday 09:52  cort
+
+	* src/Spring2.Core.NUnitRunner.csproj:
+	
+	no longer need special NUnitRunner
+
+2002-11-25 Monday 09:50  cort
+
+	* lib/: NUnitConsole.dll, NUnitCore.dll, nunit.framework.dll:
+	
+	update to NUnit 2.0
+
+2002-11-20 Wednesday 14:39  cort
+
+	* src/DAO/WhereClause.cs:
+	
+	add more support for AND and add support for OR
+
+2002-11-20 Wednesday 14:29  jeffm
+
+	* src/DAO/EntityDao.cs:
+	
+	Fix mess
+
+2002-11-20 Wednesday 10:07  robc
+
+	* src/DAO/EntityDao.cs:
+	
+	Minor reformatting for readability.
+
+2002-11-20 Wednesday 07:46  cort
+
+	* src/Types/DateType.cs:
+	
+	add convience ToString methods to underlying type
+
+2002-11-20 Wednesday 07:45  cort
+
+	* src/Types/StringType.cs:
+	
+	add named instance of an empty string.
+
+2002-11-14 Thursday 01:34  cort
+
+	* src/: Spring2.Core.csproj, Globalization/DaylightTimeRule.cs,
+	Globalization/RegionalTimeZone.cs, Globalization/WeekOfMonth.cs:
+	
+	support for time zones
+
+2002-11-07 Thursday 07:32  cort
+
+	* src/Spring2.Core.csproj:
+	
+	add new classes to project
+
+2002-11-07 Thursday 07:32  cort
+
+	* src/Drawing/Graphing/: ChartLine.cs, LineChart.cs:
+	
+	add lots of functionality
+
+2002-11-07 Thursday 07:31  cort
+
+	* src/Drawing/Graphing/: DateLabelFormat.cs, LabelFormat.cs,
+	NumberLabelFormat.cs:
+	
+	add axis label formatters
+
+2002-11-04 Monday 16:10  cort
+
+	* src/Drawing/Graphing/: ChartLine.cs, LineChart.cs:
+	
+	Simple LineChart graph
+
+2002-09-23 Monday 13:18  cort
+
+	* src/DataObject/DataObject.cs:
+	
+	made ToString() print DataObjects with indented format
+
+2002-08-28 Wednesday 10:05  crandall
+
+	* src/WebControl/: Menu.cs, MenuItem.cs:
+	
+	Allow for specifying an onclick method for disabled menus.
+
+2002-08-02 Friday 09:31  crandall
+
+	* src/Types/DecimalType.cs:
+	
+	Make decimal extendable.
+
+2002-07-30 Tuesday 09:48  cort
+
+	* src/Util/StringUtil.cs:
+	
+	add fileContentsToString for DTG
+
+2002-07-08 Monday 05:58  cort
+
+	* src/Xml/XIncludeReader.cs:
+	
+	modify to make use of ResourceLocator instead of just finding in
+	file system
+
+2002-07-08 Monday 05:57  cort
+
+	* src/: Spring2.Core.csproj, IO/ResourceLocator.cs:
+	
+	add ResourceLocator to be able to find a file in either the file
+	system or inside an assembly as a resource.
+
+2002-07-07 Sunday 08:25  bspiglejr
+
+	* src/WebControl/Menu.cs:
+	
+	Add description that can appear under the Menu text with it's own
+	Css class.
+
+2002-06-26 Wednesday 07:25  cort
+
+	* src/Util/DateUtil.cs:
+	
+	allow for yy to be either 2-digit or 4-digit
+
+2002-06-25 Tuesday 19:28  cort
+
+	* src/Test/DataObjectTest.cs:
+	
+	changed to support being run by new NUnitRunner
+
+2002-06-25 Tuesday 19:27  cort
+
+	* src/: Spring2.Core.csproj, Util/StringUtil.cs:
+	
+	new StringUtil class
+
+2002-06-25 Tuesday 19:26  cort
+
+	* src/Spring2.Core.Test.csproj:
+	
+	added test suite
+
+2002-06-25 Tuesday 19:26  cort
+
+	* src/: Spring2.Core.NUnitRunner.csproj, Test/AllTests.cs,
+	Test/App.ico, Test/NUnitRunner.cs, Spring2.Core.sln:
+	
+	move tests from adjacent to src to under src made part of solution
+	so that tests could be run from inside the IDE for debugging
+
+2002-06-25 Tuesday 19:24  cort
+
+	* src/DataObject/DataObject.cs:
+	
+	minor reformatting
+
+2002-06-25 Tuesday 19:23  cort
+
+	* src/DAO/EntityDao.cs:
+	
+	add new GetSqlCommand method to support setting the CommandTimeout.
+
+2002-06-24 Monday 07:48  cort
+
+	* lib/NUnitConsole.dll:
+	
+	lib reference for NUnitRunner project
+
+2002-06-24 Monday 06:14  cort
+
+	* src/Util/DateUtil.cs:
+	
+	add more credit card date conversion methods
+
+2002-06-23 Sunday 00:04  crandall
+
+	* src/Spring2.Core.csproj:
+	
+	Add ExceptionError.cs to the project.
+
+2002-06-23 Sunday 00:02  crandall
+
+	* src/WebControl/Menu.cs:
+	
+	Use a div instead of a panel.
+
+2002-06-21 Friday 17:21  cort
+
+	* src/Util/ExceptionError.cs:
+	
+	error type to handle an exception
+
+2002-06-21 Friday 10:42  bspiglejr
+
+	* src/WebControl/: Menu.cs, MenuItem.cs:
+	
+	Disable link when it is selected Add code to disable all links if
+	the menu is disabled (i.e. Enabled=false)
+
+2002-06-17 Monday 13:42  crandall
+
+	* src/Spring2.Core.csproj:
+	
+	Add parse error to the project.
+
+2002-06-17 Monday 13:42  crandall
+
+	* src/WebControl/: Menu.cs, MenuItem.cs:
+	
+	Change menu and menu items to be more customizable using style
+	sheets.
+
+2002-06-17 Monday 13:38  crandall
+
+	* src/Util/: ApplicationError.cs, ApplicationErrorCollection.cs,
+	ParseError.cs:
+	
+	Add method for combining error collections.  Add new constructor
+	for Application Errors.  Add parse error.
+
+2002-06-17 Monday 08:47  cort
+
+	* src/Spring2.Core.csproj:
+	
+	reference new classes
+
+2002-06-17 Monday 08:47  cort
+
+	* src/Xml/XIncludeReader.cs:
+	
+	XmlTextReader that supports includes
+
+2002-06-17 Monday 08:46  cort
+
+	* src/Util/DateUtil.cs:
+	
+	class for misc date functions
+
+2002-06-17 Monday 08:46  cort
+
+	* src/Types/DateType.cs:
+	
+	add comment
+
+2002-06-13 Thursday 11:51  crandall
+
+	* src/Types/EnumDataType.cs:
+	
+	Make enums work with data binding.
+
+2002-06-13 Thursday 09:28  crandall
+
+	* src/: Spring2.Core.csproj, Util/ApplicationError.cs,
+	Util/ApplicationErrorCollection.cs,
+	Util/MissingRequiredFieldError.cs:
+	
+	Add application error base class and collection.\nAdd Missing
+	required field error.
+
+2002-06-12 Wednesday 16:59  cort
+
+	* src/Types/IdType.cs:
+	
+	add NewInstance method to convert from a String.
+
+2002-06-12 Wednesday 10:04  crandall
+
+	* src/Types/StringType.cs:
+	
+	Add helper methods and a conversion method
+
+2002-06-12 Wednesday 08:37  crandall
+
+	* src/Types/BooleanType.cs:
+	
+	Add helper methods and a conversion method
+
+2002-06-08 Saturday 13:25  crandall
+
+	* src/Spring2.Core.Test.csproj:
+	
+	Change SubType on AssemblyInfo.
+
+2002-06-08 Saturday 13:23  crandall
+
+	* src/Spring2.Core.WebControl.csproj:
+	
+	Change default page layout to flow.
+
+2002-06-08 Saturday 13:21  crandall
+
+	* src/WebControl/Menu.cs:
+	
+	Default the navigate url field.
+
+2002-06-08 Saturday 11:07  crandall
+
+	* src/WebControl/: Menu.cs, MenuItem.cs:
+	
+	Make menu controls depend more on style sheets for rendering.
+
+2002-06-07 Friday 14:21  crandall
+
+	* src/DAO/Spring2.Core.DAO.csproj:
+	
+	Remove unused project file.
+
+2002-06-07 Friday 14:19  crandall
+
+	* src/Spring2.Core.csproj:
+	
+	Add FinderException to the project.
+
+2002-06-07 Friday 12:23  crandall
+
+	* src/WebControl/: Menu.cs, MenuItem.cs:
+	
+	Several changes needed by Stampin Up.
+
+2002-06-07 Friday 11:23  bspiglejr
+
+	* src/DAO/FinderException.cs:
+	
+	Finder exception thrown when no rows found in list or load methods.
+
+2002-06-03 Monday 08:55  crandall
+
+	* src/: Test/DataObjectTest.cs, DataObject/DataObject.cs,
+	DataObject/EntityDataObject.cs:
+	
+	Reflect changes to StringType and DateType.
+
+2002-06-03 Monday 08:54  crandall
+
+	* src/Types/: DateType.cs, StringType.cs, ValueDataType.cs:
+	
+	Make data type constructors that take reference types private to
+	avoid getting data types with null internal values.  This will
+	probably break a few things that use StringType or DateType.
+
+2002-05-31 Friday 13:29  cort
+
+	* src/DAO/EntityDao.cs:
+	
+	add support for registry type keys used to determine
+	connectionString.  Format is "Registry:hive:subkey\..\subkey\value"
+	 where hive is HKLM for HKEY_LOCAL_MACHINE or HKCU for
+	HKEY_CURRENT_USER.
+
+2002-05-30 Thursday 16:48  cort
+
+	* src/: Util/Timer.cs, Spring2.Core.csproj:
+	
+	timer to support performance logging
+
+2002-05-30 Thursday 10:51  cort
+
+	* lib/NUnitCore.dll:
+	
+	commit as binary file
+
+2002-05-30 Thursday 10:50  cort
+
+	* lib/NUnitCore.dll:
+	
+	no message
+
+2002-05-29 Wednesday 08:01  crandall
+
+	* src/: Spring2.Core.Test.csproj, Spring2.Core.csproj,
+	Spring2.Core.sln, Test/AssemblyInfo.cs:
+	
+	Move core tests to their own assembly.
+
+2002-05-29 Wednesday 07:13  crandall
+
+	* src/: AssemblyInfo.cs, Spring2.Core.csproj:
+	
+	Point the NUnitCore reference at the lib directory.
+
+2002-05-29 Wednesday 07:11  crandall
+
+	* lib/NUnitCore.dll:
+	
+	Add NUnit dll.
+
+2002-05-29 Wednesday 07:10  crandall
+
+	* src/Test/: DataObjectTest.cs, Test2Data.cs, TestData.cs:
+	
+	Coding standards.
+
+2002-05-29 Wednesday 07:09  crandall
+
+	* src/Types/QuantityType.cs:
+	
+	Minor reformatting.
+
+2002-05-29 Wednesday 07:08  crandall
+
+	* src/WebControl/MenuItem.cs:
+	
+	Remove code that was moved to the base class.
+
+2002-05-29 Wednesday 07:07  crandall
+
+	* src/DataObject/: DataObjectCompareDetail.cs,
+	DataObjectCompareList.cs, DataObjectCompareOptionEnum.cs:
+	
+	Coding standards.
+
+2002-05-29 Wednesday 06:55  crandall
+
+	* src/WebControl/MenuItem.cs:
+	
+	[no log message]
+
+2002-05-28 Tuesday 19:47  bspiglejr
+
+	* src/WebControl/MenuItem.cs:
+	
+	Added new keyword to SelectedItemImageUrl to get it to compile.
+
+2002-05-28 Tuesday 19:46  bspiglejr
+
+	* src/Spring2.Core.csproj:
+	
+	Added new classes for data object compare to the project.
+
+2002-05-28 Tuesday 16:37  bspiglejr
+
+	* src/Test/DataObjectTest.cs:
+	
+	Add tests to test the Default related options in
+	DataObject.Compare.
+
+2002-05-28 Tuesday 16:36  bspiglejr
+
+	* src/DataObject/: DataObject.cs, DataObjectCompareOptionEnum.cs:
+	
+	Allow choices on compare to ignore defaults or to allow defaults to
+	equal unset.
+
+2002-05-28 Tuesday 15:01  bspiglejr
+
+	* src/Test/DataObjectTest.cs:
+	
+	Add test of DataObject compare method.
+
+2002-05-28 Tuesday 15:01  bspiglejr
+
+	* src/DataObject/: DataObject.cs, DataObjectCompareDetail.cs,
+	DataObjectCompareList.cs:
+	
+	Add compare method for DataObject.  Returns a DataObjectCompareList
+	of DataObjectCompareDetail objects.
+
+2002-05-28 Tuesday 12:09  crandall
+
+	* src/: Spring2.Core.WebControl.csproj, WebControl/IMenu.cs,
+	WebControl/Menu.cs, WebControl/MenuItem.cs,
+	WebControl/MenuItemCollection.cs:
+	
+	Combine common functionality of menu and menu item.
+
+2002-05-24 Friday 20:30  bspiglejr
+
+	* src/: Spring2.Core.csproj, Spring2.Core.sln:
+	
+	Add unit tests
+
+2002-05-24 Friday 20:29  bspiglejr
+
+	* src/DataObject/DataObject.cs:
+	
+	Add Equals method and allow Update to update contained objects.
+
+2002-05-24 Friday 20:29  bspiglejr
+
+	* src/Test/: DataObjectTest.cs, Test2Data.cs, TestData.cs:
+	
+	Add unit test for data object
+
+2002-05-24 Friday 16:08  cort
+
+	* src/DAO/EntityDao.cs:
+	
+	support use of connection string key
+
+2002-05-24 Friday 11:56  crandall
+
+	* src/WebControl/: IMenu.cs, MenuControl.cs, MenuItem.cs:
+	
+	[no log message]
+
+2002-05-24 Friday 07:37  crandall
+
+	* src/Types/: EnumDataType.cs, GenderType.cs, USStateCodeEnum.cs:
+	
+	Move the static list of options back to the derived classes and add
+	a static accessor.
+
+2002-05-24 Friday 06:13  crandall
+
+	* src/Spring2.Core.csproj:
+	
+	Remove reference to Util directory.
+
+2002-05-24 Friday 06:12  crandall
+
+	* src/: Spring2.Core.WebControl.csproj, Spring2.Core.sln:
+	
+	Add core web control project.
+
+2002-05-24 Friday 06:10  crandall
+
+	* src/WebControl/: AssemblyInfo.cs, IMenu.cs, MenuControl.cs,
+	MenuItem.cs:
+	
+	New menu and menu item controls.
+
+2002-05-24 Friday 06:08  crandall
+
+	* src/Types/: GenderType.cs, USStateCodeEnum.cs:
+	
+	Reflect changes to EnumDataType base class.
+
+2002-05-24 Friday 06:08  crandall
+
+	* src/Types/EnumDataType.cs:
+	
+	Move OPTIONS collection to the base class and provide an accessor.
+
+2002-05-24 Friday 06:07  crandall
+
+	* src/Types/DataType.cs:
+	
+	Remove unused code.
+
+2002-05-20 Monday 10:46  cort
+
+	* src/: Types/CurrencyType.cs, Types/DateType.cs,
+	Types/DecimalType.cs, Types/EnumDataType.cs, Types/IdType.cs,
+	Types/NumberType.cs, Types/QuantityType.cs, DAO/.cvsignore:
+	
+	add Equals and GetHashCode methods
+
+2002-05-20 Monday 10:46  cort
+
+	* src/Types/GenderType.cs:
+	
+	update to extend EnumDataType
+
+2002-05-10 Friday 10:33  crandall
+
+	* src/Spring2.Core.csproj:
+	
+	Add state code enum to the project.
+
+2002-05-10 Friday 10:32  crandall
+
+	* src/Types/: EnumDataType.cs, GenderType.cs, USStateCodeEnum.cs:
+	
+	Add new enum for state codes.  Add read only property for accessing
+	gender type options.
+
+2002-05-10 Friday 07:21  crandall
+
+	* src/.cvsignore:
+	
+	Ignore bin and obj directories.
+
+2002-05-10 Friday 07:19  crandall
+
+	* src/DataObject/DataObject.cs:
+	
+	Add an update method for setting fields from one data object with
+	all non default fields of another.  Modify ToString to show
+	collections.
+
+2002-05-09 Thursday 19:23  cort
+
+	* src/Types/: CurrencyType.cs, DateType.cs, DecimalType.cs,
+	IdType.cs, NumberType.cs, QuantityType.cs:
+	
+	add ToString method that take a format string add/correct To<type>
+	conversion methods to check for unset/default.
+
+2002-05-09 Thursday 19:20  cort
+
+	* src/.cvsignore:
+	
+	no message
+
+2002-05-03 Friday 06:49  crandall
+
+	* src/Types/NumberType.cs:
+	
+	Reformatting.
+
+2002-05-03 Friday 06:46  crandall
+
+	* src/: Spring2.Core.csproj, Types/DecimalType.cs:
+	
+	Add a new type for representing decimal numbers.
+
+2002-04-25 Thursday 08:28  cort
+
+	* src/Types/: BooleanType.cs, IdType.cs, NumberType.cs:
+	
+	support conversion to primitive types
+
+2002-04-25 Thursday 08:27  cort
+
+	* src/DAO/WhereClause.cs:
+	
+	support anding multiple field/value pairs together
+
+2002-04-24 Wednesday 07:43  crandall
+
+	* src/DAO/EntityDao.cs:
+	
+	Reformatting (not so minor).
+
+2002-04-24 Wednesday 07:42  crandall
+
+	* src/Spring2.Core.csproj:
+	
+	Add gender type.
+
+2002-04-24 Wednesday 07:41  crandall
+
+	* src/: Types/IdType.cs, DAO/OrderByClause.cs, DAO/WhereClause.cs:
+	
+	Minor reformatting.
+
+2002-04-19 Friday 08:25  cort
+
+	* src/Types/EnumDataType.cs:
+	
+	implemented enum base class that supports both a database value and
+	an internal display value
+
+2002-04-19 Friday 02:49  crandall
+
+	* src/Types/GenderType.cs:
+	
+	Initial checkin.
+
+2002-04-12 Friday 19:18  cort
+
+	* src/: Spring2.Core.csproj, Types/EnumDataType.cs:
+	
+	add base class place holder for generated enum data types
+
+2002-04-12 Friday 11:09  cort
+
+	* src/: AssemblyInfo.cs, Spring2.Core.csproj, Spring2.Core.sln:
+	
+	project files to maintain/build Spring2.Core.dll
+
+2002-04-12 Friday 11:08  cort
+
+	* src/spring2.snk:
+	
+	key needed to sign Spring2 components (so they can be registerd in
+	GAC - so that they can be available for COM)
+
+2002-04-12 Friday 11:08  cort
+
+	* src/DAO/EntityDao.cs:
+	
+	addition of convience method for creating SqlCommands
+
+2002-04-12 Friday 11:06  cort
+
+	* src/Types/StringType.cs:
+	
+	swap Value and DBValue methods to be more consistant with use and
+	potential values returned add Equals and GetHashcode methods needed
+	for comparing data internal values
+
+2002-04-12 Friday 11:05  cort
+
+	* src/Types/: BooleanType.cs, DataType.cs, DateType.cs, IdType.cs:
+	
+	swap Value and DBValue methods to be more consistant with use and
+	potential values returned
+
+2002-04-12 Friday 11:03  cort
+
+	* src/Types/: CurrencyType.cs, NumberType.cs, QuantityType.cs:
+	
+	addition of missing types from SupplyWave R2 code to reprent money,
+	whole numbers and decimal values.
+
+2002-04-11 Thursday 14:09  crandall
+
+	* src/DataObject/: DataType.cs, DateType.cs, IdType.cs,
+	StringType.cs, ValueDataType.cs:
+	
+	[no log message]
+
+2002-04-11 Thursday 14:05  crandall
+
+	* src/: Types/BooleanType.cs, Types/DataType.cs, Types/DateType.cs,
+	Types/IdType.cs, Types/StringType.cs, Types/ValueDataType.cs,
+	DataObject/DataObject.cs:
+	
+	[no log message]
+
+2002-04-09 Tuesday 07:12  cort
+
+	* src/DAO/spring2.snk:
+	
+	needed to create signed Spring2.Core.DAO assembly
+
+2002-03-29 Friday 08:53  cort
+
+	* src/DAO/: AssemblyInfo.cs, EntityDao.cs, IOrderBy.cs, IWhere.cs,
+	OrderByClause.cs, Spring2.Core.DAO.csproj, WhereClause.cs:
+	
+	first pass at EntityDAO base class
+
+2002-02-22 Friday 08:50  crandall
+
+	* src/: DAO/EntityDao.cs, DataObject/DataObject.cs,
+	DataObject/DataType.cs, DataObject/DateType.cs,
+	DataObject/EntityDataObject.cs, DataObject/IEntityDataObject.cs,
+	DataObject/IdType.cs, DataObject/StringType.cs,
+	DataObject/ValueDataType.cs:
+	
+	[no log message]
+
