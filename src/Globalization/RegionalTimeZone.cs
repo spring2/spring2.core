@@ -21,17 +21,53 @@ namespace Spring2.Core.Globalization {
 
 	// Military/NATO time zones, whole hour offset, no daylight time
 	public static readonly RegionalTimeZone Y = new RegionalTimeZone("Y", "Yankee", null, new TimeSpan(-12,0,0));
-	public static readonly RegionalTimeZone Z = new RegionalTimeZone("Z", "Zulu", null, TimeSpan.Zero);
-	public static readonly RegionalTimeZone R = new RegionalTimeZone("R", "Romeo", null, new TimeSpan(-5,0,0));
+	public static readonly RegionalTimeZone X = new RegionalTimeZone("X", "Xray", null, new TimeSpan(-11,0,0));
+	public static readonly RegionalTimeZone W = new RegionalTimeZone("W", "Wiskey", null, new TimeSpan(-10,0,0));
+	public static readonly RegionalTimeZone V = new RegionalTimeZone("V", "Victor", null, new TimeSpan(-9,0,0));
+	public static readonly RegionalTimeZone U = new RegionalTimeZone("U", "Uniform", null, new TimeSpan(-8,0,0));
 	public static readonly RegionalTimeZone T = new RegionalTimeZone("T", "Tango", null, new TimeSpan(-7,0,0));
+	public static readonly RegionalTimeZone S = new RegionalTimeZone("S", "Sierra", null, new TimeSpan(-6,0,0));
+	public static readonly RegionalTimeZone R = new RegionalTimeZone("R", "Romeo", null, new TimeSpan(-5,0,0));
+	public static readonly RegionalTimeZone Q = new RegionalTimeZone("Q", "Quebec", null, new TimeSpan(-4,0,0));
+	public static readonly RegionalTimeZone P = new RegionalTimeZone("P", "Papa", null, new TimeSpan(-3,0,0));
+	public static readonly RegionalTimeZone O = new RegionalTimeZone("O", "Oscar", null, new TimeSpan(-2,0,0));
+	public static readonly RegionalTimeZone N = new RegionalTimeZone("N", "November", null, new TimeSpan(-1,0,0));
+	public static readonly RegionalTimeZone Z = new RegionalTimeZone("Z", "Zulu", null, TimeSpan.Zero);
+	public static readonly RegionalTimeZone A = new RegionalTimeZone("A", "Alpha", null, new TimeSpan(1,0,0));
+	public static readonly RegionalTimeZone B = new RegionalTimeZone("B", "Bravo", null, new TimeSpan(2,0,0));
+	public static readonly RegionalTimeZone C = new RegionalTimeZone("C", "Charlie", null, new TimeSpan(3,0,0));
+	public static readonly RegionalTimeZone D = new RegionalTimeZone("D", "Delta", null, new TimeSpan(4,0,0));
+	public static readonly RegionalTimeZone E = new RegionalTimeZone("E", "Echo", null, new TimeSpan(5,0,0));
+	public static readonly RegionalTimeZone F = new RegionalTimeZone("F", "Foxtrot", null, new TimeSpan(6,0,0));
+	public static readonly RegionalTimeZone G = new RegionalTimeZone("G", "Golf", null, new TimeSpan(7,0,0));
+	public static readonly RegionalTimeZone H = new RegionalTimeZone("H", "Hotel", null, new TimeSpan(8,0,0));
+	public static readonly RegionalTimeZone I = new RegionalTimeZone("I", "Indio", null, new TimeSpan(9,0,0));
+	public static readonly RegionalTimeZone K = new RegionalTimeZone("K", "Kilo", null, new TimeSpan(10,0,0));
+	public static readonly RegionalTimeZone L = new RegionalTimeZone("L", "Lima", null, new TimeSpan(11,0,0));
+	public static readonly RegionalTimeZone M = new RegionalTimeZone("M", "Mike", null, new TimeSpan(12,0,0));
 
 	// Time zones that use North American daylight time rules
-	public static readonly RegionalTimeZone R_US = new RegionalTimeZone("R-US", "US Eastern Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-5,0,0));
-	public static readonly RegionalTimeZone T_US = new RegionalTimeZone("T-US", "US Mountain Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-7,0,0));
+	public static readonly RegionalTimeZone V_US = new RegionalTimeZone("V-US", "US Alaska Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-7,0,0));
+	public static readonly RegionalTimeZone U_US = new RegionalTimeZone("U-US", "US Pacific Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-7,0,0));
+	public static readonly RegionalTimeZone T_US = new RegionalTimeZone("T-US", "US Mountain Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-7,0,0));
+	public static readonly RegionalTimeZone S_US = new RegionalTimeZone("S-US", "US Central Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-7,0,0));
+	public static readonly RegionalTimeZone R_US = new RegionalTimeZone("R-US", "US Eastern Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-5,0,0));
 
 	// Time zones that use EU daylight time rules
-	public static readonly RegionalTimeZone Z_EU = new RegionalTimeZone("Z-EU", "Europe Western Time", DaylightTimeRule.EUROPE, TimeSpan.Zero);
+	public static readonly RegionalTimeZone Z_EU = new RegionalTimeZone("Z-EU", "Greenwich Mean Time", DaylightTimeRule.EUROPE, TimeSpan.Zero);
 	public static readonly RegionalTimeZone A_EU = new RegionalTimeZone("A-EU", "Europe Central Time", DaylightTimeRule.EUROPE, new TimeSpan(1,0,0));
+	public static readonly RegionalTimeZone B_EU = new RegionalTimeZone("A-EU", "Europe Eastern Time", DaylightTimeRule.EUROPE, new TimeSpan(2,0,0));
+
+	// Common known timezone abbreviations
+	public static readonly RegionalTimeZone AKST = V_US;
+	public static readonly RegionalTimeZone PST = U_US;
+	public static readonly RegionalTimeZone MST = T_US;
+	public static readonly RegionalTimeZone CST = S_US;
+	public static readonly RegionalTimeZone EST = R_US;
+	public static readonly RegionalTimeZone GMT = Z_EU;
+	public static readonly RegionalTimeZone CET = A_EU;
+	public static readonly RegionalTimeZone EET = B_EU;
+
 
 	protected String code;
 	protected String name;
@@ -61,6 +97,25 @@ namespace Spring2.Core.Globalization {
 	/// <param name="code"></param>
 	/// <returns></returns>
 	public static RegionalTimeZone GetInstance(String code) {
+	    // check for common abbreviations first (one that are defined above)
+	    if (code.Equals("AKST")) {
+		return AKST;
+	    } else if (code.Equals("PST")) {
+		return PST;
+	    } else if (code.Equals("MST")) {
+		return MST;
+	    } else if (code.Equals("CST")) {
+		return CST;
+	    } else if (code.Equals("EST")) {
+		return EST;
+	    } else if (code.Equals("GMT")) {
+		return GMT;
+	    } else if (code.Equals("CET")) {
+		return CET;
+	    } else if (code.Equals("EET")) {
+		return EET;
+	    }
+
 	    foreach (RegionalTimeZone t in OPTIONS) {
 		if (t.Code.Equals(code)) {
 		    return t;
