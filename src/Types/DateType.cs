@@ -110,5 +110,26 @@ namespace Spring2.Core.Types {
 	    
 	    return Compare(that);
 	}
+
+	public DateType EndOfCurrentQuarter {
+	    get {
+		DateTime result = EndOfPreviousQuarter.ToDateTime().AddMonths(3);
+		result = result.AddDays(DateTime.DaysInMonth(result.Year, result.Month) - result.Day);
+		return new DateType(result);
+	    }
+	}
+
+	public DateType EndOfPreviousQuarter {
+	    get {
+		// Get to the correct month.
+		DateTime result = ToDateTime().AddMonths(-1);
+		result = result.AddMonths(-(result.Month % 3));
+
+		// Go to the end of the month.
+		result = result.AddDays(DateTime.DaysInMonth(result.Year, result.Month) - result.Day);
+
+		return new DateType(result);
+	    }
+	}
     }
 }
