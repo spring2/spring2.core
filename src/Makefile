@@ -5,6 +5,7 @@ SRCDIR :=	../src
 LIBDIR :=	../lib
 BUILDDIR :=     ../build
 BINDIR :=	../bin
+RELEASEDIR :=	../release
 
 CORE := $(BUILDDIR)/Spring2.Core.dll
 TEST := $(BUILDDIR)/Spring2.Core.Test.dll
@@ -28,7 +29,8 @@ $(WEBCONTROL): $(WEBCONTROL_SRC)
 	csc /target:library /out:$@ /debug+ $(WEBCONTROL_SRC) AssemblyVersionInfo.cs
 
 solution:
-	@-rm build.log
+	@touch build.log
+	@rm build.log
 	@-devenv Spring2.Core.sln /rebuild Debug /out build.log /nologo
 	@cat build.log
 
@@ -39,12 +41,27 @@ dtgcompare:
 	../../../../work/Spring2/DataTierGenerator/build/DataTierGenerator.exe dtg-dbcompare.config.xml
 
 regress:
-	../bin/nunit-console.exe /assembly:$(TEST)
+	@../bin/NUnit/nunit-console.exe /assembly:$(TEST)
 
 clean:
-	rm -rf $(BUILDDIR)/*
+	@rm -rf $(BUILDDIR)/*
 
 debug:
 	@echo MODULES = $(MODULES)
 	@echo SRC = $(SRC)
 	@echo TEST_SRC = $(TEST_SRC)
+
+changelog:
+	@updatechangelog.sh
+	@cp ../ChangeLog.txt ${BUILDDIR}
+
+package: clean solution regress changelog
+	jar -cMf ${RELEASEDIR}/Spring2.Core.$(shell ./getversion.sh).zip ${BUILDDIR}/*
+
+release: package
+	cvs tag RELEASE_$(subst .,_,$(shell ./getversion.sh))
+	$(shell cd ${RELEASEDIR}; cvs add -kb Spring2.Core.$(shell getversion.sh).zip)
+	$(shell cd ${RELEASEDIR}; cvs commit -m "new release version" Spring2.Core.$(shell getversion.sh).zip)
+	${BINDIR}/UpdateVersion -b Increment -i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs
+	cvs commit -m "update to next version" AssemblyVersionInfo.cs
+
