@@ -41,12 +41,5 @@ namespace Spring2.Core.Types {
 		return Value.ToString();
 	    }
 	}
-
-//	public abstract String format(Format format);
-//	public abstract DataType parse(Format format, String value) throws ParseException;
-//	public abstract DataType parse(String value) throws ParseException;
-//
-//	public abstract DataType getTestInstance();
-//	}
     }
 }
