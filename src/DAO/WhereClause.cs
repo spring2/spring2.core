@@ -112,8 +112,17 @@ namespace Spring2.Core.DAO {
 	    sql += field + "='" + value.ToString() + "'";
 	}
 
+	public void AndEquals(String field, DBNull value) {
+	    if (!sql.Equals(String.Empty)) {
+		sql += " AND ";
+	    }
+	    sql += field + " is null";
+	}
+
 	public void AndEquals(String field, Object value) {
-	    if (value is Int32) {
+	    if (value is DBNull) {
+		AndEquals(field, value as DBNull);
+	    } else if (value is Int32) {
 		AndEquals(field, (Int32)value);
 	    } else if (value is DateTime) {
 		AndEquals(field, (DateTime)value);
@@ -145,8 +154,17 @@ namespace Spring2.Core.DAO {
 	    sql += field + "<>'" + value.ToString() + "'";
 	}
 
+	public void AndNotEquals(String field, DBNull value) {
+	    if (!sql.Equals(String.Empty)) {
+		sql += " AND ";
+	    }
+	    sql += field + " is not null";
+	}
+
 	public void AndNotEquals(String field, Object value) {
-	    if (value is Int32) {
+	    if (value is DBNull) {
+		AndNotEquals(field, value as DBNull);
+	    } else if (value is Int32) {
 		AndNotEquals(field, (Int32)value);
 	    } else if (value is DateTime) {
 		AndNotEquals(field, (DateTime)value);
@@ -203,8 +221,17 @@ namespace Spring2.Core.DAO {
 	    sql += field + "='" + value.ToString() + "'";
 	}
 
+	public void OrEquals(String field, DBNull value) {
+	    if (!sql.Equals(String.Empty)) {
+		sql += " OR ";
+	    }
+	    sql += field + " is null";
+	}
+
 	public void OrEquals(String field, Object value) {
-	    if (value is Int32) {
+	    if (value is DBNull) {
+		OrEquals(field, value as DBNull);
+	    } else if (value is Int32) {
 		OrEquals(field, (Int32)value);
 	    } else if (value is DateTime) {
 		OrEquals(field, (DateTime)value);
@@ -236,8 +263,17 @@ namespace Spring2.Core.DAO {
 	    sql += field + "<>'" + value.ToString() + "'";
 	}
 
+	public void OrNotEquals(String field, DBNull value) {
+	    if (!sql.Equals(String.Empty)) {
+		sql += " OR ";
+	    }
+	    sql += field + " is not null";
+	}
+
 	public void OrNotEquals(String field, Object value) {
-	    if (value is Int32) {
+	    if (value is DBNull) {
+		OrNotEquals(field, value as DBNull);
+	    } else if (value is Int32) {
 		OrNotEquals(field, (Int32)value);
 	    } else if (value is DateTime) {
 		OrNotEquals(field, (DateTime)value);
