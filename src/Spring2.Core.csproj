@@ -177,6 +177,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Types\USStateCodeEnum.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Types\ValueDataType.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
