@@ -3,6 +3,7 @@ using System.Globalization;
 
 namespace Spring2.Core.Types {
 
+    [Obsolete("Use IntegerType instead.")]
     public class NumberType : DataType	{
 
 	public static readonly new NumberType DEFAULT = new NumberType();

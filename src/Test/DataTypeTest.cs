@@ -40,27 +40,6 @@ namespace Spring2.Core.Test {
 	    c2 = CurrencyType.Parse(s1);
 	    Assertion.AssertEquals(c1, c2);
 
-	    // Number type tests.
-	    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-	    NumberType number1 = new NumberType(3000);
-	    String numberString = number1.ToString("N");
-	    NumberType number2 = NumberType.Parse(numberString);
-	    Assertion.AssertEquals(number1, number2);
-	    number2 = NumberType.Parse("3000");
-	    Assertion.AssertEquals(number1, number2);
-	    number2 = NumberType.Parse("3,000");
-	    Assertion.AssertEquals(number1, number2);
-	    number2 = NumberType.Parse("3000.");
-	    Assertion.AssertEquals(number1, number2);
-	    number2 = NumberType.Parse("3000.00");
-	    Assertion.AssertEquals(number1, number2);
-	    number2 = NumberType.Parse("3000.000");
-	    Assertion.AssertEquals(number1, number2);
-	    number2 = NumberType.Parse(" 3000 ");
-	    Assertion.AssertEquals(number1, number2);
-	    number2 = NumberType.Parse(" 3,000.000 ");
-	    Assertion.AssertEquals(number1, number2);
-
 	    // Integer type tests.
 	    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 	    IntegerType integer1 = new IntegerType(3000);
@@ -92,6 +71,30 @@ namespace Spring2.Core.Test {
 	    Assertion.AssertEquals(id1, id2);
 	    id2 = IdType.Parse(" 3000 ");
 	    Assertion.AssertEquals(id1, id2);
+
+	    // DateType tests.
+	    DateType date1 = new DateType(new DateTime(2001, 11, 1));
+	    String dateString = date1.ToString();
+	    DateType date2 = DateType.Parse(dateString);
+	    Assertion.AssertEquals(date1, date2);
+	    date2 = DateType.Parse("11/01/01");
+	    Assertion.AssertEquals(date1, date2);
+	    date2 = DateType.Parse("11/01/2001");
+	    Assertion.AssertEquals(date1, date2);
+	    date2 = DateType.Parse("1 Nov 2001");
+	    Assertion.AssertEquals(date1, date2);
+	    date2 = DateType.Parse("1 November 2001");
+	    Assertion.AssertEquals(date1, date2);
+	    date2 = DateType.Parse("November 1, 2001");
+	    Assertion.AssertEquals(date1, date2);
+	    date2 = DateType.Parse("Nov, 2001");
+	    Assertion.AssertEquals(date1, date2);
+	    date2 = DateType.Parse("November, 2001");
+	    Assertion.AssertEquals(date1, date2);
+	    date2 = DateType.Parse("11-01-2001");
+	    Assertion.AssertEquals(date1, date2);
+	    date2 = DateType.Parse("11-01-01");
+	    Assertion.AssertEquals(date1, date2);
 	}
 
 	[Test]
@@ -224,33 +227,6 @@ namespace Spring2.Core.Test {
 	    Assertion.Assert(!id3.Equals(id1));
 
 	    Assertion.Assert(!id1.Equals(null));
-
-	    // Number type tests.
-	    NumberType n1 = new NumberType(100);
-	    NumberType n2 = new NumberType(100);
-	    NumberType n3 = new NumberType(50);
-
-	    Assertion.AssertEquals(NumberType.UNSET, NumberType.UNSET);
-	    Assertion.AssertEquals(NumberType.DEFAULT, NumberType.DEFAULT);
-	    Assertion.Assert(!NumberType.UNSET.Equals(NumberType.DEFAULT));
-	    Assertion.Assert(!NumberType.DEFAULT.Equals(NumberType.UNSET));
-
-	    Assertion.Assert(!n1.Equals(NumberType.UNSET));
-	    Assertion.Assert(!n1.Equals(NumberType.DEFAULT));
-	    Assertion.Assert(!NumberType.UNSET.Equals(n1));
-	    Assertion.Assert(!NumberType.DEFAULT.Equals(n1));
-	    Assertion.AssertEquals(n1, n1);
-	    Assertion.AssertEquals(n1, n2);
-	    Assertion.AssertEquals(n2, n1);
-	    Assertion.Assert(!n1.Equals(n3));
-	    Assertion.Assert(!n3.Equals(n1));
-
-	    Assertion.Assert(!n1.Equals(null));
-
-	    // Compare number to id.
-	    Assertion.Assert(!NumberType.UNSET.Equals(IdType.UNSET));
-	    Assertion.Assert(!NumberType.DEFAULT.Equals(IdType.DEFAULT));
-	    Assertion.Assert(!id1.Equals(n1));
 
 	    // Integer type tests.
 	    IntegerType integer1 = new IntegerType(100);

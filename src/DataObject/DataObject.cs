@@ -167,8 +167,8 @@ namespace Spring2.Core.DataObject {
 			returnValue.Add(new DataObjectCompareDetail(
 			    valuePrefix
 			    + ".Count", 
-			    new NumberType(collection1.Count), 
-			    new NumberType(collection2.Count)));
+			    new IntegerType(collection1.Count), 
+			    new IntegerType(collection2.Count)));
 		    }
 		    else {
 			IEnumerator enumerator1 = collection1.GetEnumerator();
