@@ -31,6 +31,7 @@ namespace Spring2.Core.Globalization {
 	private DaylightTimeRule() {
 	}
 
+
 	private DaylightTimeRule(WeekOfMonth startWeekOfMonth, DayOfWeek startDayOfWeek, Int32 startMonth, WeekOfMonth endWeekOfMonth, DayOfWeek endDayOfWeek, Int32 endMonth, Int32 hourOfDay, Boolean utcHourOfDay, TimeSpan delta) {
 	    this.startWeekOfMonth = startWeekOfMonth;
 	    this.startDayOfWeek = startDayOfWeek;
@@ -43,6 +44,17 @@ namespace Spring2.Core.Globalization {
 	    this.hourOfDay = hourOfDay;
 	    this.utcHourOfDay = utcHourOfDay;
 
+	    this.delta = delta;
+	}
+
+
+	private DaylightTimeRule(Int32 startDay, Int32 startMonth, Int32 endDay, Int32 endMonth, Int32 hourOfDay, Boolean utcHourOfDay, TimeSpan delta) {
+	    this.startDay = startDay;
+	    this.startMonth = startMonth;
+	    this.endDay = endDay;
+	    this.endMonth = endMonth;
+	    this.hourOfDay = hourOfDay;
+	    this.utcHourOfDay = utcHourOfDay;
 	    this.delta = delta;
 	}
 
