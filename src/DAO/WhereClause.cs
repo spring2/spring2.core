@@ -118,7 +118,7 @@ namespace Spring2.Core.DAO {
 	    } else if (value is DateTime) {
 		AndEquals(field, (DateTime)value);
 	    } else {
-		AndEquals(field, value.ToString().Replace("'", "''"));
+		AndEquals(field, value.ToString());
 	    }
 	}
 	#endregion
