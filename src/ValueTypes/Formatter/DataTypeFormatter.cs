@@ -1,6 +1,6 @@
 using System;
 
-namespace Spring2.Core.Types {
+namespace Spring2.Core.Types.Formatter {
 
     /// <summary>
     /// Summary description for DataTypeFormatter.
