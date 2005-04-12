@@ -120,7 +120,7 @@ namespace Spring2.Core.Types {
 	public static implicit operator StringType(string value) {
 	    //should this be an exception?
 	    if (value == null) {
-		return new StringType(TypeState.UNSET);
+		return UNSET;
 	    }
 	      
 	    return new StringType(value);
@@ -247,8 +247,7 @@ namespace Spring2.Core.Types {
 	#endregion
     
 
-	//this is here for legacy code.
-	public static string Parse(string value) {
+	public static StringType Parse(string value) {
 	    return new StringType(value);
 	}
 
