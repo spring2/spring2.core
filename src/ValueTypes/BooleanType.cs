@@ -189,13 +189,23 @@ namespace Spring2.Core.Types {
 	}
 
 	public Boolean ToBoolean() {
-	    if (Object.ReferenceEquals(this, TRUE)) {
-		return true;
+	    if (myState == TypeState.VALID) {
+		return myValue;
+	    } else {
+		throw new InvalidCastException("UNSET and DEFAULT cannot be cast to a Boolean.");
 	    }
-	    if (Object.ReferenceEquals(this, FALSE)) {
-		return false;
+	}
+
+	public Boolean IsTrue {
+	    get {
+		return this.Equals(TRUE);
 	    }
-	    throw new InvalidCastException("UNSET and DEFAULT cannot be cast to a Boolean.");
+	}
+
+	public Boolean IsFalse {
+	    get {
+		return this.Equals(FALSE);
+	    }
 	}
 
     }
