@@ -104,6 +104,11 @@
                     Project = "{80B94045-4DE6-4BB0-BE22-C5CC0E772695}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
+                <Reference
+                    Name = "Spring2.Core.WebControl"
+                    Project = "{848F75F0-EEBA-4C76-BF81-A41CF6B5EF98}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
             </References>
         </Build>
         <Files>
@@ -119,6 +124,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Test\BooleanTypeTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Test\DataTypeTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -130,6 +140,11 @@
                 />
                 <File
                     RelPath = "Test\MessageTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\StringTypeTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
