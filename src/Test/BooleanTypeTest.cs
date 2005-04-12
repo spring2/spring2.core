@@ -1,0 +1,27 @@
+using System;
+
+using NUnit.Framework;
+using Spring2.Core.Types;
+
+namespace Spring2.Core.Test {
+
+    /// <summary>
+    /// Tests for BooleanType
+    /// </summary>
+    [TestFixture]
+    public class BooleanTypeTest {
+
+	[Test]
+	public void TestParse() {
+	    Assert.IsTrue(BooleanType.FALSE.IsValid);
+	    Assert.IsTrue(BooleanType.TRUE.IsValid);
+
+	    Assert.IsFalse(BooleanType.FALSE.ToBoolean());
+	    Assert.IsTrue(BooleanType.TRUE.ToBoolean());
+
+	    Assert.IsFalse(BooleanType.UNSET.IsValid);
+	    Assert.IsFalse(BooleanType.DEFAULT.IsValid);
+	}
+
+    }
+}
