@@ -716,7 +716,7 @@ namespace Spring2.Core.Types {
 
 	#region ToString methods
 	public override string ToString() {
-	    return this.myValue;
+	    return IsValid ? this.myValue : myState.ToString();
 	}
 
 	//        string IConvertible.ToString(IFormatProvider provider) {

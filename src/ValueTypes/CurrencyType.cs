@@ -246,24 +246,19 @@ namespace Spring2.Core.Types {
 	#region ToString and Parsing
 
 	public override String ToString() {
-	    return myValue.ToString(null, null);
+	    return IsValid ? this.myValue.ToString() : myState.ToString();
 	}
 
-
 	public String ToString(String format) {
-	    return ToString(format, null);
+	    return IsValid ? this.myValue.ToString(format) : myState.ToString();
 	}
 
 	public String ToString(IFormatProvider provider) {
-	    return ToString(null, provider);
+	    return IsValid ? this.myValue.ToString(provider) : myState.ToString();
 	}
-
+         
 	public String ToString(String format, IFormatProvider provider) {
-	    if (myState != TypeState.VALID) {
-		throw new InvalidValueException(myState);
-	    }
-
-	    return myValue.ToString(format, provider);
+	    return IsValid ? this.myValue.ToString(format, provider) : myState.ToString();
 	}
 
 
@@ -732,7 +727,7 @@ namespace Spring2.Core.Types {
 
 
 	char IConvertible.ToChar(IFormatProvider provider) {
-	    throw new InvalidCastException("Decimal", "Char");
+	    throw new InvalidTypeCastException("Decimal", "Char");
 	}
 
 	[CLSCompliant(false)]
@@ -785,7 +780,7 @@ namespace Spring2.Core.Types {
 	}
 
 	DateTime IConvertible.ToDateTime(IFormatProvider provider) {
-	    throw new InvalidCastException("Decimal", "DateTime");
+	    throw new InvalidTypeCastException("Decimal", "DateTime");
 	}
 
 	Object IConvertible.ToType(Type type, IFormatProvider provider) {
@@ -846,5 +841,14 @@ namespace Spring2.Core.Types {
 	}
 
 	#endregion
+ 
+	public Decimal ToDecimal() {
+	    if (!IsValid) {
+		throw new InvalidStateException(myState);
+	    }
+
+	    return myValue;
+	}
+    
     }
 }

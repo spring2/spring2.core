@@ -269,7 +269,7 @@ namespace Spring2.Core.Types {
 	public String ToString(String phoneNumberFormat, String extensionFormat){
 
 	    if (!IsValid) {
-		throw new InvalidCastException("UNSET and DEFAULT DateTypes have no string value.");
+		return base.ToString();
 	    }
 
 	    String formattedPhoneNumber = String.Empty;

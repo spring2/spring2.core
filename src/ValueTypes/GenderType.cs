@@ -126,7 +126,7 @@ namespace Spring2.Core.Types {
 
 	public string ToString(bool returnName) {
 	    if (!IsValid) {
-		throw new InvalidStateException(myState);
+		return myState.ToString();
 	    }
 
 	    if (myValue == GenderCode.Male) {

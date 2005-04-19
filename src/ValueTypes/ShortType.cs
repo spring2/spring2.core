@@ -66,29 +66,20 @@ namespace Spring2.Core.Types {
 	#endregion
 
 	#region ToString and Parsing
-	public override System.String ToString() {
-	    if (!IsValid) {
-		throw new InvalidStateException(myState);
-	    }
-
-	    return myValue.ToString();
+	public override String ToString() {
+	    return IsValid ? this.myValue.ToString() : myState.ToString();
 	}
-   
 
-	public System.String ToString(System.String format) {
-	    if (!IsValid) {
-		throw new InvalidStateException(myState);
-	    }
-
-	    return myValue.ToString(format);
+	public String ToString(String format) {
+	    return IsValid ? this.myValue.ToString(format) : myState.ToString();
 	}
-   
-	public System.String ToString(System.String format, System.IFormatProvider formatProvider) {
-	    if (!IsValid) {
-		throw new InvalidStateException(myState);
-	    }
 
-	    return myValue.ToString(format, formatProvider);
+	public String ToString(IFormatProvider provider) {
+	    return IsValid ? this.myValue.ToString(provider) : myState.ToString();
+	}
+         
+	public String ToString(String format, IFormatProvider provider) {
+	    return IsValid ? this.myValue.ToString(format, provider) : myState.ToString();
 	}
 
 	public static ShortType Parse(System.String parseString) {    
@@ -144,14 +135,6 @@ namespace Spring2.Core.Types {
 	    return parsedInt32;
 	}
 
-
-	public System.String ToString(System.IFormatProvider formatProvider) {
-	    if (!IsValid) {
-		throw new InvalidStateException(myState);
-	    }
-
-	    return myValue.ToString(formatProvider);
-	}
 	#endregion
 
 	#region ToXX conversion methods

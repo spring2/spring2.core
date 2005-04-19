@@ -66,21 +66,8 @@ namespace Spring2.Core.Types {
 	#region ToString and Parsing
 
 	public override String ToString() {
-	    if (myState != TypeState.VALID) {
-		throw new InvalidValueException(myState);
-	    }
-
-	    return myValue.ToString();
-	    //	    if (myValue) {
-	    //		return TrueString;
-	    //	    }
-
-	    //	    return FalseString;
+	    return IsValid ? this.myValue.ToString() : myState.ToString();
 	}
-
-	//	String IConvertible.ToString(IFormatProvider provider) {
-	//	    return myValue.ToString(provider);
-	//	}
 
 	public static BooleanType Parse(String value) {
 	    bool boolVal = bool.Parse(value);

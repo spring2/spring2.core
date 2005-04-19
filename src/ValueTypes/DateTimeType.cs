@@ -451,35 +451,19 @@ namespace Spring2.Core.Types {
 	}
     
 	public override String ToString() {
-	    if (!IsValid) {
-		throw new InvalidStateException(myState);
-	    }
-
-	    return myValue.ToString();
+	    return IsValid ? this.myValue.ToString() : myState.ToString();
 	}
 
 	public String ToString(String format) {
-	    if (!IsValid) {
-		throw new InvalidStateException(myState);
-	    }
-
-	    return myValue.ToString(format);
+	    return IsValid ? this.myValue.ToString(format) : myState.ToString();
 	}
 
 	public String ToString(IFormatProvider provider) {
-	    if (!IsValid) {
-		throw new InvalidStateException(myState);
-	    }
-
-	    return myValue.ToString(provider);
+	    return IsValid ? this.myValue.ToString(provider) : myState.ToString();
 	}
          
 	public String ToString(String format, IFormatProvider provider) {
-	    if (!IsValid) {
-		throw new InvalidStateException(myState);
-	    }
-
-	    return myValue.ToString(format, provider);
+	    return IsValid ? this.myValue.ToString(format, provider) : myState.ToString();
 	}
 	#endregion   
 
@@ -687,59 +671,59 @@ namespace Spring2.Core.Types {
 
 	#region IConvertible methods
 	bool IConvertible.ToBoolean(IFormatProvider provider) {
-	    throw new InvalidCastException("DateTime", "Boolean");
+	    throw new InvalidTypeCastException("DateTime", "Boolean");
 	}
 
 	char IConvertible.ToChar(IFormatProvider provider) {
-	    throw new InvalidCastException("DateTime", "Char");
+	    throw new InvalidTypeCastException("DateTime", "Char");
 	}
 
 	[CLSCompliant(false)]
 	sbyte IConvertible.ToSByte(IFormatProvider provider) {
-	    throw new InvalidCastException("DateTime", "SByte");
+	    throw new InvalidTypeCastException("DateTime", "SByte");
 	}
 
 	byte IConvertible.ToByte(IFormatProvider provider) {
-	    throw new InvalidCastException("DateTime", "Byte");
+	    throw new InvalidTypeCastException("DateTime", "Byte");
 	}
 
 	short IConvertible.ToInt16(IFormatProvider provider) {
-	    throw new InvalidCastException("DateTime", "Int16");
+	    throw new InvalidTypeCastException("DateTime", "Int16");
 	}
 
 	[CLSCompliant(false)]
 	ushort IConvertible.ToUInt16(IFormatProvider provider) {
-	    throw new InvalidCastException("DateTime", "UInt16");
+	    throw new InvalidTypeCastException("DateTime", "UInt16");
 	}
 
 	int IConvertible.ToInt32(IFormatProvider provider) {
-	    throw new InvalidCastException("DateTime", "Int32");
+	    throw new InvalidTypeCastException("DateTime", "Int32");
 	}
 
 	[CLSCompliant(false)]
 	uint IConvertible.ToUInt32(IFormatProvider provider) {
-	    throw new InvalidCastException("DateTime", "UInt32");
+	    throw new InvalidTypeCastException("DateTime", "UInt32");
 	}
 
 	long IConvertible.ToInt64(IFormatProvider provider) {
-	    throw new InvalidCastException("DateTime", "Int64");
+	    throw new InvalidTypeCastException("DateTime", "Int64");
 	}
 
 	[CLSCompliant(false)]
 	ulong IConvertible.ToUInt64(IFormatProvider provider) {
-	    throw new InvalidCastException("DateTime", "UInt64");
+	    throw new InvalidTypeCastException("DateTime", "UInt64");
 	}
 
 	float IConvertible.ToSingle(IFormatProvider provider) {
-	    throw new InvalidCastException("DateTime", "Single");
+	    throw new InvalidTypeCastException("DateTime", "Single");
 	}
 
 	double IConvertible.ToDouble(IFormatProvider provider) {
-	    throw new InvalidCastException("DateTime", "Double");
+	    throw new InvalidTypeCastException("DateTime", "Double");
 	}
 
 	Decimal IConvertible.ToDecimal(IFormatProvider provider) {
-	    throw new InvalidCastException("DateTime", "Decimal");
+	    throw new InvalidTypeCastException("DateTime", "Decimal");
 	}
 
 	DateTime IConvertible.ToDateTime(IFormatProvider provider) {

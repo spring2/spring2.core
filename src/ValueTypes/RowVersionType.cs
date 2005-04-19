@@ -74,6 +74,11 @@ namespace Spring2.Core.Types {
 		myState = TypeState.VALID;
 	    }
 	}
+
+	public override String ToString() {
+	    return IsValid ? this.myValue.ToString() : myState.ToString();
+	}
+
     }
 }
 

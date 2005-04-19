@@ -295,7 +295,7 @@ namespace Spring2.Core.Types {
 
 	#region ToString and Parse methods
 	public override String ToString() {
-	    return myValue.ToString();
+	    return IsValid ? this.myValue.ToString() : myState.ToString();
 	}
 
 	public static TimeType Parse(String s) {
