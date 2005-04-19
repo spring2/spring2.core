@@ -64,12 +64,12 @@ namespace Spring2.Core.Types {
 	}
     }
 
-    public class InvalidCastException : TypesException {
-	public InvalidCastException(string fromType, string toType)
+    public class InvalidTypeCastException : TypesException {
+	public InvalidTypeCastException(string fromType, string toType)
 	    : base("Invalid type when casting from '" + fromType + "' to '" + toType + "'") {
 	}
 
-	public InvalidCastException(string message)
+	public InvalidTypeCastException(string message)
 	    : base("message") {
 	}
     }
