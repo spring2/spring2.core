@@ -12,7 +12,7 @@ namespace Spring2.Core.Types.Formatter {
 	/// </summary>
 	/// <param name="val"></param>
 	/// <returns></returns>
-	public String FormatDefault(DataType val) {
+	public String FormatDefault(IDataType val) {
 	    return val.IsValid ? val.ToString() : String.Empty;
 	}
 
