@@ -7,6 +7,8 @@ namespace Spring2.Core.Types {
 	private System.Int32 myValue;
 	private TypeState    myState;
 
+	public static readonly IntegerType ZERO = new IntegerType(0);
+
 	public const int MaxValue = System.Int32.MaxValue;
 	public const int MinValue = System.Int32.MinValue;
 
@@ -246,13 +248,13 @@ namespace Spring2.Core.Types {
 	#endregion
 
 	#region int
-	public static implicit operator int(IntegerType castFrom) {
-	    if (!castFrom.IsValid) {
-		throw new InvalidStateException(castFrom.myState);
-	    }
-
-	    return castFrom.myValue;
-	}
+//	public static implicit operator int(IntegerType castFrom) {
+//	    if (!castFrom.IsValid) {
+//		throw new InvalidStateException(castFrom.myState);
+//	    }
+//
+//	    return castFrom.myValue;
+//	}
 
 	public static implicit operator IntegerType(int castFrom) {
 	    IntegerType returnType = new IntegerType(castFrom);
