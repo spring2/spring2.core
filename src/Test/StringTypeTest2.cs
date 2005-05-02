@@ -81,5 +81,21 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual("UNSET", USStateCodeEnum.UNSET.ToString());
 	    Assert.AreEqual("DEFAULT", USStateCodeEnum.DEFAULT.ToString());
 	}
+
+	[Test]
+	public void CurrencyToStringTest() {
+	    CurrencyType currency = new CurrencyType(1.45);
+	    Assert.AreEqual("$1.45", currency.ToString());
+	}
+
+	[Test]
+	public void IntegerTypeInvalidStringParse() {
+	    try {
+		Assert.AreEqual(IntegerType.UNSET, IntegerType.Parse("abc"));
+		
+	    } catch (FormatException ex) {
+	    	// pass
+	    }
+	}
     }
 }
