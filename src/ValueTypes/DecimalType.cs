@@ -810,5 +810,21 @@ namespace Spring2.Core.Types {
 	    return myValue;
 	}
 
+	//sets this instance to the passed in value
+	//if it is invalid. used in SetInitialDefaults, etc.
+
+	public void SetIfInvalid(DecimalType value) {
+	    if (!IsValid) {
+		myValue = value.myValue;
+		myState = value.myState;
+	    }
+	}
+
+	public void SetIfInvalid(decimal value) {
+	    if (!IsValid) {
+		myValue = value;
+		myState = TypeState.VALID;
+	    }
+	}
     }
 }

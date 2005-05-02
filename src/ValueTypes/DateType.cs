@@ -734,5 +734,14 @@ namespace Spring2.Core.Types {
 	    return this.Date.Equals(that.Date);
 	}
 
+	//sets this instance to the passed in value
+	//if it is invalid. used in SetInitialDefaults, etc.
+
+	public void SetIfInvalid(DateType value) {
+	    if (!IsValid) {
+		myValue = value.myValue;
+		myState = value.myState;
+	    }
+	}
     }
 }

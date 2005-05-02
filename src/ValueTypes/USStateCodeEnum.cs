@@ -97,5 +97,14 @@ namespace Spring2.Core.Types {
 	public static EnumDataTypeList Options {
 	    get { return OPTIONS; }
 	}
+
+	public static USStateCodeEnum SetIfInvalid(USStateCodeEnum valueToCheck, string initialValue) {
+	    if (valueToCheck.IsDefault || valueToCheck.IsUnset) {
+		return GetInstance(initialValue);
+	    }
+
+	    return valueToCheck;
+	}
+
     }
 }
