@@ -638,11 +638,7 @@ namespace Spring2.Core.Types {
 
 	#region Object support methods
 	public override int GetHashCode() {
-	    if (!IsValid) {
-		throw new InvalidStateException(myState);
-	    }
-
-	    return myValue.GetHashCode();
+	    return IsValid ? myValue.GetHashCode() : 0;
 	}
 
 	public override bool Equals(Object value) {
