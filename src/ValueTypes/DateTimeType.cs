@@ -9,7 +9,7 @@ using Calendar = System.Globalization.Calendar;
 namespace Spring2.Core.Types {
 
     [Serializable(), StructLayout(LayoutKind.Auto)]
-    public struct DateTimeType : IComparable, IFormattable, IConvertible, IDataType {
+    public struct DateTimeType : IComparable, IFormattable, IDataType {
 	private DateTime  myValue;
 	private TypeState myState;
 
@@ -669,77 +669,13 @@ namespace Spring2.Core.Types {
 	}
 	#endregion
 
-	#region IConvertible methods
-	bool IConvertible.ToBoolean(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("DateTime", "Boolean");
-	}
-
-	char IConvertible.ToChar(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("DateTime", "Char");
-	}
-
-	[CLSCompliant(false)]
-	sbyte IConvertible.ToSByte(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("DateTime", "SByte");
-	}
-
-	byte IConvertible.ToByte(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("DateTime", "Byte");
-	}
-
-	short IConvertible.ToInt16(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("DateTime", "Int16");
-	}
-
-	[CLSCompliant(false)]
-	ushort IConvertible.ToUInt16(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("DateTime", "UInt16");
-	}
-
-	int IConvertible.ToInt32(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("DateTime", "Int32");
-	}
-
-	[CLSCompliant(false)]
-	uint IConvertible.ToUInt32(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("DateTime", "UInt32");
-	}
-
-	long IConvertible.ToInt64(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("DateTime", "Int64");
-	}
-
-	[CLSCompliant(false)]
-	ulong IConvertible.ToUInt64(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("DateTime", "UInt64");
-	}
-
-	float IConvertible.ToSingle(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("DateTime", "Single");
-	}
-
-	double IConvertible.ToDouble(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("DateTime", "Double");
-	}
-
-	Decimal IConvertible.ToDecimal(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("DateTime", "Decimal");
-	}
-
-	DateTime IConvertible.ToDateTime(IFormatProvider provider) {
+	public DateTime ToDateTime() {
 	    if (!IsValid) {
 		throw new InvalidStateException(myState);
 	    }
 
 	    return myValue;
 	}
-
-	//what do we do here?
-	Object IConvertible.ToType(Type type, IFormatProvider provider) {
-	    return null;
-	    //            return Convert.DefaultToType((IConvertible)this, type, provider);
-	}
-	#endregion
 
 	#region Object support methods
 	public override int GetHashCode() {
@@ -828,11 +764,6 @@ namespace Spring2.Core.Types {
 	    return myValue.Date;
 	}
 
-	// TODO: realizing that this is would be a change in signature, is this really needed?
-	public DateTime ToDateTime() {
-	    return myValue;
-	}
-	
 	//	public DateTimeType AddDays(Double days) {
 	//	    return new DateTimeType(ToDateTime().AddDays(days));
 	//	}
@@ -842,7 +773,35 @@ namespace Spring2.Core.Types {
 	    return this.myState == TypeState.VALID && that.myState == TypeState.VALID && this.Date.Equals(that.Date);
 	}
 
+	//this is used to indicate a default date value based on 1/1/1900
+	private static DateTimeType theDefault1900 = DateTimeType.Parse("01/01/1900");
+
+	public static DateTimeType Default1900 {
+	    get {return theDefault1900;}
+	}       	
     
-    
+	//sets this instance to the passed in value
+	//if it is invalid. used in SetInitialDefaults, etc.
+
+	public void SetIfInvalid(DateTimeType value) {
+	    if (!IsValid) {
+		myValue = value.myValue;
+		myState = value.myState;
+	    }
+	}
+
+	public void SetIfInvalid(DateTime value) {
+	    if (!IsValid) {
+		myValue = value;
+		myState = TypeState.VALID;
+	    }
+	}
+
+	public void SetIfInvalid(string value) {
+	    if (!IsValid) {
+		myValue = DateTime.Parse(value);
+		myState = TypeState.VALID;
+	    }
+	}
     }
 }

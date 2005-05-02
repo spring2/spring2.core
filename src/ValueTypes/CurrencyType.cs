@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace Spring2.Core.Types {
     [Serializable, StructLayout(LayoutKind.Sequential)]
-    public struct CurrencyType : IFormattable, IComparable, IConvertible, IDataType {
+    public struct CurrencyType : IFormattable, IComparable, IDataType {
 	private Decimal myValue;
 	private TypeState myState;
 
@@ -168,7 +168,7 @@ namespace Spring2.Core.Types {
 	}
 
 	public static implicit operator CurrencyType(Decimal castFrom) {
-	    return new DecimalType(castFrom);
+	    return new CurrencyType(castFrom);
 	}
 
 	public static explicit operator DecimalType(CurrencyType castFrom) {
@@ -721,71 +721,54 @@ namespace Spring2.Core.Types {
 
 	#region IConvertible and other conversions
 
-	bool IConvertible.ToBoolean(IFormatProvider provider) {
-	    return Convert.ToBoolean(this);
+
+	[CLSCompliant(false)]
+	public sbyte ToSByte() {
+	    return CurrencyType.ToSByte(this);
 	}
 
+	public byte ToByte() {
+	    return CurrencyType.ToByte(this);
+	}
 
-	char IConvertible.ToChar(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("Decimal", "Char");
+	public short ToInt16() {
+	    return CurrencyType.ToInt16(this);
 	}
 
 	[CLSCompliant(false)]
-	sbyte IConvertible.ToSByte(IFormatProvider provider) {
-	    return Convert.ToSByte(this);
+	public ushort ToUInt16() {
+	    return CurrencyType.ToUInt16(this);
 	}
 
-	byte IConvertible.ToByte(IFormatProvider provider) {
-	    return Convert.ToByte(this);
-	}
-
-	short IConvertible.ToInt16(IFormatProvider provider) {
-	    return Convert.ToInt16(this);
+	public int ToInt32() {
+	    return CurrencyType.ToInt32(this);
 	}
 
 	[CLSCompliant(false)]
-	ushort IConvertible.ToUInt16(IFormatProvider provider) {
-	    return Convert.ToUInt16(this);
+	public uint ToUInt32() {
+	    return CurrencyType.ToUInt32(this);
 	}
 
-	int IConvertible.ToInt32(IFormatProvider provider) {
-	    return Convert.ToInt32(this);
-	}
-
-	[CLSCompliant(false)]
-	uint IConvertible.ToUInt32(IFormatProvider provider) {
-	    return Convert.ToUInt32(this);
-	}
-
-	long IConvertible.ToInt64(IFormatProvider provider) {
-	    return Convert.ToInt64(this);
+	public long ToInt64() {
+	    return CurrencyType.ToInt64(this);
 	}
 
 	[CLSCompliant(false)]
-	ulong IConvertible.ToUInt64(IFormatProvider provider) {
-	    return Convert.ToUInt64(this);
+	public ulong ToUInt64() {
+	    return CurrencyType.ToUInt64(this);
 	}
 
-	float IConvertible.ToSingle(IFormatProvider provider) {
-	    return Convert.ToSingle(this);
+	public float ToSingle() {
+	    return CurrencyType.ToSingle(this);
 	}
 
-	double IConvertible.ToDouble(IFormatProvider provider) {
-	    return Convert.ToDouble(this);
+	public double ToDouble() {
+	    return CurrencyType.ToDouble(this);
 	}
 
-	Decimal IConvertible.ToDecimal(IFormatProvider provider) {
-	    Decimal d = Convert.ToDecimal(this.myValue);
+	public Decimal ToDecimal() {
+	    Decimal d = CurrencyType.ToDecimal(this.myValue);
 	    return d;
-	}
-
-	DateTime IConvertible.ToDateTime(IFormatProvider provider) {
-	    throw new InvalidTypeCastException("Decimal", "DateTime");
-	}
-
-	Object IConvertible.ToType(Type type, IFormatProvider provider) {
-	    return null;
-	    //            return Convert.DefaultToType((IConvertible)this, type, provider);
 	}
 
 	#endregion
@@ -841,6 +824,23 @@ namespace Spring2.Core.Types {
 	}
 
 	#endregion
+
+	//sets this instance to the passed in value
+	//if it is invalid. used in SetInitialDefaults, etc.
+
+	public void SetIfInvalid(CurrencyType value) {
+	    if (!IsValid) {
+		myValue = value.myValue;
+		myState = value.myState;
+	    }
+	}
+
+	public void SetIfInvalid(decimal value) {
+	    if (!IsValid) {
+		myValue = value;
+		myState = TypeState.VALID;
+	    }
+	}
  
 	public Decimal ToDecimal() {
 	    if (!IsValid) {
