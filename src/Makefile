@@ -1,6 +1,6 @@
 RM		:= rm -rf
 MKDIR		:= mkdir -p
-NUNIT		:= nunit-console.exe
+NUNIT		:= ../bin/NUnit/nunit-console.exe
 
 SRCDIR		:= ../src
 LIBDIR		:= ../lib
@@ -16,7 +16,7 @@ all: build
 .PHONY: clean
 clean:
 	$(RM) $(BUILDDIR)/*
-	$(RM) $(DOCDIR)/*
+	$(RM) $(DOCDIR)/NCover
 
 .PHONY: build
 build:
@@ -24,7 +24,7 @@ build:
 
 .PHONY: regress
 regress: build
-	cd $(BUILDDIR); $(NUNIT) Spring2.Core.Test.dll
+	$(NUNIT) ../build/Spring2.Core.Test.dll
 
 .PHONY: precommit
 precommit: build regress
@@ -51,3 +51,13 @@ release: package
 	cvs commit -m "update to next version" AssemblyVersionInfo.cs
 
 
+.PHONY: ncover
+ncover: 
+	rm -rf ../docs/NCover
+	mkdir -p ../docs/NCover
+	../bin/NCover/NCover.Console.exe /l ../docs/NCover/Coverage.log /o ../docs/NCover/Coverage.xml /c ../bin/nunit/nunit-console.exe "../build/Spring2.Core.Test.dll /noshadow"
+	
+ncoverreports:
+	@#../bin/nxslt ../docs/NCover/Coverage.xml ../docs/NCover/Coverage.xsl  -o ../docs/NCover/Coverage.html
+	../bin/NCover/NCoverReport.exe ../docs/NCover/Coverage.xml
+	cp ../bin/NCover/NCoverReport.css ../docs/NCover/
