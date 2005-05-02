@@ -13,6 +13,10 @@ namespace Spring2.Core.DataObject {
 
 	private static readonly String SINGLE_INDENT = "    ";
 
+	protected virtual Int32 MaximumIndentLevel {
+	    get { return 5; }
+	}
+
 	/// <summary>
 	/// Creates a string representation of the DataObject.
 	/// </summary>
@@ -21,46 +25,67 @@ namespace Spring2.Core.DataObject {
 	    return ToString(0);
 	}
 
+	public String ToString(Int32 indentLevel) {
+	    return ToString(indentLevel, true);
+	}    
+	    
 	/// <summary>
 	/// Creates a string representation of the DataObject indented to indentLevel (for nested objects)
 	/// </summary>
 	/// <returns>String representing the data object.</returns>
-	public String ToString(Int32 indentLevel) {
-
+	public String ToString(Int32 indentLevel, Boolean recurse) {
 	    String indent = String.Empty;
 	    for (int i = 0; i < indentLevel; i++) {
 		indent += SINGLE_INDENT;
 	    }
 
+	    if (indentLevel > MaximumIndentLevel) {
+		return indent + "NESTING LEVEL EXCEEDED" + Environment.NewLine;
+	    }
+
 	    StringBuilder sb = new StringBuilder();
 	    foreach (PropertyInfo p in GetType().GetProperties()) {
-		Object value = p.GetValue(this, null);
+		if (!p.GetGetMethod().IsStatic) {
+		    Object value = p.GetValue(this, null);
 
-		sb.Append(indent);
-		sb.Append(p.Name + ": ");
-		if (value is DataObject) {
-		    DataObject o = value as DataObject;
-		    if (o.IsEmpty()) {
-			sb.Append("EMPTY").Append(Environment.NewLine);
-		    } else {
-			sb.Append(Environment.NewLine);
-			sb.Append(((DataObject)value).ToString(indentLevel+1));
-		    }
-		} else if (value is ICollection) {
-		    ICollection collection = (ICollection)value;
-		    sb.Append(value.GetType().Name).Append(" (count=").Append(collection.Count).Append(")").Append(Environment.NewLine);
-		    foreach (Object item in collection) {
-			sb.Append(indent).Append(SINGLE_INDENT).Append("Item: ");
-			if (item is DataObject) {
-			    sb.Append(Environment.NewLine).Append(((DataObject)item).ToString(indentLevel+2));
+		    sb.Append(indent);
+		    sb.Append(p.Name + ": ");
+		    if (value is DataObject) {
+			DataObject o = value as DataObject;
+			if (o.IsEmpty()) {
+			    sb.Append("EMPTY").Append(Environment.NewLine);
 			} else {
-			    sb.Append(item.ToString());
 			    sb.Append(Environment.NewLine);
+			    if (recurse) {
+				if (value.GetType().Equals(this.GetType())) {
+				    sb.Append(((DataObject)value).ToString(indentLevel+1, false));
+				} else {
+				    sb.Append(((DataObject)value).ToString(indentLevel+1));
+				}
+			    }
 			}
+		    } else if (value is ICollection) {
+			ICollection collection = (ICollection)value;
+			sb.Append(value.GetType().Name).Append(" (count=").Append(collection.Count).Append(")").Append(Environment.NewLine);
+			if (recurse) {
+			    foreach (Object item in collection) {
+				sb.Append(indent).Append(SINGLE_INDENT).Append("Item: ");
+				if (item is DataObject) {
+				    if (item.GetType().Equals(this.GetType())) {
+					sb.Append(Environment.NewLine).Append(((DataObject)item).ToString(indentLevel+2, false));
+				    } else {
+					sb.Append(Environment.NewLine).Append(((DataObject)item).ToString(indentLevel+2));
+				    }
+				} else {
+				    sb.Append(item.ToString());
+				    sb.Append(Environment.NewLine);
+				}
+			    }
+			}
+		    } else {
+			sb.Append(value.ToString());
+			sb.Append(Environment.NewLine);
 		    }
-		} else {
-		    sb.Append(value.ToString());
-		    sb.Append(Environment.NewLine);
 		}
 	    }
 
