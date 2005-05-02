@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using Spring2.Core.DAO;
 
-namespace Spring2.Core.BusinessLogic {
+namespace Spring2.Core.BusinessEntity {
     
-    public abstract class BusinessEntity : IBusinessEntity {
+    public abstract class BusinessEntity : Spring2.Core.DataObject.DataObject, IBusinessEntity {
         
         protected Boolean isNew = true;
         
