@@ -766,11 +766,6 @@ namespace Spring2.Core.Types {
 	    return CurrencyType.ToDouble(this);
 	}
 
-	public Decimal ToDecimal() {
-	    Decimal d = CurrencyType.ToDecimal(this.myValue);
-	    return d;
-	}
-
 	#endregion
 
 	#region Object Support and other stuff
