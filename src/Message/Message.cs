@@ -16,6 +16,11 @@ namespace Spring2.Core.Message {
 	    this.properties = properties;
 	}
 
+	protected Message(String key, Exception innerException, params Object[] properties) : base(key, innerException) {
+	    this.key = key;
+	    this.properties = properties;
+	}
+
 	public String Key {
 	    get {
 		return this.key;
