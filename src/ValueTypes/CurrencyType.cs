@@ -246,7 +246,7 @@ namespace Spring2.Core.Types {
 	#region ToString and Parsing
 
 	public override String ToString() {
-	    return IsValid ? this.myValue.ToString() : myState.ToString();
+	    return IsValid ? this.myValue.ToString("c") : myState.ToString();
 	}
 
 	public String ToString(String format) {
