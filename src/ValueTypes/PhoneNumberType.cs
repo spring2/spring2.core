@@ -81,7 +81,7 @@ namespace Spring2.Core.Types {
 	    String phoneNumberGuts = phoneNumberString.Substring(parsedCountryCode.Length, phoneNumberString.Length - parsedCountryCode.Length - parsedExtension.Length);
 
 	    if (phoneNumberGuts == String.Empty){
-		return PhoneNumberType.DEFAULT;
+		return PhoneNumberType.UNSET;
 	    }
 	    if (parsedCountryCode == String.Empty){
 		//parse out US numbers
@@ -96,7 +96,13 @@ namespace Spring2.Core.Types {
 		    parsedNumber = phoneNumberGuts.Substring(phoneNumberGuts.Length - 4, 4);
 		}else{
 		    //if the length is less than seven, leave the phone number blank rather than throw an exception - this is bad data anyway
-		    //throw new System.ApplicationException("Invalid phone number string");
+		    //no area code
+		    if (phoneNumberGuts.Length >=3) {
+			parsedExchange = phoneNumberGuts.Substring(0,3);
+			parsedNumber = phoneNumberGuts.Substring(3);
+		    } else {
+		    	parsedExchange = phoneNumberGuts;
+		    }
 		}
 	    }else{
 		//International number - so just throw it in the 'number' property
@@ -267,7 +273,6 @@ namespace Spring2.Core.Types {
 	/// <param name="extensionFormat"></param>
 	/// <returns>Formatted Phone Number string</returns>
 	public String ToString(String phoneNumberFormat, String extensionFormat){
-
 	    if (!IsValid) {
 		return base.ToString();
 	    }
