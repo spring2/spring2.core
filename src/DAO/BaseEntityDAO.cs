@@ -129,7 +129,7 @@ namespace Spring2.Core.DAO {
 	    get;
 	}
 
-	private static String GetConnectionString(String key) {
+	protected virtual String GetConnectionString(String key) {
 	    String connectionString;
 
 	    // Try cache first
