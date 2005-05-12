@@ -129,11 +129,6 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "DAO\Filter.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "DAO\FinderException.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -169,11 +164,6 @@
                 />
                 <File
                     RelPath = "DAO\SqlEntityDAO.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\SqlFilter.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
