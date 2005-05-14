@@ -60,7 +60,7 @@ namespace Spring2.Core.Types {
 	    return new RowVersionType(value);
 	}
 
-	public byte[] Value {
+	public byte[] DBValue {
 	    get {
 		if (myState != TypeState.VALID) {
 		    throw new InvalidValueException(myState);
