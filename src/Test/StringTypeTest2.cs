@@ -51,6 +51,9 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual("UNSET", DateType.UNSET.ToString());
 	    Assert.AreEqual("DEFAULT", DateType.DEFAULT.ToString());
 
+	    Assert.AreEqual("UNSET", DateTimeType.UNSET.ToString());
+	    Assert.AreEqual("DEFAULT", DateTimeType.DEFAULT.ToString());
+
 	    Assert.AreEqual("UNSET", DecimalType.UNSET.ToString());
 	    Assert.AreEqual("DEFAULT", DecimalType.DEFAULT.ToString());
 
@@ -93,7 +96,7 @@ namespace Spring2.Core.Test {
 	    try {
 		Assert.AreEqual(IntegerType.UNSET, IntegerType.Parse("abc"));
 		
-	    } catch (FormatException ex) {
+	    } catch (FormatException) {
 	    	// pass
 	    }
 	}
