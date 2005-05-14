@@ -298,6 +298,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Types\DateTimeType.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Types\DateType.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
