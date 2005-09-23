@@ -83,7 +83,7 @@ namespace Spring2.Core.DataObject {
 			    }
 			}
 		    } else {
-			sb.Append(value.ToString());
+			sb.Append(value == null ? "<NULL>" : value.ToString());
 			sb.Append(Environment.NewLine);
 		    }
 		}
