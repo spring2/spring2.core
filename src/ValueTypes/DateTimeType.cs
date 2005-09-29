@@ -190,6 +190,29 @@ namespace Spring2.Core.Types {
 
 	    return 0;
 	}
+
+	/// <summary>
+	/// Compares dates.  Assumes equal if the difference < 2 minutes, otherwise like normal compare.
+	/// </summary>
+	/// <param name="value"></param>
+	/// <returns></returns>
+	public int CompareNoSeconds(DateTimeType value) {
+	    TimeSpan span = this.myValue.Subtract(value.myValue);
+	    if (Math.Abs(span.Minutes) < 2) {
+		return 0;
+	    }
+
+	    if (this.myValue.Ticks > value.myValue.Ticks) {
+		return 1;
+	    }
+
+	    if (this.myValue.Ticks < value.myValue.Ticks) {
+		return -1;
+	    }
+
+	    // Should never get here.
+	    return 0;
+	}
 	#endregion
    
 	#region Various methods for extracting parts of a DateTimeType (Date, Now, etc..)
