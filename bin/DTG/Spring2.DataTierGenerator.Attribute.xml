@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spring2.DataTierGenerator.Attribute</name>
+    </assembly>
+    <members>
+        <member name="T:Spring2.DataTierGenerator.Attribute.GenerateAttribute">
+            <summary>
+            Indicates that a method or property is generated and contents can be replaced
+            </summary>
+        </member>
+        <member name="M:Spring2.DataTierGenerator.Attribute.GenerateAttribute.#ctor">
+            <summary>
+            Indicates that a method or property is generated and contents can be replaced
+            </summary>
+        </member>
+    </members>
+</doc>
