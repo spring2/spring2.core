@@ -1,0 +1,182 @@
+<enums>
+    <enum name="LocaleEnum" integerbased="False">
+	<value name="Albania" code="AL" />
+	<value name="Algeria" code="DZ" />
+	<value name="Argentina" code="AR" />
+	<value name="Armenia" code="AM" />
+	<value name="Australia" code="AU" />
+	<value name="Austria" code="AT" />
+	<value name="Azerbaijan" code="AZ" />
+	<value name="Bahrain" code="BH" />
+	<value name="Belarus" code="BY" />
+	<value name="Belgium" code="BE" />
+	<value name="Belize" code="BZ" />
+	<value name="Bolivia" code="BO" />
+	<value name="Brazil" code="BR" />
+	<value name="Brunei" code="BN" />
+	<value name="Bulgaria" code="BG" />
+	<value name="Canada" code="CA" />
+	<value name="Caribbean" code="CB" />
+	<value name="Chile" code="CL" />
+	<value name="China" code="CN" />
+	<value name="Colombia" code="CO" />
+	<value name="Costa Rica" code="CR" />
+	<value name="Croatia" code="HR" />
+	<value name="Czech Republic" code="CZ" />
+	<value name="Denmark" code="DK" />
+	<value name="Dominican Republic" code="DO" />
+	<value name="Ecuador" code="EC" />
+	<value name="Egypt" code="EG" />
+	<value name="El Salvador" code="SV" />
+	<value name="Estonia" code="EE" />
+	<value name="Faroe Islands" code="FO" />
+	<value name="Finland" code="FI" />
+	<value name="France" code="FR" />
+	<value name="FYROM" code="MK" />
+	<value name="Georgia" code="GE" />
+	<value name="Germany" code="DE" />
+	<value name="United Kingdom" code="GB" />
+	<value name="Greece" code="GR" />
+	<value name="Guatemala" code="GT" />
+	<value name="Honduras" code="HN" />
+	<value name="Hong Kong" code="HK" />
+	<value name="Hungary" code="HU" />
+	<value name="Iceland" code="IS" />
+	<value name="India" code="IN" />
+	<value name="Indonesia" code="ID" />
+	<value name="Iran" code="IR" />
+	<value name="Iraq" code="IQ" />
+	<value name="Ireland" code="IE" />
+	<value name="Israel" code="IL" />
+	<value name="Italy" code="IT" />
+	<value name="Jamaica" code="JM" />
+	<value name="Japan" code="JP" />
+	<value name="Jordan" code="JO" />
+	<value name="Kazakhstan" code="KZ" />
+	<value name="Kenya" code="KE" />
+	<value name="Korea" code="KR" />
+	<value name="Kuwait" code="KW" />
+	<value name="Latvia" code="LV" />
+	<value name="Lebanon" code="LB" />
+	<value name="Libya" code="LY" />
+	<value name="Liechtenstein" code="LI" />
+	<value name="Lithuania" code="LT" />
+	<value name="Luxembourg" code="LU" />
+	<value name="Macau" code="MO" />
+	<value name="Malaysia" code="MY" />
+	<value name="Maldives" code="MV" />
+	<value name="Mexico" code="MX" />
+	<value name="Monaco" code="MC" />
+	<value name="Mongolia" code="MN" />
+	<value name="Morocco" code="MA" />
+	<value name="New Zealand" code="NZ" />
+	<value name="Nicaragua" code="NI" />
+	<value name="Norway" code="NO" />
+	<value name="Oman" code="OM" />
+	<value name="Pakistan" code="PK" />
+	<value name="Panama" code="PA" />
+	<value name="Paraguay" code="PY" />
+	<value name="Peru" code="PE" />
+	<value name="Philippines" code="PH" />
+	<value name="Poland" code="PL" />
+	<value name="Portugal" code="PT" />
+	<value name="Puerto Rico" code="PR" />
+	<value name="Qatar" code="QA" />
+	<value name="Romania" code="RO" />
+	<value name="Russia" code="RU" />
+	<value name="Saudi Arabia" code="SA" />
+	<value name="Serbia" code="SP" />
+	<value name="Singapore" code="SG" />
+	<value name="Slovakia" code="SK" />
+	<value name="Slovenia" code="SI" />
+	<value name="South Africa" code="ZA " />
+	<value name="Spain" code="ES" />
+	<value name="Sweden" code="SE" />
+	<value name="Syria" code="SY" />
+	<value name="Taiwan" code="TW" />
+	<value name="Thailand" code="TH" />
+	<value name="The Netherlands" code="NL" />
+	<value name="Trinidad and Tobago" code="TT" />
+	<value name="Tunisia" code="TN" />
+	<value name="Turkey" code="TR" />
+	<value name="Ukraine" code="UA" />
+	<value name="United Arab Emirates" code="AE" />
+	<value name="United States" code="US" />
+	<value name="Uruguay" code="UY" />
+	<value name="Uzbekistan" code="UZ" />
+	<value name="Venezuela" code="VE" />
+	<value name="Vietnam" code="VN" />
+	<value name="Yemen" code="YE" />
+	<value name="Zimbabwe" code="ZW" />
+    </enum>
+    <enum name="LanguageEnum" integerbased="False">
+	<value name="Afrikaans" code="af" />
+	<value name="Albanian" code="sq" />
+	<value name="Arabic" code="ar" />
+	<value name="Armenian" code="hy" />
+	<value name="Azeri" code="az" />
+	<value name="Basque" code="eu" />
+	<value name="Belarusian" code="be" />
+	<value name="Bulgarian" code="bg" />
+	<value name="Catalan" code="ca" />
+	<value name="Chinese" code="zh" />
+	<value name="Croatian" code="hr" />
+	<value name="Czech" code="cs" />
+	<value name="Danish" code="da" />
+	<value name="Dhivehi" code="div" />
+	<value name="Dutch" code="nl" />
+	<value name="English" code="en" />
+	<value name="Estonian" code="et" />
+	<value name="Faroese" code="fo" />
+	<value name="Farsi" code="fa" />
+	<value name="Finnish" code="fi" />
+	<value name="French" code="fr" />
+	<value name="Galician" code="gl" />
+	<value name="Georgian" code="ka" />
+	<value name="German" code="de" />
+	<value name="Greek" code="el" />
+	<value name="Gujarati" code="gu" />
+	<value name="Hebrew" code="he" />
+	<value name="Hindi" code="hi" />
+	<value name="Hungarian" code="hu" />
+	<value name="Icelandic" code="is" />
+	<value name="Indonesian" code="id" />
+	<value name="Italian" code="it" />
+	<value name="Japanese" code="ja" />
+	<value name="Kannada" code="kn" />
+	<value name="Kazakh" code="kk" />
+	<value name="Konkani" code="kok" />
+	<value name="Korean" code="ko" />
+	<value name="Kyrgyz" code="ky" />
+	<value name="Latvian" code="lv" />
+	<value name="Lithuanian" code="lt" />
+	<value name="Macedonian" code="mk" />
+	<value name="Malay" code="ms" />
+	<value name="Marathi" code="mr" />
+	<value name="Mongolian" code="mn" />
+	<value name="Norwegian" code="no" />
+	<value name="Polish" code="pl" />
+	<value name="Portuguese" code="pt" />
+	<value name="Punjabi" code="pa" />
+	<value name="Romanian" code="ro" />
+	<value name="Russian" code="ru" />
+	<value name="Sanskrit" code="sa" />
+	<value name="Serbian" code="sr" />
+	<value name="Slovak" code="sk" />
+	<value name="Slovenian" code="sl" />
+	<value name="Spanish" code="es" />
+	<value name="Swahili" code="sw" />
+	<value name="Swedish" code="sv" />
+	<value name="Syriac" code="syr" />
+	<value name="Tamil" code="ta" />
+	<value name="Tatar" code="tt" />
+	<value name="Telugu" code="te" />
+	<value name="Thai" code="th" />
+	<value name="Turkish" code="tr" />
+	<value name="Ukrainian" code="uk" />
+	<value name="Urdu" code="ur" />
+	<value name="Uzbek" code="uz" />
+	<value name="Vietnamese" code="vi" />
+    </enum>
+</enums>
+

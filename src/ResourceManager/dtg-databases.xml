@@ -1,0 +1,51 @@
+<!--
+    
+      Database/SqlEntity definitions
+
+-->
+<databases generateinsertstoredprocscript="True" generateupdatestoredprocscript="True" generatedeletestoredprocscript="True" generateselectstoredprocscript="True" generateviewscript="True" generatetablescript="True" useview="True">
+    <database name="Database" key="ConnectionString">
+	<sqlentities>
+	    <sqlentity name="Resource" >
+		<columns>
+		    <column name="ResourceId" sqltype="Int" identity="True" required="True" />
+		    <column name="EntityName" sqltype="VarChar" length="100" required="True" />
+		    <column name="PropertyName" sqltype="VarChar" length="100" required="True" />
+		    <column name="Identity" sqltype="Int" required="False" />
+		</columns>
+		<constraints>
+		    <constraint name="PK_User" type="PRIMARY KEY">
+			<column name="ResourceId" />
+		    </constraint>
+		    <constraint name="UN_ResourceEntityPropertyIdentity" type="UNIQUE">
+			<column name="EntityName" />
+			<column name="PropertyName" />
+			<column name="Identity" />
+		    </constraint>
+		</constraints>
+	    </sqlentity>
+	    <sqlentity name="LocalizedResource" >
+		<columns>
+		    <column name="LocalizedResourceId" sqltype="Int" identity="True" required="True" />
+		    <column name="ResourceId" sqltype="Int" required="True" />
+		    <column name="Locale" sqltype="Int" required="True" />
+		    <column name="Language" sqltype="Int" required="True" />
+		    <column name="Content" sqltype="VarChar" length="2000" required="True" />
+		</columns>
+		<constraints>
+		    <constraint name="PK_LocalizedResource" type="PRIMARY KEY">
+			<column name="LocalizedResourceId" />
+		    </constraint>
+		    <constraint name="FK_LocalizedResource_Resource" type="FOREIGN KEY" foreignentity="Resource">
+			<column name="ResourceId" foreigncolumn="ResourceId" />
+		    </constraint>
+		    <constraint name="UN_LocalizedResourceLocalLanguage" type="UNIQUE">
+			<column name="ResourceId" />
+			<column name="Locale" />
+			<column name="Language" />
+		    </constraint>
+		</constraints>
+	    </sqlentity>
+	</sqlentities>
+    </database>
+</databases>

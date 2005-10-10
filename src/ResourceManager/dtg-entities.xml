@@ -1,0 +1,20 @@
+<!-- Entity definitions -->
+<entities>
+    <entity name="Resource" sqlentity="Resource">
+	<properties>
+	    <property name="ResourceId" type="IdType" column="*" writable="False" />
+	    <property name="EntityName" type="StringType" column="*" writable="False" />
+	    <property name="PropertyName" type="StringType" column="*" writable="False" />
+	    <property name="Identity" type="IdType" column="*" writable="False" />
+	</properties>
+    </entity>
+    <entity name="LocalizedResource" sqlentity="LocalizedResource">
+	<properties>
+	    <property name="LocalizedResourceId" type="IdType" column="*" writable="False" />
+	    <property name="ResourceId" type="IdType" column="*" writable="False" />
+	    <property name="Locale" type="LocaleEnum" column="*" writable="False" />
+	    <property name="Language" type="LanguageEnum" column="*" writable="False" />
+	    <property name="Content" type="StringType" column="*" />
+	</properties>
+    </entity>
+</entities>

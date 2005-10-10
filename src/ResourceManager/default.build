@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<project name="Weider.Web" default="build" xmlnds="http://tempuri.org/nant-vs.xsd">
+    <target name="build">
+	<solution solutionfile="Weider.Web.sln" configuration="debug">
+	    <webmap>
+		<map url="http://localhost/Weider/Weider.Web.Web.csproj" path="Web\Weider.Web.Web.csproj" />
+	    </webmap>
+	</solution>
+    </target>
+</project>
