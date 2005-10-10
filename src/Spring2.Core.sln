@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.WithTypesTest"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.ResourceManager", "Spring2.Core.ResourceManager.csproj", "{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -53,6 +57,10 @@ Global
 		{51EA5868-FD70-4349-A7F3-0520E2891A85}.Debug.Build.0 = Debug|.NET
 		{51EA5868-FD70-4349-A7F3-0520E2891A85}.Release.ActiveCfg = Release|.NET
 		{51EA5868-FD70-4349-A7F3-0520E2891A85}.Release.Build.0 = Release|.NET
+		{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}.Debug.ActiveCfg = Debug|.NET
+		{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}.Debug.Build.0 = Debug|.NET
+		{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}.Release.ActiveCfg = Release|.NET
+		{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
