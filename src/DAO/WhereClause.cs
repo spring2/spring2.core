@@ -47,6 +47,20 @@ namespace Spring2.Core.DAO {
 	}
 
 	/// <summary>
+	/// New clause that will check that column equals value
+	/// </summary>
+	/// <remarks>
+	/// field = value
+	/// </remarks>
+	public WhereClause(String field, Boolean value) {
+	    if (value) {
+		sql = field + "=1";
+	    } else {
+		sql = field + "=0";
+	    }
+	}
+
+	/// <summary>
 	/// New clause using raw sql
 	/// </summary>
 	public WhereClause(String sql) {
@@ -85,6 +99,10 @@ namespace Spring2.Core.DAO {
 	    AndEquals(field, value);
 	}
 
+	public void And(String field, Boolean value) {
+	    AndEquals(field, value);
+	}
+
 	public void And(String field, Object value) {
 	    AndEquals(field, value);
 	}
@@ -112,6 +130,17 @@ namespace Spring2.Core.DAO {
 	    sql += field + "='" + value.ToString() + "'";
 	}
 
+	public void AndEquals(String field, Boolean value) {
+	    if (!sql.Equals(String.Empty)) {
+		sql += " AND ";
+	    }
+	    if(value) {
+		sql += field + "=1";
+	    } else {
+		sql += field + "=0";
+	    }
+	}
+
 	public void AndEquals(String field, DBNull value) {
 	    if (!sql.Equals(String.Empty)) {
 		sql += " AND ";
@@ -126,6 +155,8 @@ namespace Spring2.Core.DAO {
 		AndEquals(field, (Int32)value);
 	    } else if (value is DateTime) {
 		AndEquals(field, (DateTime)value);
+	    } else if (value is Boolean) {
+		AndEquals(field, (Boolean)value);
 	    } else {
 		AndEquals(field, value.ToString());
 	    }
@@ -161,6 +192,17 @@ namespace Spring2.Core.DAO {
 	    sql += field + " is not null";
 	}
 
+	public void AndNotEquals(String field, Boolean value) {
+	    if (!sql.Equals(String.Empty)) {
+		sql += " AND ";
+	    }
+	    if(value) {
+		sql += field + "<>" + "1";
+	    } else {
+		sql += field + "<>" + "0";
+	    }
+	}
+
 	public void AndNotEquals(String field, Object value) {
 	    if (value is DBNull) {
 		AndNotEquals(field, value as DBNull);
@@ -168,6 +210,8 @@ namespace Spring2.Core.DAO {
 		AndNotEquals(field, (Int32)value);
 	    } else if (value is DateTime) {
 		AndNotEquals(field, (DateTime)value);
+	    } else if (value is Boolean) {
+		AndNotEquals(field, (Boolean)value);
 	    } else {
 		AndNotEquals(field, value.ToString().Replace("'", "''"));
 	    }
@@ -191,6 +235,10 @@ namespace Spring2.Core.DAO {
 	}
 
 	public void Or(String field, DateTime value) {
+	    OrEquals(field, value);
+	}
+
+	public void Or(String field, Boolean value) {
 	    OrEquals(field, value);
 	}
 
@@ -221,6 +269,17 @@ namespace Spring2.Core.DAO {
 	    sql += field + "='" + value.ToString() + "'";
 	}
 
+	public void OrEquals(String field, Boolean value) {
+	    if (!sql.Equals(String.Empty)) {
+		sql += " OR ";
+	    }
+	    if(value) {
+		sql += field + "=1";
+	    } else {
+		sql += field + "=0";
+	    }
+	}
+
 	public void OrEquals(String field, DBNull value) {
 	    if (!sql.Equals(String.Empty)) {
 		sql += " OR ";
@@ -235,6 +294,8 @@ namespace Spring2.Core.DAO {
 		OrEquals(field, (Int32)value);
 	    } else if (value is DateTime) {
 		OrEquals(field, (DateTime)value);
+	    } else if (value is Boolean) {
+		OrEquals(field, (Boolean)value);
 	    } else {
 		OrEquals(field, value.ToString().Replace("'", "''"));
 	    }
@@ -263,6 +324,17 @@ namespace Spring2.Core.DAO {
 	    sql += field + "<>'" + value.ToString() + "'";
 	}
 
+	public void OrNotEquals(String field, Boolean value) {
+	    if (!sql.Equals(String.Empty)) {
+		sql += " OR ";
+	    }
+	    if(value) {
+		sql += field + "<>1";
+	    } else {
+		sql += field + "<>0";
+	    }
+	}
+
 	public void OrNotEquals(String field, DBNull value) {
 	    if (!sql.Equals(String.Empty)) {
 		sql += " OR ";
@@ -277,6 +349,8 @@ namespace Spring2.Core.DAO {
 		OrNotEquals(field, (Int32)value);
 	    } else if (value is DateTime) {
 		OrNotEquals(field, (DateTime)value);
+	    } else if (value is Boolean) {
+		OrNotEquals(field, (Boolean)value);
 	    } else {
 		OrNotEquals(field, value.ToString().Replace("'", "''"));
 	    }

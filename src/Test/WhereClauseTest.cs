@@ -61,6 +61,10 @@ namespace Spring2.Core.Test {
 
 	    filter = new WhereClause("columnA", "foo'bar");
 	    Assert.AreEqual(" WHERE columnA='foo''bar'", filter.FormatSql());
+
+	    //with Boolean
+	    filter = new WhereClause("columnA", false);
+	    Assert.AreEqual(" WHERE columnA=0", filter.FormatSql());
 	}
 
 	[Test]
@@ -74,6 +78,10 @@ namespace Spring2.Core.Test {
 	    filter = new WhereClause("columnA", "foo'bar");
 	    filter.And("columnB", "fee'fie");
 	    Assert.AreEqual(" WHERE columnA='foo''bar' AND columnB='fee''fie'", filter.FormatSql());
+
+	    filter = new WhereClause("columnA", "foo'bar");
+	    filter.And("columnB", true as object);
+	    Assert.AreEqual(" WHERE columnA='foo''bar' AND columnB=1", filter.FormatSql());
 	}
 
 	[Test]
@@ -87,6 +95,36 @@ namespace Spring2.Core.Test {
 	    filter = new WhereClause("columnA", "foo'bar");
 	    filter.AndEquals("columnB", "fee'fie");
 	    Assert.AreEqual(" WHERE columnA='foo''bar' AND columnB='fee''fie'", filter.FormatSql());
+	}
+
+	[Test]
+	public void AndNotEquals() {
+	    WhereClause filter = new WhereClause();
+
+	    //Boolean as object (best code coverage)
+	    filter = new WhereClause("columnA", 1);
+	    filter.AndNotEquals("columnB", true as object);
+	    Assert.AreEqual(" WHERE columnA=1 AND columnB<>1", filter.FormatSql());
+	}
+
+	[Test]
+	public void OrEquals() {
+	    WhereClause filter = new WhereClause();
+
+	    //Boolean as object (best code coverage)
+	    filter = new WhereClause("columnA", 1);
+	    filter.OrEquals("columnB", true as object);
+	    Assert.AreEqual(" WHERE columnA=1 OR columnB=1", filter.FormatSql());
+	}
+
+	[Test]
+	public void OrNotEquals() {
+	    WhereClause filter = new WhereClause();
+
+	    //Boolean as object (best code coverage)
+	    filter = new WhereClause("columnA", 1);
+	    filter.OrNotEquals("columnB", true as object);
+	    Assert.AreEqual(" WHERE columnA=1 OR columnB<>1", filter.FormatSql());
 	}
 
 	[Test]
