@@ -36,7 +36,7 @@
                     NoStdLib = "false"
                     NoWarn = ""
                     Optimize = "false"
-                    OutputPath = "..\..\build\Reporting\"
+                    OutputPath = "..\build\Reporting\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
@@ -81,40 +81,39 @@
                 />
                 <Reference
                     Name = "Spring2.Core"
-                    Project = "{80B94045-4DE6-4BB0-BE22-C5CC0E772695}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                    AssemblyName = "Spring2.Core"
+                    HintPath = "..\..\lib\Spring2.Core.dll"
                 />
                 <Reference
                     Name = "Spring2.Core.Types"
-                    Project = "{FB2D9DAA-2340-468C-8018-138748DA2EAE}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                    AssemblyName = "Spring2.Core.Types"
+                    HintPath = "..\..\lib\Spring2.Core.Types.dll"
                 />
             </References>
         </Build>
         <Files>
             <Include>
                 <File
-                    RelPath = "AssemblyInfo.cs"
+                    RelPath = "Reporting\AssemblyInfo.cs"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Reporting\BusinessLogic\Report.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "BusinessLogic\Report.cs"
+                    RelPath = "Reporting\DAO\SqlSchemaDAO.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "DAO\SqlSchemaDAO.cs"
+                    RelPath = "Reporting\DataObject\SqlColumnData.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "DataObject\SqlColumnData.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DataObject\SqlObjectData.cs"
+                    RelPath = "Reporting\DataObject\SqlObjectData.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
