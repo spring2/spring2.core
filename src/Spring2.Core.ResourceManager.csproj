@@ -100,10 +100,12 @@
             <Include>
                 <File
                     RelPath = "ResourceManager\AssemblyInfo.cs"
+                    SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "ResourceManager\AssemblyVersionInfo.cs"
+                    SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
