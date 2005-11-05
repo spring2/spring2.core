@@ -132,39 +132,36 @@ namespace Spring2.Core.DAO {
 	protected virtual String GetConnectionString(String key) {
 	    String connectionString;
 
-	    // Try cache first
-	    if (connectionStrings[key]!= null) {
-		return connectionStrings[key];
-	    }
+	    lock(connectionStrings.SyncRoot) {
+		// look to see if the connection string has already been cached
+		if (connectionStrings[key]!= null) {
+		    return connectionStrings[key];
+		}
 
-	    if (key.ToLower().StartsWith("registry")) {
-		String subkey = key.Substring(key.LastIndexOf(":")+1);
-		subkey = subkey.Substring(0, subkey.LastIndexOf("\\"));
-		String value = key.Substring(key.LastIndexOf("\\")+1);
-		String hive = key.Substring(9,4).ToUpper();
-		RegistryKey rkey;
-		if (hive.Equals("HKLM")) {
-		    rkey = Registry.LocalMachine.OpenSubKey(subkey);
-		} else if (hive.Equals("HKCU")) {
-		    rkey = Registry.CurrentUser.OpenSubKey(subkey);
+		if (key.ToLower().StartsWith("registry")) {
+		    String subkey = key.Substring(key.LastIndexOf(":")+1);
+		    subkey = subkey.Substring(0, subkey.LastIndexOf("\\"));
+		    String value = key.Substring(key.LastIndexOf("\\")+1);
+		    String hive = key.Substring(9,4).ToUpper();
+		    RegistryKey rkey;
+		    if (hive.Equals("HKLM")) {
+			rkey = Registry.LocalMachine.OpenSubKey(subkey);
+		    } else if (hive.Equals("HKCU")) {
+			rkey = Registry.CurrentUser.OpenSubKey(subkey);
+		    } else {
+			throw new Exception("Unable to determine hive from registry type connection key.  Hive understood: " + hive + "  Key used was: " + key);
+		    }
+		    if (rkey == null) {
+			throw new Exception("Specified subkey was not found.  Subkey: " + subkey);
+		    }
+		    connectionString = rkey.GetValue(value).ToString();
 		} else {
-		    throw new Exception("Unable to determine hive from registry type connection key.  Hive understood: " + hive + "  Key used was: " + key);
+		    connectionString = ConfigurationSettings.AppSettings[key];
 		}
-		if (rkey == null) {
-		    throw new Exception("Specified subkey was not found.  Subkey: " + subkey);
-		}
-		connectionString = rkey.GetValue(value).ToString();
-	    } else {
-		connectionString = ConfigurationSettings.AppSettings[key];
+
+		// Cache the connection string by key for fast lookup later.
+		connectionStrings.Add(key, connectionString);
 	    }
-
-	    connectionString = connectionString.ToUpper();
-	    connectionString = connectionString.Replace("NETWORK=DBMSSOCN;", "Network Library=DBMSSOCN;");
-	    connectionString = connectionString.Replace("PROVIDER=MSDASQL;", "");
-	    connectionString = connectionString.Replace("DRIVER=SQL SERVER;", "");
-
-	    // Cache the connection string by key for fast lookup later.
-	    connectionStrings.Add(key, connectionString);
 
 	    return connectionString;
 	}
