@@ -39,7 +39,7 @@
                     OutputPath = "..\build\Reporting\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
+                    TreatWarningsAsErrors = "true"
                     WarningLevel = "4"
                 />
                 <Config
@@ -81,18 +81,23 @@
                 />
                 <Reference
                     Name = "Spring2.Core"
-                    AssemblyName = "Spring2.Core"
-                    HintPath = "..\..\lib\Spring2.Core.dll"
+                    Project = "{80B94045-4DE6-4BB0-BE22-C5CC0E772695}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
                     Name = "Spring2.Core.Types"
-                    AssemblyName = "Spring2.Core.Types"
-                    HintPath = "..\..\lib\Spring2.Core.Types.dll"
+                    Project = "{FB2D9DAA-2340-468C-8018-138748DA2EAE}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
             </References>
         </Build>
         <Files>
             <Include>
+                <File
+                    RelPath = "AssemblyVersionInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
                 <File
                     RelPath = "Reporting\AssemblyInfo.cs"
                     SubType = "Code"
