@@ -155,7 +155,7 @@ namespace Spring2.Core.DAO {
 		connectionString = ConfigurationSettings.AppSettings[key];
 	    }
 
-	    connectionString = connectionString.ToUpper();
+	    //connectionString = connectionString.ToUpper();
 	    connectionString = connectionString.Replace("NETWORK=DBMSSOCN;", "Network Library=DBMSSOCN;");
 	    connectionString = connectionString.Replace("PROVIDER=MSDASQL;", "");
 	    connectionString = connectionString.Replace("DRIVER=SQL SERVER;", "");
