@@ -3,13 +3,13 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}"
+        ProjectGuid = "{BFE71D4B-66E4-467F-9649-FA699B96AC7A}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "Spring2.Core.Test"
+                AssemblyName = "Spring2.Core.Mail"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -29,14 +29,14 @@
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
                     DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = "Spring2.Core.Test.xml"
+                    DocumentationFile = ""
                     DebugSymbols = "true"
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
                     NoStdLib = "false"
-                    NoWarn = "1591"
+                    NoWarn = ""
                     Optimize = "false"
-                    OutputPath = "..\build\"
+                    OutputPath = "..\build\Mail\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "true"
@@ -67,46 +67,21 @@
                 <Reference
                     Name = "System"
                     AssemblyName = "System"
-                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.0.3705\System.dll"
+                    HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"
                 />
                 <Reference
                     Name = "System.Data"
                     AssemblyName = "System.Data"
-                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.0.3705\System.Data.dll"
+                    HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
                 />
                 <Reference
                     Name = "System.XML"
                     AssemblyName = "System.Xml"
-                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.0.3705\System.XML.dll"
-                />
-                <Reference
-                    Name = "nunit.framework"
-                    AssemblyName = "nunit.framework"
-                    HintPath = "..\lib\nunit.framework.dll"
-                />
-                <Reference
-                    Name = "System.Drawing"
-                    AssemblyName = "System.Drawing"
-                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.0.3705\System.Drawing.dll"
-                />
-                <Reference
-                    Name = "System.Windows.Forms"
-                    AssemblyName = "System.Windows.Forms"
-                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.0.3705\System.Windows.Forms.dll"
-                />
-                <Reference
-                    Name = "Spring2.Core.Types"
-                    Project = "{FB2D9DAA-2340-468C-8018-138748DA2EAE}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                    HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
                 />
                 <Reference
                     Name = "Spring2.Core"
                     Project = "{80B94045-4DE6-4BB0-BE22-C5CC0E772695}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
-                />
-                <Reference
-                    Name = "Spring2.Core.WebControl"
-                    Project = "{848F75F0-EEBA-4C76-BF81-A41CF6B5EF98}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
@@ -115,29 +90,19 @@
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
-                    Name = "Spring2.Core.Cryptography"
-                    Project = "{9BB9D043-76B5-4DEF-B146-4D6F7401154B}"
+                    Name = "Spring2.Core.Types"
+                    Project = "{FB2D9DAA-2340-468C-8018-138748DA2EAE}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
-                    Name = "Spring2.Core.Geocode"
-                    Project = "{71F4E2DB-E4C3-4C06-AD03-E9F3463D0EC8}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                    Name = "Spring2.DataTierGenerator.Attribute"
+                    AssemblyName = "Spring2.DataTierGenerator.Attribute"
+                    HintPath = "..\lib\Spring2.DataTierGenerator.Attribute.dll"
                 />
                 <Reference
-                    Name = "Spring2.Core.ResourceManager"
-                    Project = "{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
-                />
-                <Reference
-                    Name = "Spring2.Reporting.Common"
-                    Project = "{53A91AEF-E24F-41E9-AF8D-743F291BEEE1}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
-                />
-                <Reference
-                    Name = "Spring2.Core.Mail"
-                    Project = "{BFE71D4B-66E4-467F-9649-FA699B96AC7A}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                    Name = "System.Web"
+                    AssemblyName = "System.Web"
+                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Web.dll"
                 />
             </References>
         </Build>
@@ -149,77 +114,132 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\AssemblyInfo.cs"
+                    RelPath = "Mail\AssemblyInfo.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\BooleanTypeTest.cs"
+                    RelPath = "Mail\BusinessLogic\MailAttachment.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\CurrencyTypeTest.cs"
+                    RelPath = "Mail\BusinessLogic\MailMessage.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\DataTypeTest.cs"
+                    RelPath = "Mail\BusinessLogic\MailMessageRoute.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\DateTimeTypeTest.cs"
+                    RelPath = "Mail\DAO\MailAttachmentDAO.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\DateTypeTest.cs"
+                    RelPath = "Mail\DAO\MailMessageDAO.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\MessageTest.cs"
+                    RelPath = "Mail\DAO\MailMessageRouteDAO.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\PhoneNumberTypeTest.cs"
+                    RelPath = "Mail\DataObject\IMailAttachment.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\StringTypeTest.cs"
+                    RelPath = "Mail\DataObject\IMailMessage.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\TestFTPClient.cs"
+                    RelPath = "Mail\DataObject\IMailMessageRoute.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\TestGnuPGWrapper.cs"
+                    RelPath = "Mail\DataObject\MailAttachmentData.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\TestUtilities.cs"
+                    RelPath = "Mail\DataObject\MailAttachmentList.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\TimeZoneTests.cs"
+                    RelPath = "Mail\DataObject\MailMessageData.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\WhereClauseTest.cs"
+                    RelPath = "Mail\DataObject\MailMessageList.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\XmlEscapeTest.cs"
+                    RelPath = "Mail\DataObject\MailMessageRouteData.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mail\DataObject\MailMessageRouteList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mail\Types\ActiveStatusEnum.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mail\Types\ActiveStatusEnumList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mail\Types\MailBodyFormatEnum.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mail\Types\MailBodyFormatEnumList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mail\Types\MailMessageStatusEnum.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mail\Types\MailMessageStatusEnumList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mail\Types\MailPriorityEnum.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mail\Types\MailPriorityEnumList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mail\Types\RoutingTypeEnum.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mail\Types\RoutingTypeEnumList.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

@@ -15,6 +15,8 @@
 	        <include name="Spring2.Core.Cryptography.csproj" />
 	        <include name="Spring2.Core.Geocode.csproj" />
 	        <include name="Spring2.Reporting.Common.csproj" />
+	        <include name="Spring2.Core.Mail.csproj" />
+	        <include name="Spring2.Core.Mail.SendMailMessages.csproj" />
 	    </projects>
 	</solution>	
 

@@ -43,6 +43,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Cryptography",
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Mail", "Spring2.Core.Mail.csproj", "{BFE71D4B-66E4-467F-9649-FA699B96AC7A}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Mail.SendMailMessages", "Spring2.Core.Mail.SendMailMessages.csproj", "{E6030DF4-4C00-4D5C-9B90-6C13E027D913}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -93,6 +101,14 @@ Global
 		{9BB9D043-76B5-4DEF-B146-4D6F7401154B}.Debug.Build.0 = Debug|.NET
 		{9BB9D043-76B5-4DEF-B146-4D6F7401154B}.Release.ActiveCfg = Release|.NET
 		{9BB9D043-76B5-4DEF-B146-4D6F7401154B}.Release.Build.0 = Release|.NET
+		{BFE71D4B-66E4-467F-9649-FA699B96AC7A}.Debug.ActiveCfg = Debug|.NET
+		{BFE71D4B-66E4-467F-9649-FA699B96AC7A}.Debug.Build.0 = Debug|.NET
+		{BFE71D4B-66E4-467F-9649-FA699B96AC7A}.Release.ActiveCfg = Release|.NET
+		{BFE71D4B-66E4-467F-9649-FA699B96AC7A}.Release.Build.0 = Release|.NET
+		{E6030DF4-4C00-4D5C-9B90-6C13E027D913}.Debug.ActiveCfg = Debug|.NET
+		{E6030DF4-4C00-4D5C-9B90-6C13E027D913}.Debug.Build.0 = Debug|.NET
+		{E6030DF4-4C00-4D5C-9B90-6C13E027D913}.Release.ActiveCfg = Release|.NET
+		{E6030DF4-4C00-4D5C-9B90-6C13E027D913}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
