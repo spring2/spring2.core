@@ -35,8 +35,13 @@ namespace Spring2.Reporting.Common {
 		    isNumeric = false;
 		}
 
+
 		if(!isNumeric) {
-		    sql += arg.Key.ToString() + "='" + arg.Value.ToString() + "'";
+		    if (arg.Value.ToString() == String.Empty) {
+			sql += arg.Key.ToString() + "=null";
+		    } else {
+			sql += arg.Key.ToString() + "='" + arg.Value.ToString() + "'";
+		    }
 		} else {
 		    sql += arg.Key.ToString() + "=" + arg.Value.ToString();
 		}
