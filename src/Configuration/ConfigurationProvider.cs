@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Reflection;
 
@@ -27,6 +28,8 @@ namespace Spring2.Core.Configuration {
 		    Object o = System.Activator.CreateInstance(clazz);
 		    if (o is IConfigurationProvider) {
 			instance = o as IConfigurationProvider;
+			// force load of all settings, if provider caches them
+		    	NameValueCollection settings = instance.Settings;
 		    } else {
 			throw new Exception(providerClass + " does not support IConfigurationProvider");
 		    }

@@ -9,7 +9,7 @@ namespace Spring2.Core.Configuration {
     /// </summary>
     public class SqlConfigurationProvider : IConfigurationProvider {
 
-	private NameValueCollection settings = null;
+	//private NameValueCollection settings = null;
 
 	public SqlConfigurationProvider() {
 	}
@@ -17,7 +17,7 @@ namespace Spring2.Core.Configuration {
 	public NameValueCollection Settings {
 	    get {
 		//if (settings == null) {
-		    settings = new NameValueCollection();
+		    NameValueCollection settings = new NameValueCollection();
 		    ConfigurationSettingList list = ConfigurationSettingDAO.DAO.GetList();
 		    foreach(IConfigurationSetting setting in list) {
 			settings.Add(setting.Key.ToString(), setting.Value.ToString());
