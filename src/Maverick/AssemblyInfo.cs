@@ -1,9 +1,6 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-// configure logging from the file log4net.config, and watch for changes
-[assembly: log4net.Config.XmlConfigurator(ConfigFile="log4net.config", Watch=true)]
-
 //
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
