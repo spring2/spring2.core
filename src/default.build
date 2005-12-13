@@ -7,7 +7,7 @@
 	    <fail message="label-to-apply property not set, so can't create labelled distribution files" />
 	</ifnot>
 	<exec program="..\bin\UpdateVersion.exe" commandline="-i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs -rp ${label-to-apply}" />
-	<exec program="make" commandline="clean build regress ncoverreports fxcop" />
+	<exec program="make" commandline="clean build ncover ncoverreports fxcop" />
     </target>
 
     <target name="build">
