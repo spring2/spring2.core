@@ -139,6 +139,16 @@
                     Project = "{BFE71D4B-66E4-467F-9649-FA699B96AC7A}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
+                <Reference
+                    Name = "Spring2.Core.Log4Net"
+                    Project = "{ADC35D1C-39C8-4980-AE2B-57DBAE0838D1}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Spring2.Core.Maverick"
+                    Project = "{AA7663E2-76AC-4CF3-B830-2D014F6A5166}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
             </References>
         </Build>
         <Files>

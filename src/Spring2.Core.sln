@@ -51,6 +51,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Mail.SendMailM
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Log4Net", "Spring2.Core.Log4Net.csproj", "{ADC35D1C-39C8-4980-AE2B-57DBAE0838D1}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Maverick", "Spring2.Core.Maverick.csproj", "{AA7663E2-76AC-4CF3-B830-2D014F6A5166}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -109,6 +117,14 @@ Global
 		{E6030DF4-4C00-4D5C-9B90-6C13E027D913}.Debug.Build.0 = Debug|.NET
 		{E6030DF4-4C00-4D5C-9B90-6C13E027D913}.Release.ActiveCfg = Release|.NET
 		{E6030DF4-4C00-4D5C-9B90-6C13E027D913}.Release.Build.0 = Release|.NET
+		{ADC35D1C-39C8-4980-AE2B-57DBAE0838D1}.Debug.ActiveCfg = Debug|.NET
+		{ADC35D1C-39C8-4980-AE2B-57DBAE0838D1}.Debug.Build.0 = Debug|.NET
+		{ADC35D1C-39C8-4980-AE2B-57DBAE0838D1}.Release.ActiveCfg = Release|.NET
+		{ADC35D1C-39C8-4980-AE2B-57DBAE0838D1}.Release.Build.0 = Release|.NET
+		{AA7663E2-76AC-4CF3-B830-2D014F6A5166}.Debug.ActiveCfg = Debug|.NET
+		{AA7663E2-76AC-4CF3-B830-2D014F6A5166}.Debug.Build.0 = Debug|.NET
+		{AA7663E2-76AC-4CF3-B830-2D014F6A5166}.Release.ActiveCfg = Release|.NET
+		{AA7663E2-76AC-4CF3-B830-2D014F6A5166}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
