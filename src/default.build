@@ -1,6 +1,15 @@
 <?xml version="1.0" ?>
 <project name="Spring2.Core" default="build" xmlnds="http://tempuri.org/nant-vs.xsd">
     <property name="build.dir" value="..\build" />
+
+    <target name="ccnet">
+	<ifnot test="${property::exists('label-to-apply')}"> 
+	    <fail message="label-to-apply property not set, so can't create labelled distribution files" />
+	</ifnot>
+	<exec program="..\bin\UpdateVersion.exe" commandline="-i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs -rp ${label-to-apply}" />
+	<exec program="make" commandline="clean build ncover ncoverreports fxcop" />
+    </target>
+
     <target name="build">
 	<delete dir="obj" failonerror="false" />
 	<delete dir="bin" failonerror="false" />
@@ -17,6 +26,8 @@
 	        <include name="Spring2.Reporting.Common.csproj" />
 	        <include name="Spring2.Core.Mail.csproj" />
 	        <include name="Spring2.Core.Mail.SendMailMessages.csproj" />
+	        <include name="Spring2.Core.Log4Net.csproj" />
+	        <include name="Spring2.Core.Maverick.csproj" />
 	    </projects>
 	</solution>	
 
