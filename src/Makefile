@@ -61,3 +61,8 @@ ncoverreports:
 	@#../bin/nxslt ../docs/NCover/Coverage.xml ../docs/NCover/Coverage.xsl  -o ../docs/NCover/Coverage.html
 	../bin/NCover/NCoverReport.exe ../docs/NCover/Coverage.xml
 	cp ../bin/NCover/NCoverReport.css ../docs/NCover/
+
+.PHONY: fxcop
+fxcop:
+	mkdir -p ../docs/FxCop
+	-fxcopcmd /p:Spring2.Core.FxCop /out:../docs/FxCop/Spring2.Core.FxCop.xml
