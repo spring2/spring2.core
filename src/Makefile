@@ -20,7 +20,7 @@ clean:
 
 .PHONY: build
 build:
-	nant
+	../bin/NAnt/nant.exe build
 
 .PHONY: regress
 regress: build
