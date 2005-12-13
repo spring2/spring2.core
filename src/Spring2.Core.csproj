@@ -224,6 +224,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Message\InvalidTypeFormatError.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Message\Message.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -235,6 +240,11 @@
                 />
                 <File
                     RelPath = "Message\MessageListException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Message\MissingRequiredFieldError.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
