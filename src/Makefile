@@ -24,7 +24,7 @@ build:
 
 .PHONY: regress
 regress: build
-	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit-results.xml ../build/Test/Spring2.Core.Test.dll
+	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit-results.xml ../build/Spring2.Core.Test.dll
 
 .PHONY: precommit
 precommit: build regress
