@@ -39,7 +39,7 @@
                     OutputPath = "..\build\Types\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
+                    TreatWarningsAsErrors = "true"
                     WarningLevel = "4"
                 />
                 <Config

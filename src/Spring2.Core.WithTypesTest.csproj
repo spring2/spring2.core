@@ -34,12 +34,12 @@
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
                     NoStdLib = "false"
-                    NoWarn = ""
+                    NoWarn = "0618"
                     Optimize = "false"
                     OutputPath = "..\build\WithTypesTest\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
+                    TreatWarningsAsErrors = "true"
                     WarningLevel = "4"
                 />
                 <Config
