@@ -85,9 +85,9 @@
                     HintPath = "..\lib\nunit.framework.dll"
                 />
                 <Reference
-                    Name = "Spring2.Core"
-                    AssemblyName = "Spring2.Core"
-                    HintPath = "..\build\WithTypes\Spring2.Core.dll"
+                    Name = "Spring2.Core.WithTypes"
+                    Project = "{C44F21C0-6817-4C95-BBFF-58661814D2B9}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
             </References>
         </Build>
