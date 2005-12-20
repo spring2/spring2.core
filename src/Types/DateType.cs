@@ -175,7 +175,7 @@ namespace Spring2.Core.Types {
 	public DateType Date {
 	    get {
 		if (this.IsValid) {
-		    return new DateType(new DateTime(ToDateTime().Year, ToDateTime().Month, ToDateTime().Day));
+		    return new DateType(value.Date);
 		} else {
 		    return this;
 		}
