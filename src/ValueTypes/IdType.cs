@@ -72,6 +72,11 @@ namespace Spring2.Core.Types {
 	    return myValue.ToInt32();
 	}
 
+	public static implicit operator IdType(int castFrom) {
+	    IdType returnType = new IdType(castFrom);
+
+	    return returnType;
+	}
 
     }
 }
