@@ -99,12 +99,11 @@
         <Files>
             <Include>
                 <File
-                    RelPath = "ResourceManager\AssemblyInfo.cs"
-                    SubType = "Code"
+                    RelPath = "AssemblyVersionInfo.cs"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "ResourceManager\AssemblyVersionInfo.cs"
+                    RelPath = "ResourceManager\AssemblyInfo.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

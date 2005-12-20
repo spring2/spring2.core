@@ -109,6 +109,10 @@
         <Files>
             <Include>
                 <File
+                    RelPath = "AssemblyVersionInfo.cs"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Geocode\AddressCache.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

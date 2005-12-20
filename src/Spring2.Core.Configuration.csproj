@@ -99,6 +99,10 @@
         <Files>
             <Include>
                 <File
+                    RelPath = "AssemblyVersionInfo.cs"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Configuration\AppSettingsProvider.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

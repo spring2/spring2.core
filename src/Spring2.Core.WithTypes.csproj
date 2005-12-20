@@ -99,6 +99,10 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "AssemblyVersionInfo.cs"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "BusinessEntity\BusinessEntity.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
