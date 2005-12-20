@@ -11,8 +11,8 @@
     </target>
 
     <target name="build">
-	<delete dir="obj" failonerror="false" />
-	<delete dir="bin" failonerror="false" />
+	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
+	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
 	<solution configuration="debug">
 	    <projects>
 	        <include name="Spring2.Core.csproj" />
@@ -31,8 +31,8 @@
 	    </projects>
 	</solution>	
 
-	<delete dir="obj" failonerror="false" />
-	<delete dir="bin" failonerror="false" />
+	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
+	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
 	<solution configuration="debug">
 	    <projects>
 	        <include name="Spring2.Core.WithTypes.csproj" />
