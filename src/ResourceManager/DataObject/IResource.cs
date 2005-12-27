@@ -18,8 +18,8 @@ namespace Spring2.Core.ResourceManager.DataObject {
     public class ResourceFields {
 	private ResourceFields() {}
 	public static readonly String RESOURCEID = "ResourceId";
-	public static readonly String ENTITYNAME = "EntityName";
-	public static readonly String PROPERTYNAME = "PropertyName";
+	public static readonly String CONTEXT = "Context";
+	public static readonly String FIELD = "Field";
 	public static readonly String IDENTITY = "Identity";
     }
 
@@ -27,10 +27,10 @@ namespace Spring2.Core.ResourceManager.DataObject {
 	IdType ResourceId {
 	    get;
 	}
-	StringType EntityName {
+	StringType Context {
 	    get;
 	}
-	StringType PropertyName {
+	StringType Field {
 	    get;
 	}
 	IdType Identity {

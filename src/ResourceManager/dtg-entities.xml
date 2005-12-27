@@ -12,8 +12,8 @@
 	<properties>
 	    <property name="LocalizedResourceId" type="IdType" column="*" writable="False" />
 	    <property name="ResourceId" type="IdType" column="*" writable="False" />
-	    <property name="Locale" type="LocaleEnum" column="*" writable="False" />
-	    <property name="Language" type="LanguageEnum" column="*" writable="False" />
+	    <property name="Locale" type="StringType" column="*" writable="False" />
+	    <property name="Language" type="StringType" column="*" writable="False" />
 	    <property name="Content" type="StringType" column="*" />
 	</properties>
     </entity>

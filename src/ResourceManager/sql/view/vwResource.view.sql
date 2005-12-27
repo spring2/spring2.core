@@ -12,8 +12,8 @@ AS
 
 SELECT
     Resource.ResourceId,
-    Resource.EntityName,
-    Resource.PropertyName,
+    Resource.Context,
+    Resource.Field,
     Resource.[Identity]
 FROM
     Resource

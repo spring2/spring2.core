@@ -209,28 +209,28 @@ namespace Spring2.Core.ResourceManager.DataObject {
 	}
 
 	[Generate]
-	public class EntityNameSorter : System.Collections.IComparer {
+	public class ContextSorter : System.Collections.IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IResource o1 = (IResource)a;
 		IResource o2 = (IResource)b;
 
-		if (o1 == null || o2 == null || !o1.EntityName.IsValid || !o2.EntityName.IsValid) {
+		if (o1 == null || o2 == null || !o1.Context.IsValid || !o2.Context.IsValid) {
 		    return 0;
 		}
-		return o1.EntityName.CompareTo(o2.EntityName);
+		return o1.Context.CompareTo(o2.Context);
 	    }
 	}
 
 	[Generate]
-	public class PropertyNameSorter : System.Collections.IComparer {
+	public class FieldSorter : System.Collections.IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IResource o1 = (IResource)a;
 		IResource o2 = (IResource)b;
 
-		if (o1 == null || o2 == null || !o1.PropertyName.IsValid || !o2.PropertyName.IsValid) {
+		if (o1 == null || o2 == null || !o1.Field.IsValid || !o2.Field.IsValid) {
 		    return 0;
 		}
-		return o1.PropertyName.CompareTo(o2.PropertyName);
+		return o1.Field.CompareTo(o2.Field);
 	    }
 	}
 

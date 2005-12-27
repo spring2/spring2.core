@@ -9,8 +9,8 @@ GO
 CREATE PROCEDURE spResource_Update
 
 	@ResourceId	Int = null,
-	@EntityName	VarChar(100) = null,
-	@PropertyName	VarChar(100) = null,
+	@Context	VarChar(100) = null,
+	@Field	VarChar(100) = null,
 	@Identity	Int = null
 
 AS
@@ -19,8 +19,8 @@ AS
 UPDATE
 	Resource
 SET
-	EntityName = @EntityName,
-	PropertyName = @PropertyName,
+	Context = @Context,
+	Field = @Field,
 	[Identity] = @Identity
 WHERE
 ResourceId = @ResourceId

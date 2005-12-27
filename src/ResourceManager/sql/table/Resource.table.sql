@@ -23,8 +23,8 @@ GO
 if not exists (select * from dbo.sysobjects where id = object_id(N'[Resource]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
 CREATE TABLE Resource (
 	ResourceId Int IDENTITY(1,1) NOT NULL,
-	EntityName VarChar(100) NOT NULL,
-	PropertyName VarChar(100) NOT NULL,
+	Context VarChar(100) NOT NULL,
+	Field VarChar(100) NOT NULL,
 	[Identity] Int NULL
 )
 GO
@@ -42,29 +42,29 @@ if exists(select * from syscolumns where id=object_id('Resource') and name = 'Re
   END
 GO
 
-if not exists(select * from syscolumns where id=object_id('Resource') and name = 'EntityName')
+if not exists(select * from syscolumns where id=object_id('Resource') and name = 'Context')
   BEGIN
 	ALTER TABLE Resource ADD
-	    EntityName VarChar(100) NOT NULL
+	    Context VarChar(100) NOT NULL
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('Resource') and name = 'EntityName')
+if exists(select * from syscolumns where id=object_id('Resource') and name = 'Context')
   BEGIN
-	exec #spAlterColumn 'Resource', 'EntityName', 'VarChar(100)', 1
+	exec #spAlterColumn 'Resource', 'Context', 'VarChar(100)', 1
   END
 GO
 
-if not exists(select * from syscolumns where id=object_id('Resource') and name = 'PropertyName')
+if not exists(select * from syscolumns where id=object_id('Resource') and name = 'Field')
   BEGIN
 	ALTER TABLE Resource ADD
-	    PropertyName VarChar(100) NOT NULL
+	    Field VarChar(100) NOT NULL
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('Resource') and name = 'PropertyName')
+if exists(select * from syscolumns where id=object_id('Resource') and name = 'Field')
   BEGIN
-	exec #spAlterColumn 'Resource', 'PropertyName', 'VarChar(100)', 1
+	exec #spAlterColumn 'Resource', 'Field', 'VarChar(100)', 1
   END
 GO
 
@@ -93,9 +93,9 @@ if not exists (select * from dbo.sysobjects where id = object_id(N'UN_ResourceEn
 ALTER TABLE Resource ADD
 	CONSTRAINT UN_ResourceEntityPropertyIdentity UNIQUE
 	(
-		EntityName
+		Context
 ,
-		PropertyName
+		Field
 ,
 		[Identity]
 	)

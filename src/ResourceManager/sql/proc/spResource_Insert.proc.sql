@@ -7,20 +7,20 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE spResource_Insert
-	@EntityName	VarChar(100) = null,
-	@PropertyName	VarChar(100) = null,
+	@Context	VarChar(100) = null,
+	@Field	VarChar(100) = null,
 	@Identity	Int = null
 
 AS
 
 
 INSERT INTO Resource
-(	EntityName,
-	PropertyName,
+(	Context,
+	Field,
 	[Identity])
 VALUES (
-	@EntityName,
-	@PropertyName,
+	@Context,
+	@Field,
 	@Identity)
 
 if @@rowcount <> 1 or @@error!=0

@@ -18,18 +18,18 @@ namespace Spring2.Core.ResourceManager.DataObject {
 
 	public static readonly ResourceData DEFAULT = new ResourceData();
 
-	private StringType entityName = StringType.DEFAULT;
-	private StringType propertyName = StringType.DEFAULT;
+	private StringType context = StringType.DEFAULT;
+	private StringType field = StringType.DEFAULT;
 	private IdType identity = IdType.DEFAULT;
 
-	public StringType EntityName {
-	    get { return this.entityName; }
-	    set { this.entityName = value; }
+	public StringType Context {
+	    get { return this.context; }
+	    set { this.context = value; }
 	}
 
-	public StringType PropertyName {
-	    get { return this.propertyName; }
-	    set { this.propertyName = value; }
+	public StringType Field {
+	    get { return this.field; }
+	    set { this.field = value; }
 	}
 
 	public IdType Identity {

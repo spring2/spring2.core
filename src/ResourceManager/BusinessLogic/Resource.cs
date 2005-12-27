@@ -10,16 +10,16 @@ using Spring2.Core.ResourceManager.Types;
 namespace Spring2.Core.ResourceManager.BusinessLogic {
     
     
-    public class Resource : Spring2.Core.BusinessEntity.BusinessEntity, IResource {
+    public class Resource : IResource {
         
         [Generate()]
         private IdType resourceId = IdType.DEFAULT;
         
         [Generate()]
-        private StringType entityName = StringType.DEFAULT;
+        private StringType context = StringType.DEFAULT;
         
         [Generate()]
-        private StringType propertyName = StringType.DEFAULT;
+        private StringType field = StringType.DEFAULT;
         
         [Generate()]
         private IdType identity = IdType.DEFAULT;
@@ -28,6 +28,14 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         internal Resource() {
             
         }
+
+	protected Boolean isNew = true;
+
+	public Boolean IsNew {
+	    get {
+		return this.isNew;
+	    }
+	}
         
         [Generate()]
         internal Resource(Boolean isNew) {
@@ -45,22 +53,22 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         }
         
         [Generate()]
-        public StringType EntityName {
+        public StringType Context {
             get {
-                return this.entityName;
+                return this.context;
             }
             set {
-                this.entityName = value;
+                this.context = value;
             }
         }
         
         [Generate()]
-        public StringType PropertyName {
+        public StringType Field {
             get {
-                return this.propertyName;
+                return this.field;
             }
             set {
-                this.propertyName = value;
+                this.field = value;
             }
         }
         

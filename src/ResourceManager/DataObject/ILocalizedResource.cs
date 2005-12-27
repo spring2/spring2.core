@@ -30,10 +30,10 @@ namespace Spring2.Core.ResourceManager.DataObject {
 	IdType ResourceId {
 	    get;
 	}
-	LocaleEnum Locale {
+	StringType Locale {
 	    get;
 	}
-	LanguageEnum Language {
+	StringType Language {
 	    get;
 	}
 	StringType Content {
