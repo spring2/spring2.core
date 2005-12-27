@@ -3,10 +3,10 @@
     <property name="build.dir" value="..\build" />
 
     <target name="ccnet">
-	<ifnot test="${property::exists('label-to-apply')}"> 
-	    <fail message="label-to-apply property not set, so can't create labelled distribution files" />
+	<ifnot test="${property::exists('CCNetLabel')}"> 
+	    <fail message="CCNetLabel property not set, so can't create labelled distribution files" />
 	</ifnot>
-	<exec program="..\bin\UpdateVersion.exe" commandline="-i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs -rp ${label-to-apply}" />
+	<exec program="..\bin\UpdateVersion.exe" commandline="-i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs -rp ${CCNetLabel}" />
 	<exec program="make" commandline="clean build ncover ncoverreports fxcop" />
     </target>
 
