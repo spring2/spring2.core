@@ -9,8 +9,8 @@
 	    <sqlentity name="Resource" >
 		<columns>
 		    <column name="ResourceId" sqltype="Int" identity="True" required="True" />
-		    <column name="EntityName" sqltype="VarChar" length="100" required="True" />
-		    <column name="PropertyName" sqltype="VarChar" length="100" required="True" />
+		    <column name="Context" sqltype="VarChar" length="100" required="True" />
+		    <column name="Field" sqltype="VarChar" length="100" required="True" />
 		    <column name="Identity" sqltype="Int" required="False" />
 		</columns>
 		<constraints>
@@ -18,8 +18,8 @@
 			<column name="ResourceId" />
 		    </constraint>
 		    <constraint name="UN_ResourceEntityPropertyIdentity" type="UNIQUE">
-			<column name="EntityName" />
-			<column name="PropertyName" />
+			<column name="Context" />
+			<column name="Field" />
 			<column name="Identity" />
 		    </constraint>
 		</constraints>
@@ -28,9 +28,9 @@
 		<columns>
 		    <column name="LocalizedResourceId" sqltype="Int" identity="True" required="True" />
 		    <column name="ResourceId" sqltype="Int" required="True" />
-		    <column name="Locale" sqltype="Int" required="True" />
-		    <column name="Language" sqltype="Int" required="True" />
-		    <column name="Content" sqltype="VarChar" length="2000" required="True" />
+		    <column name="Locale" sqltype="VarChar" length="100" required="True" />
+		    <column name="Language" sqltype="VarChar" length="100" required="True" />
+		    <column name="Content" sqltype="VarChar" length="4000" required="True" />
 		</columns>
 		<constraints>
 		    <constraint name="PK_LocalizedResource" type="PRIMARY KEY">
