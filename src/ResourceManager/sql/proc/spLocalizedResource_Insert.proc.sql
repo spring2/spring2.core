@@ -8,9 +8,9 @@ GO
 
 CREATE PROCEDURE spLocalizedResource_Insert
 	@ResourceId	Int = null,
-	@Locale	Int = null,
-	@Language	Int = null,
-	@Content	VarChar(2000) = null
+	@Locale	VarChar(100) = null,
+	@Language	VarChar(100) = null,
+	@Content	VarChar(4000) = null
 
 AS
 

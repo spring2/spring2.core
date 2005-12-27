@@ -24,9 +24,9 @@ if not exists (select * from dbo.sysobjects where id = object_id(N'[LocalizedRes
 CREATE TABLE LocalizedResource (
 	LocalizedResourceId Int IDENTITY(1,1) NOT NULL,
 	ResourceId Int NOT NULL,
-	Locale Int NOT NULL,
-	Language Int NOT NULL,
-	Content VarChar(2000) NOT NULL
+	Locale VarChar(100) NOT NULL,
+	Language VarChar(100) NOT NULL,
+	Content VarChar(4000) NOT NULL
 )
 GO
 
@@ -59,39 +59,39 @@ GO
 if not exists(select * from syscolumns where id=object_id('LocalizedResource') and name = 'Locale')
   BEGIN
 	ALTER TABLE LocalizedResource ADD
-	    Locale Int NOT NULL
+	    Locale VarChar(100) NOT NULL
   END
 GO
 
 if exists(select * from syscolumns where id=object_id('LocalizedResource') and name = 'Locale')
   BEGIN
-	exec #spAlterColumn 'LocalizedResource', 'Locale', 'Int', 1
+	exec #spAlterColumn 'LocalizedResource', 'Locale', 'VarChar(100)', 1
   END
 GO
 
 if not exists(select * from syscolumns where id=object_id('LocalizedResource') and name = 'Language')
   BEGIN
 	ALTER TABLE LocalizedResource ADD
-	    Language Int NOT NULL
+	    Language VarChar(100) NOT NULL
   END
 GO
 
 if exists(select * from syscolumns where id=object_id('LocalizedResource') and name = 'Language')
   BEGIN
-	exec #spAlterColumn 'LocalizedResource', 'Language', 'Int', 1
+	exec #spAlterColumn 'LocalizedResource', 'Language', 'VarChar(100)', 1
   END
 GO
 
 if not exists(select * from syscolumns where id=object_id('LocalizedResource') and name = 'Content')
   BEGIN
 	ALTER TABLE LocalizedResource ADD
-	    Content VarChar(2000) NOT NULL
+	    Content VarChar(4000) NOT NULL
   END
 GO
 
 if exists(select * from syscolumns where id=object_id('LocalizedResource') and name = 'Content')
   BEGIN
-	exec #spAlterColumn 'LocalizedResource', 'Content', 'VarChar(2000)', 1
+	exec #spAlterColumn 'LocalizedResource', 'Content', 'VarChar(4000)', 1
   END
 GO
 

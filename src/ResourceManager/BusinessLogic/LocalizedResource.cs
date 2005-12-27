@@ -10,7 +10,7 @@ using Spring2.Core.ResourceManager.Types;
 namespace Spring2.Core.ResourceManager.BusinessLogic {
     
     
-    public class LocalizedResource : Spring2.Core.BusinessEntity.BusinessEntity, ILocalizedResource {
+    public class LocalizedResource : ILocalizedResource {
         
         [Generate()]
         private IdType localizedResourceId = IdType.DEFAULT;
@@ -19,10 +19,10 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         private IdType resourceId = IdType.DEFAULT;
         
         [Generate()]
-        private LocaleEnum locale = LocaleEnum.DEFAULT;
+        private StringType locale = StringType.DEFAULT;
         
         [Generate()]
-        private LanguageEnum language = LanguageEnum.DEFAULT;
+        private StringType language = StringType.DEFAULT;
         
         [Generate()]
         private StringType content = StringType.DEFAULT;
@@ -31,7 +31,15 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         internal LocalizedResource() {
             
         }
-        
+
+	private Boolean isNew = true ; 
+ 
+	public Boolean IsNew {
+	    get {
+		return this.isNew;
+	    }
+	}
+       
         [Generate()]
         internal LocalizedResource(Boolean isNew) {
             this.isNew = isNew;
@@ -58,7 +66,7 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         }
         
         [Generate()]
-        public LocaleEnum Locale {
+        public StringType Locale {
             get {
                 return this.locale;
             }
@@ -68,7 +76,7 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         }
         
         [Generate()]
-        public LanguageEnum Language {
+        public StringType Language {
             get {
                 return this.language;
             }
