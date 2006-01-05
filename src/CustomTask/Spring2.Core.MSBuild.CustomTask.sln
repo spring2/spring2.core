@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.MSBuild.CustomTask", "Spring2.Core.MSBuild.CustomTask.csproj", "{85CEB798-6503-4F55-ADC2-0A55DD69E21C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.MSBuild.CustomTask", "..\Spring2.Core.MSBuild.CustomTask.csproj", "{85CEB798-6503-4F55-ADC2-0A55DD69E21C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

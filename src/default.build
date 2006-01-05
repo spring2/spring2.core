@@ -28,6 +28,7 @@
 	        <include name="Spring2.Core.Mail.SendMailMessages.csproj" />
 	        <include name="Spring2.Core.Log4Net.csproj" />
 	        <include name="Spring2.Core.Maverick.csproj" />
+	        <include name="Spring2.Core.MSBuild.CustomTask.csproj" />
 	    </projects>
 	</solution>	
 
