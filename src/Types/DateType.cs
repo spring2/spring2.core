@@ -17,7 +17,7 @@ namespace Spring2.Core.Types {
 	}
 
 	public static DateType Parse(String value, IFormatProvider provider) {
-	    return new DateType(DateTime.Parse(value, provider).Date);
+	    return new DateType(DateTime.Parse(value, provider));
 	}
 
 	public static DateType Today {
