@@ -114,6 +114,10 @@ namespace Spring2.Core.DataObject {
 		return false;
 	    }
 
+	    if (Object.ReferenceEquals(this, obj)) {
+	    	return true;
+	    }
+
 	    foreach (PropertyInfo p in GetType().GetProperties()) {
 		Object value1 = p.GetValue(this, null);
 		Object value2 = p.GetValue(obj, null);
