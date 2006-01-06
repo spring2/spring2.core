@@ -1,3 +1,138 @@
+2006-01-06 Friday 15:05  cort
+
+	* src/: Spring2.Core.Configuration.csproj,
+	Spring2.Core.Cryptography.csproj, Spring2.Core.Geocode.csproj,
+	Spring2.Core.WithTypes.csproj:
+	
+	no message
+
+2006-01-06 Friday 15:04  cort
+
+	* src/ValueDataObject/DataObject.cs:
+	
+	check for reference equality before going the long route
+
+2006-01-06 Friday 15:03  cort
+
+	* src/: Test/DateTypeTest2.cs, Types/DateType.cs,
+	Spring2.Core.WithTypesTest.csproj:
+	
+	correct Parse with a format provider returning only the date
+
+2006-01-05 Thursday 09:02  bent
+
+	* src/default.build:
+	
+	removed customtask project until conditional compiling for
+	.NET1.1/2.0 is implemented.
+
+2006-01-05 Thursday 08:49  bent
+
+	* src/: CustomTask/Spring2.Core.MSBuild.CustomTask.sln,
+	default.build, Spring2.Core.MSBuild.CustomTask.csproj:
+	
+	updated solution/project files to fit Spring2.Core structure;
+	included project in NAnt build script.
+
+2006-01-05 Thursday 08:30  bent
+
+	* src/CustomTask/: Properties/AssemblyInfo.cs,
+	ExecuteSqlScriptFolder.cs, Spring2.Core.MSBuild.CustomTask.csproj,
+	Spring2.Core.MSBuild.CustomTask.csproj.user,
+	Spring2.Core.MSBuild.CustomTask.sln,
+	Spring2.Core.MSBuild.CustomTask.snk,
+	Spring2.Core.MSBuild.CustomTask.suo, TestTasks.cs, Util.cs:
+	
+	initial commit for MSBuild custom task for executing SQL scripts in
+	a particular folder.
+
+2005-12-27 Tuesday 16:55  kend
+
+	* src/ResourceManager/dtg-databases.xml:
+	
+	Added finder to find by context and field
+
+2005-12-27 Tuesday 16:48  kend
+
+	* src/: ResourceManager/BusinessLogic/LocalizedResource.cs,
+	ResourceManager/sql/proc/spLocalizedResource_Insert.proc.sql,
+	ResourceManager/sql/proc/spLocalizedResource_Update.proc.sql,
+	ResourceManager/sql/table/LocalizedResource.table.sql,
+	Spring2.Core.ResourceManager.csproj:
+	
+	Changed Locale and Language from enum to StringType.  Added finder
+	to find by local language and ResourceId
+
+2005-12-27 Tuesday 16:46  kend
+
+	* src/ResourceManager/: dtg-entities.xml,
+	BusinessLogic/Resource.cs, DAO/LocalizedResourceDAO.cs,
+	DAO/ResourceDAO.cs, DataObject/ILocalizedResource.cs,
+	DataObject/IResource.cs, DataObject/ResourceData.cs,
+	DataObject/ResourceList.cs, sql/proc/spResource_Insert.proc.sql,
+	sql/proc/spResource_Update.proc.sql, sql/table/Resource.table.sql,
+	sql/view/vwResource.view.sql:
+	
+	Changed the property EntityName to Context and PropertyName to
+	Field
+
+2005-12-27 Tuesday 13:37  cort
+
+	* src/default.build:
+	
+	change expected label/version property from CCNet for new version
+
+2005-12-20 Tuesday 14:40  cort
+
+	* src/Makefile:
+	
+	reference test from where project currently output bininaries
+
+2005-12-20 Tuesday 14:39  cort
+
+	* lib/Spring2.Core.Types.dll, lib/Spring2.Core.dll,
+	src/Spring2.Core.WithTypesTest.csproj:
+	
+	use project reference so if forces build when testing
+
+2005-12-20 Tuesday 14:39  cort
+
+	* src/: Spring2.Core.Configuration.csproj,
+	Spring2.Core.Cryptography.csproj, Spring2.Core.Geocode.csproj,
+	Spring2.Core.ResourceManager.csproj, Spring2.Core.WithTypes.csproj:
+	
+	use common AssemblyVersionInfo for version number
+
+2005-12-20 Tuesday 14:38  cort
+
+	* lib/: Maverick.dll, Maverick.pdb:
+	
+	updated version of Maverick with log4net 1.2.9
+
+2005-12-20 Tuesday 14:05  nathanp
+
+	* src/Types/DateType.cs:
+	
+	Increased performance of the SameDayAs method of the DateType
+
+2005-12-20 Tuesday 13:01  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2005-12-20 Tuesday 13:01  cort
+
+	* release/Spring2.Core.1.1.14.2.zip:
+	
+	new release version
+
+2005-12-20 Tuesday 13:00  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2005-12-20 Tuesday 07:19  cort
 
 	* src/: Spring2.Core.ResourceManager.csproj,
