@@ -24,22 +24,22 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         [Generate()]
         private IdType identity = IdType.DEFAULT;
         
+        protected Boolean isNew = true;
+        
         [Generate()]
         internal Resource() {
             
         }
-
-	protected Boolean isNew = true;
-
-	public Boolean IsNew {
-	    get {
-		return this.isNew;
-	    }
-	}
         
         [Generate()]
         internal Resource(Boolean isNew) {
             this.isNew = isNew;
+        }
+        
+        public Boolean IsNew {
+            get {
+                return this.isNew;
+            }
         }
         
         [Generate()]
@@ -82,9 +82,16 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
             }
         }
         
-        [Generate()]
         public static Resource NewInstance() {
-            return new Resource();
+            throw new ApplicationException("Not supported");
+        }
+        
+        public static Resource Create(StringType resourceContext, StringType fieldName) {
+            Resource resource = new Resource();
+	    resource.context = resourceContext;
+	    resource.field = fieldName;
+	    resource.Store();
+	    return resource;
         }
         
         [Generate()]

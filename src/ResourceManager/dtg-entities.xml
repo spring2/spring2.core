@@ -3,18 +3,56 @@
     <entity name="Resource" sqlentity="Resource">
 	<properties>
 	    <property name="ResourceId" type="IdType" column="*" writable="False" />
-	    <property name="EntityName" type="StringType" column="*" writable="False" />
-	    <property name="PropertyName" type="StringType" column="*" writable="False" />
-	    <property name="Identity" type="IdType" column="*" writable="False" />
+	    <property name="Context" type="StringType" column="*" writable="False" />
+	    <property name="Field" type="StringType" column="*" writable="False" />
+	    <property name="Identity" type="IdType" column="ContextIdentity" writable="False" />
 	</properties>
+	<finders>
+	    <finder name="FindByContextFieldAndIdentity" unique="True">
+		<properties>
+		    <property name="Context" />
+		    <property name="Field" />
+		    <property name="Identity" />
+		</properties>
+	    </finder>
+	</finders>
     </entity>
     <entity name="LocalizedResource" sqlentity="LocalizedResource">
 	<properties>
 	    <property name="LocalizedResourceId" type="IdType" column="*" writable="False" />
 	    <property name="ResourceId" type="IdType" column="*" writable="False" />
-	    <property name="Locale" type="StringType" column="*" writable="False" />
-	    <property name="Language" type="StringType" column="*" writable="False" />
+	    <property name="Locale" type="ILocale" column="*" writable="False" />
+	    <property name="Language" type="ILanguage" column="*" writable="False" />
 	    <property name="Content" type="StringType" column="*" />
+	    <property name="Resource" type="IResource" writable="False" entity="Resource" prefix="Resource_"/>
 	</properties>
+	<finders>
+	    <finder name="FindByResourceIdLocaleAndLanguage" unique="True">
+		<properties>
+		    <property name="ResourceId" />
+		    <property name="Locale" />
+		    <property name="Language" />
+
+		</properties>
+	    </finder>
+	    <finder name="FindByLocaleLanguageAndContext" unique="False">
+		<properties>
+		    <property name="Locale" />
+		    <property name="Language" />
+		    <property name="Resource.Context" />
+		</properties>
+	    </finder>
+	    <finder name="FindByLocaleAndLanguage" unique="False">
+		<properties>
+		    <property name="Locale" />
+		    <property name="Language" />
+		</properties>
+	    </finder>
+	    <finder name="FindByLanguage" unique="False">
+		<properties>
+		    <property name="Language" />
+		</properties>
+	    </finder>
+	</finders>
     </entity>
 </entities>

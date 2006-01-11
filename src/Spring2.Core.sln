@@ -59,6 +59,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Maverick", "Sp
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Security", "Spring2.Core.Security.csproj", "{AE5DC4B5-476C-441F-88F2-EEB268D90121}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -125,6 +129,10 @@ Global
 		{AA7663E2-76AC-4CF3-B830-2D014F6A5166}.Debug.Build.0 = Debug|.NET
 		{AA7663E2-76AC-4CF3-B830-2D014F6A5166}.Release.ActiveCfg = Release|.NET
 		{AA7663E2-76AC-4CF3-B830-2D014F6A5166}.Release.Build.0 = Release|.NET
+		{AE5DC4B5-476C-441F-88F2-EEB268D90121}.Debug.ActiveCfg = Debug|.NET
+		{AE5DC4B5-476C-441F-88F2-EEB268D90121}.Debug.Build.0 = Debug|.NET
+		{AE5DC4B5-476C-441F-88F2-EEB268D90121}.Release.ActiveCfg = Release|.NET
+		{AE5DC4B5-476C-441F-88F2-EEB268D90121}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

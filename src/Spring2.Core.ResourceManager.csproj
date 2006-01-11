@@ -94,6 +94,11 @@
                     Project = "{FB2D9DAA-2340-468C-8018-138748DA2EAE}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
+                <Reference
+                    Name = "Spring2.Core.Security"
+                    Project = "{AE5DC4B5-476C-441F-88F2-EEB268D90121}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
             </References>
         </Build>
         <Files>
@@ -107,6 +112,23 @@
                     RelPath = "ResourceManager\AssemblyInfo.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ResourceManager\dtg-databases.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "ResourceManager\dtg-entities.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "ResourceManager\ResourceLocalizer.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ResourceManager\types.inc.xml"
+                    BuildAction = "Content"
                 />
                 <File
                     RelPath = "ResourceManager\BusinessLogic\LocalizedResource.cs"
@@ -155,26 +177,6 @@
                 />
                 <File
                     RelPath = "ResourceManager\DataObject\ResourceList.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ResourceManager\Types\LanguageEnum.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ResourceManager\Types\LanguageEnumList.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ResourceManager\Types\LocaleEnum.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ResourceManager\Types\LocaleEnumList.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

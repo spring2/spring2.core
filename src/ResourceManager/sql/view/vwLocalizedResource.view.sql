@@ -15,7 +15,12 @@ SELECT
     LocalizedResource.ResourceId,
     LocalizedResource.Locale,
     LocalizedResource.Language,
-    LocalizedResource.Content
+    LocalizedResource.Content,
+    Resource.ResourceId Resource_ResourceId,
+    Resource.Context Resource_Context,
+    Resource.Field Resource_Field,
+    Resource.ContextIdentity Resource_ContextIdentity
 FROM
     LocalizedResource
+LEFT JOIN vwResource Resource on LocalizedResource.ResourceId = Resource.ResourceId
 GO

@@ -36,6 +36,18 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    if (!propertyToSqlMap.Contains("Content")) {
 		propertyToSqlMap.Add("Content",@"Content");
 	    }
+	    if (!propertyToSqlMap.Contains("Resource.ResourceId")) {
+		propertyToSqlMap.Add("Resource.ResourceId",@"Resource_ResourceId");
+	    }
+	    if (!propertyToSqlMap.Contains("Resource.Context")) {
+		propertyToSqlMap.Add("Resource.Context",@"Resource_Context");
+	    }
+	    if (!propertyToSqlMap.Contains("Resource.Field")) {
+		propertyToSqlMap.Add("Resource.Field",@"Resource_Field");
+	    }
+	    if (!propertyToSqlMap.Contains("Resource.Identity")) {
+		propertyToSqlMap.Add("Resource.Identity",@"Resource_ContextIdentity");
+	    }
 	}
 
 	private LocalizedResourceDAO() {}
@@ -271,20 +283,40 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    } else {
 		data.ResourceId = new IdType(dataReader.GetInt32(dataReader.GetOrdinal("ResourceId")));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Locale"))) { 
-		data.Locale = StringType.UNSET;
-	    } else {
-		data.Locale = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("Locale")));
-	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Language"))) { 
-		data.Language = StringType.UNSET;
-	    } else {
-		data.Language = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("Language")));
-	    }
+//	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Locale"))) { 
+//		data.Locale = null;
+//	    } else {
+//		data.Locale = data.SetValue(dataReader.GetString(dataReader.GetOrdinal("Locale")));
+//	    }
+//	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Language"))) { 
+//		data.Language = null;
+//	    } else {
+//		data.Language = data.SetValue(dataReader.GetString(dataReader.GetOrdinal("Language")));
+//	    }
 	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Content"))) { 
 		data.Content = StringType.UNSET;
 	    } else {
 		data.Content = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("Content")));
+	    }
+	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Resource_ResourceId"))) { 
+		data.Resource.ResourceId = IdType.UNSET;
+	    } else {
+		data.Resource.ResourceId = new IdType(dataReader.GetInt32(dataReader.GetOrdinal("Resource_ResourceId")));
+	    }
+	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Resource_Context"))) { 
+		data.Resource.Context = StringType.UNSET;
+	    } else {
+		data.Resource.Context = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("Resource_Context")));
+	    }
+	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Resource_Field"))) { 
+		data.Resource.Field = StringType.UNSET;
+	    } else {
+		data.Resource.Field = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("Resource_Field")));
+	    }
+	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Resource_ContextIdentity"))) { 
+		data.Resource.Identity = IdType.UNSET;
+	    } else {
+		data.Resource.Identity = new IdType(dataReader.GetInt32(dataReader.GetOrdinal("Resource_ContextIdentity")));
 	    }
 	    return data;
 	}
@@ -311,17 +343,17 @@ namespace Spring2.Core.ResourceManager.Dao {
 
 	    //Create the parameters and append them to the command object
 	    cmd.Parameters.Add(CreateDataParameter("@ResourceId", DbType.Int32, ParameterDirection.Input, data.ResourceId.IsValid ? data.ResourceId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Locale", DbType.AnsiString, ParameterDirection.Input, data.Locale.IsValid ? data.Locale.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Language", DbType.AnsiString, ParameterDirection.Input, data.Language.IsValid ? data.Language.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@Locale", DbType.AnsiString, ParameterDirection.Input, data.Locale.ToString()));
+	    cmd.Parameters.Add(CreateDataParameter("@Language", DbType.AnsiString, ParameterDirection.Input, data.Language.ToString()));
 	    cmd.Parameters.Add(CreateDataParameter("@Content", DbType.AnsiString, ParameterDirection.Input, data.Content.IsValid ? data.Content.ToString() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-	    if (transaction == null) {
-		cmd.Connection.Close();
-	    }
+ 	    if (transaction == null) {
+ 		cmd.Connection.Close();
+ 	    }
 
 	    // Set the output paramter value(s)
 	    return new IdType((Int32)idParam.Value);
@@ -347,8 +379,8 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    //Create the parameters and append them to the command object
 	    cmd.Parameters.Add(CreateDataParameter("@LocalizedResourceId", DbType.Int32, ParameterDirection.Input, data.LocalizedResourceId.IsValid ? data.LocalizedResourceId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@ResourceId", DbType.Int32, ParameterDirection.Input, data.ResourceId.IsValid ? data.ResourceId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Locale", DbType.AnsiString, ParameterDirection.Input, data.Locale.IsValid ? data.Locale.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Language", DbType.AnsiString, ParameterDirection.Input, data.Language.IsValid ? data.Language.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@Locale", DbType.AnsiString, ParameterDirection.Input, data.Locale.ToString()));
+	    cmd.Parameters.Add(CreateDataParameter("@Language", DbType.AnsiString, ParameterDirection.Input, data.Language.ToString()));
 	    cmd.Parameters.Add(CreateDataParameter("@Content", DbType.AnsiString, ParameterDirection.Input, data.Content.IsValid ? data.Content.ToString() as Object : DBNull.Value));
 
 	    // Execute the query
@@ -397,21 +429,24 @@ namespace Spring2.Core.ResourceManager.Dao {
 	/// <param name="Language">A field value to be matched.</param>
 	/// <returns>The object found.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
-	public LocalizedResource FindByResourceIdAndLocaleAndLanguage(IdType resourceId, StringType locale, StringType language) {
+	public LocalizedResource FindByResourceIdLocaleAndLanguage(IdType resourceId, ILocale locale, ILanguage language) {
 	    OrderByClause sort = new OrderByClause("ResourceId, Locale, Language");
 	    WhereClause filter = new WhereClause();
 	    filter.And("ResourceId", resourceId.IsValid ? resourceId.ToInt32() as Object : DBNull.Value);
-	    filter.And("Locale", locale.IsValid ? locale.ToString() as Object : DBNull.Value);
-	    filter.And("Language", language.IsValid ? language.ToString() as Object : DBNull.Value);
+	    filter.And("Locale", locale.Code as Object);
+	    filter.And("Language", language.Code as Object);
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);
 
 	    if (!dataReader.Read()) {
 		dataReader.Close();
-		throw new FinderException("LocalizedResource.FindResourceIdAndLocaleAndLanguage found no rows.");
+		throw new FinderException("LocalizedResource.FindByResourceIdLocaleAndLanguage found no rows.");
 	    }
 	    LocalizedResource data = GetDataObjectFromReader(dataReader);
+	    data.Locale = locale;
+	    data.Language = language;
 	    dataReader.Close();
 	    return data;
 	}
+
     }
 }

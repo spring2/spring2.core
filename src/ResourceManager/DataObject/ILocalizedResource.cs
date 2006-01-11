@@ -6,9 +6,10 @@ using System.Data.SqlClient;
 
 using Spring2.Core.DAO;
 using Spring2.Core.ResourceManager.DataObject;
-using Spring2.Core.ResourceManager.Types;
 using Spring2.Core.Types;
 
+
+using Spring2.Core.ResourceManager.Types;
 
 using Spring2.Core.BusinessEntity;
 
@@ -21,6 +22,7 @@ namespace Spring2.Core.ResourceManager.DataObject {
 	public static readonly String LOCALE = "Locale";
 	public static readonly String LANGUAGE = "Language";
 	public static readonly String CONTENT = "Content";
+	public static readonly String RESOURCE = "Resource";
     }
 
     public interface ILocalizedResource : IBusinessEntity {
@@ -30,13 +32,16 @@ namespace Spring2.Core.ResourceManager.DataObject {
 	IdType ResourceId {
 	    get;
 	}
-	StringType Locale {
+	ILocale Locale {
 	    get;
 	}
-	StringType Language {
+	ILanguage Language {
 	    get;
 	}
 	StringType Content {
+	    get;
+	}
+	IResource Resource {
 	    get;
 	}
     }

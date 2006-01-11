@@ -9,7 +9,7 @@ GO
 CREATE PROCEDURE spResource_Insert
 	@Context	VarChar(100) = null,
 	@Field	VarChar(100) = null,
-	@Identity	Int = null
+	@ContextIdentity	Int = null
 
 AS
 
@@ -17,11 +17,11 @@ AS
 INSERT INTO Resource
 (	Context,
 	Field,
-	[Identity])
+	ContextIdentity)
 VALUES (
 	@Context,
 	@Field,
-	@Identity)
+	@ContextIdentity)
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN

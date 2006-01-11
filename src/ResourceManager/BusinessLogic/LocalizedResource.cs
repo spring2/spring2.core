@@ -18,31 +18,34 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         [Generate()]
         private IdType resourceId = IdType.DEFAULT;
         
-        [Generate()]
-        private StringType locale = StringType.DEFAULT;
+        private Boolean isNew = true;
         
         [Generate()]
-        private StringType language = StringType.DEFAULT;
+        private ILocale locale = null;
+        
+        [Generate()]
+        private ILanguage language = null;
         
         [Generate()]
         private StringType content = StringType.DEFAULT;
         
         [Generate()]
+        private Resource resource = new Resource();
+        
+        [Generate()]
         internal LocalizedResource() {
             
         }
-
-	private Boolean isNew = true ; 
- 
-	public Boolean IsNew {
-	    get {
-		return this.isNew;
-	    }
-	}
-       
+        
         [Generate()]
         internal LocalizedResource(Boolean isNew) {
             this.isNew = isNew;
+        }
+        
+        public Boolean IsNew {
+            get {
+                return this.isNew;
+            }
         }
         
         [Generate()]
@@ -66,7 +69,7 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         }
         
         [Generate()]
-        public StringType Locale {
+        public ILocale Locale {
             get {
                 return this.locale;
             }
@@ -76,7 +79,7 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         }
         
         [Generate()]
-        public StringType Language {
+        public ILanguage Language {
             get {
                 return this.language;
             }
@@ -96,8 +99,34 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         }
         
         [Generate()]
+        public Resource Resource {
+            get {
+                return this.resource as Resource;
+            }
+            set {
+                this.resource = value;
+            }
+        }
+        
+        [Generate()]
+        IResource ILocalizedResource.Resource {
+            get {
+                return this.Resource;
+            }
+        }
+        
         public static LocalizedResource NewInstance() {
-            return new LocalizedResource();
+            throw new NotSupportedException();
+        }
+        
+        public static LocalizedResource Create(IdType resourceId, ILocale newLocale, ILanguage newLanguage, StringType newContent) {
+            LocalizedResource localResource = new LocalizedResource();
+	    localResource.ResourceId = resourceId;
+	    localResource.Content = newContent;
+	    localResource.Locale = newLocale;
+	    localResource.Language = newLanguage;
+	    localResource.Store();
+	    return localResource;
         }
         
         [Generate()]
@@ -140,6 +169,7 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         [Generate()]
         public void Reload() {
             LocalizedResourceDAO.DAO.Reload(this);
+	    resource = new Resource();
         }
     }
 }

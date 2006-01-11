@@ -31,7 +31,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 		propertyToSqlMap.Add("Field",@"Field");
 	    }
 	    if (!propertyToSqlMap.Contains("Identity")) {
-		propertyToSqlMap.Add("Identity",@"Identity");
+		propertyToSqlMap.Add("Identity",@"ContextIdentity");
 	    }
 	}
 
@@ -273,10 +273,10 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    } else {
 		data.Field = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("Field")));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Identity"))) { 
+	    if (dataReader.IsDBNull(dataReader.GetOrdinal("ContextIdentity"))) { 
 		data.Identity = IdType.UNSET;
 	    } else {
-		data.Identity = new IdType(dataReader.GetInt32(dataReader.GetOrdinal("Identity")));
+		data.Identity = new IdType(dataReader.GetInt32(dataReader.GetOrdinal("ContextIdentity")));
 	    }
 	    return data;
 	}
@@ -304,7 +304,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    //Create the parameters and append them to the command object
 	    cmd.Parameters.Add(CreateDataParameter("@Context", DbType.AnsiString, ParameterDirection.Input, data.Context.IsValid ? data.Context.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@Field", DbType.AnsiString, ParameterDirection.Input, data.Field.IsValid ? data.Field.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Identity", DbType.Int32, ParameterDirection.Input, data.Identity.IsValid ? data.Identity.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@ContextIdentity", DbType.Int32, ParameterDirection.Input, data.Identity.IsValid ? data.Identity.ToInt32() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -339,7 +339,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    cmd.Parameters.Add(CreateDataParameter("@ResourceId", DbType.Int32, ParameterDirection.Input, data.ResourceId.IsValid ? data.ResourceId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@Context", DbType.AnsiString, ParameterDirection.Input, data.Context.IsValid ? data.Context.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@Field", DbType.AnsiString, ParameterDirection.Input, data.Field.IsValid ? data.Field.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Identity", DbType.Int32, ParameterDirection.Input, data.Identity.IsValid ? data.Identity.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@ContextIdentity", DbType.Int32, ParameterDirection.Input, data.Identity.IsValid ? data.Identity.ToInt32() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -384,22 +384,38 @@ namespace Spring2.Core.ResourceManager.Dao {
 	/// </summary>
 	/// <param name="Context">A field value to be matched.</param>
 	/// <param name="Field">A field value to be matched.</param>
+	/// <param name="ContextIdentity">A field value to be matched.</param>
 	/// <returns>The object found.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
-	public Resource FindByContextAndField(StringType context, StringType field) {
-	    OrderByClause sort = new OrderByClause("Context, Field");
+	public Resource FindByContextFieldAndIdentity(StringType context, StringType field, IdType identity) {
+	    OrderByClause sort = new OrderByClause("Context, Field, ContextIdentity");
 	    WhereClause filter = new WhereClause();
 	    filter.And("Context", context.IsValid ? context.ToString() as Object : DBNull.Value);
 	    filter.And("Field", field.IsValid ? field.ToString() as Object : DBNull.Value);
+	    filter.And("ContextIdentity", identity.IsValid ? identity.ToInt32() as Object : DBNull.Value);
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);
 
 	    if (!dataReader.Read()) {
 		dataReader.Close();
-		throw new FinderException("Resource.FindByContextAndField found no rows.");
+		throw new FinderException("Resource.FindByContextFieldAndIdentity found no rows.");
 	    }
 	    Resource data = GetDataObjectFromReader(dataReader);
 	    dataReader.Close();
 	    return data;
 	}
+
+	#region Custom Code
+	/// <summary>
+	/// Returns an object which matches the values for the fields specified.
+	/// </summary>
+	/// <param name="Context">A field value to be matched.</param>
+	/// <param name="Field">A field value to be matched.</param>
+	/// <returns>The object found.</returns>
+	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+	public Resource FindByContextAndField(StringType context, StringType field) {
+	    return FindByContextFieldAndIdentity(context, field, IdType.UNSET);
+	}
+
+	#endregion
     }
 }

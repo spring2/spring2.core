@@ -39,6 +39,8 @@ conversion format replacement parameters:
 	<type name="USStateCodeEnum" namespace="Spring2.Core.Types" converttosqltypeformat="{1}.IsValid ? {1}.Code as Object : DBNull.Value" convertfromsqltypeformat="USStateCodeEnum.GetInstance({2})" newinstanceformat="USStateCodeEnum.DEFAULT" nullinstanceformat="USStateCodeEnum.UNSET" convertforcompare="{0}.ToString().CompareTo({1})" />
 	<type name="PhoneNumberType" namespace="Spring2.Core.Types" converttosqltypeformat="{1}.IsValid ? {1}.ToString() as Object : DBNull.Value" convertfromsqltypeformat="PhoneNumberType.Parse({2})" newinstanceformat="PhoneNumberType.DEFAULT" nullinstanceformat="PhoneNumberType.UNSET" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" />
 	<type name="StringTypeList" namespace="System.Collections" newinstanceformat="new StringTypeList()" />
+	<type name="ILocale" namespace="Spring2.Core.Types" newinstanceformat="null" converttosqltypeformat="{1}.IsValid ? {1}.Code as Object : DBNull.Value" convertfromsqltypeformat="{0}.SetValue({2})" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" />
+	<type name="ILanguage" namespace="Spring2.Core.Types" newinstanceformat="null" converttosqltypeformat="{1}.IsValid ? {1}.Code as Object : DBNull.Value" convertfromsqltypeformat="{0}.SetValue({2})" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" />
 	
 	<!-- TODO: need to be able to specify that the type implements IDataType -->
 	<type name="Message" namespace="Spring2.Core.Message" newinstanceformat="null" nullinstanceformat="null" />

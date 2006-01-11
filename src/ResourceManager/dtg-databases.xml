@@ -11,7 +11,7 @@
 		    <column name="ResourceId" sqltype="Int" identity="True" required="True" />
 		    <column name="Context" sqltype="VarChar" length="100" required="True" />
 		    <column name="Field" sqltype="VarChar" length="100" required="True" />
-		    <column name="Identity" sqltype="Int" required="False" />
+		    <column name="ContextIdentity" sqltype="Int" required="False" />
 		</columns>
 		<constraints>
 		    <constraint name="PK_User" type="PRIMARY KEY">
@@ -20,7 +20,7 @@
 		    <constraint name="UN_ResourceEntityPropertyIdentity" type="UNIQUE">
 			<column name="Context" />
 			<column name="Field" />
-			<column name="Identity" />
+			<column name="ContextIdentity" />
 		    </constraint>
 		</constraints>
 	    </sqlentity>
@@ -45,6 +45,11 @@
 			<column name="Language" />
 		    </constraint>
 		</constraints>
+		<views>
+		    <view name="vwLocalizedResource">
+			<constraint name="FK_LocalizedResource_Resource" prefix="Resource_" />
+		    </view>
+		</views>
 	    </sqlentity>
 	</sqlentities>
     </database>

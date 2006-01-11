@@ -14,7 +14,7 @@ SELECT
     Resource.ResourceId,
     Resource.Context,
     Resource.Field,
-    Resource.[Identity]
+    Resource.ContextIdentity
 FROM
     Resource
 GO

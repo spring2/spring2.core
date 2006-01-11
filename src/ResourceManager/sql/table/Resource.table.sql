@@ -25,7 +25,7 @@ CREATE TABLE Resource (
 	ResourceId Int IDENTITY(1,1) NOT NULL,
 	Context VarChar(100) NOT NULL,
 	Field VarChar(100) NOT NULL,
-	[Identity] Int NULL
+	ContextIdentity Int NULL
 )
 GO
 
@@ -68,16 +68,16 @@ if exists(select * from syscolumns where id=object_id('Resource') and name = 'Fi
   END
 GO
 
-if not exists(select * from syscolumns where id=object_id('Resource') and name = 'Identity')
+if not exists(select * from syscolumns where id=object_id('Resource') and name = 'ContextIdentity')
   BEGIN
 	ALTER TABLE Resource ADD
-	    [Identity] Int NULL
+	    ContextIdentity Int NULL
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('Resource') and name = 'Identity')
+if exists(select * from syscolumns where id=object_id('Resource') and name = 'ContextIdentity')
   BEGIN
-	exec #spAlterColumn 'Resource', 'Identity', 'Int', 0
+	exec #spAlterColumn 'Resource', 'ContextIdentity', 'Int', 0
   END
 GO
 
@@ -97,7 +97,7 @@ ALTER TABLE Resource ADD
 ,
 		Field
 ,
-		[Identity]
+		ContextIdentity
 	)
 GO
 

@@ -11,7 +11,7 @@ CREATE PROCEDURE spResource_Update
 	@ResourceId	Int = null,
 	@Context	VarChar(100) = null,
 	@Field	VarChar(100) = null,
-	@Identity	Int = null
+	@ContextIdentity	Int = null
 
 AS
 
@@ -21,7 +21,7 @@ UPDATE
 SET
 	Context = @Context,
 	Field = @Field,
-	[Identity] = @Identity
+	ContextIdentity = @ContextIdentity
 WHERE
 ResourceId = @ResourceId
 
