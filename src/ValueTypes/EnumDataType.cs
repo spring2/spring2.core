@@ -2,9 +2,12 @@ using System;
 using System.Collections;
 
 namespace Spring2.Core.Types {
+
     public abstract class EnumDataType : DataType {
 
+	[System.CLSCompliant(false)]
 	protected String code;
+	[System.CLSCompliant(false)]
 	protected String name;
 	
 	protected override Object Value {

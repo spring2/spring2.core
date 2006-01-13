@@ -72,6 +72,7 @@ namespace Spring2.Core.Types {
 	    myState = TypeState.VALID;
 	}
 
+	[System.CLSCompliant(false)]
 	public CurrencyType(sbyte value) {
 	    myValue = new decimal(value);
 	    myState = TypeState.VALID;
