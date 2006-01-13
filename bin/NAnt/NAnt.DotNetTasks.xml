@@ -430,6 +430,17 @@
             The set of resources to embed.
             </summary>
         </member>
+        <member name="P:NAnt.DotNet.Tasks.AssemblyLinkerTask.SupportsTemplate">
+            <summary>
+            Indicates whether the assembly linker for a given target framework
+            supports the "template" option, which takes an assembly from which
+            to get all options except the culture field.
+            The default is <see langword="true" />.
+            </summary>
+            <remarks>
+            TODO: remove this once Mono bug #74814 is fixed.
+            </remarks>
+        </member>
         <member name="P:NAnt.DotNet.Tasks.AssemblyLinkerTask.TemplateFile">
             <summary>
             Specifies an assembly from which to get all options except the 
@@ -575,6 +586,13 @@
             </summary>
             <param name="writer">The <see cref="T:System.IO.TextWriter"/> to which the list of warnings to suppress should be written.</param>
         </member>
+        <member name="M:NAnt.DotNet.Tasks.CompilerBase.WriteConditionalCompilationConstants(System.IO.TextWriter)">
+            <summary>
+            Writes conditional compilation constants to the specified
+            <see cref="T:System.IO.TextWriter"/>.
+            </summary>
+            <param name="writer">The <see cref="T:System.IO.TextWriter"/> to which the conditional compilation constants should be written.</param>
+        </member>
         <member name="M:NAnt.DotNet.Tasks.CompilerBase.WriteModuleReferences(System.IO.TextWriter)">
             <summary>
             Writes module references to the specified <see cref="T:System.IO.TextWriter"/>.
@@ -600,7 +618,12 @@
             </summary>
             <param name="writer">The <see cref="T:System.IO.TextWriter"/> to which the compiler options should be written.</param>
             <param name="name">The name of the option which should be passed to the compiler.</param>
-            <param name="arg">The value of the option which should be passed to the compiler.</param>
+            <param name="value">The value of the option which should be passed to the compiler.</param>
+            <remarks>
+            The combination of <paramref name="option"/> and 
+            <paramref name="value"/> (separated by a colon) is quoted
+            unless <paramref name="value"/> is already surrounded by quotes.
+            </remarks>
         </member>
         <member name="M:NAnt.DotNet.Tasks.CompilerBase.NeedsCompiling">
             <summary>
@@ -755,6 +778,16 @@
             </para>
             </remarks>
         </member>
+        <member name="P:NAnt.DotNet.Tasks.CompilerBase.KeyContainer">
+            <summary>
+            Specifies the key pair container used to strongname the assembly.
+            </summary>
+        </member>
+        <member name="P:NAnt.DotNet.Tasks.CompilerBase.KeyFile">
+            <summary>
+            Specifies a strong name key file.
+            </summary>
+        </member>
         <member name="P:NAnt.DotNet.Tasks.CompilerBase.Lib">
             <summary>
             Additional directories to search in for assembly references.
@@ -830,6 +863,18 @@
             Indicates whether the compiler for a given target framework supports
             a command line option that allows a list of warnings to be
             suppressed. The default is <see langword="false" />.
+            </summary>
+        </member>
+        <member name="P:NAnt.DotNet.Tasks.CompilerBase.SupportsKeyContainer">
+            <summary>
+            Indicates whether the compiler for a given target framework supports
+            the "keycontainer" option. The default is <see langword="false" />.
+            </summary>
+        </member>
+        <member name="P:NAnt.DotNet.Tasks.CompilerBase.SupportsKeyFile">
+            <summary>
+            Indicates whether the compiler for a given target framework supports
+            the "keyfile" option. The default is <see langword="false" />.
             </summary>
         </member>
         <member name="P:NAnt.DotNet.Tasks.CompilerBase.Extension">
@@ -1589,6 +1634,50 @@
             </para>
             </remarks>
         </member>
+        <member name="P:NAnt.DotNet.Tasks.JscTask.KeyContainer">
+            <summary>
+            Specifies the key pair container used to strongname the assembly.
+            </summary>
+            <remarks>
+            Override to avoid exposing this to build authors, as the JScript.NET
+            does not support this.
+            </remarks>
+        </member>
+        <member name="P:NAnt.DotNet.Tasks.JscTask.KeyFile">
+            <summary>
+            Specifies a strong name key file.
+            </summary>
+            <remarks>
+            Override to avoid exposing this to build authors, as the JScript.NET
+            does not support this.
+            </remarks>
+        </member>
+        <member name="P:NAnt.DotNet.Tasks.JscTask.SupportsKeyContainer">
+            <summary>
+            Indicates whether the compiler for a given target framework supports
+            the "keycontainer" option. The default is <see langword="false" />.
+            </summary>
+            <value>
+            <see langword="false" />.
+            </value>
+            <remarks>
+            Override to avoid exposing this to build authors, as the JScript.NET
+            does not support this.
+            </remarks>
+        </member>
+        <member name="P:NAnt.DotNet.Tasks.JscTask.SupportsKeyFile">
+            <summary>
+            Indicates whether the compiler for a given target framework supports
+            the "keyfile" option. The default is <see langword="false" />.
+            </summary>
+            <value>
+            <see langword="false" />.
+            </value>
+            <remarks>
+            Override to avoid exposing this to build authors, as the JScript.NET
+            does not support this.
+            </remarks>
+        </member>
         <member name="P:NAnt.DotNet.Tasks.JscTask.Modules">
             <summary>
             Link the specified modules into this assembly.
@@ -2153,13 +2242,6 @@
             otherwise <see langword="false" />.
             </returns>
         </member>
-        <member name="M:NAnt.DotNet.Tasks.ResGenTask.AppendArgument(System.String)">
-            <summary>
-            Adds a command line argument to the command line for the external
-            program that is used to convert the resource files.
-            </summary>
-            <param name="s">The argument that should be added to the command line.</param>
-        </member>
         <member name="M:NAnt.DotNet.Tasks.ResGenTask.GetOutputFile(System.IO.FileInfo)">
             <summary>
             Determines the full path and extension for the output file.
@@ -2252,6 +2334,11 @@
             is <see langword="false" />.
             </summary>
         </member>
+        <member name="P:NAnt.DotNet.Tasks.ResGenTask.QualifiedResources">
+            <summary>
+            For internal use only !
+            </summary>
+        </member>
         <member name="P:NAnt.DotNet.Tasks.ResGenTask.BaseDirectory">
             <summary>
             Gets the working directory for the application.
@@ -2279,6 +2366,35 @@
             Override in derived classes to explicitly set the location of the 
             external tool.
             </remarks>
+        </member>
+        <member name="T:NAnt.DotNet.Tasks.QualifiedResource">
+            <summary>
+            For internal use only !
+            </summary>
+        </member>
+        <member name="M:NAnt.DotNet.Tasks.QualifiedResource.#ctor(System.IO.FileInfo,System.IO.FileInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NAnt.DotNet.Tasks.QualifiedResource"/>
+            class for a given input and output file.
+            </summary>
+            <param name="input">The resource to compile.</param>
+            <param name="output">The compiled resource.</param>
+        </member>
+        <member name="P:NAnt.DotNet.Tasks.QualifiedResource.Input">
+            <summary>
+            Gets the resource file to compile.
+            </summary>
+            <value>
+            The resource file to compile.
+            </value>
+        </member>
+        <member name="P:NAnt.DotNet.Tasks.QualifiedResource.Output">
+            <summary>
+            Gets the compiled resource file.
+            </summary>
+            <value>
+            The compiled resource file.
+            </value>
         </member>
         <member name="T:NAnt.DotNet.Tasks.ScriptTask">
             <summary>
@@ -2352,7 +2468,49 @@
               </code>
             </example>
             <example>
-              <para>Run Visual Basic.NET code that writes a message to the build log.</para>
+              <para>Use a custom namespace in C# to create a database</para>
+              <code>
+                    &lt;script language="C#" &gt;
+                        &lt;references&gt;
+                            &lt;include name="System.Data.dll" /&gt;
+                        &lt;/references&gt;
+                        &lt;imports&gt;
+                            &lt;import namespace="System.Data.SqlClient" /&gt;
+                        &lt;/imports&gt;
+                        &lt;code&gt;
+                          &lt;![CDATA[
+                            public static void ScriptMain(Project project) {
+                                string dbUserName = "nant";
+                                string dbPassword = "nant";
+                                string dbServer = "(local)";
+                                string dbDatabaseName = "NAntSample";
+                                string connectionString = String.Format("Server={0};uid={1};pwd={2};", dbServer, dbUserName, dbPassword);
+                                
+                                SqlConnection connection = new SqlConnection(connectionString);
+                                string createDbQuery = "CREATE DATABASE " + dbDatabaseName;
+                                SqlCommand createDatabaseCommand = new SqlCommand(createDbQuery);
+                                createDatabaseCommand.Connection = connection;
+                                
+                                connection.Open();
+                                
+                                try {
+                                    createDatabaseCommand.ExecuteNonQuery();
+                                    project.Log(Level.Info, "Database added successfully: " + dbDatabaseName);
+                                } catch (Exception e) {
+                                    project.Log(Level.Error, e.ToString());
+                                } finally {
+                                    connection.Close();
+                                }
+                            }
+                          ]]&gt;
+                        &lt;/code&gt;
+                    &lt;/script&gt;
+              </code>
+            </example>
+            <example>
+              <para>
+              Run Visual Basic.NET code that writes a message to the build log.
+              </para>
               <code>
                     &lt;script language="VB"&gt;
                         &lt;code&gt;
@@ -2374,24 +2532,17 @@
                             [TaskName("usertask")]
                             public class TestTask : Task {
                               #region Private Instance Fields
-            
-                              private string _message;
-            
-                              #endregion Private Instance Fields
-            
-                              #region Public Instance Properties
-            
-                              [TaskAttribute("message", Required=true)]
+                                          private string _message;
+                                          #endregion Private Instance Fields
+                                          #region Public Instance Properties
+                                          [TaskAttribute("message", Required=true)]
                               public string FileName {
                                   get { return _message; }
                                   set { _message = value; }
                               }
-            
-                              #endregion Public Instance Properties
-            
-                              #region Override implementation of Task
-            
-                              protected override void ExecuteTask() {
+                                          #endregion Public Instance Properties
+                                          #region Override implementation of Task
+                                          protected override void ExecuteTask() {
                                   Log(Level.Info, _message.ToUpper());
                               }
                               #endregion Override implementation of Task
@@ -2403,7 +2554,9 @@
               </code>
             </example>
             <example>
-              <para>Define a custom function and call it using Boo (http://boo.codehaus.org/).</para>
+              <para>
+              Define a custom function and call it using <see href="http://boo.codehaus.org/">Boo</see>.
+              </para>
               <code>
                     &lt;script language="Boo.CodeDom.BooCodeProvider, Boo.CodeDom, Version=1.0.0.0, Culture=neutral, PublicKeyToken=32c39770e9a21a67"
                         failonerror="true"&gt;
@@ -2524,6 +2677,13 @@
             The namespace/classname of the source file matching the resource or
             <see langword="null"/> if the dependent source file does not exist.
             </returns>
+        </member>
+        <member name="M:NAnt.DotNet.Tasks.VbcTask.WriteConditionalCompilationConstants(System.IO.TextWriter)">
+            <summary>
+            Writes conditional compilation constants to the specified
+            <see cref="T:System.IO.TextWriter"/>.
+            </summary>
+            <param name="writer">The <see cref="T:System.IO.TextWriter"/> to which the conditional compilation constants should be written.</param>
         </member>
         <member name="M:NAnt.DotNet.Tasks.VbcTask.WriteOptions(System.IO.TextWriter)">
             <summary>
@@ -3733,6 +3893,9 @@
             A comma-delimited list of namespace imports, or an empty 
             <see cref="T:System.String"/> if there are no namespace imports.
             </returns>
+            <remarks>
+            Each namespace import is quoted individually.
+            </remarks>
         </member>
         <member name="M:NAnt.DotNet.Types.NamespaceImportCollection.System#Collections#IList#Insert(System.Int32,System.Object)">
             <summary>

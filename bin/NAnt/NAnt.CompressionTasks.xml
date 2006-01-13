@@ -234,6 +234,32 @@
             The set of files to be included in the archive.
             </summary>
         </member>
+        <member name="P:NAnt.Compression.Tasks.ZipTask.DuplicateHandling">
+            <summary>
+            Specifies the behaviour when a duplicate file is found. The default
+            is <see cref="F:NAnt.Compression.Types.DuplicateHandling.Add"/>.
+            </summary>
+        </member>
+        <member name="T:NAnt.Compression.Types.DuplicateHandling">
+            <summary>
+            Specifies how entries with the same name should be processed.
+            </summary>
+        </member>
+        <member name="F:NAnt.Compression.Types.DuplicateHandling.Add">
+            <summary>
+            Overwrite existing entry with same name.
+            </summary>
+        </member>
+        <member name="F:NAnt.Compression.Types.DuplicateHandling.Preserve">
+            <summary>
+            Preserve existing entry with the same name.
+            </summary>
+        </member>
+        <member name="F:NAnt.Compression.Types.DuplicateHandling.Fail">
+            <summary>
+            Report failure when two entries have the same name.
+            </summary>
+        </member>
         <member name="T:NAnt.Compression.Types.TarFileSet">
             <summary>
             A <see cref="T:NAnt.Compression.Types.TarFileSet"/> is a <see cref="T:NAnt.Core.Types.FileSet"/> with extra 
