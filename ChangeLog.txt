@@ -1,6 +1,77 @@
+2006-01-13 Friday 10:10  cort
+
+	* src/: AssemblyInfo.cs, AssemblyVersionInfo.cs, Makefile,
+	Spring2.Core.Configuration.csproj,
+	Spring2.Core.Cryptography.csproj, Spring2.Core.Geocode.csproj,
+	Spring2.Core.Log4Net.csproj,
+	Spring2.Core.MSBuild.CustomTask.csproj,
+	Spring2.Core.Mail.SendMailMessages.csproj,
+	Spring2.Core.Mail.csproj, Spring2.Core.Maverick.csproj,
+	Spring2.Core.ResourceManager.csproj, Spring2.Core.Security.csproj,
+	Spring2.Core.Test.csproj, Spring2.Core.Types.csproj,
+	Spring2.Core.WebControl.csproj, Spring2.Core.WithTypes.csproj,
+	Spring2.Core.WithTypesTest.csproj, Spring2.Core.csproj,
+	Spring2.Core.sln, Spring2.Reporting.Common.csproj, default.build:
+	
+	updates to support compiling both 1.1 and 2.0 framework versions of
+	Spring2.Core.
+	
+	Wahoo!
+
+2006-01-13 Friday 10:09  cort
+
+	* src/Test/DataTypeTest.cs:
+	
+	explictly use .Equals for the comparision as NUnit appears to be
+	converting to Long, which is not valid for UNSET and DEFAULT
+
+2006-01-13 Friday 10:08  cort
+
+	* src/Test/TestGnuPGWrapper.cs:
+	
+	add compiler directives to change path based on whether running in
+	VS IDE or from nant built output
+
+2006-01-13 Friday 10:07  cort
+
+	* src/ValueTypes/: CurrencyType.cs, EnumDataType.cs:
+	
+	add CLSCompliant attributes to resolve warnings when compliing with
+	2.0 framework
+
+2006-01-13 Friday 10:06  cort
+
+	* src/ValueTypes/IntegerType.cs:
+	
+	add explict cast operator for Int32 so that ToInt32 and (Int32)
+	return the same value
+
+2006-01-13 Friday 10:06  cort
+
+	* src/ValueTypes/StringType.cs:
+	
+	remove duplicate static variable for EMPTY that differed only by
+	case
+
+2006-01-13 Friday 10:02  cort
+
+	* bin/NUnit/: clr.bat, mock-assembly.dll, nonamespace-assembly.dll,
+	notestfixtures-assembly.dll, nunit-console-runner.dll,
+	nunit-console.exe, nunit-console.exe.config,
+	nunit-console.tests.dll, nunit-gui-runner.dll, nunit-gui.exe,
+	nunit-gui.exe.config, nunit-gui.tests.dll, nunit-server.exe,
+	nunit-server.tests.dll, nunit-test-server.dll, nunit.core.dll,
+	nunit.core.extensions.dll, nunit.extensions.tests.dll,
+	nunit.framework.dll, nunit.framework.tests.dll, NUnitTests.config,
+	NUnitTests.nunit, nunit.mocks.dll, nunit.mocks.tests.dll,
+	nunit.uikit.dll, nunit.uikit.tests.dll, nunit.util.dll,
+	nunit.util.tests.dll, test-utilities.dll, timing-tests.dll:
+	
+	update to 2.2.5 version of NUnit, compiled against 2.0 framework
+
 2006-01-13 Friday 09:57  cort
 
-	* ChangeLog.txt:
+	* ChangeLog.txt, ChangeLog.txt:
 	
 	update change log
 
