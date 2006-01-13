@@ -15,8 +15,13 @@ using System.IO;
 using System.Text;
 
 
+
+
+
 namespace Spring2.Core.MSBuild.CustomTask {
     public class ExecuteSqlScriptFolder : Task {
+
+
         //private string sqlCmdExe = "sqlcmd.exe";
         private string sqlFlags = "";
         private string sqlUser = "";
@@ -24,6 +29,7 @@ namespace Spring2.Core.MSBuild.CustomTask {
         private string sqlDatabase = "";
         private string sqlServer = "";
         private string sqlScriptPath = "";
+        private string dependencyFile = "";
 
         //public string SqlCmdExe {
         //    get { return sqlCmdExe; }
@@ -65,7 +71,13 @@ namespace Spring2.Core.MSBuild.CustomTask {
             set { sqlScriptPath = value; }
         }
 
+        public string DependencyFile {
+            get { return dependencyFile; }
+            set { dependencyFile = value; }
+        }
+
         public override bool Execute() {
+
             bool result = true;
             ArrayList pendingSqlScripts = GetSqlScriptsToProcess(sqlScriptPath, ".sql", ".log");
 
@@ -80,6 +92,7 @@ namespace Spring2.Core.MSBuild.CustomTask {
             return result;
         }
 
+
         private void WriteLogFile(string script) {
             StreamWriter logFile = File.CreateText(script.Replace(".sql", ".log"));
             string logContents = script + " executed successfully at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
@@ -93,6 +106,7 @@ namespace Spring2.Core.MSBuild.CustomTask {
             string[] logFiles = Directory.GetFiles(path, "*" + logExt);
 
             ArrayList sqlToDoFiles = new ArrayList();
+            sqlToDoFiles.AddRange(GetDependencies());
 
             foreach (string s in sqlFiles) {
                 DateTime lastTouched = File.GetLastWriteTime(s);
@@ -107,6 +121,25 @@ namespace Spring2.Core.MSBuild.CustomTask {
                 }
             }
             return sqlToDoFiles;
+        }
+
+        private ArrayList GetDependencies() {
+            ArrayList result = new ArrayList();
+            if (dependencyFile != "") {
+                try {
+                    StreamReader reader = File.OpenText(this.dependencyFile);
+                    string path = dependencyFile.Substring(0, dependencyFile.LastIndexOf("\\"));
+
+                    while (!reader.EndOfStream) {
+                        string tmpFile = path + "\\" + reader.ReadLine();
+                        result.Add(tmpFile);  
+                    }
+                } catch (Exception ex) {
+                    Log.LogError("Error processing dependancy file. : " +  ex.Message );
+                }
+
+            }
+            return result;
         }
 
         private bool RunSqlCmd(string cnString, string scriptFile) {
@@ -133,6 +166,8 @@ namespace Spring2.Core.MSBuild.CustomTask {
                             trans.Commit();
                         } catch (Exception ex) {
                             Debug.Write("MSBuild task : ExecuteSqlScriptFolder - failed with exception : " + ex.Message);
+                            //write to the session log
+                            Log.LogError("Failed ExecuteSqlScriptFolder task on file : " + scriptFile + Environment.NewLine + ex.Message );
                             trans.Rollback("ExecutingSqlScriptTask");
                             result = false;
                         }
