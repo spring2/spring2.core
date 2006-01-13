@@ -8,6 +8,8 @@ BINDIR		:= ../bin
 DOCDIR		:= ../docs
 RELEASEDIR	:= ../release
 BUILDDIR	:= ../build
+NANT		:= ../bin/NAnt/nant.exe
+NANT		:= nant.exe
 
 all: build
 
@@ -20,11 +22,15 @@ clean:
 
 .PHONY: build
 build:
-	../bin/NAnt/nant.exe build
+	${NANT} build
 
 .PHONY: regress
 regress: build
-	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit-results.xml ../build/Spring2.Core.Test.dll
+	export COMPLUS_Version=net-1.1
+	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-results.xml ../build/net-1.1/Spring2.Core.Test.dll 
+	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11withtypes-results.xml ../build/net-1.1/WithTypes/Spring2.Core.WithTypesTest.dll
+	export COMPLUS_Version=net-2.0
+	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit20-results.xml ../build/net-2.0/Spring2.Core.Test.dll
 
 .PHONY: precommit
 precommit: build regress
@@ -42,11 +48,13 @@ docs:
 package: clean build regress changelog docs
 	rm -rf ${BUILDDIR}/Core
 	cp $(DOCDIR)/api/Spring2.Core.chm $(BUILDDIR)
-	jar -cMvf $(RELEASEDIR)/Spring2.Core.$(shell getversion.sh).zip -C $(BUILDDIR) .
+	jar -cMvf $(RELEASEDIR)/Spring2.Core.$(shell getversion.sh)-net-1.1.zip -C $(BUILDDIR)/net-1.1 .
+	jar -cMvf $(RELEASEDIR)/Spring2.Core.$(shell getversion.sh)-net-2.0.zip -C $(BUILDDIR)/net-2.0 .
 
 release: package
 	cvs tag RELEASE_$(subst .,_,$(shell ./getversion.sh))
-	../bin/cvsadd.sh $(RELEASEDIR) Spring2.Core.$(shell getversion.sh).zip "new release version"
+	../bin/cvsadd.sh $(RELEASEDIR) Spring2.Core.$(shell getversion.sh)-net-1.1.zip "new release version"
+	../bin/cvsadd.sh $(RELEASEDIR) Spring2.Core.$(shell getversion.sh)-net-2.0.zip "new release version"
 	$(BINDIR)/UpdateVersion -b Increment -i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs
 	cvs commit -m "update to next version" AssemblyVersionInfo.cs
 

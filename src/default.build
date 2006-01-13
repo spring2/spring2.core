@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <project name="Spring2.Core" default="build" xmlnds="http://tempuri.org/nant-vs.xsd">
     <property name="build.dir" value="..\build" />
+    <property name="build.configuration" value="debug" />
 
     <target name="ccnet">
 	<ifnot test="${property::exists('CCNetLabel')}"> 
@@ -11,9 +12,35 @@
     </target>
 
     <target name="build">
+	<call target="build-net-1.1" />
+	<call target="build-net-2.0" />
+    </target>
+
+    <target name="build-net-1.1">
+	<property name="nant.settings.currentframework" value="net-1.1" />
+    	<property name="build.configuration" value="NET_1_1" />
+	<call target="internal-build" />
+	<copy todir="..\build\">
+	    <fileset basedir="..\build\net-1.1\">
+	        <include name="*" />
+	    </fileset>
+	</copy>
+    </target>
+
+    <target name="build-net-2.0">
+	<property name="nant.settings.currentframework" value="net-2.0" />
+	<property name="build.configuration" value="NET_2_0" />
+	<call target="internal-build" />
+	<exec program="msbuild.exe" commandline="Spring2.Core.MSBuild.CustomTask.csproj" />
+    </target>
+
+    <target name="internal-build">
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
-	<solution configuration="debug">
+	<solution configuration="${build.configuration}" outputdir="..\build\${nant.settings.currentframework}">
+	    <assemblyfolders>
+		  <include name="..\lib\${nant.settings.currentframework}" />
+	    </assemblyfolders>
 	    <projects>
 	        <include name="Spring2.Core.csproj" />
 	        <include name="Spring2.Core.Types.csproj" />
@@ -28,18 +55,26 @@
 	        <include name="Spring2.Core.Mail.SendMailMessages.csproj" />
 	        <include name="Spring2.Core.Log4Net.csproj" />
 	        <include name="Spring2.Core.Maverick.csproj" />
-	        <!-- <include name="Spring2.Core.MSBuild.CustomTask.csproj" /> removed until conditional compilation to handle both .NET 1.1/2.0 is implemented -->
+	        <include name="Spring2.Core.Security.csproj" />
 	    </projects>
 	</solution>	
-
+	
+          <if test="${string::contains(nant.settings.currentframework, 'net-1.1')}">
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
-	<solution configuration="debug">
+	<solution configuration="${build.configuration}" outputdir="..\build\${nant.settings.currentframework}\WithTypes">
 	    <projects>
 	        <include name="Spring2.Core.WithTypes.csproj" />
 	        <include name="Spring2.Core.WithTypesTest.csproj" />
 	    </projects>
 	</solution>	
+	</if>
 
+	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
+	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
     </target>
+
+	<target name="foo">
+		<echo message="${nant.settings.currentframework}"/>
+	</target>
 </project>
