@@ -229,6 +229,15 @@ namespace Spring2.Core.Types {
 
 	    return (byte) castFrom.myValue;
 	}
+	
+	public static explicit operator Int32(IntegerType castFrom) {
+	    if (!castFrom.IsValid) {
+		throw new InvalidStateException(castFrom.myState);
+	    }
+
+	    return castFrom.myValue;
+	}
+
 	#endregion
 
 	#region short
@@ -271,7 +280,6 @@ namespace Spring2.Core.Types {
 
 	    return (long) castFrom.myValue;
 	}
-
 	//	public static explicit operator IntegerType(long castFrom) {
 	//	    IntegerType returnType = new IntegerType(castFrom);
 	//
