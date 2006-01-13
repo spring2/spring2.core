@@ -2,6 +2,8 @@
 <project name="Spring2.Core" default="build" xmlnds="http://tempuri.org/nant-vs.xsd">
     <property name="build.dir" value="..\build" />
     <property name="build.configuration" value="debug" />
+    <property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\MSBuild.exe" />
+
 
     <target name="ccnet">
 	<ifnot test="${property::exists('CCNetLabel')}"> 
@@ -31,7 +33,7 @@
 	<property name="nant.settings.currentframework" value="net-2.0" />
 	<property name="build.configuration" value="NET_2_0" />
 	<call target="internal-build" />
-	<exec program="msbuild.exe" commandline="Spring2.Core.MSBuild.CustomTask.csproj" />
+	<exec program="${msbuild}" commandline="Spring2.Core.MSBuild.CustomTask.csproj" />
     </target>
 
     <target name="internal-build">
