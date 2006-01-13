@@ -1,3 +1,50 @@
+2006-01-11 Wednesday 13:42  nathanp
+
+	* src/: ResourceManager/sql/view/vwLocalizedResource.view.sql,
+	ResourceManager/sql/view/vwResource.view.sql,
+	Security/AssemblyInfo.cs, Security/ISpring2Principal.cs,
+	ValueTypes/ILanguage.cs, ValueTypes/ILocale.cs,
+	ValueTypes/LanguageEnum.cs, ValueTypes/LanguageEnumList.cs,
+	ValueTypes/LocaleEnum.cs, ValueTypes/LocaleEnumList.cs,
+	Spring2.Core.ResourceManager.csproj, Spring2.Core.Security.csproj,
+	Spring2.Core.Types.csproj, Spring2.Core.sln,
+	ResourceManager/dtg-databases.xml,
+	ResourceManager/dtg-entities.xml,
+	ResourceManager/resourcelocalizer.cs,
+	ResourceManager/types.inc.xml,
+	ResourceManager/BusinessLogic/LocalizedResource.cs,
+	ResourceManager/BusinessLogic/Resource.cs,
+	ResourceManager/DAO/LocalizedResourceDAO.cs,
+	ResourceManager/DAO/ResourceDAO.cs,
+	ResourceManager/DataObject/ILocalizedResource.cs,
+	ResourceManager/DataObject/LocalizedResourceData.cs,
+	ResourceManager/DataObject/ResourceData.cs,
+	ResourceManager/sql/proc/spResource_Insert.proc.sql,
+	ResourceManager/sql/proc/spResource_Update.proc.sql,
+	ResourceManager/sql/table/Resource.table.sql:
+	
+	Added localization support to a spring2 security principal and
+	enhanced the ResourceLocalizer to use the Locale and Language off
+	the thread.
+
+2006-01-06 Friday 15:12  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2006-01-06 Friday 15:12  cort
+
+	* release/Spring2.Core.1.1.16.0.zip:
+	
+	new release version
+
+2006-01-06 Friday 15:10  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2006-01-06 Friday 15:05  cort
 
 	* src/: Spring2.Core.Configuration.csproj,
