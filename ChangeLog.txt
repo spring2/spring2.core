@@ -1,3 +1,9 @@
+2006-01-13 Friday 09:57  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2006-01-11 Wednesday 13:42  nathanp
 
 	* src/: ResourceManager/sql/view/vwLocalizedResource.view.sql,
