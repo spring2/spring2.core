@@ -11,8 +11,6 @@ namespace Spring2.Core.Types {
     [Serializable] 
     public struct StringType : IComparable, ICloneable, IEnumerable, IDataType {
 
-	public static readonly StringType Empty = "";
-
 	private string    myValue;
 	private TypeState myState;
 
@@ -796,7 +794,7 @@ namespace Spring2.Core.Types {
 
 	public static StringType Concat(Object arg0) {
 	    if (arg0 == null) {
-		return StringType.Empty;
+		return StringType.EMPTY;
 	    }
 
 	    return new StringType(arg0.ToString());
@@ -804,26 +802,26 @@ namespace Spring2.Core.Types {
     
 	public static StringType Concat(Object arg0, Object arg1) {
 	    if (arg0 == null) {
-		arg0 = StringType.Empty;
+		arg0 = StringType.EMPTY;
 	    }
     
 	    if (arg1 == null) {
-		arg1 = StringType.Empty;
+		arg1 = StringType.EMPTY;
 	    }
 	    return new StringType(string.Concat(arg0.ToString(), arg1.ToString()));
 	}
     
 	public static StringType Concat(Object arg0, Object arg1, Object arg2) {
 	    if (arg0 == null) {
-		arg0 = StringType.Empty;
+		arg0 = StringType.EMPTY;
 	    }
     
 	    if (arg1 == null) {
-		arg1 = StringType.Empty;
+		arg1 = StringType.EMPTY;
 	    }
     
 	    if (arg2 == null) {
-		arg2 = StringType.Empty;
+		arg2 = StringType.EMPTY;
 	    }
     
 	    return new StringType(string.Concat(arg0.ToString(), arg1.ToString(), arg2.ToString()));
