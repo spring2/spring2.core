@@ -9,7 +9,6 @@ DOCDIR		:= ../docs
 RELEASEDIR	:= ../release
 BUILDDIR	:= ../build
 NANT		:= ../bin/NAnt/nant.exe
-NANT		:= nant.exe
 
 all: build
 
