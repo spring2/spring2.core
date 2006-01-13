@@ -268,8 +268,8 @@ namespace Spring2.Core.Test {
 	    IntegerType integer2 = new IntegerType(100);
 	    IntegerType integer3 = new IntegerType(50);
 
-	    Assert.AreEqual(IntegerType.UNSET, IntegerType.UNSET);
-	    Assert.AreEqual(IntegerType.DEFAULT, IntegerType.DEFAULT);
+	    Assert.IsTrue(IntegerType.UNSET.Equals(IntegerType.UNSET));
+	    Assert.IsTrue(IntegerType.DEFAULT.Equals(IntegerType.DEFAULT));
 	    Assert.IsTrue(!IntegerType.UNSET.Equals(IntegerType.DEFAULT));
 	    Assert.IsTrue(!IntegerType.DEFAULT.Equals(IntegerType.UNSET));
 
