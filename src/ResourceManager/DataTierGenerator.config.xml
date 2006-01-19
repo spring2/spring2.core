@@ -23,7 +23,11 @@
 		<type name="{element.Name}List" newinstanceformat="{element.Name}List.DEFAULT" nullinstanceformat="{element.Name}List.UNSET" />
 	    </task>
 
-	    <task name="dao" element="entity" template="Template\PassThroughInterface\DAO.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region"  />
+	    <task name="dao" element="entity" template="Template\PassThroughInterface\DAO.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region" >
+		<excludes>
+		    <exclude name="LocalizedResource" />
+		</excludes>
+	    </task> 
 
 	    <task name="enum" element="enum" template="Template\enum.vm" directory="Types" filenameformat="{element.Name}.cs" writer="region" >
 		<type name="{element.Name}" concretetype="{element.Name}" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}.GetInstance({2})" newinstanceformat="{element.Name}.DEFAULT" nullinstanceformat="{element.Name}.UNSET" />
@@ -42,6 +46,7 @@
 	    <task name="delete procs" element="sqlentity" template="Template\sql_delete.vm" directory="sql\proc" filenameformat="sp{element.Name}_Delete.proc.sql" writer="region" />
 	    <task name="insert procs" element="sqlentity" template="Template\sql_insert.vm" directory="sql\proc" filenameformat="sp{element.Name}_Insert.proc.sql" writer="region" />
 	    <task name="update procs" element="sqlentity" template="Template\sql_update.vm" directory="sql\proc" filenameformat="sp{element.Name}_Update.proc.sql" writer="region" />
+	    <task name="sql dependencies" element="sqlentities" template="Template\sql-dependencies.vm" directory="sql" filenameformat="resourceDependencies.mk" writer="region" />
 	</tasks>
 	<tools>
 	    <tool name="sql" class="Spring2.DataTierGenerator.Tool.MSSqlServerTool,Spring2.DataTierGenerator.Tool" />

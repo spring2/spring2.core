@@ -81,9 +81,9 @@ if exists(select * from syscolumns where id=object_id('Resource') and name = 'Co
   END
 GO
 
-if not exists (select * from dbo.sysobjects where id = object_id(N'PK_User') and OBJECTPROPERTY(id, N'IsPrimaryKey') = 1)
+if not exists (select * from dbo.sysobjects where id = object_id(N'PK_Resource') and OBJECTPROPERTY(id, N'IsPrimaryKey') = 1)
 ALTER TABLE Resource WITH NOCHECK ADD
-	CONSTRAINT PK_User PRIMARY KEY NONCLUSTERED
+	CONSTRAINT PK_Resource PRIMARY KEY NONCLUSTERED
 	(
 		ResourceId
 	)

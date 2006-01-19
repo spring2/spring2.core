@@ -14,7 +14,7 @@
 		    <column name="ContextIdentity" sqltype="Int" required="False" />
 		</columns>
 		<constraints>
-		    <constraint name="PK_User" type="PRIMARY KEY">
+		    <constraint name="PK_Resource" type="PRIMARY KEY">
 			<column name="ResourceId" />
 		    </constraint>
 		    <constraint name="UN_ResourceEntityPropertyIdentity" type="UNIQUE">
