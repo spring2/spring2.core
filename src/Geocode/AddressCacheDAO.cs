@@ -448,5 +448,29 @@ namespace Spring2.Core.Geocode {
 	    dataReader.Close();
 	    return list;
 	}
+
+	/// <summary>
+	/// Returns a list of objects which match the values for the fields specified.
+	/// </summary>
+	/// <param name="Address1">A field value to be matched.</param>
+	/// <param name="PostalCode">A field value to be matched.</param>
+	/// <returns>The list of AddressCacheDAO objects found.</returns>
+	public AddressCacheList FindAddressByStreetAndCityAndState(StringType address1, StringType city, StringType state) {
+	    OrderByClause sort = new OrderByClause("Address1, City");
+	    WhereClause filter = new WhereClause("Address1=@Address1 and City=@City and Region=@State");
+	    String sql = "Select * from " + VIEW + filter.FormatSql() + sort.FormatSql();
+	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
+	    cmd.Parameters.Add(CreateDataParameter("@Address1", DbType.AnsiString, ParameterDirection.Input, address1.IsValid ? address1.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@City", DbType.AnsiString, ParameterDirection.Input, city.IsValid ? city.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@State", DbType.AnsiString, ParameterDirection.Input, state.IsValid ? state.ToString() as Object : DBNull.Value));
+	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+	    AddressCacheList list = new AddressCacheList(); 
+
+	    while (dataReader.Read()) {
+		list.Add(GetDataObjectFromReader(dataReader)); 
+	    }
+	    dataReader.Close();
+	    return list;
+	}
     }
 }
