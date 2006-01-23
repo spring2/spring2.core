@@ -49,16 +49,42 @@ namespace Spring2.Core.Geocode {
 	}
 
 	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType path){
-	     AddressCacheList list = AddressCacheDAO.DAO.FindAddressByStreetAndPostalCode(street,postalCode);
-	     GeocodeData geocodeData = new GeocodeData();
+	    TeleAtlasGeocodeData teleAtlasgeocodeData = new TeleAtlasGeocodeData();
+	    GeocodeData geocodeData = new GeocodeData();
+	    AddressCacheList list = null;
+
+	    if(postalCode.ToString().Length > 0){
+		list = AddressCacheDAO.DAO.FindAddressByStreetAndPostalCode(street,postalCode);		
+	    }else {
+		list = AddressCacheDAO.DAO.FindAddressByStreetAndCityAndState(street,city,state);
+	    }
 
 	    foreach (IAddressCache cache in list) {
 		if((cache.Status.Equals(GeocodeStatusEnum.VALID))){
-		    geocodeData.OutPut = cache.Result.ToString();
+		    teleAtlasgeocodeData.OutPut = cache.Result.ToString();
+
+		    geocodeData.OutPut = teleAtlasgeocodeData.OutPut; 	
+		    geocodeData.MatchCount = teleAtlasgeocodeData.MatchCount;
+		    geocodeData.MatchType = teleAtlasgeocodeData.MatchType;
+		    geocodeData.MatchDB = StringType.Parse( teleAtlasgeocodeData.MatchDB );
+		    geocodeData.StdAddress = StringType.Parse( teleAtlasgeocodeData.StdAddress );
+		    geocodeData.StdCity = StringType.Parse( teleAtlasgeocodeData.StdCity );
+		    geocodeData.StdState = StringType.Parse( teleAtlasgeocodeData.StdState );
+		    geocodeData.StdZipCode = StringType.Parse( teleAtlasgeocodeData.StdZipCode );
+		    geocodeData.StdZipCodePlus4 = StringType.Parse( teleAtlasgeocodeData.StdZipCodePlus4 );
+		    geocodeData.StdDPBC = StringType.Parse( teleAtlasgeocodeData.StdDPBC );
+		    geocodeData.StdCarrier = StringType.Parse( teleAtlasgeocodeData.StdCarrier );
+		    geocodeData.MatchAddress = StringType.Parse( teleAtlasgeocodeData.MatchAddress );
+		    geocodeData.MatchCity = StringType.Parse( teleAtlasgeocodeData.MatchAddress );
+		    geocodeData.MatchState = StringType.Parse( teleAtlasgeocodeData.MatchState );
+		    geocodeData.MatchZipCode = StringType.Parse( teleAtlasgeocodeData.MatchZipCode );
+		    geocodeData.MatchLatitude = teleAtlasgeocodeData.MatchLatitude;
+		    geocodeData.MatchLongitude = teleAtlasgeocodeData.MatchLongitude;
+
 		    return geocodeData;
 		}
 	    }
-	     
+
 	    this.street = street;
 	    this.city = city;
 	    this.state = state;
@@ -79,7 +105,7 @@ namespace Spring2.Core.Geocode {
 		throw new Exception(String.Format("{0} could not be found.", directory.FullName + "\\rie.exe"));
 	    }
 
-	    geocodeData = ExecuteCommand();
+	    teleAtlasgeocodeData = ExecuteCommand();
 
 	    /*
 		Match Types:
@@ -99,29 +125,48 @@ namespace Spring2.Core.Geocode {
 	    addressCacheData.City = city;
 	    addressCacheData.Region = state;
 	    addressCacheData.PostalCode = postalCode;
-	    addressCacheData.Result = geocodeData.OutPut;
+	    addressCacheData.Result = teleAtlasgeocodeData.OutPut;
 
 	    AddressCache addressCache = new AddressCache();
 
-	    if(geocodeData.MatchType.Equals(new IntegerType(0)) || geocodeData.MatchType.Equals(new IntegerType(6))){
+	    if(teleAtlasgeocodeData.MatchType.Equals(new IntegerType(0)) || teleAtlasgeocodeData.MatchType.Equals(new IntegerType(6))){
 		addressCacheData.Status = GeocodeStatusEnum.INVALID; 
 		addressCache.Update(addressCacheData);
 		//throw new GeocodeException();
 	    }else{
 		addressCacheData.Status = GeocodeStatusEnum.VALID;
 		addressCache.Update(addressCacheData);
-	    }
+	    }	    
+
+	    geocodeData.MatchCount = teleAtlasgeocodeData.MatchCount;
+	    geocodeData.MatchType = teleAtlasgeocodeData.MatchType;
+
+	    geocodeData.MatchDB = StringType.Parse(teleAtlasgeocodeData.MatchDB);
+	    geocodeData.StdAddress = StringType.Parse( teleAtlasgeocodeData.StdAddress);
+	    geocodeData.StdCity = StringType.Parse( teleAtlasgeocodeData.StdCity);
+	    geocodeData.StdState = StringType.Parse( teleAtlasgeocodeData.StdState);
+	    geocodeData.StdZipCode = StringType.Parse( teleAtlasgeocodeData.StdZipCode);
+	    geocodeData.StdZipCodePlus4 = StringType.Parse( teleAtlasgeocodeData.StdZipCodePlus4);
+	    geocodeData.StdDPBC = StringType.Parse( teleAtlasgeocodeData.StdDPBC);
+	    geocodeData.StdCarrier = StringType.Parse( teleAtlasgeocodeData.StdCarrier);
+	    geocodeData.MatchAddress = StringType.Parse( teleAtlasgeocodeData.MatchAddress);
+	    geocodeData.MatchCity = StringType.Parse( teleAtlasgeocodeData.MatchAddress);
+	    geocodeData.MatchState = StringType.Parse( teleAtlasgeocodeData.MatchState);
+	    geocodeData.MatchZipCode = StringType.Parse( teleAtlasgeocodeData.MatchZipCode);
+
+	    geocodeData.MatchLatitude = teleAtlasgeocodeData.MatchLatitude;
+	    geocodeData.MatchLongitude = teleAtlasgeocodeData.MatchLongitude;
 
 	    return geocodeData;
 	}
 
 	/// <summary>
 	/// </summary>
-	private GeocodeData ExecuteCommand() {
+	private TeleAtlasGeocodeData ExecuteCommand() {
 	    //"-g \"232 Madison Ave|New York City|New York|10016\" -u EZL0012953 -p WurbI";
 	    //inputText = "-g \"232 Madison Ave|New York City|New York|10016\" -u EZL0012953 -p WurbI";
 	    string outputText = "";
-	    GeocodeData data = new GeocodeData();
+	    TeleAtlasGeocodeData data = new TeleAtlasGeocodeData();
 
 	    string gpgExecutable = _exeDirectory + "\\rie.exe";
 	    MakeGeocodeParamString();
