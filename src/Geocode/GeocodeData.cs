@@ -27,7 +27,7 @@ namespace Spring2.Core.Geocode {
 	private DecimalType matchLatitude = DecimalType.DEFAULT;
 	private DecimalType matchLongitude = DecimalType.DEFAULT;
 	
-	private StringType output = StringType.Empty;
+	private StringType output = StringType.EMPTY;
 
 	public StringType OutPut {
 	    set {

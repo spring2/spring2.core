@@ -179,12 +179,22 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Geocode\GecodeTestProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Geocode\GeocodeData.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Geocode\GeocodeException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\GeocodeProvider.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -205,6 +215,21 @@
                 />
                 <File
                     RelPath = "Geocode\IAddressCache.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\IGeocodeProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\TeleAtlasGeocodeData.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\TeleAtlasProvider.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

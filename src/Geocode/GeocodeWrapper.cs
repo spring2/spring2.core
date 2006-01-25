@@ -63,7 +63,7 @@ namespace Spring2.Core.Geocode {
 		if((cache.Status.Equals(GeocodeStatusEnum.VALID))){
 		    teleAtlasgeocodeData.OutPut = cache.Result.ToString();
 
-		    geocodeData.OutPut = teleAtlasgeocodeData.OutPut; 	
+		    geocodeData.OutPut = StringType.Parse(teleAtlasgeocodeData.OutPut);
 		    geocodeData.MatchCount = teleAtlasgeocodeData.MatchCount;
 		    geocodeData.MatchType = teleAtlasgeocodeData.MatchType;
 		    geocodeData.MatchDB = StringType.Parse( teleAtlasgeocodeData.MatchDB );
@@ -126,6 +126,8 @@ namespace Spring2.Core.Geocode {
 	    addressCacheData.Region = state;
 	    addressCacheData.PostalCode = postalCode;
 	    addressCacheData.Result = teleAtlasgeocodeData.OutPut;
+	    addressCacheData.Latitude = teleAtlasgeocodeData.MatchLatitude;
+	    addressCacheData.Longitude = teleAtlasgeocodeData.MatchLongitude;
 
 	    AddressCache addressCache = new AddressCache();
 
@@ -138,9 +140,9 @@ namespace Spring2.Core.Geocode {
 		addressCache.Update(addressCacheData);
 	    }	    
 
+	    geocodeData.OutPut = StringType.Parse(teleAtlasgeocodeData.OutPut);
 	    geocodeData.MatchCount = teleAtlasgeocodeData.MatchCount;
 	    geocodeData.MatchType = teleAtlasgeocodeData.MatchType;
-
 	    geocodeData.MatchDB = StringType.Parse(teleAtlasgeocodeData.MatchDB);
 	    geocodeData.StdAddress = StringType.Parse( teleAtlasgeocodeData.StdAddress);
 	    geocodeData.StdCity = StringType.Parse( teleAtlasgeocodeData.StdCity);
@@ -153,7 +155,6 @@ namespace Spring2.Core.Geocode {
 	    geocodeData.MatchCity = StringType.Parse( teleAtlasgeocodeData.MatchAddress);
 	    geocodeData.MatchState = StringType.Parse( teleAtlasgeocodeData.MatchState);
 	    geocodeData.MatchZipCode = StringType.Parse( teleAtlasgeocodeData.MatchZipCode);
-
 	    geocodeData.MatchLatitude = teleAtlasgeocodeData.MatchLatitude;
 	    geocodeData.MatchLongitude = teleAtlasgeocodeData.MatchLongitude;
 
