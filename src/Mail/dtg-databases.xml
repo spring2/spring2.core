@@ -1,0 +1,85 @@
+<!--
+    
+      Database/SqlEntity definitions
+
+-->
+<databases generateinsertstoredprocscript="True" generateupdatestoredprocscript="True" generatedeletestoredprocscript="True" generateselectstoredprocscript="True" generateviewscript="True" generatetablescript="True" useview="True">
+    <database name="Database" key="ConnectionString">
+	<sqlentities>
+	    <sqlentity name="MailMessage" view="vwMailMessage">
+		<columns>
+		    <column name="MailMessageId" sqltype="Int" identity="True" required="True" />
+		    <column name="ScheduleTime" sqltype="DateTime" />
+		    <column name="ProcessedTime" sqltype="DateTime" />
+		    <column name="Priority" sqltype="VarChar" length="10" />
+		    <column name="From" sqltype="VarChar" length="250" />
+		    <column name="To" sqltype="VarChar" length="6000" />
+		    <column name="Cc" sqltype="VarChar" length="250" />
+		    <column name="Bcc" sqltype="VarChar" length="250" />
+		    <column name="Subject" sqltype="VarChar" length="80" />
+		    <column name="BodyFormat" sqltype="VarChar" length="10" />
+		    <column name="Body" sqltype="Text" />
+		    <column name="MailMessageStatus" sqltype="VarChar" length="30" required="True" />
+		    <column name="ReleasedByUserId" sqltype="Int" />
+		    <column name="MailMessageType" sqltype="VarChar" length="80" required="True" default="''" />
+		    <column name="NumberOfAttempts" sqltype="Int" />
+		    <column name="MessageQueueDate" sqltype="DateTime" />
+		</columns>
+		<constraints>
+		    <constraint name="PK_MailMessage" type="PRIMARY KEY" clustered="true">
+			<column name="MailMessageId" />
+		    </constraint>
+		</constraints>
+		<indexes>
+		    <index name="IxMailMessage_MailMessageStatus">
+			<column name="MailMessageStatus" />
+		    </index>
+		    <index name="IxMailMessage_ScheduleTime">
+			<column name="ScheduleTime" />
+		    </index>
+		    <index name="IxMailMessage_ProcessedTime">
+			<column name="ProcessedTime" />
+		    </index>
+		    <index name="IxMailMessage_Subject">
+			<column name="Subject" />
+		    </index>
+		</indexes>
+	    </sqlentity>
+	    <sqlentity name="MailMessageRoute" view="vwMailMessageRoute">
+		<columns>
+		    <column name="MailMessageRouteId" sqltype="Int" identity="True" required="True" />
+		    <column name="MailMessage" sqltype="VarChar" length="50" required="True" />
+		    <column name="RoutingType" sqltype="VarChar" length="10" required="True" />
+		    <column name="Status" sqltype="VarChar" length="1" required="True" default="'Y'" />
+		    <column name="EmailAddress" sqltype="VarChar" length="200" required="True" />
+		</columns>
+		<constraints>
+		    <constraint name="PK_MailMessageRoute" type="PRIMARY KEY">
+			<column name="MailMessageRouteId" />
+		    </constraint>
+		    <constraint name="UN_MailMessageRoute" type="UNIQUE">
+			<column name="MailMessage" />
+			<column name="RoutingType" />
+			<column name="EmailAddress" />
+		    </constraint>
+		</constraints>
+	    </sqlentity>
+	    <sqlentity name="MailAttachment" view="vwMailAttachment">
+		<columns>
+		    <column name="MailAttachmentId" sqltype="Int" identity="True" increment="1" seed="1" required="True" />
+		    <column name="MailMessageId" sqltype="Int" required="True" />
+		    <column name="Filename" sqltype="VarChar" length="50" />
+		    <column name="Text" sqltype="VarChar" />
+		</columns>
+		<constraints>
+		    <constraint name="PK_MailAttachment" type="PRIMARY KEY">
+			<column name="MailAttachmentId" />
+		    </constraint>
+		    <constraint name="FK_MailAttachment_MailMessage" type="FOREIGN KEY" foreignentity="MailMessage">
+			<column name="MailMessageId" foreigncolumn="MailMessageId" />
+		    </constraint>
+		</constraints>
+	    </sqlentity>
+	</sqlentities>
+    </database>
+</databases>

@@ -1,0 +1,62 @@
+<!-- Entity definitions -->
+<entities>
+    <entity name="MailMessage" sqlentity="MailMessage">
+	<properties>
+	    <property name="MailMessageId" column="*" type="IdType" />
+	    <property name="ScheduleTime" column="*" type="DateTimeType" />
+	    <property name="ProcessedTime" column="*" type="DateTimeType" />
+	    <property name="Priority" column="*" type="MailPriorityEnum" />
+	    <property name="From" column="*" type="StringType" />
+	    <property name="To" column="*" type="StringType" />
+	    <property name="Cc" column="*" type="StringType" />
+	    <property name="Bcc" column="*" type="StringType" />
+	    <property name="Subject" column="*" type="StringType" />
+	    <property name="BodyFormat" column="*" type="MailBodyFormatEnum" />
+	    <property name="Body" column="*" type="StringType" />
+	    <property name="MailMessageStatus" column="*" type="MailMessageStatusEnum" />
+	    <property name="ReleasedByUserId" column="*" type="IdType" />
+	    <property name="Attachments" type="MailAttachmentList" />
+	    <property name="MailMessageType" column="*" type="StringType" />
+	    <property name="NumberOfAttempts" column="*" type="IntegerType" />
+	    <property name="MessageQueueDate" column="*" type="DateTimeType" />
+	</properties>
+	<finders>
+	    <finder name="FindByStatus" unique="False">
+ 		<properties>
+ 		    <property name="MailMessageStatus" />
+ 		</properties>
+	    </finder>
+	</finders>
+    </entity>
+    <entity name="MailMessageRoute" sqlentity="MailMessageRoute">
+	<properties>
+	    <property name="MailMessageRouteId" type="IdType" column="*" />
+	    <property name="MailMessage" type="StringType" column="*" />
+	    <property name="RoutingType" type="RoutingTypeEnum" column="*" />
+	    <property name="Status" type="ActiveStatusEnum" column="*" />
+	    <property name="EmailAddress" type="StringType" column="*" />
+	</properties>
+	<finders>
+	    <finder name="FindByMailMessage" unique="False" expression=" MailMessage = {0}">
+		<properties>
+ 		    <property name="MailMessage" />
+		</properties>
+	    </finder>
+	</finders>
+    </entity>
+    <entity name="MailAttachment" sqlentity="MailAttachment">
+	<properties>
+	    <property name="MailAttachmentId" column="*" type="IdType"></property>
+	    <property name="MailMessageId" column="*" type="IdType"></property>
+	    <property name="Filename" column="*" type="StringType"></property>
+	    <property name="Text" column="*" type="StringType"></property>
+	</properties>
+	<finders>
+	    <finder name="FindByMailMessageId" unique="False">
+ 		<properties>
+ 		    <property name="MailMessageId" />
+ 		</properties>
+	    </finder>
+	</finders>
+    </entity>
+</entities>

@@ -1,0 +1,31 @@
+<enums>
+    <enum name="RoutingTypeEnum">
+	<value name="To" code="To" />
+	<value name="From" code="From" />
+	<value name="Cc" code="Cc" />
+	<value name="Bcc" code="Bcc" />
+    </enum>
+    <enum name="MailMessageStatusEnum">
+	<value name="Unprocessed" code="Unprocessed" />
+	<value name="Sent" code="Sent" />
+	<value name="Not Allowed From Test Server" code="Not Allowed From Test Server" />
+	<value name="Held" code="Held" />
+	<value name="Released" code="Released" />
+	<value name="Rejected" code="Rejected" />
+	<value name="Failed" code="Failed" />
+    </enum>
+    <enum name="MailPriorityEnum">
+	<value name="High" code="High" />
+	<value name="Low" code="Low" />
+	<value name="Normal" code="Normal" />
+    </enum>
+    <enum name="MailBodyFormatEnum">
+	<value name="Html" code="Html" />
+	<value name="Text" code="Text" />
+    </enum>
+    <enum name="ActiveStatusEnum">
+	<value name="Active" code="Y" />
+	<value name="Disabled" code="N" />
+    </enum>
+</enums>
+
