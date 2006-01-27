@@ -313,6 +313,19 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
+	public class MailMessageTypeSorter : System.Collections.IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailMessage o1 = (IMailMessage)a;
+		IMailMessage o2 = (IMailMessage)b;
+
+		if (o1 == null || o2 == null || !o1.MailMessageType.IsValid || !o2.MailMessageType.IsValid) {
+		    return 0;
+		}
+		return o1.MailMessageType.CompareTo(o2.MailMessageType);
+	    }
+	}
+
+	[Generate]
 	public class MessageQueueDateSorter : System.Collections.IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;

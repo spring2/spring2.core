@@ -5,10 +5,9 @@ using System.Data;
 using System.Data.SqlClient;
 
 using Spring2.Core.DAO;
-using Spring2.Core.Types;
-
 using Spring2.Core.Mail.DataObject;
 using Spring2.Core.Mail.Types;
+using Spring2.Core.Types;
 
 
 using Spring2.Core.BusinessEntity;
@@ -79,7 +78,7 @@ namespace Spring2.Core.Mail.DataObject {
 	MailAttachmentList Attachments {
 	    get;
 	}
-    	StringType MailMessageType {
+	StringType MailMessageType {
 	    get;
 	}
 	IntegerType NumberOfAttempts {

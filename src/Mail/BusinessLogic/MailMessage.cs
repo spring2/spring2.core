@@ -279,7 +279,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    body = data.Body.IsDefault ? body : data.Body;
 	    mailMessageStatus = data.MailMessageStatus.IsDefault ? mailMessageStatus : data.MailMessageStatus;
 	    releasedByUserId = data.ReleasedByUserId.IsDefault ? releasedByUserId : data.ReleasedByUserId;
-        	mailMessageType = data.MailMessageType.IsDefault ? mailMessageType : data.MailMessageType;
+	    mailMessageType = data.MailMessageType.IsDefault ? mailMessageType : data.MailMessageType;
 	    numberOfAttempts = data.NumberOfAttempts.IsDefault ? numberOfAttempts : data.NumberOfAttempts;
 	    messageQueueDate = data.MessageQueueDate.IsDefault ? messageQueueDate : data.MessageQueueDate;
 	    Store();
@@ -596,25 +596,25 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    mailMessage.MailMessageStatus = MailMessageStatusEnum.HELD;
 	    mailMessage.Store();
         }
-
-	public static MailMessageList GetMailMessagesToSend() {
-	    return MailMessageDAO.DAO.FindByStatus(MailMessageStatusEnum.UNPROCESSED);
-	}
-
-	/// <summary>
-	/// Get mail messages that are of the status that is passed to this function.
-	/// </summary>
-	public static MailMessageList GetMailMessagesByStatus(MailMessageStatusEnum status) {
-	    WhereClause filter = new WhereClause(MailMessageFields.MAILMESSAGESTATUS, status.Code);
+        
+        public static MailMessageList GetMailMessagesToSend() {
+            return MailMessageDAO.DAO.FindByStatus(MailMessageStatusEnum.UNPROCESSED);
+        }
+        
+        /// <summary>
+        /// Get mail messages that are of the status that is passed to this function.
+        /// </summary>
+        public static MailMessageList GetMailMessagesByStatus(MailMessageStatusEnum status) {
+            WhereClause filter = new WhereClause(MailMessageFields.MAILMESSAGESTATUS, status.Code);
 	    // order so that scheduled messages go first
 	    OrderByClause sort = new OrderByClause("case when scheduletime is null then '12/31/2029' else scheduletime end, MailMessageId");
 	    MailMessageList list = new MailMessageList();
 	    list.AddRange(MailMessageDAO.DAO.GetList(filter, sort));
 	    return list;
-	}
-
-	public void Send() {
-	    //make sure the attachment directory exists
+        }
+        
+        public void Send() {
+            //make sure the attachment directory exists
 	    String attachmentDirectory = ConfigurationProvider.Instance.Settings["TempPath"] + @"Attachments\";
 	    if (!Directory.Exists(attachmentDirectory)){
 		Directory.CreateDirectory(attachmentDirectory);
@@ -681,8 +681,6 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    if (Directory.Exists(messageAttachmentPath)){
 		Directory.Delete(messageAttachmentPath);
 	    }
-	}
-
-
+        }
     }
 }

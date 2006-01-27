@@ -209,6 +209,19 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
+	public class MailMessageSorter : System.Collections.IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailMessageRoute o1 = (IMailMessageRoute)a;
+		IMailMessageRoute o2 = (IMailMessageRoute)b;
+
+		if (o1 == null || o2 == null || !o1.MailMessage.IsValid || !o2.MailMessage.IsValid) {
+		    return 0;
+		}
+		return o1.MailMessage.CompareTo(o2.MailMessage);
+	    }
+	}
+
+	[Generate]
 	public class EmailAddressSorter : System.Collections.IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessageRoute o1 = (IMailMessageRoute)a;

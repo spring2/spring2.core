@@ -310,7 +310,7 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.Parameters.Add(idParam);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessage", DbType.AnsiString, ParameterDirection.Input, data.MailMessage.ToString()));
+	    cmd.Parameters.Add(CreateDataParameter("@MailMessage", DbType.AnsiString, ParameterDirection.Input, data.MailMessage.IsValid ? data.MailMessage.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@RoutingType", DbType.AnsiString, ParameterDirection.Input, data.RoutingType.DBValue));
 	    cmd.Parameters.Add(CreateDataParameter("@Status", DbType.AnsiString, ParameterDirection.Input, data.Status.DBValue));
 	    cmd.Parameters.Add(CreateDataParameter("@EmailAddress", DbType.AnsiString, ParameterDirection.Input, data.EmailAddress.IsValid ? data.EmailAddress.ToString() as Object : DBNull.Value));
@@ -346,7 +346,7 @@ namespace Spring2.Core.Mail.Dao {
 
 	    //Create the parameters and append them to the command object
 	    cmd.Parameters.Add(CreateDataParameter("@MailMessageRouteId", DbType.Int32, ParameterDirection.Input, data.MailMessageRouteId.IsValid ? data.MailMessageRouteId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessage", DbType.AnsiString, ParameterDirection.Input, data.MailMessage.ToString()));
+	    cmd.Parameters.Add(CreateDataParameter("@MailMessage", DbType.AnsiString, ParameterDirection.Input, data.MailMessage.IsValid ? data.MailMessage.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@RoutingType", DbType.AnsiString, ParameterDirection.Input, data.RoutingType.DBValue));
 	    cmd.Parameters.Add(CreateDataParameter("@Status", DbType.AnsiString, ParameterDirection.Input, data.Status.DBValue));
 	    cmd.Parameters.Add(CreateDataParameter("@EmailAddress", DbType.AnsiString, ParameterDirection.Input, data.EmailAddress.IsValid ? data.EmailAddress.ToString() as Object : DBNull.Value));
@@ -399,7 +399,7 @@ namespace Spring2.Core.Mail.Dao {
 	    WhereClause filter = new WhereClause(" MailMessage = @MailMessage");
 	    String sql = "Select * from " + VIEW + filter.FormatSql() + sort.FormatSql();
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessage", DbType.AnsiString, ParameterDirection.Input, mailMessage.ToString()));
+	    cmd.Parameters.Add(CreateDataParameter("@MailMessage", DbType.AnsiString, ParameterDirection.Input, mailMessage.IsValid ? mailMessage.ToString() as Object : DBNull.Value));
 	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 	    MailMessageRouteList list = new MailMessageRouteList(); 
 
