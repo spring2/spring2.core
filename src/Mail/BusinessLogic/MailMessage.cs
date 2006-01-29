@@ -652,7 +652,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    //write them out to the <SystemSetting.TempPath>/Attachments/<MailMessageId>/<attachment.Filename>
 		    
 	    String messageAttachmentPath = attachmentDirectory + this.MailMessageId.ToInt32().ToString() + @"\";
-	    foreach (MailAttachmentData attachment in this.Attachments){
+	    foreach (MailAttachment attachment in this.Attachments){
 		//make sure the directory exists for this mail message's attachments
 			
 		if (!Directory.Exists(messageAttachmentPath)){
@@ -673,7 +673,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    MarkSent();
 
 	    //remove any attachments that were temporarily saved to file
-	    foreach (MailAttachmentData attachment in this.Attachments){
+	    foreach (MailAttachment attachment in this.Attachments){
 		String filename = messageAttachmentPath + attachment.Filename;
 		File.Delete(filename);
 	    }
