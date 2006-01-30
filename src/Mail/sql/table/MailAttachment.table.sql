@@ -25,7 +25,7 @@ CREATE TABLE MailAttachment (
 	MailAttachmentId Int IDENTITY(1,1) NOT NULL,
 	MailMessageId Int NOT NULL,
 	Filename VarChar(50) NULL,
-	Text VarChar(50) NULL
+	Text VarChar(8000) NULL
 )
 GO
 
@@ -71,13 +71,13 @@ GO
 if not exists(select * from syscolumns where id=object_id('MailAttachment') and name = 'Text')
   BEGIN
 	ALTER TABLE MailAttachment ADD
-	    Text VarChar(50) NULL
+	    Text VarChar(8000) NULL
   END
 GO
 
 if exists(select * from syscolumns where id=object_id('MailAttachment') and name = 'Text')
   BEGIN
-	exec #spAlterColumn 'MailAttachment', 'Text', 'VarChar(50)', 0
+	exec #spAlterColumn 'MailAttachment', 'Text', 'VarChar(8000)', 0
   END
 GO
 
