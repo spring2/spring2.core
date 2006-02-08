@@ -154,6 +154,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Configuration\ChainedConfigurationProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Configuration\ConfigurationProvider.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
