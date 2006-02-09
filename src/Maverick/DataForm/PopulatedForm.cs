@@ -1,9 +1,10 @@
 using System;
 using System.Web;
+using System.Text;
 using Maverick.Flow;
 using Spring2.Core.Maverick.Controller;
 using Spring2.Core.Message;
-
+using Spring2.Core.Types;
 namespace Spring2.Core.Maverick.DataForm {
     
     /// <summary>
@@ -12,16 +13,16 @@ namespace Spring2.Core.Maverick.DataForm {
     public class PopulatedForm {
 
 	//Constructor
+	protected ErrorableController controller;
 	protected IControllerContext controllerContext;
 	private MessageList errors = new MessageList();
-	private IMessageFormatter messageFormatter;
 
-	public PopulatedForm(ErrorableController controller) {
-	    this.controllerContext = controller.ControllerContext;
-	    this.messageFormatter = controller.MessageFormatter;
-	    controller.Populate(this, controller.ControllerContext.HttpContext.Request.Params);
+	public PopulatedForm(ErrorableController errorableController) {
+	    this.controller = errorableController;
+	    this.controllerContext = errorableController.ControllerContext;
+	    controller.Populate(this, errorableController.ControllerContext.HttpContext.Request.Params);
 	    Populate();
-	    this.errors.AddRange(controller.Errors);
+	    this.errors.AddRange(errorableController.Errors);
 	}
 
 	/// <summary>
@@ -31,7 +32,7 @@ namespace Spring2.Core.Maverick.DataForm {
 	}
 
 	public IMessageFormatter MessageFormatter {
-	    get { return this.messageFormatter; }
+	    get { return controller.MessageFormatter; }
 	}
 
 	public MessageList Errors {
@@ -62,7 +63,6 @@ namespace Spring2.Core.Maverick.DataForm {
 	    cookie.Path = "/";
 	    controllerContext.HttpContext.Response.Cookies.Add(cookie);
 	}
-
 
 
     }
