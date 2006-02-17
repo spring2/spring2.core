@@ -23,10 +23,20 @@ namespace Spring2.Core.ResourceManager {
 	/// <param name="identity"></param>
 	/// <returns></returns>
 	public StringType Localize(StringType context, StringType field, IdType identity, ILocale locale, ILanguage language){
-
 	    //First, look up the resource id using the context, key, and identity.
 	    try{
-		Resource resource = ResourceDAO.DAO.FindByContextFieldAndIdentity(context, field, identity);
+		Resource resource;
+		if (identity.IsValid){
+		    try{
+			//try finding the identity specific version of this resource
+			resource = ResourceDAO.DAO.FindByContextFieldAndIdentity(context, field, identity);
+		    }catch(FinderException){
+			//if no identity specific version is found, try to find a default (non identity specific) version
+			resource = ResourceDAO.DAO.FindByContextFieldAndIdentity(context, field, IdType.UNSET);
+		    }
+		}else{
+		    resource = ResourceDAO.DAO.FindByContextFieldAndIdentity(context, field, IdType.UNSET);
+		}
 		//now take that resource to the localized resource table
 		LocalizedResource localizedResource = LocalizedResourceDAO.DAO.FindByResourceIdLocaleAndLanguage(resource.ResourceId, locale, language);
 		return localizedResource.Content;
