@@ -49,6 +49,10 @@ namespace Spring2.Core.Types {
 	    return IsValid ? value.ToString(format) : base.ToString();
 	}
 
+	public String ToString(IFormatProvider provider) {
+	    return IsValid ? value.ToString("c", provider) : base.ToString();
+	}
+
 	public new CurrencyType Round(Int32 decimals) {
 	    return IsValid ? new CurrencyType(Decimal.Round(value, decimals)) : this;
 	}

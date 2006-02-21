@@ -144,6 +144,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Test\CurrencyTypeTest2.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Test\DataObjectTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

@@ -255,7 +255,7 @@ namespace Spring2.Core.Types {
 	}
 
 	public String ToString(IFormatProvider provider) {
-	    return IsValid ? this.myValue.ToString(provider) : myState.ToString();
+	    return IsValid ? this.myValue.ToString("c", provider) : myState.ToString();
 	}
          
 	public String ToString(String format, IFormatProvider provider) {
@@ -273,7 +273,7 @@ namespace Spring2.Core.Types {
 
 	public static CurrencyType Parse(String from, IFormatProvider provider) {
 	    CurrencyType result;
-	    result.myValue = Decimal.Parse(from, provider);
+	    result.myValue = Decimal.Parse(from, NumberStyles.Currency, provider);
 	    result.myState = TypeState.VALID;
 
 	    return result;
