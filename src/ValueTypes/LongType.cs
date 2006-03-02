@@ -201,6 +201,13 @@ namespace Spring2.Core.Types {
 	    return myValue;
 	}
 
+	public long ToInt64() {
+	    if (!IsValid) {
+		throw new InvalidStateException(myState);
+	    }
+	    return myValue;
+	}
+
 	public float ToSingle(System.IFormatProvider formatProvider) {
 	    if (!IsValid) {
 		throw new InvalidStateException(myState);
@@ -684,19 +691,49 @@ namespace Spring2.Core.Types {
 	#endregion
 
 	#region IComparable method
-	int IComparable.CompareTo(Object value) {
-	    if (!(value is LongType)) {
-		throw new InvalidTypeException("LongType");
+	
+	public int CompareTo(Object o) {
+	    if (!(o is LongType)) {
+		throw new ArgumentException("Argument must be an instance of LongType");
 	    }
 
-	    if (value == null) {
-		throw new InvalidArgumentException("value");
+	    LongType that = (LongType)o;
+
+	    if (this.myState == TypeState.DEFAULT) {
+		if (that.myState == TypeState.DEFAULT) {
+		    return 0;
+		} else {
+		    return -1;
+		}
 	    }
 
-	    LongType compareTo = (LongType) value;
+	    if (this.myState == TypeState.UNSET) {
+		if (that.myState == TypeState.UNSET) {
+		    return 0;
+		} else if (that.myState == TypeState.DEFAULT) {
+		    return 1;
+		} else {
+		    return -1;
+		}
+	    }
 
-	    return Compare(this, compareTo);
+	    if (that.myState != TypeState.VALID) {
+		return 1;
+	    }
+
+	    if (this.IsValid && that.IsValid) {
+		return myValue.CompareTo(that.myValue);
+	    }
+	    
+	    //return Compare(that);
+	    return Compare(this, that);
 	}
+
+
+	int IComparable.CompareTo(Object value) {
+	    return this.CompareTo(value);
+	}
+
 	#endregion
 
 	#region Object support and other stuff
