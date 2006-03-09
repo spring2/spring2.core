@@ -210,6 +210,8 @@ namespace Spring2.Core.Maverick.Controller {
 	    } else if (typeof(IntegerType).Equals(type)) {
 		return IntegerType.Parse(val);
 
+	    } else if (typeof(LongType).Equals(type)) {
+		return LongType.Parse(val);
 	    } else if (typeof(CurrencyType).Equals(type)) {
 		return CurrencyType.Parse(val);
 
