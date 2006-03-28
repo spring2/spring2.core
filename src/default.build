@@ -10,7 +10,7 @@
 	    <fail message="CCNetLabel property not set, so can't create labelled distribution files" />
 	</ifnot>
 	<exec program="..\bin\UpdateVersion.exe" commandline="-i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs -rp ${CCNetLabel}" />
-	<exec program="make" commandline="clean build ncover ncoverreports fxcop" />
+	<exec program="make" commandline="clean build regress" />
     </target>
 
     <target name="build">
