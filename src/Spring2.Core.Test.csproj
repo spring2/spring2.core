@@ -249,6 +249,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Test\RegionalTimeZoneTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Test\StringTypeTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

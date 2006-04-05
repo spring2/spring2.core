@@ -213,8 +213,11 @@ namespace Spring2.Core.Globalization {
 	/// <param name="timezone"></param>
 	/// <returns></returns>
 	public virtual DateTime ToLocalTime(DateTime time, TimeZone timezone) {
-	    return ToLocalTime(timezone.ToUniversalTime(time));
+	    TimeSpan tp = GetUtcOffset(time);
+	    time = timezone.ToUniversalTime(time);
+	    return time.Add(tp);
 	}
+
 
 	/// <summary>
 	/// Returns the coordinated universal time (UTC) that corresponds to the specified local time
