@@ -1,3 +1,314 @@
+2006-04-05 Wednesday 17:16  nathanp
+
+	* src/ValueTypes/: BooleanType.cs, CurrencyType.cs, DataType.cs,
+	DateTimeType.cs, DateType.cs, DecimalType.cs, EnumDataType.cs,
+	GenderType.cs, IdType.cs, IntegerType.cs, LongType.cs,
+	QuantityType.cs, RowVersionType.cs, ShortType.cs, StringType.cs,
+	TimeType.cs:
+	
+	Added a 'Display' method to all value types that returns an empty
+	string if the type is in an invalid state.
+
+2006-03-28 Tuesday 07:32  cort
+
+	* src/default.build:
+	
+	use regress instead of ncover to fix failing build
+
+2006-03-13 Monday 08:12  nathanp
+
+	* src/: Spring2.Core.csproj, Message/ResourceKey.cs:
+	
+	Added a ResourceKey type that can be used as a message parameter
+
+2006-03-13 Monday 08:10  nathanp
+
+	* src/ResourceManager/resourcelocalizer.cs:
+	
+	Moved the 'default' resource finder to another method to make it
+	optional
+
+2006-03-09 Thursday 13:18  jeffm
+
+	* src/Maverick/Controller/AbstractController.cs:
+	
+	Handle LongType properties.
+
+2006-03-02 Thursday 16:22  nathanp
+
+	* src/ValueTypes/LongType.cs:
+	
+	Added CompareTo and ToInt64() support to LongType
+
+2006-02-21 Tuesday 14:25  cort
+
+	* src/: Spring2.Core.WithTypesTest.csproj,
+	Test/CurrencyTypeTest.cs, Test/CurrencyTypeTest2.cs,
+	Types/CurrencyType.cs, ValueTypes/CurrencyType.cs:
+	
+	add test to make sure that CurrencyType Parse and ToString methods
+	correctly handle IFormatProvider when not the culture currently set
+	on the thread.
+
+2006-02-17 Friday 15:33  nathanp
+
+	* src/ResourceManager/resourcelocalizer.cs:
+	
+	Return non identity resources if an identified resource is not
+	found (defaults)
+
+2006-02-17 Friday 14:49  bent
+
+	* src/ResourceManager/AssemblyInfo.cs:
+	
+	made ResourceManager a Strongly Named assembly.
+
+2006-02-08 Wednesday 22:42  nathanp
+
+	* src/: Spring2.Core.Maverick.csproj,
+	Maverick/Controller/LocalizedController.cs,
+	Maverick/DataForm/LocalizedForm.cs,
+	Maverick/DataForm/PopulatedForm.cs:
+	
+	Moved LocalizedForm to the Spring2 core.  Added a reference to the
+	controller to the data forms to allow pass through access to
+	controller properties and methods
+
+2006-02-08 Wednesday 15:12  dustin
+
+	* src/: Spring2.Core.Configuration.csproj,
+	Configuration/ChainedConfigurationProvider.cs:
+	
+	Implementation of ChainedConfigurationProvider to allow customized
+	configuration settings on a per machine basis.
+
+2006-01-30 Monday 10:24  kend
+
+	* src/Geocode/GeocodeProvider.cs:
+	
+	Using Spring2.Core.ConfigurationProvider. Instaed of
+	System.Configutation.AppSetting
+
+2006-01-30 Monday 08:49  jeffm
+
+	* src/Mail/: dtg-databases.xml,
+	sql/proc/spMailAttachment_Insert.proc.sql,
+	sql/proc/spMailAttachment_Update.proc.sql,
+	sql/table/MailAttachment.table.sql:
+	
+	Increase length of text for attachment to max allowed.
+
+2006-01-28 Saturday 23:08  jeffm
+
+	* src/Mail/BusinessLogic/MailMessage.cs:
+	
+	Fix invalid cast exception by changing type used when itterating
+	through mail attachment list.
+
+2006-01-27 Friday 15:29  jeffm
+
+	* src/Mail/: .cvsignore, DataTierGenerator.config.xml, Makefile,
+	dtg-collections.xml, dtg-databases.xml, dtg-entities.xml,
+	dtg-enums.xml, sqltypes.xml, types.inc.xml,
+	sql/mailDependencies.mk, sql/proc/spMailAttachment_Delete.proc.sql,
+	sql/proc/spMailAttachment_Insert.proc.sql,
+	sql/proc/spMailAttachment_Update.proc.sql,
+	sql/proc/spMailMessageRoute_Delete.proc.sql,
+	sql/proc/spMailMessageRoute_Insert.proc.sql,
+	sql/proc/spMailMessageRoute_Update.proc.sql,
+	sql/proc/spMailMessage_Delete.proc.sql,
+	sql/proc/spMailMessage_Insert.proc.sql,
+	sql/proc/spMailMessage_Update.proc.sql,
+	sql/table/MailAttachment.table.sql,
+	sql/table/MailMessage.table.sql,
+	sql/table/MailMessageRoute.table.sql,
+	sql/view/vwMailAttachment.view.sql,
+	sql/view/vwMailMessage.view.sql,
+	sql/view/vwMailMessageRoute.view.sql:
+	
+	Add generation and the generated sql scripts needed to make this
+	work.
+
+2006-01-27 Friday 15:28  jeffm
+
+	* src/Mail/Test/: MailAttachmentTest.cs, MailMessageRouteTest.cs,
+	MailMessageTest.cs:
+	
+	Add tests so they can be added to project and run after we
+	implement a spring2Core DB for testing.
+
+2006-01-27 Friday 15:25  jeffm
+
+	* src/Mail/: DataObject/IMailAttachment.cs,
+	DataObject/IMailMessage.cs, DataObject/IMailMessageRoute.cs,
+	DataObject/MailAttachmentData.cs, DataObject/MailMessageData.cs,
+	DataObject/MailMessageList.cs, DataObject/MailMessageRouteData.cs,
+	DataObject/MailMessageRouteList.cs, BusinessLogic/MailMessage.cs,
+	DAO/MailMessageDAO.cs, DAO/MailMessageRouteDAO.cs:
+	
+	Formatting from DTG.
+
+2006-01-25 Wednesday 15:55  kend
+
+	* src/: Geocode/GeocodeData.cs, Geocode/GeocodeWrapper.cs,
+	Spring2.Core.Geocode.csproj:
+	
+	Added code so that latitude and longitude was stored to the
+	database
+
+2006-01-23 Monday 11:16  kend
+
+	* src/Geocode/GecodeTestProvider.cs:
+	
+	Tests provider. The Latitude and Longitude is pulled from the
+	configuation settings.	"DefaultLatitude" "DefaultLongitude"
+
+2006-01-23 Monday 11:15  kend
+
+	* src/Geocode/GeocodeWrapper.cs:
+	
+	Added code to populate the new GeocodeData class from the old one
+	that is renamed TeleAtlasGeocodeData
+
+2006-01-23 Monday 11:15  kend
+
+	* src/Geocode/GeocodeData.cs:
+	
+	This is the new GeocodeData class. I changed the name because it is
+	specific to TeleAtlas. The GeocodeWrapper class populates this new
+	GeocodeData class from TeleAtlasGeococdeData.
+
+2006-01-23 Monday 11:13  kend
+
+	* src/Geocode/TeleAtlasGeocodeData.cs:
+	
+	This is the original GeocodeData class. I changed the name because
+	it is specific to TeleAtlas. The GeocodeWrapper class populates the
+	new GeocodeData class from this one.
+
+2006-01-23 Monday 11:12  kend
+
+	* src/Geocode/TeleAtlasProvider.cs:
+	
+	Provider for TeleAtlas geocoding service
+
+2006-01-23 Monday 11:11  kend
+
+	* src/Geocode/GeocodeProvider.cs:
+	
+	new Geocode Provider class. Allows for dynamic selection of Geocode
+	provider
+
+2006-01-23 Monday 11:10  kend
+
+	* src/Geocode/IGeocodeProvider.cs:
+	
+	Interface for new Geocode Provider functionality
+
+2006-01-23 Monday 11:10  kend
+
+	* src/Geocode/AddressCacheDAO.cs:
+	
+	Added finder FindAddressByStreetAndCityAndState(StringType
+	address1, StringType city, StringType state) Seamless doesn't get
+	zipcode for vendor menu addresses. Needed to add search that does
+	not include zipcode
+
+2006-01-19 Thursday 10:43  jeffm
+
+	* src/ResourceManager/: sql/resourceDependencies.mk,
+	DataTierGenerator.config.xml, dtg-databases.xml,
+	sql/table/Resource.table.sql:
+	
+	Fixed primary key name for resource table, excluded
+	LocalizedResource from DAO generation, and add creation of
+	resourceDependencies.mk to allow for easy DB creation.
+
+2006-01-13 Friday 14:15  cort
+
+	* bin/NAnt/: NAnt.Console.Tests.dll, NAnt.Console.Tests.pdb,
+	NAnt.Core.Tests.dll, NAnt.Core.Tests.pdb,
+	NAnt.DotNetTasks.Tests.dll, NAnt.DotNetTasks.Tests.pdb,
+	NAnt.NUnitFormatters.dll, NAnt.NUnitFormatters.pdb,
+	NAnt.ZipTasks.Tests.dll, NAnt.ZipTasks.Tests.pdb,
+	NAnt.ZipTasks.dll, NAnt.ZipTasks.pdb, NDoc.Core.dll,
+	NDoc.Documenter.Msdn.dll, NUnitCore.dll, SharpZipLib.dll,
+	log4net.dll, nunit.framework.dll, taskdef.Tasks.dll,
+	taskdef.Tasks.pdb, NAnt.CompressionTasks.dll,
+	NAnt.CompressionTasks.xml, NAnt.Core.dll, NAnt.Core.pdb,
+	NAnt.Core.xml, NAnt.DotNetTasks.dll, NAnt.DotNetTasks.pdb,
+	NAnt.CompressionTasks.pdb, NAnt.DotNetTasks.xml,
+	NAnt.MSNetTasks.dll, NAnt.MSNetTasks.pdb, NAnt.NUnit.dll,
+	NAnt.NUnit1Tasks.dll, NAnt.NUnit1Tasks.pdb, NAnt.NUnit2Tasks.dll,
+	NAnt.NUnit2Tasks.pdb, NAnt.NUnit2Tasks.xml, NAnt.Resources.dll,
+	NAnt.SourceControlTasks.dll, NAnt.SourceControlTasks.xml,
+	NAnt.VSNetTasks.dll, NAnt.VSNetTasks.xml, NAnt.VisualCppTasks.dll,
+	NAnt.VisualCppTasks.pdb, NAnt.VisualCppTasks.xml,
+	NAnt.Win32Tasks.dll, NAnt.Win32Tasks.xml, NAnt.exe,
+	NAnt.exe.config, NAnt.pdb, NDoc.Documenter.NAnt.dll,
+	NDoc.Documenter.NAnt.pdb, scvs.exe, NAnt.NUnit.pdb,
+	NAnt.SourceControlTasks.pdb, NAnt.VSNetTasks.pdb,
+	NAnt.Win32Tasks.pdb, lib/ICSharpCode.SharpCvsLib.Console.dll,
+	lib/ICSharpCode.SharpCvsLib.dll, lib/ICSharpCode.SharpZipLib.dll:
+	
+	latest version of NAnt (nightly build) that has 2.0 build support
+
+2006-01-13 Friday 14:08  cort
+
+	* lib/: net-2.0/Maverick.dll, net-2.0/Maverick.pdb,
+	net-2.0/Spring2.DataTierGenerator.Attribute.dll,
+	net-2.0/log4net.dll, net-2.0/nunit.framework.dll,
+	nunit.framework.dll, net-1.1/Maverick.dll, net-1.1/Maverick.pdb,
+	net-1.1/Spring2.DataTierGenerator.Attribute.dll,
+	net-1.1/log4net.dll, net-1.1/nunit.framework.dll:
+	
+	update framework specific assemblies
+
+2006-01-13 Friday 13:59  cort
+
+	* src/default.build:
+	
+	add explicit path to msbuild.exe
+
+2006-01-13 Friday 13:56  cort
+
+	* src/Test/IntegerTypeTest.cs:
+	
+	tests for IntegerType, make sure that ToInt32 and explict cast
+	return the same value
+
+2006-01-13 Friday 13:52  cort
+
+	* src/Makefile:
+	
+	use project nant version
+
+2006-01-13 Friday 12:56  bent
+
+	* src/CustomTask/ExecuteSqlScriptFolder.cs:
+	
+	Changed the ExecuteSql task to use a dependency list.  Also changed
+	the logging to use the MSBuild.Log provider, instead of log4net.
+
+2006-01-13 Friday 10:11  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2006-01-13 Friday 10:11  cort
+
+	* release/: Spring2.Core.1.1.18.0-net-1.1.zip,
+	Spring2.Core.1.1.18.0-net-2.0.zip:
+	
+	new release version
+
+2006-01-13 Friday 10:10  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2006-01-13 Friday 10:10  cort
 
 	* src/: AssemblyInfo.cs, AssemblyVersionInfo.cs, Makefile,
