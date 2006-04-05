@@ -263,6 +263,26 @@ namespace Spring2.Core.Types {
 	}
 
 
+
+	public String Display() {
+	    return IsValid ? ToString("c") : String.Empty;
+	}
+
+	public String Display(String format) {
+	    return IsValid ? ToString(format) : String.Empty;
+	}
+
+	public String Display(IFormatProvider provider) {
+	    return IsValid ? ToString("c", provider) : String.Empty;
+	}
+         
+	public String Display(String format, IFormatProvider provider) {
+	    return IsValid ? ToString(format, provider) : String.Empty;
+	}
+
+
+
+
 	public static CurrencyType Parse(String from) {
 	    return Parse(from, NumberStyles.Currency, null);
 	}

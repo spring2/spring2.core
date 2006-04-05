@@ -79,6 +79,10 @@ namespace Spring2.Core.Types {
 	    return IsValid ? this.myValue.ToString() : myState.ToString();
 	}
 
+	public String Display() {
+	    return IsValid ? ToString() : String.Empty;
+	}
+
     }
 }
 

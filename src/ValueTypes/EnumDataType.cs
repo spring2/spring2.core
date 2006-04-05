@@ -40,6 +40,14 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
+	public override String Display() {
+	    if (!IsValid) {
+		return String.Empty;
+	    } else {
+		return ToString();
+	    }
+	}
+
 	public override Boolean Equals(Object o) {
 	    return ReferenceEquals(this, o);
 	}

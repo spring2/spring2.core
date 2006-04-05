@@ -64,6 +64,11 @@ namespace Spring2.Core.Types {
 	    return myValue.ToString();
 	}
 
+
+	public System.String Display() {
+	    return myValue.Display();
+	}
+
 	public int ToInt32() {
 	    if (!IsValid) {
 		throw new InvalidStateException(myValue.State);

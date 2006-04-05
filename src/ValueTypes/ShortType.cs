@@ -82,6 +82,23 @@ namespace Spring2.Core.Types {
 	    return IsValid ? this.myValue.ToString(format, provider) : myState.ToString();
 	}
 
+
+	public String Display() {
+	    return IsValid ? ToString() : String.Empty;
+	}
+
+	public String Display(String format) {
+	    return IsValid ? ToString(format) : String.Empty;
+	}
+
+	public String Display(IFormatProvider provider) {
+	    return IsValid ? ToString(provider) : String.Empty;
+	}
+         
+	public String Display(String format, IFormatProvider provider) {
+	    return IsValid ? ToString(format, provider) : String.Empty;
+	}
+
 	public static ShortType Parse(System.String parseString) {    
 	    if (parseString == null) {
 		throw new InvalidArgumentException("parseString");

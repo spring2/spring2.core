@@ -76,6 +76,10 @@ namespace Spring2.Core.Types {
 	public override string ToString() {
 	    return myValue.ToString();
 	}
+
+	public string Display() {
+	    return myValue.ToString();
+	}
 	#endregion
 
 	#region Equality operators and methods

@@ -145,6 +145,17 @@ namespace Spring2.Core.Types {
 	public override string ToString() {
 	    return ToString(true);
 	}
+
+	public string Display(bool returnName) {
+	    if (!IsValid) {
+		return String.Empty;
+	    }
+	    return ToString(returnName);
+	}
+
+	public string Display() {
+	    return Display(true);
+	}
 	#endregion
 
 	#region Equality operators and methods

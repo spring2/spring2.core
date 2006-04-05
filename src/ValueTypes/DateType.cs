@@ -396,6 +396,35 @@ namespace Spring2.Core.Types {
 	public String ToString(String format, IFormatProvider provider) {
 	    return IsValid ? this.myValue.ToString(format, provider) : myState.ToString();
 	}
+
+
+
+	//Display methods
+	public String Display() {
+	    return IsValid ? ToString() : String.Empty;
+	}
+
+	public String Display(String format) {
+	    return IsValid ? ToString(format) : String.Empty;
+	}
+
+	public String Display(IFormatProvider provider) {
+	    return IsValid ? ToString(provider) : String.Empty;
+	}
+         
+	public String Display(String format, IFormatProvider provider) {
+	    return IsValid ? ToString(format, provider) : String.Empty;
+	}
+
+	public String DisplayLongDate() {
+	    return IsValid ? ToLongDateString() : String.Empty;
+	}
+
+	public String DisplayShortDate() {
+	    return IsValid ? ToShortDateString() : String.Empty;
+	}
+
+
 	#endregion   
 
 	#region Addition and Subtraction operators and methods

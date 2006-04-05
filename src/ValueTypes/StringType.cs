@@ -717,6 +717,11 @@ namespace Spring2.Core.Types {
 	    return IsValid ? this.myValue : myState.ToString();
 	}
 
+
+	public string Display() {
+	    return IsValid ? ToString() : String.Empty;
+	}
+
 	//        string IConvertible.ToString(IFormatProvider provider) {
 	//            return this.myValue;
 	//        }
