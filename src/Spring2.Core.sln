@@ -23,10 +23,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.WithTypesTest"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.ResourceManager", "Spring2.Core.ResourceManager.csproj", "{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Reporting.Common", "Spring2.Reporting.Common.csproj", "{53A91AEF-E24F-41E9-AF8D-743F291BEEE1}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
@@ -117,14 +113,6 @@ Global
 		{51EA5868-FD70-4349-A7F3-0520E2891A85}.NET_2_0.ActiveCfg = NET_2_0|.NET
 		{51EA5868-FD70-4349-A7F3-0520E2891A85}.Release.ActiveCfg = Release|.NET
 		{51EA5868-FD70-4349-A7F3-0520E2891A85}.Release.Build.0 = Release|.NET
-		{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}.Debug.ActiveCfg = Debug|.NET
-		{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}.Debug.Build.0 = Debug|.NET
-		{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}.NET_1_1.ActiveCfg = NET_1_1|.NET
-		{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}.NET_1_1.Build.0 = NET_1_1|.NET
-		{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}.NET_2_0.ActiveCfg = NET_2_0|.NET
-		{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}.NET_2_0.Build.0 = NET_2_0|.NET
-		{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}.Release.ActiveCfg = Release|.NET
-		{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}.Release.Build.0 = Release|.NET
 		{53A91AEF-E24F-41E9-AF8D-743F291BEEE1}.Debug.ActiveCfg = Debug|.NET
 		{53A91AEF-E24F-41E9-AF8D-743F291BEEE1}.Debug.Build.0 = Debug|.NET
 		{53A91AEF-E24F-41E9-AF8D-743F291BEEE1}.NET_1_1.ActiveCfg = NET_1_1|.NET
@@ -191,6 +179,8 @@ Global
 		{AA7663E2-76AC-4CF3-B830-2D014F6A5166}.Release.Build.0 = Release|.NET
 		{AE5DC4B5-476C-441F-88F2-EEB268D90121}.Debug.ActiveCfg = Debug|.NET
 		{AE5DC4B5-476C-441F-88F2-EEB268D90121}.Debug.Build.0 = Debug|.NET
+		{AE5DC4B5-476C-441F-88F2-EEB268D90121}.NET_1_1.ActiveCfg = NET_1_1|.NET
+		{AE5DC4B5-476C-441F-88F2-EEB268D90121}.NET_2_0.ActiveCfg = NET_2_0|.NET
 		{AE5DC4B5-476C-441F-88F2-EEB268D90121}.Release.ActiveCfg = Release|.NET
 		{AE5DC4B5-476C-441F-88F2-EEB268D90121}.Release.Build.0 = Release|.NET
 	EndGlobalSection

@@ -165,11 +165,6 @@
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
-                    Name = "Spring2.Core.ResourceManager"
-                    Project = "{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
-                />
-                <Reference
                     Name = "Spring2.Reporting.Common"
                     Project = "{53A91AEF-E24F-41E9-AF8D-743F291BEEE1}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"

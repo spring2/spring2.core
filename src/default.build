@@ -48,7 +48,6 @@
 	        <include name="Spring2.Core.Types.csproj" />
 	        <include name="Spring2.Core.Test.csproj" />
 	        <include name="Spring2.Core.WebControl.csproj" />
-	        <include name="Spring2.Core.ResourceManager.csproj" />
 	        <include name="Spring2.Core.Configuration.csproj" />
 	        <include name="Spring2.Core.Cryptography.csproj" />
 	        <include name="Spring2.Core.Geocode.csproj" />
