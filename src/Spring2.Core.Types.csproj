@@ -214,7 +214,17 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "ValueTypes\ILanguageFactory.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "ValueTypes\ILocale.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ValueTypes\ILocaleFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -239,12 +249,22 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "ValueTypes\LanguageFactory.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "ValueTypes\LocaleEnum.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "ValueTypes\LocaleEnumList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ValueTypes\LocaleFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
