@@ -132,6 +132,18 @@ namespace Spring2.Core.Types {
 	    return UNSET;
 	}
 
+	public ILocale GetInstanceNonStatic(Object value) {
+	    if (value is String) {
+		foreach (LocaleEnum t in OPTIONS) {
+		    if (t.Value.Equals(value)) {
+			return t;
+		    }
+		}
+	    }
+
+	    return UNSET;
+	}
+
 	private LocaleEnum() {}
 
 	private LocaleEnum(String code, String name) {

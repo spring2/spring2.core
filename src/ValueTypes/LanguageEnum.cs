@@ -91,6 +91,18 @@ namespace Spring2.Core.Types {
 	    return UNSET;
 	}
 
+	public ILanguage GetInstanceNonStatic(Object value) {
+	    if (value is String) {
+		foreach (LanguageEnum t in OPTIONS) {
+		    if (t.Value.Equals(value)) {
+			return t;
+		    }
+		}
+	    }
+
+	    return UNSET;
+	}
+
 	private LanguageEnum() {}
 
 	private LanguageEnum(String code, String name) {

@@ -6,7 +6,8 @@ namespace Spring2.Core.Types{
     /// Use this interface to make your custom language enum compatibile with the resource manager
     /// </summary>
     public interface ILanguage {
-	//void SetValue(Object newValue);
+	ILanguage GetInstanceNonStatic(Object value);
+
 	String Code {
 	    get;
 	}

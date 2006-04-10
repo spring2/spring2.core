@@ -6,9 +6,8 @@ namespace Spring2.Core.Types {
     /// Use this interface to make your custom locale compatibile with the resource manager
     /// </summary>
     public interface ILocale {
-
+	ILocale GetInstanceNonStatic(Object value);
 	
-	//void SetValue(Object newValue);
 	String Code {
 	    get;
 	}
