@@ -83,5 +83,92 @@ namespace Spring2.Core.Types {
 	    return returnType;
 	}
 
+	#region Equality operators and methods
+	public override bool Equals(Object value) {
+	    if (value is IdType) {
+		return Compare(this, (IdType) value) == 0;
+	    }
+
+	    return false;
+	}
+
+	public override int GetHashCode() {
+	    return myValue.GetHashCode();
+	}
+
+	public static int Compare(IdType leftHand, IdType rightHand) {
+	    if (leftHand.myValue.IsValid && rightHand.myValue.IsValid) {
+		if (leftHand.myValue < rightHand.myValue) {
+		    return -1;
+		}
+
+		if (leftHand.myValue == rightHand.myValue) {
+		    return 0;
+		}
+
+		if (leftHand.myValue > rightHand.myValue) {
+		    return 1;
+		}
+	    }
+
+	    if (leftHand.myValue.IsUnset) {
+		if (rightHand.myValue.IsDefault || rightHand.myValue.IsValid) {
+		    return -1;
+		}
+
+		if (rightHand.myValue.IsUnset) {
+		    return 0;
+		}
+	    }
+
+	    if (leftHand.myValue.IsDefault) {
+		if (rightHand.myValue.IsDefault) {
+		    return 0;
+		}
+
+		if (rightHand.myValue.IsUnset) {
+		    return 1;
+		}
+
+		return -1;
+	    }
+
+	    if (leftHand.myValue.IsValid) {
+		return 1;
+	    }
+
+	    //should this throw an exception?
+	    return 0;
+	}
+
+
+	#region Equality operators
+	public static bool operator == (IdType leftHand, IdType rightHand) {
+	    return Compare(leftHand, rightHand) == 0;
+	}
+
+	public static bool operator != (IdType leftHand, IdType rightHand) {
+	    return Compare(leftHand, rightHand) != 0;
+	}
+
+	public static bool operator == (IdType leftHand, int rightHand) {
+	    if (!leftHand.IsValid) {
+		return false;
+	    }
+
+	    return leftHand.myValue == rightHand;
+	}
+
+	public static bool operator != (IdType leftHand, int rightHand) {
+	    if (!leftHand.IsValid) {
+		return false;
+	    }
+
+	    return leftHand.myValue != rightHand;
+	}
+	#endregion    
+	#endregion    
+
+
     }
 }
