@@ -24,13 +24,13 @@ namespace Spring2.Core.Types {
 	public const int MilliSecondsPerHalfDay = MilliSecondsPerHour * 12;
 	public const int MilliSecondsPerDay     = MilliSecondsPerHalfDay * 2;
 
+	private static readonly long TicksMinValue = 0;
+	private static readonly long TicksMaxValue = TicksPerDay;
+
 	public static readonly TimeType Zero = new TimeType(0L);
 	public static readonly TimeType MinValue = new TimeType(0L);
 	public static readonly TimeType MaxValue = new TimeType(TicksPerDay);
 	#endregion
-
-	private static readonly long TicksMinValue = 0;
-	private static readonly long TicksMaxValue = TicksPerDay;
 
 	public static readonly TimeType DEFAULT = new TimeType(TypeState.DEFAULT);
 	public static readonly TimeType UNSET   = new TimeType(TypeState.UNSET);
@@ -379,14 +379,5 @@ namespace Spring2.Core.Types {
 	}
 	#endregion 
 
-	//sets this instance to the passed in value
-	//if it is invalid. used in SetInitialDefaults, etc.
-
-	public void SetIfInvalid(TimeType value) {
-	    if (!IsValid) {
-		myValue = value.myValue;
-		myState = value.myState;
-	    }
-	}
     }
 }
