@@ -98,13 +98,5 @@ namespace Spring2.Core.Types {
 	    get { return OPTIONS; }
 	}
 
-	public static USStateCodeEnum SetIfInvalid(USStateCodeEnum valueToCheck, string initialValue) {
-	    if (valueToCheck.IsDefault || valueToCheck.IsUnset) {
-		return GetInstance(initialValue);
-	    }
-
-	    return valueToCheck;
-	}
-
     }
 }

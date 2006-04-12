@@ -841,23 +841,6 @@ namespace Spring2.Core.Types {
 
 	#endregion
 
-	//sets this instance to the passed in value
-	//if it is invalid. used in SetInitialDefaults, etc.
-
-	public void SetIfInvalid(CurrencyType value) {
-	    if (!IsValid) {
-		myValue = value.myValue;
-		myState = value.myState;
-	    }
-	}
-
-	public void SetIfInvalid(decimal value) {
-	    if (!IsValid) {
-		myValue = value;
-		myState = TypeState.VALID;
-	    }
-	}
- 
 	public Decimal ToDecimal() {
 	    if (!IsValid) {
 		throw new InvalidStateException(myState);

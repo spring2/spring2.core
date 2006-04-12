@@ -1020,24 +1020,6 @@ namespace Spring2.Core.Types {
 	    get { return !IsValid || String.Empty.Equals(myValue.Trim()); }
 	}
 
-	//sets this instance to the passed in value
-	//if it is invalid. used in SetInitialDefaults, etc.
-
-	public void SetIfInvalid(string value) {
-	    if (!IsValid) {
-		myValue = value;
-		myState = TypeState.VALID;
-	    }
-	}
-
-	public void SetIfInvalid(StringType value) {
-	    if (!IsValid) {
-		myValue = value.myValue;
-		myState = value.myState;
-	    }
-	}
-
-
     }
 
 }

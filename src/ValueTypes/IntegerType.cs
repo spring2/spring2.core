@@ -711,22 +711,5 @@ namespace Spring2.Core.Types {
 	}
 	#endregion
 
-    
-	//sets this instance to the passed in value
-	//if it is invalid. used in SetInitialDefaults, etc.
-
-	public void SetIfInvalid(IntegerType value) {
-	    if (!IsValid) {
-		myValue = value.myValue;
-		myState = value.myState;
-	    }
-	}
-
-	public void SetIfInvalid(int value) {
-	    if (!IsValid) {
-		myValue = value;
-		myState = TypeState.VALID;
-	    }
-	}
     }
 }

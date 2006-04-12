@@ -820,28 +820,5 @@ namespace Spring2.Core.Types {
 	    get {return theDefault1900;}
 	}       	
     
-	//sets this instance to the passed in value
-	//if it is invalid. used in SetInitialDefaults, etc.
-
-	public void SetIfInvalid(DateTimeType value) {
-	    if (!IsValid) {
-		myValue = value.myValue;
-		myState = value.myState;
-	    }
-	}
-
-	public void SetIfInvalid(DateTime value) {
-	    if (!IsValid) {
-		myValue = value;
-		myState = TypeState.VALID;
-	    }
-	}
-
-	public void SetIfInvalid(string value) {
-	    if (!IsValid) {
-		myValue = DateTime.Parse(value);
-		myState = TypeState.VALID;
-	    }
-	}
     }
 }
