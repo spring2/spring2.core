@@ -189,6 +189,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// Returns a filtered list of MailMessage rows.
 	/// </summary>
 	/// <param name="whereClause">Filtering criteria.</param>
+	/// <param name="maxRows"></param>
 	/// <returns>List of MailMessage objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
 	public MailMessageList GetList(IWhere whereClause, Int32 maxRows) { 
@@ -199,6 +200,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// Returns an ordered list of MailMessage rows.  All rows in the database are returned
 	/// </summary>
 	/// <param name="orderByClause">Ordering criteria.</param>
+	/// <param name="maxRows"></param>
 	/// <returns>List of MailMessage objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
 	public MailMessageList GetList(IOrderBy orderByClause, Int32 maxRows) { 
@@ -210,6 +212,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// </summary>
 	/// <param name="whereClause">Filtering criteria.</param>
 	/// <param name="orderByClause">Ordering criteria.</param>
+	/// <param name="maxRows"></param>
 	/// <returns>List of MailMessage objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
 	public MailMessageList GetList(IWhere whereClause, IOrderBy orderByClause, Int32 maxRows) { 
@@ -226,7 +229,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Finds a MailMessage entity using it's primary key.
 	/// </summary>
-	/// <param name="MailMessageId">A key field.</param>
+	/// <param name="mailMessageId">A key field.</param>
 	/// <returns>A MailMessage object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MailMessage Load(IdType mailMessageId) {
@@ -262,6 +265,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessage GetDataObjectFromReader(MailMessage data, IDataReader dataReader) {
@@ -282,6 +286,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessage GetDataObjectFromReader(IDataReader dataReader, String prefix) {
 	    MailMessage data = new MailMessage(false);
@@ -291,7 +296,9 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessage GetDataObjectFromReader(MailMessage data, IDataReader dataReader, String prefix) {
 	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MailMessageId"))) { 
@@ -381,7 +388,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Inserts a record into the MailMessage table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
 	public IdType Insert(MailMessage data) {
 	    return Insert(data, null);
 	}
@@ -389,7 +396,8 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Inserts a record into the MailMessage table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
+	/// <param name="transaction"></param>
 	public IdType Insert(MailMessage data, IDbTransaction transaction) {
 	    // Create and execute the command
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spMailMessage_Insert", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
@@ -430,7 +438,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Updates a record in the MailMessage table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
 	public void Update(MailMessage data) {
 	    Update(data, null);
 	}
@@ -438,7 +446,8 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Updates a record in the MailMessage table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
+	/// <param name="transaction"></param>
 	public void Update(MailMessage data, IDbTransaction transaction) {
 	    // Create and execute the command
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spMailMessage_Update", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
@@ -474,7 +483,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Deletes a record from the MailMessage table by MailMessageId.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="mailMessageId"></param>
 	public void Delete(IdType mailMessageId) {
 	    Delete(mailMessageId, null);
 	}
@@ -482,7 +491,8 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Deletes a record from the MailMessage table by MailMessageId.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="mailMessageId"></param>
+	/// <param name="transaction"></param>
 	public void Delete(IdType mailMessageId, IDbTransaction transaction) {
 	    // Create and execute the command
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spMailMessage_Delete", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
@@ -502,7 +512,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="MailMessageStatus">A field value to be matched.</param>
+	/// <param name="mailMessageStatus">A field value to be matched.</param>
 	/// <returns>The list of MailMessageDAO objects found.</returns>
 	public MailMessageList FindByStatus(MailMessageStatusEnum mailMessageStatus) {
 	    OrderByClause sort = new OrderByClause("MailMessageStatus");

@@ -152,6 +152,7 @@ namespace Spring2.Core.Configuration {
 	/// Returns a filtered list of ConfigurationSetting rows.
 	/// </summary>
 	/// <param name="whereClause">Filtering criteria.</param>
+	/// <param name="maxRows">Number of rows to return</param>
 	/// <returns>List of ConfigurationSetting objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
 	public ConfigurationSettingList GetList(IWhere whereClause, Int32 maxRows) { 
@@ -162,6 +163,7 @@ namespace Spring2.Core.Configuration {
 	/// Returns an ordered list of ConfigurationSetting rows.  All rows in the database are returned
 	/// </summary>
 	/// <param name="orderByClause">Ordering criteria.</param>
+	/// <param name="maxRows">Number of rows to return</param>
 	/// <returns>List of ConfigurationSetting objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
 	public ConfigurationSettingList GetList(IOrderBy orderByClause, Int32 maxRows) { 
@@ -173,6 +175,7 @@ namespace Spring2.Core.Configuration {
 	/// </summary>
 	/// <param name="whereClause">Filtering criteria.</param>
 	/// <param name="orderByClause">Ordering criteria.</param>
+	/// <param name="maxRows">Number of rows to return</param>
 	/// <returns>List of ConfigurationSetting objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
 	public ConfigurationSettingList GetList(IWhere whereClause, IOrderBy orderByClause, Int32 maxRows) { 
@@ -189,7 +192,7 @@ namespace Spring2.Core.Configuration {
 	/// <summary>
 	/// Finds a ConfigurationSetting entity using it's primary key.
 	/// </summary>
-	/// <param name="ConfigurationSettingId">A key field.</param>
+	/// <param name="configurationSettingId">A key field.</param>
 	/// <returns>A ConfigurationSetting object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public ConfigurationSetting Load(IdType configurationSettingId) {
@@ -225,6 +228,7 @@ namespace Spring2.Core.Configuration {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
 	internal static ConfigurationSetting GetDataObjectFromReader(ConfigurationSetting data, IDataReader dataReader) {
@@ -245,6 +249,7 @@ namespace Spring2.Core.Configuration {
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static ConfigurationSetting GetDataObjectFromReader(IDataReader dataReader, String prefix) {
 	    ConfigurationSetting data = new ConfigurationSetting(false);
@@ -254,7 +259,9 @@ namespace Spring2.Core.Configuration {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static ConfigurationSetting GetDataObjectFromReader(ConfigurationSetting data, IDataReader dataReader, String prefix) {
 	    if (dataReader.IsDBNull(dataReader.GetOrdinal("ConfigurationSettingId"))) { 
@@ -289,7 +296,7 @@ namespace Spring2.Core.Configuration {
 	/// <summary>
 	/// Inserts a record into the ConfigurationSetting table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
 	public IdType Insert(ConfigurationSetting data) {
 	    return Insert(data, null);
 	}
@@ -297,7 +304,8 @@ namespace Spring2.Core.Configuration {
 	/// <summary>
 	/// Inserts a record into the ConfigurationSetting table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
+	/// <param name="transaction"></param>
 	public IdType Insert(ConfigurationSetting data, IDbTransaction transaction) {
 	    // Create and execute the command
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spConfigurationSetting_Insert", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
@@ -327,7 +335,7 @@ namespace Spring2.Core.Configuration {
 	/// <summary>
 	/// Updates a record in the ConfigurationSetting table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
 	public void Update(ConfigurationSetting data) {
 	    Update(data, null);
 	}
@@ -335,7 +343,8 @@ namespace Spring2.Core.Configuration {
 	/// <summary>
 	/// Updates a record in the ConfigurationSetting table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
+	/// <param name="transaction"></param>
 	public void Update(ConfigurationSetting data, IDbTransaction transaction) {
 	    // Create and execute the command
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spConfigurationSetting_Update", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
@@ -360,7 +369,7 @@ namespace Spring2.Core.Configuration {
 	/// <summary>
 	/// Deletes a record from the ConfigurationSetting table by ConfigurationSettingId.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="configurationSettingId"></param>
 	public void Delete(IdType configurationSettingId) {
 	    Delete(configurationSettingId, null);
 	}
@@ -368,7 +377,8 @@ namespace Spring2.Core.Configuration {
 	/// <summary>
 	/// Deletes a record from the ConfigurationSetting table by ConfigurationSettingId.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="configurationSettingId"></param>
+	/// <param name="transaction"></param>
 	public void Delete(IdType configurationSettingId, IDbTransaction transaction) {
 	    // Create and execute the command
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spConfigurationSetting_Delete", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
@@ -388,7 +398,7 @@ namespace Spring2.Core.Configuration {
 	/// <summary>
 	/// Returns an object which matches the values for the fields specified.
 	/// </summary>
-	/// <param name="Key">A field value to be matched.</param>
+	/// <param name="key">A field value to be matched.</param>
 	/// <returns>The object found.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
 	public ConfigurationSetting FindByKey(StringType key) {
@@ -409,7 +419,7 @@ namespace Spring2.Core.Configuration {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="LastModifiedDate">A field value to be matched.</param>
+	/// <param name="lastModifiedDate">A field value to be matched.</param>
 	/// <returns>The list of ConfigurationSettingDAO objects found.</returns>
 	public ConfigurationSettingList FindModifications(DateTimeType lastModifiedDate) {
 	    OrderByClause sort = new OrderByClause("LastModifiedDate");

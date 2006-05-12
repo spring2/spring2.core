@@ -153,6 +153,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// Returns a filtered list of MailAttachment rows.
 	/// </summary>
 	/// <param name="whereClause">Filtering criteria.</param>
+	/// <param name="maxRows"></param>
 	/// <returns>List of MailAttachment objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
 	public MailAttachmentList GetList(IWhere whereClause, Int32 maxRows) { 
@@ -163,6 +164,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// Returns an ordered list of MailAttachment rows.  All rows in the database are returned
 	/// </summary>
 	/// <param name="orderByClause">Ordering criteria.</param>
+	/// <param name="maxRows"></param>
 	/// <returns>List of MailAttachment objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
 	public MailAttachmentList GetList(IOrderBy orderByClause, Int32 maxRows) { 
@@ -174,6 +176,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// </summary>
 	/// <param name="whereClause">Filtering criteria.</param>
 	/// <param name="orderByClause">Ordering criteria.</param>
+	/// <param name="maxRows"></param>
 	/// <returns>List of MailAttachment objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
 	public MailAttachmentList GetList(IWhere whereClause, IOrderBy orderByClause, Int32 maxRows) { 
@@ -190,7 +193,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Finds a MailAttachment entity using it's primary key.
 	/// </summary>
-	/// <param name="MailAttachmentId">A key field.</param>
+	/// <param name="mailAttachmentId">A key field.</param>
 	/// <returns>A MailAttachment object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MailAttachment Load(IdType mailAttachmentId) {
@@ -226,6 +229,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader) {
@@ -246,6 +250,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailAttachment GetDataObjectFromReader(IDataReader dataReader, String prefix) {
 	    MailAttachment data = new MailAttachment(false);
@@ -255,7 +260,9 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader, String prefix) {
 	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MailAttachmentId"))) { 
@@ -285,7 +292,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Inserts a record into the MailAttachment table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
 	public IdType Insert(MailAttachment data) {
 	    return Insert(data, null);
 	}
@@ -293,7 +300,8 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Inserts a record into the MailAttachment table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
+	/// <param name="transaction"></param>
 	public IdType Insert(MailAttachment data, IDbTransaction transaction) {
 	    // Create and execute the command
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spMailAttachment_Insert", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
@@ -322,7 +330,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Updates a record in the MailAttachment table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
 	public void Update(MailAttachment data) {
 	    Update(data, null);
 	}
@@ -330,7 +338,8 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Updates a record in the MailAttachment table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
+	/// <param name="transaction"></param>
 	public void Update(MailAttachment data, IDbTransaction transaction) {
 	    // Create and execute the command
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spMailAttachment_Update", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
@@ -354,7 +363,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Deletes a record from the MailAttachment table by MailAttachmentId.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="mailAttachmentId"></param>
 	public void Delete(IdType mailAttachmentId) {
 	    Delete(mailAttachmentId, null);
 	}
@@ -362,7 +371,8 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Deletes a record from the MailAttachment table by MailAttachmentId.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="mailAttachmentId"></param>
+	/// <param name="transaction"></param>
 	public void Delete(IdType mailAttachmentId, IDbTransaction transaction) {
 	    // Create and execute the command
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spMailAttachment_Delete", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
@@ -382,7 +392,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="MailMessageId">A field value to be matched.</param>
+	/// <param name="mailMessageId">A field value to be matched.</param>
 	/// <returns>The list of MailAttachmentDAO objects found.</returns>
 	public MailAttachmentList FindByMailMessageId(IdType mailMessageId) {
 	    OrderByClause sort = new OrderByClause("MailMessageId");

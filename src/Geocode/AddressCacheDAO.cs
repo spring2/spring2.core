@@ -165,6 +165,7 @@ namespace Spring2.Core.Geocode {
 	/// Returns a filtered list of AddressCache rows.
 	/// </summary>
 	/// <param name="whereClause">Filtering criteria.</param>
+	/// <param name="maxRows"></param>
 	/// <returns>List of AddressCache objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
 	public AddressCacheList GetList(IWhere whereClause, Int32 maxRows) { 
@@ -175,6 +176,7 @@ namespace Spring2.Core.Geocode {
 	/// Returns an ordered list of AddressCache rows.  All rows in the database are returned
 	/// </summary>
 	/// <param name="orderByClause">Ordering criteria.</param>
+	/// <param name="maxRows"></param>
 	/// <returns>List of AddressCache objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
 	public AddressCacheList GetList(IOrderBy orderByClause, Int32 maxRows) { 
@@ -186,6 +188,7 @@ namespace Spring2.Core.Geocode {
 	/// </summary>
 	/// <param name="whereClause">Filtering criteria.</param>
 	/// <param name="orderByClause">Ordering criteria.</param>
+	/// <param name="maxRows"></param>
 	/// <returns>List of AddressCache objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
 	public AddressCacheList GetList(IWhere whereClause, IOrderBy orderByClause, Int32 maxRows) { 
@@ -202,7 +205,7 @@ namespace Spring2.Core.Geocode {
 	/// <summary>
 	/// Finds a AddressCache entity using it's primary key.
 	/// </summary>
-	/// <param name="AddressId">A key field.</param>
+	/// <param name="addressId">A key field.</param>
 	/// <returns>A AddressCache object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public AddressCache Load(IdType addressId) {
@@ -238,6 +241,7 @@ namespace Spring2.Core.Geocode {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
 	internal static AddressCache GetDataObjectFromReader(AddressCache data, IDataReader dataReader) {
@@ -258,6 +262,7 @@ namespace Spring2.Core.Geocode {
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static AddressCache GetDataObjectFromReader(IDataReader dataReader, String prefix) {
 	    AddressCache data = new AddressCache(false);
@@ -267,7 +272,9 @@ namespace Spring2.Core.Geocode {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static AddressCache GetDataObjectFromReader(AddressCache data, IDataReader dataReader, String prefix) {
 	    if (dataReader.IsDBNull(dataReader.GetOrdinal("AddressId"))) { 
@@ -322,7 +329,7 @@ namespace Spring2.Core.Geocode {
 	/// <summary>
 	/// Inserts a record into the AddressCache table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
 	public IdType Insert(AddressCache data) {
 	    return Insert(data, null);
 	}
@@ -330,7 +337,8 @@ namespace Spring2.Core.Geocode {
 	/// <summary>
 	/// Inserts a record into the AddressCache table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
+	/// <param name="transaction"></param>
 	public IdType Insert(AddressCache data, IDbTransaction transaction) {
 	    // Create and execute the command
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spAddressCache_Insert", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
@@ -364,7 +372,7 @@ namespace Spring2.Core.Geocode {
 	/// <summary>
 	/// Updates a record in the AddressCache table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
 	public void Update(AddressCache data) {
 	    Update(data, null);
 	}
@@ -372,7 +380,8 @@ namespace Spring2.Core.Geocode {
 	/// <summary>
 	/// Updates a record in the AddressCache table.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="data"></param>
+	/// <param name="transaction"></param>
 	public void Update(AddressCache data, IDbTransaction transaction) {
 	    // Create and execute the command
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spAddressCache_Update", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
@@ -401,7 +410,7 @@ namespace Spring2.Core.Geocode {
 	/// <summary>
 	/// Deletes a record from the AddressCache table by AddressId.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="addressId"></param>
 	public void Delete(IdType addressId) {
 	    Delete(addressId, null);
 	}
@@ -409,7 +418,8 @@ namespace Spring2.Core.Geocode {
 	/// <summary>
 	/// Deletes a record from the AddressCache table by AddressId.
 	/// </summary>
-	/// <param name=""></param>
+	/// <param name="addressId"></param>
+	/// <param name="transaction"></param>
 	public void Delete(IdType addressId, IDbTransaction transaction) {
 	    // Create and execute the command
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spAddressCache_Delete", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
@@ -429,8 +439,8 @@ namespace Spring2.Core.Geocode {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="Address1">A field value to be matched.</param>
-	/// <param name="PostalCode">A field value to be matched.</param>
+	/// <param name="address1">A field value to be matched.</param>
+	/// <param name="postalCode">A field value to be matched.</param>
 	/// <returns>The list of AddressCacheDAO objects found.</returns>
 	public AddressCacheList FindAddressByStreetAndPostalCode(StringType address1, StringType postalCode) {
 	    OrderByClause sort = new OrderByClause("Address1, PostalCode");
@@ -452,8 +462,9 @@ namespace Spring2.Core.Geocode {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="Address1">A field value to be matched.</param>
-	/// <param name="PostalCode">A field value to be matched.</param>
+	/// <param name="address1">A field value to be matched.</param>
+	/// <param name="city">A field value to be matched.</param>
+	/// <param name="state"></param>
 	/// <returns>The list of AddressCacheDAO objects found.</returns>
 	public AddressCacheList FindAddressByStreetAndCityAndState(StringType address1, StringType city, StringType state) {
 	    OrderByClause sort = new OrderByClause("Address1, City");

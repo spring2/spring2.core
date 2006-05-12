@@ -463,6 +463,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
         /// Sets all mail messages that are in the list of Ids to have Status of Released.
         /// </summary>
         /// <param name="list"></param>
+        /// <param name="userId"></param>
         public static void Release(IdTypeList list, IdType userId) {
             MailMessage mailMessage;
 	    foreach (IdType mailMessageId in list) {
@@ -478,6 +479,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
         /// Sets all mail messages that are in the list of Ids to have Status of Rejected and set Processed time.
         /// </summary>
         /// <param name="list"></param>
+        /// <param name="userId"></param>
         public static void Reject(IdTypeList list, IdType userId) {
             MailMessage mailMessage;
 	    foreach (IdType mailMessageId in list) {
