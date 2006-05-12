@@ -17,7 +17,7 @@
                 DelaySign = "false"
                 OutputType = "Library"
                 PreBuildEvent = ""
-                PostBuildEvent = ""
+                PostBuildEvent = "copy $(ProjectDir)Test\App.config $(TargetPath).config&#xd;&#xa;copy $(ProjectDir)Test\test.pdf $(TargetDir)&#xd;&#xa;copy $(ProjectDir)Test\test.jpg $(TargetDir)"
                 RootNamespace = "Spring2.Core"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
@@ -39,7 +39,7 @@
                     OutputPath = "..\build\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
+                    TreatWarningsAsErrors = "true"
                     WarningLevel = "4"
                 />
                 <Config
@@ -194,12 +194,21 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Test\App.config"
+                    BuildAction = "None"
+                />
+                <File
                     RelPath = "Test\AssemblyInfo.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Test\BooleanTypeTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\CRC32.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -234,6 +243,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Test\MailMessageTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Test\MessageTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -252,6 +266,14 @@
                     RelPath = "Test\StringTypeTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\test.jpg"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Test\test.pdf"
+                    BuildAction = "None"
                 />
                 <File
                     RelPath = "Test\TestFTPClient.cs"
