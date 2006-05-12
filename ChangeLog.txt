@@ -1,3 +1,95 @@
+2006-05-11 Thursday 22:53  cort
+
+	* lib/: net-1.1/log4net.dll, net-2.0/log4net.dll:
+	
+	update to version 1.2.10 for log4net, which now has 2.0 compiled
+	version.
+
+2006-05-11 Thursday 22:51  cort
+
+	* src/.cvsignore:
+	
+	ignore nunit results files for ccnet
+
+2006-05-11 Thursday 22:50  cort
+
+	* src/Makefile:
+	
+	add 2.0 version of WithTypes assembly to regress target
+
+2006-05-11 Thursday 22:46  cort
+
+	* src/.cvsignore:
+	
+	ignore the xml comment files.
+
+2006-05-11 Thursday 22:44  cort
+
+	* src/Test/DecimalTypeTest.cs:
+	
+	tests to make sure that DecimalType formating works for identified
+	problems
+
+2006-05-11 Thursday 22:43  cort
+
+	* src/Test/: test.jpg, test.pdf:
+	
+	test binary files for mail tests
+
+2006-05-11 Thursday 22:42  cort
+
+	* src/: Spring2.Core.Configuration.csproj,
+	Spring2.Core.Cryptography.csproj, Spring2.Core.Geocode.csproj,
+	Spring2.Core.Log4Net.csproj,
+	Spring2.Core.Mail.SendMailMessages.csproj,
+	Spring2.Core.Mail.csproj, Spring2.Core.Maverick.csproj,
+	Spring2.Core.Security.csproj, Spring2.Core.Types.csproj,
+	Spring2.Core.WithTypes.csproj, Spring2.Core.ndoc,
+	Spring2.Reporting.Common.csproj:
+	
+	update NDoc project to include all of the current Spring2.Core
+	assemblies and update projects to output XML comment file
+
+2006-05-11 Thursday 22:40  cort
+
+	* src/: Configuration/ConfigurationSettingDAO.cs,
+	Geocode/AddressCacheDAO.cs, Mail/BusinessLogic/MailMessage.cs,
+	Mail/DAO/MailAttachmentDAO.cs, Mail/DAO/MailMessageDAO.cs,
+	Mail/DAO/MailMessageRouteDAO.cs:
+	
+	fix incorrect xml comments
+
+2006-05-11 Thursday 22:39  cort
+
+	* src/ValueTypes/DateTimeType.cs:
+	
+	fix comment to be XML friendly
+
+2006-05-11 Thursday 22:39  cort
+
+	* src/default.build:
+	
+	don't exclude WithTypes build for 1.1 framework
+
+2006-05-11 Thursday 19:36  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2006-05-11 Thursday 19:35  cort
+
+	* release/: Spring2.Core.1.1.22.0-net-1.1.zip,
+	Spring2.Core.1.1.22.0-net-2.0.zip:
+	
+	new release version
+
+2006-05-11 Thursday 19:35  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2006-05-11 Thursday 19:32  cort
 
 	* src/Spring2.Core.WithTypes.csproj:
