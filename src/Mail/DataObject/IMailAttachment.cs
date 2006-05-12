@@ -36,5 +36,10 @@ namespace Spring2.Core.Mail.DataObject {
 	StringType Text {
 	    get;
 	}
+	Byte[] Buffer {
+	    get;
+	}
+
+	void WriteAttachment(String path);
     }
 }

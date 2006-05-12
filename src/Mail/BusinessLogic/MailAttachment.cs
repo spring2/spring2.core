@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Spring2.Core.BusinessEntity;
 using Spring2.Core.Message;
 using Spring2.Core.Types;
@@ -21,8 +22,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
         [Generate()]
         private StringType filename = StringType.DEFAULT;
         
-        [Generate()]
-        private StringType text = StringType.DEFAULT;
+        private Byte[] buffer = null;
         
         [Generate()]
         internal MailAttachment() {
@@ -64,13 +64,22 @@ namespace Spring2.Core.Mail.BusinessLogic {
             }
         }
         
-        [Generate()]
-        public StringType Text {
+	[Generate()]
+	public StringType Text {
+	    get {
+		return ByteArrayToString(Buffer);
+	    }
+	    set {
+		buffer = StringToByteArray(value);
+	    }
+	}
+	
+	public Byte[] Buffer {
             get {
-                return this.text;
+                return buffer;
             }
             set {
-                this.text = value;
+                buffer = value;
             }
         }
         
@@ -84,12 +93,13 @@ namespace Spring2.Core.Mail.BusinessLogic {
             return MailAttachmentDAO.DAO.Load(mailAttachmentId);
         }
         
-        [Generate()]
         public void Update(MailAttachmentData data) {
             mailAttachmentId = data.MailAttachmentId.IsDefault ? mailAttachmentId : data.MailAttachmentId;
 	    mailMessageId = data.MailMessageId.IsDefault ? mailMessageId : data.MailMessageId;
 	    filename = data.Filename.IsDefault ? filename : data.Filename;
-	    text = data.Text.IsDefault ? text : data.Text;
+	    if (data.Text.IsValid) {
+	    	buffer = StringToByteArray(data.Text);
+	    }
 	    Store();
         }
         
@@ -130,5 +140,100 @@ namespace Spring2.Core.Mail.BusinessLogic {
 
 	    return attachment;
         }
+
+	public static MailAttachment Create(MailMessage message, StringType filename) {
+	    if (!File.Exists(filename)) {
+	    	throw new ArgumentException(String.Format("File {0} does not exist", filename), "filename");
+	    }
+
+	    // read in the file
+	    FileStream stream = File.OpenRead(filename);
+	    byte[] bytes = ReadFully(stream, stream.Length);
+	    stream.Close();
+
+	    // create the attachment
+	    MailAttachment attachment = new MailAttachment();
+	    attachment.Filename = Path.GetFileName(filename);
+	    attachment.MailMessageId = message.MailMessageId;
+	    attachment.Buffer = bytes;
+	    attachment.Store();
+
+	    return attachment;
+	}
+
+	public void WriteAttachment(String path) {
+	    FileStream  fs = File.Create(Path.Combine(path, Filename));
+	    BinaryWriter bw = new BinaryWriter(fs); 
+	    bw.Write(Buffer); 
+	    bw.Close(); 
+	    fs.Close(); 
+	}
+
+	/// <summary>
+	/// Reads data from a stream until the end is reached. The
+	/// data is returned as a byte array. An IOException is
+	/// thrown if any of the underlying IO calls fail.
+	/// </summary>
+	/// <param name="stream">The stream to read data from</param>
+	/// <param name="initialLength">The initial buffer length</param>
+	public static byte[] ReadFully (Stream stream, long initialLength) {
+	    // If we've been passed an unhelpful initial length, just
+	    // use 32K.
+	    if (initialLength < 1) {
+		initialLength = 32768;
+	    }
+    
+	    byte[] buffer = new byte[initialLength];
+	    int read=0;
+    
+	    int chunk;
+	    while ( (chunk = stream.Read(buffer, read, buffer.Length-read)) > 0) {
+		read += chunk;
+        
+		// If we've reached the end of our buffer, check to see if there's
+		// any more information
+		if (read == buffer.Length) {
+		    int nextByte = stream.ReadByte();
+            
+		    // End of stream? If so, we're done
+		    if (nextByte==-1) {
+			return buffer;
+		    }
+            
+		    // Nope. Resize the buffer, put in the byte we've just
+		    // read, and continue
+		    byte[] newBuffer = new byte[buffer.Length*2];
+		    Array.Copy(buffer, newBuffer, buffer.Length);
+		    newBuffer[read]=(byte)nextByte;
+		    buffer = newBuffer;
+		    read++;
+		}
+	    }
+	    // Buffer is now too big. Shrink it.
+	    byte[] ret = new byte[read];
+	    Array.Copy(buffer, ret, read);
+	    return ret;
+	} 
+ 
+	/// <summary>
+	/// Convert a string to a byte array
+	/// </summary>
+	/// <param name="s">String to be converted</param>
+	/// <returns></returns>
+	private static byte[] StringToByteArray(String s) {
+	    System.Text.ASCIIEncoding  encoding=new System.Text.ASCIIEncoding();
+	    return encoding.GetBytes(s);
+	}
+
+	/// <summary>
+	/// Convert a byte array to a string
+	/// </summary>
+	/// <param name="bytes"></param>
+	/// <returns></returns>
+	private static String ByteArrayToString(byte[] bytes) {
+	    System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
+	    return enc.GetString(bytes);
+	}
+
     }
 }

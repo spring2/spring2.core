@@ -366,187 +366,100 @@ namespace Spring2.Core.Mail.BusinessLogic {
         /// <summary>
         /// Creates and persists a new MailMessage
         /// </summary>
-        /// <param name="data"></param>
         public static MailMessage Create(MailMessageData message) {
-            MailMessage mailMessage = new MailMessage();
-	    mailMessage.SetInitialState();
-	    mailMessage.Update(message);
-
-	    //persist attachments
-	    foreach (MailAttachmentData attachment in message.Attachments){
-		mailMessage.Attachments.Add(MailAttachment.Create(attachment));
-	    }
-	    return mailMessage;
-        }
+	    return MailMessage.Create(StringType.EMPTY, message.From, message.To, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[]{});
+	}
         
         /// <summary>
         /// Creates and persists a new MailMessage and signs it using a 'from' address from the message routing table
         /// </summary>
-        /// <param name="data"></param>
         public static MailMessage Create(MailMessageData message, StringType messageType) {
-            MailMessage mailMessage = new MailMessage();
+	    StringType from = GetFromAddress(messageType);
+	    return MailMessage.Create(messageType, from, message.To, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[]{});
+        }
+        
+        /// <summary>
+        /// Creates and persists a new MailMessage
+        /// </summary>
+	public static MailMessage Create(StringType messageType, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
+	    StringType from = GetFromAddress(messageType);
+	    return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, scheduleTime, new String[]{});
+	}
+        
+        /// <summary>
+        /// Creates and persists a new MailMessage
+        /// </summary>
+        public static MailMessage Create(StringType messageType, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
+	    return MailMessage.Create(messageType, to, subject, body, bodyFormat, DateTimeType.DEFAULT);
+        }
+        
+        /// <summary>
+        /// Creates and persists a new MailMessage
+        /// </summary>
+        public static MailMessage Create(StringType messageType, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
+            return MailMessage.Create(messageType, StringType.EMPTY, subject, body, bodyFormat);
+        }
+        
+        /// <summary>
+        /// Creates and persists a new MailMessage
+        /// </summary>
+        public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
+	    return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, DateTimeType.DEFAULT, new string[]{});
+        }
+
+	public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, String[] attachmentFilenames) {
+	    return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, DateTimeType.DEFAULT, attachmentFilenames);
+	}
+
+	/// <summary>
+	/// Creates and persists a new MailMessage
+	/// This is THE method that really does the work
+	/// </summary>
+	public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime, String[] attachmentFilenames) {
+	    MailMessageData mailMessageData = new MailMessageData();
+	    MailMessage mailMessage = new MailMessage();
 	    mailMessage.SetInitialState();
 
-	    MailMessageRouteList addresses = new MailMessageRouteList();
-	    WhereClause filter = new WhereClause(MailMessageRouteFields.MAILMESSAGE, messageType);
-	    filter.And(MailMessageRouteFields.STATUS, ActiveStatusEnum.ACTIVE.Code);
-	    filter.And(MailMessageRouteFields.ROUTINGTYPE, RoutingTypeEnum.FROM.Code);
-	    addresses.AddRange(MailMessageRouteDAO.DAO.GetList(filter));
+	    mailMessage.From = from;
 
-	    if (addresses.Count == 0) {
-		throw new ArgumentException("No FROM address is defined for " + messageType.ToString());
-	    }
-	    if (addresses.Count > 1) {
-		throw new ArgumentException("More than 1 FROM address is defined for " + messageType.ToString());
-	    }
-
-	    mailMessage.From = addresses[0].EmailAddress;
-	    mailMessage.To = GetRoutingAddresses(messageType, RoutingTypeEnum.TO, mailMessage.To);
-	    mailMessage.Cc = GetRoutingAddresses(messageType, RoutingTypeEnum.CC, mailMessage.Cc);
-	    mailMessage.Bcc = GetRoutingAddresses(messageType, RoutingTypeEnum.BCC, mailMessage.Bcc);
+	    mailMessage.To = GetRoutingAddresses(messageType, RoutingTypeEnum.TO, to);
+	    mailMessage.Cc = GetRoutingAddresses(messageType, RoutingTypeEnum.CC, null);
+	    mailMessage.Bcc = GetRoutingAddresses(messageType, RoutingTypeEnum.BCC, null);
+	    mailMessage.Subject = subject;
+	    mailMessage.Body = body;
+	    mailMessage.BodyFormat = bodyFormat;
+	    mailMessage.ScheduleTime = scheduleTime;
 	    mailMessage.MailMessageType = messageType;
-	    mailMessage.Update(message);
+
+	    mailMessage.Store();
 
 	    //persist attachments
-	    foreach (MailAttachmentData attachment in message.Attachments){
-		mailMessage.Attachments.Add(MailAttachment.Create(attachment));
+	    foreach (String filename in attachmentFilenames) {
+		mailMessage.Attachments.Add(MailAttachment.Create(mailMessage, filename));
 	    }
-	    return mailMessage;
-        }
-        
-        /// <summary>
-        /// Creates and persists a new MailMessage
-        /// </summary>
-        /// <param name="data"></param>
-        public static MailMessage Create(StringType messageType, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
-            MailMessageData mailMessageData = new MailMessageData();
-	    MailMessage mailMessage = new MailMessage();
-	    mailMessage.SetInitialState();
 
+	    return mailMessage;
+	}
+
+	
+	private static StringType GetFromAddress(StringType messageType) {
 	    MailMessageRouteList addresses = new MailMessageRouteList();
 	    WhereClause filter = new WhereClause(MailMessageRouteFields.MAILMESSAGE, messageType);
 	    filter.And(MailMessageRouteFields.STATUS, ActiveStatusEnum.ACTIVE.Code);
 	    filter.And(MailMessageRouteFields.ROUTINGTYPE, RoutingTypeEnum.FROM.Code);
 	    addresses.AddRange(MailMessageRouteDAO.DAO.GetList(filter));
-
+	
 	    if (addresses.Count == 0) {
-		throw new ArgumentException("No FROM address is defined for " + mailMessage.ToString());
+		throw new ArgumentException("No FROM address is defined for " + messageType);
 	    }
 	    if (addresses.Count > 1) {
-		throw new ArgumentException("More than 1 FROM address is defined for " + mailMessage.ToString());
+		throw new ArgumentException("More than 1 FROM address is defined for " + messageType);
 	    }
+	    return addresses[0].EmailAddress;
+	}
 
-	    mailMessageData.From = addresses[0].EmailAddress;
-
-	    mailMessageData.To = GetRoutingAddresses(messageType, RoutingTypeEnum.TO, to);
-	    mailMessageData.Cc = GetRoutingAddresses(messageType, RoutingTypeEnum.CC, null);
-	    mailMessageData.Bcc = GetRoutingAddresses(messageType, RoutingTypeEnum.BCC, null);
-	    mailMessageData.Subject = subject;
-	    mailMessageData.Body = body;
-	    mailMessageData.BodyFormat = bodyFormat;
-	    mailMessageData.ScheduleTime = scheduleTime;
-	    mailMessageData.MailMessageType = messageType;
-
-	    mailMessage.Update(mailMessageData);
-
-	    return mailMessage;
-        }
-        
-        /// <summary>
-        /// Creates and persists a new MailMessage
-        /// </summary>
-        /// <param name="data"></param>
-        public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
-            MailMessageData mailMessageData = new MailMessageData();
-	    MailMessage mailMessage = new MailMessage();
-	    mailMessage.SetInitialState();
-
-	    mailMessageData.From = from;
-
-	    mailMessageData.To = GetRoutingAddresses(messageType, RoutingTypeEnum.TO, to);
-	    mailMessageData.Cc = GetRoutingAddresses(messageType, RoutingTypeEnum.CC, null);
-	    mailMessageData.Bcc = GetRoutingAddresses(messageType, RoutingTypeEnum.BCC, null);
-	    mailMessageData.Subject = subject;
-	    mailMessageData.Body = body;
-	    mailMessageData.BodyFormat = bodyFormat;
-	    mailMessageData.ScheduleTime = scheduleTime;
-	    mailMessageData.MailMessageType = messageType;
-
-	    mailMessage.Update(mailMessageData);
-
-	    return mailMessage;
-        }
-        
-        /// <summary>
-        /// Creates and persists a new MailMessage
-        /// </summary>
-        /// <param name="data"></param>
-        public static MailMessage Create(StringType messageType, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
-            MailMessageData mailMessageData = new MailMessageData();
-	    MailMessage mailMessage = new MailMessage();
-	    mailMessage.SetInitialState();
-
-	    mailMessageData.To = GetRoutingAddresses(messageType, RoutingTypeEnum.TO, to);
-	    mailMessageData.From = GetRoutingAddresses(messageType, RoutingTypeEnum.FROM, null);
-	    mailMessageData.Cc = GetRoutingAddresses(messageType, RoutingTypeEnum.CC, null);
-	    mailMessageData.Bcc = GetRoutingAddresses(messageType, RoutingTypeEnum.BCC, null);
-	    mailMessageData.Subject = subject;
-	    mailMessageData.Body = body;
-	    mailMessageData.BodyFormat = bodyFormat;
-	    mailMessageData.MailMessageType = messageType;
-
-	    mailMessage.Update(mailMessageData);
-
-	    return mailMessage;
-        }
-        
-        /// <summary>
-        /// Creates and persists a new MailMessage
-        /// </summary>
-        /// <param name="data"></param>
-        public static MailMessage Create(StringType messageType, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
-            MailMessageData mailMessageData = new MailMessageData();
-	    MailMessage mailMessage = new MailMessage();
-	    mailMessage.SetInitialState();
-
-	    mailMessageData.To = GetRoutingAddresses(messageType, RoutingTypeEnum.TO, null);
-	    mailMessageData.From = GetRoutingAddresses(messageType, RoutingTypeEnum.FROM, null);
-	    mailMessageData.Cc = GetRoutingAddresses(messageType, RoutingTypeEnum.CC, null);
-	    mailMessageData.Bcc = GetRoutingAddresses(messageType, RoutingTypeEnum.BCC, null);
-	    mailMessageData.Subject = subject;
-	    mailMessageData.Body = body;
-	    mailMessageData.BodyFormat = bodyFormat;
-
-	    mailMessageData.MailMessageType = messageType;
-	    mailMessage.Update(mailMessageData);
-
-	    return mailMessage;
-        }
-        
-        /// <summary>
-        /// Creates and persists a new MailMessage
-        /// </summary>
-        /// <param name="data"></param>
-        public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
-            MailMessageData mailMessageData = new MailMessageData();
-	    MailMessage mailMessage = new MailMessage();
-	    mailMessage.SetInitialState();
-
-	    mailMessageData.From = from;
-
-	    mailMessageData.To = GetRoutingAddresses(messageType, RoutingTypeEnum.TO, to);
-	    mailMessageData.Cc = GetRoutingAddresses(messageType, RoutingTypeEnum.CC, null);
-	    mailMessageData.Bcc = GetRoutingAddresses(messageType, RoutingTypeEnum.BCC, null);
-	    mailMessageData.Subject = subject;
-	    mailMessageData.Body = body;
-	    mailMessageData.BodyFormat = bodyFormat;
-	    mailMessageData.MailMessageType = messageType;
-	    mailMessage.Update(mailMessageData);
-
-	    return mailMessage;
-        }
-        
-        /// <summary>
+	
+	/// <summary>
         /// Sets all mail messages that are in the list of Ids to have Status of Released.
         /// </summary>
         /// <param name="list"></param>
@@ -652,18 +565,16 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    //write them out to the <SystemSetting.TempPath>/Attachments/<MailMessageId>/<attachment.Filename>
 		    
 	    String messageAttachmentPath = attachmentDirectory + this.MailMessageId.ToInt32().ToString() + @"\";
-	    foreach (MailAttachment attachment in this.Attachments){
+	    foreach (IMailAttachment attachment in this.Attachments){
 		//make sure the directory exists for this mail message's attachments
 			
 		if (!Directory.Exists(messageAttachmentPath)){
 		    Directory.CreateDirectory(messageAttachmentPath);
 		}
-		String filename = messageAttachmentPath + attachment.Filename;
-		StreamWriter fileStream = new StreamWriter(filename, false); 
-		if (attachment.Text.IsValid){
-		    fileStream.WriteLine(attachment.Text.ToString()); 
-		}
-		fileStream.Close();
+		attachment.WriteAttachment(messageAttachmentPath);
+
+		String filename = Path.Combine(messageAttachmentPath, attachment.Filename);
+
 		System.Web.Mail.MailAttachment mailAttachment = new System.Web.Mail.MailAttachment(filename, MailEncoding.UUEncode);
 		message.Attachments.Add(mailAttachment);
 	    }
@@ -674,7 +585,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 
 	    //remove any attachments that were temporarily saved to file
 	    foreach (MailAttachment attachment in this.Attachments){
-		String filename = messageAttachmentPath + attachment.Filename;
+		String filename = Path.Combine(messageAttachmentPath, attachment.Filename);
 		File.Delete(filename);
 	    }
 	    //remove the temporary directory for this message's attachments
