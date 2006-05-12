@@ -1,3 +1,132 @@
+2006-05-11 Thursday 19:32  cort
+
+	* src/Spring2.Core.WithTypes.csproj:
+	
+	add NET_20 configuration so that it can be built under .Net 2.0
+	framework
+
+2006-05-11 Thursday 19:29  cort
+
+	* src/Mail/sql/module.mk:
+	
+	no message
+
+2006-05-11 Thursday 19:15  cort
+
+	* src/Mail/: BusinessLogic/MailAttachment.cs,
+	BusinessLogic/MailMessage.cs, DataObject/IMailAttachment.cs:
+	
+	refactoring of MailMessage to reduce redundant code and to allow
+	attachment of existing files by filename.
+
+2006-05-11 Thursday 18:58  cort
+
+	* src/Test/App.config:
+	
+	default configuration for tests
+
+2006-05-11 Thursday 18:56  cort
+
+	* src/Mail/sql/: proc/.cvsignore, table/.cvsignore,
+	view/.cvsignore:
+	
+	ignore log files
+
+2006-05-11 Thursday 18:54  cort
+
+	* src/ValueTypes/: BooleanType.cs, CurrencyType.cs,
+	DateTimeType.cs, DateType.cs, DecimalType.cs, GenderType.cs,
+	IdType.cs, IntegerType.cs, LongType.cs, QuantityType.cs,
+	RowVersionType.cs, ShortType.cs, StringType.cs, TimeType.cs:
+	
+	removed state mutating methods that should never have existed
+
+2006-04-11 Tuesday 18:24  cort
+
+	* src/ValueTypes/: BooleanType.cs, CurrencyType.cs,
+	DateTimeType.cs, DateType.cs, DecimalType.cs, IntegerType.cs,
+	StringType.cs, USStateCodeEnum.cs:
+	
+	remove all SetIfInvalid methods that made the types mutable
+
+2006-04-11 Tuesday 18:23  cort
+
+	* src/: Test/IdTypeTest.cs, ValueTypes/IdType.cs:
+	
+	implement the == operator on IdType with all of the required
+	equality methods
+
+2006-04-11 Tuesday 18:22  cort
+
+	* src/: Spring2.Core.Test.csproj, ValueTypes/TimeType.cs,
+	Test/TimeTypeTest.cs:
+	
+	correct problem with definition precidence prohibiting the creation
+	of TimeType instances
+
+2006-04-10 Monday 12:44  jeffm
+
+	* src/: ValueTypes/ILanguageFactory.cs,
+	ValueTypes/ILocaleFactory.cs, Spring2.Core.Types.csproj,
+	ValueTypes/LanguageFactory.cs, ValueTypes/LocaleFactory.cs:
+	
+	Added Locale and Language factories for use in ResourceManager.
+
+2006-04-10 Monday 05:59  jeffm
+
+	* src/: Spring2.Core.Test.csproj, Spring2.Core.sln, default.build:
+	
+	Initial move of resource manager from Core to
+	Spring2.ResourceManager.  Will remove source from core completely
+	later.
+
+2006-04-10 Monday 05:58  jeffm
+
+	* src/ValueTypes/: ILanguage.cs, ILocale.cs, LanguageEnum.cs,
+	LocaleEnum.cs:
+	
+	Changes to way ILocal and ILanguage are handled to make the
+	ResourceManager.LocalizedResourceDAO able to populate from the DB.
+
+2006-04-05 Wednesday 19:39  cort
+
+	* bin/cvscommit.sh:
+	
+	no message
+
+2006-04-05 Wednesday 19:16  cort
+
+	* src/Spring2.Core.ResourceManager.csproj:
+	
+	ignore keyfile warning for NET_20 target
+
+2006-04-05 Wednesday 17:39  cort
+
+	* src/: Spring2.Core.Test.csproj,
+	Globalization/RegionalTimeZone.cs, Test/RegionalTimeZoneTest.cs:
+	
+	fix to regional time zone conversion from local to system time that
+	happens on the date of the date change.
+
+2006-04-05 Wednesday 17:36  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2006-04-05 Wednesday 17:35  cort
+
+	* release/: Spring2.Core.1.1.20.0-net-1.1.zip,
+	Spring2.Core.1.1.20.0-net-2.0.zip:
+	
+	new release version
+
+2006-04-05 Wednesday 17:35  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2006-04-05 Wednesday 17:16  nathanp
 
 	* src/ValueTypes/: BooleanType.cs, CurrencyType.cs, DataType.cs,
