@@ -176,7 +176,7 @@ namespace Spring2.Core.Types {
 	}
 
 	/// <summary>
-	/// Compares dates.  Assumes equal if the difference < 2 minutes, otherwise like normal compare.
+	/// Compares dates.  Assumes equal if the difference &lt; 2 minutes, otherwise like normal compare.
 	/// </summary>
 	/// <param name="value"></param>
 	/// <returns></returns>
