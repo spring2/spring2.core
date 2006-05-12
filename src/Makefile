@@ -48,6 +48,8 @@ docs:
 package: clean build regress changelog docs
 	rm -rf ${BUILDDIR}/Core
 	cp $(DOCDIR)/api/Spring2.Core.chm $(BUILDDIR)
+	cp $(DOCDIR)/api/Spring2.Core.chm $(RELEASEDIR)/Spring2.Core-$(shell getversion.sh).chm
+	cp ../ChangeLog.txt $(RELEASEDIR)/ChangeLog-$(shell getversion.sh).txt
 	jar -cMvf $(RELEASEDIR)/Spring2.Core.$(shell getversion.sh)-net-1.1.zip -C $(BUILDDIR)/net-1.1 .
 	jar -cMvf $(RELEASEDIR)/Spring2.Core.$(shell getversion.sh)-net-2.0.zip -C $(BUILDDIR)/net-2.0 .
 
@@ -55,6 +57,8 @@ release: package
 	cvs tag RELEASE_$(subst .,_,$(shell ./getversion.sh))
 	../bin/cvsadd.sh $(RELEASEDIR) Spring2.Core.$(shell getversion.sh)-net-1.1.zip "new release version"
 	../bin/cvsadd.sh $(RELEASEDIR) Spring2.Core.$(shell getversion.sh)-net-2.0.zip "new release version"
+	../bin/cvsadd.sh $(RELEASEDIR) Spring2.Core-$(shell getversion.sh).chm "new release version"
+	../bin/cvsadd.sh $(RELEASEDIR) ChangeLog-$(shell getversion.sh).txt "new release version"
 	$(BINDIR)/UpdateVersion -b Increment -i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs
 	cvs commit -m "update to next version" AssemblyVersionInfo.cs
 
