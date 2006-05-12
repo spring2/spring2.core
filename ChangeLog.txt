@@ -1,3 +1,9 @@
+2006-05-11 Thursday 22:54  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2006-05-11 Thursday 22:53  cort
 
 	* lib/: net-1.1/log4net.dll, net-2.0/log4net.dll:
