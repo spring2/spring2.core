@@ -17,30 +17,14 @@ namespace Spring2.Core.Types {
 	    get	{return myState	== TypeState.VALID;}
 	}
 
-	public void SetValid() {
-	    myState = TypeState.VALID;
-	}
-
 	public bool IsDefault {
 	    get	{return myState	== TypeState.DEFAULT;}
-	}
-
-	public void SetDefault() {
-	    myState = TypeState.DEFAULT;
 	}
 
 	public bool IsUnset {
 	    get	{return myState	== TypeState.UNSET;}
 	}
 
-	public void SetUnset() {
-	    myState = TypeState.UNSET;
-	}
-
-	public TypeState State {
-	    get {return myState;}
-	    set {myState = value;}
-	}
 	#endregion
 
 	#region Constructors

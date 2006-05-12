@@ -15,36 +15,25 @@ namespace Spring2.Core.Types {
 	    get {return myValue.IsValid;}
 	}
 
-	public void SetValid() {
-	    myValue.SetValid();
-	}
-
 	public bool IsDefault {
 	    get {return myValue.IsDefault;}
-	}
-
-	public void SetDefault() {
-	    myValue.SetDefault();
 	}
 
 	public bool IsUnset {
 	    get {return myValue.IsUnset;}
 	}
 
-	public void SetUnset() {
-	    myValue.SetUnset();
-	}
-
-	public TypeState State {
-	    get {return myValue.State;}
-	    set {myValue.State = value;}
-	}
 	#endregion
 
 	#region Constructors
 	private IdType(TypeState state) {
-	    myValue = 0;
-	    myValue.State = state;
+	    if (state == TypeState.DEFAULT) {
+		myValue = IntegerType.DEFAULT;
+	    } else if (state == TypeState.UNSET) {
+		myValue = IntegerType.UNSET;
+	    } else {
+	    	myValue = new IntegerType(0);
+	    }
 	}
 
 	public IdType(IntegerType value) {
@@ -71,7 +60,7 @@ namespace Spring2.Core.Types {
 
 	public int ToInt32() {
 	    if (!IsValid) {
-		throw new InvalidStateException(myValue.State);
+		throw new InvalidStateException(myValue.ToString());
 	    }
 
 	    return myValue.ToInt32();

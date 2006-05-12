@@ -14,36 +14,25 @@ namespace Spring2.Core.Types {
 	    get {return myValue.IsValid;}
 	}
 
-	public void SetValid() {
-	    myValue.SetValid();
-	}
-
 	public bool IsDefault {
 	    get {return myValue.IsDefault;}
-	}
-
-	public void SetDefault() {
-	    myValue.SetDefault();
 	}
 
 	public bool IsUnset {
 	    get {return myValue.IsUnset;}
 	}
 
-	public void SetUnset() {
-	    myValue.SetUnset();
-	}
-
-	public TypeState State {
-	    get {return myValue.State;}
-	    set {myValue.State = value;}
-	}
 	#endregion
 
 	#region Constructors
 	private QuantityType(TypeState state) {
-	    myValue = 0;
-	    myValue.State = state;
+	    if (state == TypeState.DEFAULT) {
+		myValue = DecimalType.DEFAULT;
+	    } else if (state == TypeState.UNSET) {
+		myValue = DecimalType.UNSET;
+	    } else {
+		myValue = new DecimalType(0);
+	    }
 	}
 
 	public QuantityType(IntegerType value) {
