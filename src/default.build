@@ -60,7 +60,6 @@
 	    </projects>
 	</solution>	
 	
-          <if test="${string::contains(nant.settings.currentframework, 'net-1.1')}">
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
 	<solution configuration="${build.configuration}" outputdir="..\build\${nant.settings.currentframework}\WithTypes">
@@ -69,7 +68,6 @@
 	        <include name="Spring2.Core.WithTypesTest.csproj" />
 	    </projects>
 	</solution>	
-	</if>
 
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
