@@ -65,12 +65,13 @@ namespace Spring2.Core.Mail.BusinessLogic {
         }
         
 	[Generate()]
-	public StringType Text {
+	public Byte[] Text {
 	    get {
-		return ByteArrayToString(Buffer);
+                
+		return Buffer;
 	    }
 	    set {
-		buffer = StringToByteArray(value);
+		buffer = value;
 	    }
 	}
 	
@@ -97,9 +98,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
             mailAttachmentId = data.MailAttachmentId.IsDefault ? mailAttachmentId : data.MailAttachmentId;
 	    mailMessageId = data.MailMessageId.IsDefault ? mailMessageId : data.MailMessageId;
 	    filename = data.Filename.IsDefault ? filename : data.Filename;
-	    if (data.Text.IsValid) {
-	    	buffer = StringToByteArray(data.Text);
-	    }
+	    buffer = data.Text;
 	    Store();
         }
         

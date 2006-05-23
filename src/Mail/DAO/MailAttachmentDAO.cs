@@ -281,9 +281,13 @@ namespace Spring2.Core.Mail.Dao {
 		data.Filename = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("Filename")));
 	    }
 	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Text"))) { 
-		data.Text = StringType.UNSET;
+		data.Text = null;
 	    } else {
-		data.Text = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("Text")));
+                //Byte[] b = new Byte[(dataReader.GetBytes(dataReader.GetOrdinal("Text"), 0, null, 0, int.MaxValue))];    
+		Byte[] b = new Byte[(dataReader.GetBytes(dataReader.GetOrdinal("Text"), 0, null, 0, int.MaxValue))]; 	
+		dataReader.GetBytes(dataReader.GetOrdinal("Text"), 0, b, 0, b.Length);
+		data.Buffer = b ;
+		data.Text = b;
 	    }
 	    return data;
 	}
@@ -312,7 +316,7 @@ namespace Spring2.Core.Mail.Dao {
 	    //Create the parameters and append them to the command object
 	    cmd.Parameters.Add(CreateDataParameter("@MailMessageId", DbType.Int32, ParameterDirection.Input, data.MailMessageId.IsValid ? data.MailMessageId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@Filename", DbType.AnsiString, ParameterDirection.Input, data.Filename.IsValid ? data.Filename.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Text", DbType.AnsiString, ParameterDirection.Input, data.Text.IsValid ? data.Text.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@Text", DbType.Binary, ParameterDirection.Input, data.Text.Length >0 ? data.Text as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -348,7 +352,7 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.Parameters.Add(CreateDataParameter("@MailAttachmentId", DbType.Int32, ParameterDirection.Input, data.MailAttachmentId.IsValid ? data.MailAttachmentId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@MailMessageId", DbType.Int32, ParameterDirection.Input, data.MailMessageId.IsValid ? data.MailMessageId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@Filename", DbType.AnsiString, ParameterDirection.Input, data.Filename.IsValid ? data.Filename.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Text", DbType.AnsiString, ParameterDirection.Input, data.Text.IsValid ? data.Text.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@Text", DbType.Binary, ParameterDirection.Input, data.Text.Length>0 ? data.Text as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();

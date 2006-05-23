@@ -21,7 +21,7 @@ namespace Spring2.Core.Mail.DataObject {
 	private IdType mailAttachmentId = IdType.DEFAULT;
 	private IdType mailMessageId = IdType.DEFAULT;
 	private StringType filename = StringType.DEFAULT;
-	private StringType text = StringType.DEFAULT;
+	private Byte[] text = new Byte[int.MaxValue];
 
 	public IdType MailAttachmentId {
 	    get { return this.mailAttachmentId; }
@@ -38,7 +38,7 @@ namespace Spring2.Core.Mail.DataObject {
 	    set { this.filename = value; }
 	}
 
-	public StringType Text {
+	public Byte[] Text {
 	    get { return this.text; }
 	    set { this.text = value; }
 	}

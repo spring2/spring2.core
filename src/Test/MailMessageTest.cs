@@ -16,7 +16,7 @@ namespace Spring2.Core.Test {
 
 	private static readonly String TEMP_DIRECTORY = @"c:\temp\MailMessageTest";
 	private static readonly String TEXT_ATTACHMENT = Path.Combine(TEMP_DIRECTORY, "TextFile.txt");
-	private static readonly String BINARY_ATTACHMENT1 = "test.pdf";
+	private static readonly String BINARY_ATTACHMENT1 = "Customer Credit Application.pdf";
 	private static readonly String BINARY_ATTACHMENT2 = "test.jpg";
 
 	[Test]
@@ -83,6 +83,8 @@ namespace Spring2.Core.Test {
 
 		// output attachment
 		Assert.AreEqual(1, message.Attachments.Count);
+		//message = MailMessage.GetInstance(messages[0].MailMessageId);
+		
 		((MailAttachment)message.Attachments[0]).WriteAttachment(TEMP_DIRECTORY);
 		Assert.IsTrue(File.Exists(Path.Combine(TEMP_DIRECTORY, BINARY_ATTACHMENT1)));
 

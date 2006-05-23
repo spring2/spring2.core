@@ -221,18 +221,7 @@ namespace Spring2.Core.Mail.DataObject {
 	    }
 	}
 
-	[Generate]
-	public class TextSorter : System.Collections.IComparer {
-	    public Int32 Compare(Object a, Object b) {
-		IMailAttachment o1 = (IMailAttachment)a;
-		IMailAttachment o2 = (IMailAttachment)b;
-
-		if (o1 == null || o2 == null || !o1.Text.IsValid || !o2.Text.IsValid) {
-		    return 0;
-		}
-		return o1.Text.CompareTo(o2.Text);
-	    }
-	}
+	
 
     }
 }

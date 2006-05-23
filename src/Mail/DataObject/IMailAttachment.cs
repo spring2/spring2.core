@@ -33,7 +33,7 @@ namespace Spring2.Core.Mail.DataObject {
 	StringType Filename {
 	    get;
 	}
-	StringType Text {
+	Byte[] Text {
 	    get;
 	}
 	Byte[] Buffer {
