@@ -9,7 +9,7 @@ GO
 CREATE PROCEDURE spMailAttachment_Insert
 	@MailMessageId	Int = null,
 	@Filename	VarChar(50) = null,
-	@Text	VarBinary(MAX) = null
+	@Text	Image = null
 
 AS
 
