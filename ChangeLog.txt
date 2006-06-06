@@ -1,3 +1,57 @@
+2006-05-31 Wednesday 11:58  swapnaj
+
+	* src/Mail/sql/: proc/spMailAttachment_Insert.proc.sql,
+	proc/spMailAttachment_Update.proc.sql,
+	table/MailAttachment.table.sql:
+	
+	changed varbinary to image for the text datatype
+
+2006-05-30 Tuesday 12:35  swapnaj
+
+	* src/Test/: test.pdf, MailMessageTest.cs:
+	
+	test.pdf
+
+2006-05-23 Tuesday 08:38  swapnaj
+
+	* src/Mail/DataObject/MailAttachmentData.cs:
+	
+	changed the Mailattachment from varchar(8000) to varbinary
+
+2006-05-23 Tuesday 08:21  swapnaj
+
+	* src/: Test/MailMessageTest.cs,
+	Mail/sql/table/MailAttachment.table.sql,
+	Mail/DataObject/IMailAttachment.cs,
+	Mail/DataObject/MailAttachmentData.cs,
+	Mail/DataObject/MailAttachmentList.cs,
+	Mail/sql/proc/spMailAttachment_Insert.proc.sql,
+	Mail/sql/proc/spMailAttachment_Update.proc.sql,
+	Mail/BusinessLogic/MailAttachment.cs,
+	Mail/DAO/MailAttachmentDAO.cs:
+	
+	changed the Mailattachment from varchar(8000) to varbinary
+
+2006-05-12 Friday 11:23  cort
+
+	* src/: Spring2.Core.Test.csproj, Test/CRC32.cs,
+	Test/MailMessageTest.cs:
+	
+	add test for MailMessage
+
+2006-05-12 Friday 00:20  cort
+
+	* src/Makefile:
+	
+	copy versioned ChangeLog.txt and help file to release directory in
+	package and commit in release.
+
+2006-05-11 Thursday 23:09  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2006-05-11 Thursday 23:01  cort
 
 	* ChangeLog.txt:
