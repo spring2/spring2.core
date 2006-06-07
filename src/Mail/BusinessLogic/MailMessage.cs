@@ -407,8 +407,18 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, DateTimeType.DEFAULT, new string[]{});
         }
 
+	/// <summary>
+	/// Creates and persists a new MailMessage
+	/// </summary>
 	public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, String[] attachmentFilenames) {
 	    return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, DateTimeType.DEFAULT, attachmentFilenames);
+	}
+
+	/// <summary>
+	/// Creates and persists a new MailMessage
+	/// </summary>
+	public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
+	    return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, scheduleTime, new String[]{});
 	}
 
 	/// <summary>
