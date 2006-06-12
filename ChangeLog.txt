@@ -1,3 +1,89 @@
+2006-06-12 Monday 16:04  cort
+
+	* .cvsignore, docs/.cvsignore, .cvsignore,
+	src/CustomTask/.cvsignore:
+	
+	no message
+
+2006-06-12 Monday 16:00  cort
+
+	* src/: Test/DecimalTypeTest.cs, ValueTypes/DecimalType.cs:
+	
+	add implicit cast from Double
+
+2006-06-12 Monday 15:59  cort
+
+	* src/: Test/CurrencyTypeTest.cs, ValueTypes/CurrencyType.cs:
+	
+	remove CurrencyType * CurrencyType operator and added an overload
+	for Double.
+
+2006-06-12 Monday 15:57  cort
+
+	* src/Configuration/dtg-entities.xml:
+	
+	no message
+
+2006-06-12 Monday 15:57  cort
+
+	* src/: DAO/Filter.cs, DAO/SqlFilter.cs, Test/FilterTest.cs:
+	
+	beginning of implementation for a more object based filter for sql
+	queries that keep track of the objects instead of just using string
+	concatination
+
+2006-06-12 Monday 15:56  cort
+
+	* src/: Spring2.Core.Test.csproj, Spring2.Core.WithTypes.csproj,
+	Spring2.Core.csproj, Globalization/DaylightTimeRule.cs,
+	Globalization/IDaylightTimeRule.cs,
+	Globalization/RegionalTimeZone.cs,
+	Globalization/RegionalTimeZones.xml,
+	Globalization/XmlDaylightTimeRule.cs, Test/DaylightTimeRuleTest.cs,
+	Test/RegionalTimeZoneTest.cs:
+	
+	Extracted IDaylightTimeRule interface and created and Xml based
+	version that can have rules that vary over time.  This was needed
+	to support the change in the US for 2007 where the start and end
+	dates of DST have been changed.
+
+2006-06-12 Monday 15:44  cort
+
+	* src/Util/: Cache.cs, CacheManager.cs, CachedItem.cs:
+	
+	beginnings of Spring2.Core cache manager
+
+2006-06-07 Wednesday 08:23  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	updated version of Spring2.Core with log4net 1.2.9
+
+2006-06-07 Wednesday 08:13  cort
+
+	* src/Mail/BusinessLogic/MailMessage.cs:
+	
+	added missing overload that used to exist before last refactoring
+
+2006-06-07 Wednesday 08:13  cort
+
+	* src/Mail/SendMailMessages/App.config:
+	
+	removed reference to Gold Canyon
+
+2006-06-07 Wednesday 08:12  cort
+
+	* lib/: net-1.1/log4net.dll, net-2.0/log4net.dll:
+	
+	brought back log4net 1.2.9 since things like Maverick and NVelocity
+	still use that version
+
+2006-06-06 Tuesday 12:49  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2006-05-31 Wednesday 11:58  swapnaj
 
 	* src/Mail/sql/: proc/spMailAttachment_Insert.proc.sql,
