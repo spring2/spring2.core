@@ -155,7 +155,11 @@ namespace Spring2.Core.Types {
 	    return new CurrencyType(castFrom);
 	}
 
-	public static explicit operator DecimalType(CurrencyType castFrom) {
+	public static implicit operator CurrencyType(Double castFrom) {
+	    return new CurrencyType(castFrom);
+	}
+
+    	public static explicit operator DecimalType(CurrencyType castFrom) {
 	    if (!castFrom.IsValid) {
 		throw new InvalidStateException(castFrom.myState);
 	    }
@@ -394,20 +398,6 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
-#if no
-		public static Currency ToCurrency(CurrencyType value) {
-			if (value.myState != TypeState.VALID) {
-				throw new InvalidValueException(value.myState);
-			}
-
-			try {
-				return Decimal.ToCurrency(value.myValue);
-			} catch (OverflowException) {
-				throw new ValueOverflowException("CurrencyType", "Currency");
-			}
-		}
-#endif
-
 	public static double ToDouble(CurrencyType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidValueException(value.myState);
@@ -486,10 +476,6 @@ namespace Spring2.Core.Types {
 
 
 	public static explicit operator CurrencyType(float value) {
-	    return new CurrencyType(value);
-	}
-
-	public static explicit operator CurrencyType(double value) {
 	    return new CurrencyType(value);
 	}
 
@@ -596,20 +582,47 @@ namespace Spring2.Core.Types {
 
 	#region Multiplication operators and methods
 
-	public static CurrencyType Multiply(CurrencyType multiplier, CurrencyType multiplicand) {
-	    if (multiplier.myState != TypeState.VALID || multiplicand.myState != TypeState.VALID) {
-		throw new InvalidValueException(multiplier.myState, multiplicand.myState);
+	public static CurrencyType Multiply(CurrencyType multiplier, Double multiplicand) {
+	    if (multiplier.myState != TypeState.VALID) {
+		throw new InvalidValueException(multiplier.myState);
 	    }
 
-	    CurrencyType quotient = new CurrencyType(Decimal.Multiply(multiplier.myValue, multiplicand.myValue), TypeState.VALID);
+	    CurrencyType quotient = new CurrencyType(Decimal.Multiply(multiplier.myValue, Convert.ToDecimal(multiplicand)), TypeState.VALID);
 
 	    return quotient;
 	}
 
-	public static CurrencyType operator *(CurrencyType multiplier, CurrencyType multiplicand) {
+	public static CurrencyType operator *(CurrencyType multiplier, Double multiplicand) {
 	    return Multiply(multiplier, multiplicand);
 	}
 
+	public static CurrencyType Multiply(CurrencyType multiplier, Decimal multiplicand) {
+	    if (multiplier.myState != TypeState.VALID) {
+		throw new InvalidValueException(multiplier.myState);
+	    }
+
+	    CurrencyType quotient = new CurrencyType(Decimal.Multiply(multiplier.myValue, multiplicand), TypeState.VALID);
+
+	    return quotient;
+	}
+
+	public static CurrencyType operator *(CurrencyType multiplier, Decimal multiplicand) {
+	    return Multiply(multiplier, multiplicand);
+	}
+
+	public static CurrencyType Multiply(CurrencyType multiplier, Int64 multiplicand) {
+	    if (multiplier.myState != TypeState.VALID) {
+		throw new InvalidValueException(multiplier.myState);
+	    }
+
+	    CurrencyType quotient = new CurrencyType(Decimal.Multiply(multiplier.myValue, multiplicand), TypeState.VALID);
+
+	    return quotient;
+	}
+
+	public static CurrencyType operator *(CurrencyType multiplier, Int64 multiplicand) {
+	    return Multiply(multiplier, multiplicand);
+	}
 	#endregion
 
 	#region Division operators and methods
