@@ -233,6 +233,16 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Test\DaylightTimeRuleTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\DecimalTypeTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Test\IdTypeTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

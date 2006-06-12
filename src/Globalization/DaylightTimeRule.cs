@@ -7,32 +7,42 @@ namespace Spring2.Core.Globalization {
     /// <summary>
     /// Represents the rules that are used to determine the actual DaylightTime for a given year
     /// </summary>
-    public class DaylightTimeRule {
+    public class DaylightTimeRule : IDaylightTimeRule {
 
-	public static readonly DaylightTimeRule NORTH_AMERICA = new DaylightTimeRule(WeekOfMonth.First, DayOfWeek.Sunday, 4, WeekOfMonth.Last, DayOfWeek.Sunday, 10, 2, false, new TimeSpan(1,0,0));
-	public static readonly DaylightTimeRule EUROPE = new DaylightTimeRule(WeekOfMonth.Last, DayOfWeek.Sunday, 3, WeekOfMonth.Last, DayOfWeek.Sunday, 10, 1, true, new TimeSpan(1,0,0));
+    	/// <summary>
+    	/// Daylight savings rules for the United States, which changed rules effective 2007
+    	/// </summary>
+	public static readonly IDaylightTimeRule UNITED_STATES = new XmlDaylightTimeRule("United States");
+    	
+    	/// <summary>
+    	/// Daylight savings rules for North America, but in 2007 the United States and parts of Canada have changed their rules and have been seperated as UNITED_STATES.
+    	/// </summary>
+	public static readonly IDaylightTimeRule NORTH_AMERICA = new DaylightTimeRule("North America", WeekOfMonth.First, DayOfWeek.Sunday, 4, WeekOfMonth.Last, DayOfWeek.Sunday, 10, 2, false, new TimeSpan(1,0,0));
+
+    	/// <summary>
+    	/// Daylight savings rules for Europe
+    	/// </summary>
+    	public static readonly IDaylightTimeRule EUROPE = new DaylightTimeRule("Europe", WeekOfMonth.Last, DayOfWeek.Sunday, 3, WeekOfMonth.Last, DayOfWeek.Sunday, 10, 1, true, new TimeSpan(1,0,0));
 
 	private WeekOfMonth startWeekOfMonth;
 	private DayOfWeek startDayOfWeek;
-	private Int32 startDay;
+	//private Int32 startDay;
 	private Int32 startMonth;
 
 	private WeekOfMonth endWeekOfMonth;
 	private DayOfWeek endDayOfWeek;
-	private Int32 endDay;
+	//private Int32 endDay;
 	private Int32 endMonth;
 
 	private Int32 hourOfDay;
 	private Boolean utcHourOfDay = false;
 	private TimeSpan delta = TimeSpan.Zero;
+    	private String name;
 
 	private Hashtable years = new Hashtable();
 
-	private DaylightTimeRule() {
-	}
-
-
-	private DaylightTimeRule(WeekOfMonth startWeekOfMonth, DayOfWeek startDayOfWeek, Int32 startMonth, WeekOfMonth endWeekOfMonth, DayOfWeek endDayOfWeek, Int32 endMonth, Int32 hourOfDay, Boolean utcHourOfDay, TimeSpan delta) {
+	private DaylightTimeRule(String name, WeekOfMonth startWeekOfMonth, DayOfWeek startDayOfWeek, Int32 startMonth, WeekOfMonth endWeekOfMonth, DayOfWeek endDayOfWeek, Int32 endMonth, Int32 hourOfDay, Boolean utcHourOfDay, TimeSpan delta) {
+	    this.name = name;
 	    this.startWeekOfMonth = startWeekOfMonth;
 	    this.startDayOfWeek = startDayOfWeek;
 	    this.startMonth = startMonth;
@@ -48,15 +58,18 @@ namespace Spring2.Core.Globalization {
 	}
 
 
-	private DaylightTimeRule(Int32 startDay, Int32 startMonth, Int32 endDay, Int32 endMonth, Int32 hourOfDay, Boolean utcHourOfDay, TimeSpan delta) {
-	    this.startDay = startDay;
-	    this.startMonth = startMonth;
-	    this.endDay = endDay;
-	    this.endMonth = endMonth;
-	    this.hourOfDay = hourOfDay;
-	    this.utcHourOfDay = utcHourOfDay;
-	    this.delta = delta;
-	}
+	// <summary>
+	// Creates an instance of DaylightTimeRule based on static start and end dates (i.e. Iran)
+	// </summary>
+	//private DaylightTimeRule(Int32 startDay, Int32 startMonth, Int32 endDay, Int32 endMonth, Int32 hourOfDay, Boolean utcHourOfDay, TimeSpan delta) {
+	//    this.startDay = startDay;
+	//    this.startMonth = startMonth;
+	//    this.endDay = endDay;
+	//    this.endMonth = endMonth;
+	//    this.hourOfDay = hourOfDay;
+	//    this.utcHourOfDay = utcHourOfDay;
+	//    this.delta = delta;
+	//}
 
 	/// <summary>
 	/// Get the DaylightTime for the year specified, adjusted by UTC offset if required (by a RegionalTimeZone)
@@ -84,7 +97,11 @@ namespace Spring2.Core.Globalization {
 
 	}
 
-	private DateTime CalculateTime(Int32 year, WeekOfMonth weekOfMonth, DayOfWeek dayOfWeek, Int32 month) {
+	public string Name {
+	    get { return name; }
+	}
+
+    	private DateTime CalculateTime(Int32 year, WeekOfMonth weekOfMonth, DayOfWeek dayOfWeek, Int32 month) {
 	    DateTime time = new DateTime(year, month, 1, hourOfDay, 0, 0, 0);
 
 	    Boolean found = false;
@@ -108,6 +125,5 @@ namespace Spring2.Core.Globalization {
 	    // could not find the correct occurrence
 	    throw new ArgumentOutOfRangeException("weekOfMonth", "Could not find the correct occurrence");
 	}
-
     }
 }

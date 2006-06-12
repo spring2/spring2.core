@@ -47,11 +47,11 @@ namespace Spring2.Core.Globalization {
 	public static readonly RegionalTimeZone M = new RegionalTimeZone("M", "Mike", null, new TimeSpan(12,0,0));
 
 	// Time zones that use North American daylight time rules
-	public static readonly RegionalTimeZone V_US = new RegionalTimeZone("V-US", "US Alaska Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-9,0,0));
-	public static readonly RegionalTimeZone U_US = new RegionalTimeZone("U-US", "US Pacific Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-8,0,0));
-	public static readonly RegionalTimeZone T_US = new RegionalTimeZone("T-US", "US Mountain Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-7,0,0));
-	public static readonly RegionalTimeZone S_US = new RegionalTimeZone("S-US", "US Central Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-6,0,0));
-	public static readonly RegionalTimeZone R_US = new RegionalTimeZone("R-US", "US Eastern Standard Time", DaylightTimeRule.NORTH_AMERICA, new TimeSpan(-5,0,0));
+	public static readonly RegionalTimeZone V_US = new RegionalTimeZone("V-US", "US Alaska Standard Time", DaylightTimeRule.UNITED_STATES, new TimeSpan(-9,0,0));
+	public static readonly RegionalTimeZone U_US = new RegionalTimeZone("U-US", "US Pacific Standard Time", DaylightTimeRule.UNITED_STATES, new TimeSpan(-8,0,0));
+	public static readonly RegionalTimeZone T_US = new RegionalTimeZone("T-US", "US Mountain Standard Time", DaylightTimeRule.UNITED_STATES, new TimeSpan(-7,0,0));
+	public static readonly RegionalTimeZone S_US = new RegionalTimeZone("S-US", "US Central Standard Time", DaylightTimeRule.UNITED_STATES, new TimeSpan(-6,0,0));
+	public static readonly RegionalTimeZone R_US = new RegionalTimeZone("R-US", "US Eastern Standard Time", DaylightTimeRule.UNITED_STATES, new TimeSpan(-5,0,0));
 
 	// Time zones that use EU daylight time rules
 	public static readonly RegionalTimeZone Z_EU = new RegionalTimeZone("Z-EU", "Greenwich Mean Time", DaylightTimeRule.EUROPE, TimeSpan.Zero);
@@ -71,10 +71,8 @@ namespace Spring2.Core.Globalization {
 
 	protected String code;
 	protected String name;
-	protected DaylightTimeRule daylightTimeRule;
+	protected IDaylightTimeRule daylightTimeRule;
 	protected TimeSpan utcOffset;
-
-	private RegionalTimeZone() {}
 
 	/// <summary>
 	/// Constructor to create the limited number of TimeZone instances
@@ -83,7 +81,7 @@ namespace Spring2.Core.Globalization {
 	/// <param name="name">friendly, descriptive name</param>
 	/// <param name="daylightTimeRule">period of time that is "daylight savings time"</param>
 	/// <param name="utcOffset">hours offset from UTC</param>
-	private RegionalTimeZone(String code, String name, DaylightTimeRule daylightTimeRule, TimeSpan utcOffset) {
+	private RegionalTimeZone(String code, String name, IDaylightTimeRule daylightTimeRule, TimeSpan utcOffset) {
 	    this.code = code;
 	    this.name = name;
 	    this.daylightTimeRule = daylightTimeRule;
@@ -238,7 +236,7 @@ namespace Spring2.Core.Globalization {
 	public override Boolean Equals(Object o) {
 	    if (this == o) {
 		return true;
-	    } else if (code == null || !(o is TimeZone)) {
+	    } else if (code == null || !(o is RegionalTimeZone)) {
 		return false;
 	    } else {
 		return code.Equals(((RegionalTimeZone)o).code);

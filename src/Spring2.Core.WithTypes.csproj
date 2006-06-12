@@ -278,12 +278,26 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Globalization\IDaylightTimeRule.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Globalization\RegionalTimeZone.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Globalization\RegionalTimeZones.xml"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "Globalization\WeekOfMonth.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Globalization\XmlDaylightTimeRule.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
