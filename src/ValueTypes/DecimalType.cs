@@ -108,7 +108,12 @@ namespace Spring2.Core.Types {
 	public static implicit operator DecimalType(Decimal castFrom) {
 	    return new DecimalType(castFrom, TypeState.VALID);
 	}
-	#endregion
+	
+    	public static implicit operator DecimalType(Double castFrom) {
+	    return new DecimalType(Convert.ToDecimal(castFrom), TypeState.VALID);
+	}
+
+    	#endregion
 
 	#region General math methods
 	public static DecimalType Negate(DecimalType value) {
@@ -332,20 +337,6 @@ namespace Spring2.Core.Types {
 	    }
 	}
     
-#if no
-        public static Currency ToCurrency(DecimalType value) {
-	    if (value.myState != TypeState.VALID) {
-		throw new InvalidStateException(value.myState);
-	    }
-
-	    try {
-		return Decimal.ToCurrency(value.myValue);
-	    } catch (OverflowException) {
-		throw new ValueOverflowException("DecimalType", "Currency");
-	    }
-        }
-#endif
-
 	public static double ToDouble(DecimalType value) {
 	    if (value.myState != TypeState.VALID) {
 		throw new InvalidStateException(value.myState);
@@ -416,10 +407,6 @@ namespace Spring2.Core.Types {
         
     
 	public static explicit operator DecimalType(float value) {
-	    return new DecimalType(value);
-	}
-    
-	public static explicit operator DecimalType(double value) {
 	    return new DecimalType(value);
 	}
     
@@ -703,7 +690,19 @@ namespace Spring2.Core.Types {
 	    return Convert.ToSingle(this);
 	}
 
-	double IConvertible.ToDouble(IFormatProvider provider) {
+	public double ToDouble() {
+	    return DecimalType.ToDouble(this);
+	}
+
+	public double ToInt32() {
+	    return DecimalType.ToInt32(this);
+	}
+
+	public double ToInt64() {
+	    return DecimalType.ToInt64(this);
+	}
+	
+    	double IConvertible.ToDouble(IFormatProvider provider) {
 	    return Convert.ToDouble(this);
 	}
 
