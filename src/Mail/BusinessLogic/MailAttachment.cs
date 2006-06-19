@@ -64,18 +64,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
             }
         }
         
-	[Generate()]
-	public Byte[] Text {
-	    get {
-                
-		return Buffer;
-	    }
-	    set {
-		buffer = value;
-	    }
-	}
-	
-	public Byte[] Buffer {
+        public Byte[] Buffer {
             get {
                 return buffer;
             }
@@ -98,7 +87,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
             mailAttachmentId = data.MailAttachmentId.IsDefault ? mailAttachmentId : data.MailAttachmentId;
 	    mailMessageId = data.MailMessageId.IsDefault ? mailMessageId : data.MailMessageId;
 	    filename = data.Filename.IsDefault ? filename : data.Filename;
-	    buffer = data.Text;
+	    buffer = data.Buffer;
 	    Store();
         }
         
@@ -139,9 +128,9 @@ namespace Spring2.Core.Mail.BusinessLogic {
 
 	    return attachment;
         }
-
-	public static MailAttachment Create(MailMessage message, StringType filename) {
-	    if (!File.Exists(filename)) {
+        
+        public static MailAttachment Create(MailMessage message, StringType filename) {
+            if (!File.Exists(filename)) {
 	    	throw new ArgumentException(String.Format("File {0} does not exist", filename), "filename");
 	    }
 
@@ -158,25 +147,25 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    attachment.Store();
 
 	    return attachment;
-	}
-
-	public void WriteAttachment(String path) {
-	    FileStream  fs = File.Create(Path.Combine(path, Filename));
+        }
+        
+        public void WriteAttachment(String path) {
+            FileStream  fs = File.Create(Path.Combine(path, Filename));
 	    BinaryWriter bw = new BinaryWriter(fs); 
 	    bw.Write(Buffer); 
 	    bw.Close(); 
-	    fs.Close(); 
-	}
-
-	/// <summary>
-	/// Reads data from a stream until the end is reached. The
-	/// data is returned as a byte array. An IOException is
-	/// thrown if any of the underlying IO calls fail.
-	/// </summary>
-	/// <param name="stream">The stream to read data from</param>
-	/// <param name="initialLength">The initial buffer length</param>
-	public static byte[] ReadFully (Stream stream, long initialLength) {
-	    // If we've been passed an unhelpful initial length, just
+	    fs.Close();
+        }
+        
+        /// <summary>
+        /// Reads data from a stream until the end is reached. The
+        /// data is returned as a byte array. An IOException is
+        /// thrown if any of the underlying IO calls fail.
+        /// </summary>
+        /// <param name="stream">The stream to read data from</param>
+        /// <param name="initialLength">The initial buffer length</param>
+        public static System.Byte[] ReadFully(Stream stream, long initialLength) {
+            // If we've been passed an unhelpful initial length, just
 	    // use 32K.
 	    if (initialLength < 1) {
 		initialLength = 32768;
@@ -212,27 +201,26 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    byte[] ret = new byte[read];
 	    Array.Copy(buffer, ret, read);
 	    return ret;
-	} 
- 
-	/// <summary>
-	/// Convert a string to a byte array
-	/// </summary>
-	/// <param name="s">String to be converted</param>
-	/// <returns></returns>
-	private static byte[] StringToByteArray(String s) {
-	    System.Text.ASCIIEncoding  encoding=new System.Text.ASCIIEncoding();
+        }
+        
+        /// <summary>
+        /// Convert a string to a byte array
+        /// </summary>
+        /// <param name="s">String to be converted</param>
+        /// <returns></returns>
+        private static System.Byte[] StringToByteArray(String s) {
+            System.Text.ASCIIEncoding  encoding=new System.Text.ASCIIEncoding();
 	    return encoding.GetBytes(s);
-	}
-
-	/// <summary>
-	/// Convert a byte array to a string
-	/// </summary>
-	/// <param name="bytes"></param>
-	/// <returns></returns>
-	private static String ByteArrayToString(byte[] bytes) {
-	    System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
+        }
+        
+        /// <summary>
+        /// Convert a byte array to a string
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        private static String ByteArrayToString(System.Byte[] bytes) {
+            System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
 	    return enc.GetString(bytes);
-	}
-
+        }
     }
 }

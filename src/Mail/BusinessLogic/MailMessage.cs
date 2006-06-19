@@ -367,30 +367,30 @@ namespace Spring2.Core.Mail.BusinessLogic {
         /// Creates and persists a new MailMessage
         /// </summary>
         public static MailMessage Create(MailMessageData message) {
-	    return MailMessage.Create(StringType.EMPTY, message.From, message.To, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[]{});
-	}
+            return MailMessage.Create(StringType.EMPTY, message.From, message.To, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[]{});
+        }
         
         /// <summary>
         /// Creates and persists a new MailMessage and signs it using a 'from' address from the message routing table
         /// </summary>
         public static MailMessage Create(MailMessageData message, StringType messageType) {
-	    StringType from = GetFromAddress(messageType);
+            StringType from = GetFromAddress(messageType);
 	    return MailMessage.Create(messageType, from, message.To, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[]{});
         }
         
         /// <summary>
         /// Creates and persists a new MailMessage
         /// </summary>
-	public static MailMessage Create(StringType messageType, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
-	    StringType from = GetFromAddress(messageType);
+        public static MailMessage Create(StringType messageType, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
+            StringType from = GetFromAddress(messageType);
 	    return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, scheduleTime, new String[]{});
-	}
+        }
         
         /// <summary>
         /// Creates and persists a new MailMessage
         /// </summary>
         public static MailMessage Create(StringType messageType, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
-	    return MailMessage.Create(messageType, to, subject, body, bodyFormat, DateTimeType.DEFAULT);
+            return MailMessage.Create(messageType, to, subject, body, bodyFormat, DateTimeType.DEFAULT);
         }
         
         /// <summary>
@@ -404,29 +404,29 @@ namespace Spring2.Core.Mail.BusinessLogic {
         /// Creates and persists a new MailMessage
         /// </summary>
         public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
-	    return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, DateTimeType.DEFAULT, new string[]{});
+            return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, DateTimeType.DEFAULT, new string[]{});
         }
-
-	/// <summary>
-	/// Creates and persists a new MailMessage
-	/// </summary>
-	public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, String[] attachmentFilenames) {
-	    return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, DateTimeType.DEFAULT, attachmentFilenames);
-	}
-
-	/// <summary>
-	/// Creates and persists a new MailMessage
-	/// </summary>
-	public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
-	    return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, scheduleTime, new String[]{});
-	}
-
-	/// <summary>
-	/// Creates and persists a new MailMessage
-	/// This is THE method that really does the work
-	/// </summary>
-	public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime, String[] attachmentFilenames) {
-	    MailMessageData mailMessageData = new MailMessageData();
+        
+        /// <summary>
+        /// Creates and persists a new MailMessage
+        /// </summary>
+        public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, String[] attachmentFilenames) {
+            return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, DateTimeType.DEFAULT, attachmentFilenames);
+        }
+        
+        /// <summary>
+        /// Creates and persists a new MailMessage
+        /// </summary>
+        public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
+            return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, scheduleTime, new String[]{});
+        }
+        
+        /// <summary>
+        /// Creates and persists a new MailMessage
+        /// This is THE method that really does the work
+        /// </summary>
+        public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime, String[] attachmentFilenames) {
+            MailMessageData mailMessageData = new MailMessageData();
 	    MailMessage mailMessage = new MailMessage();
 	    mailMessage.SetInitialState();
 
@@ -449,11 +449,10 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    }
 
 	    return mailMessage;
-	}
-
-	
-	private static StringType GetFromAddress(StringType messageType) {
-	    MailMessageRouteList addresses = new MailMessageRouteList();
+        }
+        
+        private static StringType GetFromAddress(StringType messageType) {
+            MailMessageRouteList addresses = new MailMessageRouteList();
 	    SqlFilter filter = new SqlFilter(new SqlEqualityPredicate(MailMessageRouteFields.MAILMESSAGE, EqualityOperatorEnum.Equal, messageType));
 	    filter.And(new SqlEqualityPredicate(MailMessageRouteFields.STATUS, EqualityOperatorEnum.Equal, ActiveStatusEnum.ACTIVE.Code));
 	    filter.And(new SqlEqualityPredicate(MailMessageRouteFields.ROUTINGTYPE, EqualityOperatorEnum.Equal, RoutingTypeEnum.FROM.Code));
@@ -466,10 +465,9 @@ namespace Spring2.Core.Mail.BusinessLogic {
 		throw new ArgumentException("More than 1 FROM address is defined for " + messageType);
 	    }
 	    return addresses[0].EmailAddress;
-	}
-
-	
-	/// <summary>
+        }
+        
+        /// <summary>
         /// Sets all mail messages that are in the list of Ids to have Status of Released.
         /// </summary>
         /// <param name="list"></param>
@@ -530,7 +528,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
         /// Get mail messages that are of the status that is passed to this function.
         /// </summary>
         public static MailMessageList GetMailMessagesByStatus(MailMessageStatusEnum status) {
-	    SqlFilter filter = new SqlFilter(new SqlEqualityPredicate(MailMessageFields.MAILMESSAGESTATUS, EqualityOperatorEnum.Equal, status.Code));
+            SqlFilter filter = new SqlFilter(new SqlEqualityPredicate(MailMessageFields.MAILMESSAGESTATUS, EqualityOperatorEnum.Equal, status.Code));
 	    // order so that scheduled messages go first
 	    OrderByClause sort = new OrderByClause("case when scheduletime is null then '12/31/2029' else scheduletime end, MailMessageId");
 	    MailMessageList list = new MailMessageList();

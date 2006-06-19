@@ -221,7 +221,5 @@ namespace Spring2.Core.Mail.DataObject {
 	    }
 	}
 
-	
-
     }
 }

@@ -20,7 +20,7 @@ namespace Spring2.Core.Mail.DataObject {
 	public static readonly String MAILATTACHMENTID = "MailAttachmentId";
 	public static readonly String MAILMESSAGEID = "MailMessageId";
 	public static readonly String FILENAME = "Filename";
-	public static readonly String TEXT = "Text";
+	public static readonly String BUFFER = "Buffer";
     }
 
     public interface IMailAttachment : IBusinessEntity {
@@ -33,13 +33,12 @@ namespace Spring2.Core.Mail.DataObject {
 	StringType Filename {
 	    get;
 	}
-	Byte[] Text {
-	    get;
-	}
 	Byte[] Buffer {
 	    get;
 	}
 
+	#region
 	void WriteAttachment(String path);
+	#endregion
     }
 }

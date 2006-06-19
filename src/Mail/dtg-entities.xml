@@ -49,7 +49,7 @@
 	    <property name="MailAttachmentId" column="*" type="IdType"></property>
 	    <property name="MailMessageId" column="*" type="IdType"></property>
 	    <property name="Filename" column="*" type="StringType"></property>
-	    <property name="Text" column="*" type="Byte[]"></property>
+	    <property name="Buffer" column="Text" type="Byte[]"></property>
 	</properties>
 	<finders>
 	    <finder name="FindByMailMessageId" unique="False">
