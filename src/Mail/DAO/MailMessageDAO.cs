@@ -77,116 +77,15 @@ namespace Spring2.Core.Mail.Dao {
 	}
 
 	/// <summary>
-	/// Hash table mapping entity property names to sql code.
-	/// </summary>
-	private static Hashtable propertyToSqlMap = new Hashtable();
-
-	/// <summary>
 	/// Initializes the static map of property names to sql expressions.
 	/// </summary>
 	static MailMessageDAO() {
-	    if (!propertyToSqlMap.Contains("MailMessageId")) {
-		propertyToSqlMap.Add("MailMessageId", @"MailMessageId");
-	    }
-	    if (!propertyToSqlMap.Contains("ScheduleTime")) {
-		propertyToSqlMap.Add("ScheduleTime", @"ScheduleTime");
-	    }
-	    if (!propertyToSqlMap.Contains("ProcessedTime")) {
-		propertyToSqlMap.Add("ProcessedTime", @"ProcessedTime");
-	    }
-	    if (!propertyToSqlMap.Contains("Priority")) {
-		propertyToSqlMap.Add("Priority", @"Priority");
-	    }
-	    if (!propertyToSqlMap.Contains("From")) {
-		propertyToSqlMap.Add("From", @"From");
-	    }
-	    if (!propertyToSqlMap.Contains("To")) {
-		propertyToSqlMap.Add("To", @"To");
-	    }
-	    if (!propertyToSqlMap.Contains("Cc")) {
-		propertyToSqlMap.Add("Cc", @"Cc");
-	    }
-	    if (!propertyToSqlMap.Contains("Bcc")) {
-		propertyToSqlMap.Add("Bcc", @"Bcc");
-	    }
-	    if (!propertyToSqlMap.Contains("Subject")) {
-		propertyToSqlMap.Add("Subject", @"Subject");
-	    }
-	    if (!propertyToSqlMap.Contains("BodyFormat")) {
-		propertyToSqlMap.Add("BodyFormat", @"BodyFormat");
-	    }
-	    if (!propertyToSqlMap.Contains("Body")) {
-		propertyToSqlMap.Add("Body", @"Body");
-	    }
-	    if (!propertyToSqlMap.Contains("MailMessageStatus")) {
-		propertyToSqlMap.Add("MailMessageStatus", @"MailMessageStatus");
-	    }
-	    if (!propertyToSqlMap.Contains("ReleasedByUserId")) {
-		propertyToSqlMap.Add("ReleasedByUserId", @"ReleasedByUserId");
-	    }
-	    if (!propertyToSqlMap.Contains("MailMessageType")) {
-		propertyToSqlMap.Add("MailMessageType", @"MailMessageType");
-	    }
-	    if (!propertyToSqlMap.Contains("NumberOfAttempts")) {
-		propertyToSqlMap.Add("NumberOfAttempts", @"NumberOfAttempts");
-	    }
-	    if (!propertyToSqlMap.Contains("MessageQueueDate")) {
-		propertyToSqlMap.Add("MessageQueueDate", @"MessageQueueDate");
-	    }
+	    AddPropertyMapping("MailMessageId", "MailMessageId");		
 	}
 
 	private MailMessageDAO() {
 	}
 
-	/// <summary>
-	/// Creates a where clause object by mapping the given where clause text.  The text may reference
-	/// entity properties which will be mapped to sql code by enclosing the property names in braces.
-	/// </summary>
-	/// <param name="whereText">Text to be mapped</param>
-	/// <returns>SqlFilter object.</returns>
-	/// <exception cref="ApplicationException">When property name found in braces is not found in the entity.</exception>
-	public static SqlFilter Filter(String whereText) {
-	    return new SqlFilter(new SqlLiteralPredicate(ProcessExpression(propertyToSqlMap, whereText)));
-	}
-
-	/// <summary>
-	/// Creates a where clause object that can be used to create sql to find objects whose entity property value
-	/// matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped
-	/// to the appropriate sql.
-	/// </summary>
-	/// <param name="propertyName">Entity property to be matched.</param>
-	/// <param name="value">Value to match the property with</param>
-	/// <returns>A SqlFilter object.</returns>
-	/// <exception cref="ApplicationException">When the property name passed is not found in the entity.</exception>
-	public static SqlFilter Filter(String propertyName, String value) {
-	    return new SqlFilter(new SqlEqualityPredicate(GetPropertyMapping(propertyToSqlMap, propertyName), EqualityOperatorEnum.Equal, value));
-	}
-
-	/// <summary>
-	/// Creates a where clause object that can be used to create sql to find objects whose entity property value
-	/// matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped
-	/// to the appropriate sql.
-	/// </summary>
-	/// <param name="propertyName">Entity property to be matched.</param>
-	/// <param name="value">Value to match the property with</param>
-	/// <returns>A SqlFilter object.</returns>
-	/// <exception cref="ApplicationException">When the property name passed is not found in the entity.</exception>
-	public static SqlFilter Filter(String propertyName, Int32 value) {
-	    return new SqlFilter(new SqlEqualityPredicate(GetPropertyMapping(propertyToSqlMap, propertyName), EqualityOperatorEnum.Equal, value));
-	}
-
-	/// <summary>
-	/// Creates a where clause object that can be used to create sql to find objects whose entity property value
-	/// matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped
-	/// to the appropriate sql.
-	/// </summary>
-	/// <param name="propertyName">Entity property to be matched.</param>
-	/// <param name="value">Value to match the property with</param>
-	/// <returns>A SqlFilter object.</returns>
-	/// <exception cref="ApplicationException">When the property name passed is not found in the entity.</exception>
-	public static SqlFilter filter(String propertyName, DateTime value) {
-	    return new SqlFilter(new SqlEqualityPredicate(GetPropertyMapping(propertyToSqlMap, propertyName), EqualityOperatorEnum.Equal, value));
-	}
 
 	protected override String ConnectionStringKey {
 	    get {
@@ -299,34 +198,19 @@ namespace Spring2.Core.Mail.Dao {
 	/// <returns>A MailMessage object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MailMessage Load(IdType mailMessageId) {
-	    String sql = "SELECT * FROM " + VIEW + " WHERE MailMessageId=@MailMessageId";
-	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageId", DbType.Int32, ParameterDirection.Input, mailMessageId.IsValid ? mailMessageId.ToInt32() as Object : DBNull.Value));
-	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
+	    SqlFilter filter = new SqlFilter();
+	    filter.And(new SqlEqualityPredicate("MailMessageId", EqualityOperatorEnum.Equal, mailMessageId.IsValid ? mailMessageId.ToInt32() as Object : DBNull.Value));
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 	    return GetDataObject(dataReader);
-	}
-
-	/// <summary>
-	/// Read through the reader and return a data object list
-	/// </summary>
-	private static MailMessageList GetList(IDataReader reader) {
-	    MailMessageList list = new MailMessageList();
-	    while (reader.Read()) {
-		list.Add(GetDataObjectFromReader(reader));
-	    }
-	    reader.Close();
-	    return list;
 	}
 
 	/// <summary>
 	/// Repopulates an existing business entity instance
 	/// </summary>
 	public void Reload(MailMessage instance) {
-	    String sql = "SELECT * FROM " + VIEW + " WHERE MailMessageId=@MailMessageId";
-	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageId", DbType.Int32, ParameterDirection.Input, instance.MailMessageId.IsValid ? instance.MailMessageId.ToInt32() as Object : DBNull.Value));
-	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+	    SqlFilter filter = new SqlFilter();
+	    filter.And(new SqlEqualityPredicate("MailMessageId", EqualityOperatorEnum.Equal, instance.MailMessageId.IsValid ? instance.MailMessageId.ToInt32() as Object : DBNull.Value));
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);
 
 	    if (!dataReader.Read()) {
 		dataReader.Close();
@@ -337,9 +221,21 @@ namespace Spring2.Core.Mail.Dao {
 	}
 
 	/// <summary>
+	/// Read through the reader and return a data object list
+	/// </summary>
+	private MailMessageList GetList(IDataReader reader) {
+	    MailMessageList list = new MailMessageList();
+	    while (reader.Read()) {
+		list.Add(GetDataObjectFromReader(reader));
+	    }
+	    reader.Close();
+	    return list;
+	}
+
+    	/// <summary>
 	/// Read from reader and return a single data object
 	/// </summary>
-	private static MailMessage GetDataObject(IDataReader reader) {
+	private MailMessage GetDataObject(IDataReader reader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(reader);
 	    }
@@ -349,7 +245,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Read from reader and return a single data object
 	/// </summary>
-	private static MailMessage GetDataObject(IDataReader reader, ColumnOrdinals ordinals) {
+	private MailMessage GetDataObject(IDataReader reader, ColumnOrdinals ordinals) {
 	    if (!reader.Read()) {
 		reader.Close();
 		throw new FinderException("Reader contained no rows.");
@@ -632,10 +528,9 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="MailMessageStatus">A field value to be matched.</param>
 	/// <returns>The list of MailMessageDAO objects found.</returns>
 	public MailMessageList FindByStatus(MailMessageStatusEnum mailMessageStatus) {
-	    String sql = "SELECT * FROM " + VIEW + " WHERE (MailMessageStatus=@MailMessageStatus or (MailMessageStatus is null and @MailMessageStatus is null)) ORDER BY MailMessageStatus";
-	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageStatus", DbType.AnsiString, ParameterDirection.Input, mailMessageStatus.DBValue));
-	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+	    SqlFilter filter = new SqlFilter();
+	    filter.And(new SqlEqualityPredicate("MailMessageStatus", EqualityOperatorEnum.Equal, mailMessageStatus.IsValid ? mailMessageStatus.Code as Object : DBNull.Value));
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 
 	    return GetList(dataReader);
 	}
