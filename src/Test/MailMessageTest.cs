@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using NUnit.Framework;
 using Spring2.Core.Mail.BusinessLogic;
+using Spring2.Core.Mail.Dao;
 using Spring2.Core.Mail.DataObject;
 using Spring2.Core.Mail.Types;
 using Spring2.Core.Types;
@@ -155,6 +156,10 @@ namespace Spring2.Core.Test {
 	    message.Send();
 	}
 
+    	[Test]
+	public void FindMailMessageRouteByMailMessageType() {
+    	    MailMessageRouteList routes = MailMessageRouteDAO.DAO.FindByMailMessage("foo");
+    	}
 
     }
 }
