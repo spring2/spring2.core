@@ -346,9 +346,9 @@ namespace Spring2.Core.Mail.BusinessLogic {
         
         private static StringType GetRoutingAddresses(StringType mailMessage, RoutingTypeEnum routingType, StringType initialAddress) {
             MailMessageRouteList routes = new MailMessageRouteList();
-	    WhereClause filter = new WhereClause(MailMessageRouteFields.MAILMESSAGE, mailMessage);
-	    filter.And(MailMessageRouteFields.STATUS, ActiveStatusEnum.ACTIVE.Code);
-	    filter.And(MailMessageRouteFields.ROUTINGTYPE, routingType.Code);
+	    SqlFilter filter = new SqlFilter(new SqlEqualityPredicate(MailMessageRouteFields.MAILMESSAGE, EqualityOperatorEnum.Equal, mailMessage));
+	    filter.And(new SqlEqualityPredicate(MailMessageRouteFields.STATUS, EqualityOperatorEnum.Equal, ActiveStatusEnum.ACTIVE.Code));
+	    filter.And(new SqlEqualityPredicate(MailMessageRouteFields.ROUTINGTYPE, EqualityOperatorEnum.Equal, routingType.Code));
 	    routes.AddRange(MailMessageRouteDAO.DAO.GetList(filter));
 	    
 	    StringBuilder sb = new StringBuilder();
@@ -454,9 +454,9 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	
 	private static StringType GetFromAddress(StringType messageType) {
 	    MailMessageRouteList addresses = new MailMessageRouteList();
-	    WhereClause filter = new WhereClause(MailMessageRouteFields.MAILMESSAGE, messageType);
-	    filter.And(MailMessageRouteFields.STATUS, ActiveStatusEnum.ACTIVE.Code);
-	    filter.And(MailMessageRouteFields.ROUTINGTYPE, RoutingTypeEnum.FROM.Code);
+	    SqlFilter filter = new SqlFilter(new SqlEqualityPredicate(MailMessageRouteFields.MAILMESSAGE, EqualityOperatorEnum.Equal, messageType));
+	    filter.And(new SqlEqualityPredicate(MailMessageRouteFields.STATUS, EqualityOperatorEnum.Equal, ActiveStatusEnum.ACTIVE.Code));
+	    filter.And(new SqlEqualityPredicate(MailMessageRouteFields.ROUTINGTYPE, EqualityOperatorEnum.Equal, RoutingTypeEnum.FROM.Code));
 	    addresses.AddRange(MailMessageRouteDAO.DAO.GetList(filter));
 	
 	    if (addresses.Count == 0) {
@@ -530,7 +530,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
         /// Get mail messages that are of the status that is passed to this function.
         /// </summary>
         public static MailMessageList GetMailMessagesByStatus(MailMessageStatusEnum status) {
-            WhereClause filter = new WhereClause(MailMessageFields.MAILMESSAGESTATUS, status.Code);
+	    SqlFilter filter = new SqlFilter(new SqlEqualityPredicate(MailMessageFields.MAILMESSAGESTATUS, EqualityOperatorEnum.Equal, status.Code));
 	    // order so that scheduled messages go first
 	    OrderByClause sort = new OrderByClause("case when scheduletime is null then '12/31/2029' else scheduletime end, MailMessageId");
 	    MailMessageList list = new MailMessageList();
