@@ -69,7 +69,7 @@
 		    <column name="MailAttachmentId" sqltype="Int" identity="True" increment="1" seed="1" required="True" />
 		    <column name="MailMessageId" sqltype="Int" required="True" />
 		    <column name="Filename" sqltype="VarChar" length="50" />
-		    <column name="Text" sqltype="VarChar" length="8000" />
+		    <column name="Text" sqltype="Image" />
 		</columns>
 		<constraints>
 		    <constraint name="PK_MailAttachment" type="PRIMARY KEY">
