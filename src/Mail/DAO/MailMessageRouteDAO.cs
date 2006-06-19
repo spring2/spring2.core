@@ -13,87 +13,119 @@ using Spring2.Core.Mail.Types;
 namespace Spring2.Core.Mail.Dao {
     public class MailMessageRouteDAO : Spring2.Core.DAO.SqlEntityDAO {
 
-
-	public static readonly MailMessageRouteDAO DAO = new MailMessageRouteDAO(); 
+	public static readonly MailMessageRouteDAO DAO = new MailMessageRouteDAO();
 	private static readonly String VIEW = "vwMailMessageRoute";
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";
 	private static readonly Int32 COMMAND_TIMEOUT = 15;
-	private static Hashtable propertyToSqlMap = new Hashtable();
+	private static ColumnOrdinals columnOrdinals = null;
 
-	static MailMessageRouteDAO() {
-	    if (!propertyToSqlMap.Contains("MailMessageRouteId")) {
-		propertyToSqlMap.Add("MailMessageRouteId",@"MailMessageRouteId");
+	internal sealed class ColumnOrdinals {
+	    public Int32 MailMessageRouteId;
+	    public Int32 MailMessage;
+	    public Int32 RoutingType;
+	    public Int32 Status;
+	    public Int32 EmailAddress;
+
+	    internal ColumnOrdinals(IDataReader reader) {
+		MailMessageRouteId = reader.GetOrdinal("MailMessageRouteId");
+		MailMessage = reader.GetOrdinal("MailMessage");
+		RoutingType = reader.GetOrdinal("RoutingType");
+		Status = reader.GetOrdinal("Status");
+		EmailAddress = reader.GetOrdinal("EmailAddress");
 	    }
-	    if (!propertyToSqlMap.Contains("MailMessage")) {
-		propertyToSqlMap.Add("MailMessage",@"MailMessage");
-	    }
-	    if (!propertyToSqlMap.Contains("RoutingType")) {
-		propertyToSqlMap.Add("RoutingType",@"RoutingType");
-	    }
-	    if (!propertyToSqlMap.Contains("Status")) {
-		propertyToSqlMap.Add("Status",@"Status");
-	    }
-	    if (!propertyToSqlMap.Contains("EmailAddress")) {
-		propertyToSqlMap.Add("EmailAddress",@"EmailAddress");
+
+	    internal ColumnOrdinals(IDataReader reader, String prefix) {
+		MailMessageRouteId = reader.GetOrdinal(prefix + "MailMessageRouteId");
+		MailMessage = reader.GetOrdinal(prefix + "MailMessage");
+		RoutingType = reader.GetOrdinal(prefix + "RoutingType");
+		Status = reader.GetOrdinal(prefix + "Status");
+		EmailAddress = reader.GetOrdinal(prefix + "EmailAddress");
 	    }
 	}
 
-	private MailMessageRouteDAO() {}
-	
+	/// <summary>
+	/// Hash table mapping entity property names to sql code.
+	/// </summary>
+	private static Hashtable propertyToSqlMap = new Hashtable();
+
+	/// <summary>
+	/// Initializes the static map of property names to sql expressions.
+	/// </summary>
+	static MailMessageRouteDAO() {
+	    if (!propertyToSqlMap.Contains("MailMessageRouteId")) {
+		propertyToSqlMap.Add("MailMessageRouteId", @"MailMessageRouteId");
+	    }
+	    if (!propertyToSqlMap.Contains("MailMessage")) {
+		propertyToSqlMap.Add("MailMessage", @"MailMessage");
+	    }
+	    if (!propertyToSqlMap.Contains("RoutingType")) {
+		propertyToSqlMap.Add("RoutingType", @"RoutingType");
+	    }
+	    if (!propertyToSqlMap.Contains("Status")) {
+		propertyToSqlMap.Add("Status", @"Status");
+	    }
+	    if (!propertyToSqlMap.Contains("EmailAddress")) {
+		propertyToSqlMap.Add("EmailAddress", @"EmailAddress");
+	    }
+	}
+
+	private MailMessageRouteDAO() {
+	}
+
 	/// <summary>
 	/// Creates a where clause object by mapping the given where clause text.  The text may reference
 	/// entity properties which will be mapped to sql code by enclosing the property names in braces.
 	/// </summary>
 	/// <param name="whereText">Text to be mapped</param>
-	/// <returns>WhereClause object.</returns>
+	/// <returns>SqlFilter object.</returns>
 	/// <exception cref="ApplicationException">When property name found in braces is not found in the entity.</exception>
-	public static IWhere Where(String whereText) {
-	    return new WhereClause(ProcessExpression(propertyToSqlMap, whereText));
+	public static SqlFilter Filter(String whereText) {
+	    return new SqlFilter(new SqlLiteralPredicate(ProcessExpression(propertyToSqlMap, whereText)));
 	}
 
 	/// <summary>
 	/// Creates a where clause object that can be used to create sql to find objects whose entity property value
-	/// matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped 
+	/// matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped
 	/// to the appropriate sql.
 	/// </summary>
 	/// <param name="propertyName">Entity property to be matched.</param>
 	/// <param name="value">Value to match the property with</param>
-	/// <returns>A WhereClause object.</returns>
+	/// <returns>A SqlFilter object.</returns>
 	/// <exception cref="ApplicationException">When the property name passed is not found in the entity.</exception>
-	public static IWhere Where(String propertyName, String value) {
-	    return new WhereClause(GetPropertyMapping(propertyToSqlMap, propertyName), value);
+	public static SqlFilter Filter(String propertyName, String value) {
+	    return new SqlFilter(new SqlEqualityPredicate(GetPropertyMapping(propertyToSqlMap, propertyName), EqualityOperatorEnum.Equal, value));
 	}
 
 	/// <summary>
 	/// Creates a where clause object that can be used to create sql to find objects whose entity property value
-	/// matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped 
+	/// matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped
 	/// to the appropriate sql.
 	/// </summary>
 	/// <param name="propertyName">Entity property to be matched.</param>
 	/// <param name="value">Value to match the property with</param>
-	/// <returns>A WhereClause object.</returns>
+	/// <returns>A SqlFilter object.</returns>
 	/// <exception cref="ApplicationException">When the property name passed is not found in the entity.</exception>
-	public static IWhere Where(String propertyName, Int32 value) {
-	    return new WhereClause(GetPropertyMapping(propertyToSqlMap, propertyName), value);
+	public static SqlFilter Filter(String propertyName, Int32 value) {
+	    return new SqlFilter(new SqlEqualityPredicate(GetPropertyMapping(propertyToSqlMap, propertyName), EqualityOperatorEnum.Equal, value));
 	}
 
 	/// <summary>
 	/// Creates a where clause object that can be used to create sql to find objects whose entity property value
-	/// matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped 
+	/// matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped
 	/// to the appropriate sql.
 	/// </summary>
 	/// <param name="propertyName">Entity property to be matched.</param>
 	/// <param name="value">Value to match the property with</param>
-	/// <returns>A WhereClause object.</returns>
+	/// <returns>A SqlFilter object.</returns>
 	/// <exception cref="ApplicationException">When the property name passed is not found in the entity.</exception>
-	public static IWhere Where(String propertyName, DateTime value)	{
-	    return new WhereClause(GetPropertyMapping(propertyToSqlMap, propertyName), value);
+	public static SqlFilter filter(String propertyName, DateTime value) {
+	    return new SqlFilter(new SqlEqualityPredicate(GetPropertyMapping(propertyToSqlMap, propertyName), EqualityOperatorEnum.Equal, value));
 	}
 
 	protected override String ConnectionStringKey {
 	    get {
 		return CONNECTION_STRING_KEY;
-  	    }
+	    }
 	}
 
 	/// <summary>
@@ -101,18 +133,18 @@ namespace Spring2.Core.Mail.Dao {
 	/// </summary>
 	/// <returns>List of MailMessageRoute objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
-	public MailMessageRouteList GetList() { 
+	public MailMessageRouteList GetList() {
 	    return GetList(null, null);
 	}
 
 	/// <summary>
 	/// Returns a filtered list of MailMessageRoute rows.
 	/// </summary>
-	/// <param name="whereClause">Filtering criteria.</param>
+	/// <param name="filter">Filtering criteria.</param>
 	/// <returns>List of MailMessageRoute objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
-	public MailMessageRouteList GetList(IWhere whereClause) { 
-	    return GetList(whereClause, null);
+	public MailMessageRouteList GetList(SqlFilter filter) {
+	    return GetList(filter, null);
 	}
 
 	/// <summary>
@@ -121,122 +153,175 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="orderByClause">Ordering criteria.</param>
 	/// <returns>List of MailMessageRoute objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
-	public MailMessageRouteList GetList(IOrderBy orderByClause) { 
+	public MailMessageRouteList GetList(IOrderBy orderByClause) {
 	    return GetList(null, orderByClause);
 	}
 
 	/// <summary>
 	/// Returns an ordered and filtered list of MailMessageRoute rows.
 	/// </summary>
-	/// <param name="whereClause">Filtering criteria.</param>
+	/// <param name="filter">Filtering criteria.</param>
 	/// <param name="orderByClause">Ordering criteria.</param>
 	/// <returns>List of MailMessageRoute objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
-	public MailMessageRouteList GetList(IWhere whereClause, IOrderBy orderByClause) { 
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, whereClause, orderByClause); 
+	public MailMessageRouteList GetList(SqlFilter filter, IOrderBy orderByClause) {
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, orderByClause);
 
-	    MailMessageRouteList list = new MailMessageRouteList(); 
-	    while (dataReader.Read()) { 
-		list.Add(GetDataObjectFromReader(dataReader)); 
+	    MailMessageRouteList list = new MailMessageRouteList();
+	    while (dataReader.Read()) {
+		list.Add(GetDataObjectFromReader(dataReader));
 	    }
 	    dataReader.Close();
-	    return list; 
+	    return list;
 	}
 
 	/// <summary>
 	/// Returns a list of all MailMessageRoute rows.
 	/// </summary>
+	/// <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
 	/// <returns>List of MailMessageRoute objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
-	public MailMessageRouteList GetList(Int32 maxRows) { 
+	public MailMessageRouteList GetList(Int32 maxRows) {
 	    return GetList(null, null, maxRows);
 	}
 
 	/// <summary>
 	/// Returns a filtered list of MailMessageRoute rows.
 	/// </summary>
-	/// <param name="whereClause">Filtering criteria.</param>
-	/// <param name="maxRows"></param>
+	/// <param name="filter">Filtering criteria.</param>
+	/// <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
 	/// <returns>List of MailMessageRoute objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
-	public MailMessageRouteList GetList(IWhere whereClause, Int32 maxRows) { 
-	    return GetList(whereClause, null, maxRows);
+	public MailMessageRouteList GetList(SqlFilter filter, Int32 maxRows) {
+	    return GetList(filter, null, maxRows);
 	}
 
 	/// <summary>
 	/// Returns an ordered list of MailMessageRoute rows.  All rows in the database are returned
 	/// </summary>
 	/// <param name="orderByClause">Ordering criteria.</param>
-	/// <param name="maxRows"></param>
+	/// <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
 	/// <returns>List of MailMessageRoute objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
-	public MailMessageRouteList GetList(IOrderBy orderByClause, Int32 maxRows) { 
+	public MailMessageRouteList GetList(IOrderBy orderByClause, Int32 maxRows) {
 	    return GetList(null, orderByClause, maxRows);
 	}
 
 	/// <summary>
 	/// Returns an ordered and filtered list of MailMessageRoute rows.
 	/// </summary>
-	/// <param name="whereClause">Filtering criteria.</param>
+	/// <param name="filter">Filtering criteria.</param>
 	/// <param name="orderByClause">Ordering criteria.</param>
-	/// <param name="maxRows"></param>
+	/// <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
 	/// <returns>List of MailMessageRoute objects.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
-	public MailMessageRouteList GetList(IWhere whereClause, IOrderBy orderByClause, Int32 maxRows) { 
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, whereClause, orderByClause, maxRows); 
+	public MailMessageRouteList GetList(SqlFilter filter, IOrderBy orderByClause, Int32 maxRows) {
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, orderByClause, maxRows);
 
 	    MailMessageRouteList list = new MailMessageRouteList();
-	    while (dataReader.Read()) { 
-		list.Add(GetDataObjectFromReader(dataReader)); 
+	    while (dataReader.Read()) {
+		list.Add(GetDataObjectFromReader(dataReader));
 	    }
 	    dataReader.Close();
-	    return list; 
+	    return list;
 	}
 
 	/// <summary>
 	/// Finds a MailMessageRoute entity using it's primary key.
 	/// </summary>
-	/// <param name="mailMessageRouteId">A key field.</param>
+	/// <param name="MailMessageRouteId">A key field.</param>
 	/// <returns>A MailMessageRoute object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MailMessageRoute Load(IdType mailMessageRouteId) {
-	    WhereClause w = new WhereClause();
-	    w.And("MailMessageRouteId", mailMessageRouteId.IsValid ? mailMessageRouteId.ToInt32() as Object : DBNull.Value);
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, w, null);
+	    String sql = "SELECT * FROM " + VIEW + " WHERE MailMessageRouteId=@MailMessageRouteId";
+	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
+	    cmd.Parameters.Add(CreateDataParameter("@MailMessageRouteId", DbType.Int32, ParameterDirection.Input, mailMessageRouteId.IsValid ? mailMessageRouteId.ToInt32() as Object : DBNull.Value));
+	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
-	    if (!dataReader.Read()) {
-		dataReader.Close();
-		throw new FinderException("Load found no rows for MailMessageRoute.");
+	    return GetDataObject(dataReader);
+	}
+
+	/// <summary>
+	/// Read through the reader and return a data object list
+	/// </summary>
+	private static MailMessageRouteList GetList(IDataReader reader) {
+	    MailMessageRouteList list = new MailMessageRouteList();
+	    while (reader.Read()) {
+		list.Add(GetDataObjectFromReader(reader));
 	    }
-	    MailMessageRoute data = GetDataObjectFromReader(dataReader);
-	    dataReader.Close();
-	    return data;
+	    reader.Close();
+	    return list;
 	}
 
 	/// <summary>
 	/// Repopulates an existing business entity instance
 	/// </summary>
 	public void Reload(MailMessageRoute instance) {
-	    WhereClause w = new WhereClause();
-	    w.And("MailMessageRouteId", instance.MailMessageRouteId);
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, w, null);
+	    String sql = "SELECT * FROM " + VIEW + " WHERE MailMessageRouteId=@MailMessageRouteId";
+	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
+	    cmd.Parameters.Add(CreateDataParameter("@MailMessageRouteId", DbType.Int32, ParameterDirection.Input, instance.MailMessageRouteId.IsValid ? instance.MailMessageRouteId.ToInt32() as Object : DBNull.Value));
+	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
 	    if (!dataReader.Read()) {
 		dataReader.Close();
 		throw new FinderException("Reload found no rows for MailMessageRoute.");
 	    }
-	    MailMessageRoute data = GetDataObjectFromReader(instance, dataReader);
+	    GetDataObjectFromReader(instance, dataReader);
 	    dataReader.Close();
+	}
+
+	/// <summary>
+	/// Read from reader and return a single data object
+	/// </summary>
+	private static MailMessageRoute GetDataObject(IDataReader reader) {
+	    if (columnOrdinals == null) {
+		columnOrdinals = new ColumnOrdinals(reader);
+	    }
+	    return GetDataObject(reader, columnOrdinals);
+	}
+
+	/// <summary>
+	/// Read from reader and return a single data object
+	/// </summary>
+	private static MailMessageRoute GetDataObject(IDataReader reader, ColumnOrdinals ordinals) {
+	    if (!reader.Read()) {
+		reader.Close();
+		throw new FinderException("Reader contained no rows.");
+	    }
+	    MailMessageRoute data = GetDataObjectFromReader(reader, ordinals);
+	    reader.Close();
+	    return data;
 	}
 
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
-	/// <param name="data"></param>
+	/// <param name="dataReader">Container for database row.</param>
+	/// <returns>Data object built from current row.</returns>
+	internal static MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader, ColumnOrdinals ordinals) {
+	    return GetDataObjectFromReader(data, dataReader, String.Empty, ordinals);
+	}
+
+	/// <summary>
+	/// Builds a data object from the current row in a data reader..
+	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader) {
-	    return GetDataObjectFromReader(data, dataReader, String.Empty);
+	    if (columnOrdinals == null) {
+		columnOrdinals = new ColumnOrdinals(dataReader);
+	    }
+	    return GetDataObjectFromReader(data, dataReader, String.Empty, columnOrdinals);
+	}
+
+	/// <summary>
+	/// Builds a data object from the current row in a data reader..
+	/// </summary>
+	/// <param name="dataReader">Container for database row.</param>
+	/// <returns>Data object built from current row.</returns>
+	internal static MailMessageRoute GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
+	    MailMessageRoute data = new MailMessageRoute(false);
+	    return GetDataObjectFromReader(data, dataReader, String.Empty, ordinals);
 	}
 
 	/// <summary>
@@ -245,50 +330,50 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessageRoute GetDataObjectFromReader(IDataReader dataReader) {
+	    if (columnOrdinals == null) {
+		columnOrdinals = new ColumnOrdinals(dataReader);
+	    }
 	    MailMessageRoute data = new MailMessageRoute(false);
-	    return GetDataObjectFromReader(data, dataReader, String.Empty);
+	    return GetDataObjectFromReader(data, dataReader, String.Empty, columnOrdinals);
 	}
-	
+
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
-	/// <param name="prefix"></param>
 	/// <returns>Data object built from current row.</returns>
-	internal static MailMessageRoute GetDataObjectFromReader(IDataReader dataReader, String prefix) {
+	internal static MailMessageRoute GetDataObjectFromReader(IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
 	    MailMessageRoute data = new MailMessageRoute(false);
-	    return GetDataObjectFromReader(data, dataReader, prefix);
+	    return GetDataObjectFromReader(data, dataReader, prefix, columnOrdinals);
 	}
-	
+
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
-	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
-	/// <param name="prefix"></param>
 	/// <returns>Data object built from current row.</returns>
-	internal static MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader, String prefix) {
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MailMessageRouteId"))) { 
+	internal static MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
+	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MailMessageRouteId"))) {
 		data.MailMessageRouteId = IdType.UNSET;
 	    } else {
 		data.MailMessageRouteId = new IdType(dataReader.GetInt32(dataReader.GetOrdinal("MailMessageRouteId")));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MailMessage"))) { 
+	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MailMessage"))) {
 		data.MailMessage = StringType.UNSET;
 	    } else {
 		data.MailMessage = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("MailMessage")));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("RoutingType"))) { 
+	    if (dataReader.IsDBNull(dataReader.GetOrdinal("RoutingType"))) {
 		data.RoutingType = RoutingTypeEnum.UNSET;
 	    } else {
 		data.RoutingType = RoutingTypeEnum.GetInstance(dataReader.GetString(dataReader.GetOrdinal("RoutingType")));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Status"))) { 
+	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Status"))) {
 		data.Status = ActiveStatusEnum.UNSET;
 	    } else {
 		data.Status = ActiveStatusEnum.GetInstance(dataReader.GetString(dataReader.GetOrdinal("Status")));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("EmailAddress"))) { 
+	    if (dataReader.IsDBNull(dataReader.GetOrdinal("EmailAddress"))) {
 		data.EmailAddress = StringType.UNSET;
 	    } else {
 		data.EmailAddress = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("EmailAddress")));
@@ -304,7 +389,7 @@ namespace Spring2.Core.Mail.Dao {
 	public IdType Insert(MailMessageRoute data) {
 	    return Insert(data, null);
 	}
-	
+
 	/// <summary>
 	/// Inserts a record into the MailMessageRoute table.
 	/// </summary>
@@ -327,9 +412,9 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
- 	    if (transaction == null) {
- 		cmd.Connection.Close();
- 	    }
+	    if (transaction == null) {
+		cmd.Connection.Close();
+	    }
 
 	    // Set the output paramter value(s)
 	    return new IdType((Int32)idParam.Value);
@@ -343,7 +428,7 @@ namespace Spring2.Core.Mail.Dao {
 	public void Update(MailMessageRoute data) {
 	    Update(data, null);
 	}
-	
+
 	/// <summary>
 	/// Updates a record in the MailMessageRoute table.
 	/// </summary>
@@ -362,7 +447,7 @@ namespace Spring2.Core.Mail.Dao {
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
-	    
+
 	    // do not close the connection if it is part of a transaction
 	    if (transaction == null) {
 		cmd.Connection.Close();
@@ -373,15 +458,15 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Deletes a record from the MailMessageRoute table by MailMessageRouteId.
 	/// </summary>
-	/// <param name="mailMessageRouteId"></param>
+	/// <param name="MailMessageRouteId">A key field.</param>
 	public void Delete(IdType mailMessageRouteId) {
 	    Delete(mailMessageRouteId, null);
 	}
-	
+
 	/// <summary>
 	/// Deletes a record from the MailMessageRoute table by MailMessageRouteId.
 	/// </summary>
-	/// <param name="mailMessageRouteId"></param>
+	/// <param name="MailMessageRouteId">A key field.</param>
 	/// <param name="transaction"></param>
 	public void Delete(IdType mailMessageRouteId, IDbTransaction transaction) {
 	    // Create and execute the command
@@ -389,10 +474,9 @@ namespace Spring2.Core.Mail.Dao {
 
 	    // Create and append the parameters
 	    cmd.Parameters.Add(CreateDataParameter("@MailMessageRouteId", DbType.Int32, ParameterDirection.Input, mailMessageRouteId.IsValid ? mailMessageRouteId.ToInt32() as Object : DBNull.Value));
-
 	    // Execute the query and return the result
 	    cmd.ExecuteNonQuery();
-	    
+
 	    // do not close the connection if it is part of a transaction
 	    if (transaction == null) {
 		cmd.Connection.Close();
@@ -402,22 +486,16 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="mailMessage">A field value to be matched.</param>
+	/// <param name="MailMessage">A field value to be matched.</param>
 	/// <returns>The list of MailMessageRouteDAO objects found.</returns>
 	public MailMessageRouteList FindByMailMessage(StringType mailMessage) {
 	    OrderByClause sort = new OrderByClause("MailMessage");
-	    WhereClause filter = new WhereClause(" MailMessage = @MailMessage");
-	    String sql = "Select * from " + VIEW + filter.FormatSql() + sort.FormatSql();
+	    SqlFilter filter = new SqlFilter(new SqlLiteralPredicate(" MailMessage = @MailMessage"));
+	    String sql = "SELECT * from " + VIEW + filter.Statement + sort.FormatSql();
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
 	    cmd.Parameters.Add(CreateDataParameter("@MailMessage", DbType.AnsiString, ParameterDirection.Input, mailMessage.IsValid ? mailMessage.ToString() as Object : DBNull.Value));
 	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-	    MailMessageRouteList list = new MailMessageRouteList(); 
-
-	    while (dataReader.Read()) {
-		list.Add(GetDataObjectFromReader(dataReader)); 
-	    }
-	    dataReader.Close();
-	    return list;
+	    return GetList(dataReader);
 	}
     }
 }
