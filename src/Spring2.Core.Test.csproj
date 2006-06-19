@@ -273,6 +273,31 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Test\SqlBetweenPredicateTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\SqlEqualityPredicateTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\SqlFilterTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\SqlInPredicateTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\SqlLiteralPredicateTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Test\StringTypeTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

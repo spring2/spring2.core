@@ -169,12 +169,27 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "DAO\DatabaseFilter.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "DAO\EntityDAO.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "DAO\EqualityOperatorEnum.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "DAO\FinderException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DAO\IDatabaseExpression.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -189,6 +204,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "DAO\LogicalOperatorEnum.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "DAO\OracleEntityDAO.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -199,12 +219,47 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "DAO\SqlBetweenPredicate.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "DAO\SqlDaoTransaction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "DAO\SqlEntityDAO.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DAO\SqlEqualityPredicate.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DAO\SqlFilter.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DAO\SqlInPredicate.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DAO\SqlLiteralPredicate.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DAO\SqlParameterList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DAO\SqlPredicate.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
