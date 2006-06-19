@@ -80,12 +80,26 @@ namespace Spring2.Core.Mail.Dao {
 	/// Initializes the static map of property names to sql expressions.
 	/// </summary>
 	static MailMessageDAO() {
-	    AddPropertyMapping("MailMessageId", "MailMessageId");		
+	    AddPropertyMapping("MailMessageId", @"MailMessageId");
+	    AddPropertyMapping("ScheduleTime", @"ScheduleTime");
+	    AddPropertyMapping("ProcessedTime", @"ProcessedTime");
+	    AddPropertyMapping("Priority", @"Priority");
+	    AddPropertyMapping("From", @"From");
+	    AddPropertyMapping("To", @"To");
+	    AddPropertyMapping("Cc", @"Cc");
+	    AddPropertyMapping("Bcc", @"Bcc");
+	    AddPropertyMapping("Subject", @"Subject");
+	    AddPropertyMapping("BodyFormat", @"BodyFormat");
+	    AddPropertyMapping("Body", @"Body");
+	    AddPropertyMapping("MailMessageStatus", @"MailMessageStatus");
+	    AddPropertyMapping("ReleasedByUserId", @"ReleasedByUserId");
+	    AddPropertyMapping("MailMessageType", @"MailMessageType");
+	    AddPropertyMapping("NumberOfAttempts", @"NumberOfAttempts");
+	    AddPropertyMapping("MessageQueueDate", @"MessageQueueDate");
 	}
 
 	private MailMessageDAO() {
 	}
-
 
 	protected override String ConnectionStringKey {
 	    get {
@@ -210,7 +224,7 @@ namespace Spring2.Core.Mail.Dao {
 	public void Reload(MailMessage instance) {
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(new SqlEqualityPredicate("MailMessageId", EqualityOperatorEnum.Equal, instance.MailMessageId.IsValid ? instance.MailMessageId.ToInt32() as Object : DBNull.Value));
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 
 	    if (!dataReader.Read()) {
 		dataReader.Close();
@@ -232,7 +246,7 @@ namespace Spring2.Core.Mail.Dao {
 	    return list;
 	}
 
-    	/// <summary>
+	/// <summary>
 	/// Read from reader and return a single data object
 	/// </summary>
 	private MailMessage GetDataObject(IDataReader reader) {
@@ -528,8 +542,9 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="MailMessageStatus">A field value to be matched.</param>
 	/// <returns>The list of MailMessageDAO objects found.</returns>
 	public MailMessageList FindByStatus(MailMessageStatusEnum mailMessageStatus) {
+	    OrderByClause sort = new OrderByClause("MailMessageStatus");
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("MailMessageStatus", EqualityOperatorEnum.Equal, mailMessageStatus.IsValid ? mailMessageStatus.Code as Object : DBNull.Value));
+	    filter.And(new SqlEqualityPredicate("MailMessageStatus", EqualityOperatorEnum.Equal, mailMessageStatus.DBValue));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 
 	    return GetList(dataReader);
