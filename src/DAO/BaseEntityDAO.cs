@@ -12,8 +12,9 @@ namespace Spring2.Core.DAO {
 
 	private static StringDictionary connectionStrings = new StringDictionary();
 
+	#region WhereClause
 	protected IDataReader GetListReader(String key, String viewName) { 
-	    return GetListReader(key, viewName, null, null); 
+	    return GetListReader(key, viewName, new SqlFilter(), null); 
 	} 
 		 
 	protected IDataReader GetListReader(String key, String viewName, IWhere whereClause, IOrderBy orderByClause) { 
@@ -41,7 +42,37 @@ namespace Spring2.Core.DAO {
 			 
 	    return ExecuteReader(key, sql, commandTimeout);
 	}
+	#endregion
+    	
+	#region SqlFilter
+	protected IDataReader GetListReader(String key, String viewName, DatabaseFilter filter, IOrderBy orderByClause) { 
+	    return GetListReader(key, viewName, filter, orderByClause, -1);
+	}
 
+	protected IDataReader GetListReader(String key, String viewName, DatabaseFilter filter, IOrderBy orderByClause, Int32 maxRows) {
+	    return GetListReader(key, viewName, filter, orderByClause, maxRows, -1);
+	}
+
+	protected IDataReader GetListReader(String key, String viewName, DatabaseFilter filter, IOrderBy orderByClause, Int32 maxRows, Int32 commandTimeout) {
+	    String sql = "";
+	    if (maxRows < 1) {
+		sql = "select * from " + viewName;
+	    }
+	    else {
+		sql = "select top " + maxRows.ToString() + " * from " + viewName;
+	    }
+	    if (filter != null && !filter.IsEmpty) { 
+		sql = sql + filter.Statement; 
+	    } 
+	    if (orderByClause != null) { 
+		sql = sql + orderByClause.FormatSql(); 
+	    } 
+			 
+	    return ExecuteReader(key, sql, filter.Parameters, commandTimeout);
+	}
+    	
+	#endregion
+    	
 	protected IDataReader ExecuteReader(String key, String sql) {
 	    return ExecuteReader(key, sql, -1);
 	}
@@ -62,7 +93,27 @@ namespace Spring2.Core.DAO {
 	    }
 	}
 
-	protected abstract IDbCommand CreateCommand();
+	protected IDataReader ExecuteReader(String key, String sql, IDataParameterCollection parameters, Int32 commandTimeout) {
+	    IDbCommand cmd = GetDbCommand(key);
+	    cmd.CommandType = CommandType.Text;
+	    cmd.CommandText = sql;
+	    if (commandTimeout > 0) {
+		cmd.CommandTimeout = commandTimeout;
+	    }
+		
+	    foreach(IDataParameter parameter in parameters) {
+	    	cmd.Parameters.Add(parameter);
+	    }
+			 
+	    try { 
+		IDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+		return reader;
+	    } catch (Exception ex) { 
+		throw new DaoException(ex.Message + " [running statement: " + sql + "]", ex);
+	    }
+	}
+
+    	protected abstract IDbCommand CreateCommand();
 
 	protected IDbCommand GetDbCommand(String key) {
 	    IDbConnection conn = GetDbConnection(key);
