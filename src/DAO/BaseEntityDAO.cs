@@ -12,6 +12,68 @@ namespace Spring2.Core.DAO {
 
 	private static StringDictionary connectionStrings = new StringDictionary();
 
+    	/// <summary>
+	/// Hash table mapping entity property names to sql code.
+	/// </summary>
+	private static Hashtable propertyToSqlMap = new Hashtable();
+    	
+    	protected static void AddPropertyMapping(String property, String mapping) {
+	    if (!propertyToSqlMap.Contains(property)) {
+		propertyToSqlMap.Add(property, mapping);
+	    }
+    	}
+
+	/// <summary>
+	/// Creates a where clause object by mapping the given where clause text.  The text may reference
+	/// entity properties which will be mapped to sql code by enclosing the property names in braces.
+	/// </summary>
+	/// <param name="whereText">Text to be mapped</param>
+	/// <returns>SqlFilter object.</returns>
+	/// <exception cref="ApplicationException">When property name found in braces is not found in the entity.</exception>
+	public static SqlFilter Filter(String whereText) {
+	    return new SqlFilter(new SqlLiteralPredicate(ProcessExpression(propertyToSqlMap, whereText)));
+	}
+
+    	/// <summary>
+	/// Creates a where clause object that can be used to create sql to find objects whose entity property value
+	/// matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped
+	/// to the appropriate sql.
+	/// </summary>
+	/// <param name="propertyName">Entity property to be matched.</param>
+	/// <param name="value">Value to match the property with</param>
+	/// <returns>A SqlFilter object.</returns>
+	/// <exception cref="ApplicationException">When the property name passed is not found in the entity.</exception>
+	public static SqlFilter Filter(String propertyName, String value) {
+	    return new SqlFilter(new SqlEqualityPredicate(GetPropertyMapping(propertyToSqlMap, propertyName), EqualityOperatorEnum.Equal, value));
+	}
+
+	/// <summary>
+	/// Creates a where clause object that can be used to create sql to find objects whose entity property value
+	/// matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped
+	/// to the appropriate sql.
+	/// </summary>
+	/// <param name="propertyName">Entity property to be matched.</param>
+	/// <param name="value">Value to match the property with</param>
+	/// <returns>A SqlFilter object.</returns>
+	/// <exception cref="ApplicationException">When the property name passed is not found in the entity.</exception>
+	public static SqlFilter Filter(String propertyName, Int32 value) {
+	    return new SqlFilter(new SqlEqualityPredicate(GetPropertyMapping(propertyToSqlMap, propertyName), EqualityOperatorEnum.Equal, value));
+	}
+
+	/// <summary>
+	/// Creates a where clause object that can be used to create sql to find objects whose entity property value
+	/// matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped
+	/// to the appropriate sql.
+	/// </summary>
+	/// <param name="propertyName">Entity property to be matched.</param>
+	/// <param name="value">Value to match the property with</param>
+	/// <returns>A SqlFilter object.</returns>
+	/// <exception cref="ApplicationException">When the property name passed is not found in the entity.</exception>
+	public static SqlFilter filter(String propertyName, DateTime value) {
+	    return new SqlFilter(new SqlEqualityPredicate(GetPropertyMapping(propertyToSqlMap, propertyName), EqualityOperatorEnum.Equal, value));
+	}
+
+
 	#region WhereClause
 	protected IDataReader GetListReader(String key, String viewName) { 
 	    return GetListReader(key, viewName, new SqlFilter(), null); 
