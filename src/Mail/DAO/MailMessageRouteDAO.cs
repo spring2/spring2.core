@@ -353,30 +353,30 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MailMessageRouteId"))) {
+	    if (dataReader.IsDBNull(ordinals.MailMessageRouteId)) {
 		data.MailMessageRouteId = IdType.UNSET;
 	    } else {
-		data.MailMessageRouteId = new IdType(dataReader.GetInt32(dataReader.GetOrdinal("MailMessageRouteId")));
+		data.MailMessageRouteId = new IdType(dataReader.GetInt32(ordinals.MailMessageRouteId));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MailMessage"))) {
+	    if (dataReader.IsDBNull(ordinals.MailMessage)) {
 		data.MailMessage = StringType.UNSET;
 	    } else {
-		data.MailMessage = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("MailMessage")));
+		data.MailMessage = StringType.Parse(dataReader.GetString(ordinals.MailMessage));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("RoutingType"))) {
+	    if (dataReader.IsDBNull(ordinals.RoutingType)) {
 		data.RoutingType = RoutingTypeEnum.UNSET;
 	    } else {
-		data.RoutingType = RoutingTypeEnum.GetInstance(dataReader.GetString(dataReader.GetOrdinal("RoutingType")));
+		data.RoutingType = RoutingTypeEnum.GetInstance(dataReader.GetString(ordinals.RoutingType));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Status"))) {
+	    if (dataReader.IsDBNull(ordinals.Status)) {
 		data.Status = ActiveStatusEnum.UNSET;
 	    } else {
-		data.Status = ActiveStatusEnum.GetInstance(dataReader.GetString(dataReader.GetOrdinal("Status")));
+		data.Status = ActiveStatusEnum.GetInstance(dataReader.GetString(ordinals.Status));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("EmailAddress"))) {
+	    if (dataReader.IsDBNull(ordinals.EmailAddress)) {
 		data.EmailAddress = StringType.UNSET;
 	    } else {
-		data.EmailAddress = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("EmailAddress")));
+		data.EmailAddress = StringType.Parse(dataReader.GetString(ordinals.EmailAddress));
 	    }
 	    return data;
 	}

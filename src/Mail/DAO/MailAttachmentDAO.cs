@@ -347,28 +347,29 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MailAttachmentId"))) {
+	    if (dataReader.IsDBNull(ordinals.MailAttachmentId)) {
 		data.MailAttachmentId = IdType.UNSET;
 	    } else {
-		data.MailAttachmentId = new IdType(dataReader.GetInt32(dataReader.GetOrdinal("MailAttachmentId")));
+		data.MailAttachmentId = new IdType(dataReader.GetInt32(ordinals.MailAttachmentId));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MailMessageId"))) {
+	    if (dataReader.IsDBNull(ordinals.MailMessageId)) {
 		data.MailMessageId = IdType.UNSET;
 	    } else {
-		data.MailMessageId = new IdType(dataReader.GetInt32(dataReader.GetOrdinal("MailMessageId")));
+		data.MailMessageId = new IdType(dataReader.GetInt32(ordinals.MailMessageId));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Filename"))) {
+	    if (dataReader.IsDBNull(ordinals.Filename)) {
 		data.Filename = StringType.UNSET;
 	    } else {
-		data.Filename = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("Filename")));
+		data.Filename = StringType.Parse(dataReader.GetString(ordinals.Filename));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Text"))) {
+	    if (dataReader.IsDBNull(ordinals.Text)) {
 		data.Text = null;
 	    } else {
- 		Byte[] b = new Byte[(dataReader.GetBytes(dataReader.GetOrdinal("Text"), 0, null, 0, int.MaxValue))]; 	
- 		dataReader.GetBytes(dataReader.GetOrdinal("Text"), 0, b, 0, b.Length);
+ 		Byte[] b = new Byte[(dataReader.GetBytes(ordinals.Text, 0, null, 0, int.MaxValue))]; 	
+ 		dataReader.GetBytes(ordinals.Text, 0, b, 0, b.Length);
  		data.Buffer = b ;
  		data.Text = b;
+
 	    }
 	    return data;
 	}

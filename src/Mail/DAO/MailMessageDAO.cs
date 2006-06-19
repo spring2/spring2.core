@@ -419,85 +419,85 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessage GetDataObjectFromReader(MailMessage data, IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MailMessageId"))) {
+	    if (dataReader.IsDBNull(ordinals.MailMessageId)) {
 		data.MailMessageId = IdType.UNSET;
 	    } else {
-		data.MailMessageId = new IdType(dataReader.GetInt32(dataReader.GetOrdinal("MailMessageId")));
+		data.MailMessageId = new IdType(dataReader.GetInt32(ordinals.MailMessageId));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("ScheduleTime"))) {
+	    if (dataReader.IsDBNull(ordinals.ScheduleTime)) {
 		data.ScheduleTime = DateTimeType.UNSET;
 	    } else {
-		data.ScheduleTime = new DateTimeType(dataReader.GetDateTime(dataReader.GetOrdinal("ScheduleTime")));
+		data.ScheduleTime = new DateTimeType(dataReader.GetDateTime(ordinals.ScheduleTime));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("ProcessedTime"))) {
+	    if (dataReader.IsDBNull(ordinals.ProcessedTime)) {
 		data.ProcessedTime = DateTimeType.UNSET;
 	    } else {
-		data.ProcessedTime = new DateTimeType(dataReader.GetDateTime(dataReader.GetOrdinal("ProcessedTime")));
+		data.ProcessedTime = new DateTimeType(dataReader.GetDateTime(ordinals.ProcessedTime));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Priority"))) {
+	    if (dataReader.IsDBNull(ordinals.Priority)) {
 		data.Priority = MailPriorityEnum.UNSET;
 	    } else {
-		data.Priority = MailPriorityEnum.GetInstance(dataReader.GetString(dataReader.GetOrdinal("Priority")));
+		data.Priority = MailPriorityEnum.GetInstance(dataReader.GetString(ordinals.Priority));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("From"))) {
+	    if (dataReader.IsDBNull(ordinals.From)) {
 		data.From = StringType.UNSET;
 	    } else {
-		data.From = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("From")));
+		data.From = StringType.Parse(dataReader.GetString(ordinals.From));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("To"))) {
+	    if (dataReader.IsDBNull(ordinals.To)) {
 		data.To = StringType.UNSET;
 	    } else {
-		data.To = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("To")));
+		data.To = StringType.Parse(dataReader.GetString(ordinals.To));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Cc"))) {
+	    if (dataReader.IsDBNull(ordinals.Cc)) {
 		data.Cc = StringType.UNSET;
 	    } else {
-		data.Cc = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("Cc")));
+		data.Cc = StringType.Parse(dataReader.GetString(ordinals.Cc));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Bcc"))) {
+	    if (dataReader.IsDBNull(ordinals.Bcc)) {
 		data.Bcc = StringType.UNSET;
 	    } else {
-		data.Bcc = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("Bcc")));
+		data.Bcc = StringType.Parse(dataReader.GetString(ordinals.Bcc));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Subject"))) {
+	    if (dataReader.IsDBNull(ordinals.Subject)) {
 		data.Subject = StringType.UNSET;
 	    } else {
-		data.Subject = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("Subject")));
+		data.Subject = StringType.Parse(dataReader.GetString(ordinals.Subject));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("BodyFormat"))) {
+	    if (dataReader.IsDBNull(ordinals.BodyFormat)) {
 		data.BodyFormat = MailBodyFormatEnum.UNSET;
 	    } else {
-		data.BodyFormat = MailBodyFormatEnum.GetInstance(dataReader.GetString(dataReader.GetOrdinal("BodyFormat")));
+		data.BodyFormat = MailBodyFormatEnum.GetInstance(dataReader.GetString(ordinals.BodyFormat));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Body"))) {
+	    if (dataReader.IsDBNull(ordinals.Body)) {
 		data.Body = StringType.UNSET;
 	    } else {
-		data.Body = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("Body")));
+		data.Body = StringType.Parse(dataReader.GetString(ordinals.Body));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MailMessageStatus"))) {
+	    if (dataReader.IsDBNull(ordinals.MailMessageStatus)) {
 		data.MailMessageStatus = MailMessageStatusEnum.UNSET;
 	    } else {
-		data.MailMessageStatus = MailMessageStatusEnum.GetInstance(dataReader.GetString(dataReader.GetOrdinal("MailMessageStatus")));
+		data.MailMessageStatus = MailMessageStatusEnum.GetInstance(dataReader.GetString(ordinals.MailMessageStatus));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("ReleasedByUserId"))) {
+	    if (dataReader.IsDBNull(ordinals.ReleasedByUserId)) {
 		data.ReleasedByUserId = IdType.UNSET;
 	    } else {
-		data.ReleasedByUserId = new IdType(dataReader.GetInt32(dataReader.GetOrdinal("ReleasedByUserId")));
+		data.ReleasedByUserId = new IdType(dataReader.GetInt32(ordinals.ReleasedByUserId));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MailMessageType"))) {
+	    if (dataReader.IsDBNull(ordinals.MailMessageType)) {
 		data.MailMessageType = StringType.UNSET;
 	    } else {
-		data.MailMessageType = StringType.Parse(dataReader.GetString(dataReader.GetOrdinal("MailMessageType")));
+		data.MailMessageType = StringType.Parse(dataReader.GetString(ordinals.MailMessageType));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("NumberOfAttempts"))) {
+	    if (dataReader.IsDBNull(ordinals.NumberOfAttempts)) {
 		data.NumberOfAttempts = IntegerType.UNSET;
 	    } else {
-		data.NumberOfAttempts = new IntegerType(dataReader.GetInt32(dataReader.GetOrdinal("NumberOfAttempts")));
+		data.NumberOfAttempts = new IntegerType(dataReader.GetInt32(ordinals.NumberOfAttempts));
 	    }
-	    if (dataReader.IsDBNull(dataReader.GetOrdinal("MessageQueueDate"))) {
+	    if (dataReader.IsDBNull(ordinals.MessageQueueDate)) {
 		data.MessageQueueDate = DateTimeType.UNSET;
 	    } else {
-		data.MessageQueueDate = new DateTimeType(dataReader.GetDateTime(dataReader.GetOrdinal("MessageQueueDate")));
+		data.MessageQueueDate = new DateTimeType(dataReader.GetDateTime(ordinals.MessageQueueDate));
 	    }
 	    return data;
 	}
