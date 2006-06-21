@@ -75,6 +75,36 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual(Int64.MaxValue, ((SqlParameter)predicate.Parameters["@foo"]).Value);
 	}
 
+	[Test]
+	public void EqualDBNull() {
+	    SqlEqualityPredicate predicate = new SqlEqualityPredicate("foo", EqualityOperatorEnum.Equal, DBNull.Value);
+	    Assert.AreEqual("(foo IS NULL)", predicate.Expression);
+	    Assert.AreEqual(0, predicate.Parameters.Count);
+	}
+    
+	[Test]
+	public void NotEqualDBNull() {
+	    SqlEqualityPredicate predicate = new SqlEqualityPredicate("foo", EqualityOperatorEnum.NotEqual, DBNull.Value);
+	    Assert.AreEqual("(foo IS NOT NULL)", predicate.Expression);
+	    Assert.AreEqual(0, predicate.Parameters.Count);
+	}
+
+	[Test]
+	public void EqualNull() {
+	    String s = null;
+	    SqlEqualityPredicate predicate = new SqlEqualityPredicate("foo", EqualityOperatorEnum.Equal, s);
+	    Assert.AreEqual("(foo IS NULL)", predicate.Expression);
+	    Assert.AreEqual(0, predicate.Parameters.Count);
+	}
+    
+	[Test]
+	public void NotEqualNull() {
+	    String s = null;
+	    SqlEqualityPredicate predicate = new SqlEqualityPredicate("foo", EqualityOperatorEnum.NotEqual, s);
+	    Assert.AreEqual("(foo IS NOT NULL)", predicate.Expression);
+	    Assert.AreEqual(0, predicate.Parameters.Count);
+	}
+
 
     }
 }

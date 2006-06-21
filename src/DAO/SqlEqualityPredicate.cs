@@ -62,12 +62,12 @@ namespace Spring2.Core.DAO {
 	}
 
 	public SqlEqualityPredicate(String columnName, EqualityOperatorEnum _operator, DBNull value) {
-	    SetInternalValues(columnName, _operator, value, SqlDbType.Variant);
+	    SetInternalValues(columnName, _operator, null, SqlDbType.Variant);
 	}
 
 	public SqlEqualityPredicate(String columnName, EqualityOperatorEnum _operator, Object value) {
 	    if (value is DBNull) {
-		SetInternalValues(columnName, _operator, value as DBNull, SqlDbType.Variant);
+		SetInternalValues(columnName, _operator, null, SqlDbType.Variant);
 	    } else if (value is Int64) {
 		SetInternalValues(columnName, _operator, value, SqlDbType.BigInt);
 	    } else if (value is Int32) {
@@ -106,14 +106,26 @@ namespace Spring2.Core.DAO {
 
 	public override String Expression {
 	    get {
-		return String.Format("({0} {1} @{0})", columnName, GetSqlOperator(_operator));
+		if (_operator.Equals(EqualityOperatorEnum.Equal) && value == null) {
+		    return String.Format("({0} IS NULL)", columnName);
+		} else if (_operator.Equals(EqualityOperatorEnum.NotEqual) && value == null) {
+		    return String.Format("({0} IS NOT NULL)", columnName);
+		} else {
+		    return String.Format("({0} {1} @{0})", columnName, GetSqlOperator(_operator));
+		}
 	    }
 	}
 
 	public override IDataParameterCollection Parameters {
 	    get {
 		SqlParameterList parameters = new SqlParameterList();
-		parameters.Add("@" + columnName, dbType, value);
+		if (_operator.Equals(EqualityOperatorEnum.Equal) && value == null) {
+		    // do not add parameter
+		} else if (_operator.Equals(EqualityOperatorEnum.NotEqual) && value == null) {
+		    // do not add parameter
+		} else {
+		    parameters.Add("@" + columnName, dbType, value);
+		}
 		return parameters;
 	    }
 	}
