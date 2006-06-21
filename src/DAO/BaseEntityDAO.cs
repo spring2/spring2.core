@@ -128,9 +128,13 @@ namespace Spring2.Core.DAO {
 	    } 
 	    if (orderByClause != null) { 
 		sql = sql + orderByClause.FormatSql(); 
-	    } 
-			 
-	    return ExecuteReader(key, sql, filter.Parameters, commandTimeout);
+	    }
+
+	    if(filter != null) {
+		return ExecuteReader(key, sql, filter.Parameters, commandTimeout);
+	    } else {
+		return ExecuteReader(key, sql, commandTimeout);
+	    }
 	}
     	
 	#endregion
