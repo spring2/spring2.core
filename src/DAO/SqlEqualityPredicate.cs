@@ -111,7 +111,7 @@ namespace Spring2.Core.DAO {
 		} else if (_operator.Equals(EqualityOperatorEnum.NotEqual) && value == null) {
 		    return String.Format("({0} IS NOT NULL)", columnName);
 		} else {
-		    return String.Format("({0} {1} @{0})", columnName, GetSqlOperator(_operator));
+		    return String.Format("({0} {1} @{2})", columnName, GetSqlOperator(_operator), columnName.Replace(".", "_"));
 		}
 	    }
 	}
@@ -124,7 +124,7 @@ namespace Spring2.Core.DAO {
 		} else if (_operator.Equals(EqualityOperatorEnum.NotEqual) && value == null) {
 		    // do not add parameter
 		} else {
-		    parameters.Add("@" + columnName, dbType, value);
+		    parameters.Add("@" + columnName.Replace(".","_"), dbType, value);
 		}
 		return parameters;
 	    }

@@ -36,7 +36,7 @@ namespace Spring2.Core.DAO {
 		    if (i>0) {
 		    	sb.Append(", ");
 		    }
-	    	    sb.Append("@").Append(columnName).Append((i+1).ToString());
+	    	    sb.Append("@").Append(columnName.Replace(".","_")).Append((i+1).ToString());
 	    	}
 		return String.Format(" {0} {1}IN ({2})", columnName, not ? "NOT " : String.Empty, sb.ToString());
 	    }
@@ -46,7 +46,7 @@ namespace Spring2.Core.DAO {
 	    get {
 		SqlParameterList parameters = new SqlParameterList();
 		for(Int32 i=0; i<values.Length; i++) {
-		    parameters.Add("@" + columnName + (i+1).ToString(), dbType, values[i]);
+		    parameters.Add("@" + columnName.Replace(".","_") + (i+1).ToString(), dbType, values[i]);
 		}
 		return parameters;
 	    }
