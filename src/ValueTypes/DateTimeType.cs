@@ -61,7 +61,7 @@ namespace Spring2.Core.Types {
 	}
     
 	public DateTimeType(int year, int month, int day, int hour, int minute, int second) {
-	    myValue = new DateTime(year, month, day, hour, second, minute, second);
+	    myValue = new DateTime(year, month, day, hour, minute, second);
 	    myState = TypeState.VALID;
 	}
     
