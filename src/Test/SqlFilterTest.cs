@@ -11,7 +11,7 @@ namespace Spring2.Core.Test {
     [TestFixture]
     public class SqlFilterTest {
 
-	#region Old version
+	#region Old version (kept for reference until these test are converted to new version as appropriate)
 //	[Test]
 //	public void SqlFilter() {
 //	    // make sure an empty object does not emits an empty clause
@@ -681,6 +681,19 @@ namespace Spring2.Core.Test {
 	    Assert.IsTrue(filter.Parameters.Contains("@tweener1"));
 	    Assert.IsTrue(filter.Parameters.Contains("@tweener2"));    		
     	}
+    	
+    	[Test]
+    	[Ignore ("Not yet implemented")]
+	public void ShouldHandleMultipleUsesOfSameColumnName() {
+    	    // TODO: this test needs to show that 2 values can be added to an expressions, that may be contained
+	    // in deeper contained expressions and be referenced correctly and uniquely.
+    	    SqlFilter filter = new SqlFilter(new SqlEqualityPredicate("foo", EqualityOperatorEnum.GreaterThanOrEqual, DateTime.Today.AddDays(-1)));
+    	    filter.And(new SqlEqualityPredicate("foo", EqualityOperatorEnum.LessThanOrEqual, DateTime.Today.AddDays(1)));
+	    Assert.AreEqual(" WHERE ((foo >= @a_foo) AND (foo <= @b_foo))", filter.Statement);
+	    Assert.AreEqual(2, filter.Parameters.Count);
+	    Assert.IsTrue(filter.Parameters.Contains("@a_foo"));
+	    Assert.IsTrue(filter.Parameters.Contains("@b_foo"));
+	}
     	
     }
 }
