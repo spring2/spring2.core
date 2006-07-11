@@ -164,7 +164,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Finds a MailMessageRoute entity using it's primary key.
 	/// </summary>
-	/// <param name="MailMessageRouteId">A key field.</param>
+	/// <param name="mailMessageRouteId">A key field.</param>
 	/// <returns>A MailMessageRoute object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MailMessageRoute Load(IdType mailMessageRouteId) {
@@ -228,7 +228,9 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="ordinals"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader, ColumnOrdinals ordinals) {
 	    return GetDataObjectFromReader(data, dataReader, String.Empty, ordinals);
@@ -237,6 +239,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader) {
@@ -250,6 +253,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="ordinals"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessageRoute GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
 	    MailMessageRoute data = new MailMessageRoute(false);
@@ -273,6 +277,8 @@ namespace Spring2.Core.Mail.Dao {
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
+	/// <param name="ordinals"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessageRoute GetDataObjectFromReader(IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
 	    MailMessageRoute data = new MailMessageRoute(false);
@@ -282,7 +288,10 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
+	/// <param name="ordinals"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
 	    if (dataReader.IsDBNull(ordinals.MailMessageRouteId)) {
@@ -390,7 +399,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Deletes a record from the MailMessageRoute table by MailMessageRouteId.
 	/// </summary>
-	/// <param name="MailMessageRouteId">A key field.</param>
+	/// <param name="mailMessageRouteId">A key field.</param>
 	public void Delete(IdType mailMessageRouteId) {
 	    Delete(mailMessageRouteId, null);
 	}
@@ -398,7 +407,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Deletes a record from the MailMessageRoute table by MailMessageRouteId.
 	/// </summary>
-	/// <param name="MailMessageRouteId">A key field.</param>
+	/// <param name="mailMessageRouteId">A key field.</param>
 	/// <param name="transaction"></param>
 	public void Delete(IdType mailMessageRouteId, IDbTransaction transaction) {
 	    // Create and execute the command
@@ -418,7 +427,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="MailMessage">A field value to be matched.</param>
+	/// <param name="mailMessage">A field value to be matched.</param>
 	/// <returns>The list of MailMessageRouteDAO objects found.</returns>
 	public MailMessageRouteList FindByMailMessage(StringType mailMessage) {
 	    OrderByClause sort = new OrderByClause("MailMessage");

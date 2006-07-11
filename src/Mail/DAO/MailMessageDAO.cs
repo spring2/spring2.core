@@ -2,80 +2,27 @@ using System;
 using System.Collections;
 using System.Configuration;
 using System.Data;
-
 using Spring2.Core.DAO;
 using Spring2.Core.Types;
-
 using Spring2.Core.Mail.BusinessLogic;
 using Spring2.Core.Mail.DataObject;
 using Spring2.Core.Mail.Types;
 
 namespace Spring2.Core.Mail.Dao {
+    
+    
     public class MailMessageDAO : Spring2.Core.DAO.SqlEntityDAO {
-
+        
 	public static readonly MailMessageDAO DAO = new MailMessageDAO();
+        
 	private static readonly String VIEW = "vwMailMessage";
+        
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";
+        
 	private static readonly Int32 COMMAND_TIMEOUT = 15;
+        
 	private static ColumnOrdinals columnOrdinals = null;
-
-	internal sealed class ColumnOrdinals {
-	    public Int32 MailMessageId;
-	    public Int32 ScheduleTime;
-	    public Int32 ProcessedTime;
-	    public Int32 Priority;
-	    public Int32 From;
-	    public Int32 To;
-	    public Int32 Cc;
-	    public Int32 Bcc;
-	    public Int32 Subject;
-	    public Int32 BodyFormat;
-	    public Int32 Body;
-	    public Int32 MailMessageStatus;
-	    public Int32 ReleasedByUserId;
-	    public Int32 MailMessageType;
-	    public Int32 NumberOfAttempts;
-	    public Int32 MessageQueueDate;
-
-	    internal ColumnOrdinals(IDataReader reader) {
-		MailMessageId = reader.GetOrdinal("MailMessageId");
-		ScheduleTime = reader.GetOrdinal("ScheduleTime");
-		ProcessedTime = reader.GetOrdinal("ProcessedTime");
-		Priority = reader.GetOrdinal("Priority");
-		From = reader.GetOrdinal("From");
-		To = reader.GetOrdinal("To");
-		Cc = reader.GetOrdinal("Cc");
-		Bcc = reader.GetOrdinal("Bcc");
-		Subject = reader.GetOrdinal("Subject");
-		BodyFormat = reader.GetOrdinal("BodyFormat");
-		Body = reader.GetOrdinal("Body");
-		MailMessageStatus = reader.GetOrdinal("MailMessageStatus");
-		ReleasedByUserId = reader.GetOrdinal("ReleasedByUserId");
-		MailMessageType = reader.GetOrdinal("MailMessageType");
-		NumberOfAttempts = reader.GetOrdinal("NumberOfAttempts");
-		MessageQueueDate = reader.GetOrdinal("MessageQueueDate");
-	    }
-
-	    internal ColumnOrdinals(IDataReader reader, String prefix) {
-		MailMessageId = reader.GetOrdinal(prefix + "MailMessageId");
-		ScheduleTime = reader.GetOrdinal(prefix + "ScheduleTime");
-		ProcessedTime = reader.GetOrdinal(prefix + "ProcessedTime");
-		Priority = reader.GetOrdinal(prefix + "Priority");
-		From = reader.GetOrdinal(prefix + "From");
-		To = reader.GetOrdinal(prefix + "To");
-		Cc = reader.GetOrdinal(prefix + "Cc");
-		Bcc = reader.GetOrdinal(prefix + "Bcc");
-		Subject = reader.GetOrdinal(prefix + "Subject");
-		BodyFormat = reader.GetOrdinal(prefix + "BodyFormat");
-		Body = reader.GetOrdinal(prefix + "Body");
-		MailMessageStatus = reader.GetOrdinal(prefix + "MailMessageStatus");
-		ReleasedByUserId = reader.GetOrdinal(prefix + "ReleasedByUserId");
-		MailMessageType = reader.GetOrdinal(prefix + "MailMessageType");
-		NumberOfAttempts = reader.GetOrdinal(prefix + "NumberOfAttempts");
-		MessageQueueDate = reader.GetOrdinal(prefix + "MessageQueueDate");
-	    }
-	}
-
+        
 	/// <summary>
 	/// Initializes the static map of property names to sql expressions.
 	/// </summary>
@@ -97,16 +44,17 @@ namespace Spring2.Core.Mail.Dao {
 	    AddPropertyMapping("NumberOfAttempts", @"NumberOfAttempts");
 	    AddPropertyMapping("MessageQueueDate", @"MessageQueueDate");
 	}
-
+        
 	private MailMessageDAO() {
+            
 	}
-
+        
 	protected override String ConnectionStringKey {
 	    get {
 		return CONNECTION_STRING_KEY;
 	    }
 	}
-
+        
 	/// <summary>
 	/// Returns a list of all MailMessage rows.
 	/// </summary>
@@ -115,7 +63,7 @@ namespace Spring2.Core.Mail.Dao {
 	public MailMessageList GetList() {
 	    return GetList(null, null);
 	}
-
+        
 	/// <summary>
 	/// Returns a filtered list of MailMessage rows.
 	/// </summary>
@@ -125,7 +73,7 @@ namespace Spring2.Core.Mail.Dao {
 	public MailMessageList GetList(SqlFilter filter) {
 	    return GetList(filter, null);
 	}
-
+        
 	/// <summary>
 	/// Returns an ordered list of MailMessage rows.  All rows in the database are returned
 	/// </summary>
@@ -135,7 +83,7 @@ namespace Spring2.Core.Mail.Dao {
 	public MailMessageList GetList(IOrderBy orderByClause) {
 	    return GetList(null, orderByClause);
 	}
-
+        
 	/// <summary>
 	/// Returns an ordered and filtered list of MailMessage rows.
 	/// </summary>
@@ -153,7 +101,7 @@ namespace Spring2.Core.Mail.Dao {
 	    dataReader.Close();
 	    return list;
 	}
-
+        
 	/// <summary>
 	/// Returns a list of all MailMessage rows.
 	/// </summary>
@@ -163,7 +111,7 @@ namespace Spring2.Core.Mail.Dao {
 	public MailMessageList GetList(Int32 maxRows) {
 	    return GetList(null, null, maxRows);
 	}
-
+        
 	/// <summary>
 	/// Returns a filtered list of MailMessage rows.
 	/// </summary>
@@ -174,7 +122,7 @@ namespace Spring2.Core.Mail.Dao {
 	public MailMessageList GetList(SqlFilter filter, Int32 maxRows) {
 	    return GetList(filter, null, maxRows);
 	}
-
+        
 	/// <summary>
 	/// Returns an ordered list of MailMessage rows.  All rows in the database are returned
 	/// </summary>
@@ -185,7 +133,7 @@ namespace Spring2.Core.Mail.Dao {
 	public MailMessageList GetList(IOrderBy orderByClause, Int32 maxRows) {
 	    return GetList(null, orderByClause, maxRows);
 	}
-
+        
 	/// <summary>
 	/// Returns an ordered and filtered list of MailMessage rows.
 	/// </summary>
@@ -204,11 +152,11 @@ namespace Spring2.Core.Mail.Dao {
 	    dataReader.Close();
 	    return list;
 	}
-
+        
 	/// <summary>
 	/// Finds a MailMessage entity using it's primary key.
 	/// </summary>
-	/// <param name="MailMessageId">A key field.</param>
+	/// <param name="mailMessageId">A key field.</param>
 	/// <returns>A MailMessage object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MailMessage Load(IdType mailMessageId) {
@@ -217,7 +165,7 @@ namespace Spring2.Core.Mail.Dao {
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 	    return GetDataObject(dataReader);
 	}
-
+        
 	/// <summary>
 	/// Repopulates an existing business entity instance
 	/// </summary>
@@ -233,7 +181,7 @@ namespace Spring2.Core.Mail.Dao {
 	    GetDataObjectFromReader(instance, dataReader);
 	    dataReader.Close();
 	}
-
+        
 	/// <summary>
 	/// Read through the reader and return a data object list
 	/// </summary>
@@ -245,7 +193,7 @@ namespace Spring2.Core.Mail.Dao {
 	    reader.Close();
 	    return list;
 	}
-
+        
 	/// <summary>
 	/// Read from reader and return a single data object
 	/// </summary>
@@ -255,7 +203,7 @@ namespace Spring2.Core.Mail.Dao {
 	    }
 	    return GetDataObject(reader, columnOrdinals);
 	}
-
+        
 	/// <summary>
 	/// Read from reader and return a single data object
 	/// </summary>
@@ -268,19 +216,22 @@ namespace Spring2.Core.Mail.Dao {
 	    reader.Close();
 	    return data;
 	}
-
+        
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="ordinals"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessage GetDataObjectFromReader(MailMessage data, IDataReader dataReader, ColumnOrdinals ordinals) {
 	    return GetDataObjectFromReader(data, dataReader, String.Empty, ordinals);
 	}
-
+        
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessage GetDataObjectFromReader(MailMessage data, IDataReader dataReader) {
@@ -289,17 +240,18 @@ namespace Spring2.Core.Mail.Dao {
 	    }
 	    return GetDataObjectFromReader(data, dataReader, String.Empty, columnOrdinals);
 	}
-
+        
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="ordinals"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessage GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
 	    MailMessage data = new MailMessage(false);
 	    return GetDataObjectFromReader(data, dataReader, String.Empty, ordinals);
 	}
-
+        
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
@@ -312,21 +264,26 @@ namespace Spring2.Core.Mail.Dao {
 	    MailMessage data = new MailMessage(false);
 	    return GetDataObjectFromReader(data, dataReader, String.Empty, columnOrdinals);
 	}
-
+        
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
+	/// <param name="ordinals"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessage GetDataObjectFromReader(IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
 	    MailMessage data = new MailMessage(false);
 	    return GetDataObjectFromReader(data, dataReader, prefix, columnOrdinals);
 	}
-
+        
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
+	/// <param name="ordinals"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailMessage GetDataObjectFromReader(MailMessage data, IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
 	    if (dataReader.IsDBNull(ordinals.MailMessageId)) {
@@ -411,8 +368,7 @@ namespace Spring2.Core.Mail.Dao {
 	    }
 	    return data;
 	}
-
-
+        
 	/// <summary>
 	/// Inserts a record into the MailMessage table.
 	/// </summary>
@@ -420,7 +376,7 @@ namespace Spring2.Core.Mail.Dao {
 	public IdType Insert(MailMessage data) {
 	    return Insert(data, null);
 	}
-
+        
 	/// <summary>
 	/// Inserts a record into the MailMessage table.
 	/// </summary>
@@ -461,8 +417,7 @@ namespace Spring2.Core.Mail.Dao {
 	    // Set the output paramter value(s)
 	    return new IdType((Int32)idParam.Value);
 	}
-
-
+        
 	/// <summary>
 	/// Updates a record in the MailMessage table.
 	/// </summary>
@@ -470,7 +425,7 @@ namespace Spring2.Core.Mail.Dao {
 	public void Update(MailMessage data) {
 	    Update(data, null);
 	}
-
+        
 	/// <summary>
 	/// Updates a record in the MailMessage table.
 	/// </summary>
@@ -506,20 +461,19 @@ namespace Spring2.Core.Mail.Dao {
 		cmd.Connection.Close();
 	    }
 	}
-
-
+        
 	/// <summary>
 	/// Deletes a record from the MailMessage table by MailMessageId.
 	/// </summary>
-	/// <param name="MailMessageId">A key field.</param>
+	/// <param name="mailMessageId">A key field.</param>
 	public void Delete(IdType mailMessageId) {
 	    Delete(mailMessageId, null);
 	}
-
+        
 	/// <summary>
 	/// Deletes a record from the MailMessage table by MailMessageId.
 	/// </summary>
-	/// <param name="MailMessageId">A key field.</param>
+	/// <param name="mailMessageId">A key field.</param>
 	/// <param name="transaction"></param>
 	public void Delete(IdType mailMessageId, IDbTransaction transaction) {
 	    // Create and execute the command
@@ -535,11 +489,11 @@ namespace Spring2.Core.Mail.Dao {
 		cmd.Connection.Close();
 	    }
 	}
-
+        
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="MailMessageStatus">A field value to be matched.</param>
+	/// <param name="mailMessageStatus">A field value to be matched.</param>
 	/// <returns>The list of MailMessageDAO objects found.</returns>
 	public MailMessageList FindByStatus(MailMessageStatusEnum mailMessageStatus) {
 	    OrderByClause sort = new OrderByClause("MailMessageStatus");
@@ -548,6 +502,79 @@ namespace Spring2.Core.Mail.Dao {
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 
 	    return GetList(dataReader);
+	}
+        
+	public sealed class ColumnOrdinals {
+            
+	    public Int32 MailMessageId;
+            
+	    public Int32 ScheduleTime;
+            
+	    public Int32 ProcessedTime;
+            
+	    public Int32 Priority;
+            
+	    public Int32 From;
+            
+	    public Int32 To;
+            
+	    public Int32 Cc;
+            
+	    public Int32 Bcc;
+            
+	    public Int32 Subject;
+            
+	    public Int32 BodyFormat;
+            
+	    public Int32 Body;
+            
+	    public Int32 MailMessageStatus;
+            
+	    public Int32 ReleasedByUserId;
+            
+	    public Int32 MailMessageType;
+            
+	    public Int32 NumberOfAttempts;
+            
+	    public Int32 MessageQueueDate;
+            
+	    internal ColumnOrdinals(IDataReader reader) {
+		MailMessageId = reader.GetOrdinal("MailMessageId");
+		ScheduleTime = reader.GetOrdinal("ScheduleTime");
+		ProcessedTime = reader.GetOrdinal("ProcessedTime");
+		Priority = reader.GetOrdinal("Priority");
+		From = reader.GetOrdinal("From");
+		To = reader.GetOrdinal("To");
+		Cc = reader.GetOrdinal("Cc");
+		Bcc = reader.GetOrdinal("Bcc");
+		Subject = reader.GetOrdinal("Subject");
+		BodyFormat = reader.GetOrdinal("BodyFormat");
+		Body = reader.GetOrdinal("Body");
+		MailMessageStatus = reader.GetOrdinal("MailMessageStatus");
+		ReleasedByUserId = reader.GetOrdinal("ReleasedByUserId");
+		MailMessageType = reader.GetOrdinal("MailMessageType");
+		NumberOfAttempts = reader.GetOrdinal("NumberOfAttempts");
+		MessageQueueDate = reader.GetOrdinal("MessageQueueDate");
+	    }
+            
+	    internal ColumnOrdinals(IDataReader reader, String prefix) {
+		MailMessageId = reader.GetOrdinal(prefix + "MailMessageId");
+		ScheduleTime = reader.GetOrdinal(prefix + "ScheduleTime");
+		ProcessedTime = reader.GetOrdinal(prefix + "ProcessedTime");
+		Priority = reader.GetOrdinal(prefix + "Priority");
+		From = reader.GetOrdinal(prefix + "From");
+		To = reader.GetOrdinal(prefix + "To");
+		Cc = reader.GetOrdinal(prefix + "Cc");
+		Bcc = reader.GetOrdinal(prefix + "Bcc");
+		Subject = reader.GetOrdinal(prefix + "Subject");
+		BodyFormat = reader.GetOrdinal(prefix + "BodyFormat");
+		Body = reader.GetOrdinal(prefix + "Body");
+		MailMessageStatus = reader.GetOrdinal(prefix + "MailMessageStatus");
+		ReleasedByUserId = reader.GetOrdinal(prefix + "ReleasedByUserId");
+		MailMessageType = reader.GetOrdinal(prefix + "MailMessageType");
+		NumberOfAttempts = reader.GetOrdinal(prefix + "NumberOfAttempts");
+		MessageQueueDate = reader.GetOrdinal(prefix + "MessageQueueDate");
+	    }
 	}
     }
 }

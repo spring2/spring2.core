@@ -160,7 +160,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Finds a MailAttachment entity using it's primary key.
 	/// </summary>
-	/// <param name="MailAttachmentId">A key field.</param>
+	/// <param name="mailAttachmentId">A key field.</param>
 	/// <returns>A MailAttachment object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MailAttachment Load(IdType mailAttachmentId) {
@@ -221,11 +221,13 @@ namespace Spring2.Core.Mail.Dao {
 	    return data;
 	}
 
-	/// <summary>
-	/// Builds a data object from the current row in a data reader..
-	/// </summary>
-	/// <param name="dataReader">Container for database row.</param>
-	/// <returns>Data object built from current row.</returns>
+    	/// <summary>
+    	/// Builds a data object from the current row in a data reader..
+    	/// </summary>
+    	/// <param name="data"></param>
+    	/// <param name="dataReader"></param>
+    	/// <param name="ordinals"></param>
+    	/// <returns></returns>
 	internal static MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader, ColumnOrdinals ordinals) {
 	    return GetDataObjectFromReader(data, dataReader, String.Empty, ordinals);
 	}
@@ -233,9 +235,10 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
-	/// <param name="dataReader">Container for database row.</param>
-	/// <returns>Data object built from current row.</returns>
-	internal static MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader) {
+	/// <param name="data"></param>
+	/// <param name="dataReader"></param>
+	/// <returns></returns>
+    	internal static MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
@@ -246,6 +249,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="ordinals"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailAttachment GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
 	    MailAttachment data = new MailAttachment(false);
@@ -269,6 +273,8 @@ namespace Spring2.Core.Mail.Dao {
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
+	/// <param name="ordinals"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailAttachment GetDataObjectFromReader(IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
 	    MailAttachment data = new MailAttachment(false);
@@ -278,7 +284,10 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data"></param>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="prefix"></param>
+	/// <param name="ordinals"></param>
 	/// <returns>Data object built from current row.</returns>
 	internal static MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
 	    if (dataReader.IsDBNull(ordinals.MailAttachmentId)) {
@@ -381,7 +390,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Deletes a record from the MailAttachment table by MailAttachmentId.
 	/// </summary>
-	/// <param name="MailAttachmentId">A key field.</param>
+	/// <param name="mailAttachmentId">A key field.</param>
 	public void Delete(IdType mailAttachmentId) {
 	    Delete(mailAttachmentId, null);
 	}
@@ -389,7 +398,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Deletes a record from the MailAttachment table by MailAttachmentId.
 	/// </summary>
-	/// <param name="MailAttachmentId">A key field.</param>
+	/// <param name="mailAttachmentId">A key field.</param>
 	/// <param name="transaction"></param>
 	public void Delete(IdType mailAttachmentId, IDbTransaction transaction) {
 	    // Create and execute the command
@@ -409,7 +418,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="MailMessageId">A field value to be matched.</param>
+	/// <param name="mailMessageId">A field value to be matched.</param>
 	/// <returns>The list of MailAttachmentDAO objects found.</returns>
 	public MailAttachmentList FindByMailMessageId(IdType mailMessageId) {
 	    OrderByClause sort = new OrderByClause("MailMessageId");
