@@ -146,7 +146,7 @@ namespace Spring2.Core.Test {
 	    DecimalType doubleDollars = 12.34M;
 	    CurrencyType dollars = doubleDollars;
 	    Assert.AreEqual(new CurrencyType(doubleDollars), dollars);
-	    Assert.AreEqual(doubleDollars, dollars.ToDouble());    		
+	    Assert.AreEqual(doubleDollars, new DecimalType(dollars.ToDecimal()));    		
 	}
 
 	[Test]
