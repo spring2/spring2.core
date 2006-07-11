@@ -19,7 +19,7 @@ public sealed class CRC32 {
     /// <summary>
     /// The standard CRC32 algorithm's polynomial.
     /// </summary>
-    [CLSCompliant(false)]
+    //[CLSCompliant(false)]
     public const uint STANDARD_POLYNOMIAL = 0xedb88320;
     #endregion
     #region constructors
@@ -50,7 +50,7 @@ public sealed class CRC32 {
     /// <remarks>
     /// This property is not CLS-compliant.
     /// </remarks>
-    [CLSCompliant(false)]
+    //[CLSCompliant(false)]
     public static uint Polynomial { 
 	get { return polynomial; }
     }
@@ -81,7 +81,7 @@ public sealed class CRC32 {
     /// </remarks>
     /// <param name="Polynomial">The polynomial to use for initialization of the
     /// table.</param>
-    [CLSCompliant(false)]
+    //[CLSCompliant(false)]
     public static void Init(uint Polynomial) {
 	polynomial = Polynomial;
 	// counters
