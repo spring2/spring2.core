@@ -96,6 +96,10 @@ namespace Spring2.Core.Test {
 	    CurrencyType dollars2 = dollars1 * doubleDollars;
 	    Assert.AreEqual(new CurrencyType(1200), dollars2);
 	    Assert.AreEqual(1200, dollars2.ToInt32());    		
+
+	    dollars2 = doubleDollars * dollars1;
+	    Assert.AreEqual(new CurrencyType(1200), dollars2);
+	    Assert.AreEqual(1200, dollars2.ToInt32());    		
 	}
     	
 	[Test]
@@ -136,6 +140,37 @@ namespace Spring2.Core.Test {
 	}
 	#endregion
     	
+	#region DecimalType
+	[Test]
+	public void ImplicitConvertionFromDecimalType() {
+	    DecimalType doubleDollars = 12.34M;
+	    CurrencyType dollars = doubleDollars;
+	    Assert.AreEqual(new CurrencyType(doubleDollars), dollars);
+	    Assert.AreEqual(doubleDollars, dollars.ToDouble());    		
+	}
+
+	[Test]
+	public void MultiplyByDecimalType() {
+	    DecimalType doubleDollars = 12.34M;
+	    CurrencyType dollars1 = 100;
+	    CurrencyType dollars2 = dollars1 * doubleDollars;
+	    Assert.AreEqual(new CurrencyType(1234), dollars2);
+	    Assert.AreEqual(1234M, dollars2.ToDouble());    		
+
+	    dollars2 = doubleDollars * dollars1;
+	    Assert.AreEqual(new CurrencyType(1234), dollars2);
+	    Assert.AreEqual(1234M, dollars2.ToDouble());    		
+	}
+    	
+	[Test]
+	public void MultiplyAssignmentByDecimalType() {
+	    DecimalType doubleDollars = 12.34M;
+	    CurrencyType dollars = 100;
+	    dollars *= doubleDollars;
+	    Assert.AreEqual(new CurrencyType(1234), dollars);
+	    Assert.AreEqual(1234M, dollars.ToDouble());    		
+	}
+	#endregion
     	
     }
 }
