@@ -1,3 +1,239 @@
+2006-07-11 Tuesday 15:21  cort
+
+	* src/Test/CurrencyTypeTest.cs:
+	
+	fix comparision for conversion from DecimalType, although not sure
+	how valid it is if there is another conversion in the middle
+
+2006-07-11 Tuesday 14:46  cort
+
+	* src/: Test/CurrencyTypeTest.cs, ValueTypes/CurrencyType.cs:
+	
+	added tests to multiply by Int32 and DecimalType with types on both
+	sides of the operator reverted changes to remove CurrencyType *
+	CurrencyType until I can figure out how to be able to have the
+	other type on either side of the operator and still work.  add
+	support for assigning from double and decimaltype as well as the
+	multiplication methods/operators
+
+2006-07-11 Tuesday 14:33  cort
+
+	* src/Test/CRC32.cs:
+	
+	comment out CLSCompliant attributes, since assembly is not marked
+	as compliant
+
+2006-07-11 Tuesday 14:08  cort
+
+	* src/Mail/DAO/: MailAttachmentDAO.cs, MailMessageDAO.cs,
+	MailMessageRouteDAO.cs:
+	
+	correct xml comments
+
+2006-07-11 Tuesday 14:02  crandall
+
+	* src/Test/DateTimeTypeTest.cs:
+	
+	Add tests for all constructors.
+
+2006-07-11 Tuesday 14:01  crandall
+
+	* src/ValueTypes/DateTimeType.cs:
+	
+	Fix constructor that was transposing minutes and seconds.
+
+2006-07-11 Tuesday 13:39  cort
+
+	* src/Test/SqlFilterTest.cs:
+	
+	added test as a reminder that adding the same column twice is not
+	correctly handled
+
+2006-07-11 Tuesday 13:38  cort
+
+	* src/DAO/: DatabaseFilter.cs, SqlFilter.cs:
+	
+	cleaned out remaining old style sql filter code
+
+2006-07-11 Tuesday 13:06  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	no message
+
+2006-06-27 Tuesday 15:39  cort
+
+	* src/: DAO/SqlBetweenPredicate.cs,
+	Test/SqlBetweenPredicateTest.cs:
+	
+	add support for the other Int types and DateTime
+
+2006-06-26 Monday 12:39  jeffm
+
+	* src/DAO/: SqlEqualityPredicate.cs, SqlInPredicate.cs:
+	
+	Handle table.column notation for parameters
+
+2006-06-21 Wednesday 14:16  jeffm
+
+	* src/DAO/BaseEntityDAO.cs:
+	
+	Handle null filter.
+
+2006-06-21 Wednesday 14:03  cort
+
+	* src/Spring2.Core.WithTypes.csproj:
+	
+	add the new SqlFilter stuff to the Spring2.CoreWithTypes assembly
+
+2006-06-21 Wednesday 13:39  cort
+
+	* src/: DAO/SqlEqualityPredicate.cs,
+	Test/SqlEqualityPredicateTest.cs:
+	
+	update SqlEqualityPredicate to handle null values for equal and not
+	equal.
+
+2006-06-19 Monday 16:28  cort
+
+	* src/DAO/SqlEqualityPredicate.cs:
+	
+	added constructor that takes object and then checks for the
+	explicit types.  This was to handle the dataType.ToXxx as Object :
+	DBNull.Value syntax in the dao classes.
+
+2006-06-19 Monday 16:24  cort
+
+	* src/DAO/BaseEntityDAO.cs:
+	
+	moved common Filter methods to base class along with the
+	propertyToSql mapping.	Add method for mappings.
+
+2006-06-19 Monday 16:22  cort
+
+	* src/Mail/DAO/: MailAttachmentDAO.cs, MailMessageDAO.cs,
+	MailMessageRouteDAO.cs:
+	
+	moved common Filter methods to base class along with the
+	propertyToSql mapping.	Use add method for mappings.  Reworked
+	Load/Reload methods.  Removed unneeded statics.
+
+2006-06-19 Monday 15:38  cort
+
+	* src/Mail/DAO/MailMessageDAO.cs:
+	
+	moved common Filter methods to base class along with the
+	propertyToSql mapping.	Use add method for mappings.  Reworked
+	Load/Reload methods.  Removed unneeded statics.
+
+2006-06-19 Monday 12:59  cort
+
+	* src/DAO/BaseEntityDAO.cs:
+	
+	add new support methods that will take a database filter
+
+2006-06-19 Monday 12:59  cort
+
+	* src/Test/MailMessageTest.cs:
+	
+	test finder that will use SqlFilter
+
+2006-06-19 Monday 12:58  cort
+
+	* src/Test/DAO/TestDAO.cs:
+	
+	no message
+
+2006-06-19 Monday 12:57  cort
+
+	* src/: DAO/DatabaseFilter.cs, DAO/EqualityOperatorEnum.cs,
+	DAO/Filter.cs, DAO/IDatabaseExpression.cs,
+	DAO/LogicalOperatorEnum.cs, DAO/SqlBetweenPredicate.cs,
+	DAO/SqlEqualityPredicate.cs, DAO/SqlFilter.cs,
+	DAO/SqlInPredicate.cs, DAO/SqlLiteralPredicate.cs,
+	DAO/SqlParameterList.cs, DAO/SqlPredicate.cs, Test/FilterTest.cs,
+	Test/SqlBetweenPredicateTest.cs, Test/SqlEntityDAOTest.cs,
+	Test/SqlEqualityPredicateTest.cs, Test/SqlFilterTest.cs,
+	Test/SqlInPredicateTest.cs, Test/SqlLiteralPredicateTest.cs,
+	Spring2.Core.Test.csproj, Spring2.Core.csproj:
+	
+	add new replacement for WhereClause
+
+2006-06-19 Monday 12:54  cort
+
+	* src/Spring2.Core.Mail.csproj:
+	
+	no message
+
+2006-06-19 Monday 12:53  cort
+
+	* src/Mail/: dtg-entities.xml, BusinessLogic/MailAttachment.cs,
+	BusinessLogic/MailMessage.cs, DAO/MailAttachmentDAO.cs,
+	DataObject/IMailAttachment.cs, DataObject/MailAttachmentData.cs,
+	DataObject/MailAttachmentList.cs:
+	
+	consistenly use Buffer for the attachment data instead of Text
+
+2006-06-19 Monday 12:40  cort
+
+	* src/Mail/sqltypes.xml:
+	
+	reflected change to dao template that uses the ordinals from cache
+	instead of looking up each time
+
+2006-06-19 Monday 12:39  cort
+
+	* src/Mail/: dtg-databases.xml, dtg-entities.xml:
+	
+	change type for attachment property Text
+
+2006-06-19 Monday 12:35  cort
+
+	* src/Mail/DAO/: MailAttachmentDAO.cs, MailMessageDAO.cs,
+	MailMessageRouteDAO.cs:
+	
+	replace GetOrdinal with the of ColumnOrdinal cache
+
+2006-06-19 Monday 12:05  cort
+
+	* src/Mail/DAO/: MailAttachmentDAO.cs, MailMessageDAO.cs,
+	MailMessageRouteDAO.cs:
+	
+	updated to use SqlFilter instead of WhereClause
+
+2006-06-19 Monday 11:59  cort
+
+	* src/Mail/BusinessLogic/MailMessage.cs:
+	
+	updated to use SqlFilter instead of WhereClause
+
+2006-06-19 Monday 09:37  cort
+
+	* src/Mail/: BusinessLogic/.cvsignore, DAO/.cvsignore,
+	DataObject/.cvsignore, sql/proc/.cvsignore, sql/table/.cvsignore:
+	
+	no message
+
+2006-06-12 Monday 16:11  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2006-06-12 Monday 16:11  cort
+
+	* release/: Spring2.Core.1.1.26.0-net-1.1.zip,
+	Spring2.Core.1.1.26.0-net-2.0.zip, Spring2.Core-1.1.26.0.chm,
+	ChangeLog-1.1.26.0.txt:
+	
+	new release version
+
+2006-06-12 Monday 16:08  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2006-06-12 Monday 16:04  cort
 
 	* .cvsignore, docs/.cvsignore, .cvsignore,
