@@ -1,3 +1,29 @@
+2006-07-13 Thursday 15:00  cort
+
+	* src/: Test/BooleanTypeTest.cs, ValueTypes/BooleanType.cs:
+	
+	allow construction and implicit conversion from Boolean
+
+2006-07-12 Wednesday 07:15  crandall
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2006-07-12 Wednesday 07:14  crandall
+
+	* release/: Spring2.Core.1.1.29.0-net-1.1.zip,
+	Spring2.Core.1.1.29.0-net-2.0.zip, Spring2.Core-1.1.29.0.chm,
+	ChangeLog-1.1.29.0.txt:
+	
+	new release version
+
+2006-07-12 Wednesday 07:13  crandall
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2006-07-11 Tuesday 15:21  cort
 
 	* src/Test/CurrencyTypeTest.cs:
