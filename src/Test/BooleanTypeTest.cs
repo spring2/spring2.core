@@ -22,6 +22,24 @@ namespace Spring2.Core.Test {
 	    Assert.IsFalse(BooleanType.UNSET.IsValid);
 	    Assert.IsFalse(BooleanType.DEFAULT.IsValid);
 	}
+    	
+    	[Test]
+	public void ShouldConstructFromBoolean() {
+    	    BooleanType bt = new BooleanType(true);
+    	    Assert.AreEqual(true, bt.ToBoolean());
+    		
+	    bt = new BooleanType(false);
+	    Assert.AreEqual(false, bt.ToBoolean());
+    	}
+    	
+    	[Test]
+	public void ShouldImplicitlyConvertFromBoolean() {
+	    BooleanType bt = true;
+	    Assert.AreEqual(true, bt.ToBoolean());
+    		
+	    bt = false;
+	    Assert.AreEqual(false, bt.ToBoolean());
+    	}
 
     }
 }

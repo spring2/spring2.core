@@ -40,7 +40,7 @@ namespace Spring2.Core.Types {
 	    myState = state;
 	}
 
-	private BooleanType(bool value) {
+	public BooleanType(bool value) {
 	    myValue = value;
 	    myState = TypeState.VALID;
 	}
@@ -181,6 +181,11 @@ namespace Spring2.Core.Types {
 		return this.Equals(FALSE);
 	    }
 	}
+    	
+	public static implicit operator BooleanType(Boolean castFrom) {
+	    return new BooleanType(castFrom);
+	}
+
 
     }
 }
