@@ -352,7 +352,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    routes.AddRange(MailMessageRouteDAO.DAO.GetList(filter));
 	    
 	    StringBuilder sb = new StringBuilder();
-	    if (initialAddress != null && initialAddress.IsValid) {
+	    if (initialAddress != null && !initialAddress.IsEmpty) {
 		sb.Append(initialAddress.ToString()).Append(";");
 	    }
 
@@ -367,15 +367,22 @@ namespace Spring2.Core.Mail.BusinessLogic {
         /// Creates and persists a new MailMessage
         /// </summary>
         public static MailMessage Create(MailMessageData message) {
-            return MailMessage.Create(StringType.EMPTY, message.From, message.To, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[]{});
+	    StringType messageType = StringType.EMPTY;
+	    if (!message.MailMessageType.IsEmpty) {
+	    	messageType = message.MailMessageType;
+	    }
+            return Create(messageType, message.From, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[]{});
         }
         
         /// <summary>
         /// Creates and persists a new MailMessage and signs it using a 'from' address from the message routing table
         /// </summary>
         public static MailMessage Create(MailMessageData message, StringType messageType) {
-            StringType from = GetFromAddress(messageType);
-	    return MailMessage.Create(messageType, from, message.To, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[]{});
+	    StringType from = message.From;
+	    if (from.IsEmpty) {
+		from = GetFromAddress(messageType);
+	    }
+	    return Create(messageType, from, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[]{});
         }
         
         /// <summary>
@@ -383,49 +390,49 @@ namespace Spring2.Core.Mail.BusinessLogic {
         /// </summary>
         public static MailMessage Create(StringType messageType, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
             StringType from = GetFromAddress(messageType);
-	    return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, scheduleTime, new String[]{});
+	    return Create(messageType, from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[]{});
         }
         
         /// <summary>
         /// Creates and persists a new MailMessage
         /// </summary>
         public static MailMessage Create(StringType messageType, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
-            return MailMessage.Create(messageType, to, subject, body, bodyFormat, DateTimeType.DEFAULT);
+            return Create(messageType, to, subject, body, bodyFormat, DateTimeType.DEFAULT);
         }
         
         /// <summary>
         /// Creates and persists a new MailMessage
         /// </summary>
         public static MailMessage Create(StringType messageType, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
-            return MailMessage.Create(messageType, StringType.EMPTY, subject, body, bodyFormat);
+            return Create(messageType, StringType.EMPTY, subject, body, bodyFormat);
         }
         
         /// <summary>
         /// Creates and persists a new MailMessage
         /// </summary>
         public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
-            return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, DateTimeType.DEFAULT, new string[]{});
+            return Create(messageType, from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, DateTimeType.DEFAULT, new string[]{});
         }
         
         /// <summary>
         /// Creates and persists a new MailMessage
         /// </summary>
         public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, String[] attachmentFilenames) {
-            return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, DateTimeType.DEFAULT, attachmentFilenames);
+            return Create(messageType, from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, DateTimeType.DEFAULT, attachmentFilenames);
         }
         
         /// <summary>
         /// Creates and persists a new MailMessage
         /// </summary>
         public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
-            return MailMessage.Create(messageType, from, to, subject, body, bodyFormat, scheduleTime, new String[]{});
+            return Create(messageType, from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[]{});
         }
         
         /// <summary>
         /// Creates and persists a new MailMessage
         /// This is THE method that really does the work
         /// </summary>
-        public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime, String[] attachmentFilenames) {
+        public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType cc, StringType bcc, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime, String[] attachmentFilenames) {
             MailMessageData mailMessageData = new MailMessageData();
 	    MailMessage mailMessage = new MailMessage();
 	    mailMessage.SetInitialState();
@@ -433,8 +440,8 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    mailMessage.From = from;
 
 	    mailMessage.To = GetRoutingAddresses(messageType, RoutingTypeEnum.TO, to);
-	    mailMessage.Cc = GetRoutingAddresses(messageType, RoutingTypeEnum.CC, null);
-	    mailMessage.Bcc = GetRoutingAddresses(messageType, RoutingTypeEnum.BCC, null);
+	    mailMessage.Cc = GetRoutingAddresses(messageType, RoutingTypeEnum.CC, cc);
+	    mailMessage.Bcc = GetRoutingAddresses(messageType, RoutingTypeEnum.BCC, bcc);
 	    mailMessage.Subject = subject;
 	    mailMessage.Body = body;
 	    mailMessage.BodyFormat = bodyFormat;
