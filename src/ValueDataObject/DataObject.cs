@@ -46,7 +46,14 @@ namespace Spring2.Core.DataObject {
 	    StringBuilder sb = new StringBuilder();
 	    foreach (PropertyInfo p in GetType().GetProperties()) {
 		if (!p.GetGetMethod().IsStatic) {
-		    Object value = p.GetValue(this, null);
+		    Object value;
+
+		    // get the value, but handle any unfriendly exceptions by outputing that as the value
+		    try {
+		    	value = p.GetValue(this, null);
+		    } catch (Exception ex) {
+		    	value = ex.ToString();
+		    }
 
 		    sb.Append(indent);
 		    sb.Append(p.Name + ": ");
