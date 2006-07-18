@@ -768,29 +768,12 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
-	//	/// <summary>
-	//	/// Get the date part only
-	//	/// </summary>
-	//	public DateTimeType Date {
-	//	    get {
-	//		if (this.IsValid) {
-	//		    return new DateTimeType(new DateTime(ToDateTime().Year, ToDateTime().Month, ToDateTime().Day));
-	//		} else {
-	//		    return this;
-	//		}
-	//	    }
-	//	}
-
 	/// <summary>
 	/// Get the date part only
 	/// </summary>
 	public DateTime ToDate() {
 	    return myValue.Date;
 	}
-
-	//	public DateTimeType AddDays(Double days) {
-	//	    return new DateTimeType(ToDateTime().AddDays(days));
-	//	}
 
 	public Boolean SameDayAs(DateTimeType that) {
 	    // TODO: what should happen for unset and default in this method?
@@ -802,7 +785,34 @@ namespace Spring2.Core.Types {
 
 	public static DateTimeType Default1900 {
 	    get {return theDefault1900;}
-	}       	
+	}       
     
+	/// <summary>
+	/// Get the date part only, truncating the time
+	/// </summary>
+	public DateTimeType BeginningOfDay {
+	    get {
+		if (this.IsValid) {
+		    return new DateTimeType(new DateTime(ToDateTime().Year, ToDateTime().Month, ToDateTime().Day));
+		} else {
+		    return this;
+		}
+	    }
+	}
+
+    	/// <summary>
+	/// Get the date with the very last millisecond of the day.
+	/// Matches Sql Server granularity of milliseconds.
+	/// </summary>
+	public DateTimeType EndOfDay {
+	    get {
+		if (this.IsValid) {
+		    return new DateTimeType(new DateTime(ToDateTime().Year, ToDateTime().Month, ToDateTime().Day, 23, 59, 59, 997));
+		} else {
+		    return this;
+		}
+	    }
+	}
+
     }
 }

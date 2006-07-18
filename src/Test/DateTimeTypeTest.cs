@@ -116,5 +116,18 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual(5, date.Second);
 	    Assert.AreEqual(6, date.Millisecond);
 	}
+    	
+    	[Test]
+	public void ShouldCalculateBeginningOfDay() {
+    	    DateTimeType date = DateTimeType.Now;
+    	    Assert.AreEqual(DateTimeType.Today, date.BeginningOfDay);
+    	}
+
+    	[Test]
+	public void ShouldCalculateEndOfDay() {
+	    DateTimeType date = DateTimeType.Now;
+    	    DateTimeType endOfDay = DateTimeType.Today.AddHours(23).AddMinutes(59).AddSeconds(59).AddMilliseconds(997);
+	    Assert.AreEqual(endOfDay, date.EndOfDay);
+	}
     }
 }
