@@ -105,6 +105,20 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual(0, predicate.Parameters.Count);
 	}
 
+    	[Test]
+	public void ShouldEscapeKeywords() {
+	    SqlEqualityPredicate predicate = new SqlEqualityPredicate("order", EqualityOperatorEnum.Equal, Int64.MaxValue);
+	    Assert.AreEqual("([order] = @order)", predicate.Expression);
+	    Assert.AreEqual(1, predicate.Parameters.Count);
+	    Assert.AreEqual(Int64.MaxValue, ((SqlParameter)predicate.Parameters["@order"]).Value);    	    
+    	}
 
+	[Test]
+	public void ShouldEscapeNamesWithSpecialCharacters() {
+	    SqlEqualityPredicate predicate = new SqlEqualityPredicate("Unit Price", EqualityOperatorEnum.Equal, Int64.MaxValue);
+	    Assert.AreEqual("([Unit Price] = @Unit_Price)", predicate.Expression);
+	    Assert.AreEqual(1, predicate.Parameters.Count);
+	    Assert.AreEqual(Int64.MaxValue, ((SqlParameter)predicate.Parameters["@Unit_Price"]).Value);    	    
+	}
     }
 }
