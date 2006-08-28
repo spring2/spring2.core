@@ -44,8 +44,8 @@ namespace Spring2.Core.Geocode {
 	    set { _exeDirectory = value; }
 	}
 
-	public GeocodeData GetCityAndStateOfZipCode(StringType zipCode){
-	    return DoGeocode(StringType.EMPTY,StringType.EMPTY, StringType.EMPTY, zipCode,StringType.DEFAULT);
+	public GeocodeData GetCityAndStateOfZipCode(StringType postalCode){
+	    return DoGeocode(StringType.EMPTY,StringType.EMPTY, StringType.EMPTY, postalCode,StringType.DEFAULT);
 	}
 
 	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType path){
@@ -88,9 +88,7 @@ namespace Spring2.Core.Geocode {
 	    this.street = street;
 	    this.city = city;
 	    this.state = state;
-	    this.zipCode = zipCode;
-	    this.password = password;
-	    this.userName = userName;
+	    this.zipCode = postalCode;
 	    this.password = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodePassword"]);
 	    this.userName = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodeUserName"]);
 	    DirectoryInfo directory = new DirectoryInfo(ConfigurationProvider.Instance.Settings["GeocodePath"]);
