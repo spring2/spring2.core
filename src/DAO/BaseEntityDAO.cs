@@ -317,7 +317,7 @@ namespace Spring2.Core.DAO {
 	    if (!propertyToSqlMap.ContainsKey(propertyName)) {
 		throw new ApplicationException("Property " + propertyName + " not found for where clause.");
 	    }
-	    return "(" + (String)(propertyToSqlMap[propertyName]) + ")";
+	    return propertyToSqlMap[propertyName] as String;
 	}
     }
 }
