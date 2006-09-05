@@ -18,7 +18,11 @@ namespace Spring2.Core.Geocode {
 
 	public IntegerType MatchCount {
 	    get {
-		return new IntegerType(Convert.ToInt32(output.Substring(15,1)));
+		try {
+		    return new IntegerType(Convert.ToInt32(output.Substring(15,1)));
+		} catch (Exception) {
+		    return IntegerType.ZERO;
+		}
 	    }
 	}
 
@@ -41,161 +45,212 @@ namespace Spring2.Core.Geocode {
 	}
 
 	public string MatchDB {
-	    get { return output.Substring(51,1);}
+	    get { 
+		try {
+		    return output.Substring(51,1);
+		} catch (Exception) {
+		    return string.Empty;
+		}
+	    }
 	}
 
 	public string StdAddress {
 	    get { 
-		if(output.Length<700){
-		    int index = output.IndexOf("Std. Addr");
-		    index = output.IndexOf("<",index);
-		    int stopIndex = output.IndexOf(">",index);
-		    return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
-		}else{
-		    return output.Substring(71,60);
+		try {
+		    if(output.Length<700){
+			int index = output.IndexOf("Std. Addr");
+			index = output.IndexOf("<",index);
+			int stopIndex = output.IndexOf(">",index);
+			return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
+		    }else{
+			return output.Substring(71,60);
+		    }
+		} catch (Exception) {
+		    return string.Empty;
 		}
 	    }
 	}
 
 	public string StdCity {
 	    get { 
-		if(output.Length<700){
-		    int index = output.IndexOf("Std. City");
-		    index = output.IndexOf("<",index);
-		    int stopIndex = output.IndexOf(">",index);
-		    return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
-		}else{return output.Substring(148,28);}
+		try {
+		    if(output.Length<700){
+			int index = output.IndexOf("Std. City");
+			index = output.IndexOf("<",index);
+			int stopIndex = output.IndexOf(">",index);
+			return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
+		    }else{return output.Substring(148,28);}
+		} catch (Exception) {
+		    return string.Empty;
+		}
 	    }
 	}
 
 	public string StdState {
 	    get {
-		if(output.Length<700){
-		    int index = output.IndexOf("Std. State");
-		    index = output.IndexOf("<",index);
-		    int stopIndex = output.IndexOf(">",index);
-		    return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
-		} else {
-		    return output.Substring(193,2);
+		try {
+		    if(output.Length<700){
+			int index = output.IndexOf("Std. State");
+			index = output.IndexOf("<",index);
+			int stopIndex = output.IndexOf(">",index);
+			return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
+		    } else {
+			return output.Substring(193,2);
+		    }
+		} catch (Exception) {
+		    return string.Empty;
 		}
 	    }
 	}
 
 	public string StdZipCode {
 	    get { 
-		if(output.Length<700){
-		    int index = output.IndexOf("Std. Zip");
-		    index = output.IndexOf("<",index);
-		    int stopIndex = output.IndexOf(">",index);
-		    return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
-		} else { 
-		    return output.Substring(212,5);
+		try {
+		    if(output.Length<700){
+			int index = output.IndexOf("Std. Zip");
+			index = output.IndexOf("<",index);
+			int stopIndex = output.IndexOf(">",index);
+			return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
+		    } else { 
+			return output.Substring(212,5);
+		    }
+		} catch (Exception) {
+		    return string.Empty;
 		}
 	    }
 	}
 
 	public string StdZipCodePlus4 {
 	    get { 
-		if(output.Length<700){
-		    int index = output.IndexOf("Std. P4");
-		    index = output.IndexOf("<",index);
-		    int stopIndex = output.IndexOf(">",index);
-		    return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
-		}else{
-		    return output.Substring(234,4);
+		try {
+		    if(output.Length<700){
+			int index = output.IndexOf("Std. P4");
+			index = output.IndexOf("<",index);
+			int stopIndex = output.IndexOf(">",index);
+			return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
+		    }else{
+			return output.Substring(234,4);
+		    }
+		} catch (Exception) {
+		    return string.Empty;
 		}
 	    }
 	}
 
 	public string StdDPBC {
 	    get { 
-		if(output.Length<700){
-		    int index = output.IndexOf("Std. DPBC");
-		    index = output.IndexOf("<",index);
-		    int stopIndex = output.IndexOf(">",index);
-		    return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
-		}else{
-		    return output.Substring(255,2);
+		try {
+		    if(output.Length<700){
+			int index = output.IndexOf("Std. DPBC");
+			index = output.IndexOf("<",index);
+			int stopIndex = output.IndexOf(">",index);
+			return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
+		    }else{
+			return output.Substring(255,2);
+		    }
+		} catch (Exception) {
+		    return string.Empty;
 		}
 	    }
 	}
 
 	public string StdCarrier {
 	    get { 
-		if(output.Length<700){
-		    int index = output.IndexOf("Std. Carrier");
-		    index = output.IndexOf("<",index);
-		    int stopIndex = output.IndexOf(">",index);
-		    return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
-		}else{
-		    return output.Substring(274,4);
+		try {
+		    if(output.Length<700){
+			int index = output.IndexOf("Std. Carrier");
+			index = output.IndexOf("<",index);
+			int stopIndex = output.IndexOf(">",index);
+			return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
+		    }else{
+			return output.Substring(274,4);
+		    }
+		} catch (Exception) {
+		    return string.Empty;
 		}
 	    }
 	}
 
 	public string MatchAddress {
 	    get { 
-		if(output.Length<700){
-		    int index = output.IndexOf("Match Addr");
-		    index = output.IndexOf("<",index);
-		    int stopIndex = output.IndexOf(">",index);
-		    return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
-		}else{return output.Substring(297,60);}
+		try {
+		    if(output.Length<700){
+			int index = output.IndexOf("Match Addr");
+			index = output.IndexOf("<",index);
+			int stopIndex = output.IndexOf(">",index);
+			return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
+		    }else{return output.Substring(297,60);}
+		} catch (Exception) {
+		    return string.Empty;
+		}
 	    }
 	}
 
 	public string MatchCity {
 	    
 	    get {
-		if(output.Length<700){
-		    int index = output.IndexOf("Match City");
-		    index = output.IndexOf("<",index);
-		    int stopIndex = output.IndexOf(">",index);
-		    return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
-		}else{
-		    return output.Substring(374,28);
+		try {
+		    if(output.Length<700){
+			int index = output.IndexOf("Match City");
+			index = output.IndexOf("<",index);
+			int stopIndex = output.IndexOf(">",index);
+			return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
+		    }else{
+			return output.Substring(374,28);
+		    }
+		} catch (Exception) {
+		    return string.Empty;
 		}
 	    }
 	}
 
 	public string MatchState {
 	    get { 
-		if(output.Length<700){
-		    int index = output.IndexOf("Match State");
-		    index = output.IndexOf("<",index);
-		    int stopIndex = output.IndexOf(">",index);
-		    return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
-		}else{		
-		    return output.Substring(419,2);
+		try {
+		    if(output.Length<700){
+			int index = output.IndexOf("Match State");
+			index = output.IndexOf("<",index);
+			int stopIndex = output.IndexOf(">",index);
+			return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
+		    }else{		
+			return output.Substring(419,2);
+		    }
+		} catch (Exception) {
+		    return string.Empty;
 		}
 	    }
 	}
 
 	public string MatchZipCode {
 	    get {
-		if(output.Length<700) {
-		    int index = output.IndexOf("Match Zip");
-		    index = output.IndexOf("<",index);
-		    int stopIndex = output.IndexOf(">",index);
-		    return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
-		} else {
-		    return output.Substring(438,5);
+		try {
+		    if(output.Length<700) {
+			int index = output.IndexOf("Match Zip");
+			index = output.IndexOf("<",index);
+			int stopIndex = output.IndexOf(">",index);
+			return output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
+		    } else {
+			return output.Substring(438,5);
+		    }
+		} catch (Exception) {
+		    return string.Empty;
 		}
 	    }
 	}
 
 	public DecimalType MatchLatitude {
 	    get {
-		String latString;
-		if(output.Length<700){
-		    int index = output.IndexOf("Match Lat");
-		    index = output.IndexOf("<",index);
-		    int stopIndex = output.IndexOf(">",index);
-		    latString = output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
-		} else {
-		    latString = output.Substring(460,9);
-		}
-		try{
+		try {
+		    String latString;
+		    if(output.Length<700){
+			int index = output.IndexOf("Match Lat");
+			index = output.IndexOf("<",index);
+			int stopIndex = output.IndexOf(">",index);
+			latString = output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
+		    } else {
+			latString = output.Substring(460,9);
+		    }
+		
 		    return new DecimalType(Convert.ToDecimal(latString));
 		} catch (Exception) {
 		    return new DecimalType(0);
@@ -205,16 +260,17 @@ namespace Spring2.Core.Geocode {
 
 	public DecimalType MatchLongitude {
 	    get {
-		String latString;
-		if(output.Length<700){
-		    int index = output.IndexOf("Match Lon");
-		    index = output.IndexOf("<",index);
-		    int stopIndex = output.IndexOf(">",index);
-		    latString = output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
-		} else {
-		    latString = output.Substring(486,11);
-		}
-		try{
+		try {
+		    String latString;
+		    if(output.Length<700){
+			int index = output.IndexOf("Match Lon");
+			index = output.IndexOf("<",index);
+			int stopIndex = output.IndexOf(">",index);
+			latString = output.Substring(index+1,(stopIndex-index)-1).TrimEnd(' ');
+		    } else {
+			latString = output.Substring(486,11);
+		    }
+		
 		    return new DecimalType(Convert.ToDecimal(latString));
 		} catch (Exception) {
 		    return new DecimalType(0);

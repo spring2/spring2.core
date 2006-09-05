@@ -27,6 +27,8 @@ namespace Spring2.Core.Geocode {
 	    data.OutPut = StringType.EMPTY;
 	    data.MatchLatitude = DecimalType.Parse(ConfigurationProvider.Instance.Settings["DefaultLatitude"]);
 	    data.MatchLongitude = DecimalType.Parse(ConfigurationProvider.Instance.Settings["DefaultLongitude"]);
+	    data.MatchCount = 1;
+	    data.MatchType = 1;
 	    return data;
 	}
 
