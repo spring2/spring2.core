@@ -10,6 +10,10 @@ namespace Spring2.Core.Geocode {
 	public GecodeTestProvider() {
 	}
 
+	public IntegerType GetAvailableGeocodeCount() {
+	    return IntegerType.MaxValue;
+	}
+
 	public GeocodeData GetCityAndStateOfZipCode(StringType zipCode) {
 	    return DoGeocode(StringType.EMPTY,StringType.EMPTY, StringType.EMPTY, zipCode,StringType.DEFAULT);
 	}

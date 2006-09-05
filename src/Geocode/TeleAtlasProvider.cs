@@ -9,6 +9,11 @@ namespace Spring2.Core.Geocode {
 	public TeleAtlasProvider() {
 	}
 
+	public IntegerType GetAvailableGeocodeCount() {
+	    GeocodeWrapper wrapper = new GeocodeWrapper();
+	    return wrapper.GetGeocodeCount();
+	}
+
 	public GeocodeData GetCityAndStateOfZipCode(StringType zipCode) {
 	    GeocodeWrapper wrapper = new GeocodeWrapper();
 	    return wrapper.GetCityAndStateOfZipCode(zipCode);
