@@ -4,6 +4,10 @@
     <property name="build.configuration" value="debug" />
     <property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\MSBuild.exe" />
 
+    <property name="debug" value="true" />
+    <property name="build.root" value="..\" />
+    <property name="build.dir" value="..\build" />
+    <property name="release.dir" value="..\release" />
 
     <target name="ccnet">
 	<ifnot test="${property::exists('CCNetLabel')}"> 
@@ -76,4 +80,20 @@
 	<target name="foo">
 		<echo message="${nant.settings.currentframework}"/>
 	</target>
+
+    <target name="package_src">
+        <mkdir dir="${release.dir}" />
+	<ifnot test="${property::exists('version')}"> 
+	    <fail message="version property not set, so can't create versioned package" />
+	</ifnot>
+	<zip zipfile="${release.dir}/Spring2.Core-${version}-src.zip" ziplevel="9"> 
+	    <fileset basedir="..">
+	        <include name="**/*" />
+		<exclude name="**/CVS/*" />
+		<exclude name="**/_ReSharper.Spring2.Dss/**" />
+		<exclude name="release/**" />
+	    </fileset>
+	</zip>
+    </target>
+
 </project>
