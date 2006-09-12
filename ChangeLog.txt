@@ -1,3 +1,83 @@
+2006-09-05 Tuesday 17:18  dustin
+
+	* src/Geocode/: GecodeTestProvider.cs, GeocodeWrapper.cs,
+	IGeocodeProvider.cs, TeleAtlasProvider.cs:
+	
+	Added ability to retrieve geocode balance to the geocode provider
+
+2006-09-05 Tuesday 13:32  dustin
+
+	* src/Geocode/: GecodeTestProvider.cs, TeleAtlasGeocodeData.cs:
+	
+	Properly handle geocode results if no match found
+
+2006-08-30 Wednesday 08:44  dustin
+
+	* src/Test/GeocodeTest.cs:
+	
+	Ignored geocoding tests that shouldn't be run on the build server
+
+2006-08-29 Tuesday 08:06  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	no message
+
+2006-08-29 Tuesday 08:04  cort
+
+	* src/DAO/BaseEntityDAO.cs:
+	
+	remove the ( ) from around property mappings
+
+2006-08-28 Monday 16:34  dustin
+
+	* src/: Test/GeocodeTest.cs, Geocode/GeocodeWrapper.cs,
+	Spring2.Core.Test.csproj, Spring2.Core.WithTypes.csproj:
+	
+	Fixed default zip code issue with the tele atlas geocode provider
+
+2006-08-28 Monday 14:56  cort
+
+	* src/Spring2.Core.csproj:
+	
+	include SqlUtility
+
+2006-07-18 Tuesday 10:41  cort
+
+	* src/: DAO/SqlEqualityPredicate.cs, DAO/SqlPredicate.cs,
+	DAO/SqlUtility.cs, Test/SqlEqualityPredicateTest.cs:
+	
+	handle escaping object names that need it as well as replacing
+	special characters with underscores for variable names
+
+2006-07-18 Tuesday 10:10  cort
+
+	* src/: ValueTypes/DateTimeType.cs, Test/DateTimeTypeTest.cs:
+	
+	add property to calculate the beginning of the day with time and
+	the end of the day with time.
+
+2006-07-14 Friday 08:25  cort
+
+	* src/: Mail/BusinessLogic/MailMessage.cs, Test/MailMessageTest.cs:
+	
+	add version of tests for MailMessage that were part of Uppercase
+	and correct some of the expectations that had been refactored out
+	accidentally when it was refactored for attachments
+
+2006-07-14 Friday 08:21  cort
+
+	* src/ValueDataObject/DataObject.cs:
+	
+	handle exception in rendering data object ToString by using the
+	exception text in the output
+
+2006-07-13 Thursday 16:08  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2006-07-13 Thursday 15:00  cort
 
 	* src/: Test/BooleanTypeTest.cs, ValueTypes/BooleanType.cs:
