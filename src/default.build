@@ -59,6 +59,7 @@
 	        <include name="Spring2.Core.Mail.csproj" />
 	        <include name="Spring2.Core.Mail.SendMailMessages.csproj" />
 	        <include name="Spring2.Core.Log4Net.csproj" />
+	        <include name="Spring2.Core.PropertyPopulator.csproj" />
 	        <include name="Spring2.Core.Maverick.csproj" />
 	        <include name="Spring2.Core.Security.csproj" />
 	    </projects>

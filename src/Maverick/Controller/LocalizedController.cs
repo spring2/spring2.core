@@ -1,5 +1,4 @@
 using System;
-using Spring2.Core.Message;
 using Spring2.Core.Types;
 
 namespace Spring2.Core.Maverick.Controller {

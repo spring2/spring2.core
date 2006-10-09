@@ -59,6 +59,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Security", "Sp
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.PropertyPopulator", "Spring2.Core.PropertyPopulator.csproj", "{A82A4D4A-007B-4870-9C24-DE21C287B43D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Ajax", "Spring2.Core.Ajax.csproj", "{40C60A12-0493-4b5a-9B48-C8DFD878DFD5}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spring2.Core.Ajax</name>
+    </assembly>
+    <members>
+        <member name="T:Spring2.Core.Ajax.Command">
+            <summary>
+            Summary description for Command.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -3,24 +3,24 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{E6030DF4-4C00-4D5C-9B90-6C13E027D913}"
+        ProjectGuid = "{A82A4D4A-007B-4870-9C24-DE21C287B43D}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "Spring2.Core.Mail.SendMailMessages"
+                AssemblyName = "Spring2.Core.PropertyPopulator"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
                 DefaultTargetSchema = "IE50"
                 DelaySign = "false"
-                OutputType = "Exe"
+                OutputType = "Library"
                 PreBuildEvent = ""
-                PostBuildEvent = 'copy/Y "$(ProjectDir)\Mail\SendMailMessages\App.Config" "$(TargetPath).config"'
-                RootNamespace = "Spring2.Core.Mail.SendMailMessages"
+                PostBuildEvent = ""
+                RootNamespace = "Spring2.Core"
                 RunPostBuildEvent = "OnBuildSuccess"
-                StartupObject = "Spring2.Core.Mail.SendMailMessages.SendMailMessages"
+                StartupObject = ""
             >
                 <Config
                     Name = "Debug"
@@ -29,14 +29,14 @@
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
                     DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = ""
+                    DocumentationFile = "Spring2.Core.PropertyPopulator.xml"
                     DebugSymbols = "true"
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
                     NoStdLib = "false"
-                    NoWarn = ""
+                    NoWarn = "1591"
                     Optimize = "false"
-                    OutputPath = "..\build\SendMailMessages\"
+                    OutputPath = "..\build\PropertyPopulator\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "true"
@@ -69,14 +69,14 @@
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
                     DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = ""
+                    DocumentationFile = "Spring2.Core.PropertyPopulator.xml"
                     DebugSymbols = "true"
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
                     NoStdLib = "false"
-                    NoWarn = ""
+                    NoWarn = "1591"
                     Optimize = "false"
-                    OutputPath = "..\build\SendMailMessages\"
+                    OutputPath = "..\build\PropertyPopulator\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
@@ -89,14 +89,14 @@
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
                     DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = ""
+                    DocumentationFile = "Spring2.Core.PropertyPopulator.xml"
                     DebugSymbols = "true"
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
                     NoStdLib = "false"
-                    NoWarn = ""
+                    NoWarn = "1591"
                     Optimize = "false"
-                    OutputPath = "..\build\SendMailMessages\"
+                    OutputPath = "..\build\PropertyPopulator\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
@@ -107,42 +107,17 @@
                 <Reference
                     Name = "System"
                     AssemblyName = "System"
-                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                    HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"
                 />
                 <Reference
                     Name = "System.Data"
                     AssemblyName = "System.Data"
-                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
+                    HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
                 />
                 <Reference
                     Name = "System.XML"
                     AssemblyName = "System.Xml"
-                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
-                />
-                <Reference
-                    Name = "System.Web"
-                    AssemblyName = "System.Web"
-                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Web.dll"
-                />
-                <Reference
-                    Name = "log4net"
-                    AssemblyName = "log4net"
-                    HintPath = "..\lib\log4net.dll"
-                />
-                <Reference
-                    Name = "Spring2.DataTierGenerator.Attribute"
-                    AssemblyName = "Spring2.DataTierGenerator.Attribute"
-                    HintPath = "..\lib\Spring2.DataTierGenerator.Attribute.dll"
-                />
-                <Reference
-                    Name = "System.EnterpriseServices"
-                    AssemblyName = "System.EnterpriseServices"
-                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.EnterpriseServices.dll"
-                />
-                <Reference
-                    Name = "Spring2.Core.Mail"
-                    Project = "{BFE71D4B-66E4-467F-9649-FA699B96AC7A}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                    HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
                 />
                 <Reference
                     Name = "Spring2.Core.Types"
@@ -150,9 +125,9 @@
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
-                    Name = "Spring2.Core.Configuration"
-                    Project = "{1A8B880B-0EB3-4841-ADA7-D0D3E9B1E71C}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                    Name = "log4net"
+                    AssemblyName = "log4net"
+                    HintPath = "..\lib\log4net.dll"
                 />
                 <Reference
                     Name = "Spring2.Core"
@@ -169,16 +144,12 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Mail\SendMailMessages\App.config"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "Mail\SendMailMessages\AssemblyInfo.cs"
+                    RelPath = "PropertyPopulator\AssemblyInfo.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Mail\SendMailMessages\SendMailMessages.cs"
+                    RelPath = "PropertyPopulator\PropertyPopulator.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

@@ -144,6 +144,11 @@
                     Project = "{80B94045-4DE6-4BB0-BE22-C5CC0E772695}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
+                <Reference
+                    Name = "Spring2.Core.PropertyPopulator"
+                    Project = "{A82A4D4A-007B-4870-9C24-DE21C287B43D}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
             </References>
         </Build>
         <Files>
@@ -170,11 +175,6 @@
                 />
                 <File
                     RelPath = "Maverick\Controller\LocalizedController.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Maverick\Controller\RequiredAttribute.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

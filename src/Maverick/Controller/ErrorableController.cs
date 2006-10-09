@@ -54,25 +54,8 @@ namespace Spring2.Core.Maverick.Controller {
 	/// <summary>
 	/// Handle parsing exceptions
 	/// </summary>
-	protected override void HandleParseException(PropertyInfo property, object val) {
-	    Boolean required = property.GetCustomAttributes(typeof(RequiredAttribute), true).Length == 1;
-
-	    if (required && typeof(string).IsInstanceOfType(val) && String.Empty.Equals(val)) {
-		Errors.Add(new MissingRequiredFieldError(property.Name.ToString()));
-	    } else {
-		if (typeof(string).IsInstanceOfType(val) && String.Empty.Equals(val)) {
-		    // do nothing - if the value is an empty string and is not required then no problem
-		} else {
-		    Errors.Add(new InvalidTypeFormatError(property.Name,  val.ToString()));
-		}
-	    }
-	}
-
-	/// <summary>
-	/// Handle parsing exceptions
-	/// </summary>
-	protected override void HandleMissingRequiredProperty(PropertyInfo property) {
-	    Errors.Add(new MissingRequiredFieldError(property.Name));
+	protected override void HandleParseErrorsAndMissingRequiredPropertyErrors(MessageList errors) {
+	    Errors.AddRange(errors);
 	}
 
 	/// <summary>
