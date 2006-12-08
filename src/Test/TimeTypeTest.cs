@@ -29,5 +29,19 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual(span.Ticks, time.Ticks);
 	}
 
+	[Test]
+	public void AddToTimeType() {
+	    TimeType time = new TimeType(1, 1, 1);
+	    time = time.Add(new TimeType(1, 1, 1));
+	    Assert.AreEqual(new TimeType(2, 2, 2), time);
+	}
+
+	[Test]
+	public void SubtractTimeType() {
+	    TimeType time = new TimeType(2, 2, 2);
+	    time = time.Subtract(new TimeType(1, 1, 1));
+	    Assert.AreEqual(new TimeType(1, 1, 1), time);
+	}
+
     }
 }

@@ -245,8 +245,7 @@ namespace Spring2.Core.Types {
 		throw new InvalidStateException(myState, toAdd.myState);
 	    }
 
-	    TimeSpan time = myValue;
-	    time.Add(toAdd.myValue);
+	    TimeSpan time = myValue.Add(toAdd.myValue);
 
 	    if (!InRange(time)) {
 		throw new ArgumentOutOfRangeException("Arguement out of range");
