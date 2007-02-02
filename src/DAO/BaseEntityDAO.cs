@@ -223,7 +223,6 @@ namespace Spring2.Core.DAO {
 	protected IDbConnection GetDbConnection(String key) {
 	    String connectionString = GetConnectionString(key);
 	    IDbConnection conn = CreateConnection(connectionString);
-	    conn.Open();
 	    return conn;
 	}
 

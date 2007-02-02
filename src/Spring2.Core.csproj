@@ -28,7 +28,7 @@
                     BaseAddress = "285212672"
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE"
+                    DefineConstants = "DEBUG;TRACE;NET_1_1"
                     DocumentationFile = "Spring2.Core.xml"
                     DebugSymbols = "true"
                     FileAlignment = "4096"
@@ -68,7 +68,7 @@
                     BaseAddress = "285212672"
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE;NET_1_1"
+                    DefineConstants = "DEBUG;TRACE;NET_1_1;"
                     DocumentationFile = "Spring2.Core.xml"
                     DebugSymbols = "true"
                     FileAlignment = "4096"
@@ -88,7 +88,7 @@
                     BaseAddress = "285212672"
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE;NET_2_0"
+                    DefineConstants = "DEBUG;TRACE;NET_2_0;"
                     DocumentationFile = "Spring2.Core.xml"
                     DebugSymbols = "true"
                     FileAlignment = "4096"
@@ -170,6 +170,11 @@
                 />
                 <File
                     RelPath = "DAO\DatabaseFilter.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DAO\DbConnectionScope.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

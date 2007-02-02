@@ -50,7 +50,20 @@ namespace Spring2.Core.DAO {
 //	}
 
 	protected override IDbConnection CreateConnection(String connectionString) {
-	    return new SqlConnection(connectionString);
+#if (NET_1_1)
+	    IDbConnection connection = new SqlConnection(connectionString);
+	    connection.Open();
+	    return connection;
+#else
+	    // check to see if there is a current connection scope and pull connection from that, otherwise create and open a new one
+	    if (DbConnectionScope.Current != null) {
+		return DbConnectionScope.Current.GetOpenConnection(SqlClientFactory.Instance, connectionString);
+	    } else {
+		IDbConnection connection = new SqlConnection(connectionString);
+		connection.Open();
+		return connection;
+	    }
+#endif
 	}
     }
 }

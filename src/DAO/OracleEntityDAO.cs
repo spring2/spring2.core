@@ -37,7 +37,9 @@ namespace Spring2.Core.DAO {
 	}
 
 	protected override IDbConnection CreateConnection(String connectionString) {
-	    return new OracleConnection(connectionString);
+	    IDbConnection connection = new OracleConnection(connectionString);
+	    connection.Open();
+	    return connection;
 	}
     }
 }
