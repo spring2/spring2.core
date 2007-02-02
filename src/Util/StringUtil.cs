@@ -58,23 +58,15 @@ namespace Spring2.Core.Util {
 	    else
 		tmpBool = System.IO.Directory.Exists(f.FullName);
 	    if (tmpBool) {
-		//try {
-		    System.IO.StreamReader fr = new System.IO.StreamReader(f.FullName);
-		    char[] template = new char[(int) f.Length];
-		    fr.Read((System.Char[]) template, 0, template.Length);
-		    contents = new String(template);
-		    fr.Close();
-//		}
-//		catch (System.Exception e) {
-//		    System.Console.Out.WriteLine(e);
-//		    SupportClass.WriteStackTrace(e, Console.Error);
-//		}
+	        System.IO.StreamReader fr = new System.IO.StreamReader(f.FullName);
+	        char[] template = new char[(int) f.Length];
+	        fr.Read((System.Char[]) template, 0, template.Length);
+	        contents = new String(template);
+	        fr.Close();
 	    }
 			
 	    return contents;
 	}
-
-
 
     }
 }
