@@ -158,6 +158,41 @@ namespace Spring2.Core.Types {
 	#endregion    
 	#endregion    
 
+	public Int32 CompareTo(Object o) {
+	    if (!(o is IdType)) {
+		throw new ArgumentException("Argument must be an instance of IdType");
+	    }
 
+	    IdType that = (IdType)o;
+
+	    if (this.IsDefault) {
+		if (that.IsDefault) {
+		    return 0;
+		} else {
+		    return -1;
+		}
+	    }
+
+	    if (this.IsUnset) {
+		if (that.IsUnset) {
+		    return 0;
+		} else if (that.IsDefault) {
+		    return 1;
+		} else {
+		    return -1;
+		}
+	    }
+
+	    if (!that.IsValid) {
+		return 1;
+	    }
+
+	    if (this.IsValid && that.IsValid) {
+		return myValue.CompareTo(that.myValue);
+	    }
+	    
+	    //return Compare(that);
+	    return Compare(this, that);
+	}
     }
 }
