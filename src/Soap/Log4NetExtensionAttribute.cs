@@ -1,7 +1,7 @@
 using System;
 using System.Web.Services.Protocols;
 
-namespace Spring2.Dss.Soap {
+namespace Spring2.Core.Soap {
 
     /// <summary>
     /// Summary description for CompressionExtensionAttribute.

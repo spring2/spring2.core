@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using Spring2.Core.Configuration;
 
-namespace Spring2.Dss.Payment.PayflowPro {
+namespace Spring2.Core.Payment.PayflowPro {
     public class PayflowProProviderConfiguration : BaseConfigurationProvider {
  
 	// configuration setting keys

@@ -3,7 +3,7 @@ using System.IO;
 using System.Web.Services.Protocols;
 using System.Xml;
 
-namespace Spring2.Dss.Soap {
+namespace Spring2.Core.Soap {
 
     /// <summary>
     /// Log4Net soap extension for logging request and response xml

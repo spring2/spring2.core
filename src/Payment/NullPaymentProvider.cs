@@ -1,7 +1,7 @@
 using System;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.Payment.Test {
+namespace Spring2.Core.Payment.Test {
     /// <summary>
     /// Null object provider so that there can be something to lock in the payment manager
     /// </summary>

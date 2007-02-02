@@ -2,7 +2,7 @@ using System;
 using Spring2.Core.Configuration;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.Test {
+namespace Spring2.Core.Test {
     /// <summary>
     /// Summary description for BaseTest.
     /// </summary>

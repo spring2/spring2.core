@@ -3,7 +3,7 @@ using System.Collections;
 using Spring2.Core.Types;
 using Spring2.Core.Configuration;
 
-namespace Spring2.Dss.Tax {
+namespace Spring2.Core.Tax {
     /// <summary>
     /// Summary description for TaxManager.
     /// </summary>

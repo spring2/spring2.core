@@ -1,7 +1,7 @@
 using System;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.AddressValidation {
+namespace Spring2.Core.AddressValidation {
     public class AddressData {
 	private StringType street1 = StringType.DEFAULT;
 	private StringType street2 = StringType.DEFAULT;

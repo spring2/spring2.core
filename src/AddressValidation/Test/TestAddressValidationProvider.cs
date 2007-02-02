@@ -1,7 +1,7 @@
 using System;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.AddressValidation.Test {
+namespace Spring2.Core.AddressValidation.Test {
     public class TestAddressValidationProvider: IAddressValidationProvider {
 	public AddressValidationResult Validate(StringType street, StringType city, StringType state, StringType postalCode, StringType countryCode) {
 	    AddressValidationResult result = new AddressValidationResult();

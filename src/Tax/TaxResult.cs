@@ -1,7 +1,7 @@
 using System;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.Tax {
+namespace Spring2.Core.Tax {
 
     public class TaxResult : TaxRateInfo {
 	private StringType taxTransactionId = StringType.DEFAULT;

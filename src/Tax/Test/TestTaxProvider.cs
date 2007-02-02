@@ -1,9 +1,9 @@
 using System;
 using Spring2.Core.Types;
-using Spring2.Dss.Tax.Vertex;
+using Spring2.Core.Tax.Vertex;
 using NotImplementedException = System.NotImplementedException;
 
-namespace Spring2.Dss.Tax.Test {
+namespace Spring2.Core.Tax.Test {
     /// <summary>
     /// Summary description for TestTaxProvider.
     /// </summary>

@@ -7,10 +7,10 @@ using log4net;
 using Spring2.Core.Configuration;
 using Spring2.Core.Message;
 using Spring2.Core.Types;
-using Spring2.Dss.net.esalestax.webservices1;
-using Spring2.Dss.Tax.Vertex;
+using Spring2.Core.net.esalestax.webservices1;
+using Spring2.Core.Tax.Vertex;
 
-namespace Spring2.Dss.Tax.CertiTax {
+namespace Spring2.Core.Tax.CertiTax {
     /// <summary>
     /// Tax provider using CertiTax Web Service.
     /// This class is must be stateless in order to be thread safe.
@@ -80,7 +80,7 @@ namespace Spring2.Dss.Tax.CertiTax {
 	public TaxResult Commit(TaxOrder order, StringType currencyCode) {
 	    //		try { 
 	    //		    //Create Tax Transaction object from the web service.
-	    //		    TaxTransaction taxTrans = new Spring2.Dss.net.esalestax.webservices1.TaxTransaction();
+	    //		    TaxTransaction taxTrans = new Spring2.Core.net.esalestax.webservices1.TaxTransaction();
 	    //    			 
 	    //		    GetQuoteTaxTotal(ref taxTrans, order);
 	    //    	
@@ -102,7 +102,7 @@ namespace Spring2.Dss.Tax.CertiTax {
 
 	public TaxResult GetQuoteTaxTotal(TaxOrder order, StringType currencyCode) {
 	    //	    //Create Tax Transaction object from the web service.
-	    //	    TaxTransaction taxTrans = new Spring2.Dss.net.esalestax.webservices1.TaxTransaction();
+	    //	    TaxTransaction taxTrans = new Spring2.Core.net.esalestax.webservices1.TaxTransaction();
 	    //	    taxTrans.CertiTAXTransactionId = ConfigurationProvider.Instance.Settings["CertiTax.TransactionId"];
 	    //	    return GetQuoteTaxTotal(ref taxTrans, order);
 
@@ -111,8 +111,8 @@ namespace Spring2.Dss.Tax.CertiTax {
 
 	public TaxResult GetQuoteTaxTotal(ref TaxTransaction taxTrans, TaxOrder order, StringType currencyCode) {
 	    //	    //Create Order object and populate it.
-	    //	    Order certiTaxOrder = new Spring2.Dss.net.esalestax.webservices1.Order();
-	    //	    Address clsAddr = new Spring2.Dss.net.esalestax.webservices1.Address();
+	    //	    Order certiTaxOrder = new Spring2.Core.net.esalestax.webservices1.Order();
+	    //	    Address clsAddr = new Spring2.Core.net.esalestax.webservices1.Address();
 	    //            
 	    //	    //Populate main fields
 	    //	    certiTaxOrder.SerialNumber = ConfigurationProvider.Instance.Settings["CertiTaxSerialNum"];
@@ -198,11 +198,11 @@ namespace Spring2.Dss.Tax.CertiTax {
 	    return area;
 
 	    //	    //Create Tax Transaction object from the web service.
-	    //	    TaxTransaction taxTrans = new Spring2.Dss.net.esalestax.webservices1.TaxTransaction();
+	    //	    TaxTransaction taxTrans = new Spring2.Core.net.esalestax.webservices1.TaxTransaction();
 	    //
 	    //	    //Create Order object and populate it.
-	    //	    Order certiTaxOrder = new Spring2.Dss.net.esalestax.webservices1.Order();
-	    //	    Address clsAddr = new Spring2.Dss.net.esalestax.webservices1.Address();
+	    //	    Order certiTaxOrder = new Spring2.Core.net.esalestax.webservices1.Order();
+	    //	    Address clsAddr = new Spring2.Core.net.esalestax.webservices1.Address();
 	    //            
 	    //	    //Populate main fields
 	    //	    certiTaxOrder.SerialNumber = ConfigurationProvider.Instance.Settings["CertiTaxSerialNum"];

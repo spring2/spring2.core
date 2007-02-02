@@ -1,7 +1,7 @@
 using System;
 using Spring2.Core.Configuration;
 
-namespace Spring2.Dss.Payment {
+namespace Spring2.Core.Payment {
 
     /// <summary>
     /// Base configuration provider

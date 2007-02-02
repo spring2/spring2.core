@@ -1,8 +1,8 @@
 using System;
 using Spring2.Core.Types;
-using Spring2.Dss.Payment;
+using Spring2.Core.Payment;
 
-namespace Spring2.Dss.Payment {
+namespace Spring2.Core.Payment {
     /// <summary>
     /// Exception to indicate that the payment request has failed and that no funds should be moved.  This would include things like declines and card validation issues.
     /// </summary>

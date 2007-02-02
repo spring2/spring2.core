@@ -1,9 +1,9 @@
 using NUnit.Framework;
 using Spring2.Core.Types;
-using Spring2.Dss.Tax;
-using Spring2.Dss.Tax.Vertex;
+using Spring2.Core.Tax;
+using Spring2.Core.Tax.Vertex;
 
-namespace Spring2.Dss.Test {
+namespace Spring2.Core.Test {
     
     /// <summary>
     /// Summary description for CountryTest.

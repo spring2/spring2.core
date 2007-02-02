@@ -1,6 +1,6 @@
 using System;
 
-namespace Spring2.Dss.Payment {
+namespace Spring2.Core.Payment {
 
     /// <summary>
     /// Exception to indicate that there was a problem after a request was made and that the result may be unknown and that the payment might have been processed.

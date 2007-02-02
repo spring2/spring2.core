@@ -18,7 +18,7 @@ using System.Web.Services.Protocols;
 using System.ComponentModel;
 using System.Web.Services;
 
-namespace Spring2.Dss.Tax.Vertex {
+namespace Spring2.Core.Tax.Vertex {
 
     /// <remarks/>
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -34,7 +34,7 @@ namespace Spring2.Dss.Tax.Vertex {
 	/// <remarks/>
 	[System.Web.Services.Protocols.SoapDocumentMethodAttribute("", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
 	[return: System.Xml.Serialization.XmlElementAttribute("inStringReturn", Namespace="http://axis.webservices.vertexinc.com")]
-	[Spring2.Dss.Soap.Log4NetExtension("CalculateTax")]
+	[Spring2.Core.Soap.Log4NetExtension("CalculateTax")]
 	public string calculateTaxString([System.Xml.Serialization.XmlElementAttribute(Namespace="http://axis.webservices.vertexinc.com")] string inString) {
 	    object[] results = this.Invoke("calculateTaxString", new object[] {
 										  inString});

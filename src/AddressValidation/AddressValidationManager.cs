@@ -1,8 +1,8 @@
 using System;
 using Spring2.Core.Configuration;
-using Spring2.Dss.AddressValidation.Test;
+using Spring2.Core.AddressValidation.Test;
 
-namespace Spring2.Dss.AddressValidation {
+namespace Spring2.Core.AddressValidation {
 
     /// <summary>
     /// Summary description for Class1.

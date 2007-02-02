@@ -3,7 +3,7 @@ using System.Collections;
 using System.Data;
 using Spring2.DataTierGenerator.Attribute;
 
-namespace Spring2.Dss.Tax {
+namespace Spring2.Core.Tax {
 	/// <summary>
 	/// TaxAreaData generic collection
 	/// </summary>

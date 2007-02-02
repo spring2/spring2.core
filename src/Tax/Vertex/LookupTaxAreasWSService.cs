@@ -19,7 +19,7 @@ using System.Web.Services.Description;
 using System.Web.Services.Protocols;
 using System.Xml.Serialization;
 
-namespace Spring2.Dss.Tax.Vertex {
+namespace Spring2.Core.Tax.Vertex {
 	/// <remarks/>
 	[DebuggerStepThrough()]
 	[DesignerCategory("code")]

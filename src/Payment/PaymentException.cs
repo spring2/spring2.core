@@ -1,6 +1,6 @@
 using System;
 
-namespace Spring2.Dss.Payment {
+namespace Spring2.Core.Payment {
     /// <summary>
     /// Base exception for all payment related exceptions
     /// </summary>

@@ -4,9 +4,9 @@
 using System.Net;
 using System.Xml;
 
-using Spring2.Dss.Soap;
+using Spring2.Core.Soap;
 
-namespace Spring2.Dss.com.concordebiz.efsnet {
+namespace Spring2.Core.com.concordebiz.efsnet {
     using System.Diagnostics;
     using System.Xml.Serialization;
     using System;

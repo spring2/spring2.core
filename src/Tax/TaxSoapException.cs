@@ -1,7 +1,7 @@
 using System;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.Tax {
+namespace Spring2.Core.Tax {
     public class TaxSoapException : TaxException {
 	private StringType ex = StringType.DEFAULT;
 

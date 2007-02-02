@@ -1,6 +1,6 @@
 using System;
 
-namespace Spring2.Dss.Payment {
+namespace Spring2.Core.Payment {
 
     /// <summary>
     /// Exception to indicate that there is a configuration problem and that processing will not be able to happen

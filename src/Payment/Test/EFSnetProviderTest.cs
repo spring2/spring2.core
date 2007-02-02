@@ -2,10 +2,10 @@ using System;
 using NUnit.Framework;
 using Spring2.Core.Configuration;
 using Spring2.Core.Types;
-using Spring2.Dss.Payment;
-using Spring2.Dss.Payment.EFSNet;
+using Spring2.Core.Payment;
+using Spring2.Core.Payment.EFSNet;
 
-namespace Spring2.Dss.Test {
+namespace Spring2.Core.Test {
     
     /// <summary>
     /// Provides unit tests for EFSNet payment provider class.

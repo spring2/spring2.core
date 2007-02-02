@@ -1,6 +1,6 @@
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.Payment {
+namespace Spring2.Core.Payment {
 	
     public interface IPaymentProvider {
 	PaymentResult Authorize(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear, StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode, StringType comment);

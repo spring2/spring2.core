@@ -1,7 +1,7 @@
 using System;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.Payment {
+namespace Spring2.Core.Payment {
 
     /// <summary>
     /// Exception for Avs validation failures

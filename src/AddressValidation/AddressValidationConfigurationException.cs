@@ -1,6 +1,6 @@
 using System;
 
-namespace Spring2.Dss.AddressValidation {
+namespace Spring2.Core.AddressValidation {
     /// <summary>
     /// Summary description for AddressValidationConfigurationException.
     /// </summary>

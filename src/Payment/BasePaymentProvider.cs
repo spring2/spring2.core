@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Text.RegularExpressions;
 
-namespace Spring2.Dss.Payment {
+namespace Spring2.Core.Payment {
 
     /// <summary>
     /// Summary description for BasePaymentProvider.

@@ -1,7 +1,7 @@
 using System;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.AddressValidation {
+namespace Spring2.Core.AddressValidation {
     public class AddressValidationResult {
 	private ResponseTypeEnum responseType = ResponseTypeEnum.DEFAULT;
 	private AddressList addresses = AddressList.DEFAULT;

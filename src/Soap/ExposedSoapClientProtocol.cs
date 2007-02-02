@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 
-namespace Spring2.Dss.Soap {
+namespace Spring2.Core.Soap {
     public class ExposedSoapClientProtocol : System.Web.Services.Protocols.SoapHttpClientProtocol {
 	private WebResponse _lastResponse;
 

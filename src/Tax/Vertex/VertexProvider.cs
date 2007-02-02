@@ -10,7 +10,7 @@ using Spring2.Core.Message;
 using Spring2.Core.Types;
 using NotImplementedException = System.NotImplementedException;
 
-namespace Spring2.Dss.Tax.Vertex {
+namespace Spring2.Core.Tax.Vertex {
 
     /// <summary>
     /// Tax provider using Vertex O Series via Web Services.

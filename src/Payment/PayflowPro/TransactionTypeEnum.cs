@@ -1,7 +1,7 @@
 using System;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.Payment.PayflowPro {
+namespace Spring2.Core.Payment.PayflowPro {
     public class TransactionTypeEnum : EnumDataType {
 	private static readonly EnumDataTypeList OPTIONS = new EnumDataTypeList();
 

@@ -8,7 +8,7 @@ using PayFlowPro;
 
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.Payment.PayflowPro {
+namespace Spring2.Core.Payment.PayflowPro {
     /// <summary>
     /// Summary description for PayflowProCommand.
     /// </summary>

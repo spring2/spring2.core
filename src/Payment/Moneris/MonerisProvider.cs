@@ -9,7 +9,7 @@ using Spring2.Core.Types;
 
 using NotImplementedException=System.NotImplementedException;
 
-namespace Spring2.Dss.Payment.Moneris {
+namespace Spring2.Core.Payment.Moneris {
     /// <summary>
     /// Summary description for MonerisProvider.
     /// </summary>

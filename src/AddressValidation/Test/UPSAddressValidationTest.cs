@@ -1,10 +1,10 @@
 using System;
 using NUnit.Framework;
 using Spring2.Core.Types;
-using Spring2.Dss.AddressValidation;
-using Spring2.Dss.AddressValidation.UPS;
+using Spring2.Core.AddressValidation;
+using Spring2.Core.AddressValidation.UPS;
 
-namespace Spring2.Dss.Test {
+namespace Spring2.Core.Test {
     [TestFixture()]
     public class UPSAddressValidationTest {
 	[Test()]

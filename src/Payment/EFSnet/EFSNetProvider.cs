@@ -4,9 +4,9 @@ using System.Net;
 using System.Xml.Serialization;
 using Spring2.Core.Types;
 using Spring2.Core.Configuration;
-using Spring2.Dss.com.concordebiz.efsnet;
+using Spring2.Core.com.concordebiz.efsnet;
 
-namespace Spring2.Dss.Payment.EFSNet {
+namespace Spring2.Core.Payment.EFSNet {
 
     /// <summary>
     /// Concord EFSnet payment provider.

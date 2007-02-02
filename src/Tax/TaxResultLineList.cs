@@ -4,7 +4,7 @@ using System.Data;
 using Spring2.Core.Types;
 using Spring2.DataTierGenerator.Attribute;
 
-namespace Spring2.Dss.Tax {
+namespace Spring2.Core.Tax {
     /// <summary>
     /// IOrderItemLine generic collection
     /// </summary>

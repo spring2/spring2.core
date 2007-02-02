@@ -1,10 +1,10 @@
 using System;
 using NUnit.Framework;
 using Spring2.Core.Configuration;
-using Spring2.Dss.Payment;
-using Spring2.Dss.Payment.Test;
+using Spring2.Core.Payment;
+using Spring2.Core.Payment.Test;
 
-namespace Spring2.Dss.Test {
+namespace Spring2.Core.Test {
 	
     /// <summary>
     /// Summary description for PaymentManagerTest.
@@ -20,7 +20,7 @@ namespace Spring2.Dss.Test {
 		// change the provider to cause connection failure
 		SimpleConfigurationProvider provider = new SimpleConfigurationProvider();
 		provider.Settings.Add(currentProvider.Settings);
-		provider.Settings["PaymentProvider.Class"] = "Spring2.Dss.Payment.Test.TestPaymentProvider,Spring2.Dss.Payment";
+		provider.Settings["PaymentProvider.Class"] = "Spring2.Core.Payment.Test.TestPaymentProvider,Spring2.Core.Payment";
 		ConfigurationProvider.SetProvider(provider);
 		PaymentManager.Reset();
 	    	

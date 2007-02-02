@@ -2,9 +2,9 @@ using System;
 
 using Spring2.Core.Types;
 
-using Spring2.Dss.AddressValidation;
+using Spring2.Core.AddressValidation;
 
-namespace Spring2.Dss.AddressValidation {
+namespace Spring2.Core.AddressValidation {
 
     public class AddressList : System.Collections.CollectionBase {
 	

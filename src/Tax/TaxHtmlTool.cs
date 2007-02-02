@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.Tax {
+namespace Spring2.Core.Tax {
     /// <summary>
     /// Html rendering utilities for Vertex tax area results
     /// </summary>

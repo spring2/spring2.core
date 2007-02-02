@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using Spring2.Core.DAO;
 using Spring2.Core.Types;
 
-namespace Spring2.Reporting.Common {
+namespace Spring2.Core.Reporting {
     public class SqlSchemaDAO : Spring2.Core.DAO.EntityDAO {
 
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";

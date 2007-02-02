@@ -1,10 +1,10 @@
 using System;
 using NUnit.Framework;
 using Spring2.Core.Types;
-using Spring2.Dss.Tax;
-using Spring2.Dss.Tax.CertiTax;
+using Spring2.Core.Tax;
+using Spring2.Core.Tax.CertiTax;
 
-namespace Spring2.Dss.Test {
+namespace Spring2.Core.Test {
     
     /// <summary>
     /// Provides unit tests for CertiTaxProvider class.

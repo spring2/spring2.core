@@ -3,7 +3,7 @@ using System.Text;
 using Spring2.Core.Configuration;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.Payment.Moneris {
+namespace Spring2.Core.Payment.Moneris {
     public class MonerisProviderConfiguration : BaseConfigurationProvider {
  
 	// configuration setting keys

@@ -2,9 +2,9 @@
 // this class was hand modified after generation to add support for logging request and response
 //------------------------------------------------------------------------------
 
-using Spring2.Dss.Soap;
+using Spring2.Core.Soap;
 
-namespace Spring2.Dss.net.esalestax.webservices1 {
+namespace Spring2.Core.net.esalestax.webservices1 {
     using System.Diagnostics;
     using System.Xml.Serialization;
     using System;

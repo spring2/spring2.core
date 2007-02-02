@@ -3,7 +3,7 @@ using System.Text;
 using Spring2.Core.Configuration;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.Payment.EFSNet {
+namespace Spring2.Core.Payment.EFSNet {
     public class EFSNetProviderConfiguration : BaseConfigurationProvider {
  
 	// configuration setting keys

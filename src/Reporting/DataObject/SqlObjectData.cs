@@ -2,7 +2,7 @@ using System;
 
 using Spring2.Core.Types;
 
-namespace Spring2.Reporting.Common {
+namespace Spring2.Core.Reporting {
     public class SqlObjectData : Spring2.Core.DataObject.DataObject {
 
 	private StringType name = StringType.DEFAULT;

@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Net;
 
-namespace Spring2.Dss.Soap {
+namespace Spring2.Core.Soap {
     public class ExposedHttpWebResponse : WebResponse {
 	/// stores response, so it can be searchable
 	private HttpWebResponse _response = null;

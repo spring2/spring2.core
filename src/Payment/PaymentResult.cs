@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.Payment {
+namespace Spring2.Core.Payment {
     /// <summary>
     /// Summary description for PaymentResponse.
     /// </summary>

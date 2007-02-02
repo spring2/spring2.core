@@ -2,7 +2,7 @@ using System;
 using Spring2.Core.Types;
 using NotImplementedException = System.NotImplementedException;
 
-namespace Spring2.Dss.Payment.Test {
+namespace Spring2.Core.Payment.Test {
 
     /// <summary>
     /// Summary description for TestPaymentProvider.

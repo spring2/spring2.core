@@ -1,10 +1,10 @@
 using System;
 using NUnit.Framework;
 using Spring2.Core.Configuration;
-using Spring2.Dss.AddressValidation;
-using Spring2.Dss.AddressValidation.Test;
+using Spring2.Core.AddressValidation;
+using Spring2.Core.AddressValidation.Test;
 
-namespace Spring2.Dss.Test {
+namespace Spring2.Core.Test {
 	
     /// <summary>
     /// Summary description for AddressValidationManagerTest.
@@ -20,7 +20,7 @@ namespace Spring2.Dss.Test {
 		// change the provider to cause connection failure
 		SimpleConfigurationProvider provider = new SimpleConfigurationProvider();
 		provider.Settings.Add(currentProvider.Settings);
-		provider.Settings["AddressValidationProvider.Class"] = "Spring2.Dss.AddressValidation.Test.TestAddressValidationProvider,Spring2.Dss.AddressValidation";
+		provider.Settings["AddressValidationProvider.Class"] = "Spring2.Core.AddressValidation.Test.TestAddressValidationProvider,Spring2.Core.AddressValidation";
 		ConfigurationProvider.SetProvider(provider);
 		AddressValidationManager.Reset();
 	    	

@@ -1,7 +1,7 @@
 using Spring2.Core.Types;
-using Spring2.Dss.Tax.Vertex;
+using Spring2.Core.Tax.Vertex;
 
-namespace Spring2.Dss.Tax {
+namespace Spring2.Core.Tax {
 
     /// <summary>
     /// Common interface expected to be implmented by all tax provider that are avaialable through the Tax Manager.

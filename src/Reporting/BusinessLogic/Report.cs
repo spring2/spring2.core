@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using Spring2.Core.DAO;
 using Spring2.Core.Types;
 
-namespace Spring2.Reporting.Common {
+namespace Spring2.Core.Reporting {
     public class Report {
 	private Report() {
 	}

@@ -2,10 +2,10 @@ using System;
 using NUnit.Framework;
 using Spring2.Core.Configuration;
 using Spring2.Core.Types;
-using Spring2.Dss.Payment;
-using Spring2.Dss.Payment.PayflowPro;
+using Spring2.Core.Payment;
+using Spring2.Core.Payment.PayflowPro;
 
-namespace Spring2.Dss.Test {
+namespace Spring2.Core.Test {
 
     /// <summary>
     /// Summary description for PayflowProProviderTest.

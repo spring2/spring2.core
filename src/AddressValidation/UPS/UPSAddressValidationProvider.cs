@@ -6,7 +6,7 @@ using System.Xml;
 using Spring2.Core.Types;
 using Spring2.Core.Configuration;
 
-namespace Spring2.Dss.AddressValidation.UPS {
+namespace Spring2.Core.AddressValidation.UPS {
     public class UPSAddressValidationProvider: IAddressValidationProvider {
 
 	private string UPSAccessKey {

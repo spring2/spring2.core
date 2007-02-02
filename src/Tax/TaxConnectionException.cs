@@ -1,6 +1,6 @@
 using System;
 
-namespace Spring2.Dss.Tax {
+namespace Spring2.Core.Tax {
     /// <summary>
     /// Summary description for TaxConnectionException.
     /// </summary>

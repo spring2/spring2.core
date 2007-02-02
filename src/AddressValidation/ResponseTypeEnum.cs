@@ -1,7 +1,7 @@
 using System;
 using Spring2.Core.Types;
 
-namespace Spring2.Dss.AddressValidation {
+namespace Spring2.Core.AddressValidation {
     public class ResponseTypeEnum : EnumDataType {
 	private static readonly EnumDataTypeList OPTIONS = new EnumDataTypeList();
 

@@ -1,8 +1,8 @@
 using System;
 using Spring2.Core.Configuration;
-using Spring2.Dss.Payment.Test;
+using Spring2.Core.Payment.Test;
 
-namespace Spring2.Dss.Payment {
+namespace Spring2.Core.Payment {
 
     /// <summary>
     /// Summary description for Class1.
