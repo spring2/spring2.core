@@ -129,7 +129,12 @@
         <Files>
             <Include>
                 <File
-                    RelPath = "AssemblyInfo.cs"
+                    RelPath = "AssemblyVersionInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Security\AssemblyInfo.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
