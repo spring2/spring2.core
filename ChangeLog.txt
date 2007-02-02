@@ -1,3 +1,117 @@
+2007-02-02 Friday 12:42  cort
+
+	* lib/: net-1.1/Interop.PFPro.dll,
+	net-1.1/eSELECTplus_dotNet_API.dll, net-2.0/Interop.PFPro.dll,
+	net-2.0/eSELECTplus_dotNet_API.dll:
+	
+	binary reference for payment providers
+
+2007-02-02 Friday 12:40  cort
+
+	* src/.cvsignore:
+	
+	ignore any of the spring2.core xml doc files
+
+2007-02-02 Friday 12:38  cort
+
+	* src/default.build:
+	
+	added resource manger and moved spring2.dss projects
+
+2007-02-02 Friday 12:36  cort
+
+	* src/: Spring2.Core.AddressValidation.Test.csproj,
+	Spring2.Core.AddressValidation.csproj,
+	Spring2.Core.Payment.Test.csproj, Spring2.Core.Payment.csproj,
+	Spring2.Core.Reporting.csproj, Spring2.Core.Soap.csproj,
+	Spring2.Core.Tax.Test.csproj, Spring2.Core.Tax.csproj,
+	Spring2.Core.ndoc, Spring2.Core.sln, Spring2.Core.WithTypes.csproj,
+	AddressValidation/AddressData.cs, AddressValidation/AddressList.cs,
+	AddressValidation/AddressValidationConfigurationException.cs,
+	AddressValidation/AddressValidationException.cs,
+	AddressValidation/AddressValidationManager.cs,
+	AddressValidation/AddressValidationResult.cs,
+	AddressValidation/AssemblyInfo.cs,
+	AddressValidation/IAddressValidationProvider.cs,
+	AddressValidation/NullAddressValidationProvider.cs,
+	AddressValidation/ResponseTypeEnum.cs,
+	AddressValidation/Test/AddressValidationManagerTest.cs,
+	AddressValidation/Test/App.config,
+	AddressValidation/Test/TestAddressValidationProvider.cs,
+	AddressValidation/Test/TestFailureAddressValidationProvider.cs,
+	AddressValidation/Test/UPSAddressValidationTest.cs,
+	AddressValidation/UPS/UPSAddressValidationProvider.cs,
+	Payment/AssemblyInfo.cs, Payment/AvsValidationException.cs,
+	Payment/BaseConfigurationProvider.cs,
+	Payment/BasePaymentProvider.cs, Payment/CvvValidationException.cs,
+	Payment/IPaymentProvider.cs, Payment/NullPaymentProvider.cs,
+	Payment/PaymentConfigurationException.cs,
+	Payment/PaymentConnectionException.cs, Payment/PaymentException.cs,
+	Payment/PaymentFailureException.cs, Payment/PaymentManager.cs,
+	Payment/PaymentResult.cs, Payment/EFSnet/EFSNetProvider.cs,
+	Payment/EFSnet/EFSNetProviderConfiguration.cs,
+	Payment/EFSnet/QueryTransactionsResult.cs,
+	Payment/Moneris/MonerisProvider.cs,
+	Payment/Moneris/MonerisProviderConfiguration.cs,
+	Payment/PayflowPro/CreditCommand.cs,
+	Payment/PayflowPro/InquiryCommand.cs,
+	Payment/PayflowPro/PayflowProCommand.cs,
+	Payment/PayflowPro/PayflowProProvider.cs,
+	Payment/PayflowPro/PayflowProProviderConfiguration.cs,
+	Payment/PayflowPro/SaleCommand.cs,
+	Payment/PayflowPro/TransactionTypeEnum.cs,
+	Payment/PayflowPro/VoidCommand.cs, Payment/Test/App.config,
+	Payment/Test/AssemblyInfo.cs, Payment/Test/BaseTest.cs,
+	Payment/Test/EFSnetProviderTest.cs,
+	Payment/Test/MonerisProviderTest.cs,
+	Payment/Test/PayflowProProviderTest.cs,
+	Payment/Test/PaymentManagerTest.cs,
+	Payment/Test/TestConnectionFailurePaymentProvider.cs,
+	Payment/Test/TestFailurePaymentProvider.cs,
+	Payment/Test/TestPaymentProvider.cs, Payment/Web
+	References/com.concordebiz.efsnet/EFSnet2.wsdl, Payment/Web
+	References/com.concordebiz.efsnet/Reference.cs, Payment/Web
+	References/com.concordebiz.efsnet/Reference.map,
+	Soap/AssemblyInfo.cs, Soap/ExposedHttpWebResponse.cs,
+	Soap/ExposedSoapClientProtocol.cs, Soap/Log4NetExtension.cs,
+	Soap/Log4NetExtensionAttribute.cs, Tax/AssemblyInfo.cs,
+	Tax/ITaxProvider.cs, Tax/TaxAddressNotFoundException.cs,
+	Tax/TaxAreaData.cs, Tax/TaxAreaList.cs,
+	Tax/TaxConfigurationException.cs, Tax/TaxConnectionException.cs,
+	Tax/TaxException.cs, Tax/TaxHtmlTool.cs, Tax/TaxManager.cs,
+	Tax/TaxOrder.cs, Tax/TaxOrderLine.cs, Tax/TaxOrderLineList.cs,
+	Tax/TaxRateInfo.cs, Tax/TaxRateInfoList.cs, Tax/TaxResult.cs,
+	Tax/TaxResultLine.cs, Tax/TaxResultLineList.cs,
+	Tax/TaxSoapException.cs, Tax/CertiTax/CertitaxProvider.cs,
+	Tax/Test/App.config, Tax/Test/CertiTaxTest.cs,
+	Tax/Test/NullTaxProvider.cs, Tax/Test/TaxManagerTest.cs,
+	Tax/Test/TestFailureTaxProvider.cs, Tax/Test/TestTaxProvider.cs,
+	Tax/Test/VertexTest.cs, Tax/Vertex/CalculateTaxWSService.cs,
+	Tax/Vertex/LookupTaxAreasWSService.cs,
+	Tax/Vertex/VertexProvider.cs, Tax/Web
+	References/net.esalestax.webservices1/CertiCalc.disco, Tax/Web
+	References/net.esalestax.webservices1/CertiCalc.wsdl, Tax/Web
+	References/net.esalestax.webservices1/Reference.cs, Tax/Web
+	References/net.esalestax.webservices1/Reference.map:
+	
+	move tax, payment, adddress validation and soap extensions from
+	Spring2.Dss to Spring2.Core
+
+2007-02-02 Friday 12:35  cort
+
+	* src/: Spring2.Core.ResourceManager.BusinessLogic.csproj,
+	Spring2.Core.ResourceManager.DataObject.csproj,
+	Spring2.Core.ResourceManager.ResourceEditor.csproj,
+	Spring2.Core.ResourceManager.ResourceLocalizer.csproj:
+	
+	add/correct xml documentation file for ndoc
+
+2007-02-02 Friday 11:56  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2007-02-02 Friday 00:31  cort
 
 	* src/ValueTypes/IdType.cs:
