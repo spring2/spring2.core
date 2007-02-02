@@ -34,7 +34,7 @@
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
                     NoStdLib = "false"
-                    NoWarn = ""
+                    NoWarn = "1591,1572,1573"
                     Optimize = "false"
                     OutputPath = "..\build\Tax\"
                     RegisterForComInterop = "false"
