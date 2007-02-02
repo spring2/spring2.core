@@ -10,20 +10,20 @@
 	    <option name="bracing style" value="block" />
 	</writer>
 	<tasks>
-	    <task name="business entities" element="entity" template="Template\PassThroughInterface\BusinessEntity.vm" directory="BusinessLogic" filenameformat="{element.Name}.cs" writer="c#" >
+	    <task name="business entities" element="entity" template=".\BusinessEntity.vm" directory="BusinessLogic" filenameformat="{element.Name}.cs" writer="c#" >
 	        <type name="{element.Name}" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}.GetInstance({2})" newinstanceformat="{element.Name}.NewInstance()" nullinstanceformat="null" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" />
 	    </task>
-	    <task name="interface" element="entity" template="Template\PassThroughInterface\interface.vm" directory="DataObject" filenameformat="I{element.Name}.cs" writer="region"  >
+	    <task name="interface" element="entity" template=".\interface.vm" directory="DataObject" filenameformat="I{element.Name}.cs" writer="region"  >
 		<type name="I{element.Name}" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}.GetInstance({2})" newinstanceformat="new {element.Name}()" nullinstanceformat="null" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" concretetype="{element.Name}" />
 	    </task>
-	    <task name="data object" element="entity" template="Template\PassThroughInterface\dataobject.vm" directory="DataObject" filenameformat="{element.Name}Data.cs" writer="region"  >
+	    <task name="data object" element="entity" template=".\dataobject.vm" directory="DataObject" filenameformat="{element.Name}Data.cs" writer="region"  >
 		<type name="{element.Name}Data" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}Data.GetInstance({2})" newinstanceformat="{element.Name}Data.DEFAULT" nullinstanceformat="null" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" concretetype="{element.Name}Data" />
 	    </task>
-	    <task name="dataobject lists" element="entity" template="Template\PassThroughInterface\dataobject-collection.vm" directory="DataObject" filenameformat="{element.Name}List.cs" writer="region" >
+	    <task name="dataobject lists" element="entity" template=".\dataobject-collection.vm" directory="DataObject" filenameformat="{element.Name}List.cs" writer="region" >
 		<type name="{element.Name}List" newinstanceformat="{element.Name}List.DEFAULT" nullinstanceformat="{element.Name}List.UNSET" />
 	    </task>
 
-	    <task name="dao" element="entity" template="Template\PassThroughInterface\DAO.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region" >
+	    <task name="dao" element="entity" template=".\DAO.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region" >
 		<excludes>
 		    <exclude name="LocalizedResource" />
 		</excludes>
@@ -57,7 +57,7 @@
     -->
     <config>
 	<setting name="RootDirectory" value="." />
-	<setting name="RootNameSpace" value="Spring2.Core.ResourceManager" />
+	<setting name="RootNameSpace" value="Spring2.ResourceManager" />
 	<setting name="DAOBaseClass" value="Spring2.Core.DAO.SqlEntityDAO" />
     </config>
     <entities-ref xinc:href="dtg-entities.xml" />

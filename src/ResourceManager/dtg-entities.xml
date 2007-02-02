@@ -15,6 +15,17 @@
 		    <property name="Identity" />
 		</properties>
 	    </finder>
+	    <finder name="FindByContext" unique="False">
+		<properties>
+		    <property name="Context" />
+		</properties>
+	    </finder>
+	    <finder name="FindListByContextAndField" unique="False">
+		<properties>
+		    <property name="Context" />
+		    <property name="Field" />
+		</properties>
+	    </finder>
 	</finders>
     </entity>
     <entity name="LocalizedResource" sqlentity="LocalizedResource">
@@ -26,13 +37,12 @@
 	    <property name="Content" type="StringType" column="*" />
 	    <property name="Resource" type="IResource" writable="False" entity="Resource" prefix="Resource_"/>
 	</properties>
-	<finders>
+	<finders><!-- Hand Written DAO due to way Locale and Language are handled -->
 	    <finder name="FindByResourceIdLocaleAndLanguage" unique="True">
 		<properties>
 		    <property name="ResourceId" />
 		    <property name="Locale" />
 		    <property name="Language" />
-
 		</properties>
 	    </finder>
 	    <finder name="FindByLocaleLanguageAndContext" unique="False">
@@ -40,6 +50,23 @@
 		    <property name="Locale" />
 		    <property name="Language" />
 		    <property name="Resource.Context" />
+		</properties>
+	    </finder>
+	    <finder name="FindByLocaleLanguageContextAndField" unique="False">
+		<properties>
+		    <property name="Locale" />
+		    <property name="Language" />
+		    <property name="Resource.Context" />
+		    <property name="Resource.Field" />
+		</properties>
+	    </finder>
+	    <finder name="FindByLocaleLanguageContextFieldAndIdentity" unique="True">
+		<properties>
+		    <property name="Locale" />
+		    <property name="Language" />
+		    <property name="Resource.Context" />
+		    <property name="Resource.Field" />
+		    <property name="Resource.Identity" />
 		</properties>
 	    </finder>
 	    <finder name="FindByLocaleAndLanguage" unique="False">

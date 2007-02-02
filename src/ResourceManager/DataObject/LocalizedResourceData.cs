@@ -5,11 +5,9 @@ using System.Data;
 using System.Data.SqlClient;
 
 using Spring2.Core.DAO;
-using Spring2.Core.ResourceManager.DataObject;
 using Spring2.Core.Types;
+using Spring2.Core.ResourceManager.DataObject;
 
-
-using Spring2.Core.ResourceManager.Types;
 
 
 namespace Spring2.Core.ResourceManager.DataObject {
@@ -18,7 +16,7 @@ namespace Spring2.Core.ResourceManager.DataObject {
 
 	public static readonly LocalizedResourceData DEFAULT = new LocalizedResourceData();
 
-	private StringType content = StringType.DEFAULT;
+	private StringType content = StringType.UNSET;
 
 	public StringType Content {
 	    get { return this.content; }

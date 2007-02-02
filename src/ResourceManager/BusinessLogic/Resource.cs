@@ -5,7 +5,6 @@ using Spring2.Core.Types;
 using Spring2.DataTierGenerator.Attribute;
 using Spring2.Core.ResourceManager.Dao;
 using Spring2.Core.ResourceManager.DataObject;
-using Spring2.Core.ResourceManager.Types;
 
 namespace Spring2.Core.ResourceManager.BusinessLogic {
     
@@ -13,16 +12,16 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
     public class Resource : IResource {
         
         [Generate()]
-        private IdType resourceId = IdType.DEFAULT;
+        private IdType resourceId = IdType.UNSET;
         
         [Generate()]
-        private StringType context = StringType.DEFAULT;
+        private StringType context = StringType.UNSET;
         
         [Generate()]
-        private StringType field = StringType.DEFAULT;
+        private StringType field = StringType.UNSET;
         
         [Generate()]
-        private IdType identity = IdType.DEFAULT;
+        private IdType identity = IdType.UNSET;
         
         protected Boolean isNew = true;
         
@@ -86,10 +85,31 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
             throw new ApplicationException("Not supported");
         }
         
-        public static Resource Create(StringType resourceContext, StringType fieldName) {
+        public static StringTypeList GetContextList() {
+            return ResourceDAO.DAO.FindUniqueContexts();
+        }
+        
+        public static StringTypeList GetFieldList(StringType context) {
+            return ResourceDAO.DAO.FindUniqueFields(context);
+        }
+        
+        public static IdTypeList GetIdentityList(StringType context, StringType field) {
+            return ResourceDAO.DAO.FindUniqueIdentities(context, field);
+        }
+        
+        public static ResourceList GetListByContext(StringType context) {
+            return ResourceDAO.DAO.FindByContext(context);
+        }
+        
+        public static ResourceList GetListByContextAndField(StringType context, StringType field) {
+            return ResourceDAO.DAO.FindListByContextAndField(context, field);
+        }
+        
+        public static Resource Create(StringType resourceContext, StringType fieldName, IdType identity) {
             Resource resource = new Resource();
 	    resource.context = resourceContext;
 	    resource.field = fieldName;
+	    resource.Identity = identity;
 	    resource.Store();
 	    return resource;
         }
@@ -97,6 +117,10 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         [Generate()]
         public static Resource GetInstance(IdType resourceId) {
             return ResourceDAO.DAO.Load(resourceId);
+        }
+        
+        public static Resource GetInstance(StringType context, StringType field, IdType identity) {
+            return ResourceDAO.DAO.FindByContextFieldAndIdentity(context, field, identity);
         }
         
         [Generate()]
@@ -118,11 +142,28 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
             }
         }
         
-        [Generate()]
         public MessageList Validate() {
             MessageList errors = new MessageList();
 
+	    if(Identity.IsUnset) {
+		throw(new InvalidArgumentException(ResourceFields.IDENTITY));
+	    }
+
+	    if(isNew && ResourceDAO.DAO.FindUniqueIdentities(this.Context, this.Field).Contains(this.Identity)) {
+		throw new InvalidValueException(ResourceFields.IDENTITY);
+	    }
+
 	    return errors;
+        }
+        
+        public LocalizedResourceList CopyResourceAndLocalization(IdType newContextIdentity) {
+            Resource newResouce = Resource.Create(this.Context, this.Field, newContextIdentity);
+	    LocalizedResourceList list = LocalizedResourceDAO.DAO.FindByResourceId(this.ResourceId);
+	    LocalizedResourceList newList = new LocalizedResourceList();
+	    foreach(ILocalizedResource localizedResource in list) {
+		newList.Add(LocalizedResource.Create(newResouce.ResourceId, localizedResource.Locale, localizedResource.Language, localizedResource.Content));
+	    }
+	    return newList;
         }
         
         [Generate()]

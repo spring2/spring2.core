@@ -5,7 +5,6 @@ using Spring2.Core.Types;
 using Spring2.DataTierGenerator.Attribute;
 using Spring2.Core.ResourceManager.Dao;
 using Spring2.Core.ResourceManager.DataObject;
-using Spring2.Core.ResourceManager.Types;
 
 namespace Spring2.Core.ResourceManager.BusinessLogic {
     
@@ -13,10 +12,10 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
     public class LocalizedResource : ILocalizedResource {
         
         [Generate()]
-        private IdType localizedResourceId = IdType.DEFAULT;
+        private IdType localizedResourceId = IdType.UNSET;
         
         [Generate()]
-        private IdType resourceId = IdType.DEFAULT;
+        private IdType resourceId = IdType.UNSET;
         
         private Boolean isNew = true;
         
@@ -27,7 +26,7 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         private ILanguage language = null;
         
         [Generate()]
-        private StringType content = StringType.DEFAULT;
+        private StringType content = StringType.UNSET;
         
         [Generate()]
         private Resource resource = new Resource();
@@ -126,12 +125,12 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
 	    localResource.Locale = newLocale;
 	    localResource.Language = newLanguage;
 	    localResource.Store();
+	    localResource.Resource = Resource.GetInstance(resourceId);
 	    return localResource;
         }
         
-        [Generate()]
-        public static LocalizedResource GetInstance(IdType localizedResourceId) {
-            return LocalizedResourceDAO.DAO.Load(localizedResourceId);
+        public static LocalizedResource GetInstance(IdType resourceId, ILocale locale, ILanguage language) {
+            return LocalizedResourceDAO.DAO.FindByResourceIdLocaleAndLanguage(resourceId, locale, language);
         }
         
         [Generate()]
@@ -170,6 +169,11 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
         public void Reload() {
             LocalizedResourceDAO.DAO.Reload(this);
 	    resource = new Resource();
+        }
+        
+        [Generate()]
+        public static LocalizedResource GetInstance(IdType localizedResourceId) {
+            return LocalizedResourceDAO.DAO.Load(localizedResourceId);
         }
     }
 }

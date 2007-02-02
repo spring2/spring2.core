@@ -3,13 +3,13 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{37F3BDF5-2449-4E1A-804B-33F7A0B6C44B}"
+        ProjectGuid = "{829FBB2E-45E9-43AD-B987-9484CE3671E2}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "Spring2.Core.ResourceManager"
+                AssemblyName = "Spring2.Core.ResourceManager.BusinessLogic"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "Library"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "Spring2.Core.ResourceManager"
+                RootNamespace = "BusinessLogic"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -36,10 +36,10 @@
                     NoStdLib = "false"
                     NoWarn = ""
                     Optimize = "false"
-                    OutputPath = "..\build\ResourceManager\"
+                    OutputPath = "..\build\ResourceManager\BusinessLogic\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
+                    TreatWarningsAsErrors = "true"
                     WarningLevel = "4"
                 />
                 <Config
@@ -56,7 +56,7 @@
                     NoStdLib = "false"
                     NoWarn = ""
                     Optimize = "true"
-                    OutputPath = "bin\Release\"
+                    OutputPath = "..\build\ResourceManager\BusinessLogic\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
@@ -68,15 +68,15 @@
                     BaseAddress = "285212672"
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = ""
+                    DefineConstants = "DEBUG;TRACE;NET_1_1"
+                    DocumentationFile = "Spring2.Core.xml"
                     DebugSymbols = "true"
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
                     NoStdLib = "false"
-                    NoWarn = ""
+                    NoWarn = "1591,1572,1573"
                     Optimize = "false"
-                    OutputPath = "..\build\ResourceManager\"
+                    OutputPath = "..\build\ResourceManager\BusinessLogic\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
@@ -88,15 +88,15 @@
                     BaseAddress = "285212672"
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = ""
+                    DefineConstants = "DEBUG;TRACE;NET_2_0"
+                    DocumentationFile = "Spring2.Core.xml"
                     DebugSymbols = "true"
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
                     NoStdLib = "false"
-                    NoWarn = "1699"
+                    NoWarn = "1591,1699,0618,1572,1573"
                     Optimize = "false"
-                    OutputPath = "..\build\ResourceManager\"
+                    OutputPath = "..\build\ResourceManager\BusinessLogic\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
@@ -120,9 +120,9 @@
                     HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
                 />
                 <Reference
-                    Name = "Spring2.DataTierGenerator.Attribute"
-                    AssemblyName = "Spring2.DataTierGenerator.Attribute"
-                    HintPath = "..\lib\Spring2.DataTierGenerator.Attribute.dll"
+                    Name = "Spring2.Core.ResourceManager.DataObject"
+                    Project = "{EE6B2078-6D63-47D0-A837-3DC0859DA7E7}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
                     Name = "Spring2.Core"
@@ -135,9 +135,14 @@
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
-                    Name = "Spring2.Core.Security"
-                    Project = "{AE5DC4B5-476C-441F-88F2-EEB268D90121}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                    Name = "nunit.framework"
+                    AssemblyName = "nunit.framework"
+                    HintPath = "..\lib\nunit.framework.dll"
+                />
+                <Reference
+                    Name = "Spring2.DataTierGenerator.Attribute"
+                    AssemblyName = "Spring2.DataTierGenerator.Attribute"
+                    HintPath = "..\lib\Spring2.DataTierGenerator.Attribute.dll"
                 />
             </References>
         </Build>
@@ -149,26 +154,9 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "ResourceManager\AssemblyInfo.cs"
+                    RelPath = "ResourceManager\BusinessLogic\AssemblyInfo.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ResourceManager\dtg-databases.xml"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "ResourceManager\dtg-entities.xml"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "ResourceManager\ResourceLocalizer.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ResourceManager\types.inc.xml"
-                    BuildAction = "Content"
                 />
                 <File
                     RelPath = "ResourceManager\BusinessLogic\LocalizedResource.cs"
@@ -181,42 +169,31 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "ResourceManager\BusinessLogic\UnitTest\App.config"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "ResourceManager\BusinessLogic\UnitTest\LocalizedResourceTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ResourceManager\BusinessLogic\UnitTest\ResourceTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ResourceManager\BusinessLogic\UnitTest\TestUtility.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "ResourceManager\DAO\LocalizedResourceDAO.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "ResourceManager\DAO\ResourceDAO.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ResourceManager\DataObject\ILocalizedResource.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ResourceManager\DataObject\IResource.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ResourceManager\DataObject\LocalizedResourceData.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ResourceManager\DataObject\LocalizedResourceList.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ResourceManager\DataObject\ResourceData.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ResourceManager\DataObject\ResourceList.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
