@@ -3,13 +3,13 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{53A91AEF-E24F-41E9-AF8D-743F291BEEE1}"
+        ProjectGuid = "{533B92EA-13A3-4A45-A55F-7E2586AEFCC9}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "Spring2.Core.Reporting"
+                AssemblyName = "Spring2.Core.Soap"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "Library"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "Spring2.Core"
+                RootNamespace = "Spring2.Dss"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -29,14 +29,14 @@
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
                     DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = "Spring2.Core.Reporting.xml"
+                    DocumentationFile = "Spring2.Core.Soap.xml"
                     DebugSymbols = "true"
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
                     NoStdLib = "false"
-                    NoWarn = "1591"
+                    NoWarn = ""
                     Optimize = "false"
-                    OutputPath = "..\build\Reporting\"
+                    OutputPath = "..\build\Soap\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "true"
@@ -63,71 +63,71 @@
                     WarningLevel = "4"
                 />
                 <Config
-                    Name = "NET_1_1"
-                    AllowUnsafeBlocks = "false"
-                    BaseAddress = "285212672"
-                    CheckForOverflowUnderflow = "false"
-                    ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = "Spring2.Core.Reporting.xml"
-                    DebugSymbols = "true"
-                    FileAlignment = "4096"
-                    IncrementalBuild = "false"
-                    NoStdLib = "false"
-                    NoWarn = "1591"
-                    Optimize = "false"
-                    OutputPath = "..\build\Reporting\"
-                    RegisterForComInterop = "false"
-                    RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
-                    WarningLevel = "4"
-                />
-                <Config
                     Name = "NET_2_0"
                     AllowUnsafeBlocks = "false"
                     BaseAddress = "285212672"
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE;NET_2_0"
-                    DocumentationFile = "Spring2.Reporting.Common.xml"
+                    DefineConstants = ""
+                    DocumentationFile = "Spring2.Core.Soap.xml"
                     DebugSymbols = "true"
                     FileAlignment = "4096"
-                    IncrementalBuild = "false"
+                    IncrementalBuild = "true"
                     NoStdLib = "false"
-                    NoWarn = "1699,1591"
+                    NoWarn = "1699"
                     Optimize = "false"
-                    OutputPath = "..\build\Reporting\"
+                    OutputPath = "..\build\Soap\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
-                    WarningLevel = "4"
+                    WarningLevel = "1"
+                />
+                <Config
+                    Name = "NET_1_1"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = ""
+                    DocumentationFile = "Spring2.Core.Soap.xml"
+                    DebugSymbols = "true"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "true"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "false"
+                    OutputPath = "..\build\Soap\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "1"
                 />
             </Settings>
             <References>
                 <Reference
                     Name = "System"
                     AssemblyName = "System"
-                    HintPath = "..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                    HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"
                 />
                 <Reference
                     Name = "System.Data"
                     AssemblyName = "System.Data"
-                    HintPath = "..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
+                    HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
                 />
                 <Reference
                     Name = "System.XML"
                     AssemblyName = "System.Xml"
-                    HintPath = "..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
+                    HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
                 />
                 <Reference
-                    Name = "Spring2.Core"
-                    Project = "{80B94045-4DE6-4BB0-BE22-C5CC0E772695}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                    Name = "System.Web.Services"
+                    AssemblyName = "System.Web.Services"
+                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Web.Services.dll"
                 />
                 <Reference
-                    Name = "Spring2.Core.Types"
-                    Project = "{FB2D9DAA-2340-468C-8018-138748DA2EAE}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                    Name = "log4net"
+                    AssemblyName = "log4net"
+                    HintPath = "..\lib\net-1.1\log4net.dll"
                 />
             </References>
         </Build>
@@ -139,27 +139,27 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Reporting\AssemblyInfo.cs"
+                    RelPath = "Soap\AssemblyInfo.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Reporting\BusinessLogic\Report.cs"
+                    RelPath = "Soap\ExposedHttpWebResponse.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Reporting\DAO\SqlSchemaDAO.cs"
+                    RelPath = "Soap\ExposedSoapClientProtocol.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Soap\Log4NetExtension.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Reporting\DataObject\SqlColumnData.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Reporting\DataObject\SqlObjectData.cs"
+                    RelPath = "Soap\Log4NetExtensionAttribute.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

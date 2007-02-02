@@ -1,0 +1,140 @@
+using System;
+using Spring2.Core.Types;
+using Spring2.Dss.Tax.Vertex;
+using NotImplementedException = System.NotImplementedException;
+
+namespace Spring2.Dss.Tax.Test {
+    /// <summary>
+    /// Summary description for TestTaxProvider.
+    /// </summary>
+    public class TestTaxProvider : ITaxProvider {
+
+	public TestTaxProvider(StringType profileKey) {
+	}
+
+	public TaxRateInfo GetTaxRateForArea(IdType id, DateType dateType) {
+	    TaxRateInfo taxRateInfo = new TaxRateInfo();
+	    taxRateInfo.CityTaxRate = 1.0M;
+	    taxRateInfo.CountryTaxRate = 1.0M;
+	    taxRateInfo.CountyTaxRate = 1;
+	    taxRateInfo.LocalDistrict1TaxRate = 0;
+	    taxRateInfo.LocalDistrict2TaxRate = 0;
+	    taxRateInfo.LocalDistrict3TaxRate = 0;
+	    taxRateInfo.RegionTaxRate = 0;
+	    taxRateInfo.TotalTaxRate = 6.6M;
+	    taxRateInfo.TaxAreaID = new IdType(1);
+
+	    return taxRateInfo;
+	}
+
+	public TaxResult Commit(TaxOrder order, StringType currencyCode) {
+	    CurrencyType total = CurrencyType.ZERO;
+	    foreach(TaxOrderLine line in order.Lines) {
+		total += line.ExtendedPrice;
+	    }
+
+	    TaxResult result = new TaxResult();
+	    result.TotalTax = CurrencyType.Round(total * 0.066M,2);
+	    return result;
+	}
+
+	public TaxResult GetQuoteTaxTotal(TaxOrder order, StringType currencyCode) {
+	    CurrencyType total = CurrencyType.ZERO;
+	    foreach(TaxOrderLine line in order.Lines) {
+		total += line.ExtendedPrice;
+	    }
+
+	    TaxResult result = new TaxResult();
+	    result.TotalTax = CurrencyType.Round(total * 0.066M,2);
+	    return result;
+	}
+
+	public TaxAreaData GetTaxAreaForAddress(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, BooleanType limits) {
+	    TaxAreaData taxArea = new TaxAreaData();
+	    taxArea.City = city;
+	    taxArea.CityTaxRate = 0;
+	    taxArea.Country = country;
+	    taxArea.CountyTaxRate = 0;
+	    taxArea.LocalDistrict1 = "LocalDistrict1";
+	    taxArea.LocalDistrict2 = "LocalDistrict2";
+	    taxArea.LocalDistrict3 = "LocalDistrict3";
+	    taxArea.PostalCode = postalCode;
+	    taxArea.Region = region;
+	    taxArea.TaxArea = "Test";
+	    taxArea.TaxAreaID = new IdType(1);
+	    taxArea.TotalTaxRate = 6.6M;
+	    taxArea.IsShippingTaxable = BooleanType.TRUE;
+	    taxArea.AddressValidated = BooleanType.TRUE;
+	    return taxArea;
+	}
+
+	public TaxAreaList LookupTaxArea(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, BooleanType replaceHTMLEntities) {
+	    TaxAreaList list = new TaxAreaList();
+	    list.Add(GetTaxAreaForAddress(street, city, county, region, postalCode, country, BooleanType.FALSE));
+	    return list;
+	}
+
+	public TaxResult Commit(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
+	    CurrencyType total = CurrencyType.ZERO;
+	    foreach(TaxOrderLine line in order.Lines) {
+		total += line.ExtendedPrice;
+	    }
+
+	    TaxResult result = new TaxResult();
+	    result.City = city;
+	    result.CityTaxRate = 0;
+	    result.Country = country;
+	    result.CountyTaxRate = 0;
+	    result.PostalCode = postalCode;
+	    result.Region = region;
+	    result.TaxAreaID = new IdType(1);
+	    result.TotalTaxRate = 6.6M;
+	    result.TotalTax = CurrencyType.Round(total * 0.066M,2);;
+	    
+	    return result;
+	}
+
+	public TaxResult Calculate(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
+	    CurrencyType total = CurrencyType.ZERO;
+	    foreach(TaxOrderLine line in order.Lines) {
+		total += line.ExtendedPrice;
+	    }
+
+	    TaxResult result = new TaxResult();
+	    result.City = city;
+	    result.CityTaxRate = 0;
+	    result.Country = country;
+	    result.CountyTaxRate = 0;
+	    result.PostalCode = postalCode;
+	    result.Region = region;
+	    result.TaxAreaID = new IdType(1);
+	    result.TotalTaxRate = 6.6M;
+	    result.TotalTax = CurrencyType.Round(total * 0.066M,2);
+	    result.AddressValidated = BooleanType.TRUE;
+	    
+	    return result;
+	}
+
+	public TaxResult Calculate(StringType transactionId, StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
+	    CurrencyType total = CurrencyType.ZERO;
+	    foreach(TaxOrderLine line in order.Lines) {
+		total += line.ExtendedPrice;
+	    }
+
+	    TaxResult result = new TaxResult();
+	    result.City = city;
+	    result.CityTaxRate = 0;
+	    result.Country = country;
+	    result.CountyTaxRate = 0;
+	    result.PostalCode = postalCode;
+	    result.Region = region;
+	    result.TaxAreaID = new IdType(1);
+	    result.TotalTaxRate = 6.6M;
+	    result.TotalTax = CurrencyType.Round(total * 0.066M,2);
+	    result.AddressValidated = BooleanType.TRUE;
+	    
+	    return result;
+	}
+
+    }
+}

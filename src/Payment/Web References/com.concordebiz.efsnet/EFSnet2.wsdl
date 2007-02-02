@@ -1,0 +1,2379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://tempuri.org/type" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/wsdl/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://tempuri.org/wsdl/" name="EFSnet2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://tempuri.org/type" />
+  </wsdl:types>
+  <wsdl:message name="EFSnet.QueryIdentityChekAuditSummary">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="DeliveryMethod" type="s:string" />
+    <wsdl:part name="TransactionDateBegin" type="s:string" />
+    <wsdl:part name="TransactionDateEnd" type="s:string" />
+    <wsdl:part name="TransactionTimeBegin" type="s:string" />
+    <wsdl:part name="TransactionTimeEnd" type="s:string" />
+    <wsdl:part name="InquiryNumber" type="s:string" />
+    <wsdl:part name="BranchID" type="s:string" />
+    <wsdl:part name="MultiBank" type="s:string" />
+    <wsdl:part name="ClerkNumber" type="s:string" />
+    <wsdl:part name="FirstName" type="s:string" />
+    <wsdl:part name="MiddleName" type="s:string" />
+    <wsdl:part name="LastName" type="s:string" />
+    <wsdl:part name="BusinessName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryIdentityChekAuditSummaryResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ItemCount" type="s:string" />
+    <wsdl:part name="QueryDataSize" type="s:string" />
+    <wsdl:part name="QueryData" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryIdentityChekAuditRecords">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="DeliveryMethod" type="s:string" />
+    <wsdl:part name="TransactionDateBegin" type="s:string" />
+    <wsdl:part name="TransactionDateEnd" type="s:string" />
+    <wsdl:part name="TransactionTimeBegin" type="s:string" />
+    <wsdl:part name="TransactionTimeEnd" type="s:string" />
+    <wsdl:part name="InquiryNumber" type="s:string" />
+    <wsdl:part name="BranchID" type="s:string" />
+    <wsdl:part name="MultiBank" type="s:string" />
+    <wsdl:part name="ClerkNumber" type="s:string" />
+    <wsdl:part name="FirstName" type="s:string" />
+    <wsdl:part name="MiddleName" type="s:string" />
+    <wsdl:part name="LastName" type="s:string" />
+    <wsdl:part name="BusinessName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryIdentityChekAuditRecordsResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ItemCount" type="s:string" />
+    <wsdl:part name="QueryDataSize" type="s:string" />
+    <wsdl:part name="QueryData" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryIdentityChekTransactionTotals">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="DeliveryMethod" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionStatus" type="s:string" />
+    <wsdl:part name="TransactionDateBegin" type="s:string" />
+    <wsdl:part name="TransactionDateEnd" type="s:string" />
+    <wsdl:part name="TransactionTimeBegin" type="s:string" />
+    <wsdl:part name="TransactionTimeEnd" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="ClerkNumber" type="s:string" />
+    <wsdl:part name="FirstName" type="s:string" />
+    <wsdl:part name="MiddleName" type="s:string" />
+    <wsdl:part name="LastName" type="s:string" />
+    <wsdl:part name="NameSuffix" type="s:string" />
+    <wsdl:part name="BusinessName" type="s:string" />
+    <wsdl:part name="FirstAddress" type="s:string" />
+    <wsdl:part name="FirstCity" type="s:string" />
+    <wsdl:part name="FirstState" type="s:string" />
+    <wsdl:part name="FirstPostalCode" type="s:string" />
+    <wsdl:part name="FirstCountry" type="s:string" />
+    <wsdl:part name="SecondAddress" type="s:string" />
+    <wsdl:part name="SecondCity" type="s:string" />
+    <wsdl:part name="SecondState" type="s:string" />
+    <wsdl:part name="SecondPostalCode" type="s:string" />
+    <wsdl:part name="SecondCountry" type="s:string" />
+    <wsdl:part name="HomePhoneNumber" type="s:string" />
+    <wsdl:part name="WorkPhoneNumber" type="s:string" />
+    <wsdl:part name="TaxIDNumber" type="s:string" />
+    <wsdl:part name="AlienRegistrationNumber" type="s:string" />
+    <wsdl:part name="CountryOfCitizenship" type="s:string" />
+    <wsdl:part name="IdentificationType" type="s:string" />
+    <wsdl:part name="IdentificationNumber" type="s:string" />
+    <wsdl:part name="IdentificationState" type="s:string" />
+    <wsdl:part name="IdentificationCountry" type="s:string" />
+    <wsdl:part name="BirthDate" type="s:string" />
+    <wsdl:part name="BirthCity" type="s:string" />
+    <wsdl:part name="BirthState" type="s:string" />
+    <wsdl:part name="BirthCountry" type="s:string" />
+    <wsdl:part name="Gender" type="s:string" />
+    <wsdl:part name="InquiryNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryIdentityChekTransactionTotalsResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ItemCount" type="s:string" />
+    <wsdl:part name="QueryDataSize" type="s:string" />
+    <wsdl:part name="QueryData" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryIdentityChekTransactions">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="DeliveryMethod" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionStatus" type="s:string" />
+    <wsdl:part name="TransactionDateBegin" type="s:string" />
+    <wsdl:part name="TransactionDateEnd" type="s:string" />
+    <wsdl:part name="TransactionTimeBegin" type="s:string" />
+    <wsdl:part name="TransactionTimeEnd" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="ClerkNumber" type="s:string" />
+    <wsdl:part name="FirstName" type="s:string" />
+    <wsdl:part name="MiddleName" type="s:string" />
+    <wsdl:part name="LastName" type="s:string" />
+    <wsdl:part name="NameSuffix" type="s:string" />
+    <wsdl:part name="BusinessName" type="s:string" />
+    <wsdl:part name="FirstAddress" type="s:string" />
+    <wsdl:part name="FirstCity" type="s:string" />
+    <wsdl:part name="FirstState" type="s:string" />
+    <wsdl:part name="FirstPostalCode" type="s:string" />
+    <wsdl:part name="FirstCountry" type="s:string" />
+    <wsdl:part name="SecondAddress" type="s:string" />
+    <wsdl:part name="SecondCity" type="s:string" />
+    <wsdl:part name="SecondState" type="s:string" />
+    <wsdl:part name="SecondPostalCode" type="s:string" />
+    <wsdl:part name="SecondCountry" type="s:string" />
+    <wsdl:part name="HomePhoneNumber" type="s:string" />
+    <wsdl:part name="WorkPhoneNumber" type="s:string" />
+    <wsdl:part name="TaxIDNumber" type="s:string" />
+    <wsdl:part name="AlienRegistrationNumber" type="s:string" />
+    <wsdl:part name="CountryOfCitizenship" type="s:string" />
+    <wsdl:part name="IdentificationType" type="s:string" />
+    <wsdl:part name="IdentificationNumber" type="s:string" />
+    <wsdl:part name="IdentificationState" type="s:string" />
+    <wsdl:part name="IdentificationCountry" type="s:string" />
+    <wsdl:part name="BirthDate" type="s:string" />
+    <wsdl:part name="BirthCity" type="s:string" />
+    <wsdl:part name="BirthState" type="s:string" />
+    <wsdl:part name="BirthCountry" type="s:string" />
+    <wsdl:part name="Gender" type="s:string" />
+    <wsdl:part name="InquiryNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryIdentityChekTransactionsResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ItemCount" type="s:string" />
+    <wsdl:part name="QueryDataSize" type="s:string" />
+    <wsdl:part name="QueryData" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryBatchTotals">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="DeliveryMethod" type="s:string" />
+    <wsdl:part name="BatchID" type="s:string" />
+    <wsdl:part name="BatchStatus" type="s:string" />
+    <wsdl:part name="BatchSubmitDateBegin" type="s:string" />
+    <wsdl:part name="BatchSubmitDateEnd" type="s:string" />
+    <wsdl:part name="BatchSubmitTimeBegin" type="s:string" />
+    <wsdl:part name="BatchSubmitTimeEnd" type="s:string" />
+    <wsdl:part name="BatchCompleteDateBegin" type="s:string" />
+    <wsdl:part name="BatchCompleteDateEnd" type="s:string" />
+    <wsdl:part name="BatchCompleteTimeBegin" type="s:string" />
+    <wsdl:part name="BatchCompleteTimeEnd" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="Comments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryBatchTotalsResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ItemCount" type="s:string" />
+    <wsdl:part name="QueryDataSize" type="s:string" />
+    <wsdl:part name="QueryData" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryBatches">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="DeliveryMethod" type="s:string" />
+    <wsdl:part name="BatchID" type="s:string" />
+    <wsdl:part name="BatchStatus" type="s:string" />
+    <wsdl:part name="BatchSubmitDateBegin" type="s:string" />
+    <wsdl:part name="BatchSubmitDateEnd" type="s:string" />
+    <wsdl:part name="BatchSubmitTimeBegin" type="s:string" />
+    <wsdl:part name="BatchSubmitTimeEnd" type="s:string" />
+    <wsdl:part name="BatchCompleteDateBegin" type="s:string" />
+    <wsdl:part name="BatchCompleteDateEnd" type="s:string" />
+    <wsdl:part name="BatchCompleteTimeBegin" type="s:string" />
+    <wsdl:part name="BatchCompleteTimeEnd" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="Comments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryBatchesResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ItemCount" type="s:string" />
+    <wsdl:part name="QueryDataSize" type="s:string" />
+    <wsdl:part name="QueryData" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryTransactionTotals">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="DeliveryMethod" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="TransactionType" type="s:string" />
+    <wsdl:part name="TransactionStatus" type="s:string" />
+    <wsdl:part name="TransactionDateBegin" type="s:string" />
+    <wsdl:part name="TransactionDateEnd" type="s:string" />
+    <wsdl:part name="TransactionTimeBegin" type="s:string" />
+    <wsdl:part name="TransactionTimeEnd" type="s:string" />
+    <wsdl:part name="SettlementDateBegin" type="s:string" />
+    <wsdl:part name="SettlementDateEnd" type="s:string" />
+    <wsdl:part name="ParentTransactionID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="CashBackAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="RoutingNumber" type="s:string" />
+    <wsdl:part name="CheckNumber" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+    <wsdl:part name="OriginalTransactionID" type="s:string" />
+    <wsdl:part name="OriginalTransactionAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryTransactionTotalsResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ItemCount" type="s:string" />
+    <wsdl:part name="QueryDataSize" type="s:string" />
+    <wsdl:part name="QueryData" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryTransactions">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="DeliveryMethod" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="TransactionType" type="s:string" />
+    <wsdl:part name="TransactionStatus" type="s:string" />
+    <wsdl:part name="TransactionDateBegin" type="s:string" />
+    <wsdl:part name="TransactionDateEnd" type="s:string" />
+    <wsdl:part name="TransactionTimeBegin" type="s:string" />
+    <wsdl:part name="TransactionTimeEnd" type="s:string" />
+    <wsdl:part name="SettlementDateBegin" type="s:string" />
+    <wsdl:part name="SettlementDateEnd" type="s:string" />
+    <wsdl:part name="ParentTransactionID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="CashBackAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="RoutingNumber" type="s:string" />
+    <wsdl:part name="CheckNumber" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+    <wsdl:part name="OriginalTransactionID" type="s:string" />
+    <wsdl:part name="OriginalTransactionAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.QueryTransactionsResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ItemCount" type="s:string" />
+    <wsdl:part name="QueryDataSize" type="s:string" />
+    <wsdl:part name="QueryData" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GetSettlementTotals">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="SettlementDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GetSettlementTotalsResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="SettledAmount" type="s:string" />
+    <wsdl:part name="DetailedTotals" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GetProcessorTotals">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ActivityPeriod" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GetProcessorTotalsResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="ProcessedAmount" type="s:string" />
+    <wsdl:part name="DetailedTotals" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.TimeOutReversal">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.TimeOutReversalResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.VoidTransaction">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.VoidTransactionResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.IdentityChek">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="ClerkNumber" type="s:string" />
+    <wsdl:part name="FirstName" type="s:string" />
+    <wsdl:part name="MiddleName" type="s:string" />
+    <wsdl:part name="LastName" type="s:string" />
+    <wsdl:part name="NameSuffix" type="s:string" />
+    <wsdl:part name="BusinessName" type="s:string" />
+    <wsdl:part name="FirstAddress" type="s:string" />
+    <wsdl:part name="FirstCity" type="s:string" />
+    <wsdl:part name="FirstState" type="s:string" />
+    <wsdl:part name="FirstPostalCode" type="s:string" />
+    <wsdl:part name="FirstCountry" type="s:string" />
+    <wsdl:part name="SecondAddress" type="s:string" />
+    <wsdl:part name="SecondCity" type="s:string" />
+    <wsdl:part name="SecondState" type="s:string" />
+    <wsdl:part name="SecondPostalCode" type="s:string" />
+    <wsdl:part name="SecondCountry" type="s:string" />
+    <wsdl:part name="HomePhoneNumber" type="s:string" />
+    <wsdl:part name="WorkPhoneNumber" type="s:string" />
+    <wsdl:part name="TaxIDNumber" type="s:string" />
+    <wsdl:part name="AlienRegistrationNumber" type="s:string" />
+    <wsdl:part name="CountryOfCitizenship" type="s:string" />
+    <wsdl:part name="IdentificationType" type="s:string" />
+    <wsdl:part name="IdentificationNumber" type="s:string" />
+    <wsdl:part name="IdentificationState" type="s:string" />
+    <wsdl:part name="IdentificationCountry" type="s:string" />
+    <wsdl:part name="BirthDate" type="s:string" />
+    <wsdl:part name="BirthCity" type="s:string" />
+    <wsdl:part name="BirthState" type="s:string" />
+    <wsdl:part name="BirthCountry" type="s:string" />
+    <wsdl:part name="Gender" type="s:string" />
+    <wsdl:part name="OriginalInquiryNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.IdentityChekResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="InquiryNumber" type="s:string" />
+    <wsdl:part name="TaxIDNumberStartDate" type="s:string" />
+    <wsdl:part name="TaxIDNumberEndDate" type="s:string" />
+    <wsdl:part name="IdentificationStartDate" type="s:string" />
+    <wsdl:part name="IdentificationEndDate" type="s:string" />
+    <wsdl:part name="VerifyParameters" type="s:string" />
+    <wsdl:part name="VerifyAlerts" type="s:string" />
+    <wsdl:part name="ResendParameters" type="s:string" />
+    <wsdl:part name="ResendTries" type="s:string" />
+    <wsdl:part name="MaxTriesExceeded" type="s:string" />
+    <wsdl:part name="WarningFlags" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.TeleCheckICARefund">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="OriginalTransactionID" type="s:string" />
+    <wsdl:part name="OriginalTransactionAmount" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.TeleCheckICARefundResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.TeleCheckICASettle">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="OriginalTransactionID" type="s:string" />
+    <wsdl:part name="OriginalTransactionAmount" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.TeleCheckICASettleResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.TeleCheckICAAuthorize">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="RoutingNumber" type="s:string" />
+    <wsdl:part name="CheckNumber" type="s:string" />
+    <wsdl:part name="MICR" type="s:string" />
+    <wsdl:part name="CheckType" type="s:string" />
+    <wsdl:part name="IdentificationNumber" type="s:string" />
+    <wsdl:part name="IdentificationState" type="s:string" />
+    <wsdl:part name="TaxIDNumber" type="s:string" />
+    <wsdl:part name="AccountBusinessName" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.TeleCheckICAAuthorizeResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="ExtendedResultMessage" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.TeleCheckRiskManagement">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="RoutingNumber" type="s:string" />
+    <wsdl:part name="CheckNumber" type="s:string" />
+    <wsdl:part name="MICR" type="s:string" />
+    <wsdl:part name="IdentificationNumber" type="s:string" />
+    <wsdl:part name="IdentificationState" type="s:string" />
+    <wsdl:part name="BirthDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.TeleCheckRiskManagementResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.STARChekDirectDebit">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="RoutingNumber" type="s:string" />
+    <wsdl:part name="CheckNumber" type="s:string" />
+    <wsdl:part name="MICR" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.STARChekDirectDebitResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.STARChekDirectVerify">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="RoutingNumber" type="s:string" />
+    <wsdl:part name="CheckNumber" type="s:string" />
+    <wsdl:part name="MICR" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.STARChekDirectVerifyResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.FIAccountVerification">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="RoutingNumber" type="s:string" />
+    <wsdl:part name="CheckNumber" type="s:string" />
+    <wsdl:part name="PCTranCode" type="s:string" />
+    <wsdl:part name="AccountFirstName" type="s:string" />
+    <wsdl:part name="AccountMiddleName" type="s:string" />
+    <wsdl:part name="AccountLastName" type="s:string" />
+    <wsdl:part name="AccountBusinessName" type="s:string" />
+    <wsdl:part name="AccountAddress" type="s:string" />
+    <wsdl:part name="AccountCity" type="s:string" />
+    <wsdl:part name="AccountState" type="s:string" />
+    <wsdl:part name="AccountPostalCode" type="s:string" />
+    <wsdl:part name="AccountCountry" type="s:string" />
+    <wsdl:part name="AccountEmail" type="s:string" />
+    <wsdl:part name="AccountHomePhone" type="s:string" />
+    <wsdl:part name="AccountWorkPhone" type="s:string" />
+    <wsdl:part name="AccountTaxIDNumber" type="s:string" />
+    <wsdl:part name="AccountBirthDate" type="s:string" />
+    <wsdl:part name="IdentificationType" type="s:string" />
+    <wsdl:part name="IdentificationNumber" type="s:string" />
+    <wsdl:part name="IdentificationState" type="s:string" />
+    <wsdl:part name="IdentificationCountry" type="s:string" />
+    <wsdl:part name="IdentificationIssueDate" type="s:string" />
+    <wsdl:part name="IdentificationExpirationDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.FIAccountVerificationResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="NonParticipantFlag" type="s:string" />
+    <wsdl:part name="AccountStatusCodes" type="s:string" />
+    <wsdl:part name="AccountVerificationFlags" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.STARChek">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="RoutingNumber" type="s:string" />
+    <wsdl:part name="CheckNumber" type="s:string" />
+    <wsdl:part name="MICR" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.STARChekResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardDeactivate">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardDeactivateResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="BalanceAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardActivate">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardActivateResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="BalanceAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardBalanceIncrease">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardBalanceIncreaseResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="BalanceAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardBalanceInquiry">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardBalanceInquiryResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="BalanceAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardCredit">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardCreditResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="BalanceAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardRefund">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="OriginalTransactionID" type="s:string" />
+    <wsdl:part name="OriginalTransactionAmount" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardRefundResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="BalanceAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardCapture">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="AuthorizationNumber" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardCaptureResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="BalanceAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardSettle">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="OriginalTransactionID" type="s:string" />
+    <wsdl:part name="OriginalTransactionAmount" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardSettleResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="BalanceAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardAuthorize">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardAuthorizeResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="AuthorizationNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="BalanceAmount" type="s:string" />
+    <wsdl:part name="ApprovedAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardCharge">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.GiftCardChargeResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="BalanceAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.BenefitsBalanceInquiry">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="PINData" type="s:string" />
+    <wsdl:part name="KeySerialNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.BenefitsBalanceInquiryResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="FoodStampBalanceAmount" type="s:string" />
+    <wsdl:part name="CashBenefitBalanceAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CashBenefitCharge">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="CashBackAmount" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="PINData" type="s:string" />
+    <wsdl:part name="KeySerialNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CashBenefitChargeResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="FoodStampBalanceAmount" type="s:string" />
+    <wsdl:part name="CashBenefitBalanceAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.FoodStampVoucher">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="VoucherNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.FoodStampVoucherResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.FoodStampCredit">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="PINData" type="s:string" />
+    <wsdl:part name="KeySerialNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.FoodStampCreditResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="FoodStampBalanceAmount" type="s:string" />
+    <wsdl:part name="CashBenefitBalanceAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.FoodStampCharge">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="PINData" type="s:string" />
+    <wsdl:part name="KeySerialNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.FoodStampChargeResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="FoodStampBalanceAmount" type="s:string" />
+    <wsdl:part name="CashBenefitBalanceAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.DebitSessionKeyChange">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.DebitSessionKeyChangeResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="SessionKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.DebitCardCredit">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="PINData" type="s:string" />
+    <wsdl:part name="KeySerialNumber" type="s:string" />
+    <wsdl:part name="SignatureData" type="s:string" />
+    <wsdl:part name="SignatureAlgorithm" type="s:string" />
+    <wsdl:part name="PrivateData" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.DebitCardCreditResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="AuthorizationNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.DebitCardCapture">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="CashBackAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="PINData" type="s:string" />
+    <wsdl:part name="KeySerialNumber" type="s:string" />
+    <wsdl:part name="SignatureData" type="s:string" />
+    <wsdl:part name="SignatureAlgorithm" type="s:string" />
+    <wsdl:part name="PrivateData" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="AuthorizationNumber" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.DebitCardCaptureResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.DebitCardAuthorize">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="CashBackAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="PINData" type="s:string" />
+    <wsdl:part name="KeySerialNumber" type="s:string" />
+    <wsdl:part name="SignatureData" type="s:string" />
+    <wsdl:part name="SignatureAlgorithm" type="s:string" />
+    <wsdl:part name="PrivateData" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.DebitCardAuthorizeResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="AuthorizationNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="ApprovedAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.DebitCardChargePINless">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.DebitCardChargePINlessResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="AuthorizationNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.DebitCardCharge">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="CashBackAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="PINData" type="s:string" />
+    <wsdl:part name="KeySerialNumber" type="s:string" />
+    <wsdl:part name="SignatureData" type="s:string" />
+    <wsdl:part name="SignatureAlgorithm" type="s:string" />
+    <wsdl:part name="PrivateData" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.DebitCardChargeResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="AuthorizationNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardAddressVerify">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardAddressVerifyResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="AVSResponseCode" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.ProcessAuthenticationResponse">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="AuthenticationResponseToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.ProcessAuthenticationResponseResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="AVSResponseCode" type="s:string" />
+    <wsdl:part name="CVVResponseCode" type="s:string" />
+    <wsdl:part name="AuthenticationResponseCode" type="s:string" />
+    <wsdl:part name="AuthenticationMethodName" type="s:string" />
+    <wsdl:part name="AuthenticationMethodVersion" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="AuthorizationNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardAuthorizeWithAuthentication">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="CardVerificationValue" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="AuthenticationResponseToken" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardAuthorizeWithAuthenticationResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="AVSResponseCode" type="s:string" />
+    <wsdl:part name="CVVResponseCode" type="s:string" />
+    <wsdl:part name="AuthenticationResponseCode" type="s:string" />
+    <wsdl:part name="AuthenticationMethodName" type="s:string" />
+    <wsdl:part name="AuthenticationMethodVersion" type="s:string" />
+    <wsdl:part name="AuthenticationRequestToken" type="s:string" />
+    <wsdl:part name="AuthenticationServerURL" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="AuthorizationNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardVoiceAuthorize">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="CardVerificationValue" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="AuthorizationNumber" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardVoiceAuthorizeResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardCredit">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardCreditResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardRefund">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="OriginalTransactionID" type="s:string" />
+    <wsdl:part name="OriginalTransactionAmount" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardRefundResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardCapture">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="AuthorizationNumber" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardCaptureResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardSettle">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="OriginalTransactionID" type="s:string" />
+    <wsdl:part name="OriginalTransactionAmount" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardSettleResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardCharge">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="CardVerificationValue" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardChargeResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="AVSResponseCode" type="s:string" />
+    <wsdl:part name="CVVResponseCode" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="AuthorizationNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardAuthorize">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="TerminalID" type="s:string" />
+    <wsdl:part name="ReferenceNumber" type="s:string" />
+    <wsdl:part name="CashierNumber" type="s:string" />
+    <wsdl:part name="TransactionAmount" type="s:string" />
+    <wsdl:part name="SalesTaxAmount" type="s:string" />
+    <wsdl:part name="Currency" type="s:string" />
+    <wsdl:part name="AccountNumber" type="s:string" />
+    <wsdl:part name="ExpirationMonth" type="s:string" />
+    <wsdl:part name="ExpirationYear" type="s:string" />
+    <wsdl:part name="CardVerificationValue" type="s:string" />
+    <wsdl:part name="Track1" type="s:string" />
+    <wsdl:part name="Track2" type="s:string" />
+    <wsdl:part name="BillingName" type="s:string" />
+    <wsdl:part name="BillingAddress" type="s:string" />
+    <wsdl:part name="BillingCity" type="s:string" />
+    <wsdl:part name="BillingState" type="s:string" />
+    <wsdl:part name="BillingPostalCode" type="s:string" />
+    <wsdl:part name="BillingCountry" type="s:string" />
+    <wsdl:part name="BillingPhone" type="s:string" />
+    <wsdl:part name="BillingEmail" type="s:string" />
+    <wsdl:part name="ShippingName" type="s:string" />
+    <wsdl:part name="ShippingAddress" type="s:string" />
+    <wsdl:part name="ShippingCity" type="s:string" />
+    <wsdl:part name="ShippingState" type="s:string" />
+    <wsdl:part name="ShippingPostalCode" type="s:string" />
+    <wsdl:part name="ShippingCountry" type="s:string" />
+    <wsdl:part name="ShippingPhone" type="s:string" />
+    <wsdl:part name="ShippingEmail" type="s:string" />
+    <wsdl:part name="ClientIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.CreditCardAuthorizeResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="AVSResponseCode" type="s:string" />
+    <wsdl:part name="CVVResponseCode" type="s:string" />
+    <wsdl:part name="ApprovalNumber" type="s:string" />
+    <wsdl:part name="AuthorizationNumber" type="s:string" />
+    <wsdl:part name="TransactionDate" type="s:string" />
+    <wsdl:part name="TransactionTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.RequestPassThrough">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+    <wsdl:part name="RequestMessage" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.RequestPassThroughResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="TransactionID" type="s:string" />
+    <wsdl:part name="ReplyMessage" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.SystemCheck">
+    <wsdl:part name="StoreID" type="s:string" />
+    <wsdl:part name="StoreKey" type="s:string" />
+    <wsdl:part name="ApplicationID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EFSnet.SystemCheckResponse">
+    <wsdl:part name="Result" type="s:int" />
+    <wsdl:part name="ResultCode" type="s:string" />
+    <wsdl:part name="ResultMessage" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="EFSnetSoapPort">
+    <wsdl:operation name="QueryIdentityChekAuditSummary" parameterOrder="StoreID StoreKey ApplicationID DeliveryMethod TransactionDateBegin TransactionDateEnd TransactionTimeBegin TransactionTimeEnd InquiryNumber BranchID MultiBank ClerkNumber FirstName MiddleName LastName BusinessName ItemCount QueryDataSize QueryData">
+      <wsdl:input message="tns:EFSnet.QueryIdentityChekAuditSummary" />
+      <wsdl:output message="tns:EFSnet.QueryIdentityChekAuditSummaryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryIdentityChekAuditRecords" parameterOrder="StoreID StoreKey ApplicationID DeliveryMethod TransactionDateBegin TransactionDateEnd TransactionTimeBegin TransactionTimeEnd InquiryNumber BranchID MultiBank ClerkNumber FirstName MiddleName LastName BusinessName ItemCount QueryDataSize QueryData">
+      <wsdl:input message="tns:EFSnet.QueryIdentityChekAuditRecords" />
+      <wsdl:output message="tns:EFSnet.QueryIdentityChekAuditRecordsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryIdentityChekTransactionTotals" parameterOrder="StoreID StoreKey ApplicationID DeliveryMethod TransactionID TransactionStatus TransactionDateBegin TransactionDateEnd TransactionTimeBegin TransactionTimeEnd ReferenceNumber ClerkNumber FirstName MiddleName LastName NameSuffix BusinessName FirstAddress FirstCity FirstState FirstPostalCode FirstCountry SecondAddress SecondCity SecondState SecondPostalCode SecondCountry HomePhoneNumber WorkPhoneNumber TaxIDNumber AlienRegistrationNumber CountryOfCitizenship IdentificationType IdentificationNumber IdentificationState IdentificationCountry BirthDate BirthCity BirthState BirthCountry Gender InquiryNumber ItemCount QueryDataSize QueryData">
+      <wsdl:input message="tns:EFSnet.QueryIdentityChekTransactionTotals" />
+      <wsdl:output message="tns:EFSnet.QueryIdentityChekTransactionTotalsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryIdentityChekTransactions" parameterOrder="StoreID StoreKey ApplicationID DeliveryMethod TransactionID TransactionStatus TransactionDateBegin TransactionDateEnd TransactionTimeBegin TransactionTimeEnd ReferenceNumber ClerkNumber FirstName MiddleName LastName NameSuffix BusinessName FirstAddress FirstCity FirstState FirstPostalCode FirstCountry SecondAddress SecondCity SecondState SecondPostalCode SecondCountry HomePhoneNumber WorkPhoneNumber TaxIDNumber AlienRegistrationNumber CountryOfCitizenship IdentificationType IdentificationNumber IdentificationState IdentificationCountry BirthDate BirthCity BirthState BirthCountry Gender InquiryNumber ItemCount QueryDataSize QueryData">
+      <wsdl:input message="tns:EFSnet.QueryIdentityChekTransactions" />
+      <wsdl:output message="tns:EFSnet.QueryIdentityChekTransactionsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryBatchTotals" parameterOrder="StoreID StoreKey ApplicationID DeliveryMethod BatchID BatchStatus BatchSubmitDateBegin BatchSubmitDateEnd BatchSubmitTimeBegin BatchSubmitTimeEnd BatchCompleteDateBegin BatchCompleteDateEnd BatchCompleteTimeBegin BatchCompleteTimeEnd ReferenceNumber Comments ItemCount QueryDataSize QueryData">
+      <wsdl:input message="tns:EFSnet.QueryBatchTotals" />
+      <wsdl:output message="tns:EFSnet.QueryBatchTotalsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryBatches" parameterOrder="StoreID StoreKey ApplicationID DeliveryMethod BatchID BatchStatus BatchSubmitDateBegin BatchSubmitDateEnd BatchSubmitTimeBegin BatchSubmitTimeEnd BatchCompleteDateBegin BatchCompleteDateEnd BatchCompleteTimeBegin BatchCompleteTimeEnd ReferenceNumber Comments ItemCount QueryDataSize QueryData">
+      <wsdl:input message="tns:EFSnet.QueryBatches" />
+      <wsdl:output message="tns:EFSnet.QueryBatchesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryTransactionTotals" parameterOrder="StoreID StoreKey ApplicationID DeliveryMethod TransactionID TerminalID TransactionType TransactionStatus TransactionDateBegin TransactionDateEnd TransactionTimeBegin TransactionTimeEnd SettlementDateBegin SettlementDateEnd ParentTransactionID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount CashBackAmount Currency AccountNumber ExpirationMonth ExpirationYear RoutingNumber CheckNumber BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail ApprovalNumber ClientIPAddress OriginalTransactionID OriginalTransactionAmount ItemCount QueryDataSize QueryData">
+      <wsdl:input message="tns:EFSnet.QueryTransactionTotals" />
+      <wsdl:output message="tns:EFSnet.QueryTransactionTotalsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryTransactions" parameterOrder="StoreID StoreKey ApplicationID DeliveryMethod TransactionID TerminalID TransactionType TransactionStatus TransactionDateBegin TransactionDateEnd TransactionTimeBegin TransactionTimeEnd SettlementDateBegin SettlementDateEnd ParentTransactionID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount CashBackAmount Currency AccountNumber ExpirationMonth ExpirationYear RoutingNumber CheckNumber BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail ApprovalNumber ClientIPAddress OriginalTransactionID OriginalTransactionAmount ItemCount QueryDataSize QueryData">
+      <wsdl:input message="tns:EFSnet.QueryTransactions" />
+      <wsdl:output message="tns:EFSnet.QueryTransactionsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSettlementTotals" parameterOrder="StoreID StoreKey ApplicationID SettlementDate ResultCode ResultMessage SettledAmount DetailedTotals">
+      <wsdl:input message="tns:EFSnet.GetSettlementTotals" />
+      <wsdl:output message="tns:EFSnet.GetSettlementTotalsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProcessorTotals" parameterOrder="StoreID StoreKey ApplicationID TerminalID ActivityPeriod ResultCode ResultMessage ProcessedAmount DetailedTotals">
+      <wsdl:input message="tns:EFSnet.GetProcessorTotals" />
+      <wsdl:output message="tns:EFSnet.GetProcessorTotalsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="TimeOutReversal" parameterOrder="StoreID StoreKey ApplicationID ReferenceNumber TransactionAmount ResultCode ResultMessage">
+      <wsdl:input message="tns:EFSnet.TimeOutReversal" />
+      <wsdl:output message="tns:EFSnet.TimeOutReversalResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="VoidTransaction" parameterOrder="StoreID StoreKey ApplicationID TransactionID ResultCode ResultMessage">
+      <wsdl:input message="tns:EFSnet.VoidTransaction" />
+      <wsdl:output message="tns:EFSnet.VoidTransactionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="IdentityChek" parameterOrder="StoreID StoreKey ApplicationID ReferenceNumber ClerkNumber FirstName MiddleName LastName NameSuffix BusinessName FirstAddress FirstCity FirstState FirstPostalCode FirstCountry SecondAddress SecondCity SecondState SecondPostalCode SecondCountry HomePhoneNumber WorkPhoneNumber TaxIDNumber AlienRegistrationNumber CountryOfCitizenship IdentificationType IdentificationNumber IdentificationState IdentificationCountry BirthDate BirthCity BirthState BirthCountry Gender OriginalInquiryNumber ResultCode ResultMessage TransactionID TransactionDate TransactionTime InquiryNumber TaxIDNumberStartDate TaxIDNumberEndDate IdentificationStartDate IdentificationEndDate VerifyParameters VerifyAlerts ResendParameters ResendTries MaxTriesExceeded WarningFlags">
+      <wsdl:input message="tns:EFSnet.IdentityChek" />
+      <wsdl:output message="tns:EFSnet.IdentityChekResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="TeleCheckICARefund" parameterOrder="StoreID StoreKey ApplicationID ReferenceNumber CashierNumber TransactionAmount OriginalTransactionID OriginalTransactionAmount ClientIPAddress ResultCode ResultMessage TransactionID TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.TeleCheckICARefund" />
+      <wsdl:output message="tns:EFSnet.TeleCheckICARefundResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="TeleCheckICASettle" parameterOrder="StoreID StoreKey ApplicationID ReferenceNumber CashierNumber TransactionAmount OriginalTransactionID OriginalTransactionAmount ClientIPAddress ResultCode ResultMessage TransactionID TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.TeleCheckICASettle" />
+      <wsdl:output message="tns:EFSnet.TeleCheckICASettleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="TeleCheckICAAuthorize" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount Currency AccountNumber RoutingNumber CheckNumber MICR CheckType IdentificationNumber IdentificationState TaxIDNumber AccountBusinessName BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail ClientIPAddress ResultCode ResultMessage TransactionID TransactionDate TransactionTime ExtendedResultMessage">
+      <wsdl:input message="tns:EFSnet.TeleCheckICAAuthorize" />
+      <wsdl:output message="tns:EFSnet.TeleCheckICAAuthorizeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="TeleCheckRiskManagement" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount Currency AccountNumber RoutingNumber CheckNumber MICR IdentificationNumber IdentificationState BirthDate ResultCode ResultMessage TransactionID ApprovalNumber TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.TeleCheckRiskManagement" />
+      <wsdl:output message="tns:EFSnet.TeleCheckRiskManagementResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="STARChekDirectDebit" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount Currency AccountNumber RoutingNumber CheckNumber MICR ResultCode ResultMessage TransactionID ApprovalNumber TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.STARChekDirectDebit" />
+      <wsdl:output message="tns:EFSnet.STARChekDirectDebitResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="STARChekDirectVerify" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount Currency AccountNumber RoutingNumber CheckNumber MICR ResultCode ResultMessage TransactionID ApprovalNumber TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.STARChekDirectVerify" />
+      <wsdl:output message="tns:EFSnet.STARChekDirectVerifyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="FIAccountVerification" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount Currency AccountNumber RoutingNumber CheckNumber PCTranCode AccountFirstName AccountMiddleName AccountLastName AccountBusinessName AccountAddress AccountCity AccountState AccountPostalCode AccountCountry AccountEmail AccountHomePhone AccountWorkPhone AccountTaxIDNumber AccountBirthDate IdentificationType IdentificationNumber IdentificationState IdentificationCountry IdentificationIssueDate IdentificationExpirationDate ResultCode ResultMessage TransactionID TransactionDate TransactionTime NonParticipantFlag AccountStatusCodes AccountVerificationFlags">
+      <wsdl:input message="tns:EFSnet.FIAccountVerification" />
+      <wsdl:output message="tns:EFSnet.FIAccountVerificationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="STARChek" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount Currency AccountNumber RoutingNumber CheckNumber MICR ResultCode ResultMessage TransactionID TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.STARChek" />
+      <wsdl:output message="tns:EFSnet.STARChekResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardDeactivate" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount AccountNumber ExpirationMonth ExpirationYear Track1 Track2 ResultCode ResultMessage TransactionID TransactionDate TransactionTime BalanceAmount">
+      <wsdl:input message="tns:EFSnet.GiftCardDeactivate" />
+      <wsdl:output message="tns:EFSnet.GiftCardDeactivateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardActivate" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount AccountNumber ExpirationMonth ExpirationYear Track1 Track2 ResultCode ResultMessage TransactionID TransactionDate TransactionTime BalanceAmount">
+      <wsdl:input message="tns:EFSnet.GiftCardActivate" />
+      <wsdl:output message="tns:EFSnet.GiftCardActivateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardBalanceIncrease" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount AccountNumber ExpirationMonth ExpirationYear Track1 Track2 ResultCode ResultMessage TransactionID TransactionDate TransactionTime BalanceAmount">
+      <wsdl:input message="tns:EFSnet.GiftCardBalanceIncrease" />
+      <wsdl:output message="tns:EFSnet.GiftCardBalanceIncreaseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardBalanceInquiry" parameterOrder="StoreID StoreKey ApplicationID TerminalID CashierNumber AccountNumber ExpirationMonth ExpirationYear Track1 Track2 ClientIPAddress ResultCode ResultMessage TransactionID TransactionDate TransactionTime BalanceAmount">
+      <wsdl:input message="tns:EFSnet.GiftCardBalanceInquiry" />
+      <wsdl:output message="tns:EFSnet.GiftCardBalanceInquiryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardCredit" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount AccountNumber ExpirationMonth ExpirationYear Track1 Track2 BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ClientIPAddress ResultCode ResultMessage TransactionID TransactionDate TransactionTime BalanceAmount">
+      <wsdl:input message="tns:EFSnet.GiftCardCredit" />
+      <wsdl:output message="tns:EFSnet.GiftCardCreditResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardRefund" parameterOrder="StoreID StoreKey ApplicationID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount OriginalTransactionID OriginalTransactionAmount ClientIPAddress ResultCode ResultMessage TransactionID TransactionDate TransactionTime BalanceAmount">
+      <wsdl:input message="tns:EFSnet.GiftCardRefund" />
+      <wsdl:output message="tns:EFSnet.GiftCardRefundResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardCapture" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount AccountNumber ExpirationMonth ExpirationYear Track1 Track2 BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail AuthorizationNumber ClientIPAddress ResultCode ResultMessage TransactionID TransactionDate TransactionTime BalanceAmount">
+      <wsdl:input message="tns:EFSnet.GiftCardCapture" />
+      <wsdl:output message="tns:EFSnet.GiftCardCaptureResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardSettle" parameterOrder="StoreID StoreKey ApplicationID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount OriginalTransactionID OriginalTransactionAmount ClientIPAddress ResultCode ResultMessage TransactionID TransactionDate TransactionTime BalanceAmount">
+      <wsdl:input message="tns:EFSnet.GiftCardSettle" />
+      <wsdl:output message="tns:EFSnet.GiftCardSettleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardAuthorize" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount AccountNumber ExpirationMonth ExpirationYear Track1 Track2 BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail ClientIPAddress ResultCode ResultMessage TransactionID ApprovalNumber AuthorizationNumber TransactionDate TransactionTime BalanceAmount ApprovedAmount">
+      <wsdl:input message="tns:EFSnet.GiftCardAuthorize" />
+      <wsdl:output message="tns:EFSnet.GiftCardAuthorizeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardCharge" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount AccountNumber ExpirationMonth ExpirationYear Track1 Track2 BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail ClientIPAddress ResultCode ResultMessage TransactionID TransactionDate TransactionTime BalanceAmount">
+      <wsdl:input message="tns:EFSnet.GiftCardCharge" />
+      <wsdl:output message="tns:EFSnet.GiftCardChargeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="BenefitsBalanceInquiry" parameterOrder="StoreID StoreKey ApplicationID TerminalID CashierNumber AccountNumber ExpirationMonth ExpirationYear Track2 PINData KeySerialNumber ResultCode ResultMessage TransactionID TransactionDate TransactionTime FoodStampBalanceAmount CashBenefitBalanceAmount">
+      <wsdl:input message="tns:EFSnet.BenefitsBalanceInquiry" />
+      <wsdl:output message="tns:EFSnet.BenefitsBalanceInquiryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CashBenefitCharge" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount CashBackAmount AccountNumber ExpirationMonth ExpirationYear Track2 PINData KeySerialNumber ResultCode ResultMessage TransactionID ApprovalNumber TransactionDate TransactionTime FoodStampBalanceAmount CashBenefitBalanceAmount">
+      <wsdl:input message="tns:EFSnet.CashBenefitCharge" />
+      <wsdl:output message="tns:EFSnet.CashBenefitChargeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="FoodStampVoucher" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount AccountNumber ExpirationMonth ExpirationYear ApprovalNumber VoucherNumber ResultCode ResultMessage TransactionID TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.FoodStampVoucher" />
+      <wsdl:output message="tns:EFSnet.FoodStampVoucherResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="FoodStampCredit" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount AccountNumber ExpirationMonth ExpirationYear Track2 PINData KeySerialNumber ResultCode ResultMessage TransactionID ApprovalNumber TransactionDate TransactionTime FoodStampBalanceAmount CashBenefitBalanceAmount">
+      <wsdl:input message="tns:EFSnet.FoodStampCredit" />
+      <wsdl:output message="tns:EFSnet.FoodStampCreditResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="FoodStampCharge" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount AccountNumber ExpirationMonth ExpirationYear Track2 PINData KeySerialNumber ResultCode ResultMessage TransactionID ApprovalNumber TransactionDate TransactionTime FoodStampBalanceAmount CashBenefitBalanceAmount">
+      <wsdl:input message="tns:EFSnet.FoodStampCharge" />
+      <wsdl:output message="tns:EFSnet.FoodStampChargeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="DebitSessionKeyChange" parameterOrder="StoreID StoreKey ApplicationID TerminalID ResultCode ResultMessage SessionKey">
+      <wsdl:input message="tns:EFSnet.DebitSessionKeyChange" />
+      <wsdl:output message="tns:EFSnet.DebitSessionKeyChangeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="DebitCardCredit" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount Currency AccountNumber Track1 Track2 PINData KeySerialNumber SignatureData SignatureAlgorithm PrivateData BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ClientIPAddress ResultCode ResultMessage TransactionID ApprovalNumber AuthorizationNumber TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.DebitCardCredit" />
+      <wsdl:output message="tns:EFSnet.DebitCardCreditResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="DebitCardCapture" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount CashBackAmount Currency AccountNumber Track1 Track2 PINData KeySerialNumber SignatureData SignatureAlgorithm PrivateData BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail AuthorizationNumber ClientIPAddress ResultCode ResultMessage TransactionID TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.DebitCardCapture" />
+      <wsdl:output message="tns:EFSnet.DebitCardCaptureResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="DebitCardAuthorize" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount CashBackAmount Currency AccountNumber Track1 Track2 PINData KeySerialNumber SignatureData SignatureAlgorithm PrivateData BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail ClientIPAddress ResultCode ResultMessage TransactionID ApprovalNumber AuthorizationNumber TransactionDate TransactionTime ApprovedAmount">
+      <wsdl:input message="tns:EFSnet.DebitCardAuthorize" />
+      <wsdl:output message="tns:EFSnet.DebitCardAuthorizeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="DebitCardChargePINless" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount Currency AccountNumber ExpirationMonth ExpirationYear BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail ClientIPAddress ResultCode ResultMessage TransactionID ApprovalNumber AuthorizationNumber TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.DebitCardChargePINless" />
+      <wsdl:output message="tns:EFSnet.DebitCardChargePINlessResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="DebitCardCharge" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount CashBackAmount Currency AccountNumber Track1 Track2 PINData KeySerialNumber SignatureData SignatureAlgorithm PrivateData BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail ClientIPAddress ResultCode ResultMessage TransactionID ApprovalNumber AuthorizationNumber TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.DebitCardCharge" />
+      <wsdl:output message="tns:EFSnet.DebitCardChargeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardAddressVerify" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber AccountNumber ExpirationMonth ExpirationYear Track1 Track2 BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ClientIPAddress ResultCode ResultMessage TransactionID AVSResponseCode TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.CreditCardAddressVerify" />
+      <wsdl:output message="tns:EFSnet.CreditCardAddressVerifyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessAuthenticationResponse" parameterOrder="StoreID StoreKey ApplicationID TransactionID AuthenticationResponseToken ResultCode ResultMessage AVSResponseCode CVVResponseCode AuthenticationResponseCode AuthenticationMethodName AuthenticationMethodVersion ApprovalNumber AuthorizationNumber TransactionDate TransactionTime ReferenceNumber AccountNumber TransactionAmount">
+      <wsdl:input message="tns:EFSnet.ProcessAuthenticationResponse" />
+      <wsdl:output message="tns:EFSnet.ProcessAuthenticationResponseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardAuthorizeWithAuthentication" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount Currency AccountNumber ExpirationMonth ExpirationYear CardVerificationValue Track1 Track2 AuthenticationResponseToken BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail ClientIPAddress ResultCode ResultMessage TransactionID AVSResponseCode CVVResponseCode AuthenticationResponseCode AuthenticationMethodName AuthenticationMethodVersion AuthenticationRequestToken AuthenticationServerURL ApprovalNumber AuthorizationNumber TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.CreditCardAuthorizeWithAuthentication" />
+      <wsdl:output message="tns:EFSnet.CreditCardAuthorizeWithAuthenticationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardVoiceAuthorize" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount Currency AccountNumber ExpirationMonth ExpirationYear CardVerificationValue Track1 Track2 BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail AuthorizationNumber ClientIPAddress ResultCode ResultMessage TransactionID TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.CreditCardVoiceAuthorize" />
+      <wsdl:output message="tns:EFSnet.CreditCardVoiceAuthorizeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardCredit" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount Currency AccountNumber ExpirationMonth ExpirationYear Track1 Track2 BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ClientIPAddress ResultCode ResultMessage TransactionID ApprovalNumber TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.CreditCardCredit" />
+      <wsdl:output message="tns:EFSnet.CreditCardCreditResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardRefund" parameterOrder="StoreID StoreKey ApplicationID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount OriginalTransactionID OriginalTransactionAmount ClientIPAddress ResultCode ResultMessage TransactionID ApprovalNumber TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.CreditCardRefund" />
+      <wsdl:output message="tns:EFSnet.CreditCardRefundResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardCapture" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount Currency AccountNumber ExpirationMonth ExpirationYear Track1 Track2 BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail AuthorizationNumber ClientIPAddress ResultCode ResultMessage TransactionID TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.CreditCardCapture" />
+      <wsdl:output message="tns:EFSnet.CreditCardCaptureResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardSettle" parameterOrder="StoreID StoreKey ApplicationID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount OriginalTransactionID OriginalTransactionAmount ClientIPAddress ResultCode ResultMessage TransactionID ApprovalNumber TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.CreditCardSettle" />
+      <wsdl:output message="tns:EFSnet.CreditCardSettleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardCharge" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount Currency AccountNumber ExpirationMonth ExpirationYear CardVerificationValue Track1 Track2 BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail ClientIPAddress ResultCode ResultMessage TransactionID AVSResponseCode CVVResponseCode ApprovalNumber AuthorizationNumber TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.CreditCardCharge" />
+      <wsdl:output message="tns:EFSnet.CreditCardChargeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardAuthorize" parameterOrder="StoreID StoreKey ApplicationID TerminalID ReferenceNumber CashierNumber TransactionAmount SalesTaxAmount Currency AccountNumber ExpirationMonth ExpirationYear CardVerificationValue Track1 Track2 BillingName BillingAddress BillingCity BillingState BillingPostalCode BillingCountry BillingPhone BillingEmail ShippingName ShippingAddress ShippingCity ShippingState ShippingPostalCode ShippingCountry ShippingPhone ShippingEmail ClientIPAddress ResultCode ResultMessage TransactionID AVSResponseCode CVVResponseCode ApprovalNumber AuthorizationNumber TransactionDate TransactionTime">
+      <wsdl:input message="tns:EFSnet.CreditCardAuthorize" />
+      <wsdl:output message="tns:EFSnet.CreditCardAuthorizeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestPassThrough" parameterOrder="StoreID StoreKey ApplicationID RequestMessage TransactionID ReplyMessage">
+      <wsdl:input message="tns:EFSnet.RequestPassThrough" />
+      <wsdl:output message="tns:EFSnet.RequestPassThroughResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SystemCheck" parameterOrder="StoreID StoreKey ApplicationID ResultCode ResultMessage">
+      <wsdl:input message="tns:EFSnet.SystemCheck" />
+      <wsdl:output message="tns:EFSnet.SystemCheckResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EFSnetSoapBinding" type="tns:EFSnetSoapPort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="QueryIdentityChekAuditSummary">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.QueryIdentityChekAuditSummary" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryIdentityChekAuditRecords">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.QueryIdentityChekAuditRecords" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryIdentityChekTransactionTotals">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.QueryIdentityChekTransactionTotals" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryIdentityChekTransactions">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.QueryIdentityChekTransactions" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBatchTotals">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.QueryBatchTotals" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBatches">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.QueryBatches" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTransactionTotals">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.QueryTransactionTotals" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTransactions">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.QueryTransactions" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSettlementTotals">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.GetSettlementTotals" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProcessorTotals">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.GetProcessorTotals" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TimeOutReversal">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.TimeOutReversal" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoidTransaction">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.VoidTransaction" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IdentityChek">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.IdentityChek" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeleCheckICARefund">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.TeleCheckICARefund" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeleCheckICASettle">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.TeleCheckICASettle" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeleCheckICAAuthorize">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.TeleCheckICAAuthorize" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeleCheckRiskManagement">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.TeleCheckRiskManagement" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="STARChekDirectDebit">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.STARChekDirectDebit" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="STARChekDirectVerify">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.STARChekDirectVerify" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FIAccountVerification">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.FIAccountVerification" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="STARChek">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.STARChek" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardDeactivate">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.GiftCardDeactivate" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardActivate">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.GiftCardActivate" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardBalanceIncrease">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.GiftCardBalanceIncrease" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardBalanceInquiry">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.GiftCardBalanceInquiry" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardCredit">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.GiftCardCredit" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardRefund">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.GiftCardRefund" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardCapture">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.GiftCardCapture" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardSettle">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.GiftCardSettle" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardAuthorize">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.GiftCardAuthorize" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GiftCardCharge">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.GiftCardCharge" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BenefitsBalanceInquiry">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.BenefitsBalanceInquiry" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CashBenefitCharge">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.CashBenefitCharge" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FoodStampVoucher">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.FoodStampVoucher" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FoodStampCredit">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.FoodStampCredit" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FoodStampCharge">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.FoodStampCharge" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DebitSessionKeyChange">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.DebitSessionKeyChange" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DebitCardCredit">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.DebitCardCredit" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DebitCardCapture">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.DebitCardCapture" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DebitCardAuthorize">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.DebitCardAuthorize" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DebitCardChargePINless">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.DebitCardChargePINless" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DebitCardCharge">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.DebitCardCharge" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardAddressVerify">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.CreditCardAddressVerify" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessAuthenticationResponse">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.ProcessAuthenticationResponse" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardAuthorizeWithAuthentication">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.CreditCardAuthorizeWithAuthentication" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardVoiceAuthorize">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.CreditCardVoiceAuthorize" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardCredit">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.CreditCardCredit" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardRefund">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.CreditCardRefund" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardCapture">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.CreditCardCapture" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardSettle">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.CreditCardSettle" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardCharge">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.CreditCardCharge" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardAuthorize">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.CreditCardAuthorize" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestPassThrough">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.RequestPassThrough" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SystemCheck">
+      <soap:operation soapAction="http://tempuri.org/action/EFSnet.SystemCheck" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EFSnet2">
+    <wsdl:port name="EFSnetSoapPort" binding="tns:EFSnetSoapBinding">
+      <soap:address location="https://EFSnet.concordebiz.com/EFSnet2.wsdl" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

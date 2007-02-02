@@ -91,6 +91,34 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.ResourceManage
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Payment", "Spring2.Core.Payment.csproj", "{F490E6C4-2B1C-4EC8-8D89-80EC80B93C70}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Soap", "Spring2.Core.Soap.csproj", "{533B92EA-13A3-4A45-A55F-7E2586AEFCC9}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Tax", "Spring2.Core.Tax.csproj", "{A64B9B05-C8D0-4298-82D9-441A9D3F2E40}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Payment.Test", "Spring2.Core.Payment.Test.csproj", "{08694813-3503-4CF5-9E5D-03848AAB0471}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.AddressValidation", "Spring2.Core.AddressValidation.csproj", "{94DC8DD8-CEEA-45E0-8290-F5BD3C1B18CC}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Tax.Test", "Spring2.Core.Tax.Test.csproj", "{82A9222F-075A-4B76-BA68-9A421DB09A28}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.AddressValidation.Test", "Spring2.Core.AddressValidation.Test.csproj", "{B6FBABB4-6206-41B2-BD7C-C67E1D3D9EAA}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -271,6 +299,62 @@ Global
 		{0EDE568C-7311-4FAD-8C8F-5E7AE8988E00}.NET_2_0.Build.0 = Release|.NET
 		{0EDE568C-7311-4FAD-8C8F-5E7AE8988E00}.Release.ActiveCfg = Release|.NET
 		{0EDE568C-7311-4FAD-8C8F-5E7AE8988E00}.Release.Build.0 = Release|.NET
+		{F490E6C4-2B1C-4EC8-8D89-80EC80B93C70}.Debug.ActiveCfg = Debug|.NET
+		{F490E6C4-2B1C-4EC8-8D89-80EC80B93C70}.Debug.Build.0 = Debug|.NET
+		{F490E6C4-2B1C-4EC8-8D89-80EC80B93C70}.NET_1_1.ActiveCfg = NET_1_1|.NET
+		{F490E6C4-2B1C-4EC8-8D89-80EC80B93C70}.NET_1_1.Build.0 = NET_1_1|.NET
+		{F490E6C4-2B1C-4EC8-8D89-80EC80B93C70}.NET_2_0.ActiveCfg = NET_2_0|.NET
+		{F490E6C4-2B1C-4EC8-8D89-80EC80B93C70}.NET_2_0.Build.0 = NET_2_0|.NET
+		{F490E6C4-2B1C-4EC8-8D89-80EC80B93C70}.Release.ActiveCfg = Release|.NET
+		{F490E6C4-2B1C-4EC8-8D89-80EC80B93C70}.Release.Build.0 = Release|.NET
+		{533B92EA-13A3-4A45-A55F-7E2586AEFCC9}.Debug.ActiveCfg = Debug|.NET
+		{533B92EA-13A3-4A45-A55F-7E2586AEFCC9}.Debug.Build.0 = Debug|.NET
+		{533B92EA-13A3-4A45-A55F-7E2586AEFCC9}.NET_1_1.ActiveCfg = NET_1_1|.NET
+		{533B92EA-13A3-4A45-A55F-7E2586AEFCC9}.NET_1_1.Build.0 = NET_1_1|.NET
+		{533B92EA-13A3-4A45-A55F-7E2586AEFCC9}.NET_2_0.ActiveCfg = NET_2_0|.NET
+		{533B92EA-13A3-4A45-A55F-7E2586AEFCC9}.NET_2_0.Build.0 = NET_2_0|.NET
+		{533B92EA-13A3-4A45-A55F-7E2586AEFCC9}.Release.ActiveCfg = Release|.NET
+		{533B92EA-13A3-4A45-A55F-7E2586AEFCC9}.Release.Build.0 = Release|.NET
+		{A64B9B05-C8D0-4298-82D9-441A9D3F2E40}.Debug.ActiveCfg = Debug|.NET
+		{A64B9B05-C8D0-4298-82D9-441A9D3F2E40}.Debug.Build.0 = Debug|.NET
+		{A64B9B05-C8D0-4298-82D9-441A9D3F2E40}.NET_1_1.ActiveCfg = NET_1_1|.NET
+		{A64B9B05-C8D0-4298-82D9-441A9D3F2E40}.NET_1_1.Build.0 = NET_1_1|.NET
+		{A64B9B05-C8D0-4298-82D9-441A9D3F2E40}.NET_2_0.ActiveCfg = NET_2_0|.NET
+		{A64B9B05-C8D0-4298-82D9-441A9D3F2E40}.NET_2_0.Build.0 = NET_2_0|.NET
+		{A64B9B05-C8D0-4298-82D9-441A9D3F2E40}.Release.ActiveCfg = Release|.NET
+		{A64B9B05-C8D0-4298-82D9-441A9D3F2E40}.Release.Build.0 = Release|.NET
+		{08694813-3503-4CF5-9E5D-03848AAB0471}.Debug.ActiveCfg = Debug|.NET
+		{08694813-3503-4CF5-9E5D-03848AAB0471}.Debug.Build.0 = Debug|.NET
+		{08694813-3503-4CF5-9E5D-03848AAB0471}.NET_1_1.ActiveCfg = NET_1_1|.NET
+		{08694813-3503-4CF5-9E5D-03848AAB0471}.NET_1_1.Build.0 = NET_1_1|.NET
+		{08694813-3503-4CF5-9E5D-03848AAB0471}.NET_2_0.ActiveCfg = NET_2_0|.NET
+		{08694813-3503-4CF5-9E5D-03848AAB0471}.NET_2_0.Build.0 = NET_2_0|.NET
+		{08694813-3503-4CF5-9E5D-03848AAB0471}.Release.ActiveCfg = Release|.NET
+		{08694813-3503-4CF5-9E5D-03848AAB0471}.Release.Build.0 = Release|.NET
+		{94DC8DD8-CEEA-45E0-8290-F5BD3C1B18CC}.Debug.ActiveCfg = Debug|.NET
+		{94DC8DD8-CEEA-45E0-8290-F5BD3C1B18CC}.Debug.Build.0 = Debug|.NET
+		{94DC8DD8-CEEA-45E0-8290-F5BD3C1B18CC}.NET_1_1.ActiveCfg = NET_1_1|.NET
+		{94DC8DD8-CEEA-45E0-8290-F5BD3C1B18CC}.NET_1_1.Build.0 = NET_1_1|.NET
+		{94DC8DD8-CEEA-45E0-8290-F5BD3C1B18CC}.NET_2_0.ActiveCfg = NET_2_0|.NET
+		{94DC8DD8-CEEA-45E0-8290-F5BD3C1B18CC}.NET_2_0.Build.0 = NET_2_0|.NET
+		{94DC8DD8-CEEA-45E0-8290-F5BD3C1B18CC}.Release.ActiveCfg = Release|.NET
+		{94DC8DD8-CEEA-45E0-8290-F5BD3C1B18CC}.Release.Build.0 = Release|.NET
+		{82A9222F-075A-4B76-BA68-9A421DB09A28}.Debug.ActiveCfg = Debug|.NET
+		{82A9222F-075A-4B76-BA68-9A421DB09A28}.Debug.Build.0 = Debug|.NET
+		{82A9222F-075A-4B76-BA68-9A421DB09A28}.NET_1_1.ActiveCfg = Release|.NET
+		{82A9222F-075A-4B76-BA68-9A421DB09A28}.NET_1_1.Build.0 = Release|.NET
+		{82A9222F-075A-4B76-BA68-9A421DB09A28}.NET_2_0.ActiveCfg = Release|.NET
+		{82A9222F-075A-4B76-BA68-9A421DB09A28}.NET_2_0.Build.0 = Release|.NET
+		{82A9222F-075A-4B76-BA68-9A421DB09A28}.Release.ActiveCfg = Release|.NET
+		{82A9222F-075A-4B76-BA68-9A421DB09A28}.Release.Build.0 = Release|.NET
+		{B6FBABB4-6206-41B2-BD7C-C67E1D3D9EAA}.Debug.ActiveCfg = Debug|.NET
+		{B6FBABB4-6206-41B2-BD7C-C67E1D3D9EAA}.Debug.Build.0 = Debug|.NET
+		{B6FBABB4-6206-41B2-BD7C-C67E1D3D9EAA}.NET_1_1.ActiveCfg = Release|.NET
+		{B6FBABB4-6206-41B2-BD7C-C67E1D3D9EAA}.NET_1_1.Build.0 = Release|.NET
+		{B6FBABB4-6206-41B2-BD7C-C67E1D3D9EAA}.NET_2_0.ActiveCfg = Release|.NET
+		{B6FBABB4-6206-41B2-BD7C-C67E1D3D9EAA}.NET_2_0.Build.0 = Release|.NET
+		{B6FBABB4-6206-41B2-BD7C-C67E1D3D9EAA}.Release.ActiveCfg = Release|.NET
+		{B6FBABB4-6206-41B2-BD7C-C67E1D3D9EAA}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

@@ -3,13 +3,13 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{53A91AEF-E24F-41E9-AF8D-743F291BEEE1}"
+        ProjectGuid = "{08694813-3503-4CF5-9E5D-03848AAB0471}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "Spring2.Core.Reporting"
+                AssemblyName = "Spring2.Core.Payment.Test"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -17,8 +17,8 @@
                 DelaySign = "false"
                 OutputType = "Library"
                 PreBuildEvent = ""
-                PostBuildEvent = ""
-                RootNamespace = "Spring2.Core"
+                PostBuildEvent = 'copy/Y "$(ProjectDir)\Test\App.Config" "$(TargetPath).config'
+                RootNamespace = "Spring2.Dss"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -29,14 +29,14 @@
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
                     DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = "Spring2.Core.Reporting.xml"
+                    DocumentationFile = ""
                     DebugSymbols = "true"
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
                     NoStdLib = "false"
-                    NoWarn = "1591"
+                    NoWarn = ""
                     Optimize = "false"
-                    OutputPath = "..\build\Reporting\"
+                    OutputPath = "..\build\Test\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "true"
@@ -63,65 +63,100 @@
                     WarningLevel = "4"
                 />
                 <Config
-                    Name = "NET_1_1"
-                    AllowUnsafeBlocks = "false"
-                    BaseAddress = "285212672"
-                    CheckForOverflowUnderflow = "false"
-                    ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = "Spring2.Core.Reporting.xml"
-                    DebugSymbols = "true"
-                    FileAlignment = "4096"
-                    IncrementalBuild = "false"
-                    NoStdLib = "false"
-                    NoWarn = "1591"
-                    Optimize = "false"
-                    OutputPath = "..\build\Reporting\"
-                    RegisterForComInterop = "false"
-                    RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
-                    WarningLevel = "4"
-                />
-                <Config
                     Name = "NET_2_0"
                     AllowUnsafeBlocks = "false"
                     BaseAddress = "285212672"
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE;NET_2_0"
-                    DocumentationFile = "Spring2.Reporting.Common.xml"
+                    DefineConstants = ""
+                    DocumentationFile = ""
                     DebugSymbols = "true"
                     FileAlignment = "4096"
-                    IncrementalBuild = "false"
+                    IncrementalBuild = "true"
                     NoStdLib = "false"
-                    NoWarn = "1699,1591"
+                    NoWarn = "1699"
                     Optimize = "false"
-                    OutputPath = "..\build\Reporting\"
+                    OutputPath = "bin\NET_2_0\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
-                    WarningLevel = "4"
+                    WarningLevel = "1"
+                />
+                <Config
+                    Name = "NET_1_1"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = ""
+                    DocumentationFile = ""
+                    DebugSymbols = "true"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "true"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "false"
+                    OutputPath = "bin\NET_1_1\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "1"
                 />
             </Settings>
             <References>
                 <Reference
                     Name = "System"
                     AssemblyName = "System"
-                    HintPath = "..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                    HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"
                 />
                 <Reference
                     Name = "System.Data"
                     AssemblyName = "System.Data"
-                    HintPath = "..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
+                    HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
                 />
                 <Reference
                     Name = "System.XML"
                     AssemblyName = "System.Xml"
-                    HintPath = "..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
+                    HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
+                />
+                <Reference
+                    Name = "nunit.framework"
+                    AssemblyName = "nunit.framework"
+                    HintPath = "..\lib\net-1.1\nunit.framework.dll"
+                />
+                <Reference
+                    Name = "System.Web.Services"
+                    AssemblyName = "System.Web.Services"
+                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Web.Services.dll"
+                />
+                <Reference
+                    Name = "System.EnterpriseServices"
+                    AssemblyName = "System.EnterpriseServices"
+                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.EnterpriseServices.dll"
+                />
+                <Reference
+                    Name = "Spring2.Dss.Payment"
+                    Project = "{F490E6C4-2B1C-4EC8-8D89-80EC80B93C70}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Spring2.DataTierGenerator.Attribute"
+                    AssemblyName = "Spring2.DataTierGenerator.Attribute"
+                    HintPath = "..\lib\net-1.1\Spring2.DataTierGenerator.Attribute.dll"
+                />
+                <Reference
+                    Name = "log4net"
+                    AssemblyName = "log4net"
+                    HintPath = "..\lib\net-1.1\log4net.dll"
                 />
                 <Reference
                     Name = "Spring2.Core"
                     Project = "{80B94045-4DE6-4BB0-BE22-C5CC0E772695}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Spring2.Core.Configuration"
+                    Project = "{1A8B880B-0EB3-4841-ADA7-D0D3E9B1E71C}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
@@ -139,27 +174,51 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Reporting\AssemblyInfo.cs"
+                    RelPath = "Payment\Test\App.config"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "Payment\Test\AssemblyInfo.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Reporting\BusinessLogic\Report.cs"
+                    RelPath = "Payment\Test\BaseTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Reporting\DAO\SqlSchemaDAO.cs"
+                    RelPath = "Payment\Test\EFSnetProviderTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Reporting\DataObject\SqlColumnData.cs"
+                    RelPath = "Payment\Test\MonerisProviderTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Reporting\DataObject\SqlObjectData.cs"
+                    RelPath = "Payment\Test\PayflowProProviderTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Payment\Test\PaymentManagerTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Payment\Test\TestConnectionFailurePaymentProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Payment\Test\TestFailurePaymentProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Payment\Test\TestPaymentProvider.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
