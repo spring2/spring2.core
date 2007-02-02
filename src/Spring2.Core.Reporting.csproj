@@ -9,7 +9,7 @@
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "Spring2.Reporting.Common"
+                AssemblyName = "Spring2.Core.Reporting"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "Library"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "Spring2.Reporting.Common"
+                RootNamespace = "Spring2.Core"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
