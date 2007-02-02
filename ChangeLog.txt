@@ -1,3 +1,183 @@
+2007-02-02 Friday 00:31  cort
+
+	* src/ValueTypes/IdType.cs:
+	
+	implement CompareTo so that IdType can be used as a sort property
+
+2007-02-02 Friday 00:29  cort
+
+	* src/Util/StringUtil.cs:
+	
+	remove commented out code
+
+2007-02-02 Friday 00:29  cort
+
+	* src/Security/AssemblyInfo.cs:
+	
+	remove version attributes that are duplicate becuase of global
+	version info
+
+2007-02-02 Friday 00:27  cort
+
+	* src/: Spring2.Core.ResourceManager.AcceptanceTest.csproj,
+	Spring2.Core.ResourceManager.BusinessLogic.csproj,
+	Spring2.Core.ResourceManager.DataObject.csproj,
+	Spring2.Core.ResourceManager.ResourceEditor.csproj,
+	Spring2.Core.ResourceManager.ResourceLocalizer.csproj,
+	Spring2.Core.ResourceManager.TestUtility.csproj,
+	Spring2.Core.ResourceManager.csproj, Spring2.Core.sln,
+	ResourceManager/AssemblyInfo.cs,
+	ResourceManager/AssemblyVersionInfo.cs,
+	ResourceManager/BusinessEntity.vm, ResourceManager/DAO.vm,
+	ResourceManager/DataTierGenerator.config.xml,
+	ResourceManager/dataobject-collection.vm,
+	ResourceManager/dataobject.vm, ResourceManager/dtg-entities.xml,
+	ResourceManager/dtg-enums.xml, ResourceManager/interface.vm,
+	ResourceManager/BusinessLogic/AssemblyInfo.cs,
+	ResourceManager/BusinessLogic/LocalizedResource.cs,
+	ResourceManager/BusinessLogic/Resource.cs,
+	ResourceManager/BusinessLogic/UnitTest/.cvsignore,
+	ResourceManager/BusinessLogic/UnitTest/App.config,
+	ResourceManager/BusinessLogic/UnitTest/LocalizedResourceTest.cs,
+	ResourceManager/BusinessLogic/UnitTest/ResourceTest.cs,
+	ResourceManager/BusinessLogic/UnitTest/TestUtility.cs,
+	ResourceManager/DAO/LocalizedResourceDAO.cs,
+	ResourceManager/DAO/ResourceDAO.cs,
+	ResourceManager/DataObject/AssemblyInfo.cs,
+	ResourceManager/DataObject/ILocalizedResource.cs,
+	ResourceManager/DataObject/IResource.cs,
+	ResourceManager/DataObject/LocalizedResourceData.cs,
+	ResourceManager/DataObject/LocalizedResourceList.cs,
+	ResourceManager/DataObject/ResourceList.cs,
+	ResourceManager/Test/AssemblyInfo.cs,
+	ResourceManager/Test/ResourceEditorTest.cs,
+	ResourceManager/sql/.cvsignore,
+	ResourceManager/sql/proc/.cvsignore,
+	ResourceManager/sql/table/.cvsignore,
+	ResourceManager/sql/view/.cvsignore,
+	ResourceManager/Test/ResourceLocalizerTest.cs,
+	ResourceManager/Test/TestUtil.cs:
+	
+	merge resource manager changes from Spring2.ResourceManager
+
+2007-02-02 Friday 00:20  cort
+
+	* src/DAO/spring2.snk:
+	
+	no message
+
+2007-02-02 Friday 00:18  cort
+
+	* src/Spring2.Core.Ajax.csproj:
+	
+	remove files that aren't committed
+
+2007-02-02 Friday 00:17  cort
+
+	* src/: Spring2.Core.Ajax.xml, Spring2.Core.PropertyPopulator.xml:
+	
+	remove generated doc files durring compile
+
+2007-02-02 Friday 00:17  cort
+
+	* src/Spring2.Core.Security.csproj:
+	
+	reference local AssemblyInfo and global AssemblyVersionInfo
+
+2007-02-02 Friday 00:14  cort
+
+	* src/: Spring2.Core.WithTypes.csproj, Spring2.Core.csproj,
+	DAO/BaseEntityDAO.cs, DAO/DbConnectionScope.cs,
+	DAO/OracleEntityDAO.cs, DAO/SqlEntityDAO.cs:
+	
+	add DbConnectionScope for .Net 2.0 modify base entity dao classes
+	to expected an open connection when CreateConnection is called as
+	well as to use the DbConnectionScope to get the connection if there
+	is a current one
+
+2007-02-02 Friday 00:06  cort
+
+	* src/: Spring2.Core.Reporting.csproj,
+	Spring2.Reporting.Common.csproj:
+	
+	rename project to better fit namespace name
+
+2006-12-07 Thursday 17:06  jeffm
+
+	* src/: Test/TimeTypeTest.cs, ValueTypes/TimeType.cs:
+	
+	Fix issue with Add method on TimeType.
+
+2006-10-09 Monday 15:05  jeffm
+
+	* src/: Spring2.Core.Ajax.csproj, Spring2.Core.Ajax.xml,
+	Spring2.Core.Mail.SendMailMessages.csproj,
+	Spring2.Core.Maverick.csproj,
+	Spring2.Core.PropertyPopulator.csproj,
+	Spring2.Core.PropertyPopulator.xml, Spring2.Core.Test.csproj,
+	Spring2.Core.Types.csproj, Spring2.Core.sln, default.build,
+	Maverick/Controller/AbstractController.cs, Test/GnuPG/random_seed,
+	Maverick/Controller/ErrorableController.cs,
+	Maverick/Controller/LocalizedController.cs,
+	Maverick/DataForm/LocalizedForm.cs,
+	Maverick/DataForm/PopulatedForm.cs,
+	PropertyPopulator/AssemblyInfo.cs,
+	PropertyPopulator/PropertyPopulator.cs, Test/AjaxTest.cs,
+	Test/DataFormTest.cs, Test/PropertyPopulatorTest.cs,
+	ValueTypes/RequiredAttribute.cs:
+	
+	Separate population out of AbstractController and move it to it's
+	own namespace so it can more easily be used by other things like
+	AJAX commands.
+
+2006-09-22 Friday 16:08  dustin
+
+	* src/AssemblyVersionInfo.cs:
+	
+	Modified TaxManager and providers to be more configurable and to
+	allow passing in a serialKey for use in calculating tax for
+	multiple countries
+
+2006-09-18 Monday 16:43  dustin
+
+	* src/AssemblyVersionInfo.cs:
+	
+	Modified Vertex provider to use Int32.Max for the line id on the
+	shipping line and to use the actual line id for item lines rather
+	than the order id
+
+2006-09-15 Friday 11:52  dustin
+
+	* src/AssemblyVersionInfo.cs:
+	
+	no message
+
+2006-09-12 Tuesday 14:21  cort
+
+	* src/: Makefile, default.build:
+	
+	add packaging of source to package target
+
+2006-09-12 Tuesday 13:37  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2006-09-12 Tuesday 13:37  cort
+
+	* release/: Spring2.Core.1.1.32.0-net-1.1.zip,
+	Spring2.Core.1.1.32.0-net-2.0.zip, Spring2.Core-1.1.32.0.chm,
+	ChangeLog-1.1.32.0.txt:
+	
+	new release version
+
+2006-09-12 Tuesday 13:34  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2006-09-05 Tuesday 17:18  dustin
 
 	* src/Geocode/: GecodeTestProvider.cs, GeocodeWrapper.cs,
@@ -737,19 +917,19 @@
 	Added a 'Display' method to all value types that returns an empty
 	string if the type is in an invalid state.
 
-2006-03-28 Tuesday 07:32  cort
+2006-03-28 Tuesday 08:32  cort
 
 	* src/default.build:
 	
 	use regress instead of ncover to fix failing build
 
-2006-03-13 Monday 08:12  nathanp
+2006-03-13 Monday 09:12  nathanp
 
 	* src/: Spring2.Core.csproj, Message/ResourceKey.cs:
 	
 	Added a ResourceKey type that can be used as a message parameter
 
-2006-03-13 Monday 08:10  nathanp
+2006-03-13 Monday 09:10  nathanp
 
 	* src/ResourceManager/resourcelocalizer.cs:
 	
@@ -1613,31 +1793,31 @@
 	
 	log4net needed for Geocode namespace
 
-2005-11-04 Friday 21:57  cort
+2005-11-04 Friday 22:57  cort
 
 	* bin/NAnt/.cvsignore, docs/.cvsignore:
 	
 	no message
 
-2005-11-04 Friday 21:01  cort
+2005-11-04 Friday 22:01  cort
 
 	* src/DAO/BaseEntityDAO.cs:
 	
 	lock the connection string collection so that it is thread safe
 
-2005-11-04 Friday 21:00  cort
+2005-11-04 Friday 22:00  cort
 
 	* src/Spring2.Reporting.Common.csproj:
 	
 	no message
 
-2005-11-04 Friday 20:47  cort
+2005-11-04 Friday 21:47  cort
 
 	* src/Spring2.Core.ResourceManager.csproj:
 	
 	no message
 
-2005-11-02 Wednesday 10:44  dustin
+2005-11-02 Wednesday 11:44  dustin
 
 	* src/: Reporting/AssemblyInfo.cs,
 	Reporting/Spring2.Reporting.Common.csproj, Spring2.Core.sln,
@@ -1645,7 +1825,7 @@
 	
 	Added storng name to Reporting assembly
 
-2005-11-02 Wednesday 09:29  dustin
+2005-11-02 Wednesday 10:29  dustin
 
 	* src/Reporting/: .cvsignore, AssemblyInfo.cs,
 	Spring2.Reporting.Common.csproj, BusinessLogic/Report.cs,
@@ -2037,13 +2217,13 @@
 	
 	add missing GetInstance ToBoolean methods to match old types
 
-2005-03-31 Thursday 14:29  cort
+2005-03-31 Thursday 15:29  cort
 
 	* src/.cvsignore:
 	
 	ignore more resharper files
 
-2005-03-31 Thursday 14:28  cort
+2005-03-31 Thursday 15:28  cort
 
 	* src/default.build:
 	
@@ -2051,48 +2231,48 @@
 	building them all at one time because of assemblies left in the obj
 	and bin folders
 
-2005-03-31 Thursday 14:27  cort
+2005-03-31 Thursday 15:27  cort
 
 	* src/Spring2.Core.sln:
 	
 	add new projects
 
-2005-03-31 Thursday 14:27  cort
+2005-03-31 Thursday 15:27  cort
 
 	* src/Spring2.Core.csproj:
 	
 	remove old types and old version of data object classes, add in new
 	types and new data object class.
 
-2005-03-31 Thursday 14:27  cort
+2005-03-31 Thursday 15:27  cort
 
 	* src/Spring2.Core.Test.csproj:
 	
 	remove tests moved to new test assembly that references
 	spring2.core with types
 
-2005-03-31 Thursday 14:26  cort
+2005-03-31 Thursday 15:26  cort
 
 	* src/Spring2.Core.Types.csproj:
 	
 	project for new value types, broken out of Spring2.Core from this
 	point forward
 
-2005-03-31 Thursday 14:26  cort
+2005-03-31 Thursday 15:26  cort
 
 	* src/Spring2.Core.WithTypes.csproj:
 	
 	project for Spring2.Core assembly that does have types (i.e. before
 	the introdcution of the new value types).
 
-2005-03-31 Thursday 14:25  cort
+2005-03-31 Thursday 15:25  cort
 
 	* src/Spring2.Core.WithTypesTest.csproj:
 	
 	new project for tests that rely on the version of spring2.core that
 	has types
 
-2005-03-31 Thursday 14:24  cort
+2005-03-31 Thursday 15:24  cort
 
 	* src/ValueDataObject/DataObject.cs:
 	
@@ -2101,21 +2281,21 @@
 	make this a breaking change when upgrading to this version of
 	Spring2.Core (without types).
 
-2005-03-31 Thursday 14:22  cort
+2005-03-31 Thursday 15:22  cort
 
 	* src/Test/: DataTypeTest.cs, DateTypeTest.cs:
 	
 	change tests that were using DateType that expected to have access
 	to the time portion to use the new DateTimeType
 
-2005-03-31 Thursday 14:20  cort
+2005-03-31 Thursday 15:20  cort
 
 	* src/BusinessEntity/: BusinessEntity.cs, IBusinessEntity.cs:
 	
 	interface and base class for business entities (when using pass
 	through interfaces)
 
-2005-03-31 Thursday 14:19  cort
+2005-03-31 Thursday 15:19  cort
 
 	* src/ValueTypes/: BooleanType.cs, CurrencyType.cs, DataType.cs,
 	DateTimeType.cs, DateType.cs, DecimalType.cs, EnumDataType.cs,
@@ -2127,7 +2307,7 @@
 	updates needed to get classes to compile correct namespaces changes
 	needed to make types pass existing unit tests
 
-2005-03-31 Thursday 14:17  cort
+2005-03-31 Thursday 15:17  cort
 
 	* src/ValueTypes/IDataType.cs:
 	
@@ -2136,7 +2316,7 @@
 	and IsValid values that are expected to be implemented by all core
 	types.
 
-2005-03-31 Thursday 14:08  cort
+2005-03-31 Thursday 15:08  cort
 
 	* src/ValueTypes/: BooleanType.cs, CurrencyType.cs,
 	DateTimeType.cs, DateType.cs, DecimalType.cs, GenderType.cs,
@@ -2146,7 +2326,7 @@
 	
 	reformatted
 
-2005-03-31 Thursday 14:06  cort
+2005-03-31 Thursday 15:06  cort
 
 	* src/ValueTypes/: AssemblyInfo.cs, BooleanType.cs,
 	CurrencyType.cs, DataType.cs, DateTimeType.cs, DateType.cs,
@@ -2204,44 +2384,44 @@
 	
 	correct typo exposing wrong timezone for it's name
 
-2004-11-05 Friday 06:06  crandall
+2004-11-05 Friday 07:06  crandall
 
 	* src/Test/: MessageTest.cs, GnuPG/random_seed:
 	
 	Add tests for message class.
 
-2004-11-05 Friday 05:26  crandall
+2004-11-05 Friday 06:26  crandall
 
 	* src/: Spring2.Core.Test.csproj, Spring2.Core.csproj:
 	
 	Add new files to the project.
 
-2004-11-05 Friday 05:25  crandall
+2004-11-05 Friday 06:25  crandall
 
 	* src/Message/: IMessageFormatter.cs, Message.cs, MessageList.cs,
 	MessageListException.cs, SimpleFormatter.cs, TestMessage.cs:
 	
 	Initial checkin of message related classes.
 
-2004-11-04 Thursday 20:43  crandall
+2004-11-04 Thursday 21:43  crandall
 
 	* src/default.build:
 	
 	NAnt build file.
 
-2004-10-31 Sunday 15:16  crandall
+2004-10-31 Sunday 16:16  crandall
 
 	* src/Types/DateType.cs:
 	
 	Add method for comparing the date part of a date type.
 
-2004-10-31 Sunday 15:15  crandall
+2004-10-31 Sunday 16:15  crandall
 
 	* src/Spring2.Core.Test.csproj:
 	
 	Add new file to the project.
 
-2004-10-31 Sunday 15:15  crandall
+2004-10-31 Sunday 16:15  crandall
 
 	* src/Test/DateTypeTest.cs:
 	
@@ -2569,31 +2749,31 @@
 	
 	Minor reformatting.
 
-2004-03-31 Wednesday 07:20  crandall
+2004-03-31 Wednesday 08:20  crandall
 
 	* src/Types/StringType.cs:
 	
 	Add Length property and Trim method.
 
-2004-03-30 Tuesday 06:23  crandall
+2004-03-30 Tuesday 07:23  crandall
 
 	* src/Spring2.Core.csproj:
 	
 	Add file to the project.
 
-2004-03-30 Tuesday 06:21  crandall
+2004-03-30 Tuesday 07:21  crandall
 
 	* src/Types/: StringType.cs, StringTypeConverter.cs:
 	
 	Add a type converter for StringType.
 
-2004-03-30 Tuesday 05:52  crandall
+2004-03-30 Tuesday 06:52  crandall
 
 	* src/Types/DateType.cs:
 	
 	Add helper properties.
 
-2004-03-19 Friday 03:32  cort
+2004-03-19 Friday 04:32  cort
 
 	* src/Types/: CurrencyTypeList.cs, DateTypeList.cs,
 	DecimalTypeList.cs, IdTypeList.cs, IntegerTypeList.cs,
@@ -2799,44 +2979,44 @@
 	
 	use recommended path to signing key (..\..\)
 
-2003-10-28 Tuesday 14:10  cort
+2003-10-28 Tuesday 15:10  cort
 
 	* src/AssemblyVersionInfo.cs:
 	
 	update to next version
 
-2003-10-28 Tuesday 14:10  cort
+2003-10-28 Tuesday 15:10  cort
 
 	* release/Spring2.Core.1.1.4.5383.zip:
 	
 	new release version
 
-2003-10-28 Tuesday 14:10  cort
+2003-10-28 Tuesday 15:10  cort
 
 	* ChangeLog.txt:
 	
 	update change log
 
-2003-10-28 Tuesday 14:09  cort
+2003-10-28 Tuesday 15:09  cort
 
 	* src/DAO/WhereClause.cs:
 	
 	fix of double escaping in WhereClause for handling String when
 	passed in as an Object
 
-2003-10-28 Tuesday 13:58  cort
+2003-10-28 Tuesday 14:58  cort
 
 	* src/AssemblyVersionInfo.cs:
 	
 	update to next version
 
-2003-10-28 Tuesday 13:58  cort
+2003-10-28 Tuesday 14:58  cort
 
 	* release/Spring2.Core.1.1.3.6510.zip:
 	
 	new release version
 
-2003-10-28 Tuesday 13:58  cort
+2003-10-28 Tuesday 14:58  cort
 
 	* ChangeLog.txt:
 	
@@ -3146,7 +3326,7 @@
 	
 	ignore xml comment files
 
-2003-04-04 Friday 10:28  crandall
+2003-04-04 Friday 11:28  crandall
 
 	* src/Types/: CurrencyType.cs, DateType.cs, DecimalType.cs,
 	IntegerType.cs, NumberType.cs, StringType.cs:
@@ -3154,7 +3334,7 @@
 	Make all ToString methods return UNSET and DEFAULT when
 	appropriate.  Make StringType implement IComparable interface.
 
-2003-03-20 Thursday 12:26  crandall
+2003-03-20 Thursday 13:26  crandall
 
 	* src/: AssemblyInfo.cs, Makefile, DAO/module.mk,
 	DataObject/module.mk, Drawing/Graphing/module.mk,
@@ -3164,39 +3344,39 @@
 	
 	Add makefile and related files.
 
-2003-03-20 Thursday 12:19  cort
+2003-03-20 Thursday 13:19  cort
 
 	* .cvsignore:
 	
 	no message
 
-2003-03-20 Thursday 11:34  crandall
+2003-03-20 Thursday 12:34  crandall
 
 	* src/Test/NUnitRunner.cs:
 	
 	Remove unused file.
 
-2003-03-20 Thursday 11:12  crandall
+2003-03-20 Thursday 12:12  crandall
 
 	* src/DAO/AssemblyInfo.cs:
 	
 	Remove unused file.
 
-2003-03-20 Thursday 10:17  crandall
+2003-03-20 Thursday 11:17  crandall
 
 	* src/: Test/DataTypeTest.cs, Types/DataType.cs,
 	Types/DecimalType.cs, Types/IntegerType.cs, Types/StringType.cs:
 	
 	Add CompareTo methods for base data types.
 
-2003-03-17 Monday 12:00  crandall
+2003-03-17 Monday 13:00  crandall
 
 	* src/Types/: CurrencyType.cs, DateType.cs, DecimalType.cs,
 	IdType.cs, IntegerType.cs, NumberType.cs, QuantityType.cs:
 	
 	Return UNSET when parse is passed a null string reference.
 
-2003-03-11 Tuesday 23:31  crandall
+2003-03-12 Wednesday 00:31  crandall
 
 	* src/DAO/EntityDao.cs:
 	
@@ -4122,7 +4302,7 @@
 	
 	needed to create signed Spring2.Core.DAO assembly
 
-2002-03-29 Friday 08:53  cort
+2002-03-29 Friday 09:53  cort
 
 	* src/DAO/: AssemblyInfo.cs, EntityDao.cs, IOrderBy.cs, IWhere.cs,
 	OrderByClause.cs, Spring2.Core.DAO.csproj, WhereClause.cs:
