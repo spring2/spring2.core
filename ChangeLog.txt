@@ -1,6 +1,99 @@
+2007-02-02 Friday 16:52  cort
+
+	* src/ResourceManager/Facade/: ResourceLocalizer/AssemblyInfo.cs,
+	ResourceLocalizer/ResourceLocalizer.cs,
+	ResourceEditor/AssemblyInfo.cs,
+	ResourceEditor/ResourceDictionary.cs,
+	ResourceEditor/ResourceEditor.cs:
+	
+	add missing ResourceManager files that had had their CVS folder
+	from old location copied
+
+2007-02-02 Friday 16:44  cort
+
+	* src/: AddressValidation/AddressData.cs,
+	AddressValidation/AddressList.cs,
+	AddressValidation/AddressValidationConfigurationException.cs,
+	AddressValidation/AddressValidationException.cs,
+	AddressValidation/AddressValidationManager.cs,
+	AddressValidation/AddressValidationResult.cs,
+	AddressValidation/IAddressValidationProvider.cs,
+	AddressValidation/NullAddressValidationProvider.cs,
+	AddressValidation/ResponseTypeEnum.cs,
+	AddressValidation/Test/AddressValidationManagerTest.cs,
+	AddressValidation/Test/TestAddressValidationProvider.cs,
+	AddressValidation/Test/TestFailureAddressValidationProvider.cs,
+	AddressValidation/Test/UPSAddressValidationTest.cs,
+	AddressValidation/UPS/UPSAddressValidationProvider.cs,
+	Payment/AvsValidationException.cs,
+	Payment/BaseConfigurationProvider.cs,
+	Payment/BasePaymentProvider.cs, Payment/CvvValidationException.cs,
+	Payment/IPaymentProvider.cs, Payment/NullPaymentProvider.cs,
+	Payment/PaymentConfigurationException.cs,
+	Payment/PaymentConnectionException.cs, Payment/PaymentException.cs,
+	Payment/PaymentFailureException.cs, Payment/PaymentManager.cs,
+	Payment/PaymentResult.cs, Payment/EFSnet/EFSNetProvider.cs,
+	Payment/EFSnet/EFSNetProviderConfiguration.cs,
+	Payment/EFSnet/QueryTransactionsResult.cs,
+	Payment/Moneris/MonerisProvider.cs,
+	Payment/Moneris/MonerisProviderConfiguration.cs,
+	Payment/PayflowPro/CreditCommand.cs,
+	Payment/PayflowPro/InquiryCommand.cs,
+	Payment/PayflowPro/PayflowProCommand.cs,
+	Payment/PayflowPro/PayflowProProvider.cs,
+	Payment/PayflowPro/PayflowProProviderConfiguration.cs,
+	Payment/PayflowPro/SaleCommand.cs,
+	Payment/PayflowPro/TransactionTypeEnum.cs,
+	Payment/PayflowPro/VoidCommand.cs, Payment/Test/BaseTest.cs,
+	Payment/Test/EFSnetProviderTest.cs,
+	Payment/Test/MonerisProviderTest.cs,
+	Payment/Test/PayflowProProviderTest.cs,
+	Payment/Test/PaymentManagerTest.cs,
+	Payment/Test/TestConnectionFailurePaymentProvider.cs,
+	Payment/Test/TestFailurePaymentProvider.cs,
+	Payment/Test/TestPaymentProvider.cs, Payment/Web
+	References/com.concordebiz.efsnet/Reference.cs,
+	Reporting/BusinessLogic/Report.cs, Reporting/DAO/SqlSchemaDAO.cs,
+	Reporting/DataObject/SqlColumnData.cs,
+	Reporting/DataObject/SqlObjectData.cs,
+	Soap/ExposedHttpWebResponse.cs, Soap/ExposedSoapClientProtocol.cs,
+	Soap/Log4NetExtension.cs, Soap/Log4NetExtensionAttribute.cs,
+	Tax/ITaxProvider.cs, Tax/TaxAddressNotFoundException.cs,
+	Tax/TaxAreaData.cs, Tax/TaxAreaList.cs,
+	Tax/TaxConfigurationException.cs, Tax/TaxConnectionException.cs,
+	Tax/TaxException.cs, Tax/TaxHtmlTool.cs, Tax/TaxManager.cs,
+	Tax/TaxOrder.cs, Tax/TaxOrderLine.cs, Tax/TaxOrderLineList.cs,
+	Tax/TaxRateInfo.cs, Tax/TaxRateInfoList.cs, Tax/TaxResult.cs,
+	Tax/TaxResultLine.cs, Tax/TaxResultLineList.cs,
+	Tax/TaxSoapException.cs, Tax/CertiTax/CertitaxProvider.cs,
+	Tax/Test/CertiTaxTest.cs, Tax/Test/NullTaxProvider.cs,
+	Tax/Test/TaxManagerTest.cs, Tax/Test/TestFailureTaxProvider.cs,
+	Tax/Test/TestTaxProvider.cs, Tax/Test/VertexTest.cs,
+	Tax/Vertex/CalculateTaxWSService.cs,
+	Tax/Vertex/LookupTaxAreasWSService.cs,
+	Tax/Vertex/VertexProvider.cs, Tax/Web
+	References/net.esalestax.webservices1/Reference.cs:
+	
+	update namespace to Spring2.Core
+
+2007-02-02 Friday 16:43  cort
+
+	* src/: Spring2.Core.AddressValidation.csproj,
+	Spring2.Core.Payment.csproj,
+	Spring2.Core.ResourceManager.AcceptanceTest.csproj,
+	Spring2.Core.ResourceManager.BusinessLogic.csproj,
+	Spring2.Core.ResourceManager.DataObject.csproj,
+	Spring2.Core.ResourceManager.ResourceEditor.csproj,
+	Spring2.Core.ResourceManager.ResourceLocalizer.csproj,
+	Spring2.Core.ResourceManager.TestUtility.csproj,
+	Spring2.Core.Soap.csproj, Spring2.Core.Tax.csproj:
+	
+	treat warnings as errors, and ignore those that are related to doc
+	comments
+
 2007-02-02 Friday 16:26  cort
 
-	* ChangeLog.txt:
+	* ChangeLog.txt, ChangeLog.txt:
 	
 	update change log
 
