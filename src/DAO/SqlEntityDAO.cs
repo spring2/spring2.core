@@ -57,7 +57,7 @@ namespace Spring2.Core.DAO {
 #else
 	    // check to see if there is a current connection scope and pull connection from that, otherwise create and open a new one
 	    if (DbConnectionScope.Current != null) {
-		return DbConnectionScope.Current.GetOpenConnection(SqlClientFactory.Instance, connectionString);
+		return DbConnectionScope.Current.GetOpenConnection(SqlClientFactory.Instance, connectionString, false);
 	    } else {
 		IDbConnection connection = new SqlConnection(connectionString);
 		connection.Open();
