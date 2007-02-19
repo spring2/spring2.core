@@ -26,25 +26,31 @@ namespace Spring2.Core.PropertyPopulator {
 	    }
 
 	    Type t = target.GetType();
+	    PropertyInfo[] ps = t.GetProperties(BindingFlags.SetProperty);
 	    foreach (PropertyInfo property in t.GetProperties()) {
-		Boolean required = property.GetCustomAttributes(typeof(RequiredAttribute), true).Length == 1;
+		if (property.CanWrite) {
+		    Boolean required = property.GetCustomAttributes(typeof(RequiredAttribute), true).Length == 1;
 
-		//set value Note:NameValueCollection is not case sensitive
-		String val = data[property.Name];
+		    //set value Note:NameValueCollection is not case sensitive
+		    String val = data[property.Name];
 
-		if(val == null) {
-		    if(required) {
-			errors.Add(new MissingRequiredFieldError(property.Name));
-		    }
-		} else {
-		    try {
-			Object o = ParseValue(val, property.PropertyType);
-			property.SetValue(target, o, null);
-		    } catch (FormatException) {
+		    if(val == null) {
 			if(required) {
 			    errors.Add(new MissingRequiredFieldError(property.Name));
-			} else {
-			    errors.Add(new InvalidTypeFormatError(property.Name, val));
+			}
+		    } else {
+			try {
+			    Object o = ParseValue(val, property.PropertyType);
+			    property.SetValue(target, o, null);
+			} catch (FormatException) {
+			    if(required) {
+				errors.Add(new MissingRequiredFieldError(property.Name));
+			    } else {
+				// only add an error if there was a value
+				if (val.Length > 0) {
+				    errors.Add(new InvalidTypeFormatError(property.Name, val));
+				}
+			    }
 			}
 		    }
 		}

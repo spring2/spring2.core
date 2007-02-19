@@ -269,6 +269,16 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual(new StringType("value2"), data.Spring2StringType);
 	    Assert.AreEqual(LanguageEnum.VIETNAMESE, data.Spring2LanguageEnum);
 	}
+    	
+	[Test()]
+	public void ShouldNotAttemptToPopulateReadOnlyProperty() {
+	    NameValueCollection collection = new NameValueCollection();
+	    collection.Add("ReadOnlySystemString", "value1");
+		
+	    SampleDataForm data = new SampleDataForm();
+	    Populator.Instance.Populate(data, collection);
+	}
+
 
 	public class SampleDataForm {
 	    private string systemString;
@@ -446,6 +456,10 @@ namespace Spring2.Core.Test {
 	    public LanguageEnum Spring2LanguageEnum {
 		get { return spring2LanguageEnum; }
 		set { spring2LanguageEnum = value; }
+	    }
+		
+	    public String ReadOnlySystemString {
+		get { return String.Empty; }
 	    }
 
 	}

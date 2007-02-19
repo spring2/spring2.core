@@ -64,7 +64,12 @@ namespace Spring2.Core.Maverick.DataForm {
 	/// <param name="cookieName"></param>
 	/// <returns></returns>
 	public HttpCookie GetCookie(String cookieName) {
-	    return this.cookies[cookieName];
+	    //return this.cookies[cookieName];
+	    HttpCookie returnCookie = this.cookies[cookieName];
+	    if (returnCookie == null) {
+		returnCookie = new HttpCookie(cookieName);
+	    }
+	    return returnCookie;
 	}
 
 
