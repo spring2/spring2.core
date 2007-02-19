@@ -158,16 +158,6 @@
                     BuildAction = "None"
                 />
                 <File
-                    RelPath = "AddressValidation\Test\TestAddressValidationProvider.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "AddressValidation\Test\TestFailureAddressValidationProvider.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "AddressValidation\Test\UPSAddressValidationTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

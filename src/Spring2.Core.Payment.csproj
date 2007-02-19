@@ -304,6 +304,21 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Payment\Test\TestConnectionFailurePaymentProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Payment\Test\TestFailurePaymentProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Payment\Test\TestPaymentProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Payment\Web References\com.concordebiz.efsnet\EFSnet2.wsdl"
                     BuildAction = "None"
                 />

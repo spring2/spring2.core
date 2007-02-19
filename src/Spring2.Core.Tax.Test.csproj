@@ -173,16 +173,6 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Tax\Test\TestFailureTaxProvider.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Tax\Test\TestTaxProvider.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "Tax\Test\VertexTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
