@@ -10,6 +10,15 @@ using System.Data;
 using System.Data.Common;
 
 namespace Spring2.Core.DAO {
+    /// <summary>
+    /// Options for modifying how DbConnectionScope.Current is affected while constructing a new scope.
+    /// </summary>
+    public enum DbConnectionScopeOption {
+        Required,                   // Set self as currentScope if there isn't one already on the thread, otherwise don't do anything.
+        RequiresNew,                // Push self as currentScope (track prior scope and restore it on dispose).
+        Suppress,                   // Push null reference as currentScope (track prior scope and restore it on dispose).
+    }
+
     // Allows almost-automated re-use of connections across multiple call levels
     //  while still controlling connection lifetimes.  Multiple connections are supported within a single scope.
     // To use:
@@ -41,7 +50,7 @@ namespace Spring2.Core.DAO {
     /// </summary>
     sealed public class DbConnectionScope : IDisposable {
 #region class fields
-	[ThreadStatic()]
+	//[ThreadStatic()]
 	private static DbConnectionScope __currentScope = null;      // Scope that is currently active on this thread
 	private static Object __nullKey = new Object();   // used to allow null as a key
 #endregion
@@ -49,6 +58,10 @@ namespace Spring2.Core.DAO {
 #region instance fields
 	private DbConnectionScope _priorScope;    // previous scope in stack of scopes on this thread
 	private Dictionary<object, DbConnection> _connections;   // set of connections contained by this scope.
+        private bool                                _isDisposed;   // 
+
+	private Guid guid = Guid.NewGuid();
+
 #endregion
 
 #region public class methods and properties
@@ -62,157 +75,341 @@ namespace Spring2.Core.DAO {
 	}
 #endregion
 
-#region public instance methods and properties
-	/// <summary>
-	/// Constructor
-	/// </summary>
-	public DbConnectionScope() {
-	    // Devnote:  Order of initial assignment is important in cases of failure!
-	    //  _priorScope first makes sure we know who we need to restore
-	    //  _connections second, to make sure we no-op dispose until we're as close to
-	    //      correct setup as possible
-	    //  __currentScope last, to make sure the thread static only holds validly set up objects
-	    _priorScope = __currentScope;
-	    _connections = new Dictionary<object, DbConnection>();
-	    __currentScope = this;
+        #region public instance methods and properties
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        public DbConnectionScope() : this(DbConnectionScopeOption.Required) {
+        }
+
+        /// <summary>
+        /// Constructor with options
+        /// </summary>
+        /// <param name="option">Option for how to modify Current during constructor</param>
+        public DbConnectionScope(DbConnectionScopeOption option) {
+            _isDisposed = true;  // short circuit Dispose until we're properly set up
+
+            bool mustPush;      // do we need to change __currentScope?
+            bool pushNull;      // should we set __currentScope to NULL or this?
+            switch(option) {
+                case DbConnectionScopeOption.Required:
+                    if (null == __currentScope) {
+                        mustPush = true;
+                        pushNull = false;
+                    }
+                    else {
+                        mustPush = false;
+                        pushNull = false;
+                    }
+                    break;
+                case DbConnectionScopeOption.RequiresNew:
+                    mustPush = true;
+                    pushNull = false;
+                    break;
+
+                case DbConnectionScopeOption.Suppress:
+                    mustPush = true;
+                    pushNull = true;
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException("option");
+            }
+
+            if (mustPush) {
+                // only bother allocating dictionary if we're going to push
+
+		// TODO: added us of "this" crap to see if I can figure out why I still have a connection
+                this._connections = new Dictionary<object, DbConnection>();
+		this._connections.Clear();
+
+                // Devnote:  Order of initial assignment is important in cases of failure!
+                //  _priorScope first makes sure we know who we need to restore
+                //  _isDisposed second, to make sure we no-op dispose until we're as close to
+                //      correct setup as possible (i.e. all other instance fields set prior to _isDisposed = false)
+                //  __currentScope last, to make sure the thread static only holds validly set up objects
+                _priorScope = __currentScope;
+                _isDisposed = false;
+                if (pushNull) {
+                    __currentScope = null;
+                }
+                else {
+                    __currentScope = this;
+
+		    // TODO: added this crap to see if I can figure out why I still have a connection
+		    __currentScope._connections = new Dictionary<object, DbConnection>();
+		    __currentScope._connections.Clear();
+
+		    this._connections = new Dictionary<object, DbConnection>();
+		    this._connections.Clear();
+
+                }
+            }
+        }
+
+
+	private DbConnectionScope(Boolean foo) {
 	}
 
-	/// <summary>
-	/// Convenience constructor to add an initial connection
-	/// </summary>
-	/// <param name="key">Key to associate with connection</param>
-	/// <param name="connection">Connection to add</param>
-	public DbConnectionScope(object key, DbConnection connection)
-	    : this() {
-	    AddConnection(key, connection);
-	}
+	public static DbConnectionScope CreateNew() {
+	    DbConnectionScopeOption option = DbConnectionScopeOption.Required;
 
-	/// <summary>
-	/// Add a connection and associate it with the given key
-	/// </summary>
-	/// <param name="key">Key to associate with the connection</param>
-	/// <param name="connection">Connection to add</param>
-	public void AddConnection(object key, DbConnection connection) {
-	    CheckDisposed();
-	    if (null == key) {
-		key = __nullKey;
-	    }
-	    _connections[key] = connection;
-	}
-
-	/// <summary>
-	/// Check to see if there is a connection associated with this key
-	/// </summary>
-	/// <param name="key">Key to use for lookup</param>
-	/// <returns>true if there is a connection, false otherwise</returns>
-	public bool ContainsKey(object key) {
-	    CheckDisposed();
-	    return _connections.ContainsKey(key);
-	}
-
-	/// <summary>
-	/// Shut down this instance.  Disposes all connections it holds and restores the prior scope.
-	/// </summary>
-	public void Dispose() {
-	    if (!IsDisposed) {
-		// Firstly, remove ourselves from the stack (but, only if we are the one on the stack)
-		//  Note: Thread-local _currentScope, and requirement that scopes not be disposed on other threads
-		//      means we can get away with not locking.
-		if (__currentScope == this) {
-		    // In case the user called dispose out of order, skip up the chain until we find
-		    //  an undisposed scope.
-		    DbConnectionScope prior = _priorScope;
-		    while (null != prior && prior.IsDisposed) {
-			prior = prior._priorScope;
+	    bool mustPush;      // do we need to change __currentScope?
+	    bool pushNull;      // should we set __currentScope to NULL or this?
+	    switch (option) {
+		case DbConnectionScopeOption.Required:
+		    if (null == __currentScope) {
+			mustPush = true;
+			pushNull = false;
+		    } else {
+			mustPush = false;
+			pushNull = false;
 		    }
-		    __currentScope = prior;
-		}
+		    break;
+		case DbConnectionScopeOption.RequiresNew:
+		    mustPush = true;
+		    pushNull = false;
+		    break;
 
-		// secondly, make sure our internal state is set to "Disposed"
-		IDictionary<object, DbConnection> connections = _connections;
+		case DbConnectionScopeOption.Suppress:
+		    mustPush = true;
+		    pushNull = true;
+		    break;
+
+		default:
+		    throw new ArgumentOutOfRangeException("option");
+	    }
+
+	    if (mustPush) {
+		DbConnectionScope scope = new DbConnectionScope(true);
+		scope._isDisposed = true;  // short circuit Dispose until we're properly set up
+
+		// only bother allocating dictionary if we're going to push
+
+		// TODO: added us of "this" crap to see if I can figure out why I still have a connection
+		scope._connections = new Dictionary<object, DbConnection>();
+		scope._connections.Clear();
+
+		// Devnote:  Order of initial assignment is important in cases of failure!
+		//  _priorScope first makes sure we know who we need to restore
+		//  _isDisposed second, to make sure we no-op dispose until we're as close to
+		//      correct setup as possible (i.e. all other instance fields set prior to _isDisposed = false)
+		//  __currentScope last, to make sure the thread static only holds validly set up objects
+		scope._priorScope = __currentScope;
+		scope._isDisposed = false;
+		if (pushNull) {
+		    __currentScope = null;
+		} else {
+		    DbConnectionScope.__currentScope = scope;
+		}
+		return scope;
+	    }
+	    return null;
+	}
+
+        /// <summary>
+        /// Convenience constructor to add an initial connection
+        /// </summary>
+        /// <param name="key">Key to associate with connection</param>
+        /// <param name="connection">Connection to add</param>
+        public DbConnectionScope(object key, DbConnection connection) : this() {
+            AddConnection(key, connection);
+        }
+
+        /// <summary>
+        /// Add a connection and associate it with the given key
+        /// </summary>
+        /// <param name="key">Key to associate with the connection</param>
+        /// <param name="connection">Connection to add</param>
+        public void AddConnection(object key, DbConnection connection) {
+            CheckDisposed();
+            if (null == key) {
+                key = __nullKey;
+            }
+            _connections[key] = connection;
+        }
+
+        /// <summary>
+        /// Check to see if there is a connection associated with this key
+        /// </summary>
+        /// <param name="key">Key to use for lookup</param>
+        /// <returns>true if there is a connection, false otherwise</returns>
+        public bool ContainsKey(object key) {
+            CheckDisposed();
+            return _connections.ContainsKey(key);
+        }
+
+        /// <summary>
+        /// Shut down this instance.  Disposes all connections it holds and restores the prior scope.
+        /// </summary>
+        public void Dispose() {
+            if (!IsDisposed) {
+                // Firstly, remove ourselves from the stack (but, only if we are the one on the stack)
+                //  Note: Thread-local _currentScope, and requirement that scopes not be disposed on other threads
+                //      means we can get away with not locking.  Worst case is that we corrupt the connections
+                //      and the IDictionary contained in the scope that's being disposed on two threads -- we don't
+                //      corrupt the __currentScope stack because we don't touch it unless this instance is in said stack!
+                if (__currentScope == this) {
+                    // In case the user called dispose out of order, skip up the chain until we find
+                    //  an undisposed scope.
+                    DbConnectionScope prior = _priorScope;
+                    while (null != prior && prior.IsDisposed) {
+                        prior = prior._priorScope;
+                    }
+                    __currentScope = prior;
+                }
+
+                // secondly, make sure our internal state is set to "Disposed"
+		List<DbConnection> connections = new List<DbConnection>();
+		connections.AddRange(_connections.Values);
+
+		// TODO: added this crap to see if I can figure out why I still have a connection
+		_connections.Clear();
 		_connections = null;
 
-		// Lastly, clean up the connections we own
-		foreach (DbConnection connection in connections.Values) {
-		    connection.Dispose();
-		}
-	    }
-	}
+                // Lastly, clean up the connections we own
+                if (null != connections) {
+                    foreach(DbConnection connection in connections) {
+                        connection.Dispose();
+                    }
+                }
 
-	/// <summary>
-	/// Get the connection associated with this key. Throws if there is no entry for the key.
-	/// </summary>
-	/// <param name="key">Key to use for lookup</param>
-	/// <returns>Associated connection</returns>
-	public DbConnection GetConnection(object key) {
-	    CheckDisposed();
+                _isDisposed = true;
+            }
+        }
 
-	    // allow null-ref as key
-	    if (null == key) {
-		key = __nullKey;
-	    }
+        /// <summary>
+        /// Get the connection associated with this key. Throws if there is no entry for the key.
+        /// </summary>
+        /// <param name="key">Key to use for lookup</param>
+        /// <param name="searchPriorScopes">Search for connection throughout the current scope stack?</param>
+        /// <returns>Associated connection</returns>
+        public DbConnection GetConnection(object key, bool searchPriorScopes) {
+            CheckDisposed();
+            DbConnection returnValue = null;
 
-	    return _connections[key];
-	}
+            // allow null-ref as key
+            if (null == key) {
+                key = __nullKey;
+            }
+            
+            if (!_connections.TryGetValue(key, out returnValue)) {
+                if (searchPriorScopes && null != _priorScope) {
+                    returnValue = _priorScope.GetConnection(key, searchPriorScopes);
+                }
+                else {
+                    returnValue = _connections[key];  // we alread know it's not there so force the exception
+                }
+            }
 
-	/// <summary>
-	/// This method gets the connection using the connection string as a key.  If no connection is
-	/// associated with the string, the connection factory is used to create the connection.
-	/// Finally, if the resulting connection is in the closed state, it is opened.
-	/// </summary>
-	/// <param name="factory">Factory to use to create connection if it is not already present</param>
-	/// <param name="connectionString">Connection string to use</param>
-	/// <returns>Connection in open state</returns>
-	public DbConnection GetOpenConnection(DbProviderFactory factory, string connectionString) {
-	    CheckDisposed();
-	    object key;
+            return returnValue;
+        }
 
-	    // allow null-ref as key
-	    if (null == connectionString) {
-		key = __nullKey;
-	    } else {
-		key = connectionString;
-	    }
+        /// <summary>
+        /// Get the connection associated with this key in this scope. Throws if there is no entry for the key.
+        /// </summary>
+        /// <param name="key">Key to use for lookup</param>
+        /// <returns>Associated connection</returns>
+        public DbConnection GetConnection(object key) {
+            return GetConnection(key, false);
+        }
 
-	    // go get the connection
-	    DbConnection result;
-	    if (!_connections.TryGetValue(key, out result)) {
-		// didn't find it, so create it.
-		result = factory.CreateConnection();
-		result.ConnectionString = connectionString;
-		_connections[key] = result;
-	    }
+        /// <summary>
+        /// This method gets the connection using the connection string as a key.  If no connection is
+        /// associated with the string, the connection factory is used to create the connection.
+        /// Finally, if the resulting connection is in the closed state, it is opened.
+        /// </summary>
+        /// <param name="factory">Factory to use to create connection if it is not already present</param>
+        /// <param name="connectionString">Connection string to use</param>
+        /// <param name="searchPriorScopes">Search for connection throughout the current scope stack?</param>
+        /// <returns>Connection in open state</returns>
+        public DbConnection GetOpenConnection(DbProviderFactory factory, string connectionString, bool searchPriorScopes) {
+            CheckDisposed();
+            object key;
 
-	    // however we got it, open it if it's closed.
-	    //  note: don't open unless state is unambiguous that it's ok to open
-	    if (ConnectionState.Closed == result.State) {
-		result.Open();
-	    }
+            // allow null-ref as key
+            if (null == connectionString) {
+                key = __nullKey;
+            }
+            else {
+                key = connectionString;
+            }
 
-	    return result;
-	}
-#endregion
+            // go get the connection
+            DbConnection result;
+            if (!TryGetConnection(key, searchPriorScopes, out result)) {
+                // didn't find it, so create it.
+                result = factory.CreateConnection();
+                result.ConnectionString = connectionString;
+                _connections[key] = result;
+            }
 
-#region private methods and properties
-	/// <summary>
-	/// Was this instance previously disposed?
-	/// </summary>
-	private bool IsDisposed {
-	    get {
-		return null == _connections;
-	    }
-	}
+            // however we got it, open it if it's closed.
+            //  note: don't open unless state is unambiguous that it's ok to open
+            if (ConnectionState.Closed == result.State) {
+                result.Open();
+            }
 
-	/// <summary>
-	/// Handle calling API function after instance has been disposed
-	/// </summary>
-	private void CheckDisposed() {
-	    if (IsDisposed) {
-		throw new ObjectDisposedException("DbConnectionScope");
-	    }
-	}
+            return result;
+        }
 
-#endregion
+        /// <summary>
+        /// Get the connection associated with this key.
+        /// </summary>
+        /// <param name="key">Key to use for lookup</param>
+        /// <param name="searchPriorScopes">Search for connection throughout the current scope stack?</param>
+        /// <param name="connection">Associated connection</param>
+        /// <returns>True if connection found, false otherwise</returns>
+        public bool TryGetConnection(object key, bool searchPriorScopes, out DbConnection connection) {
+            CheckDisposed();
+            connection = null;
+
+            // allow null-ref as key
+            if (null == key) {
+                key = __nullKey;
+            }
+
+            bool found = _connections.TryGetValue(key, out connection);
+            if (!found) {
+                if (searchPriorScopes && null != _priorScope) {
+                    found = _priorScope.TryGetConnection(key, searchPriorScopes, out connection);
+                }
+            }
+
+            return found;
+        }
+
+        /// <summary>
+        /// Get the connection associated with this key without searching current scope stack.
+        /// </summary>
+        /// <param name="key">Key to use for lookup</param>
+        /// <param name="connection">Associated connection</param>
+        /// <returns>True if connection found, false otherwise</returns>
+        public bool TryGetConnection(object key, out DbConnection connection) {
+            return TryGetConnection(key, false, out connection);
+        }
+        #endregion
+
+        #region private methods and properties
+        /// <summary>
+        /// Was this instance previously disposed?
+        /// </summary>
+        private bool IsDisposed {
+            get {
+                return _isDisposed;
+            }
+        }
+
+        /// <summary>
+        /// Handle calling API function after instance has been disposed
+        /// </summary>
+        private void CheckDisposed() {
+            if (IsDisposed) {
+                throw new ObjectDisposedException("DbConnectionScope");
+            }
+        }
+
+       #endregion
     }
 }
 #endif
