@@ -18,6 +18,8 @@ all: build
 clean:
 	$(RM) $(BUILDDIR)/*
 	$(RM) $(DOCDIR)/NCover
+	$(RM) obj
+	$(RM) bin
 
 .PHONY: build
 build:
@@ -28,6 +30,11 @@ regress: build
 	export COMPLUS_Version=net-1.1
 	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-results.xml ../build/net-1.1/Spring2.Core.Test.dll 
 	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11withtypes-results.xml ../build/net-1.1/WithTypes/Spring2.Core.WithTypesTest.dll
+	#$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-AddressValidation-results.xml ../build/net-1.1/Spring2.Core.AddressValidation.Test.dll
+	#$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-Payment-results.xml ../build/net-1.1/Spring2.Core.Payment.Test.dll
+	#$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-ResouceManager.AcceptanceTest-results.xml ../build/net-1.1/Spring2.Core.ResourceManager.AcceptanceTest.dll
+	#$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-Tax-results.xml ../build/net-1.1/Spring2.Core.Tax.Test.dll
+
 	export COMPLUS_Version=net-2.0
 	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit20-results.xml ../build/net-2.0/Spring2.Core.Test.dll
 	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit20withtypes-results.xml ../build/net-2.0/WithTypes/Spring2.Core.WithTypesTest.dll
