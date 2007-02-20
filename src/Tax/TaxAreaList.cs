@@ -195,45 +195,6 @@ namespace Spring2.Core.Tax {
 		}
 
 		[Generate]
-		public class LocalDistrict1Sorter : IComparer {
-			public Int32 Compare(Object a, Object b) {
-				TaxAreaData o1 = (TaxAreaData) a;
-				TaxAreaData o2 = (TaxAreaData) b;
-
-				if (o1 == null || o2 == null || !o1.LocalDistrict1.IsValid || !o2.LocalDistrict1.IsValid) {
-					return 0;
-				}
-				return o1.LocalDistrict1.CompareTo(o2.LocalDistrict1);
-			}
-		}
-
-		[Generate]
-		public class LocalDistrict2Sorter : IComparer {
-			public Int32 Compare(Object a, Object b) {
-				TaxAreaData o1 = (TaxAreaData) a;
-				TaxAreaData o2 = (TaxAreaData) b;
-
-				if (o1 == null || o2 == null || !o1.LocalDistrict2.IsValid || !o2.LocalDistrict2.IsValid) {
-					return 0;
-				}
-				return o1.LocalDistrict2.CompareTo(o2.LocalDistrict2);
-			}
-		}
-
-		[Generate]
-		public class LocalDistrict3Sorter : IComparer {
-			public Int32 Compare(Object a, Object b) {
-				TaxAreaData o1 = (TaxAreaData) a;
-				TaxAreaData o2 = (TaxAreaData) b;
-
-				if (o1 == null || o2 == null || !o1.LocalDistrict3.IsValid || !o2.LocalDistrict3.IsValid) {
-					return 0;
-				}
-				return o1.LocalDistrict3.CompareTo(o2.LocalDistrict3);
-			}
-		}
-
-		[Generate]
 		public class CountryTaxRateSorter : IComparer {
 			public Int32 Compare(Object a, Object b) {
 				TaxAreaData o1 = (TaxAreaData) a;
@@ -282,45 +243,6 @@ namespace Spring2.Core.Tax {
 					return 0;
 				}
 				return o1.CityTaxRate.CompareTo(o2.CityTaxRate);
-			}
-		}
-
-		[Generate]
-		public class LocalDistrict1TaxRateSorter : IComparer {
-			public Int32 Compare(Object a, Object b) {
-				TaxAreaData o1 = (TaxAreaData) a;
-				TaxAreaData o2 = (TaxAreaData) b;
-
-				if (o1 == null || o2 == null || !o1.LocalDistrict1TaxRate.IsValid || !o2.LocalDistrict1TaxRate.IsValid) {
-					return 0;
-				}
-				return o1.LocalDistrict1TaxRate.CompareTo(o2.LocalDistrict1TaxRate);
-			}
-		}
-
-		[Generate]
-		public class LocalDistrict2TaxRateSorter : IComparer {
-			public Int32 Compare(Object a, Object b) {
-				TaxAreaData o1 = (TaxAreaData) a;
-				TaxAreaData o2 = (TaxAreaData) b;
-
-				if (o1 == null || o2 == null || !o1.LocalDistrict2TaxRate.IsValid || !o2.LocalDistrict2TaxRate.IsValid) {
-					return 0;
-				}
-				return o1.LocalDistrict2TaxRate.CompareTo(o2.LocalDistrict2TaxRate);
-			}
-		}
-
-		[Generate]
-		public class LocalDistrict3TaxRateSorter : IComparer {
-			public Int32 Compare(Object a, Object b) {
-				TaxAreaData o1 = (TaxAreaData) a;
-				TaxAreaData o2 = (TaxAreaData) b;
-
-				if (o1 == null || o2 == null || !o1.LocalDistrict3TaxRate.IsValid || !o2.LocalDistrict3TaxRate.IsValid) {
-					return 0;
-				}
-				return o1.LocalDistrict3TaxRate.CompareTo(o2.LocalDistrict3TaxRate);
 			}
 		}
 

@@ -753,13 +753,13 @@ namespace Spring2.Core.Tax.Vertex {
 				dist = dist.Replace("&amp;", "&");
 			    }
 
-			    if (t.LocalDistrict1.IsEmpty) {
-				t.LocalDistrict1 = StringType.Parse(dist);
-			    } else if (t.LocalDistrict2.IsEmpty) {
-				t.LocalDistrict2 = StringType.Parse(dist);
-			    } else if (t.LocalDistrict3.IsEmpty) {
-				t.LocalDistrict3 = StringType.Parse(dist);
-			    }
+//			    if (t.LocalDistrict1.IsEmpty) {
+//				t.LocalDistrict1 = StringType.Parse(dist);
+//			    } else if (t.LocalDistrict2.IsEmpty) {
+//				t.LocalDistrict2 = StringType.Parse(dist);
+//			    } else if (t.LocalDistrict3.IsEmpty) {
+//				t.LocalDistrict3 = StringType.Parse(dist);
+//			    }
 			}
 		    }
 		}

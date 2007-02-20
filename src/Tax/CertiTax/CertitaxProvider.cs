@@ -175,9 +175,6 @@ namespace Spring2.Core.Tax.CertiTax {
 	    area.CountryTaxRate = result.CountryTaxRate;
 	    area.County = result.County;
 	    area.CountyTaxRate = result.CountyTaxRate;
-	    area.LocalDistrict1TaxRate = result.LocalDistrict1TaxRate;
-	    area.LocalDistrict2TaxRate = result.LocalDistrict2TaxRate;
-	    area.LocalDistrict3TaxRate = result.LocalDistrict3TaxRate;
 	    area.PostalCode = result.PostalCode;
 	    area.Region = result.Region;
 	    area.RegionTaxRate = result.RegionTaxRate;
@@ -185,6 +182,7 @@ namespace Spring2.Core.Tax.CertiTax {
 	    area.TotalTaxRate = result.TotalTaxRate;
 	    area.TaxAreaID = result.TaxAreaID;
 	    area.AddressValidated = result.AddressValidated;
+	    area.TaxJurisdictions = result.TaxJurisdictions;
 
 	    order.Lines.Add(GetDummyShippingLine());
 	    result = Calculate(street, city, county, region, postalCode, country, DateType.Now, order);

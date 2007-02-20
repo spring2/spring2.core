@@ -55,9 +55,6 @@ namespace Spring2.Core.Tax.Test {
 	    taxArea.CityTaxRate = 0;
 	    taxArea.Country = country;
 	    taxArea.CountyTaxRate = 0;
-	    taxArea.LocalDistrict1 = "LocalDistrict1";
-	    taxArea.LocalDistrict2 = "LocalDistrict2";
-	    taxArea.LocalDistrict3 = "LocalDistrict3";
 	    taxArea.PostalCode = postalCode;
 	    taxArea.Region = region;
 	    taxArea.TaxArea = "Test";
