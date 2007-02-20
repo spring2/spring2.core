@@ -399,5 +399,25 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual(18.50, jurisidiction.Amount.ToDecimal());
 	    Assert.AreEqual(1.8500m, jurisidiction.Rate.ToDecimal());
 	}
+
+	[Test()]
+	public void GetTaxJurisidictionsWithTaxAreaData() {
+	    CertiTaxProvider CertiTaxProvider = new CertiTaxProvider("United States");
+	    TaxAreaData taxArea = CertiTaxProvider.GetTaxAreaForAddress("10150 S. Centennial Parkway", "Sandy", "Salt Lake", "UT", "84070", "USA", BooleanType.FALSE);
+
+	    Assert.AreEqual(2, taxArea.TaxJurisdictions.Count);
+		     	    
+	    TaxJurisdiction jurisidiction = taxArea.TaxJurisdictions[TaxJurisdictionTypeEnum.STATE];
+	    Assert.AreEqual(TaxJurisdictionTypeEnum.STATE, jurisidiction.JurisdictionType);
+	    Assert.AreEqual("UTAH", jurisidiction.Description.ToString());
+	    Assert.AreEqual(47.50, jurisidiction.Amount.ToDecimal());
+	    Assert.AreEqual(4.7500m, jurisidiction.Rate.ToDecimal());
+		     
+	    jurisidiction = taxArea.TaxJurisdictions[TaxJurisdictionTypeEnum.COUNTY];
+	    Assert.AreEqual(TaxJurisdictionTypeEnum.COUNTY, jurisidiction.JurisdictionType);
+	    Assert.AreEqual("SALT LAKE", jurisidiction.Description.ToString());
+	    Assert.AreEqual(18.50, jurisidiction.Amount.ToDecimal());
+	    Assert.AreEqual(1.8500m, jurisidiction.Rate.ToDecimal());
+	}
     }
 }
