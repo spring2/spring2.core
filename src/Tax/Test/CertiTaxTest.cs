@@ -368,5 +368,36 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual(StringType.Parse("UT"), taxArea.Region);
 	    Assert.AreEqual(IdType.Parse("840704103"), taxArea.TaxAreaID);
 	}
+
+	[Test()]
+	public void GetTaxJurisidictionsWithTaxResult() {
+	    TaxOrder order = new TaxOrder();
+	    order.TaxAreaId = IdType.Parse("84070");
+		     		
+	    TaxOrderLine taxOrderLine;
+		     		
+	    taxOrderLine = new TaxOrderLine();
+	    taxOrderLine.Quantity = 1;
+	    taxOrderLine.Price = 500;
+	    taxOrderLine.ItemNumber = "001";
+	    order.Lines.Add(taxOrderLine);
+		     
+	    CertiTaxProvider CertiTaxProvider = new CertiTaxProvider("United States");
+	    TaxResult result = CertiTaxProvider.Calculate("10150 South Centennial Parkway","Sandy", "", "UT", "84070", "USA", DateType.Now, order);
+		     
+	    Assert.AreEqual(2, result.TaxJurisdictions.Count);
+		     	    
+	    TaxJurisdiction jurisidiction = result.TaxJurisdictions[TaxJurisdictionTypeEnum.STATE];
+	    Assert.AreEqual(TaxJurisdictionTypeEnum.STATE, jurisidiction.JurisdictionType);
+	    Assert.AreEqual("UTAH", jurisidiction.Description.ToString());
+	    Assert.AreEqual(47.50, jurisidiction.Amount.ToDecimal());
+	    Assert.AreEqual(4.7500m, jurisidiction.Rate.ToDecimal());
+		     
+	    jurisidiction = result.TaxJurisdictions[TaxJurisdictionTypeEnum.COUNTY];
+	    Assert.AreEqual(TaxJurisdictionTypeEnum.COUNTY, jurisidiction.JurisdictionType);
+	    Assert.AreEqual("SALT LAKE", jurisidiction.Description.ToString());
+	    Assert.AreEqual(18.50, jurisidiction.Amount.ToDecimal());
+	    Assert.AreEqual(1.8500m, jurisidiction.Rate.ToDecimal());
+	}
     }
 }

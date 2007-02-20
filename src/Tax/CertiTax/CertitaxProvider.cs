@@ -335,11 +335,13 @@ namespace Spring2.Core.Tax.CertiTax {
 	    Debug.WriteLine(taxTrans.CertiTAXTransactionId);
 	    result.TotalTax = taxTrans.TotalTax;
 
-	    result.CityTaxRate = (DecimalType) ((taxTrans.CityTax/certiTaxOrder.Total)*100);
-	    result.CountyTaxRate = (DecimalType) ((taxTrans.CountyTax/certiTaxOrder.Total)*100);
-	    result.RegionTaxRate = (DecimalType) ((taxTrans.StateTax/certiTaxOrder.Total)*100);
-	    result.CountryTaxRate = (DecimalType) ((taxTrans.NationalTax/certiTaxOrder.Total)*100);
+//	    result.CityTaxRate = (DecimalType) ((taxTrans.CityTax/certiTaxOrder.Total)*100);
+//	    result.CountyTaxRate = (DecimalType) ((taxTrans.CountyTax/certiTaxOrder.Total)*100);
+//	    result.RegionTaxRate = (DecimalType) ((taxTrans.StateTax/certiTaxOrder.Total)*100);
+//	    result.CountryTaxRate = (DecimalType) ((taxTrans.NationalTax/certiTaxOrder.Total)*100);
 	    result.TotalTaxRate = (DecimalType) ((taxTrans.TotalTax/certiTaxOrder.Total)*100);
+
+	    AddTaxJurisidctionsToResult(taxTrans, certiTaxOrder, result);	    
 
 	    result.Street = taxTrans.CorrectedAddress.Street1;
 	    result.City = taxTrans.CorrectedAddress.City;
@@ -389,6 +391,24 @@ namespace Spring2.Core.Tax.CertiTax {
 		throw new MessageListException(errors);
 	    }
 
+	}
+
+	private void AddTaxJurisidctionsToResult(TaxTransaction taxTrans, Order certiTaxOrder, TaxResult result) {
+	    if (taxTrans.CityTax > 0) {
+		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.CITY, taxTrans.CityTaxAuthority, (taxTrans.CityTax / certiTaxOrder.Total) * 100, taxTrans.CityTax);
+	    }
+	    if (taxTrans.CountyTax > 0) {
+		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.COUNTY, taxTrans.CountyTaxAuthority, (taxTrans.CountyTax / certiTaxOrder.Total) * 100, taxTrans.CountyTax);
+	    }
+	    if (taxTrans.NationalTax > 0) {
+		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.COUNTRY, taxTrans.NationalTaxAuthority, (taxTrans.NationalTax / certiTaxOrder.Total) * 100, taxTrans.NationalTax);
+	    }
+	    if (taxTrans.StateTax > 0) {
+		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.STATE, taxTrans.StateTaxAuthority, (taxTrans.StateTax / certiTaxOrder.Total) * 100, taxTrans.StateTax);
+	    }
+	    if (taxTrans.OtherTax > 0) {
+		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.OTHER, taxTrans.OtherTaxAuthority, (taxTrans.OtherTax / certiTaxOrder.Total) * 100, taxTrans.OtherTax);
+	    }
 	}
 
 	private OrderLineItem BuildOrderLineItem(IdType lineId, CurrencyType price, IntegerType quantity, StringType itemNumber, CurrencyType discountAmount) {

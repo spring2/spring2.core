@@ -214,6 +214,21 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Tax\TaxJurisdiction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tax\TaxJurisdictionList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tax\TaxJurisidictionTypeEnum.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Tax\TaxManager.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
