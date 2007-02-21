@@ -390,13 +390,13 @@ namespace Spring2.Core.Test {
 	    TaxJurisdiction jurisidiction = result.TaxJurisdictions[TaxJurisdictionTypeEnum.STATE];
 	    Assert.AreEqual(TaxJurisdictionTypeEnum.STATE, jurisidiction.JurisdictionType);
 	    Assert.AreEqual("UTAH", jurisidiction.Description.ToString());
-	    Assert.AreEqual(47.50, jurisidiction.Amount.ToDecimal());
+	    Assert.AreEqual(23.7500m, jurisidiction.Amount.ToDecimal());
 	    Assert.AreEqual(4.7500m, jurisidiction.Rate.ToDecimal());
 		     
 	    jurisidiction = result.TaxJurisdictions[TaxJurisdictionTypeEnum.COUNTY];
 	    Assert.AreEqual(TaxJurisdictionTypeEnum.COUNTY, jurisidiction.JurisdictionType);
 	    Assert.AreEqual("SALT LAKE", jurisidiction.Description.ToString());
-	    Assert.AreEqual(18.50, jurisidiction.Amount.ToDecimal());
+	    Assert.AreEqual(9.2500m, jurisidiction.Amount.ToDecimal());
 	    Assert.AreEqual(1.8500m, jurisidiction.Rate.ToDecimal());
 	}
 
@@ -410,13 +410,13 @@ namespace Spring2.Core.Test {
 	    TaxJurisdiction jurisidiction = taxArea.TaxJurisdictions[TaxJurisdictionTypeEnum.STATE];
 	    Assert.AreEqual(TaxJurisdictionTypeEnum.STATE, jurisidiction.JurisdictionType);
 	    Assert.AreEqual("UTAH", jurisidiction.Description.ToString());
-	    Assert.AreEqual(47.50, jurisidiction.Amount.ToDecimal());
+	    Assert.AreEqual(23.7500m, jurisidiction.Amount.ToDecimal());
 	    Assert.AreEqual(4.7500m, jurisidiction.Rate.ToDecimal());
 		     
 	    jurisidiction = taxArea.TaxJurisdictions[TaxJurisdictionTypeEnum.COUNTY];
 	    Assert.AreEqual(TaxJurisdictionTypeEnum.COUNTY, jurisidiction.JurisdictionType);
 	    Assert.AreEqual("SALT LAKE", jurisidiction.Description.ToString());
-	    Assert.AreEqual(18.50, jurisidiction.Amount.ToDecimal());
+	    Assert.AreEqual(9.2500m, jurisidiction.Amount.ToDecimal());
 	    Assert.AreEqual(1.8500m, jurisidiction.Rate.ToDecimal());
 	}
     }
