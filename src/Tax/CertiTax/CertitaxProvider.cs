@@ -347,6 +347,8 @@ namespace Spring2.Core.Tax.CertiTax {
 		result.TaxAreaID = IdType.Parse(taxTrans.CorrectedAddress.PostalCode.Substring(0, 5) + taxTrans.CorrectedAddress.PostalCode.Substring(6, 4));
 	    }
 
+	    AddTaxJurisidctionsToResult(taxTrans, certiTaxOrder, result);
+
 	    // calculate the actual tax
 	    try {
 		//populate orderline items
@@ -379,7 +381,7 @@ namespace Spring2.Core.Tax.CertiTax {
 		Debug.WriteLine(taxTrans.CertiTAXTransactionId);
 		result.TotalTax = taxTrans.TotalTax;
 
-		AddTaxJurisidctionsToResult(taxTrans, certiTaxOrder, result);
+		UpdateTaxJurisdictionAmounts(taxTrans, result);
 
 		return result;
 	    } catch (SoapException ex) {
@@ -388,25 +390,41 @@ namespace Spring2.Core.Tax.CertiTax {
 		Debug.WriteLine(ex.Message.ToString());
 		throw new MessageListException(errors);
 	    }
-
 	}
 
 	private void AddTaxJurisidctionsToResult(TaxTransaction taxTrans, Order certiTaxOrder, TaxResult result) {
-	    decimal basis = GetDummyOrderLines()[0].ExtendedPrice;
 	    if (taxTrans.CityTax > 0) {
-		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.CITY, taxTrans.CityTaxAuthority, DecimalType.Round((taxTrans.CityTax / certiTaxOrder.Total) * 100, 2), taxTrans.CityTax);
+		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.CITY, taxTrans.CityTaxAuthority, (taxTrans.CityTax / certiTaxOrder.Total) * 100, 0);
 	    }
 	    if (taxTrans.CountyTax > 0) {
-		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.COUNTY, taxTrans.CountyTaxAuthority, DecimalType.Round((taxTrans.CountyTax / certiTaxOrder.Total) * 100, 2), taxTrans.CountyTax);
+		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.COUNTY, taxTrans.CountyTaxAuthority, (taxTrans.CountyTax / certiTaxOrder.Total) * 100, 0);
 	    }
 	    if (taxTrans.NationalTax > 0) {
-		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.COUNTRY, taxTrans.NationalTaxAuthority, DecimalType.Round((taxTrans.NationalTax / certiTaxOrder.Total) * 100, 2), taxTrans.NationalTax);
+		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.COUNTRY, taxTrans.NationalTaxAuthority, (taxTrans.NationalTax / certiTaxOrder.Total) * 100, 0);
 	    }
 	    if (taxTrans.StateTax > 0) {
-		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.STATE, taxTrans.StateTaxAuthority, DecimalType.Round((taxTrans.StateTax / certiTaxOrder.Total) * 100, 2), taxTrans.StateTax);
+		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.STATE, taxTrans.StateTaxAuthority, (taxTrans.StateTax / certiTaxOrder.Total) * 100, 0);
 	    }
 	    if (taxTrans.OtherTax > 0) {
-		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.OTHER, taxTrans.OtherTaxAuthority, DecimalType.Round((taxTrans.OtherTax / certiTaxOrder.Total) * 100, 2), taxTrans.OtherTax);
+		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.OTHER, taxTrans.OtherTaxAuthority, (taxTrans.OtherTax / certiTaxOrder.Total) * 100, 0);
+	    }
+	}
+
+	private void UpdateTaxJurisdictionAmounts(TaxTransaction taxTrans, TaxResult result) {
+	    foreach (TaxJurisdiction jurisdiction in result.TaxJurisdictions) {
+		if (jurisdiction.JurisdictionType.Equals(TaxJurisdictionTypeEnum.CITY)) {
+		    jurisdiction.Amount = taxTrans.CityTax;
+		} else if (jurisdiction.JurisdictionType.Equals(TaxJurisdictionTypeEnum.COUNTRY)) {
+		    jurisdiction.Amount = taxTrans.NationalTax;
+		} else if (jurisdiction.JurisdictionType.Equals(TaxJurisdictionTypeEnum.COUNTY)) {
+		    jurisdiction.Amount = taxTrans.CountyTax;
+		} else if (jurisdiction.JurisdictionType.Equals(TaxJurisdictionTypeEnum.DISTRICT)) {
+		    jurisdiction.Amount = taxTrans.LocalTax;
+		} else if (jurisdiction.JurisdictionType.Equals(TaxJurisdictionTypeEnum.OTHER)) {
+		    jurisdiction.Amount = taxTrans.OtherTax;
+		} else if (jurisdiction.JurisdictionType.Equals(TaxJurisdictionTypeEnum.STATE)) {
+		    jurisdiction.Amount = taxTrans.StateTax;
+		}
 	    }
 	}
 
