@@ -33,6 +33,17 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test()]
+	public void GetTaxAreaForAddress1() {
+	    CertiTaxProvider CertiTaxProvider = new CertiTaxProvider("United States");
+	    TaxAreaData taxArea = CertiTaxProvider.GetTaxAreaForAddress("200 W. State St.", "Irene", "", "SD", "57037", "USA", BooleanType.FALSE);
+
+	    Assert.AreEqual(StringType.Parse("200 W State St"), taxArea.Street);
+	    Assert.AreEqual(StringType.Parse("Irene"), taxArea.City);
+	    Assert.AreEqual(StringType.Parse("SD"), taxArea.Region);
+	    Assert.AreEqual(IdType.Parse("57037"), taxArea.TaxAreaID);
+	}
+
+	[Test()]
 	public void Commit() {
 	    TaxOrder order = new TaxOrder();
 	    order.TaxAreaId = IdType.Parse("84070");

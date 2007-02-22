@@ -344,7 +344,11 @@ namespace Spring2.Core.Tax.CertiTax {
 	    result.Region = taxTrans.CorrectedAddress.State;
 	    result.PostalCode = taxTrans.CorrectedAddress.PostalCode;
 	    if (taxTrans.CorrectedAddress.PostalCode.Length > 0) {
-		result.TaxAreaID = IdType.Parse(taxTrans.CorrectedAddress.PostalCode.Substring(0, 5) + taxTrans.CorrectedAddress.PostalCode.Substring(6, 4));
+		if (taxTrans.CorrectedAddress.PostalCode.Length > 5) {
+		    result.TaxAreaID = IdType.Parse(taxTrans.CorrectedAddress.PostalCode.Substring(0, 5) + taxTrans.CorrectedAddress.PostalCode.Substring(6, 4));
+		} else {
+		    result.TaxAreaID = IdType.Parse(taxTrans.CorrectedAddress.PostalCode.Substring(0, 5));
+		}
 	    }
 
 	    AddTaxJurisidctionsToResult(taxTrans, certiTaxOrder, result);
