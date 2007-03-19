@@ -91,12 +91,13 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test()]
-	public void IfCookieNotFoundInCollectionExpectNullReturnedFromGetCookie() {
+	public void ShouldGetEmptyCookieWhenCallingGetCookieWithNewCookieName() {
 	    SampleLocalizedDataForm dataForm = new SampleLocalizedDataForm(new SimpleFormatter(), new NameValueCollection(), LocaleEnum.UNITED_STATES, LanguageEnum.ENGLISH);
 
 	    HttpCookie cookie = dataForm.GetCookie("NoCookieWithThisName");
 
-	    Assert.AreEqual(null as object, cookie);
+	    Assert.AreEqual("NoCookieWithThisName", cookie.Name);
+	    Assert.AreEqual(null as object, cookie.Value);
 	}
 
 	public class SampleLocalizedDataForm : LocalizedForm {
