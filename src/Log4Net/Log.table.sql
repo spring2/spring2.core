@@ -29,7 +29,8 @@ CREATE TABLE Log (
 	Logger varchar(255) NOT NULL,
 	Message varchar(4000) NOT NULL,
 	Exception varchar(2000) NULL,
-	Machine varchar(25) NULL
+	Machine varchar(25) NULL,
+	UserName varchar(100) NULL
 )
 GO
 
@@ -128,6 +129,19 @@ if not exists(select * from syscolumns where id=object_id('Log') and name = 'Mac
   BEGIN
 	ALTER TABLE Log ADD
 	    Machine varchar(25) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('Log') and name = 'UserName')
+  BEGIN
+	exec #spAlterColumn 'Log', 'UserName', 'varchar(100)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('Log') and name = 'UserName')
+  BEGIN
+	ALTER TABLE Log ADD
+	    UserName varchar(100) NULL
   END
 GO
 
