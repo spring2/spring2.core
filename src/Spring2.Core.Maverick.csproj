@@ -1,7 +1,7 @@
 <VisualStudioProject>
     <CSHARP
         ProjectType = "Local"
-        ProductVersion = "7.10.3077"
+        ProductVersion = "7.10.6030"
         SchemaVersion = "2.0"
         ProjectGuid = "{AA7663E2-76AC-4CF3-B830-2D014F6A5166}"
     >
@@ -160,6 +160,11 @@
                 />
                 <File
                     RelPath = "Maverick\AssemblyInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Maverick\MockHttpWorkerRequest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
