@@ -1,12 +1,10 @@
 using System;
 #if (NET_1_1)
+using Spring2.Core.ResourceManager.Facade;
 #else
 using System.Collections.Generic;
 #endif
 using NUnit.Framework;
-
-using ResourceEditor.ResourceManager.Facade;
-
 using Spring2.Core.Types;
 
 using Spring2.Core.ResourceManager.TestUtility;

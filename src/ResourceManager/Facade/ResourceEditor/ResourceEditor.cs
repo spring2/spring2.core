@@ -3,7 +3,6 @@ using System;
 #else
 using System.Collections.Generic;
 #endif
-using ResourceEditor.ResourceManager.Facade;
 
 using Spring2.Core.Types;
 using Spring2.Core.DAO;
