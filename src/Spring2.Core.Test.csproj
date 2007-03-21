@@ -1,7 +1,7 @@
 <VisualStudioProject>
     <CSHARP
         ProjectType = "Local"
-        ProductVersion = "7.10.3077"
+        ProductVersion = "7.10.6030"
         SchemaVersion = "2.0"
         ProjectGuid = "{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}"
     >
@@ -194,6 +194,11 @@
                     AssemblyName = "System.Web"
                     HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Web.dll"
                 />
+                <Reference
+                    Name = "Maverick"
+                    AssemblyName = "Maverick"
+                    HintPath = "..\lib\Maverick.dll"
+                />
             </References>
         </Build>
         <Files>
@@ -279,6 +284,11 @@
                 />
                 <File
                     RelPath = "Test\MessageTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\MockHttpWorkerRequestTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
