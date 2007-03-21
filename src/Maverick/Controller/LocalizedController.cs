@@ -13,14 +13,30 @@ namespace Spring2.Core.Maverick.Controller {
 	    return LocalizedPerform();
 	}
 
+	private String GetCultureFromRequest(String defaultCulture) {
+	    String[] cultures = ControllerContext.HttpContext.Request.ServerVariables["HTTP_ACCEPT_LANGUAGE"].Split(new char[] {','});   // need to parse out comma seperated values, then sort by q= value, where q=1 is the default if not specified
+	    String culture;
+	    if (cultures.Length>0 && cultures[0] != null) {
+		culture = cultures[0];
+	    } else {
+		culture = defaultCulture;
+	    }
+
+	    return culture;
+	}
+
 	public virtual ILocale Locale {
-	    get{
-		//try to determine the locale of the user from the web request
-		String culture = ControllerContext.HttpContext.Request.ServerVariables["HTTP_ACCEPT_LANGUAGE"];
-		String locale = culture.Substring(culture.IndexOf("-") + 1, 2);
-		LocaleEnum localeEnum = LocaleEnum.GetInstance(locale.ToUpper());
-		if (localeEnum.IsValid) {
-		    return localeEnum;
+	    get {
+		String culture = GetCultureFromRequest("en-US");
+		if (culture.IndexOf("-")>0) {
+		    String locale = culture.Substring(culture.IndexOf("-") + 1, 2);
+		    LocaleEnum localeEnum = LocaleEnum.GetInstance(locale.ToUpper());
+		    if (localeEnum.IsValid) {
+			return localeEnum;
+		    } else {
+			//return system default of US
+			return LocaleEnum.UNITED_STATES;
+		    }
 		} else {
 		    //return system default of US
 		    return LocaleEnum.UNITED_STATES;
@@ -29,10 +45,16 @@ namespace Spring2.Core.Maverick.Controller {
 	}
 
 	public virtual ILanguage Language {
-	    get{
-		//try to determine the Language of the user from the web request
-		String culture = ControllerContext.HttpContext.Request.ServerVariables["HTTP_ACCEPT_LANGUAGE"];
-		String language = culture.Substring(0, culture.IndexOf("-"));
+	    get {
+		String culture = GetCultureFromRequest("en-US");
+
+		String language;
+		if (culture.IndexOf("-")>0) {
+		    language = culture.Substring(0, culture.IndexOf("-"));
+		} else {
+		    language = culture;
+		}
+
 		LanguageEnum languageEnum = LanguageEnum.GetInstance(language.ToLower());
 		if (languageEnum.IsValid) {
 		    return languageEnum;
@@ -42,5 +64,6 @@ namespace Spring2.Core.Maverick.Controller {
 		}
 	    }
 	}
+
     }
 }
