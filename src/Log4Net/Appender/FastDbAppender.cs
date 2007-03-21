@@ -125,7 +125,7 @@ namespace Spring2.Core.Log4Net.Appender {
 	/// </remarks>
 	virtual protected void InitializeCommand(IDbCommand command) {
 	    command.CommandType = CommandType.Text;
-	    command.CommandText = "INSERT INTO [Log] ([Date],[Logger],[Level],[Thread],[Message],[Exception],[Machine]) VALUES (@Date,@Logger,@Level,@Thread,@Message, @Exception, @Machine)";
+	    command.CommandText = "INSERT INTO [Log] ([Date],[Logger],[Level],[Thread],[Message],[Exception],[Machine], [UserName]) VALUES (@Date,@Logger,@Level,@Thread,@Message, @Exception, @Machine, @UserName)";
 
 	    IDbDataParameter param = null;
 			
@@ -170,6 +170,12 @@ namespace Spring2.Core.Log4Net.Appender {
 	    param.ParameterName = "@Machine";
 	    param.DbType = DbType.String;
 	    command.Parameters.Add(param);
+
+	    // @UserName
+	    param = command.CreateParameter();
+	    param.ParameterName = "@UserName";
+	    param.DbType = DbType.String;
+	    command.Parameters.Add(param);
 	}
 
 	/// <summary>
@@ -192,13 +198,18 @@ namespace Spring2.Core.Log4Net.Appender {
 	    if (loggingEvent.ExceptionObject != null) {
 		((IDbDataParameter)command.Parameters["@Exception"]).Value = loggingEvent.ExceptionObject.ToString();
 	    } else {
-	    	((IDbDataParameter)command.Parameters["@Exception"]).Value = DBNull.Value;
+		((IDbDataParameter)command.Parameters["@Exception"]).Value = DBNull.Value;
 	    }
 	    Object machine = loggingEvent.LookupProperty("hostname");
 	    if (machine != null) {
 		((IDbDataParameter)command.Parameters["@Machine"]).Value = loggingEvent.LookupProperty("hostname");
 	    } else {
-	    	((IDbDataParameter)command.Parameters["@Machine"]).Value = DBNull.Value;
+		((IDbDataParameter) command.Parameters["@Machine"]).Value = Environment.MachineName;
+	    }
+	    if (loggingEvent.UserName != null) {
+		((IDbDataParameter)command.Parameters["@UserName"]).Value = loggingEvent.UserName;
+	    } else {
+		((IDbDataParameter)command.Parameters["@UserName"]).Value = DBNull.Value;
 	    }
 	}
     }
