@@ -3,7 +3,7 @@ using System.Collections;
 
 using Spring2.Core.ResourceManager.DataObject;
 
-namespace ResourceEditor.ResourceManager.Facade {
+namespace Spring2.Core.ResourceManager.Facade {
 
     public class ResourceDictionary : DictionaryBase  {
 
