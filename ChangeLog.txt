@@ -1,3 +1,171 @@
+2007-03-21 Wednesday 13:49  cort
+
+	* src/ResourceManager/: Facade/ResourceEditor/ResourceEditor.cs,
+	Test/ResourceEditorTest.cs:
+	
+	reflect namespace change for ResourceDictionary
+
+2007-03-21 Wednesday 13:44  cort
+
+	* src/ResourceManager/Facade/ResourceEditor/ResourceDictionary.cs:
+	
+	correct namespace to match it's location
+
+2007-03-21 Wednesday 13:42  cort
+
+	* src/: Spring2.Core.Maverick.csproj,
+	Test/MockHttpWorkerRequestTest.cs:
+	
+	simple, incomplete tests for mock http request
+
+2007-03-21 Wednesday 13:41  cort
+
+	* src/: Spring2.Core.Test.csproj,
+	Maverick/MockHttpWorkerRequest.cs:
+	
+	add an object to help facilitate testing of controllers
+
+2007-03-21 Wednesday 13:36  cort
+
+	* src/Log4Net/Appender/FastDbAppender.cs:
+	
+	add new value for username use the environments machine name if the
+	logging event does not find one set
+
+2007-03-21 Wednesday 13:32  cort
+
+	* src/Maverick/Controller/LocalizedController.cs:
+	
+	added some better handling of multiple values in Accept-Languange
+	HTTP header as well as a value that is not a language and locale
+	pair.
+
+2007-03-19 Monday 17:46  jeffm
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2007-03-19 Monday 17:44  jeffm
+
+	* release/: Spring2.Core.1.1.49.0-net-1.1.zip,
+	Spring2.Core.1.1.49.0-net-2.0.zip, Spring2.Core-1.1.49.0.chm,
+	ChangeLog-1.1.49.0.txt:
+	
+	new release version
+
+2007-03-19 Monday 16:57  jeffm
+
+	* src/Test/DataFormTest.cs:
+	
+	Change test that was expecting null cookie when asking for cookie
+	by name that doesn't exist in collection to get a new cookie.
+
+2007-02-22 Thursday 16:24  dustin
+
+	* src/: Tax/CertiTax/CertitaxProvider.cs, Tax/Test/CertiTaxTest.cs,
+	AssemblyVersionInfo.cs:
+	
+	Fixed address validation issue in CertiTax provider when corrected
+	address comes back as 5 digits rather than 9
+
+2007-02-21 Wednesday 10:39  dustin
+
+	* src/: AssemblyVersionInfo.cs, Tax/CertiTax/CertitaxProvider.cs,
+	Tax/Test/CertiTaxTest.cs:
+	
+	Fixed calculation of tax rates for jurisdiction breakdown in the
+	certitax provider
+
+2007-02-20 Tuesday 17:06  dustin
+
+	* src/: AssemblyVersionInfo.cs, Tax/CertiTax/CertitaxProvider.cs,
+	Tax/Test/CertiTaxTest.cs:
+	
+	Fixed tax jurisdiction rate calculation for certitax provider
+	Updated certitax jurisdiction tests to reflect change to logic
+
+2007-02-20 Tuesday 12:24  dustin
+
+	* src/Spring2.Core.Tax.Test.csproj:
+	
+	Added post build event to copy app.config to build folder for
+	Tax.Test project
+
+2007-02-20 Tuesday 12:24  dustin
+
+	* src/Tax/Test/CertiTaxTest.cs:
+	
+	Added test to validate tax jurisdictions on tax area data
+
+2007-02-20 Tuesday 11:15  dustin
+
+	* src/Tax/: TaxAreaData.cs, TaxAreaList.cs,
+	CertiTax/CertitaxProvider.cs, Test/TestTaxProvider.cs,
+	Vertex/VertexProvider.cs:
+	
+	Added TaxJurisidictionList to TaxAreaData
+
+2007-02-20 Tuesday 09:45  dustin
+
+	* src/: AssemblyVersionInfo.cs, Spring2.Core.Tax.csproj,
+	Tax/TaxResult.cs, Tax/CertiTax/CertitaxProvider.cs,
+	Tax/Test/CertiTaxTest.cs, Tax/TaxJurisdiction.cs,
+	Tax/TaxJurisdictionList.cs, Tax/TaxJurisidictionTypeEnum.cs:
+	
+	Brought TaxJurisdiction implemtation from Spring2.Dss into
+	Spring2.Core
+
+2007-02-19 Monday 10:44  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	updated version
+
+2007-02-19 Monday 10:44  cort
+
+	* src/DAO/: BaseEntityDAO.cs, SqlEntityDAO.cs:
+	
+	added support for DbConnectionScope
+
+2007-02-19 Monday 10:43  cort
+
+	* src/Makefile:
+	
+	no message
+
+2007-02-19 Monday 10:42  cort
+
+	* src/: Spring2.Core.AddressValidation.Test.csproj,
+	Spring2.Core.AddressValidation.csproj,
+	Spring2.Core.Payment.Test.csproj, Spring2.Core.Payment.csproj,
+	Spring2.Core.Tax.Test.csproj, Spring2.Core.Tax.csproj:
+	
+	move the test providers into the main assembly, seperate from the
+	actual tests
+
+2007-02-19 Monday 10:40  cort
+
+	* src/: Maverick/DataForm/PopulatedForm.cs,
+	PropertyPopulator/PropertyPopulator.cs,
+	Test/PropertyPopulatorTest.cs:
+	
+	the populator should only attempt to populate if the property as a
+	setter only throw an invalid type format error if the value is not
+	an empty string
+
+2007-02-19 Monday 10:37  cort
+
+	* src/DAO/DbConnectionScope.cs:
+	
+	updated version that supports a connection scope option
+
+2007-02-02 Friday 17:03  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2007-02-02 Friday 16:52  cort
 
 	* src/ResourceManager/Facade/: ResourceLocalizer/AssemblyInfo.cs,
