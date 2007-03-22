@@ -1,3 +1,29 @@
+2007-03-21 Wednesday 14:19  cort
+
+	* src/Log4Net/Log.table.sql:
+	
+	updated script with new UserName column
+
+2007-03-21 Wednesday 13:59  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2007-03-21 Wednesday 13:58  cort
+
+	* release/: Spring2.Core.1.1.51.0-net-1.1.zip,
+	Spring2.Core.1.1.51.0-net-2.0.zip, Spring2.Core-1.1.51.0.chm,
+	ChangeLog-1.1.51.0.txt:
+	
+	new release version
+
+2007-03-21 Wednesday 13:55  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2007-03-21 Wednesday 13:50  cort
 
 	* ChangeLog.txt:
