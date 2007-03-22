@@ -30,7 +30,8 @@ CREATE TABLE Log (
 	Message varchar(4000) NOT NULL,
 	Exception varchar(2000) NULL,
 	Machine varchar(25) NULL,
-	UserName varchar(100) NULL
+	[Identity] varchar(100) NULL,
+	Application varchar(100) NULL
 )
 GO
 
@@ -132,22 +133,35 @@ if not exists(select * from syscolumns where id=object_id('Log') and name = 'Mac
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('Log') and name = 'UserName')
-  BEGIN
-	exec #spAlterColumn 'Log', 'UserName', 'varchar(100)', 0
-  END
-GO
-
-if not exists(select * from syscolumns where id=object_id('Log') and name = 'UserName')
-  BEGIN
-	ALTER TABLE Log ADD
-	    UserName varchar(100) NULL
-  END
-GO
-
 if exists(select * from syscolumns where id=object_id('Log') and name = 'Machine')
   BEGIN
 	exec #spAlterColumn 'Log', 'Machine', 'varchar(25)', 0
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('Log') and name = 'Identity')
+  BEGIN
+	exec #spAlterColumn 'Log', 'Identity', 'varchar(100)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('Log') and name = 'Identity')
+  BEGIN
+	ALTER TABLE Log ADD
+	    [Identity] varchar(100) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('Log') and name = 'Application')
+  BEGIN
+	exec #spAlterColumn 'Log', 'Application', 'varchar(100)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('Log') and name = 'Application')
+  BEGIN
+	ALTER TABLE Log ADD
+	    Application varchar(100) NULL
   END
 GO
 

@@ -125,7 +125,7 @@ namespace Spring2.Core.Log4Net.Appender {
 	/// </remarks>
 	virtual protected void InitializeCommand(IDbCommand command) {
 	    command.CommandType = CommandType.Text;
-	    command.CommandText = "INSERT INTO [Log] ([Date],[Logger],[Level],[Thread],[Message],[Exception],[Machine], [UserName]) VALUES (@Date,@Logger,@Level,@Thread,@Message, @Exception, @Machine, @UserName)";
+	    command.CommandText = "INSERT INTO [Log] ([Date],[Logger],[Level],[Thread],[Message],[Exception],[Machine], [Identity], [Application]) VALUES (@Date,@Logger,@Level,@Thread,@Message, @Exception, @Machine, @Identity, @Application)";
 
 	    IDbDataParameter param = null;
 			
@@ -171,9 +171,15 @@ namespace Spring2.Core.Log4Net.Appender {
 	    param.DbType = DbType.String;
 	    command.Parameters.Add(param);
 
-	    // @UserName
+	    // @Identity
 	    param = command.CreateParameter();
-	    param.ParameterName = "@UserName";
+	    param.ParameterName = "@Identity";
+	    param.DbType = DbType.String;
+	    command.Parameters.Add(param);
+
+	    // @Application
+	    param = command.CreateParameter();
+	    param.ParameterName = "@Application";
 	    param.DbType = DbType.String;
 	    command.Parameters.Add(param);
 	}
@@ -200,16 +206,22 @@ namespace Spring2.Core.Log4Net.Appender {
 	    } else {
 		((IDbDataParameter)command.Parameters["@Exception"]).Value = DBNull.Value;
 	    }
-	    Object machine = loggingEvent.LookupProperty("hostname");
+	    Object machine = loggingEvent.LookupProperty("log4net:HostName");
 	    if (machine != null) {
-		((IDbDataParameter)command.Parameters["@Machine"]).Value = loggingEvent.LookupProperty("hostname");
+		((IDbDataParameter)command.Parameters["@Machine"]).Value = machine;
 	    } else {
-		((IDbDataParameter) command.Parameters["@Machine"]).Value = Environment.MachineName;
+		((IDbDataParameter)command.Parameters["@Machine"]).Value = Environment.MachineName;
 	    }
-	    if (loggingEvent.UserName != null) {
-		((IDbDataParameter)command.Parameters["@UserName"]).Value = loggingEvent.UserName;
+	    if (loggingEvent.Identity != null) {
+		((IDbDataParameter)command.Parameters["@Identity"]).Value = loggingEvent.Identity;
 	    } else {
-		((IDbDataParameter)command.Parameters["@UserName"]).Value = DBNull.Value;
+		((IDbDataParameter)command.Parameters["@Identity"]).Value = DBNull.Value;
+	    }
+	    Object application = loggingEvent.LookupProperty("Application");
+	    if (application != null) {
+		((IDbDataParameter)command.Parameters["@Application"]).Value = application;
+	    } else {
+		((IDbDataParameter)command.Parameters["@Application"]).Value = DBNull.Value;
 	    }
 	}
     }
