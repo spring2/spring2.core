@@ -1,3 +1,20 @@
+2007-03-22 Thursday 02:16  cort
+
+	* src/Log4Net/: Appender/FastDbAppender.cs, Log.table.sql:
+	
+	use the log4net hostname property instead of set machine name
+	property, since it is known to be always set use identity instead
+	of username from logging event, so that a forms authentication
+	identity is available instead of the user that is set to run the
+	app output property for application to that logging events can be
+	distinguished
+
+2007-03-22 Thursday 01:02  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2007-03-21 Wednesday 14:19  cort
 
 	* src/Log4Net/Log.table.sql:
