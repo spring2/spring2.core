@@ -412,6 +412,9 @@ namespace Spring2.Core.Tax.CertiTax {
 	    if (taxTrans.OtherTax > 0) {
 		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.OTHER, taxTrans.OtherTaxAuthority, (taxTrans.OtherTax / certiTaxOrder.Total) * 100, 0);
 	    }
+	    if (taxTrans.LocalTax > 0) {
+		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.LOCAL, taxTrans.LocalTaxAuthority, (taxTrans.LocalTax / certiTaxOrder.Total) * 100, 0);
+	    }
 	}
 
 	private void UpdateTaxJurisdictionAmounts(TaxTransaction taxTrans, TaxResult result) {

@@ -14,6 +14,7 @@ namespace Spring2.Core.Tax {
 	public static readonly TaxJurisdictionTypeEnum STATE = new TaxJurisdictionTypeEnum("State", "State");
 	public static readonly TaxJurisdictionTypeEnum DISTRICT = new TaxJurisdictionTypeEnum("District", "District");
 	public static readonly TaxJurisdictionTypeEnum OTHER = new TaxJurisdictionTypeEnum("Other", "Other");
+	public static readonly TaxJurisdictionTypeEnum LOCAL = new TaxJurisdictionTypeEnum("Local", "Local");
 
 	public static TaxJurisdictionTypeEnum GetInstance(Object value) {
 	    if (value is String) {

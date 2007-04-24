@@ -230,6 +230,13 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test()]
+	public void LookUpTaxArea2() {
+	    CertiTaxProvider CertiTaxProvider = new CertiTaxProvider("United States");			
+	    TaxAreaList taxAreaList = CertiTaxProvider.LookupTaxArea("6862 S Algonguian Ct", "Aurora", "", "CO", "80016", "USA", DateType.Now, BooleanType.FALSE);
+	    Assert.AreEqual(4, taxAreaList[0].TaxJurisdictions.Count);
+	}
+
+	[Test()]
 	public void CalculateWithTaxRate() {
 	    TaxOrder order = new TaxOrder();
 		
