@@ -14,12 +14,12 @@ namespace Spring2.Core.Maverick.Controller {
 	}
 
 	private String GetCultureFromRequest(String defaultCulture) {
-	    String[] cultures = ControllerContext.HttpContext.Request.ServerVariables["HTTP_ACCEPT_LANGUAGE"].Split(new char[] {','});   // need to parse out comma seperated values, then sort by q= value, where q=1 is the default if not specified
-	    String culture;
-	    if (cultures.Length>0 && cultures[0] != null) {
-		culture = cultures[0];
-	    } else {
-		culture = defaultCulture;
+	    String culture = defaultCulture;
+	    if (ControllerContext.HttpContext.Request.ServerVariables["HTTP_ACCEPT_LANGUAGE"] != null && ControllerContext.HttpContext.Request.ServerVariables["HTTP_ACCEPT_LANGUAGE"].Length>0) {
+	    	String[] cultures = ControllerContext.HttpContext.Request.ServerVariables["HTTP_ACCEPT_LANGUAGE"].Split(new char[] {','});   // need to parse out comma seperated values, then sort by q= value, where q=1 is the default if not specified
+	    	if (cultures.Length>0 && cultures[0] != null) {
+	    	    culture = cultures[0];
+	    	} 
 	    }
 
 	    return culture;
