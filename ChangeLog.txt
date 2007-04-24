@@ -1,3 +1,37 @@
+2007-04-24 Tuesday 15:05  cort
+
+	* src/Maverick/Controller/LocalizedController.cs:
+	
+	no message
+
+2007-04-24 Tuesday 14:58  dustin
+
+	* src/Tax/: CertiTax/CertitaxProvider.cs, Test/CertiTaxTest.cs,
+	TaxJurisidictionTypeEnum.cs:
+	
+	Fixed CertiTax provider so loca tax jurisidictions get parsed and
+	added to the tax area jurisdiction list
+
+2007-03-22 Thursday 02:31  cort
+
+	* src/AssemblyVersionInfo.cs:
+	
+	update to next version
+
+2007-03-22 Thursday 02:28  cort
+
+	* release/: Spring2.Core.1.1.53.1-net-1.1.zip,
+	Spring2.Core.1.1.53.1-net-2.0.zip, Spring2.Core-1.1.53.1.chm,
+	ChangeLog-1.1.53.1.txt:
+	
+	new release version
+
+2007-03-22 Thursday 02:22  cort
+
+	* ChangeLog.txt:
+	
+	update change log
+
 2007-03-22 Thursday 02:16  cort
 
 	* src/Log4Net/: Appender/FastDbAppender.cs, Log.table.sql:
