@@ -694,7 +694,7 @@ namespace Spring2.Core.Types {
 	    return DecimalType.ToDouble(this);
 	}
 
-	public double ToInt32() {
+	public Int32 ToInt32() {
 	    return DecimalType.ToInt32(this);
 	}
 

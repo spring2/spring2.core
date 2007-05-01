@@ -112,6 +112,13 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual(new DecimalType(1200), dollars);
 	    Assert.AreEqual(1200, dollars.ToInt32());    		
 	}
+
+	[Test]
+	public void ToInt32ShouldReturnAnInt32() {
+	    DecimalType newDecimal = 100;
+	    Int32 integer = newDecimal.ToInt32();
+	    Assert.AreEqual(100, integer);
+	}
 	#endregion
 
 	#region Int64
