@@ -43,5 +43,12 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual(new TimeType(1, 1, 1), time);
 	}
 
+	[Test]
+	public void ShouldBeAbleToConvertBackToTimeSpan() {
+	    TimeSpan span = new TimeSpan(3, 3, 3);
+	    TimeType time = new TimeType(span);
+	    Assert.AreEqual(span, time.ToTimeSpan());
+	}
+
     }
 }

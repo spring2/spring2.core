@@ -362,5 +362,20 @@ namespace Spring2.Core.Types {
 	}
 	#endregion 
 
+	#region conversion methods
+
+	public static TimeSpan ToTimeSpan(TimeType value) {
+	    if (value.myState != TypeState.VALID) {
+		throw new InvalidStateException(value.myState);
+	    }
+
+	    return value.myValue;
+	}
+
+	public TimeSpan ToTimeSpan() {
+	    return TimeType.ToTimeSpan(this);
+	}
+	#endregion
+
     }
 }
