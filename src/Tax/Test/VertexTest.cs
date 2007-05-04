@@ -82,7 +82,7 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test()]
-	[Ignore("")]
+	//[Ignore("")]
 	public void TaxAreaLookup7() {
 	    try {
 		VertexProvider tax = new VertexProvider("CA");
@@ -99,12 +99,12 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test()]
-	[Ignore("This fails, there is an open request with Vertex on this.")]
+	//[Ignore("This fails, there is an open request with Vertex on this.")]
 	public void TaxRateLookup1() {
 	    VertexProvider tax = new VertexProvider("US");
 
 	    DecimalType taxRate = tax.GetTaxRateForArea(new IdType(170690000), DateType.Now).TotalTaxRate;
-	    Assert.AreEqual(6.45, taxRate.ToDecimal());
+	    Assert.AreEqual(6.45M, taxRate.ToDecimal());
 	}
 
 	[Test()]
@@ -113,7 +113,7 @@ namespace Spring2.Core.Test {
 	    VertexProvider tax = new VertexProvider("US");
 
 	    DecimalType taxRate = tax.GetTaxRateForArea(new IdType(50391940), DateType.Now).TotalTaxRate;
-	    Assert.AreEqual(7.25, taxRate.ToDecimal());
+	    Assert.AreEqual(7.25M, taxRate.ToDecimal());
 	}
 
 	//Toronto
