@@ -286,13 +286,15 @@ namespace Spring2.Core.Types {
 	}
 
 	public static TimeType Parse(String s) {
-	    TimeSpan time = TimeSpan.Parse(s);
-
-	    if (!InRange(time)) {
-		throw new ArgumentOutOfRangeException("Arguement out of range");
+	    s = "1/1/1999 " + s;
+	    DateTime tempDateTime;
+	    try {
+		tempDateTime = DateTime.Parse(s);
+	    } catch (FormatException) {
+		throw new FormatException("String was not recognized as a valid TimeType.");
 	    }
 
-	    return new TimeType(time);
+	    return new TimeType(tempDateTime.Hour, tempDateTime.Minute, tempDateTime.Second);
 	}
 	#endregion 
 
