@@ -82,5 +82,12 @@ namespace Spring2.Core.Test {
 	    }
 	}
 
+	[Test]
+	public void ShouldBeAbleToParseFromTimeSpanDotToString() {
+	    TimeSpan span = new TimeSpan(23, 9, 0);
+	    TimeType time = TimeType.Parse(span.ToString());
+	    Assert.AreEqual(new TimeType(23, 9, 0), time, "Should have been able to parse properly");
+	}
+
     }
 }
