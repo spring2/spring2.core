@@ -17,18 +17,27 @@ namespace Spring2.Core.Maverick {
 	private NameValueCollection form = new NameValueCollection();
 	private String queryString = String.Empty;
 	private NameValueCollection cookies = new NameValueCollection();
-    	private String rawUrl = String.Empty;
+    	private String rawUrl = "http://localhost/index.html";
 	private StringDictionary headerValues = new StringDictionary();
+	private String localAddress = String.Empty;
+	private String uriPath = String.Empty;
 
 	public MockHttpWorkerRequest() {
 	    Initialize();
 	}
 
 	public MockHttpWorkerRequest(String rawUrl) {
+	    this.rawUrl = rawUrl;
 	    Initialize();
 	}
 	
     	public MockHttpWorkerRequest(NameValueCollection form) {
+	    this.form = form;
+	    Initialize();
+	}
+
+	public MockHttpWorkerRequest(String rawUrl, NameValueCollection form) {
+	    this.rawUrl = rawUrl;
 	    this.form = form;
 	    Initialize();
 	}
@@ -40,6 +49,17 @@ namespace Spring2.Core.Maverick {
 	    headerValues.Add(HttpWorkerRequest.HeaderContentLength.ToString(), (Content.Length - 2).ToString());
 	    headerValues.Add(HttpWorkerRequest.HeaderContentType.ToString(), "application/x-www-form-urlencoded");
 	    headerValues.Add(HttpWorkerRequest.HeaderAcceptLanguage.ToString(), "en-US");
+	    if(this.rawUrl.IndexOf("?") > 0) {
+		queryString = rawUrl.Substring(rawUrl.IndexOf("?") + 1);
+	    }
+	    localAddress = rawUrl.Substring(rawUrl.IndexOf("//")+2);
+	    if(localAddress.IndexOf("/") > 0) {
+		localAddress = localAddress.Substring(0, localAddress.IndexOf("/"));
+	    }
+	    uriPath = rawUrl.Substring(7 + localAddress.Length);
+	    if(uriPath.IndexOf("?") > 0) {
+		uriPath = uriPath.Remove(uriPath.IndexOf("?"), queryString.Length + 1);
+	    }
 	}
 
 	public void SetHeaderValue(Int32 index, String value) {
@@ -47,7 +67,7 @@ namespace Spring2.Core.Maverick {
 	}
 
 	public override string GetUriPath() {
-	    return "/localhost/";
+	    return uriPath;
 	}
 
 	public override string GetQueryString() {
@@ -75,7 +95,7 @@ namespace Spring2.Core.Maverick {
 	}
 
 	public override string GetLocalAddress() {
-	    return "host";
+	    return this.localAddress;
 	}
 
 	public override int GetLocalPort() {

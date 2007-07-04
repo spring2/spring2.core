@@ -39,7 +39,6 @@ namespace Spring2.Core.Test {
 	}
     	
 	[Test]
-	[Ignore("Implementation of MockHttpWorkerRequest is incomplete.")]
 	public void ShouldExposeQueryString() {
 	    String rawUrl = "http://localhost/foo/bar.m?abc=123";
 	    HttpWorkerRequest wr = new MockHttpWorkerRequest(rawUrl);
@@ -98,6 +97,31 @@ namespace Spring2.Core.Test {
 
 	    Assert.AreEqual(LocaleEnum.UNITED_STATES, controller.Locale);
 	    Assert.AreEqual(LanguageEnum.ENGLISH, controller.Language);
+	}
+
+	[Test]
+	public void ShouldBeAbleToSetUrlAndForm() {
+	    NameValueCollection form = new NameValueCollection();
+	    form.Add("1", "a");
+	    form.Add("2", "b");
+	    form.Add("3", "c");
+
+	    String rawUrl = "http://test.localhost/foo/bar.m?abc=123";
+
+	    HttpWorkerRequest wr = new MockHttpWorkerRequest(rawUrl, form);
+	    HttpContext context = new HttpContext(wr);
+	    Assert.AreEqual(3, context.Request.Form.Keys.Count);
+
+	    Assert.AreEqual("a", context.Request.Form["1"]);
+	    Assert.AreEqual("b", context.Request.Form["2"]);
+	    Assert.AreEqual("c", context.Request.Form["3"]);
+
+	    Assert.AreEqual("a", context.Request["1"]);
+	    Assert.AreEqual("b", context.Request["2"]);
+	    Assert.AreEqual("c", context.Request["3"]);
+
+	    Assert.AreEqual(rawUrl, context.Request.Url.ToString());
+	    Assert.AreEqual("test.localhost", context.Request.Url.Host);
 	}
     
     }
