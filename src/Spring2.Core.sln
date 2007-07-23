@@ -119,6 +119,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.AddressValidat
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Navigation", "Spring2.Core.Navigation.csproj", "{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -355,6 +359,14 @@ Global
 		{B6FBABB4-6206-41B2-BD7C-C67E1D3D9EAA}.NET_2_0.Build.0 = Release|.NET
 		{B6FBABB4-6206-41B2-BD7C-C67E1D3D9EAA}.Release.ActiveCfg = Release|.NET
 		{B6FBABB4-6206-41B2-BD7C-C67E1D3D9EAA}.Release.Build.0 = Release|.NET
+		{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}.Debug.ActiveCfg = Debug|.NET
+		{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}.Debug.Build.0 = Debug|.NET
+		{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}.NET_1_1.ActiveCfg = NET_1_1|.NET
+		{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}.NET_1_1.Build.0 = NET_1_1|.NET
+		{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}.NET_2_0.ActiveCfg = NET_2_0|.NET
+		{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}.NET_2_0.Build.0 = NET_2_0|.NET
+		{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}.Release.ActiveCfg = Release|.NET
+		{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

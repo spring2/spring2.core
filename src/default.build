@@ -77,6 +77,7 @@
 	        <include name="Spring2.Core.Soap.csproj" />
 	        <include name="Spring2.Core.Tax.csproj" />
 	        <include name="Spring2.Core.Tax.Test.csproj" />
+	        <include name="Spring2.Core.Navigation.csproj" />
 	    </projects>
 	</solution>	
 	

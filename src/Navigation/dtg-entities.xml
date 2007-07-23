@@ -1,0 +1,56 @@
+<!-- Entity definitions -->
+<entities>
+    <entity name="MenuLinkGroup" sqlentity="MenuLinkGroup">
+	<properties>
+	    <property name="MenuLinkGroupId" column="*" type="IdType" writable="False" />
+	    <property name="Name" column="*" type="StringType" />
+	    <property name="MenuLinks" type="MenuLinkList" writable="False" />
+	</properties>
+	<finders>
+	    <finder name="FindByName" unique="True">
+ 		<properties>
+ 		    <property name="Name" />
+ 		</properties>
+	    </finder>
+	</finders>
+    </entity>
+    <entity name="MenuLinkKey" sqlentity="MenuLinkKey">
+	<properties>
+	    <property name="MenuLinkId" column="*" type="IdType" />
+	    <property name="Key" column="*" type="StringType" />
+	</properties>
+	<finders>
+	    <finder name="FindByMenuLinkId" unique="False">
+ 		<properties>
+ 		    <property name="MenuLinkId" />
+ 		</properties>
+	    </finder>
+	</finders>
+    </entity>
+    <entity name="MenuLink" sqlentity="MenuLink">
+	<properties>
+	    <property name="MenuLinkId" type="IdType" column="*" writable="False" />
+	    <property name="Name" type="StringType" column="*" />
+	    <property name="Target" type="StringType" column="*" />
+	    <property name="Active" type="BooleanType" column="*" />
+	    <property name="MenuLinkGroupId" type="IdType" column="*" />
+	    <property name="ParentMenuLinkId" type="IdType" column="*" />
+	    <property name="ChildMenuLinks" type="MenuLinkList" />
+	    <property name="Keys" type="MenuLinkKeyList" />
+	    <property name="EffectiveDate" type="DateTimeType" column="*" />
+	    <property name="ExpirationDate" type="DateTimeType" column="*" />
+	</properties>
+	<finders>
+	    <finder name="FindByMenuLinkGroup" unique="False" >
+		<properties>
+ 		    <property name="MenuLinkGroupId" />
+		</properties>
+	    </finder>
+	    <finder name="FindByParentMenuLink" unique="False" >
+		<properties>
+ 		    <property name="ParentMenuLinkId" />
+		</properties>
+	    </finder>
+	</finders>
+    </entity>
+</entities>

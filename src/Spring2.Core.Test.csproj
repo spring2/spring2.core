@@ -1,7 +1,7 @@
 <VisualStudioProject>
     <CSHARP
         ProjectType = "Local"
-        ProductVersion = "7.10.6030"
+        ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
         ProjectGuid = "{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}"
     >
@@ -199,6 +199,11 @@
                     AssemblyName = "Maverick"
                     HintPath = "..\lib\Maverick.dll"
                 />
+                <Reference
+                    Name = "Spring2.Core.Navigation"
+                    Project = "{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
             </References>
         </Build>
         <Files>
@@ -289,6 +294,11 @@
                 />
                 <File
                     RelPath = "Test\MockHttpWorkerRequestTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\NavigationTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

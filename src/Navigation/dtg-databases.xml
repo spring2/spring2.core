@@ -1,0 +1,65 @@
+<!--
+    
+      Database/SqlEntity definitions
+
+-->
+<databases generateinsertstoredprocscript="True" generateupdatestoredprocscript="True" generatedeletestoredprocscript="True" generateselectstoredprocscript="True" generateviewscript="True" generatetablescript="True" useview="True">
+    <database name="Database" key="ConnectionString">
+	<sqlentities>
+	    <sqlentity name="MenuLinkGroup" view="vwMenuLinkGroup">
+		<columns>
+		    <column name="MenuLinkGroupId" sqltype="Int" identity="True" required="True" />
+		    <column name="Name" sqltype="VarChar" length="80" />
+		</columns>
+		<constraints>
+		    <constraint name="PK_MenuLinkGroup" type="PRIMARY KEY">
+			<column name="MenuLinkGroupId" />
+		    </constraint>
+		</constraints>
+		<indexes>
+		    <index name="IxMenuLinkGroup_Name">
+			<column name="Name" />
+		    </index>
+		</indexes>
+	    </sqlentity>
+	    <sqlentity name="MenuLinkKey" view="vwMenuLinkKey" generateupdatestoredprocscript="false">
+		<columns>
+		    <column name="MenuLinkId" sqltype="Int" required="True" />
+		    <column name="Key" sqltype="VarChar" length="100" required="True" />
+		</columns>
+		<constraints>
+		    <constraint name="PK_MenuLinkKey" type="PRIMARY KEY">
+			<column name="MenuLinkId" />
+			<column name="Key" />
+		    </constraint>
+		    <constraint name="FK_MenuLinkKey_MenuLink" type="FOREIGN KEY" foreignentity="MenuLink">
+			<column name="MenuLinkId" foreigncolumn="MenuLinkId" />
+		    </constraint>
+		</constraints>
+	    </sqlentity>
+	    <sqlentity name="MenuLink" view="vwMenuLink">
+		<columns>
+		    <column name="MenuLinkId" sqltype="Int" identity="True" required="True" />
+		    <column name="Name" sqltype="VarChar" length="75" required="True" />
+		    <column name="Target" sqltype="VarChar" length="150" required="True" />
+		    <column name="Active" sqltype="Bit" required="True" />
+		    <column name="MenuLinkGroupId" sqltype="Int" required="False" />
+		    <column name="ParentMenuLinkId" sqltype="Int" required="False" />
+		    <column name="EffectiveDate" sqltype="DateTime" required="False" />
+		    <column name="ExpirationDate" sqltype="DateTime" required="False" />
+		</columns>
+		<constraints>
+		    <constraint name="PK_MenuLink" type="PRIMARY KEY">
+			<column name="MenuLinkId" />
+		    </constraint>
+		    <constraint name="FK_MenuLink_MenuLinkGroup" type="FOREIGN KEY" foreignentity="MenuLinkGroup">
+			<column name="MenuLinkGroupId" foreigncolumn="MenuLinkGroupId" />
+		    </constraint>
+		    <constraint name="FK_MenuLink_ParentMenuLink" type="FOREIGN KEY" foreignentity="MenuLink">
+			<column name="ParentMenuLinkId" foreigncolumn="MenuLinkId" />
+		    </constraint>
+		</constraints>
+	    </sqlentity>
+	</sqlentities>
+    </database>
+</databases>
