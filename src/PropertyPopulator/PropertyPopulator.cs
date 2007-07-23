@@ -42,7 +42,7 @@ namespace Spring2.Core.PropertyPopulator {
 			try {
 			    Object o = ParseValue(val, property.PropertyType);
 			    property.SetValue(target, o, null);
-			} catch (FormatException) {
+			} catch (Exception) {
 			    if(required) {
 				errors.Add(new MissingRequiredFieldError(property.Name));
 			    } else {
