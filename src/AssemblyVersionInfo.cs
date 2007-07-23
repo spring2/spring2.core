@@ -9,4 +9,4 @@
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: System.Reflection.AssemblyVersion("1.1.57.6521")]
+[assembly: System.Reflection.AssemblyVersion("1.1.58.3874")]
