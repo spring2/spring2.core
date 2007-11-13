@@ -1,12 +1,12 @@
-if exists (select * from sysobjects where id = object_id(N'dbo.[vwAddressCache]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view dbo.[vwAddressCache]
+if exists (select * from sysobjects where id = object_id(N'[vwAddressCache]') and OBJECTPROPERTY(id, N'IsView') = 1)
+drop view [vwAddressCache]
 GO
 
 SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE VIEW dbo.[vwAddressCache]
+CREATE VIEW [vwAddressCache]
 
 AS
 
@@ -19,7 +19,13 @@ SELECT
     AddressCache.Latitude,
     AddressCache.Longitude,
     AddressCache.Result,
-    AddressCache.Status
+    AddressCache.Status,
+    AddressCache.StdAddress1,
+    AddressCache.StdCity,
+    AddressCache.StdRegion,
+    AddressCache.StdPostalCode,
+    AddressCache.StdPlus4,
+    AddressCache.MatchType
 FROM
     AddressCache
 GO

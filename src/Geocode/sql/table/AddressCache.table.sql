@@ -21,7 +21,7 @@ end
 GO
 
 if not exists (select * from dbo.sysobjects where id = object_id(N'[AddressCache]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-CREATE TABLE dbo.AddressCache (
+CREATE TABLE AddressCache (
 	AddressId Int IDENTITY(1,1) NOT NULL,
 	Address1 VarChar(80) NULL,
 	City VarChar(40) NULL,
@@ -30,7 +30,13 @@ CREATE TABLE dbo.AddressCache (
 	Latitude Decimal(18, 8) NULL,
 	Longitude Decimal(18, 8) NULL,
 	Result VarChar(1000) NULL,
-	Status VarChar(20) NOT NULL
+	Status VarChar(20) NULL,
+	StdAddress1 VarChar(80) NULL,
+	StdCity VarChar(40) NULL,
+	StdRegion Char(2) NULL,
+	StdPostalCode VarChar(10) NULL,
+	StdPlus4 Char(4) NULL,
+	MatchType Int NULL
 )
 GO
 
@@ -141,13 +147,91 @@ GO
 if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'Status')
   BEGIN
 	ALTER TABLE AddressCache ADD
-	    Status VarChar(20) NOT NULL
+	    Status VarChar(20) NULL
   END
 GO
 
 if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'Status')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'Status', 'VarChar(20)', 1
+	exec #spAlterColumn 'AddressCache', 'Status', 'VarChar(20)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdAddress1')
+  BEGIN
+	ALTER TABLE AddressCache ADD
+	    StdAddress1 VarChar(80) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdAddress1')
+  BEGIN
+	exec #spAlterColumn 'AddressCache', 'StdAddress1', 'VarChar(80)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdCity')
+  BEGIN
+	ALTER TABLE AddressCache ADD
+	    StdCity VarChar(40) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdCity')
+  BEGIN
+	exec #spAlterColumn 'AddressCache', 'StdCity', 'VarChar(40)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdRegion')
+  BEGIN
+	ALTER TABLE AddressCache ADD
+	    StdRegion Char(2) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdRegion')
+  BEGIN
+	exec #spAlterColumn 'AddressCache', 'StdRegion', 'Char(2)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdPostalCode')
+  BEGIN
+	ALTER TABLE AddressCache ADD
+	    StdPostalCode VarChar(10) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdPostalCode')
+  BEGIN
+	exec #spAlterColumn 'AddressCache', 'StdPostalCode', 'VarChar(10)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdPlus4')
+  BEGIN
+	ALTER TABLE AddressCache ADD
+	    StdPlus4 Char(4) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdPlus4')
+  BEGIN
+	exec #spAlterColumn 'AddressCache', 'StdPlus4', 'Char(4)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatchType')
+  BEGIN
+	ALTER TABLE AddressCache ADD
+	    MatchType Int NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatchType')
+  BEGIN
+	exec #spAlterColumn 'AddressCache', 'MatchType', 'Int', 0
   END
 GO
 

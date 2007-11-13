@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE dbo.spAddressCache_Insert
+CREATE PROCEDURE spAddressCache_Insert
 	@Address1	VarChar(80) = null,
 	@City	VarChar(40) = null,
 	@Region	Char(2) = null,
@@ -14,7 +14,13 @@ CREATE PROCEDURE dbo.spAddressCache_Insert
 	@Latitude	Decimal(18, 8) = null,
 	@Longitude	Decimal(18, 8) = null,
 	@Result	VarChar(1000) = null,
-	@Status	VarChar(20) = null
+	@Status	VarChar(20) = null,
+	@StdAddress1	VarChar(80) = null,
+	@StdCity	VarChar(40) = null,
+	@StdRegion	Char(2) = null,
+	@StdPostalCode	VarChar(10) = null,
+	@StdPlus4	Char(4) = null,
+	@MatchType	Int = null
 
 AS
 
@@ -27,7 +33,13 @@ INSERT INTO AddressCache
 	Latitude,
 	Longitude,
 	Result,
-	Status)
+	Status,
+	StdAddress1,
+	StdCity,
+	StdRegion,
+	StdPostalCode,
+	StdPlus4,
+	MatchType)
 VALUES (
 	@Address1,
 	@City,
@@ -36,7 +48,13 @@ VALUES (
 	@Latitude,
 	@Longitude,
 	@Result,
-	@Status)
+	@Status,
+	@StdAddress1,
+	@StdCity,
+	@StdRegion,
+	@StdPostalCode,
+	@StdPlus4,
+	@MatchType)
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN
