@@ -19,6 +19,11 @@ namespace Spring2.Core.Test {
 	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode(street, city, state, zip, StringType.UNSET);
 	    Assert.AreEqual(new DecimalType(40.566941), geocode.MatchLatitude);
 	    Assert.AreEqual(new DecimalType(-111.895122), geocode.MatchLongitude);
+	    Assert.AreEqual("10150 CENTENNIAL PKWY", geocode.StdAddress.ToString().Trim());
+	    Assert.AreEqual("SANDY", geocode.StdCity.ToString().Trim());
+	    Assert.AreEqual("84070", geocode.StdZipCode.ToString().Trim());
+	    Assert.AreEqual("UT", geocode.StdState.ToString().Trim());
+	    Assert.AreEqual("4103", geocode.StdZipCodePlus4.ToString().Trim());
 	}
 
 	[Test]
