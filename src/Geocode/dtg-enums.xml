@@ -1,0 +1,6 @@
+<enums>
+<enum name="GeocodeStatusEnum">
+	<value name="Valid" code="Valid" />
+	<value name="Invalid" code="Invalid" />
+</enum>
+</enums>

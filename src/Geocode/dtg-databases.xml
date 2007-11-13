@@ -1,0 +1,35 @@
+<!--
+    
+      Database/SqlEntity definitions
+
+-->
+<databases generateinsertstoredprocscript="True" generateupdatestoredprocscript="True" generatedeletestoredprocscript="True" generateselectstoredprocscript="True" generateviewscript="True" generatetablescript="True" useview="True">
+    <database name="Database" key="ConnectionString">
+	<sqlentities>
+	    <sqlentity name="AddressCache" view="vwAddressCache">
+		<columns>
+		    <column name="AddressId" sqltype="Int" identity="True" required="True" />
+		    <column name="Address1" sqltype="VarChar" length="80" />
+		    <column name="City" sqltype="VarChar" length="40" />
+		    <column name="Region" sqltype="Char" length="2" />
+		    <column name="PostalCode" sqltype="VarChar" length="10" />
+		    <column name="Latitude" sqltype="Decimal" precision="18" scale="8" />
+		    <column name="Longitude" sqltype="Decimal" precision="18" scale="8" />
+		    <column name="Result" sqltype="VarChar" length="1000" />
+		    <column name="Status" sqltype="VarChar" length="20" />
+		    <column name="StdAddress1" sqltype="VarChar" length="80" />
+		    <column name="StdCity" sqltype="VarChar" length="40" />
+		    <column name="StdRegion" sqltype="Char" length="2" />
+		    <column name="StdPostalCode" sqltype="VarChar" length="10" />
+		    <column name="StdPlus4" sqltype="Char" length="4" />
+		    <column name="MatchType" sqltype="Int" />
+		</columns>
+		<constraints>
+		    <constraint name="PK_Address" type="PRIMARY KEY" clustered="true">
+			<column name="AddressId" />
+		    </constraint>
+		</constraints>
+	    </sqlentity>
+	</sqlentities>
+    </database>
+</databases>

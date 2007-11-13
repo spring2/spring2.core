@@ -1,0 +1,37 @@
+<!-- Entity definitions -->
+<entities>
+    <entity name="AddressCache" sqlentity="AddressCache">
+	<properties>
+	    <property name="AddressId" column="*" type="IdType" />
+	    <property name="Address1" column="*" type="StringType" />
+	    <property name="City" column="*" type="StringType" />
+	    <property name="Region" column="*" type="StringType" />
+	    <property name="PostalCode" column="*" type="StringType" />
+	    <property name="Latitude" column="*" type="DecimalType" />
+	    <property name="Longitude" column="*" type="DecimalType" />
+	    <property name="Result" column="*" type="StringType" />
+	    <property name="Status" column="*" type="GeocodeStatusEnum" />
+	    <property name="StdAddress1" column="*" type="StringType" />
+	    <property name="StdCity" column="*" type="StringType" />
+	    <property name="StdRegion" column="*" type="StringType" />
+	    <property name="StdPostalCode" column="*" type="StringType" />
+	    <property name="StdPlus4" column="*" type="StringType" />
+	    <property name="MatchType" column="*" type="IntegerType" />
+	</properties>
+	<finders>
+	    <finder name="FindAddressByStreetAndPostalCode" unique="False">
+ 		<properties>
+ 		    <property name="Address1" />
+ 		    <property name="PostalCode" />
+ 		</properties>
+	    </finder>
+	    <finder name="FindAddressByStreetAndCityAndState" unique="False">
+ 		<properties>
+ 		    <property name="Address1" />
+ 		    <property name="City" />
+		    <property name="Region" />
+ 		</properties>
+	    </finder>
+	</finders>
+    </entity>
+</entities>
