@@ -34,7 +34,7 @@
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
                     NoStdLib = "false"
-                    NoWarn = "1591"
+                    NoWarn = "1591;1572;1573"
                     Optimize = "false"
                     OutputPath = "..\build\Geocode\"
                     RegisterForComInterop = "false"
@@ -144,32 +144,17 @@
                     AssemblyName = "log4net"
                     HintPath = "..\lib\log4net.dll"
                 />
+                <Reference
+                    Name = "System.Web.Services"
+                    AssemblyName = "System.Web.Services"
+                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Web.Services.dll"
+                />
             </References>
         </Build>
         <Files>
             <Include>
                 <File
                     RelPath = "AssemblyVersionInfo.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Geocode\AddressCache.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Geocode\AddressCacheDAO.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Geocode\AddressCacheData.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Geocode\AddressCacheList.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -199,39 +184,134 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Geocode\GeocodeStatusEnum.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Geocode\GeocodeStatusEnumList.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Geocode\GeocodeWrapper.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Geocode\IAddressCache.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "Geocode\IGeocodeProvider.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Geocode\TeleAtlasGeocodeData.cs"
+                    RelPath = "Geocode\BusinessLogic\AddressCache.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Geocode\TeleAtlasProvider.cs"
+                    RelPath = "Geocode\DAO\AddressCacheDAO.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\DataObject\AddressCacheData.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\DataObject\AddressCacheList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\DataObject\IAddressCache.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\Tele Atlas App\GeocodeWrapper.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\Tele Atlas App\TeleAtlasGeocodeData.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\Tele Atlas App\TeleAtlasProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\Types\GeocodeStatusEnum.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\Types\GeocodeStatusEnumList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\WebService\GeocodeWebServiceWrapper.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\WebService\ITeleAtlasAuthenticator.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\WebService\TeleAtlasAuthenticator.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\WebService\TeleAtlasGeocodeWebServiceData.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Geocode\WebService\TeleAtlasWebServiceProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web References\com.teleatlas.na.ezlocate.authentication\Authentication.wsdl"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "Web References\com.teleatlas.na.ezlocate.authentication\Reference.map"
+                    BuildAction = "None"
+                    Generator = "MSDiscoCodeGenerator"
+                    LastGenOutput = "Reference.cs"
+                />
+                <File
+                    RelPath = "Web References\com.teleatlas.na.ezlocate.authentication\Reference.cs"
+                    DependentUpon = "Reference.map"
+                    SubType = "code"
+                    BuildAction = "Compile"
+                    DesignTime = "True"
+                    AutoGen = "True"
+                />
+                <Folder
+                    RelPath = "Web References\com.teleatlas.na.ezlocate.authentication\"
+                    WebReferenceUrl = "http://ezlocate.na.teleatlas.com/Authentication.wsdl"
+                    UrlBehavior = "Static"
+                />
+                <File
+                    RelPath = "Web References\com.teleatlas.na.ezlocate.geocoding\Geocoding.wsdl"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "Web References\com.teleatlas.na.ezlocate.geocoding\Reference.map"
+                    BuildAction = "None"
+                    Generator = "MSDiscoCodeGenerator"
+                    LastGenOutput = "Reference.cs"
+                />
+                <File
+                    RelPath = "Web References\com.teleatlas.na.ezlocate.geocoding\Reference.cs"
+                    DependentUpon = "Reference.map"
+                    SubType = "code"
+                    BuildAction = "Compile"
+                    DesignTime = "True"
+                    AutoGen = "True"
+                />
+                <Folder
+                    RelPath = "Web References\com.teleatlas.na.ezlocate.geocoding\"
+                    WebReferenceUrl = "http://ezlocate.na.teleatlas.com/Geocoding.wsdl"
+                    UrlBehavior = "Static"
+                />
+                <Folder
+                    RelPath = "Web References\"
+                    WebReferences = "TRUE"
                 />
             </Include>
         </Files>

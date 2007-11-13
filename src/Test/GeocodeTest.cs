@@ -11,7 +11,6 @@ namespace Spring2.Core.Test {
     [TestFixture]
     public class GeocodeTest {
 	[Test]
-	[Ignore("Requires a tele atlas login to run.")]
 	public void GetGeocodeForStandardAddress() {
 	    StringType street = "10150 S. Centennial Parkway";
 	    StringType city = "Sandy";
@@ -23,7 +22,6 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test]
-	[Ignore("Requires a tele atlas login to run.")]
 	public void GetGeocodeForZipCode() {
 	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode(StringType.EMPTY, StringType.EMPTY, StringType.EMPTY, StringType.Parse("84070"), StringType.EMPTY);
 	    Assert.AreEqual(new DecimalType(40.577445), geocode.MatchLatitude);
