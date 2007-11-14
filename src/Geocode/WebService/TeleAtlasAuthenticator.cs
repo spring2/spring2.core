@@ -10,7 +10,7 @@ namespace Spring2.Core.Geocode.WebService {
 	    private TeleAtlasAuthenticator() {}
 
 	    #region Members
-    
+	    private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 	    private com.teleatlas.na.ezlocate.authentication.Authentication authenticator;
 	    private static ITeleAtlasAuthenticator instance = null;
 	    private int credential;
@@ -22,7 +22,6 @@ namespace Spring2.Core.Geocode.WebService {
             	    
 	    #endregion
 	
-
 	    #region Properties
 
 	    public static ITeleAtlasAuthenticator Instance  {
@@ -38,6 +37,7 @@ namespace Spring2.Core.Geocode.WebService {
 		get {
 		    if (authenticator == null) {
 			authenticator = new com.teleatlas.na.ezlocate.authentication.Authentication();
+			authenticator.Url = "http://" + host + "/axis/services/Authentication";
 		    }
 		    return authenticator;
 		}
@@ -58,6 +58,7 @@ namespace Spring2.Core.Geocode.WebService {
 		this.userName = userName;
 		this.password = password;
 		this.host = host;
+
 
 		return GetCredential();
 	    }

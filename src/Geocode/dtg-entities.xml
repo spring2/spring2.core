@@ -16,6 +16,10 @@
 	    <property name="StdRegion" column="*" type="StringType" />
 	    <property name="StdPostalCode" column="*" type="StringType" />
 	    <property name="StdPlus4" column="*" type="StringType" />
+	    <property name="MatAddress1" column="*" type="StringType" />
+	    <property name="MatCity" column="*" type="StringType" />
+	    <property name="MatRegion" column="*" type="StringType" />
+	    <property name="MatPostalCode" column="*" type="StringType" />
 	    <property name="MatchType" column="*" type="IntegerType" />
 	</properties>
 	<finders>

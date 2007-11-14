@@ -31,6 +31,10 @@ namespace Spring2.Core.Geocode.DataObject {
 	private StringType stdRegion = StringType.DEFAULT;
 	private StringType stdPostalCode = StringType.DEFAULT;
 	private StringType stdPlus4 = StringType.DEFAULT;
+	private StringType matAddress1 = StringType.DEFAULT;
+	private StringType matCity = StringType.DEFAULT;
+	private StringType matRegion = StringType.DEFAULT;
+	private StringType matPostalCode = StringType.DEFAULT;
 	private IntegerType matchType = IntegerType.DEFAULT;
 
 	public IdType AddressId {
@@ -101,6 +105,26 @@ namespace Spring2.Core.Geocode.DataObject {
 	public StringType StdPlus4 {
 	    get { return this.stdPlus4; }
 	    set { this.stdPlus4 = value; }
+	}
+
+	public StringType MatAddress1 {
+	    get { return this.matAddress1; }
+	    set { this.matAddress1 = value; }
+	}
+
+	public StringType MatCity {
+	    get { return this.matCity; }
+	    set { this.matCity = value; }
+	}
+
+	public StringType MatRegion {
+	    get { return this.matRegion; }
+	    set { this.matRegion = value; }
+	}
+
+	public StringType MatPostalCode {
+	    get { return this.matPostalCode; }
+	    set { this.matPostalCode = value; }
 	}
 
 	public IntegerType MatchType {

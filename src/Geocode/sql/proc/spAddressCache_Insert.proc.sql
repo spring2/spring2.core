@@ -20,6 +20,10 @@ CREATE PROCEDURE spAddressCache_Insert
 	@StdRegion	Char(2) = null,
 	@StdPostalCode	VarChar(10) = null,
 	@StdPlus4	Char(4) = null,
+	@MatAddress1	VarChar(80) = null,
+	@MatCity	VarChar(40) = null,
+	@MatRegion	Char(2) = null,
+	@MatPostalCode	VarChar(10) = null,
 	@MatchType	Int = null
 
 AS
@@ -39,6 +43,10 @@ INSERT INTO AddressCache
 	StdRegion,
 	StdPostalCode,
 	StdPlus4,
+	MatAddress1,
+	MatCity,
+	MatRegion,
+	MatPostalCode,
 	MatchType)
 VALUES (
 	@Address1,
@@ -54,6 +62,10 @@ VALUES (
 	@StdRegion,
 	@StdPostalCode,
 	@StdPlus4,
+	@MatAddress1,
+	@MatCity,
+	@MatRegion,
+	@MatPostalCode,
 	@MatchType)
 
 if @@rowcount <> 1 or @@error!=0

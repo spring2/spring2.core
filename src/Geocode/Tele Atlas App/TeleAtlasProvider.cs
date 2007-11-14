@@ -19,6 +19,10 @@ namespace Spring2.Core.Geocode {
 	    return wrapper.GetCityAndStateOfZipCode(zipCode);
 	}
 
+	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode) {
+	    return DoGeocode (street, city, state, postalCode, String.Empty);
+	}
+
 	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType path) {
 	    GeocodeWrapper wrapper = new GeocodeWrapper();
 	    return wrapper.DoGeocode(street, city, state, postalCode, path);

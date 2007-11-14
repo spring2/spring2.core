@@ -25,6 +25,10 @@ SELECT
     AddressCache.StdRegion,
     AddressCache.StdPostalCode,
     AddressCache.StdPlus4,
+    AddressCache.MatAddress1,
+    AddressCache.MatCity,
+    AddressCache.MatRegion,
+    AddressCache.MatPostalCode,
     AddressCache.MatchType
 FROM
     AddressCache

@@ -58,6 +58,18 @@ namespace Spring2.Core.Geocode.BusinessLogic {
         private IntegerType matchType = IntegerType.DEFAULT;
         
         [Generate()]
+        private StringType matAddress1 = StringType.DEFAULT;
+        
+        [Generate()]
+        private StringType matCity = StringType.DEFAULT;
+        
+        [Generate()]
+        private StringType matRegion = StringType.DEFAULT;
+        
+        [Generate()]
+        private StringType matPostalCode = StringType.DEFAULT;
+        
+        [Generate()]
         internal AddressCache() {
             
         }
@@ -218,6 +230,46 @@ namespace Spring2.Core.Geocode.BusinessLogic {
         }
         
         [Generate()]
+        public StringType MatAddress1 {
+            get {
+                return this.matAddress1;
+            }
+            set {
+                this.matAddress1 = value;
+            }
+        }
+        
+        [Generate()]
+        public StringType MatCity {
+            get {
+                return this.matCity;
+            }
+            set {
+                this.matCity = value;
+            }
+        }
+        
+        [Generate()]
+        public StringType MatRegion {
+            get {
+                return this.matRegion;
+            }
+            set {
+                this.matRegion = value;
+            }
+        }
+        
+        [Generate()]
+        public StringType MatPostalCode {
+            get {
+                return this.matPostalCode;
+            }
+            set {
+                this.matPostalCode = value;
+            }
+        }
+        
+        [Generate()]
         public static AddressCache NewInstance() {
             return new AddressCache();
         }
@@ -243,6 +295,10 @@ namespace Spring2.Core.Geocode.BusinessLogic {
 	    stdRegion = data.StdRegion.IsDefault ? stdRegion : data.StdRegion;
 	    stdPostalCode = data.StdPostalCode.IsDefault ? stdPostalCode : data.StdPostalCode;
 	    stdPlus4 = data.StdPlus4.IsDefault ? stdPlus4 : data.StdPlus4;
+	    matAddress1 = data.MatAddress1.IsDefault ? matAddress1 : data.MatAddress1;
+	    matCity = data.MatCity.IsDefault ? matCity : data.MatCity;
+	    matRegion = data.MatRegion.IsDefault ? matRegion : data.MatRegion;
+	    matPostalCode = data.MatPostalCode.IsDefault ? matPostalCode : data.MatPostalCode;
 	    matchType = data.MatchType.IsDefault ? matchType : data.MatchType;
 	    Store();
         }

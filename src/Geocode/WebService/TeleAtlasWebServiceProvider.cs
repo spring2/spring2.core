@@ -13,10 +13,19 @@ namespace Spring2.Core.Geocode.WebService {
 	    GeocodeWebServiceWrapper wrapper = new GeocodeWebServiceWrapper();
 	    return wrapper.GetCityAndStateOfZipCode(zipCode);
 	}
+	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode) {
+	    GeocodeWebServiceWrapper wrapper = new GeocodeWebServiceWrapper();
+	    return wrapper.DoGeocode(street, city, state, postalCode, StringType.EMPTY);
+	}
 
 	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType path) {
 	    GeocodeWebServiceWrapper wrapper = new GeocodeWebServiceWrapper();
-	    return wrapper.DoGeocode(street, city, state, postalCode, path);
+	    return wrapper.DoGeocode(street, city, state, postalCode, StringType.EMPTY);
+	}
+
+	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType path, StringType plus4) {
+	    GeocodeWebServiceWrapper wrapper = new GeocodeWebServiceWrapper();
+	    return wrapper.DoGeocode(street, city, state, postalCode, plus4);
 	}
 
 	public IntegerType GetAvailableGeocodeCount() {

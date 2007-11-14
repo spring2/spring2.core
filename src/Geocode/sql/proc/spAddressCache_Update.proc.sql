@@ -22,6 +22,10 @@ CREATE PROCEDURE spAddressCache_Update
 	@StdRegion	Char(2) = null,
 	@StdPostalCode	VarChar(10) = null,
 	@StdPlus4	Char(4) = null,
+	@MatAddress1	VarChar(80) = null,
+	@MatCity	VarChar(40) = null,
+	@MatRegion	Char(2) = null,
+	@MatPostalCode	VarChar(10) = null,
 	@MatchType	Int = null
 
 AS
@@ -43,6 +47,10 @@ SET
 	StdRegion = @StdRegion,
 	StdPostalCode = @StdPostalCode,
 	StdPlus4 = @StdPlus4,
+	MatAddress1 = @MatAddress1,
+	MatCity = @MatCity,
+	MatRegion = @MatRegion,
+	MatPostalCode = @MatPostalCode,
 	MatchType = @MatchType
 WHERE
 AddressId = @AddressId

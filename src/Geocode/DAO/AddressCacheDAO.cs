@@ -39,6 +39,10 @@ namespace Spring2.Core.Geocode.Dao {
 	    public Int32 StdRegion;
 	    public Int32 StdPostalCode;
 	    public Int32 StdPlus4;
+	    public Int32 MatAddress1;
+	    public Int32 MatCity;
+	    public Int32 MatRegion;
+	    public Int32 MatPostalCode;
 	    public Int32 MatchType;
 
 	    internal ColumnOrdinals(IDataReader reader) {
@@ -56,6 +60,10 @@ namespace Spring2.Core.Geocode.Dao {
 		StdRegion = reader.GetOrdinal("StdRegion");
 		StdPostalCode = reader.GetOrdinal("StdPostalCode");
 		StdPlus4 = reader.GetOrdinal("StdPlus4");
+		MatAddress1 = reader.GetOrdinal("MatAddress1");
+		MatCity = reader.GetOrdinal("MatCity");
+		MatRegion = reader.GetOrdinal("MatRegion");
+		MatPostalCode = reader.GetOrdinal("MatPostalCode");
 		MatchType = reader.GetOrdinal("MatchType");
 	    }
 
@@ -75,6 +83,10 @@ namespace Spring2.Core.Geocode.Dao {
 		StdRegion = reader.GetOrdinal(prefix + "StdRegion");
 		StdPostalCode = reader.GetOrdinal(prefix + "StdPostalCode");
 		StdPlus4 = reader.GetOrdinal(prefix + "StdPlus4");
+		MatAddress1 = reader.GetOrdinal(prefix + "MatAddress1");
+		MatCity = reader.GetOrdinal(prefix + "MatCity");
+		MatRegion = reader.GetOrdinal(prefix + "MatRegion");
+		MatPostalCode = reader.GetOrdinal(prefix + "MatPostalCode");
 		MatchType = reader.GetOrdinal(prefix + "MatchType");
 	    }
 	}
@@ -97,6 +109,10 @@ namespace Spring2.Core.Geocode.Dao {
 	    AddPropertyMapping("StdRegion", @"StdRegion");
 	    AddPropertyMapping("StdPostalCode", @"StdPostalCode");
 	    AddPropertyMapping("StdPlus4", @"StdPlus4");
+	    AddPropertyMapping("MatAddress1", @"MatAddress1");
+	    AddPropertyMapping("MatCity", @"MatCity");
+	    AddPropertyMapping("MatRegion", @"MatRegion");
+	    AddPropertyMapping("MatPostalCode", @"MatPostalCode");
 	    AddPropertyMapping("MatchType", @"MatchType");
 	}
 
@@ -386,6 +402,26 @@ namespace Spring2.Core.Geocode.Dao {
 	    } else {
 		data.StdPlus4 = StringType.Parse(dataReader.GetString(ordinals.StdPlus4));
 	    }
+	    if (dataReader.IsDBNull(ordinals.MatAddress1)) {
+		data.MatAddress1 = StringType.UNSET;
+	    } else {
+		data.MatAddress1 = StringType.Parse(dataReader.GetString(ordinals.MatAddress1));
+	    }
+	    if (dataReader.IsDBNull(ordinals.MatCity)) {
+		data.MatCity = StringType.UNSET;
+	    } else {
+		data.MatCity = StringType.Parse(dataReader.GetString(ordinals.MatCity));
+	    }
+	    if (dataReader.IsDBNull(ordinals.MatRegion)) {
+		data.MatRegion = StringType.UNSET;
+	    } else {
+		data.MatRegion = StringType.Parse(dataReader.GetString(ordinals.MatRegion));
+	    }
+	    if (dataReader.IsDBNull(ordinals.MatPostalCode)) {
+		data.MatPostalCode = StringType.UNSET;
+	    } else {
+		data.MatPostalCode = StringType.Parse(dataReader.GetString(ordinals.MatPostalCode));
+	    }
 	    if (dataReader.IsDBNull(ordinals.MatchType)) {
 		data.MatchType = IntegerType.UNSET;
 	    } else {
@@ -429,6 +465,10 @@ namespace Spring2.Core.Geocode.Dao {
 	    cmd.Parameters.Add(CreateDataParameter("@StdRegion", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.StdRegion.IsValid ? data.StdRegion.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@StdPostalCode", DbType.AnsiString, ParameterDirection.Input, data.StdPostalCode.IsValid ? data.StdPostalCode.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@StdPlus4", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.StdPlus4.IsValid ? data.StdPlus4.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@MatAddress1", DbType.AnsiString, ParameterDirection.Input, data.MatAddress1.IsValid ? data.MatAddress1.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@MatCity", DbType.AnsiString, ParameterDirection.Input, data.MatCity.IsValid ? data.MatCity.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@MatRegion", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.MatRegion.IsValid ? data.MatRegion.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@MatPostalCode", DbType.AnsiString, ParameterDirection.Input, data.MatPostalCode.IsValid ? data.MatPostalCode.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@MatchType", DbType.Int32, ParameterDirection.Input, data.MatchType.IsValid ? data.MatchType.ToInt32() as Object : DBNull.Value));
 
 	    // Execute the query
@@ -476,6 +516,10 @@ namespace Spring2.Core.Geocode.Dao {
 	    cmd.Parameters.Add(CreateDataParameter("@StdRegion", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.StdRegion.IsValid ? data.StdRegion.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@StdPostalCode", DbType.AnsiString, ParameterDirection.Input, data.StdPostalCode.IsValid ? data.StdPostalCode.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@StdPlus4", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.StdPlus4.IsValid ? data.StdPlus4.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@MatAddress1", DbType.AnsiString, ParameterDirection.Input, data.MatAddress1.IsValid ? data.MatAddress1.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@MatCity", DbType.AnsiString, ParameterDirection.Input, data.MatCity.IsValid ? data.MatCity.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@MatRegion", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.MatRegion.IsValid ? data.MatRegion.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@MatPostalCode", DbType.AnsiString, ParameterDirection.Input, data.MatPostalCode.IsValid ? data.MatPostalCode.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@MatchType", DbType.Int32, ParameterDirection.Input, data.MatchType.IsValid ? data.MatchType.ToInt32() as Object : DBNull.Value));
 
 	    // Execute the query

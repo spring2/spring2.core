@@ -22,6 +22,10 @@
 		    <column name="StdRegion" sqltype="Char" length="2" />
 		    <column name="StdPostalCode" sqltype="VarChar" length="10" />
 		    <column name="StdPlus4" sqltype="Char" length="4" />
+		    <column name="MatAddress1" sqltype="VarChar" length="80" />
+		    <column name="MatCity" sqltype="VarChar" length="40" />
+		    <column name="MatRegion" sqltype="Char" length="2" />
+		    <column name="MatPostalCode" sqltype="VarChar" length="10" />
 		    <column name="MatchType" sqltype="Int" />
 		</columns>
 		<constraints>

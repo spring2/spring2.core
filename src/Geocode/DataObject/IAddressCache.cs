@@ -33,6 +33,10 @@ namespace Spring2.Core.Geocode.DataObject {
 	public static readonly String STDREGION = "StdRegion";
 	public static readonly String STDPOSTALCODE = "StdPostalCode";
 	public static readonly String STDPLUS4 = "StdPlus4";
+	public static readonly String MATADDRESS1 = "MatAddress1";
+	public static readonly String MATCITY = "MatCity";
+	public static readonly String MATREGION = "MatRegion";
+	public static readonly String MATPOSTALCODE = "MatPostalCode";
 	public static readonly String MATCHTYPE = "MatchType";
     }
 
@@ -77,6 +81,18 @@ namespace Spring2.Core.Geocode.DataObject {
 	    get;
 	}
 	StringType StdPlus4 {
+	    get;
+	}
+	StringType MatAddress1 {
+	    get;
+	}
+	StringType MatCity {
+	    get;
+	}
+	StringType MatRegion {
+	    get;
+	}
+	StringType MatPostalCode {
 	    get;
 	}
 	IntegerType MatchType {

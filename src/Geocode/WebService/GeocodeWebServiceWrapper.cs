@@ -31,19 +31,21 @@ namespace Spring2.Core.Geocode.WebService {
 
 	// Tele Atlas specific variables
 	//authentication credential token
-	private int credential = int.MinValue;
+	private IntegerType credential = IntegerType.UNSET;
 	
 	/// <summary>
 	/// Creates the credential it uses to authenticate against the Tele Atlas Servers
 	/// </summary>
-	private int Credential {
+	private IntegerType Credential {
 	    get {
-		if (credential == int.MinValue) {
-		    this.password = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodePassword"]);
-		    this.userName = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodeUserName"]);
-		    this.host = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodeHost"]);
-		    this.serviceName = StringType.Parse(ConfigurationProvider.Instance.Settings["GeoCodeServiceName"]);
-		    this.credential = TeleAtlasAuthenticator.Instance.Authenticate(this.userName, this.password, this.host);
+		if (!credential.IsValid) {
+		    int retval;
+		    this.password = StringType.Parse(ConfigurationSettings.AppSettings["GeocodePassword"]);
+		    this.userName = StringType.Parse(ConfigurationSettings.AppSettings["GeocodeUserName"]);
+		    this.host = StringType.Parse(ConfigurationSettings.AppSettings["GeocodeHost"]);
+		    this.serviceName = StringType.Parse(ConfigurationSettings.AppSettings["GeoCodeServiceName"]);
+		    retval = TeleAtlasAuthenticator.Instance.Authenticate(this.userName, this.password, this.host);
+		    this.credential = new IntegerType(retval);
 		}
 		return this.credential;
 	    }
@@ -102,6 +104,10 @@ namespace Spring2.Core.Geocode.WebService {
 			addressCacheData.StdPostalCode = teleAtlasgeocodeData.StdZipCode;
 			addressCacheData.StdPlus4 = teleAtlasgeocodeData.StdZipCodePlus4;
 			addressCacheData.MatchType = teleAtlasgeocodeData.MatchType;
+			addressCacheData.MatAddress1 = teleAtlasgeocodeData.MatchAddress;
+			addressCacheData.MatCity = teleAtlasgeocodeData.MatchCity;
+			addressCacheData.MatRegion = teleAtlasgeocodeData.MatchState;
+			addressCacheData.MatPostalCode = teleAtlasgeocodeData.MatchZipCode;
 
 			addressCache = AddressCache.GetInstance(cache.AddressId);
 			addressCache.Update(addressCacheData);
@@ -113,10 +119,10 @@ namespace Spring2.Core.Geocode.WebService {
 			geocodeData.StdState = cache.StdRegion;
 			geocodeData.StdZipCode = cache.StdPostalCode;
 			geocodeData.StdZipCodePlus4 = cache.StdPlus4;
-			geocodeData.MatchAddress = cache.Address1;
-			geocodeData.MatchCity = cache.City;
-			geocodeData.MatchState = cache.Region;
-			geocodeData.MatchZipCode = cache.PostalCode;
+			geocodeData.MatchAddress = cache.MatAddress1;
+			geocodeData.MatchCity = cache.MatCity;
+			geocodeData.MatchState = cache.MatRegion;
+			geocodeData.MatchZipCode = cache.MatPostalCode;
 			geocodeData.MatchLatitude = cache.Latitude;
 			geocodeData.MatchLongitude = cache.Longitude;
 		    }
@@ -199,7 +205,8 @@ namespace Spring2.Core.Geocode.WebService {
 	    if (Credential != 0) {
 		com.teleatlas.na.ezlocate.geocoding.Geocode returnedGeocode;
 		com.teleatlas.na.ezlocate.geocoding.Geocoding geoCoder = new Spring2.Core.com.teleatlas.na.ezlocate.geocoding.Geocoding();
-		long retval = geoCoder.findAddress(this.serviceName, address, Credential, out returnedGeocode);
+		geoCoder.Url = "http://" + this.host + "/axis/services/Geocoding";
+		long retval = geoCoder.findAddress(this.serviceName, address, Credential.ToInt32(), out returnedGeocode);
 		if (retval == 0) {
 		    if (returnedGeocode.resultCode == 0) {
 			for (int i = 0; i < returnedGeocode.mAttributes.Length; i++) {

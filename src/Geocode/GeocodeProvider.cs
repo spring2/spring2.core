@@ -10,7 +10,7 @@ namespace Spring2.Core.Geocode {
     /// </summary>
     public class GeocodeProvider {
 
-	public static readonly String DEFAULT_PROVIDER = "Spring2.Core.Geocode.TeleAtlasProvider";
+	public static readonly string DEFAULT_PROVIDER = "Spring2.Core.Geocode.TeleAtlasProvider";
 
 	private static IGeocodeProvider instance = null;
 
@@ -19,13 +19,13 @@ namespace Spring2.Core.Geocode {
 
 	public static IGeocodeProvider Instance {
 	    get {
-		if (instance==null) {
-		    String providerClass = DEFAULT_PROVIDER;
+		if (instance == null) {
+		    string providerClass = DEFAULT_PROVIDER;
 		    
-		    if (ConfigurationProvider.Instance.Settings["GeocodeProvider"] != null && ConfigurationProvider.Instance.Settings["GeocodeProvider"] != String.Empty) {
-			providerClass = ConfigurationProvider.Instance.Settings["GeocodeProvider"];
+		    if (ConfigurationSettings.AppSettings["GeocodeProvider"] != null && ConfigurationSettings.AppSettings["GeocodeProvider"] != String.Empty) {
+			providerClass = ConfigurationSettings.AppSettings["GeocodeProvider"];
 		    }
-	    
+
 		    Type clazz = Type.GetType(providerClass);
 		    Object o = System.Activator.CreateInstance(clazz);
 		    if (o is IGeocodeProvider) {

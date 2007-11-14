@@ -36,6 +36,10 @@ CREATE TABLE AddressCache (
 	StdRegion Char(2) NULL,
 	StdPostalCode VarChar(10) NULL,
 	StdPlus4 Char(4) NULL,
+	MatAddress1 VarChar(80) NULL,
+	MatCity VarChar(40) NULL,
+	MatRegion Char(2) NULL,
+	MatPostalCode VarChar(10) NULL,
 	MatchType Int NULL
 )
 GO
@@ -219,6 +223,58 @@ GO
 if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdPlus4')
   BEGIN
 	exec #spAlterColumn 'AddressCache', 'StdPlus4', 'Char(4)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatAddress1')
+  BEGIN
+	ALTER TABLE AddressCache ADD
+	    MatAddress1 VarChar(80) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatAddress1')
+  BEGIN
+	exec #spAlterColumn 'AddressCache', 'MatAddress1', 'VarChar(80)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatCity')
+  BEGIN
+	ALTER TABLE AddressCache ADD
+	    MatCity VarChar(40) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatCity')
+  BEGIN
+	exec #spAlterColumn 'AddressCache', 'MatCity', 'VarChar(40)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatRegion')
+  BEGIN
+	ALTER TABLE AddressCache ADD
+	    MatRegion Char(2) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatRegion')
+  BEGIN
+	exec #spAlterColumn 'AddressCache', 'MatRegion', 'Char(2)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatPostalCode')
+  BEGIN
+	ALTER TABLE AddressCache ADD
+	    MatPostalCode VarChar(10) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatPostalCode')
+  BEGIN
+	exec #spAlterColumn 'AddressCache', 'MatPostalCode', 'VarChar(10)', 0
   END
 GO
 

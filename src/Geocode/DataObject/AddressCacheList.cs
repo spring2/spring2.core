@@ -373,5 +373,57 @@ namespace Spring2.Core.Geocode.DataObject {
 	    }
 	}
 
+	[Generate]
+	public class MatAddress1Sorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IAddressCache o1 = (IAddressCache)a;
+		IAddressCache o2 = (IAddressCache)b;
+
+		if (o1 == null || o2 == null || !o1.MatAddress1.IsValid || !o2.MatAddress1.IsValid) {
+		    return 0;
+		}
+		return o1.MatAddress1.CompareTo(o2.MatAddress1);
+	    }
+	}
+
+	[Generate]
+	public class MatCitySorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IAddressCache o1 = (IAddressCache)a;
+		IAddressCache o2 = (IAddressCache)b;
+
+		if (o1 == null || o2 == null || !o1.MatCity.IsValid || !o2.MatCity.IsValid) {
+		    return 0;
+		}
+		return o1.MatCity.CompareTo(o2.MatCity);
+	    }
+	}
+
+	[Generate]
+	public class MatRegionSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IAddressCache o1 = (IAddressCache)a;
+		IAddressCache o2 = (IAddressCache)b;
+
+		if (o1 == null || o2 == null || !o1.MatRegion.IsValid || !o2.MatRegion.IsValid) {
+		    return 0;
+		}
+		return o1.MatRegion.CompareTo(o2.MatRegion);
+	    }
+	}
+
+	[Generate]
+	public class MatPostalCodeSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IAddressCache o1 = (IAddressCache)a;
+		IAddressCache o2 = (IAddressCache)b;
+
+		if (o1 == null || o2 == null || !o1.MatPostalCode.IsValid || !o2.MatPostalCode.IsValid) {
+		    return 0;
+		}
+		return o1.MatPostalCode.CompareTo(o2.MatPostalCode);
+	    }
+	}
+
     }
 }
