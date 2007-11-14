@@ -38,12 +38,11 @@ namespace Spring2.Core.Geocode.WebService {
 	private IntegerType Credential {
 	    get {
 		if (!credential.IsValid) {
-		    int retval;
 		    this.password = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodePassword"]);
 		    this.userName = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodeUserName"]);
 		    this.host = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodeHost"]);
 		    this.serviceName = StringType.Parse(ConfigurationProvider.Instance.Settings["GeoCodeServiceName"]);
-		    retval = TeleAtlasAuthenticator.Instance.Authenticate(this.userName, this.password, this.host);
+		    int retval = TeleAtlasAuthenticator.Instance.Authenticate(this.userName, this.password, this.host);
 		    this.credential = new IntegerType(retval);
 		}
 		return this.credential;
