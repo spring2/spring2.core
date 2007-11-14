@@ -3,7 +3,6 @@ using System.IO;
 using System.Text; 
 using System.Diagnostics; 
 using System.Threading; 
-using System.Configuration;
 using Spring2.Core.Configuration;
 using Spring2.Core.Types;
 using Spring2.Core.Geocode.DataObject;
@@ -40,10 +39,10 @@ namespace Spring2.Core.Geocode.WebService {
 	    get {
 		if (!credential.IsValid) {
 		    int retval;
-		    this.password = StringType.Parse(ConfigurationSettings.AppSettings["GeocodePassword"]);
-		    this.userName = StringType.Parse(ConfigurationSettings.AppSettings["GeocodeUserName"]);
-		    this.host = StringType.Parse(ConfigurationSettings.AppSettings["GeocodeHost"]);
-		    this.serviceName = StringType.Parse(ConfigurationSettings.AppSettings["GeoCodeServiceName"]);
+		    this.password = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodePassword"]);
+		    this.userName = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodeUserName"]);
+		    this.host = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodeHost"]);
+		    this.serviceName = StringType.Parse(ConfigurationProvider.Instance.Settings["GeoCodeServiceName"]);
 		    retval = TeleAtlasAuthenticator.Instance.Authenticate(this.userName, this.password, this.host);
 		    this.credential = new IntegerType(retval);
 		}

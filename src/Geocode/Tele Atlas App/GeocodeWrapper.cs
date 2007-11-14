@@ -3,7 +3,6 @@ using System.IO;
 using System.Text; 
 using System.Diagnostics; 
 using System.Threading; 
-using System.Configuration;
 using Spring2.Core.Configuration;
 using Spring2.Core.Types;
 using Spring2.Core.Geocode.DataObject;

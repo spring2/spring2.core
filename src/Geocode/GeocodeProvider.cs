@@ -1,5 +1,4 @@
 using System;
-using System.Configuration;
 using Spring2.Core;
 using Spring2.Core.Configuration;
 
@@ -22,8 +21,9 @@ namespace Spring2.Core.Geocode {
 		if (instance == null) {
 		    string providerClass = DEFAULT_PROVIDER;
 		    
-		    if (ConfigurationSettings.AppSettings["GeocodeProvider"] != null && ConfigurationSettings.AppSettings["GeocodeProvider"] != String.Empty) {
-			providerClass = ConfigurationSettings.AppSettings["GeocodeProvider"];
+		    if (ConfigurationProvider.Instance.Settings["GeocodeProvider"] != null && 
+			ConfigurationProvider.Instance.Settings["GeocodeProvider"] != String.Empty) {
+			providerClass = ConfigurationProvider.Instance.Settings["GeocodeProvider"];
 		    }
 
 		    Type clazz = Type.GetType(providerClass);

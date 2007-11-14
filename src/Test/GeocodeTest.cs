@@ -1,10 +1,10 @@
 using System;
-using System.Configuration;
 
 using NUnit.Framework;
 using Spring2.Core.Types;
 using Spring2.Core.Geocode;
 using Spring2.Core.Geocode.WebService;
+using Spring2.Core.Configuration;
 
 namespace Spring2.Core.Test {
     /// <summary>
@@ -46,10 +46,10 @@ namespace Spring2.Core.Test {
 	    string serviceName;
 	    IntegerType credential;
 
-	    password = StringType.Parse(ConfigurationSettings.AppSettings["GeocodePassword"]);
-	    userName = StringType.Parse(ConfigurationSettings.AppSettings["GeocodeUserName"]);
-	    host = StringType.Parse(ConfigurationSettings.AppSettings["GeocodeHost"]);
-	    serviceName = StringType.Parse(ConfigurationSettings.AppSettings["GeoCodeServiceName"]);
+	    password = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodePassword"]);
+	    userName = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodeUserName"]);
+	    host = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodeHost"]);
+	    serviceName = StringType.Parse(ConfigurationProvider.Instance.Settings["GeoCodeServiceName"]);
 
 
 	    credential = new IntegerType(TeleAtlasAuthenticator.Instance.Authenticate(userName,password,host));
@@ -60,7 +60,7 @@ namespace Spring2.Core.Test {
 	[Test]
 	[Ignore("Requires a tele atlas login to run.")]
 	public void GetGeocodeFromWebService() {
-	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("10150 S. Centennial Parkway", "Sandy", "UT", "", "");
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("5892 South Acheron Avenue", "Boise", "ID", "", "");
 	}
     }
 }
