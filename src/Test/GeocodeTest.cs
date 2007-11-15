@@ -70,7 +70,7 @@ namespace Spring2.Core.Test {
 	[Test]
 	[Ignore("Requires a tele atlas login to run.")]
 	public void GetGeocodeFromWebServiceByZipCode() {
-	    GeocodeData geocode = (GeocodeProvider.Instance as TeleAtlasProvider).GetCityAndStateOfZipCode("84128-3877");
+	    GeocodeData geocode = GeocodeProvider.Instance.GetCityAndStateOfZipCode("84128-3877");
 	    Assert.AreEqual("SALT LAKE CITY", geocode.StdCity);
 	    Assert.AreEqual("UT", geocode.StdState);
 	}
