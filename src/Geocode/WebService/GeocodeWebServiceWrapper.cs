@@ -49,10 +49,6 @@ namespace Spring2.Core.Geocode.WebService {
 	    }
 	}
 
-	public GeocodeData GetCityAndStateOfZipCode(StringType postalCode){
-	    return DoGeocode(StringType.EMPTY, StringType.EMPTY, StringType.EMPTY, postalCode, StringType.EMPTY);
-	}
-
 	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType plus4){
 	    TeleAtlasGeocodeWebServiceData teleAtlasgeocodeData = new TeleAtlasGeocodeWebServiceData();
 	    GeocodeData geocodeData = new GeocodeData();
@@ -153,7 +149,11 @@ namespace Spring2.Core.Geocode.WebService {
 	    addressCacheData.StdPlus4 = teleAtlasgeocodeData.StdZipCodePlus4;
 	    addressCacheData.MatchType = teleAtlasgeocodeData.MatchType;
 
-	    addressCache = new AddressCache();
+	    if (list.Count > 0) {
+		addressCache = AddressCache.GetInstance(list[0].AddressId);
+	    } else {
+		addressCache = new AddressCache();
+	    }
 
 	    // Match Codes 10-17 and -1, -10 are Non Match/Errors codes
 	    switch (teleAtlasgeocodeData.MatchType) {
