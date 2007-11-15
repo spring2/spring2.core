@@ -59,8 +59,20 @@ namespace Spring2.Core.Test {
 
 	[Test]
 	[Ignore("Requires a tele atlas login to run.")]
-	public void GetGeocodeFromWebService() {
-	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("5892 South Acheron Avenue", "Boise", "ID", "", "");
+	public void GetGeocodeFromWebServiceByFullAddress() {
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("5892 South Acheron Avenue","Boise","ID","", "");
+	    Assert.AreEqual("5892 S ACHERON AVE", geocode.StdAddress.ToString());
+	    Assert.AreEqual("BOISE", geocode.StdCity.ToString());
+	    Assert.AreEqual("ID", geocode.StdState.ToString());
+	    Assert.AreEqual("83709", geocode.StdZipCode.ToString());
+	}
+
+	[Test]
+	[Ignore("Requires a tele atlas login to run.")]
+	public void GetGeocodeFromWebServiceByZipCode() {
+	    GeocodeData geocode = (GeocodeProvider.Instance as TeleAtlasProvider).GetCityAndStateOfZipCode("84128-3877");
+	    Assert.AreEqual("SALT LAKE CITY", geocode.StdCity);
+	    Assert.AreEqual("UT", geocode.StdState);
 	}
     }
 }
