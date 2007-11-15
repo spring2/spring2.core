@@ -8,11 +8,6 @@ namespace Spring2.Core.Geocode.WebService {
     public class TeleAtlasWebServiceProvider : IGeocodeProvider {
 	public TeleAtlasWebServiceProvider() {
 	}
-
-	public GeocodeData GetCityAndStateOfZipCode(StringType zipCode) {
-	    GeocodeWebServiceWrapper wrapper = new GeocodeWebServiceWrapper();
-	    return wrapper.GetCityAndStateOfZipCode(zipCode);
-	}
 	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode) {
 	    GeocodeWebServiceWrapper wrapper = new GeocodeWebServiceWrapper();
 	    return wrapper.DoGeocode(street, city, state, postalCode, StringType.EMPTY);
