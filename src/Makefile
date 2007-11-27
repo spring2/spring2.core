@@ -59,7 +59,7 @@ package: clean build regress changelog docs
 	cp ../ChangeLog.txt $(RELEASEDIR)/ChangeLog-$(shell getversion.sh).txt
 	jar -cMvf $(RELEASEDIR)/Spring2.Core.$(shell getversion.sh)-net-1.1.zip -C $(BUILDDIR)/net-1.1 .
 	jar -cMvf $(RELEASEDIR)/Spring2.Core.$(shell getversion.sh)-net-2.0.zip -C $(BUILDDIR)/net-2.0 .
-	nant -D:version=$(shell $(GETVERSION)) package_src
+	${NANT} -D:version=$(shell $(GETVERSION)) package_src
 
 release: package
 	cvs tag RELEASE_$(subst .,_,$(shell ./getversion.sh))
