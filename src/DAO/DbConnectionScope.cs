@@ -50,7 +50,7 @@ namespace Spring2.Core.DAO {
     /// </summary>
     sealed public class DbConnectionScope : IDisposable {
 #region class fields
-	//[ThreadStatic()]
+	[ThreadStatic()]
 	private static DbConnectionScope __currentScope = null;      // Scope that is currently active on this thread
 	private static Object __nullKey = new Object();   // used to allow null as a key
 #endregion
