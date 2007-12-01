@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Spring2.Core.Types;
 
 namespace Spring2.Core.Geocode {
@@ -8,6 +9,33 @@ namespace Spring2.Core.Geocode {
     public class GeocodeData {
 
 	public GeocodeData() {
+	}
+
+	public GeocodeData(String delimitedString) {
+	    String[] parts = delimitedString.Split('|');
+	    matchCount = IntegerType.Parse(parts[0]);
+	    matchType = IntegerType.Parse(parts[1]);
+	    matchDB = parts[2];
+	    stdAddress = parts[3];
+	    stdCity = parts[4];
+	    stdState = parts[5];
+	    stdZipCode = parts[6];
+	    stdZipCodePlus4 = parts[7];
+	    stdDPBC = parts[8];
+	    stdCarrier = parts[9];
+	    matchAddress = parts[10];
+	    matchCity = parts[11];
+	    matchState = parts[12];
+	    matchZipCode = parts[13];
+	    matchLatitude = DecimalType.Parse(parts[14]);
+	    matchLongitude = DecimalType.Parse(parts[15]);
+	    output = parts[16];
+	}
+
+	public String ToDelimitedString() {
+	    StringBuilder sb = new StringBuilder();
+
+	    return sb.ToString();
 	}
 
 	private IntegerType matchCount = IntegerType.DEFAULT;
