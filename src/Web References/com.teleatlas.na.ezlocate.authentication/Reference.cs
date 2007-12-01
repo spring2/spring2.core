@@ -23,18 +23,24 @@ namespace Spring2.Core.com.teleatlas.na.ezlocate.authentication {
     /// <remarks/>
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="AuthenticationBinding", Namespace="http://ezlocate.na.teleatlas.com/Authentication.wsdl")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="AuthenticationSoapBinding", Namespace="http://ezlocate.na.teleatlas.com/Authentication.wsdl")]
     public class Authentication : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
+	protected static DefaultTraceListener debug = new DefaultTraceListener();
+
         /// <remarks/>
         public Authentication() {
-            this.Url = "http://ezlocate.na.teleatlas.com/axis/services/Authentication";
+            this.Url = "http://mmezl.teleatlas.com/axis/services/Authentication";
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("Authentication:AuthenticationPortType#requestChallenge", RequestNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("resultCode", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int requestChallenge([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string userName, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int minutesValid, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out int encryptedID) {
+	    debug.WriteLine(this.Url);
+	    debug.WriteLine(userName);
+	    debug.WriteLine(minutesValid);
+
             object[] results = this.Invoke("requestChallenge", new object[] {
                         userName,
                         minutesValid});
@@ -57,7 +63,7 @@ namespace Spring2.Core.com.teleatlas.na.ezlocate.authentication {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("Authentication:AuthenticationPortType#answerChallenge", RequestNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("resultCode", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int answerChallenge([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int encryptedResponse, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int originalChallenge, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out int credential) {
             object[] results = this.Invoke("answerChallenge", new object[] {
@@ -82,7 +88,7 @@ namespace Spring2.Core.com.teleatlas.na.ezlocate.authentication {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("Authentication:AuthenticationPortType#invalidateCredential", RequestNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("resultCode", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int invalidateCredential([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int credential) {
             object[] results = this.Invoke("invalidateCredential", new object[] {
@@ -103,7 +109,7 @@ namespace Spring2.Core.com.teleatlas.na.ezlocate.authentication {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("Authentication:AuthenticationPortType#testCredential", RequestNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("resultCode", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int testCredential([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string ipAddress, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int credential, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int serverCred, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out string user, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out string password, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out long expiration) {
             object[] results = this.Invoke("testCredential", new object[] {

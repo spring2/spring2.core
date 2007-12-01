@@ -1,92 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://ezlocate.na.teleatlas.com/Authentication.xsd1" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://ezlocate.na.teleatlas.com/Authentication.wsdl" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://ezlocate.na.teleatlas.com/Authentication.wsdl" name="Authentication" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://ezlocate.na.teleatlas.com/Authentication.xsd1" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://ezlocate.na.teleatlas.com/Authentication.wsdl" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://ezlocate.na.teleatlas.com/Authentication.wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1">
-      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
       <s:element name="requestChallenge">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="userName" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="minutesValid" type="s:int" />
+            <s:element name="userName" type="s:string" />
+            <s:element name="minutesValid" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="requestChallengeResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="resultCode" type="s:int" />
-            <s:element minOccurs="1" maxOccurs="1" name="encryptedID" type="s:int" />
+            <s:element name="resultCode" type="s:int" />
+            <s:element name="encryptedID" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="answerChallenge">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="encryptedResponse" type="s:int" />
-            <s:element minOccurs="1" maxOccurs="1" name="originalChallenge" type="s:int" />
+            <s:element name="encryptedResponse" type="s:int" />
+            <s:element name="originalChallenge" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="answerChallengeResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="resultCode" type="s:int" />
-            <s:element minOccurs="1" maxOccurs="1" name="credential" type="s:int" />
+            <s:element name="resultCode" type="s:int" />
+            <s:element name="credential" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="invalidateCredential">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="credential" type="s:int" />
+            <s:element name="credential" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="invalidateCredentialResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="resultCode" type="s:int" />
+            <s:element name="resultCode" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="testCredential">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="ipAddress" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="credential" type="s:int" />
-            <s:element minOccurs="1" maxOccurs="1" name="serverCred" type="s:int" />
+            <s:element name="ipAddress" type="s:string" />
+            <s:element name="credential" type="s:int" />
+            <s:element name="serverCred" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="testCredentialResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="resultCode" type="s:int" />
-            <s:element minOccurs="1" maxOccurs="1" name="user" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="password" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="expiration" type="s:long" />
+            <s:element name="resultCode" type="s:int" />
+            <s:element name="user" type="s:string" />
+            <s:element name="password" type="s:string" />
+            <s:element name="expiration" type="s:long" />
           </s:sequence>
         </s:complexType>
       </s:element>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="requestChallengeRequest">
-    <wsdl:part name="parameters" element="s0:requestChallenge" />
-  </wsdl:message>
-  <wsdl:message name="requestChallengeResponse">
-    <wsdl:part name="parameters" element="s0:requestChallengeResponse" />
+  <wsdl:message name="invalidateCredentialRequest">
+    <wsdl:part name="parameters" element="s0:invalidateCredential" />
   </wsdl:message>
   <wsdl:message name="answerChallengeRequest">
     <wsdl:part name="parameters" element="s0:answerChallenge" />
   </wsdl:message>
-  <wsdl:message name="answerChallengeResponse">
-    <wsdl:part name="parameters" element="s0:answerChallengeResponse" />
-  </wsdl:message>
-  <wsdl:message name="invalidateCredentialRequest">
-    <wsdl:part name="parameters" element="s0:invalidateCredential" />
+  <wsdl:message name="requestChallengeRequest">
+    <wsdl:part name="parameters" element="s0:requestChallenge" />
   </wsdl:message>
   <wsdl:message name="invalidateCredentialResponse">
     <wsdl:part name="parameters" element="s0:invalidateCredentialResponse" />
+  </wsdl:message>
+  <wsdl:message name="requestChallengeResponse">
+    <wsdl:part name="parameters" element="s0:requestChallengeResponse" />
   </wsdl:message>
   <wsdl:message name="testCredentialRequest">
     <wsdl:part name="parameters" element="s0:testCredential" />
@@ -94,66 +90,69 @@
   <wsdl:message name="testCredentialResponse">
     <wsdl:part name="parameters" element="s0:testCredentialResponse" />
   </wsdl:message>
+  <wsdl:message name="answerChallengeResponse">
+    <wsdl:part name="parameters" element="s0:answerChallengeResponse" />
+  </wsdl:message>
   <wsdl:portType name="AuthenticationPortType">
     <wsdl:operation name="requestChallenge">
-      <wsdl:input message="tns:requestChallengeRequest" />
-      <wsdl:output message="tns:requestChallengeResponse" />
+      <wsdl:input name="requestChallengeRequest" message="tns:requestChallengeRequest" />
+      <wsdl:output name="requestChallengeResponse" message="tns:requestChallengeResponse" />
     </wsdl:operation>
     <wsdl:operation name="answerChallenge">
-      <wsdl:input message="tns:answerChallengeRequest" />
-      <wsdl:output message="tns:answerChallengeResponse" />
+      <wsdl:input name="answerChallengeRequest" message="tns:answerChallengeRequest" />
+      <wsdl:output name="answerChallengeResponse" message="tns:answerChallengeResponse" />
     </wsdl:operation>
     <wsdl:operation name="invalidateCredential">
-      <wsdl:input message="tns:invalidateCredentialRequest" />
-      <wsdl:output message="tns:invalidateCredentialResponse" />
+      <wsdl:input name="invalidateCredentialRequest" message="tns:invalidateCredentialRequest" />
+      <wsdl:output name="invalidateCredentialResponse" message="tns:invalidateCredentialResponse" />
     </wsdl:operation>
     <wsdl:operation name="testCredential">
-      <wsdl:input message="tns:testCredentialRequest" />
-      <wsdl:output message="tns:testCredentialResponse" />
+      <wsdl:input name="testCredentialRequest" message="tns:testCredentialRequest" />
+      <wsdl:output name="testCredentialResponse" message="tns:testCredentialResponse" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="AuthenticationBinding" type="tns:AuthenticationPortType">
+  <wsdl:binding name="AuthenticationSoapBinding" type="tns:AuthenticationPortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
     <wsdl:operation name="requestChallenge">
-      <soap:operation soapAction="Authentication:AuthenticationPortType#requestChallenge" />
-      <wsdl:input>
-        <soap:body use="literal" />
+      <soap:operation soapAction="" />
+      <wsdl:input name="requestChallengeRequest">
+        <soap:body use="literal" namespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1" />
       </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
+      <wsdl:output name="requestChallengeResponse">
+        <soap:body use="literal" namespace="http://ezlocate.na.teleatlas.com/Authentication.wsdl" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="answerChallenge">
-      <soap:operation soapAction="Authentication:AuthenticationPortType#answerChallenge" />
-      <wsdl:input>
-        <soap:body use="literal" />
+      <soap:operation soapAction="" />
+      <wsdl:input name="answerChallengeRequest">
+        <soap:body use="literal" namespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1" />
       </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
+      <wsdl:output name="answerChallengeResponse">
+        <soap:body use="literal" namespace="http://ezlocate.na.teleatlas.com/Authentication.wsdl" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="invalidateCredential">
-      <soap:operation soapAction="Authentication:AuthenticationPortType#invalidateCredential" />
-      <wsdl:input>
-        <soap:body use="literal" />
+      <soap:operation soapAction="" />
+      <wsdl:input name="invalidateCredentialRequest">
+        <soap:body use="literal" namespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1" />
       </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
+      <wsdl:output name="invalidateCredentialResponse">
+        <soap:body use="literal" namespace="http://ezlocate.na.teleatlas.com/Authentication.wsdl" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="testCredential">
-      <soap:operation soapAction="Authentication:AuthenticationPortType#testCredential" />
-      <wsdl:input>
-        <soap:body use="literal" />
+      <soap:operation soapAction="" />
+      <wsdl:input name="testCredentialRequest">
+        <soap:body use="literal" namespace="http://ezlocate.na.teleatlas.com/Authentication.xsd1" />
       </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
+      <wsdl:output name="testCredentialResponse">
+        <soap:body use="literal" namespace="http://ezlocate.na.teleatlas.com/Authentication.wsdl" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Authentication">
-    <wsdl:port name="Authentication" binding="tns:AuthenticationBinding">
-      <soap:address location="http://ezlocate.na.teleatlas.com/axis/services/Authentication" />
+    <wsdl:port name="Authentication" binding="tns:AuthenticationSoapBinding">
+      <soap:address location="http://mmezl.teleatlas.com/axis/services/Authentication" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

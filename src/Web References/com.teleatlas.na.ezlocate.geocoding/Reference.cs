@@ -23,16 +23,16 @@ namespace Spring2.Core.com.teleatlas.na.ezlocate.geocoding {
     /// <remarks/>
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="GeocodingBinding", Namespace="http://ezlocate.na.teleatlas.com/Geocoding.wsdl")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="GeocodingSoapBinding", Namespace="http://ezlocate.na.teleatlas.com/Geocoding.wsdl")]
     public class Geocoding : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         /// <remarks/>
         public Geocoding() {
-            this.Url = "http://ezlocate.na.teleatlas.com/axis/services/Geocoding";
+            this.Url = "http://mmezl.teleatlas.com/axis/services/Geocoding";
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("Geocoding:GeocodingPortType#getServices", RequestNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("resultCode", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int getServices([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int identity, [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlArrayItemAttribute("nv", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out NameValue[] services) {
             object[] results = this.Invoke("getServices", new object[] {
@@ -55,7 +55,7 @@ namespace Spring2.Core.com.teleatlas.na.ezlocate.geocoding {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("Geocoding:GeocodingPortType#getServiceDescription", RequestNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("resultCode", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int getServiceDescription([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string service, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int identity, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out string description, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out string countryCode, [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlArrayItemAttribute("nv", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out NameValue[] inputs, [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlArrayItemAttribute("fields", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out OutputField[] outputs, [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlArrayItemAttribute("types", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out MatchType[] matchTypes, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out string matchTypeName) {
             object[] results = this.Invoke("getServiceDescription", new object[] {
@@ -90,7 +90,7 @@ namespace Spring2.Core.com.teleatlas.na.ezlocate.geocoding {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("Geocoding:GeocodingPortType#findAddress", RequestNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("resultCode", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int findAddress([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string service, [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlArrayItemAttribute("nv", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] NameValue[] input, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int identity, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out Geocode result) {
             object[] results = this.Invoke("findAddress", new object[] {
@@ -117,7 +117,7 @@ namespace Spring2.Core.com.teleatlas.na.ezlocate.geocoding {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("Geocoding:GeocodingPortType#findMultiAddress", RequestNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", ResponseNamespace="http://ezlocate.na.teleatlas.com/Geocoding.xsd1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("resultCode", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int findMultiAddress([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string service, [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlArrayItemAttribute("record", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlArrayItemAttribute("nv", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, NestingLevel=1)] NameValue[][] inputs, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int identity, [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlArrayItemAttribute("sequence", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out Geocode[] results) {
             object[] results1 = this.Invoke("findMultiAddress", new object[] {
