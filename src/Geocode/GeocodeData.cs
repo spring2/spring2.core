@@ -15,7 +15,9 @@ namespace Spring2.Core.Geocode {
 	    String[] parts = delimitedString.Split('|');
 	    if (parts[0].Length>0) {
 	    	matchCount = IntegerType.Parse(parts[0]);
-	    }
+	    } else {
+			matchCount = 0;
+		}
 	    matchType = IntegerType.Parse(parts[1]);
 	    matchDB = parts[2];
 	    stdAddress = parts[3];

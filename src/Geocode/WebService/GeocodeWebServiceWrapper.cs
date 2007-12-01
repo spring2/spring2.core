@@ -70,6 +70,7 @@ namespace Spring2.Core.Geocode.WebService {
 		    // then go throw the motions of converting it
 		    if (cache.Result.StartsWith("Match Count")) {
 			geocodeData.OutPut = StringType.Parse(teleAtlasgeocodeData.DBOutPut);
+			geocodeData.MatchCount = 1;
 			geocodeData.MatchType = teleAtlasgeocodeData.MatchType;
 			geocodeData.StdAddress = StringType.Parse(teleAtlasgeocodeData.StdAddress);
 			geocodeData.StdCity = StringType.Parse(teleAtlasgeocodeData.StdCity);
@@ -107,6 +108,7 @@ namespace Spring2.Core.Geocode.WebService {
 			addressCache.Update(addressCacheData);
 		    } else { // The contents of the Result column are not in the legacy format...use the db columns
 			geocodeData.OutPut = StringType.Parse(teleAtlasgeocodeData.DBOutPut);
+			geocodeData.MatchCount = 1;
 			geocodeData.MatchType = cache.MatchType;
 			geocodeData.StdAddress = cache.StdAddress1;
 			geocodeData.StdCity = cache.StdCity;
@@ -174,6 +176,11 @@ namespace Spring2.Core.Geocode.WebService {
 	    addressCache.Update(addressCacheData);
 
 	    geocodeData.OutPut = StringType.Parse(teleAtlasgeocodeData.DBOutPut);
+	    if (addressCacheData.Status.Equals(GeocodeStatusEnum.VALID)) {
+	    	geocodeData.MatchCount = 1;
+	    } else {
+	    	geocodeData.MatchCount = 0;
+	    }
 	    geocodeData.MatchType = teleAtlasgeocodeData.MatchType;
 	    geocodeData.StdAddress = StringType.Parse(teleAtlasgeocodeData.StdAddress);
 	    geocodeData.StdCity = StringType.Parse(teleAtlasgeocodeData.StdCity);
