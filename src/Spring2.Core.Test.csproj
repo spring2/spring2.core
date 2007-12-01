@@ -1,7 +1,7 @@
 <VisualStudioProject>
     <CSHARP
         ProjectType = "Local"
-        ProductVersion = "7.10.3077"
+        ProductVersion = "7.10.6030"
         SchemaVersion = "2.0"
         ProjectGuid = "{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}"
     >
@@ -202,6 +202,11 @@
                 <Reference
                     Name = "Spring2.Core.Navigation"
                     Project = "{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Spring2.Core.Geocode.TeleAtlasWS"
+                    Project = "{06211A7B-46F9-4E4F-AA71-7F865B75CA89}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
             </References>

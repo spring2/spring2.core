@@ -123,12 +123,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Navigation", "
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Geocode.TeleAtlasWS", "Spring2.Core.Geocode.TeleAtlasWS.csproj", "{06211A7B-46F9-4E4F-AA71-7F865B75CA89}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Geocode.TeleAtlasExe", "Spring2.Core.Geocode.TeleAtlasExe.csproj", "{73136F36-FFAE-4627-806E-8A59EDF59157}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
 		NET_1_1 = NET_1_1
 		NET_2_0 = NET_2_0
 		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
 	EndGlobalSection
 	GlobalSection(ProjectConfiguration) = postSolution
 		{80B94045-4DE6-4BB0-BE22-C5CC0E772695}.Debug.ActiveCfg = Debug|.NET
@@ -367,6 +377,22 @@ Global
 		{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}.NET_2_0.Build.0 = NET_2_0|.NET
 		{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}.Release.ActiveCfg = Release|.NET
 		{5500F7FB-3506-4AC6-A52D-9DD8FC3B4583}.Release.Build.0 = Release|.NET
+		{06211A7B-46F9-4E4F-AA71-7F865B75CA89}.Debug.ActiveCfg = Debug|.NET
+		{06211A7B-46F9-4E4F-AA71-7F865B75CA89}.Debug.Build.0 = Debug|.NET
+		{06211A7B-46F9-4E4F-AA71-7F865B75CA89}.NET_1_1.ActiveCfg = Release|.NET
+		{06211A7B-46F9-4E4F-AA71-7F865B75CA89}.NET_1_1.Build.0 = Release|.NET
+		{06211A7B-46F9-4E4F-AA71-7F865B75CA89}.NET_2_0.ActiveCfg = Release|.NET
+		{06211A7B-46F9-4E4F-AA71-7F865B75CA89}.NET_2_0.Build.0 = Release|.NET
+		{06211A7B-46F9-4E4F-AA71-7F865B75CA89}.Release.ActiveCfg = Release|.NET
+		{06211A7B-46F9-4E4F-AA71-7F865B75CA89}.Release.Build.0 = Release|.NET
+		{73136F36-FFAE-4627-806E-8A59EDF59157}.Debug.ActiveCfg = Debug|.NET
+		{73136F36-FFAE-4627-806E-8A59EDF59157}.Debug.Build.0 = Debug|.NET
+		{73136F36-FFAE-4627-806E-8A59EDF59157}.NET_1_1.ActiveCfg = Release|.NET
+		{73136F36-FFAE-4627-806E-8A59EDF59157}.NET_1_1.Build.0 = Release|.NET
+		{73136F36-FFAE-4627-806E-8A59EDF59157}.NET_2_0.ActiveCfg = Release|.NET
+		{73136F36-FFAE-4627-806E-8A59EDF59157}.NET_2_0.Build.0 = Release|.NET
+		{73136F36-FFAE-4627-806E-8A59EDF59157}.Release.ActiveCfg = Release|.NET
+		{73136F36-FFAE-4627-806E-8A59EDF59157}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
