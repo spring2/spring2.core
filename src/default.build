@@ -82,6 +82,20 @@
 	        <include name="Spring2.Core.Navigation.csproj" />
 	    </projects>
 	</solution>	
+
+	<solution configuration="${build.configuration}" outputdir="..\build\${nant.settings.currentframework}">
+	    <assemblyfolders>
+		  <include name="..\lib\${nant.settings.currentframework}" />
+	    </assemblyfolders>
+	    <projects>
+	        <include name="Spring2.Core.Configuration.csproj" />
+	        <include name="Spring2.Core.Geocode.csproj" />
+			<include name="Spring2.Core.Geocode.TeleAtlasExe.csproj" />
+	        <include name="Spring2.Core.csproj" />
+	        <include name="Spring2.Core.Types.csproj" />
+	    </projects>
+	</solution>	
+
 	
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
