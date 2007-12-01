@@ -35,6 +35,40 @@ namespace Spring2.Core.Geocode {
 	public String ToDelimitedString() {
 	    StringBuilder sb = new StringBuilder();
 
+	    sb.Append(matchCount.Display());
+	    sb.Append('|');
+	    sb.Append(matchType.Display());
+	    sb.Append('|');
+	    sb.Append(matchDB.Display());
+	    sb.Append('|');
+	    sb.Append(stdAddress.Display());
+	    sb.Append('|');
+	    sb.Append(stdCity.Display());
+	    sb.Append('|');
+	    sb.Append(stdState.Display());
+	    sb.Append('|');
+	    sb.Append(stdZipCode.Display());
+	    sb.Append('|');
+	    sb.Append(StdZipCodePlus4.Display());
+	    sb.Append('|');
+	    sb.Append(stdDPBC.Display());
+	    sb.Append('|');
+	    sb.Append(stdCarrier.Display());
+	    sb.Append('|');
+	    sb.Append(matchAddress.Display());
+	    sb.Append('|');
+	    sb.Append(matchCity.Display());
+	    sb.Append('|');
+	    sb.Append(matchState.Display());
+	    sb.Append('|');
+	    sb.Append(matchZipCode.Display());
+	    sb.Append('|');
+	    sb.Append(matchLatitude.Display());
+	    sb.Append('|');
+	    sb.Append(matchLongitude.Display());
+	    sb.Append('|');
+	    sb.Append(output.Display());
+
 	    return sb.ToString();
 	}
 

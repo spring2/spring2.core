@@ -74,5 +74,53 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual("SALT LAKE CITY", geocode.StdCity);
 	    Assert.AreEqual("UT", geocode.StdState);
 	}
+
+	[Test]
+	public void ShouldBeAbleToPopulateGeocodeDataWithString() {
+	    String delimitedString = "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17";
+
+	    GeocodeData data = new GeocodeData(delimitedString);
+	    Assert.AreEqual(new IntegerType(1), data.MatchCount);
+	    Assert.AreEqual(new IntegerType(2), data.MatchType);
+	    Assert.AreEqual(new StringType("3"), data.MatchDB);
+	    Assert.AreEqual(new StringType("4"), data.StdAddress);
+	    Assert.AreEqual(new StringType("5"), data.StdCity);
+	    Assert.AreEqual(new StringType("6"), data.StdState);
+	    Assert.AreEqual(new StringType("7"), data.StdZipCode);
+	    Assert.AreEqual(new StringType("8"), data.StdZipCodePlus4);
+	    Assert.AreEqual(new StringType("9"), data.StdDPBC);
+	    Assert.AreEqual(new StringType("10"), data.StdCarrier);
+	    Assert.AreEqual(new StringType("11"), data.MatchAddress);
+	    Assert.AreEqual(new StringType("12"), data.MatchCity);
+	    Assert.AreEqual(new StringType("13"), data.MatchState);
+	    Assert.AreEqual(new StringType("14"), data.MatchZipCode);
+	    Assert.AreEqual(new DecimalType(15), data.MatchLatitude);
+	    Assert.AreEqual(new DecimalType(16), data.MatchLongitude);
+	    Assert.AreEqual(new StringType("17"), data.OutPut);
+	}
+
+	[Test]
+	public void ShouldBeAbleToGetDelimitedStringFromGeocodeData() {
+	    GeocodeData data = new GeocodeData();
+	    data.MatchCount = new IntegerType(1);
+	    data.MatchType = new IntegerType(2);
+	    data.MatchDB = new StringType("3");
+	    data.StdAddress = new StringType("4");
+	    data.StdCity = new StringType("5");
+	    data.StdState = new StringType("6");
+	    data.StdZipCode = new StringType("7");
+	    data.StdZipCodePlus4 = new StringType("8");
+	    data.StdDPBC = new StringType("9");
+	    data.StdCarrier = new StringType("10");
+	    data.MatchAddress = new StringType("11");
+	    data.MatchCity = new StringType("12");
+	    data.MatchState = new StringType("13");
+	    data.MatchZipCode = new StringType("14");
+	    data.MatchLatitude = new DecimalType(15);
+	    data.MatchLongitude = new DecimalType(16);
+	    data.OutPut = new StringType("17");
+
+	    Assert.AreEqual("1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17", data.ToDelimitedString());
+	}
     }
 }
