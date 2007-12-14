@@ -261,6 +261,10 @@ namespace Spring2.Core.Types {
 
 	#region Subtract methods and operators
 	public TimeType Subtract(TimeType toSubtract) {
+	    if (!IsValid || !toSubtract.IsValid) {
+		throw new InvalidStateException(myState, toSubtract.myState);
+	    }
+
 	    TimeSpan time = myValue.Subtract(toSubtract.myValue);
 
 	    if (!InRange(time)) {

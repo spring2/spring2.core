@@ -37,10 +37,32 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test]
+	public void ShouldGetExceptionWhenAddingInValidValue() {
+	    TimeType time = new TimeType(2,2,2);
+	    try {
+		time.Add(TimeType.DEFAULT);
+		Assert.Fail("Should not allow add of invalid time");
+	    } catch (InvalidStateException) {
+		//Expected
+	    }
+	}
+
+	[Test]
 	public void SubtractTimeType() {
 	    TimeType time = new TimeType(2, 2, 2);
 	    time = time.Subtract(new TimeType(1, 1, 1));
 	    Assert.AreEqual(new TimeType(1, 1, 1), time);
+	}
+
+	[Test]
+	public void ShouldGetExceptionWhenSubtractingInValidValue() {
+	    TimeType time = new TimeType(2,2,2);
+	    try {
+		time.Subtract(TimeType.DEFAULT);
+		Assert.Fail("Should not allow subtract of invalid time");
+	    } catch (InvalidStateException) {
+		//Expected
+	    }
 	}
 
 	[Test]
