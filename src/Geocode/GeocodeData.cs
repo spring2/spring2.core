@@ -14,10 +14,10 @@ namespace Spring2.Core.Geocode {
 	public GeocodeData(String delimitedString) {
 	    String[] parts = delimitedString.Split('|');
 	    if (parts[0].Length>0) {
-	    	matchCount = IntegerType.Parse(parts[0]);
+		matchCount = IntegerType.Parse(parts[0]);
 	    } else {
-			matchCount = 0;
-		}
+		matchCount = 0;
+	    }
 	    matchType = IntegerType.Parse(parts[1]);
 	    matchDB = parts[2];
 	    stdAddress = parts[3];
@@ -31,8 +31,16 @@ namespace Spring2.Core.Geocode {
 	    matchCity = parts[11];
 	    matchState = parts[12];
 	    matchZipCode = parts[13];
-	    matchLatitude = DecimalType.Parse(parts[14]);
-	    matchLongitude = DecimalType.Parse(parts[15]);
+	    if (parts[14].Length>0) {
+		matchLatitude = DecimalType.Parse(parts[14]);
+	    } else {
+		matchLatitude = 0;
+	    }
+	    if (parts[15].Length>0) {
+		matchLongitude = DecimalType.Parse(parts[15]);
+	    } else {
+		matchLongitude = 0;
+	    }
 	    output = parts[16];
 	}
 
