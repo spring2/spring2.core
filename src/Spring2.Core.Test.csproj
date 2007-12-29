@@ -1,7 +1,7 @@
 <VisualStudioProject>
     <CSHARP
         ProjectType = "Local"
-        ProductVersion = "7.10.6030"
+        ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
         ProjectGuid = "{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}"
     >
@@ -209,12 +209,22 @@
                     Project = "{06211A7B-46F9-4E4F-AA71-7F865B75CA89}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
+                <Reference
+                    Name = "Spring2.Core.Ajax"
+                    Project = "{40C60A12-0493-4B5A-9B48-C8DFD878DFD5}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
             </References>
         </Build>
         <Files>
             <Include>
                 <File
                     RelPath = "AssemblyVersionInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\AjaxTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -304,6 +314,11 @@
                 />
                 <File
                     RelPath = "Test\NavigationTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\PagedListTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

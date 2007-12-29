@@ -133,7 +133,16 @@
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
-                <Folder RelPath = "Ajax\" />
+                <File
+                    RelPath = "Ajax\AssemblyInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Ajax\Command.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
             </Include>
         </Files>
     </CSHARP>
