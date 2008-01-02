@@ -53,17 +53,6 @@ namespace Spring2.Core.Navigation.DataObject {
 		}
 	    }
 	}
-	
-	public IMenuLinkGroup this[StringType name] {
-	    get {
-		foreach(IMenuLinkGroup group in List) {
-		    if(group.Name.Equals(name)) {
-			return group;
-		    }
-		}
-		throw new IndexOutOfRangeException();
-	    }
-	}
 
 	[Generate]
 	public void Add(IMenuLinkGroup value) {
@@ -241,5 +230,17 @@ namespace Spring2.Core.Navigation.DataObject {
 	    }
 	}
 
+	#region	
+	public IMenuLinkGroup this[StringType name] {
+	    get {
+		foreach(IMenuLinkGroup group in List) {
+		    if(group.Name.Equals(name)) {
+			return group;
+		    }
+		}
+		throw new IndexOutOfRangeException();
+	    }
+	}
+	#endregion
     }
 }
