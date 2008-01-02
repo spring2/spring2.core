@@ -157,8 +157,8 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Finds a MenuLinkKey entity using it's primary key.
 	/// </summary>
-	/// <param name="MenuLinkId">A key field.</param>
-	/// <param name="Key">A key field.</param>
+	/// <param name="menuLinkId">A key field.</param>
+	/// <param name="key">A key field.</param>
 	/// <returns>A MenuLinkKey object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MenuLinkKey Load(IdType menuLinkId, StringType key) {
@@ -317,8 +317,8 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Deletes a record from the MenuLinkKey table by a composite primary key.
 	/// </summary>
-	/// <param name="MenuLinkId">A key field.</param>
-	/// <param name="Key">A key field.</param>
+	/// <param name="menuLinkId">A key field.</param>
+	/// <param name="key">A key field.</param>
 	public void Delete(IdType menuLinkId, StringType key) {
 	    Delete(menuLinkId, key, null);
 	}
@@ -326,8 +326,8 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Deletes a record from the MenuLinkKey table by a composite primary key.
 	/// </summary>
-	/// <param name="MenuLinkId">A key field.</param>
-	/// <param name="Key">A key field.</param>
+	/// <param name="menuLinkId">A key field.</param>
+	/// <param name="key">A key field.</param>
 	/// <param name="transaction"></param>
 	public void Delete(IdType menuLinkId, StringType key, IDbTransaction transaction) {
 	    // Create and execute the command
@@ -346,7 +346,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="MenuLinkId">A field value to be matched.</param>
+	/// <param name="menuLinkId">A field value to be matched.</param>
 	/// <returns>The list of MenuLinkKeyDAO objects found.</returns>
 	public MenuLinkKeyList FindByMenuLinkId(IdType menuLinkId) {
 	    OrderByClause sort = new OrderByClause("MenuLinkId");
