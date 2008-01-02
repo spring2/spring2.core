@@ -115,9 +115,9 @@ namespace Spring2.Core.Navigation.BusinessLogic {
 	    group.Update(data);
 	    return group;
         }
-
-	public static MenuLinkGroupList GetMenuLinkGroups() {
-	    return MenuLinkGroupDAO.DAO.GetList();
-	}
+        
+        public static MenuLinkGroupList GetMenuLinkGroups() {
+            return MenuLinkGroupDAO.DAO.GetList();
+        }
     }
 }
