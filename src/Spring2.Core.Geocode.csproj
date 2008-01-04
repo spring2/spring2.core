@@ -283,7 +283,7 @@
                 />
                 <Folder
                     RelPath = "Web References\com.teleatlas.na.ezlocate.authentication\"
-                    WebReferenceUrl = "http://ezlocate.na.teleatlas.com/Authentication.wsdl"
+                    WebReferenceUrl = "http://mmezl.teleatlas.com/axis/services/Authentication?wsdl"
                     UrlBehavior = "Static"
                 />
                 <File
@@ -306,7 +306,7 @@
                 />
                 <Folder
                     RelPath = "Web References\com.teleatlas.na.ezlocate.geocoding\"
-                    WebReferenceUrl = "http://ezlocate.na.teleatlas.com/Geocoding.wsdl"
+                    WebReferenceUrl = "http://mmezl.teleatlas.com/axis/services/Geocoding?wsdl"
                     UrlBehavior = "Static"
                 />
                 <Folder
