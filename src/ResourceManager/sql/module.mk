@@ -1,10 +1,10 @@
 SQL_SERVER ?= .
-SQL_DATABASE ?= WeiderTest
+SQL_DATABASE ?= Spring2Core
 SQL_USER ?= sa
 SQL_PASSWORD ?= 1qaz2wsx
 
 # Path to SQL Server bin.
-SQL := isql
+SQL := sqlcmd
 BCP := bcp
 SQL_FLAGS := -b -n -r -i
 SQL_LOGIN := /S "${SQL_SERVER}" /U "${SQL_USER}" /P "${SQL_PASSWORD}" -d "${SQL_DATABASE}"
