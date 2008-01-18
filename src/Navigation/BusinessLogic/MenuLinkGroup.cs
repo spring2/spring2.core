@@ -119,5 +119,34 @@ namespace Spring2.Core.Navigation.BusinessLogic {
         public static MenuLinkGroupList GetMenuLinkGroups() {
             return MenuLinkGroupDAO.DAO.GetList();
         }
+		#region Custom Code
+		/// <summary>
+		/// Returns the lowest active MenuLink
+		/// </summary>
+		/// <returns>The lowest active Menu Link</returns>
+		public IMenuLink GetHighestActiveChild()
+		{
+			IMenuLink result = null;
+			if(MenuLinks.Count > 0)
+			{
+				foreach(IMenuLink link in MenuLinks)
+				{
+					if(link.Active.IsTrue)
+					{
+						if(result == null)
+						{
+							result = link;
+							continue;
+						}
+						if(link.Sequence.ToInt32() > result.Sequence.ToInt32())
+						{
+							result = link;
+						}
+					}
+				}
+			}
+			return result;
+		}
+		#endregion
     }
 }

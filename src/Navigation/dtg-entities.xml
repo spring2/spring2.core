@@ -39,14 +39,15 @@
 	    <property name="Keys" type="MenuLinkKeyList" />
 	    <property name="EffectiveDate" type="DateTimeType" column="*" />
 	    <property name="ExpirationDate" type="DateTimeType" column="*" />
+	    <property name="Sequence" type="IdType" column="*" />
 	</properties>
 	<finders>
-	    <finder name="FindByMenuLinkGroup" unique="False" >
+	    <finder name="FindByMenuLinkGroup" unique="False" sort="Sequence, Name" >
 		<properties>
  		    <property name="MenuLinkGroupId" />
 		</properties>
 	    </finder>
-	    <finder name="FindByParentMenuLink" unique="False" >
+	    <finder name="FindByParentMenuLink" unique="False" sort="Sequence, Name" >
 		<properties>
  		    <property name="ParentMenuLinkId" />
 		</properties>

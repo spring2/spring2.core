@@ -32,6 +32,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    public Int32 ParentMenuLinkId;
 	    public Int32 EffectiveDate;
 	    public Int32 ExpirationDate;
+	    public Int32 Sequence;
 
 	    internal ColumnOrdinals(IDataReader reader) {
 		MenuLinkId = reader.GetOrdinal("MenuLinkId");
@@ -42,6 +43,7 @@ namespace Spring2.Core.Navigation.Dao {
 		ParentMenuLinkId = reader.GetOrdinal("ParentMenuLinkId");
 		EffectiveDate = reader.GetOrdinal("EffectiveDate");
 		ExpirationDate = reader.GetOrdinal("ExpirationDate");
+		Sequence = reader.GetOrdinal("Sequence");
 	    }
 
 	    internal ColumnOrdinals(IDataReader reader, String prefix) {
@@ -54,6 +56,7 @@ namespace Spring2.Core.Navigation.Dao {
 		ParentMenuLinkId = reader.GetOrdinal(prefix + "ParentMenuLinkId");
 		EffectiveDate = reader.GetOrdinal(prefix + "EffectiveDate");
 		ExpirationDate = reader.GetOrdinal(prefix + "ExpirationDate");
+		Sequence = reader.GetOrdinal(prefix + "Sequence");
 	    }
 	}
 
@@ -69,6 +72,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    AddPropertyMapping("ParentMenuLinkId", @"ParentMenuLinkId");
 	    AddPropertyMapping("EffectiveDate", @"EffectiveDate");
 	    AddPropertyMapping("ExpirationDate", @"ExpirationDate");
+	    AddPropertyMapping("Sequence", @"Sequence");
 	}
 
 	private MenuLinkDAO() {
@@ -181,7 +185,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Finds a MenuLink entity using it's primary key.
 	/// </summary>
-	/// <param name="menuLinkId">A key field.</param>
+	/// <param name="MenuLinkId">A key field.</param>
 	/// <returns>A MenuLink object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MenuLink Load(IdType menuLinkId) {
@@ -327,6 +331,11 @@ namespace Spring2.Core.Navigation.Dao {
 	    } else {
 		data.ExpirationDate = new DateTimeType(dataReader.GetDateTime(ordinals.ExpirationDate));
 	    }
+	    if (dataReader.IsDBNull(ordinals.Sequence)) {
+		data.Sequence = IdType.UNSET;
+	    } else {
+		data.Sequence = new IdType(dataReader.GetInt32(ordinals.Sequence));
+	    }
 	    return data;
 	}
 
@@ -359,6 +368,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.Parameters.Add(CreateDataParameter("@ParentMenuLinkId", DbType.Int32, ParameterDirection.Input, data.ParentMenuLinkId.IsValid ? data.ParentMenuLinkId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@EffectiveDate", DbType.DateTime, ParameterDirection.Input, data.EffectiveDate.IsValid ? data.EffectiveDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@ExpirationDate", DbType.DateTime, ParameterDirection.Input, data.ExpirationDate.IsValid ? data.ExpirationDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@Sequence", DbType.Int32, ParameterDirection.Input, data.Sequence.IsValid ? data.Sequence.ToInt32() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -399,6 +409,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.Parameters.Add(CreateDataParameter("@ParentMenuLinkId", DbType.Int32, ParameterDirection.Input, data.ParentMenuLinkId.IsValid ? data.ParentMenuLinkId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@EffectiveDate", DbType.DateTime, ParameterDirection.Input, data.EffectiveDate.IsValid ? data.EffectiveDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@ExpirationDate", DbType.DateTime, ParameterDirection.Input, data.ExpirationDate.IsValid ? data.ExpirationDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@Sequence", DbType.Int32, ParameterDirection.Input, data.Sequence.IsValid ? data.Sequence.ToInt32() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -413,7 +424,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Deletes a record from the MenuLink table by MenuLinkId.
 	/// </summary>
-	/// <param name="menuLinkId">A key field.</param>
+	/// <param name="MenuLinkId">A key field.</param>
 	public void Delete(IdType menuLinkId) {
 	    Delete(menuLinkId, null);
 	}
@@ -421,7 +432,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Deletes a record from the MenuLink table by MenuLinkId.
 	/// </summary>
-	/// <param name="menuLinkId">A key field.</param>
+	/// <param name="MenuLinkId">A key field.</param>
 	/// <param name="transaction"></param>
 	public void Delete(IdType menuLinkId, IDbTransaction transaction) {
 	    // Create and execute the command
@@ -441,10 +452,10 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="menuLinkGroupId">A field value to be matched.</param>
+	/// <param name="MenuLinkGroupId">A field value to be matched.</param>
 	/// <returns>The list of MenuLinkDAO objects found.</returns>
 	public MenuLinkList FindByMenuLinkGroup(IdType menuLinkGroupId) {
-	    OrderByClause sort = new OrderByClause("MenuLinkGroupId");
+	    OrderByClause sort = new OrderByClause("Sequence");
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(new SqlEqualityPredicate("MenuLinkGroupId", EqualityOperatorEnum.Equal, menuLinkGroupId.IsValid ? menuLinkGroupId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
@@ -455,15 +466,141 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="parentMenuLinkId">A field value to be matched.</param>
+	/// <param name="ParentMenuLinkId">A field value to be matched.</param>
 	/// <returns>The list of MenuLinkDAO objects found.</returns>
 	public MenuLinkList FindByParentMenuLink(IdType parentMenuLinkId) {
-	    OrderByClause sort = new OrderByClause("ParentMenuLinkId");
+	    OrderByClause sort = new OrderByClause("Sequence");
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(new SqlEqualityPredicate("ParentMenuLinkId", EqualityOperatorEnum.Equal, parentMenuLinkId.IsValid ? parentMenuLinkId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
 
 	    return GetList(dataReader);
 	}
+
+	#region Custom Code
+	public MenuLink FindNextHigherSibling(MenuLink link)
+	{
+		MenuLink result = null;
+		string commandText = string.Empty;
+
+		IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY);
+		cmd.CommandType = CommandType.Text;
+
+		if(link.ParentMenuLinkId.IsValid)
+		{
+			cmd.Parameters.Add(CreateDataParameter("@ParentMenuLinkId", DbType.Int32, ParameterDirection.Input, link.ParentMenuLinkId.IsValid ? link.ParentMenuLinkId.ToInt32() as Object : DBNull.Value));
+			commandText = "select top(1) * from menulink where ParentMenuLinkId = @ParentMenuLinkId and Sequence < @Sequence order by Sequence DESC";
+		}
+		else if(link.MenuLinkGroupId.IsValid)
+		{
+			cmd.Parameters.Add(CreateDataParameter("@MenuLinkGroupId", DbType.Int32, ParameterDirection.Input, link.MenuLinkGroupId.IsValid ? link.MenuLinkGroupId.ToInt32() as Object : DBNull.Value));
+			commandText = "select top(1) * from menulink where MenuLinkGroupId = @MenuLinkGroupId and Sequence < @Sequence order by Sequence DESC";
+		}
+		cmd.Parameters.Add(CreateDataParameter("@Sequence", DbType.Int32, ParameterDirection.Input, link.Sequence.IsValid ? link.Sequence.ToInt32() as Object : DBNull.Value));
+
+		if(commandText != string.Empty)
+		{
+			cmd.CommandText = commandText;
+
+			IDataReader reader = cmd.ExecuteReader();
+
+			result = reader.Read() ? GetDataObjectFromReader(reader) : null;
+
+			cmd.Connection.Close();
+		}
+
+		return result;
+	}
+
+
+	public MenuLink FindNextLowerSibling(MenuLink link)
+	{
+		MenuLink result = null;
+		string commandText = string.Empty;
+
+		IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY);
+		cmd.CommandType = CommandType.Text;
+
+		if(link.ParentMenuLinkId.IsValid)
+		{
+			cmd.Parameters.Add(CreateDataParameter("@ParentMenuLinkId", DbType.Int32, ParameterDirection.Input, link.ParentMenuLinkId.IsValid ? link.ParentMenuLinkId.ToInt32() as Object : DBNull.Value));
+			commandText = "select top(1) * from menulink where ParentMenuLinkId = @ParentMenuLinkId and Sequence > @Sequence order by Sequence";
+		}
+		else if(link.MenuLinkGroupId.IsValid)
+		{
+			cmd.Parameters.Add(CreateDataParameter("@MenuLinkGroupId", DbType.Int32, ParameterDirection.Input, link.MenuLinkGroupId.IsValid ? link.MenuLinkGroupId.ToInt32() as Object : DBNull.Value));
+			commandText = "select top(1) * from menulink where MenuLinkGroupId = @MenuLinkGroupId and Sequence > @Sequence order by Sequence";
+		}
+		cmd.Parameters.Add(CreateDataParameter("@Sequence", DbType.Int32, ParameterDirection.Input, link.Sequence.IsValid ? link.Sequence.ToInt32() as Object : DBNull.Value));
+
+		if(commandText != string.Empty)
+		{
+			cmd.CommandText = commandText;
+
+			IDataReader reader = cmd.ExecuteReader();
+
+			result = reader.Read() ? GetDataObjectFromReader(reader) : null;
+			cmd.Connection.Close();
+		}
+
+		return result;
+	}
+
+
+	public IdType FindNextSequenceByParentId(IdType parentMenuLinkId)
+	{
+		IdType result = IdType.DEFAULT;
+
+		string commandText = "select top(1) sequence + 1 Sequence from menulink where ParentMenuLinkId = @ParentMenuLinkId order by Sequence DESC";
+
+		IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY);
+		cmd.CommandType = CommandType.Text;
+
+		cmd.Parameters.Add(CreateDataParameter("@ParentMenuLinkId", DbType.Int32, ParameterDirection.Input, parentMenuLinkId.IsValid ? parentMenuLinkId.ToInt32() as Object : DBNull.Value));
+
+		if(commandText != string.Empty)
+		{
+			cmd.CommandText = commandText;
+
+			IDataReader reader = cmd.ExecuteReader();
+
+			int ordinal = reader.GetOrdinal("Sequence");
+
+			result = (reader.Read() && !reader.IsDBNull(ordinal)) ? new IdType(reader.GetInt32(ordinal)) : 1;
+
+			cmd.Connection.Close();
+		}
+
+		return result;
+	}
+
+
+	public IdType FindNextSequenceByGroupId(IdType menuLinkGroupId)
+	{
+		IdType result = IdType.DEFAULT;
+
+		string commandText = "select top(1) sequence + 1 Sequence from menulink where MenuLinkGroupId = @MenuLinkGroupId order by Sequence DESC";
+
+		IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY);
+		cmd.CommandType = CommandType.Text;
+
+		cmd.Parameters.Add(CreateDataParameter("@MenuLinkGroupId", DbType.Int32, ParameterDirection.Input, menuLinkGroupId.IsValid ? menuLinkGroupId.ToInt32() as Object : DBNull.Value));
+
+		if(commandText != string.Empty)
+		{
+			cmd.CommandText = commandText;
+
+			IDataReader reader = cmd.ExecuteReader();
+
+			int ordinal = reader.GetOrdinal("Sequence");
+
+			result = (reader.Read() && !reader.IsDBNull(ordinal)) ? new IdType(reader.GetInt32(ordinal)) : 1;
+
+			cmd.Connection.Close();
+		}
+
+		return result;
+	}
+	#endregion
     }
 }

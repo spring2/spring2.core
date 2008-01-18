@@ -6,14 +6,15 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE dbo.spMenuLink_Insert
+CREATE PROCEDURE spMenuLink_Insert
 	@Name	VarChar(75) = null,
 	@Target	VarChar(150) = null,
 	@Active	Bit = null,
 	@MenuLinkGroupId	Int = null,
 	@ParentMenuLinkId	Int = null,
 	@EffectiveDate	DateTime = null,
-	@ExpirationDate	DateTime = null
+	@ExpirationDate	DateTime = null,
+	@Sequence	Int = null
 
 AS
 
@@ -25,7 +26,8 @@ INSERT INTO MenuLink
 	MenuLinkGroupId,
 	ParentMenuLinkId,
 	EffectiveDate,
-	ExpirationDate)
+	ExpirationDate,
+	Sequence)
 VALUES (
 	@Name,
 	@Target,
@@ -33,7 +35,8 @@ VALUES (
 	@MenuLinkGroupId,
 	@ParentMenuLinkId,
 	@EffectiveDate,
-	@ExpirationDate)
+	@ExpirationDate,
+	@Sequence)
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN

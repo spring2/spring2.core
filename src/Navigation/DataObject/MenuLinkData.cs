@@ -25,6 +25,7 @@ namespace Spring2.Core.Navigation.DataObject {
 	private MenuLinkKeyList keys = MenuLinkKeyList.DEFAULT;
 	private DateTimeType effectiveDate = DateTimeType.DEFAULT;
 	private DateTimeType expirationDate = DateTimeType.DEFAULT;
+	private IdType sequence = IdType.DEFAULT;
 
 	public StringType Name {
 	    get { return this.name; }
@@ -69,6 +70,11 @@ namespace Spring2.Core.Navigation.DataObject {
 	public DateTimeType ExpirationDate {
 	    get { return this.expirationDate; }
 	    set { this.expirationDate = value; }
+	}
+
+	public IdType Sequence {
+	    get { return this.sequence; }
+	    set { this.sequence = value; }
 	}
 
 	public Boolean IsDefault {

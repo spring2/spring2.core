@@ -42,6 +42,9 @@ namespace Spring2.Core.Navigation.BusinessLogic {
         private DateTimeType expirationDate = DateTimeType.DEFAULT;
         
         [Generate()]
+        private IdType sequence = IdType.DEFAULT;
+        
+        [Generate()]
         internal MenuLink() {
             
         }
@@ -150,6 +153,28 @@ namespace Spring2.Core.Navigation.BusinessLogic {
         }
         
         [Generate()]
+        public IdType Sequence {
+            get {
+                return this.sequence;
+            }
+            set {
+                this.sequence = value;
+            }
+        }
+        
+        public BooleanType CanMoveUp {
+            get {
+                return MenuLinkDAO.DAO.FindNextHigherSibling(this) != null;
+            }
+        }
+        
+        public BooleanType CanMoveDown {
+            get {
+                return MenuLinkDAO.DAO.FindNextLowerSibling(this) != null;
+            }
+        }
+        
+        [Generate()]
         public static MenuLink NewInstance() {
             return new MenuLink();
         }
@@ -168,6 +193,7 @@ namespace Spring2.Core.Navigation.BusinessLogic {
 	    parentMenuLinkId = data.ParentMenuLinkId.IsDefault ? parentMenuLinkId : data.ParentMenuLinkId;
 	    effectiveDate = data.EffectiveDate.IsDefault ? effectiveDate : data.EffectiveDate;
 	    expirationDate = data.ExpirationDate.IsDefault ? expirationDate : data.ExpirationDate;
+	    sequence = data.Sequence.IsDefault ? sequence : data.Sequence;
 	    Store();
         }
         
@@ -217,5 +243,70 @@ namespace Spring2.Core.Navigation.BusinessLogic {
 	    }
 	    return BooleanType.FALSE;
         }
+        
+		#region Custom Code
+        public void MoveUp() 
+		{
+            MenuLink sibling = MenuLinkDAO.DAO.FindNextHigherSibling(this);
+			IdType tmp = IdType.DEFAULT;
+			if (sibling != null) 
+			{
+				tmp = this.Sequence;
+				this.Sequence = sibling.Sequence;
+				sibling.Sequence = tmp;
+
+				this.Store();
+				sibling.Store();
+			}
+        }
+        
+        public void MoveDown() {
+            MenuLink sibling = MenuLinkDAO.DAO.FindNextLowerSibling(this);
+			IdType tmp = IdType.DEFAULT;
+			if (sibling != null) 
+			{
+				tmp = this.Sequence;
+				this.Sequence = sibling.Sequence;
+				sibling.Sequence = tmp;
+
+				this.Store();
+				sibling.Store();
+			}
+        }
+
+		public static IdType FindNextSequenceByParentId(IdType parentMenuLinkId)
+		{
+			return MenuLinkDAO.DAO.FindNextSequenceByParentId(parentMenuLinkId);
+		}
+
+		public static IdType FindNextSequenceByGroupId(IdType menuLinkGroupId)
+		{
+			return MenuLinkDAO.DAO.FindNextSequenceByGroupId(menuLinkGroupId);
+		}
+
+		public IMenuLink GetHighestActiveChild()
+		{
+			IMenuLink result = null;
+			if(ChildMenuLinks.Count > 0)
+			{
+				foreach(IMenuLink link in ChildMenuLinks)
+				{
+					if(link.Active.IsTrue)
+					{
+						if(result == null)
+						{
+							result = link;
+							continue;
+						}
+						if(link.Sequence.ToInt32() > result.Sequence.ToInt32())
+						{
+							result = link;
+						}
+					}
+				}
+			}
+			return result;
+		}
+		#endregion
     }
 }

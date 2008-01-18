@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE dbo.spMenuLink_Update
+CREATE PROCEDURE spMenuLink_Update
 
 	@MenuLinkId	Int = null,
 	@Name	VarChar(75) = null,
@@ -15,7 +15,8 @@ CREATE PROCEDURE dbo.spMenuLink_Update
 	@MenuLinkGroupId	Int = null,
 	@ParentMenuLinkId	Int = null,
 	@EffectiveDate	DateTime = null,
-	@ExpirationDate	DateTime = null
+	@ExpirationDate	DateTime = null,
+	@Sequence	Int = null
 
 AS
 
@@ -29,7 +30,8 @@ SET
 	MenuLinkGroupId = @MenuLinkGroupId,
 	ParentMenuLinkId = @ParentMenuLinkId,
 	EffectiveDate = @EffectiveDate,
-	ExpirationDate = @ExpirationDate
+	ExpirationDate = @ExpirationDate,
+	Sequence = @Sequence
 WHERE
 MenuLinkId = @MenuLinkId
 

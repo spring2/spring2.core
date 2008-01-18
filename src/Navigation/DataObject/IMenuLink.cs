@@ -28,6 +28,7 @@ namespace Spring2.Core.Navigation.DataObject {
 	public static readonly String KEYS = "Keys";
 	public static readonly String EFFECTIVEDATE = "EffectiveDate";
 	public static readonly String EXPIRATIONDATE = "ExpirationDate";
+	public static readonly String SEQUENCE = "Sequence";
     }
 
     public interface IMenuLink : IBusinessEntity {
@@ -61,9 +62,18 @@ namespace Spring2.Core.Navigation.DataObject {
 	DateTimeType ExpirationDate {
 	    get;
 	}
+	IdType Sequence {
+	    get;
+	}
 
 	#region Custome Code
 	BooleanType IsSelected(StringType key);
+	BooleanType CanMoveUp {get;}
+	BooleanType CanMoveDown {get;}
+
+	void MoveUp();
+	void MoveDown();
+	IMenuLink GetHighestActiveChild();
 	#endregion
     }
 }

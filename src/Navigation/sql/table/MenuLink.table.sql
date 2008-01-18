@@ -21,7 +21,7 @@ end
 GO
 
 if not exists (select * from dbo.sysobjects where id = object_id(N'[MenuLink]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-CREATE TABLE dbo.MenuLink (
+CREATE TABLE MenuLink (
 	MenuLinkId Int IDENTITY(1,1) NOT NULL,
 	Name VarChar(75) NOT NULL,
 	Target VarChar(150) NOT NULL,
@@ -29,7 +29,8 @@ CREATE TABLE dbo.MenuLink (
 	MenuLinkGroupId Int NULL,
 	ParentMenuLinkId Int NULL,
 	EffectiveDate DateTime NULL,
-	ExpirationDate DateTime NULL
+	ExpirationDate DateTime NULL,
+	Sequence Int NULL
 )
 GO
 
@@ -134,6 +135,19 @@ GO
 if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'ExpirationDate')
   BEGIN
 	exec #spAlterColumn 'MenuLink', 'ExpirationDate', 'DateTime', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('MenuLink') and name = 'Sequence')
+  BEGIN
+	ALTER TABLE MenuLink ADD
+	    Sequence Int NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'Sequence')
+  BEGIN
+	exec #spAlterColumn 'MenuLink', 'Sequence', 'Int', 0
   END
 GO
 

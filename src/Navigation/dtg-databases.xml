@@ -47,6 +47,7 @@
 		    <column name="ParentMenuLinkId" sqltype="Int" required="False" />
 		    <column name="EffectiveDate" sqltype="DateTime" required="False" />
 		    <column name="ExpirationDate" sqltype="DateTime" required="False" />
+		    <column name="Sequence" sqltype="Int" required="False" />
 		</columns>
 		<constraints>
 		    <constraint name="PK_MenuLink" type="PRIMARY KEY">

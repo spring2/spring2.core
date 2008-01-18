@@ -386,5 +386,8 @@ namespace Spring2.Core.Navigation.Dao {
 
 	    return GetDataObject(dataReader);
 	}
+
+	#region Custom Code
+	#endregion
     }
 }
