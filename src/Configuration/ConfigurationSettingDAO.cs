@@ -351,7 +351,7 @@ namespace Spring2.Core.Configuration {
 
 	    //Create the parameters and append them to the command object
 	    cmd.Parameters.Add(CreateDataParameter("@ConfigurationSettingId", DbType.Int32, ParameterDirection.Input, data.ConfigurationSettingId.IsValid ? data.ConfigurationSettingId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Key", DbType.Int32, ParameterDirection.Input, data.Key.IsValid ? data.Key.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@Key", DbType.AnsiString, ParameterDirection.Input, data.Key.IsValid ? data.Key.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@Value", DbType.AnsiString, ParameterDirection.Input, data.Value.IsValid ? data.Value.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedDate", DbType.DateTime, ParameterDirection.Input, data.LastModifiedDate.IsValid ? data.LastModifiedDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedUserId", DbType.Int32, ParameterDirection.Input, data.LastModifiedUserId.IsValid ? data.LastModifiedUserId.ToInt32() as Object : DBNull.Value));

@@ -8,7 +8,7 @@
 			<column name="LastModifiedUserId" sqltype="Int" required="True" />
 		    </columns>
 		    <constraints>
-			<constraint name="PK_ConfigrationSetting" type="PRIMARY KEY">
+			<constraint name="PK_ConfigurationSetting" type="PRIMARY KEY">
 			    <column name="ConfigurationSettingId" />
 			</constraint>
 		    <constraint name="UN_ConfigurationSetting" type="UNIQUE">
