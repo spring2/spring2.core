@@ -26,6 +26,7 @@ namespace Spring2.Core.Navigation.DataObject {
 	private DateTimeType effectiveDate = DateTimeType.DEFAULT;
 	private DateTimeType expirationDate = DateTimeType.DEFAULT;
 	private IdType sequence = IdType.DEFAULT;
+	private StringType targetWindow = StringType.DEFAULT;
 
 	public StringType Name {
 	    get { return this.name; }
@@ -75,6 +76,11 @@ namespace Spring2.Core.Navigation.DataObject {
 	public IdType Sequence {
 	    get { return this.sequence; }
 	    set { this.sequence = value; }
+	}
+
+	public StringType TargetWindow {
+	    get { return this.targetWindow; }
+	    set { this.targetWindow = value; }
 	}
 
 	public Boolean IsDefault {

@@ -33,6 +33,7 @@ namespace Spring2.Core.Navigation.DataObject {
 	MenuLinkList MenuLinks {
 	    get;
 	}
+
 	#region Custom Code
 	IMenuLink GetHighestActiveChild();
 	#endregion

@@ -19,7 +19,8 @@ SELECT
     MenuLink.ParentMenuLinkId,
     MenuLink.EffectiveDate,
     MenuLink.ExpirationDate,
-    MenuLink.Sequence
+    MenuLink.Sequence,
+    MenuLink.TargetWindow
 FROM
     MenuLink
 GO

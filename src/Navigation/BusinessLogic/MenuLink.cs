@@ -45,6 +45,9 @@ namespace Spring2.Core.Navigation.BusinessLogic {
         private IdType sequence = IdType.DEFAULT;
         
         [Generate()]
+        private StringType targetWindow = StringType.DEFAULT;
+        
+        [Generate()]
         internal MenuLink() {
             
         }
@@ -175,6 +178,16 @@ namespace Spring2.Core.Navigation.BusinessLogic {
         }
         
         [Generate()]
+        public StringType TargetWindow {
+            get {
+                return this.targetWindow;
+            }
+            set {
+                this.targetWindow = value;
+            }
+        }
+        
+        [Generate()]
         public static MenuLink NewInstance() {
             return new MenuLink();
         }
@@ -194,6 +207,7 @@ namespace Spring2.Core.Navigation.BusinessLogic {
 	    effectiveDate = data.EffectiveDate.IsDefault ? effectiveDate : data.EffectiveDate;
 	    expirationDate = data.ExpirationDate.IsDefault ? expirationDate : data.ExpirationDate;
 	    sequence = data.Sequence.IsDefault ? sequence : data.Sequence;
+	    targetWindow = data.TargetWindow.IsDefault ? targetWindow : data.TargetWindow;
 	    Store();
         }
         
@@ -244,9 +258,7 @@ namespace Spring2.Core.Navigation.BusinessLogic {
 	    return BooleanType.FALSE;
         }
         
-		#region Custom Code
-        public void MoveUp() 
-		{
+        public void MoveUp() {
             MenuLink sibling = MenuLinkDAO.DAO.FindNextHigherSibling(this);
 			IdType tmp = IdType.DEFAULT;
 			if (sibling != null) 
@@ -273,20 +285,17 @@ namespace Spring2.Core.Navigation.BusinessLogic {
 				sibling.Store();
 			}
         }
-
-		public static IdType FindNextSequenceByParentId(IdType parentMenuLinkId)
-		{
-			return MenuLinkDAO.DAO.FindNextSequenceByParentId(parentMenuLinkId);
-		}
-
-		public static IdType FindNextSequenceByGroupId(IdType menuLinkGroupId)
-		{
-			return MenuLinkDAO.DAO.FindNextSequenceByGroupId(menuLinkGroupId);
-		}
-
-		public IMenuLink GetHighestActiveChild()
-		{
-			IMenuLink result = null;
+        
+        public static IdType FindNextSequenceByParentId(IdType parentMenuLinkId) {
+            return MenuLinkDAO.DAO.FindNextSequenceByParentId(parentMenuLinkId);
+        }
+        
+        public static IdType FindNextSequenceByGroupId(IdType menuLinkGroupId) {
+            return MenuLinkDAO.DAO.FindNextSequenceByGroupId(menuLinkGroupId);
+        }
+        
+        public IMenuLink GetHighestActiveChild() {
+            IMenuLink result = null;
 			if(ChildMenuLinks.Count > 0)
 			{
 				foreach(IMenuLink link in ChildMenuLinks)
@@ -306,7 +315,6 @@ namespace Spring2.Core.Navigation.BusinessLogic {
 				}
 			}
 			return result;
-		}
-		#endregion
+        }
     }
 }

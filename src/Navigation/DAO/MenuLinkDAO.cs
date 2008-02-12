@@ -33,6 +33,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    public Int32 EffectiveDate;
 	    public Int32 ExpirationDate;
 	    public Int32 Sequence;
+	    public Int32 TargetWindow;
 
 	    internal ColumnOrdinals(IDataReader reader) {
 		MenuLinkId = reader.GetOrdinal("MenuLinkId");
@@ -44,6 +45,7 @@ namespace Spring2.Core.Navigation.Dao {
 		EffectiveDate = reader.GetOrdinal("EffectiveDate");
 		ExpirationDate = reader.GetOrdinal("ExpirationDate");
 		Sequence = reader.GetOrdinal("Sequence");
+		TargetWindow = reader.GetOrdinal("TargetWindow");
 	    }
 
 	    internal ColumnOrdinals(IDataReader reader, String prefix) {
@@ -57,6 +59,7 @@ namespace Spring2.Core.Navigation.Dao {
 		EffectiveDate = reader.GetOrdinal(prefix + "EffectiveDate");
 		ExpirationDate = reader.GetOrdinal(prefix + "ExpirationDate");
 		Sequence = reader.GetOrdinal(prefix + "Sequence");
+		TargetWindow = reader.GetOrdinal(prefix + "TargetWindow");
 	    }
 	}
 
@@ -73,6 +76,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    AddPropertyMapping("EffectiveDate", @"EffectiveDate");
 	    AddPropertyMapping("ExpirationDate", @"ExpirationDate");
 	    AddPropertyMapping("Sequence", @"Sequence");
+	    AddPropertyMapping("TargetWindow", @"TargetWindow");
 	}
 
 	private MenuLinkDAO() {
@@ -336,6 +340,11 @@ namespace Spring2.Core.Navigation.Dao {
 	    } else {
 		data.Sequence = new IdType(dataReader.GetInt32(ordinals.Sequence));
 	    }
+	    if (dataReader.IsDBNull(ordinals.TargetWindow)) {
+		data.TargetWindow = StringType.UNSET;
+	    } else {
+		data.TargetWindow = StringType.Parse(dataReader.GetString(ordinals.TargetWindow));
+	    }
 	    return data;
 	}
 
@@ -369,6 +378,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.Parameters.Add(CreateDataParameter("@EffectiveDate", DbType.DateTime, ParameterDirection.Input, data.EffectiveDate.IsValid ? data.EffectiveDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@ExpirationDate", DbType.DateTime, ParameterDirection.Input, data.ExpirationDate.IsValid ? data.ExpirationDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@Sequence", DbType.Int32, ParameterDirection.Input, data.Sequence.IsValid ? data.Sequence.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@TargetWindow", DbType.AnsiString, ParameterDirection.Input, data.TargetWindow.IsValid ? data.TargetWindow.ToString() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -410,6 +420,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.Parameters.Add(CreateDataParameter("@EffectiveDate", DbType.DateTime, ParameterDirection.Input, data.EffectiveDate.IsValid ? data.EffectiveDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@ExpirationDate", DbType.DateTime, ParameterDirection.Input, data.ExpirationDate.IsValid ? data.ExpirationDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@Sequence", DbType.Int32, ParameterDirection.Input, data.Sequence.IsValid ? data.Sequence.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@TargetWindow", DbType.AnsiString, ParameterDirection.Input, data.TargetWindow.IsValid ? data.TargetWindow.ToString() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -455,7 +466,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <param name="MenuLinkGroupId">A field value to be matched.</param>
 	/// <returns>The list of MenuLinkDAO objects found.</returns>
 	public MenuLinkList FindByMenuLinkGroup(IdType menuLinkGroupId) {
-	    OrderByClause sort = new OrderByClause("Sequence");
+	    OrderByClause sort = new OrderByClause("Sequence, Name");
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(new SqlEqualityPredicate("MenuLinkGroupId", EqualityOperatorEnum.Equal, menuLinkGroupId.IsValid ? menuLinkGroupId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
@@ -469,7 +480,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <param name="ParentMenuLinkId">A field value to be matched.</param>
 	/// <returns>The list of MenuLinkDAO objects found.</returns>
 	public MenuLinkList FindByParentMenuLink(IdType parentMenuLinkId) {
-	    OrderByClause sort = new OrderByClause("Sequence");
+	    OrderByClause sort = new OrderByClause("Sequence, Name");
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(new SqlEqualityPredicate("ParentMenuLinkId", EqualityOperatorEnum.Equal, parentMenuLinkId.IsValid ? parentMenuLinkId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	

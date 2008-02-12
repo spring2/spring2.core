@@ -269,5 +269,18 @@ namespace Spring2.Core.Navigation.DataObject {
 	    }
 	}
 
+	[Generate]
+	public class TargetWindowSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMenuLink o1 = (IMenuLink)a;
+		IMenuLink o2 = (IMenuLink)b;
+
+		if (o1 == null || o2 == null || !o1.TargetWindow.IsValid || !o2.TargetWindow.IsValid) {
+		    return 0;
+		}
+		return o1.TargetWindow.CompareTo(o2.TargetWindow);
+	    }
+	}
+
     }
 }

@@ -14,7 +14,8 @@ CREATE PROCEDURE spMenuLink_Insert
 	@ParentMenuLinkId	Int = null,
 	@EffectiveDate	DateTime = null,
 	@ExpirationDate	DateTime = null,
-	@Sequence	Int = null
+	@Sequence	Int = null,
+	@TargetWindow	VarChar(50) = null
 
 AS
 
@@ -27,7 +28,8 @@ INSERT INTO MenuLink
 	ParentMenuLinkId,
 	EffectiveDate,
 	ExpirationDate,
-	Sequence)
+	Sequence,
+	TargetWindow)
 VALUES (
 	@Name,
 	@Target,
@@ -36,7 +38,8 @@ VALUES (
 	@ParentMenuLinkId,
 	@EffectiveDate,
 	@ExpirationDate,
-	@Sequence)
+	@Sequence,
+	@TargetWindow)
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN

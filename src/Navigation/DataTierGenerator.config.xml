@@ -63,5 +63,5 @@
     <types-ref xinc:href="types.inc.xml" />
     <sqltypes-ref xinc:href="sqltypes.xml" />
     <databases-ref xinc:href="dtg-databases.xml" />
-	<messages-ref xinc:href="dtg-messages.xml" />
+	<!-- <messages-ref xinc:href="dtg-messages.xml" /> -->
 </DataTierGenerator>

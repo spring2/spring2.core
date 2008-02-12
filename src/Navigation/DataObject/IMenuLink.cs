@@ -29,6 +29,7 @@ namespace Spring2.Core.Navigation.DataObject {
 	public static readonly String EFFECTIVEDATE = "EffectiveDate";
 	public static readonly String EXPIRATIONDATE = "ExpirationDate";
 	public static readonly String SEQUENCE = "Sequence";
+	public static readonly String TARGETWINDOW = "TargetWindow";
     }
 
     public interface IMenuLink : IBusinessEntity {
@@ -63,6 +64,9 @@ namespace Spring2.Core.Navigation.DataObject {
 	    get;
 	}
 	IdType Sequence {
+	    get;
+	}
+	StringType TargetWindow {
 	    get;
 	}
 

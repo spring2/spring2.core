@@ -30,7 +30,8 @@ CREATE TABLE MenuLink (
 	ParentMenuLinkId Int NULL,
 	EffectiveDate DateTime NULL,
 	ExpirationDate DateTime NULL,
-	Sequence Int NULL
+	Sequence Int NULL,
+	TargetWindow VarChar(50) NOT NULL CONSTRAINT [DF_MenuLink_TargetWindow] DEFAULT ('_self')
 )
 GO
 
@@ -148,6 +149,37 @@ GO
 if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'Sequence')
   BEGIN
 	exec #spAlterColumn 'MenuLink', 'Sequence', 'Int', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('MenuLink') and name = 'TargetWindow')
+  BEGIN
+	ALTER TABLE MenuLink ADD
+	    TargetWindow VarChar(50) NOT NULL
+	CONSTRAINT
+	    [DF_MenuLink_TargetWindow] DEFAULT '_self' WITH VALUES
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'TargetWindow')
+  BEGIN
+	declare @cdefault varchar(1000)
+	select @cdefault = '[' + object_name(cdefault) + ']' from syscolumns where id=object_id('MenuLink') and name = 'TargetWindow'
+
+	if @cdefault is not null
+		exec('alter table MenuLink DROP CONSTRAINT ' + @cdefault)
+		
+	if exists(select * from sysobjects where name = 'DF_MenuLink_TargetWindow' and xtype='D')
+          begin
+            declare @table sysname
+            select @table=object_name(parent_obj) from  sysobjects where (name = 'DF_MenuLink_TargetWindow' and xtype='D')
+            exec('alter table ' + @table + ' DROP CONSTRAINT [DF_MenuLink_TargetWindow]')
+          end
+	
+	exec #spAlterColumn 'MenuLink', 'TargetWindow', 'VarChar(50)', 0
+	if not exists(select * from sysobjects where name = 'DF_MenuLink_TargetWindow' and xtype='D')
+		alter table MenuLink
+			ADD CONSTRAINT [DF_MenuLink_TargetWindow] DEFAULT '_self' FOR TargetWindow WITH VALUES
   END
 GO
 

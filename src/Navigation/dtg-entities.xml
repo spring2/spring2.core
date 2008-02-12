@@ -40,6 +40,7 @@
 	    <property name="EffectiveDate" type="DateTimeType" column="*" />
 	    <property name="ExpirationDate" type="DateTimeType" column="*" />
 	    <property name="Sequence" type="IdType" column="*" />
+	    <property name="TargetWindow" type="StringType" column="*" />
 	</properties>
 	<finders>
 	    <finder name="FindByMenuLinkGroup" unique="False" sort="Sequence, Name" >

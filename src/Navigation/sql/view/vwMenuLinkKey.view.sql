@@ -1,12 +1,12 @@
-if exists (select * from sysobjects where id = object_id(N'dbo.[vwMenuLinkKey]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view dbo.[vwMenuLinkKey]
+if exists (select * from sysobjects where id = object_id(N'[vwMenuLinkKey]') and OBJECTPROPERTY(id, N'IsView') = 1)
+drop view [vwMenuLinkKey]
 GO
 
 SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE VIEW dbo.[vwMenuLinkKey]
+CREATE VIEW [vwMenuLinkKey]
 
 AS
 

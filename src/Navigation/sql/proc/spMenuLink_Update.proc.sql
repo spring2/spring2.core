@@ -16,7 +16,8 @@ CREATE PROCEDURE spMenuLink_Update
 	@ParentMenuLinkId	Int = null,
 	@EffectiveDate	DateTime = null,
 	@ExpirationDate	DateTime = null,
-	@Sequence	Int = null
+	@Sequence	Int = null,
+	@TargetWindow	VarChar(50) = null
 
 AS
 
@@ -31,7 +32,8 @@ SET
 	ParentMenuLinkId = @ParentMenuLinkId,
 	EffectiveDate = @EffectiveDate,
 	ExpirationDate = @ExpirationDate,
-	Sequence = @Sequence
+	Sequence = @Sequence,
+	TargetWindow = @TargetWindow
 WHERE
 MenuLinkId = @MenuLinkId
 

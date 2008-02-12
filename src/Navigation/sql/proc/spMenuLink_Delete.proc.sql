@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE dbo.spMenuLink_Delete
+CREATE PROCEDURE spMenuLink_Delete
 
 @MenuLinkId	Int
 
