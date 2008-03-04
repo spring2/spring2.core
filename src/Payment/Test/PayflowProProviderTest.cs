@@ -232,6 +232,30 @@ namespace Spring2.Core.Test {
 	public void Settle() {
 		
 	}
+
+	[Test()]
+	public void ShouldEscapeValuesWhenGettingCommandText() {
+	    SaleCommand command = new SaleCommand("Elmer & Fudd", new CurrencyType(random.Next(999)), "El&F", "Elmer&Fudd", "Elmer & Fudd", "Elmer & Fudd", "Elmer & Fudd", "Elm & Fud", "Elmer & Fudd", "Elmer & Fudd", "Elmer & Fudd");
+	    Console.Write(command.CommandText);
+	    Assert.IsTrue(command.CommandText.Length > 0);
+	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&ACCT=") + 6, 14));
+	    Assert.AreEqual("El%26F", command.CommandText.Substring(command.CommandText.IndexOf("&CVV2=") + 6, 6));
+	    Assert.AreEqual("Elmer%26Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&CUSTREF=") + 9, 12));
+	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&EXPDATE=") + 9, 14));
+	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&NAME=") + 6, 14));
+	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&STREET=") + 8, 14));
+	    Assert.AreEqual("Elm+%26+Fud", command.CommandText.Substring(command.CommandText.IndexOf("&ZIP=") + 5, 11));
+	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&COMMENT1=") + 10, 14));
+	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&COMMENT2=") + 10, 14));
+	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&PONUM=") + 7, 14));
+	}
+
+	[Test()]
+	public void ShouldHandleAmpersandInName() {
+	    PayflowProProvider provider = new PayflowProProvider();
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), "11", "09", StringType.UNSET, "Elmer & Fudd", StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    Assert.AreEqual("0", result.ResultCode);
+	}
 	#endregion
     	    	
 	#region Invalid configuration

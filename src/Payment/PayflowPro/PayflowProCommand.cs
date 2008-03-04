@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Text;
+using System.Web;
 
 using log4net;
 
@@ -63,7 +64,7 @@ namespace Spring2.Core.Payment.PayflowPro {
 		if (value.Length > maxLength) {
 		    value = value.Substring(0, maxLength);
 		}
-		sb.Append("&").Append(command).Append("=").Append(value);
+		sb.Append("&").Append(command).Append("=").Append(HttpUtility.UrlEncode(value));
 	    }
 	}
     	
