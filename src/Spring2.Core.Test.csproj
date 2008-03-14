@@ -209,22 +209,12 @@
                     Project = "{06211A7B-46F9-4E4F-AA71-7F865B75CA89}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
-                <Reference
-                    Name = "Spring2.Core.Ajax"
-                    Project = "{40C60A12-0493-4B5A-9B48-C8DFD878DFD5}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
-                />
             </References>
         </Build>
         <Files>
             <Include>
                 <File
                     RelPath = "AssemblyVersionInfo.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Test\AjaxTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

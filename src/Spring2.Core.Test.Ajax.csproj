@@ -3,14 +3,14 @@
     <ProjectType>Local</ProjectType>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{40C60A12-0493-4B5A-9B48-C8DFD878DFD5}</ProjectGuid>
+    <ProjectGuid>{3F634E1D-24BE-4729-8B48-B801B85219E2}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ApplicationIcon>
     </ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
-    <AssemblyName>Spring2.Core.Ajax</AssemblyName>
+    <AssemblyName>Spring2.Core.Test.Ajax</AssemblyName>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
@@ -27,7 +27,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>0.0</OldToolsVersion>
-    <PublishUrl>http://localhost/Spring2.Core.Ajax/</PublishUrl>
+    <PublishUrl>http://localhost/Spring2.Core.Test.Ajax/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -44,14 +44,14 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\build\Ajax\</OutputPath>
+    <OutputPath>..\build\</OutputPath>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <BaseAddress>285212672</BaseAddress>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>Spring2.Core.Ajax.xml</DocumentationFile>
+    <DocumentationFile>Spring2.Core.Test.Ajax.xml</DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <NoStdLib>false</NoStdLib>
@@ -94,12 +94,12 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>Spring2.Core.Ajax.xml</DocumentationFile>
+    <DefineConstants>DEBUG;TRACE;NET_2_0</DefineConstants>
+    <DocumentationFile>Spring2.Core.Test.Ajax.xml</DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <NoStdLib>false</NoStdLib>
-    <NoWarn>1591</NoWarn>
+    <NoWarn>1591,1718</NoWarn>
     <Optimize>false</Optimize>
     <RegisterForComInterop>false</RegisterForComInterop>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
@@ -107,33 +107,56 @@
     <WarningLevel>4</WarningLevel>
     <DebugType>full</DebugType>
     <ErrorReport>prompt</ErrorReport>
+    <PostBuildEvent>
+	copy $(ProjectDir)Test\Ajax\App.config ..\build\net-2.0\$(TargetPath).config
+    </PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Maverick">
+      <Name>Maverick</Name>
+      <HintPath>..\lib\Maverick.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <Name>nunit.framework</Name>
+      <HintPath>..\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="Spring2.Core, Version=1.1.73.5925, Culture=neutral, PublicKeyToken=687bce93d7ce902c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\build\net-2.0\Spring2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Spring2.Core.PropertyPopulator, Version=1.1.73.5925, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Spring2.Core.Types, Version=1.1.73.5925, Culture=neutral, PublicKeyToken=687bce93d7ce902c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\build\net-2.0\Spring2.Core.PropertyPopulator.dll</HintPath>
+      <HintPath>..\build\net-2.0\Spring2.Core.Types.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
     <Reference Include="System.Web">
       <Name>System.Web</Name>
     </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="Spring2.Core.Ajax.csproj">
+      <Name>Spring2.Core.Ajax</Name>
+      <Project>{40C60A12-0493-4B5A-9B48-C8DFD878DFD5}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ajax\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Ajax\Command.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="AssemblyVersionInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Test\Ajax\AjaxTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\Ajax\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="Test\Ajax\App.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
@@ -156,7 +179,7 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>
+    <PostBuildEvent>copy $(ProjectDir)Test\Ajax\App.config $(TargetPath).config
     </PostBuildEvent>
   </PropertyGroup>
 </Project>

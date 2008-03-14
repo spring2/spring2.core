@@ -38,6 +38,8 @@
 	<property name="build.configuration" value="NET_2_0" />
 	<call target="internal-build" />
 	<exec program="${msbuild}" commandline="Spring2.Core.MSBuild.CustomTask.csproj" />
+	<exec program="${msbuild}" commandline="Spring2.Core.Ajax.csproj /property:configuration=NET_2_0" />
+	<exec program="${msbuild}" commandline="Spring2.Core.Ajax.Test.csproj /property:configuration=NET_2_0" />
     </target>
 
     <target name="internal-build">
@@ -63,7 +65,6 @@
 	        <include name="Spring2.Core.PropertyPopulator.csproj" />
 	        <include name="Spring2.Core.Maverick.csproj" />
 	        <include name="Spring2.Core.Security.csproj" />
-	        <include name="Spring2.Core.Ajax.csproj" />
 	        <include name="Spring2.Core.PropertyPopulator.csproj" />
 	        <include name="Spring2.Core.Reporting.csproj" />
 	        <include name="Spring2.Core.ResourceManager.AcceptanceTest.csproj" />
