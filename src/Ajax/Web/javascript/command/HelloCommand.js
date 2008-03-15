@@ -2,8 +2,8 @@
   
   Ajax.Commands.HelloCommand=function(elementId,ajaxCommand,cmdCounter){
   this.ajaxCommand = commandNumberMap.get(ajaxCommand);
-  this.priority=net.CommandQueue.PRIORITY_IMMEDIATE;
-  this.type=net.CommandQueue.TYPE_MULTIPROCESS;
+  this.priority=sp2Ajax.CommandQueue.PRIORITY_IMMEDIATE;
+  this.type=sp2Ajax.CommandQueue.TYPE_MULTIPROCESS;
   this.id=cmdCounter; 
   this.elementId = elementId;
 }

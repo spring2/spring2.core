@@ -16,6 +16,7 @@ if(Context.Items["ajaxCommands"] != null) {
 	<title><%=Context.Items["title"]%> - Spring2 AJAX Framework&trade;</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<% if(ajaxCommands.Count>0) { %>
+	    <script src="<% =Page.ResolveClientUrl("~/javascript/mootools.js") %>" type="text/javascript"></script>
 	    <script src="<% =Page.ResolveClientUrl("~/javascript/arrayMethods.js") %>" type="text/javascript"></script>
 	    <script src="<% =Page.ResolveClientUrl("~/javascript/Hashtable.js") %>" type="text/javascript"></script>
 	    <script src="<% =Page.ResolveClientUrl("~/javascript/CommandQueue.js") %>" type="text/javascript"></script>
@@ -26,7 +27,7 @@ if(Context.Items["ajaxCommands"] != null) {
 		Ajax.Commands=new Object();
 		var Queue = null;
 		function GetQueue(){
-		    Queue = new net.CommandQueue('<%=Page.ResolveClientUrl("~/Ajax.m")%>');
+		    Queue = new sp2Ajax.CommandQueue('<%=Page.ResolveClientUrl("~/Ajax.m")%>');
 		}
 		this.onload = new Function(" GetQueue(); ");
             	    	          
@@ -35,7 +36,7 @@ if(Context.Items["ajaxCommands"] != null) {
 			<%foreach(Command command in ajaxCommands) { %>
 			    case '<%=command.Name%>':
 				var command = new Ajax.Commands.<%=command.Name%>(elementId,id,counter);
-				net.Base.addCommand(command);
+				sp2Ajax.Base.addCommand(command);
 				break;
 			<%}%>
 		    }

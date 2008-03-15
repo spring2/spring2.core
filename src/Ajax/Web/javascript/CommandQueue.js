@@ -1,87 +1,34 @@
 /* namespacing object */
-var net=new Object();
+var sp2Ajax=new Object();
 
-var debug = false;
+sp2Ajax.debug = false;
 
-net.READY_STATE_UNINITIALIZED=0;
-net.READY_STATE_LOADING=1;
-net.READY_STATE_LOADED=2;
-net.READY_STATE_INTERACTIVE=3;
-net.READY_STATE_COMPLETE=4;
+sp2Ajax.READY_STATE_UNINITIALIZED=0;
+sp2Ajax.READY_STATE_LOADING=1;
+sp2Ajax.READY_STATE_LOADED=2;
+sp2Ajax.READY_STATE_INTERACTIVE=3;
+sp2Ajax.READY_STATE_COMPLETE=4;
 
 
 /*--- content loader object for cross-browser requests ---*/
-net.ContentLoader=function(url,onload,onerror,method,params,contentType){
-  this.req=null;
-  this.onload=onload;
-  this.onerror=(onerror) ? onerror : this.defaultError;
-  this.loadXMLDoc(url,method,params,contentType);
-}
-
-net.ContentLoader.prototype={
- loadXMLDoc:function(url,method,params,contentType){
-  if (!method){
-    method="GET";
-  }
-  if (!contentType && method=="POST"){
-    contentType='application/x-www-form-urlencoded';
-  }
-  if (window.XMLHttpRequest){
-    this.req=new XMLHttpRequest();
-  } else if (window.ActiveXObject){
-    this.req=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  if (this.req){
-    try{
-      var loader=this;
-      this.req.onreadystatechange=function(){
-        loader.onReadyState.call(loader);
-      }
-      this.req.open(method,url,true);
-      if (contentType){
-        this.req.setRequestHeader('Content-Type', contentType);
-      }
-      if(debug){
-	alert(params);
-      }
-      this.req.send(params);
-    }catch (err){
-      this.onerror.call(this);
-    }
-  }
- },
-
- onReadyState:function(){
-  var req=this.req;
-  var ready=req.readyState;
-  if (ready==net.READY_STATE_COMPLETE){
-  var httpStatus=req.status;
-    if (httpStatus==200 || httpStatus==0){
-      this.onload.call(this);
-    }else{
-      this.onerror.call(this);
-    }
-  }
- },
-
- defaultError:function(){
-  alert("error fetching data!"
-    +"\n\nreadyState:"+this.req.readyState
-    +"\nstatus: "+this.req.status
-    +"\nheaders: "+this.req.getAllResponseHeaders());
- }
-}
+sp2Ajax.ContentLoader = new Class({
+	Extends: Request,
+	options: {
+		onSuccess: function(){sp2Ajax.CommandQueue.onload(this.response.xml)},
+		onFailure:  function(){sp2Ajax.CommandQueue.onerror(this.xhr.responseText)}
+	}
+});
 
 
 
 
-net.cmdQueues=new Array();
-net.Base;
+sp2Ajax.cmdQueues=new Array();
+sp2Ajax.Base;
 
-net.CommandQueue=function(url,freq){
-  net.Base = this;
+sp2Ajax.CommandQueue=function(url,freq){
+  sp2Ajax.Base = this;
   this.id = "1";
-  net.cmdQueues["1"] = this;
+  sp2Ajax.cmdQueues["1"] = this;
   this.url = url;
   this.queued = new Array();
   this.sent = new Array();
@@ -91,37 +38,37 @@ net.CommandQueue=function(url,freq){
   }
 }
 
-net.CommandQueue.STATUS_QUEUED=-1;
-net.CommandQueue.STATE_UNINITIALIZED=net.READY_STATE_UNINITIALIZED;
-net.CommandQueue.STATE_LOADING=net.READY_STATE_LOADING;
-net.CommandQueue.STATE_LOADED=net.READY_STATE_LOADED;
-net.CommandQueue.STATE_INTERACTIVE=net.READY_STATE_INTERACTIVE;
-net.CommandQueue.STATE_COMPLETE=net.READY_STATE_COMPLETE;
-net.CommandQueue.STATE_PROCESSED=5;
+sp2Ajax.CommandQueue.STATUS_QUEUED=-1;
+sp2Ajax.CommandQueue.STATE_UNINITIALIZED=sp2Ajax.READY_STATE_UNINITIALIZED;
+sp2Ajax.CommandQueue.STATE_LOADING=sp2Ajax.READY_STATE_LOADING;
+sp2Ajax.CommandQueue.STATE_LOADED=sp2Ajax.READY_STATE_LOADED;
+sp2Ajax.CommandQueue.STATE_INTERACTIVE=sp2Ajax.READY_STATE_INTERACTIVE;
+sp2Ajax.CommandQueue.STATE_COMPLETE=sp2Ajax.READY_STATE_COMPLETE;
+sp2Ajax.CommandQueue.STATE_PROCESSED=5;
 
-net.CommandQueue.PRIORITY_NORMAL=0;
-net.CommandQueue.PRIORITY_IMMEDIATE=1;
+sp2Ajax.CommandQueue.PRIORITY_NORMAL=0;
+sp2Ajax.CommandQueue.PRIORITY_IMMEDIATE=1;
 
-net.CommandQueue.TYPE_MULTIPROCESS=0;
-net.CommandQueue.TYPE_SINGLEPROCESS=1;
-net.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE=2;
+sp2Ajax.CommandQueue.TYPE_MULTIPROCESS=0;
+sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS=1;
+sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE=2;
 
-net.CommandQueue.holdQueue = false;
+sp2Ajax.CommandQueue.holdQueue = false;
 
 
-net.CommandQueue.prototype={
+sp2Ajax.CommandQueue.prototype={
  addCommand:function(command){
   if (this.isCommand(command)){
-    if(debug){
+    if(sp2Ajax.debug){
       alert("isCommand");
     }
     var added = false;
-    if(command.type == net.CommandQueue.TYPE_SINGLEPROCESS || command.type == net.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE) {
-      if(debug){alert("Single Process Command");}
+    if(command.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS || command.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE) {
+      if(sp2Ajax.debug){alert("Single Process Command");}
       for(var i=0; i<this.queued.length; i++) {
 	if(this.queued[i].ajaxCommand == command.ajaxCommand) {
 	  this.queued[i] = command;
-	  if(debug){alert("Single Process Command UPDATED");}
+	  if(sp2Ajax.debug){alert("Single Process Command UPDATED");}
 	  added = true;
 	  break;
 	}
@@ -129,14 +76,14 @@ net.CommandQueue.prototype={
     }
     if(!added) {
       this.queued.append(command,true);
-      if(debug){alert("added command");}
+      if(sp2Ajax.debug){alert("added command");}
     }
-    if (command.priority==net.CommandQueue.PRIORITY_IMMEDIATE){
-      if(debug){alert("PRIORITY_IMMEDIATE");}
+    if (command.priority==sp2Ajax.CommandQueue.PRIORITY_IMMEDIATE){
+      if(sp2Ajax.debug){alert("PRIORITY_IMMEDIATE");}
       this.fireRequest();
     }
   }else{
-    if(debug){
+    if(sp2Ajax.debug){
       alert("not command");
     }
   }
@@ -155,7 +102,7 @@ net.CommandQueue.prototype={
     var cmd = this.queued[i];
     if (this.isCommand(cmd)){
       var processCommand = true;
-      if(cmd.type == net.CommandQueue.TYPE_SINGLEPROCESS || cmd.type == net.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE) {
+      if(cmd.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS || cmd.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE) {
         for(var j=0; j<this.sent.length; j++) {
           if(this.sent[j] && this.sent[j].ajaxCommand == cmd.ajaxCommand) {
             newQueued.append(cmd);
@@ -165,7 +112,7 @@ net.CommandQueue.prototype={
         }
       }
       if(processCommand) {
-        if(cmd.tpe == net.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE) {
+        if(cmd.tpe == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE) {
 	  this.holdQueue = true;
 	}
         if(i > 0){
@@ -187,10 +134,10 @@ net.CommandQueue.prototype={
   }
   if(commandStr.length > 12) {
     data = commandStr + commandMapString + this.buildQueryStringVariables();
-    if(debug) {
+    if(sp2Ajax.debug) {
       alert("Query string = " + data);
     }
-    this.loader = new net.ContentLoader(this.url, net.CommandQueue.onload, net.CommandQueue.onerror, "POST",data);
+    this.loader = new sp2Ajax.ContentLoader({url: this.url, method : 'post', data : data}).send({});
   }
   this.queued = newQueued;
   this.queryStringVariables = new Hashtable();
@@ -227,7 +174,7 @@ net.CommandQueue.prototype={
   this.unrepeat();
   if (freq>0){
     this.freq=freq;
-    var cmd="net.Base.fireRequest()";
+    var cmd="sp2Ajax.Base.fireRequest()";
     this.repeater=setInterval(cmd,freq*1000);
   }
  },
@@ -246,23 +193,22 @@ net.CommandQueue.prototype={
  ReleaseQueue:function(){
    this.holdQueue = false;
    for(var i=0; i<this.queued.length; i++){
-     if(this.queued[i].priority == net.CommandQueue.PRIORITY_IMMEDIATE){
-       net.Base.fireRequest();
+     if(this.queued[i].priority == sp2Ajax.CommandQueue.PRIORITY_IMMEDIATE){
+       sp2Ajax.Base.fireRequest();
        return;
      }
    }
  }
 }
 
-net.CommandQueue.onload=function(){
-if(debug){
+sp2Ajax.CommandQueue.onload=function(xmlDoc){
+if(sp2Ajax.debug){
 alert("OnLoad");
 }
-  var xmlDoc=this.req.responseXML;
-  var myText = this.req.responseText;
+  //var xmlDoc=sp2Ajax.CommandQueue.loader.responseXML;
   var elDocRoot=xmlDoc.getElementsByTagName("commands")[0];
   if (elDocRoot){
-    if(debug){
+    if(sp2Ajax.debug){
     alert("Good XML");
     }
     var needFireQueue = false;
@@ -272,12 +218,12 @@ alert("OnLoad");
         var attrs=elChild.attributes;
         var id=attrs.getNamedItem("id").value;
          //Get refence from myself here
-            if(debug){
+            if(sp2Ajax.debug){
             alert(id);
             }
-         command = net.Base.sent[id];   
+         command = sp2Ajax.Base.sent[id];   
        if (command){
-           if(debug){
+           if(sp2Ajax.debug){
             alert("GotCommand");
             }
           var unhandledException = elChild.attributes.getNamedItem("unhandledException");
@@ -285,27 +231,27 @@ alert("OnLoad");
 	    alert(DecodeText(elChild.attributes.getNamedItem("message").value));
 	  } else {
 	    command.ParseResponse(elChild);
-	    if(!needFireQueue && command.type == net.CommandQueue.TYPE_SINGLEPROCESS && command.priority == net.CommandQueue.PRIORITY_IMMEDIATE) {
-	      for(var j=0; j<net.Base.queued.length; j++) {
-		if(command.ajaxCommand == net.Base.queued[j].ajaxCommand) {
+	    if(!needFireQueue && command.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS && command.priority == sp2Ajax.CommandQueue.PRIORITY_IMMEDIATE) {
+	      for(var j=0; j<sp2Ajax.Base.queued.length; j++) {
+		if(command.ajaxCommand == sp2Ajax.Base.queued[j].ajaxCommand) {
 		  needFireQueue = true;
 		  break;
 		}
 	      }
 	    }
-	    net.Base.sent[id] = null;
+	    sp2Ajax.Base.sent[id] = null;
           }
         }
       }
       if(needFireQueue) {
-	net.Base.fireRequest();
+	sp2Ajax.Base.fireRequest();
       }
     }
   }
 }
 
-net.CommandQueue.onerror=function(){
-  alert("problem sending the data to the server");
+sp2Ajax.CommandQueue.onerror=function(message){
+  alert("problem sending the data to the server\n\n" + message);
 }
 
 
