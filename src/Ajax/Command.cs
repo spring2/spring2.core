@@ -6,6 +6,7 @@ using System.Web;
 
 using Spring2.Core.Message;
 using Spring2.Core.PropertyPopulator;
+using Spring2.Core.Ajax.Json;
 
 namespace Spring2.Core.Ajax {
     /// <summary>
@@ -13,7 +14,6 @@ namespace Spring2.Core.Ajax {
     /// </summary>
     abstract public class Command {
 	protected Int32 responseHandlerId;
-	protected String commandIdentifier = String.Empty;
 	protected IMessageFormatter messageFormatter = null;
 	protected NameValueCollection commandValues = null;
 	protected MessageList errors = new MessageList();
@@ -22,10 +22,9 @@ namespace Spring2.Core.Ajax {
 	private String qualifiedName = String.Empty;
 	private Boolean isValid = false;
 
-	public Command(Int32 responseHandlerId, String commandIdentifier, NameValueCollection values, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) {
+	public Command(Int32 responseHandlerId, NameValueCollection values, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) {
 	    this.isValid = true;
 	    this.responseHandlerId = responseHandlerId;
-	    this.commandIdentifier = commandIdentifier;
 	    this.commandValues = values;
 	    this.messageFormatter = formatter;
 	    this.errors = errors;
@@ -70,7 +69,7 @@ namespace Spring2.Core.Ajax {
 	}
 
 	protected virtual void Populate() {
-	    errors.AddRange(Populator.Instance.Populate(this, commandValues, commandIdentifier));
+	    errors.AddRange(Populator.Instance.Populate(this, commandValues));
 	}
 
 	abstract protected String Execute();
