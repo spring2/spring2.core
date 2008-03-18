@@ -5,23 +5,28 @@ using System.Text;
 using System.Reflection;
 
 using Spring2.Core.Ajax;
+using Spring2.Core.Ajax.Json;
 using Spring2.Core.Maverick.Controller;
 using Spring2.Core.Message;
 
 
 namespace Spring2.Core.Ajax.SampleController {
     public class AjaxController : ErrorableController {
-        private bool gotAjaxCommand = false;
-        private String ajaxCommands;
+        //private bool gotAjaxRequest = false;
+        private String ajaxRequest;
 	private String commandName = String.Empty;
 	private Int32 responseHandlerId = 0;
-	private String commandMapString = String.Empty;
-	private Dictionary<String, String> commandMap = new Dictionary<string, string>();  
+        private NameValueCollection formVariables;
 
-        public String AjaxCommand {
+        public NameValueCollection FormVariables {
+            get { return formVariables; }
+            set { formVariables = value; }
+        }	
+
+        public String AjaxRequest {
             set {
-                gotAjaxCommand = true;
-                ajaxCommands = value;
+                //gotAjaxRequest = true;
+                ajaxRequest = value;
             }
 	}
 
@@ -30,51 +35,61 @@ namespace Spring2.Core.Ajax.SampleController {
 	    set { responseHandlerId = value; }
 	}
 
-	public String CommandMapString {
-	    set { commandMapString = value; }
-	}
+        public String CommandName {
+            get { return commandName; }
+            set { commandName = value; }
+        }
 
 	public override string SafePerform() {
-            if (gotAjaxCommand) {
-		CreateCommandMap();
-                String xml = String.Empty;
-                xml = processCommands(ajaxCommands);
+            //if (gotAjaxRequest) {
+		//CreateCommandMap();
+                String json = String.Empty;
+
+                ajaxRequest = @"{""fullyQualifiedNames"":{""0"":""Spring2.Core.Ajax.SampleController.SampleCommand.HelloCommand,Spring2.Core.Ajax.SampleController""},""AjaxCommands"":[";
+                ajaxRequest += @"{""commandkey"":0,""responseHandlerId"":0,""parameters"":{""X"":""MyX"",""Y"":""MyY""}}";
+                ajaxRequest += "]}";
+ 
+                //{'ResponseHandlerId':0, 'Response':{'car':'BMW','Truck':'Dodge','House':'Big'}}
+
+
+                json = processCommands(ajaxRequest);
                 this.ControllerContext.HttpContext.Response.ContentType = "text/xml";
-                this.ControllerContext.Model = xml;
+                this.ControllerContext.Model = json;
                 return "ajax";
-            }
-            return SUCCESS;
+            //}
+            //return SUCCESS;
         }
 
         public String processCommands(String ajaxCommands) {
-            String xml = String.Empty;
+            String json = String.Empty;
+            String jsonWrapper = String.Empty;
             String result = String.Empty;
-            xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><commands>";
-            String[] exCommands = ajaxCommands.Split(',');
-            foreach (String com in exCommands) {
-                String[] commandAndId = com.Split('~');
-                this.ResponseHandlerId = Convert.ToInt32(commandAndId[1]);
-
-                xml += GetCommand(commandMap[commandAndId[0]], com).RunCommand();
+            jsonWrapper = "{command:Responses[";
+            JsonAjaxUtility util = null;
+            try {
+                util = new JsonAjaxUtility(ajaxCommands);
+            } catch (Exception ex ) {
+                json += ex.Message;
             }
-            xml += "</commands>";
-            return xml;
+
+            while (util.NextCommand(ref commandName, ref responseHandlerId, ref formVariables)) {
+                if (json.Length == 0) {
+                    json += GetCommand().RunCommand();
+                } else {
+                    json += "," + GetCommand().RunCommand();
+                }
+            }
+            jsonWrapper += json;
+            jsonWrapper += "]}";
+            return jsonWrapper;
         }
 
-        private Command GetCommand(String commandName, String commandIdentifier) {
+        private Command GetCommand() {
 	    Type clazz = Type.GetType(commandName);
-	    object[] args = { this.ResponseHandlerId, commandIdentifier, this.ControllerContext.HttpContext.Request.Params, this.MessageFormatter, this.Errors, this.Request.Cookies };
+	    object[] args = { this.ResponseHandlerId, this.FormVariables, this.MessageFormatter, this.Errors, this.Request.Cookies };
             Object o = System.Activator.CreateInstance(clazz, args);
             return (Command)o;
         }
-
-	private void CreateCommandMap() {
-	    String[] allMappings = this.commandMapString.Split('~');
-	    foreach(String mapping in allMappings) {
-		String[] mapArray = mapping.Split('^');
-		commandMap.Add(mapArray[0], mapArray[1]);
-	    }
-	}
 
 
 	protected override IMessageFormatter GetMessageFormatter() {
