@@ -11,6 +11,7 @@ using Spring2.Core.Message;
 
 namespace Spring2.Core.Ajax.SampleController.SampleCommand {
     public class HelloCommand : Command {
+	private String helloText = "";
 
 	public static readonly HelloCommand Instance = new HelloCommand();
 
@@ -18,17 +19,19 @@ namespace Spring2.Core.Ajax.SampleController.SampleCommand {
 	protected HelloCommand() { }
 
 	protected override String Execute() {
-	    String result = "Hello";
+	    String result = helloText;
 	    String status = "success";
 
             JsonAjaxUtility util = new JsonAjaxUtility();
             Hashtable response = new Hashtable();
-            response.Add("id", responseHandlerId);
             response.Add("status", status);
             response.Add("message", result);
             return util.SerializeResponse(this.responseHandlerId, response);
+	}
 
-	    //return String.Format("<command id='{0}' status='{1}' message='{2}'></command>", responseHandlerId, status, result);
+	public String HelloText {
+	    get { return helloText; }
+	    set { helloText = value; }
 	}
     }
 }

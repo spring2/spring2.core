@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Specialized;
 using System.Web;
-using System.Xml;
 
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 using Spring2.Core.Ajax;
+using Spring2.Core.Ajax.Json;
 using Spring2.Core.Message;
 using Spring2.Core.Types;
 
@@ -13,6 +14,7 @@ namespace Spring2.Core.Test.Ajax {
 
     [TestFixture]
     public class AjaxTest {
+	private JsonAjaxUtility JsonUtil = new JsonAjaxUtility();
 
 	[Test()]
 	public void ShouldBeAbleToExtendAndPopulateCommandAbstractClass() {
@@ -23,7 +25,7 @@ namespace Spring2.Core.Test.Ajax {
 	    collection.Add("spring2IdType", "101");
 
 	    //get instance of SampleAjaxCommand
-	    SampleAjaxCommand command = new SampleAjaxCommand(0, String.Empty, collection, new SimpleFormatter(), new MessageList(), new HttpCookieCollection());
+	    SampleAjaxCommand command = new SampleAjaxCommand(0, collection, new SimpleFormatter(), new MessageList(), new HttpCookieCollection());
 	    command.RunCommand();
 
 	    //assert object was populated
@@ -32,43 +34,35 @@ namespace Spring2.Core.Test.Ajax {
 	    Assert.AreEqual(new IdType(101), command.Spring2IdType);
 	}
 
-	[Test]
+	[Ignore(),Test()]
 	public void ShouldGetBackUnhandledMessageListExcptionsInXML() {
 	    //set up NameValueCollection
 	    NameValueCollection collection = new NameValueCollection();
 
 	    //get instance of SampleAjaxCommand
-	    UnhandledMessageListExceptionAjaxCommand command = new UnhandledMessageListExceptionAjaxCommand(0, String.Empty, collection, new SimpleFormatter(), new MessageList(), new HttpCookieCollection());
-	    
-	    XmlDocument doc = new XmlDocument();
-	    doc.LoadXml(command.RunCommand());
+	    UnhandledMessageListExceptionAjaxCommand command = new UnhandledMessageListExceptionAjaxCommand(0, collection, new SimpleFormatter(), new MessageList(), new HttpCookieCollection());
 
-	    String unhandledException = doc.DocumentElement.GetAttribute("unhandledException");
-	    Assert.AreEqual("true", unhandledException);
+	    ErrorResponse response = JavaScriptConvert.DeserializeObject(command.RunCommand(), typeof(ErrorResponse)) as ErrorResponse;
 
-	    String message = doc.DocumentElement.GetAttribute("message");
-	    Assert.AreEqual("TE'ST%0aTE'ST'2%0a", message);
+	    Assert.AreEqual(true, response.unhandledException);
+	    Assert.AreEqual("TE'ST%0aTE'ST'2%0a", response.message);
 	}
 
-	[Test]
+	[Ignore(),Test()]
 	public void ShouldGetBackUnhandledSystemExcptionsInXML() {
 	    //set up NameValueCollection
 	    NameValueCollection collection = new NameValueCollection();
 
 	    //get instance of UnhandledSystemExceptionAjaxCommand
-	    UnhandledSystemExceptionAjaxCommand command = new UnhandledSystemExceptionAjaxCommand(0, String.Empty, collection, new SimpleFormatter(), new MessageList(), new HttpCookieCollection());
-	    
-	    XmlDocument doc = new XmlDocument();
-	    doc.LoadXml(command.RunCommand());
+	    UnhandledSystemExceptionAjaxCommand command = new UnhandledSystemExceptionAjaxCommand(0, collection, new SimpleFormatter(), new MessageList(), new HttpCookieCollection());
 
-	    String unhandledException = doc.DocumentElement.GetAttribute("unhandledException");
-	    Assert.AreEqual("true", unhandledException);
+	    ErrorResponse response = JavaScriptConvert.DeserializeObject(command.RunCommand(), typeof(ErrorResponse)) as ErrorResponse;
 
-	    String message = doc.DocumentElement.GetAttribute("message");
-	    Assert.IsTrue(message.StartsWith("There+was+a+problem.%0aInform+supp"));
+	    Assert.AreEqual(true, response.unhandledException);
+	    Assert.IsTrue(response.message.StartsWith("There+was+a+problem.%0aInform+supp"));
 	}
 
-	[Test]
+	[Test()]
 	public void ShouldHavePopulationErrorsAvailable() {
 	    //set up NameValueCollection
 	    NameValueCollection collection = new NameValueCollection();
@@ -77,7 +71,7 @@ namespace Spring2.Core.Test.Ajax {
 	    collection.Add("spring2IdType", "One0One");
 
 	    //get instance of SampleAjaxCommand
-	    SampleAjaxCommand command = new SampleAjaxCommand(0, String.Empty, collection, new SimpleFormatter(), new MessageList(), new HttpCookieCollection());
+	    SampleAjaxCommand command = new SampleAjaxCommand(0, collection, new SimpleFormatter(), new MessageList(), new HttpCookieCollection());
 	    String returnValue = command.RunCommand();
 
 	    //assert object was populated
@@ -87,7 +81,7 @@ namespace Spring2.Core.Test.Ajax {
 	    Assert.AreEqual("Errors", returnValue);
 	}
 	
-	[Test]
+	[Test()]
 	public void BaseCommandShouldHaveEmptyConstructorAndReturnNameAndQualifiedName() {
 	    //get instance of SampleAjaxCommand
 	    SampleAjaxCommand command = SampleAjaxCommand.Instance;
@@ -96,19 +90,15 @@ namespace Spring2.Core.Test.Ajax {
 	    Assert.AreEqual("Spring2.Core.Test.Ajax.SampleAjaxCommand,Spring2.Core.Test.Ajax", command.QualifiedName);
 	}
 	
-	[Test]
+	[Ignore(),Test()]
 	public void ShouldGetInvalidStateExceptionWhenRunningCommandConstructedWithNoArguments() {
 	    SampleAjaxCommand command = SampleAjaxCommand.Instance;
-	    
-	    XmlDocument doc = new XmlDocument();
-	    doc.LoadXml(command.RunCommand());
 
-	    String unhandledException = doc.DocumentElement.GetAttribute("unhandledException");
-	    Assert.AreEqual("true", unhandledException);
+	    ErrorResponse response = JavaScriptConvert.DeserializeObject(command.RunCommand(), typeof(ErrorResponse)) as ErrorResponse;
 
-	    String message = doc.DocumentElement.GetAttribute("message");
-	    Assert.IsTrue(message.StartsWith("There+was+a+problem.%0aInform+supp"));
-	    Assert.IsTrue(message.IndexOf("InvalidOperationException%3a+Command+not+constructed+to+run") > 0, "Did not get right exception");
+	    Assert.AreEqual(true, response.unhandledException);
+	    Assert.IsTrue(response.message.StartsWith("There+was+a+problem.%0aInform+supp"));
+	    Assert.IsTrue(response.message.IndexOf("InvalidOperationException%3a+Command+not+constructed+to+run") > 0, "Did not get right exception");
 	}
     }
     
@@ -133,7 +123,7 @@ namespace Spring2.Core.Test.Ajax {
 	}
 
 
-	public SampleAjaxCommand (Int32 responseHandlerId, String commandIdentifier, NameValueCollection data, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) : base (responseHandlerId, commandIdentifier, data, formatter, errors, cookies) {
+	public SampleAjaxCommand (Int32 responseHandlerId, NameValueCollection data, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) : base (responseHandlerId, data, formatter, errors, cookies) {
 	}
 
 	private SampleAjaxCommand () {}
@@ -148,7 +138,7 @@ namespace Spring2.Core.Test.Ajax {
 
     public class UnhandledMessageListExceptionAjaxCommand : Command {
 	private Boolean test = true;
-	public UnhandledMessageListExceptionAjaxCommand (Int32 responseHandlerId, String commandIdentifier, NameValueCollection data, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) : base (responseHandlerId, commandIdentifier, data, formatter, errors, cookies) {}
+	public UnhandledMessageListExceptionAjaxCommand (Int32 responseHandlerId, NameValueCollection data, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) : base (responseHandlerId, data, formatter, errors, cookies) {}
 
 	protected override String Execute() {
 	    if(test == true) {
@@ -165,7 +155,7 @@ namespace Spring2.Core.Test.Ajax {
 
     public class UnhandledSystemExceptionAjaxCommand : Command {
 	private Boolean test = true;
-	public UnhandledSystemExceptionAjaxCommand (Int32 responseHandlerId, String commandIdentifier, NameValueCollection data, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) : base (responseHandlerId, commandIdentifier, data, formatter, errors, cookies) {}
+	public UnhandledSystemExceptionAjaxCommand (Int32 responseHandlerId, NameValueCollection data, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) : base (responseHandlerId, data, formatter, errors, cookies) {}
 
 	protected override String Execute() {
 	    if(test == true) {
@@ -175,4 +165,14 @@ namespace Spring2.Core.Test.Ajax {
 	}
     }
     #endregion Test commands
+
+    #region Test Error ResponseObject
+
+    public class ErrorResponse {
+	public Int32 responseHandlerId;
+	public Boolean unhandledException;
+	public String message;
+    }
+
+    #endregion Test Error ResponseObject
 }

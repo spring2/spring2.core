@@ -12,27 +12,26 @@ sp2Ajax.READY_STATE_COMPLETE=4;
 
 /*--- content loader object for cross-browser requests ---*/
 sp2Ajax.ContentLoader = new Class({
-	Extends: Request,
-	options: {
-		onSuccess: function(){sp2Ajax.CommandQueue.onload(this.response.xml)},
-		onFailure:  function(){sp2Ajax.CommandQueue.onerror(this.xhr.responseText)}
-	}
+    Extends: Request.JSON,
+    options: {
+	onSuccess: function(){sp2Ajax.CommandQueue.onload(JSON.decode(this.response.text))},
+	onFailure:  function(){sp2Ajax.CommandQueue.onerror(this.xhr.responseText)}
+    }
 });
 
 
 
 
-sp2Ajax.cmdQueues=new Array();
+
+
 sp2Ajax.Base;
 
 sp2Ajax.CommandQueue=function(url,freq){
   sp2Ajax.Base = this;
-  this.id = "1";
-  sp2Ajax.cmdQueues["1"] = this;
   this.url = url;
   this.queued = new Array();
-  this.sent = new Array();
-  this.queryStringVariables = new Hashtable();
+  this.sent = new Hash();
+  this.queryStringVariables = new Hash();
   if (freq){
     this.repeat(freq);
   }
@@ -66,7 +65,7 @@ sp2Ajax.CommandQueue.prototype={
     if(command.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS || command.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE) {
       if(sp2Ajax.debug){alert("Single Process Command");}
       for(var i=0; i<this.queued.length; i++) {
-	if(this.queued[i].ajaxCommand == command.ajaxCommand) {
+	if(this.queued[i].ajaxCommand == command.commandKey) {
 	  this.queued[i] = command;
 	  if(sp2Ajax.debug){alert("Single Process Command UPDATED");}
 	  added = true;
@@ -75,7 +74,7 @@ sp2Ajax.CommandQueue.prototype={
       }
     }
     if(!added) {
-      this.queued.append(command,true);
+      this.queued.include(command,true);
       if(sp2Ajax.debug){alert("added command");}
     }
     if (command.priority==sp2Ajax.CommandQueue.PRIORITY_IMMEDIATE){
@@ -90,83 +89,71 @@ sp2Ajax.CommandQueue.prototype={
  },
 
  fireRequest:function(){
-  var data = "";
-  var commandStr = 'ajaxCommand=';
-  var commandMapString = '&CommandMapString=';
-  
   if (this.holdQueue || this.queued.length == 0){
     return;
   }
+  var commandMapToSend = new Hash();
+  var commandsToSend = new Array();
   var newQueued = new Array();
+
   for(var i=0; i < this.queued.length; i++){
     var cmd = this.queued[i];
     if (this.isCommand(cmd)){
       var processCommand = true;
       if(cmd.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS || cmd.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE) {
-        for(var j=0; j<this.sent.length; j++) {
-          if(this.sent[j] && this.sent[j].ajaxCommand == cmd.ajaxCommand) {
-            newQueued.append(cmd);
-            processCommand = false;
-            break;
-          }
-        }
+        Hash.each(this.sent, function(value, key){
+	    if(value.commandKey == cmd.commandKey) {
+		newQueued.push(cmd);
+		processCommand = false;
+	    }
+	});
       }
       if(processCommand) {
-        if(cmd.tpe == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE) {
+        if(cmd.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE) {
 	  this.holdQueue = true;
 	}
-        if(i > 0){
-	  commandStr += ",";
-	  if(commandMapString.indexOf(cmd.ajaxCommand + "^") < 0) {
-	    commandMapString += "~";
-	  }
-        }
-        
-        if(commandMapString.indexOf(cmd.ajaxCommand + "^") < 0) {
-	    commandMapString += cmd.ajaxCommand + "^" + commandMap.get(cmd.ajaxCommand);
-        }
-        var commandIdentifier = cmd.ajaxCommand + "~" + cmd.id;
-        commandStr += commandIdentifier; 
-        this.addCommandVariablesToQueryStringVariables(commandIdentifier, cmd.QueryStringVariables());
-        this.sent[cmd.id] = cmd;
+        commandMapToSend.set(cmd.commandKey, commandMap.get(cmd.commandKey));
+        commandsToSend.include(cmd);
+        this.sent.set(cmd.responseHandlerId, cmd);
       }
     }
   }
-  if(commandStr.length > 12) {
-    data = commandStr + commandMapString + this.buildQueryStringVariables();
+  if(commandsToSend.length > 0) {
+    var data = "ajaxRequest={fullyQualifiedNames:" + JSON.encode(commandMapToSend) + ",AjaxCommands:[";
+    for(var j=0; j<commandsToSend.length; j++) {
+	data += commandsToSend[j].getJsonToSend() + (commandsToSend.length - 1 == j ? "" : ",");
+    }
+    data += "]}";
     if(sp2Ajax.debug) {
-      alert("Query string = " + data);
+      alert("Data string = " + data);
     }
     this.loader = new sp2Ajax.ContentLoader({url: this.url, method : 'post', data : data}).send({});
   }
   this.queued = newQueued;
-  this.queryStringVariables = new Hashtable();
- },
- 
- addCommandVariablesToQueryStringVariables:function(commandIdentifier, commandVariables){
-    commandVariables.moveFirst();
-    while(commandVariables.next()) {
-	this.queryStringVariables.put(commandIdentifier + commandVariables.getKey(), escape(commandVariables.getValue()).replace(/\+/g, "%2B"));
-    }
-    return 
- },
- 
- buildQueryStringVariables:function(){
-    var returnValue = "";
-    this.queryStringVariables.moveFirst();
-    while(this.queryStringVariables.next()) {
-	returnValue += "&" + this.queryStringVariables.getKey() + "=" + this.queryStringVariables.getValue();
-    }
-    return returnValue;
+  this.queryStringVariables = new Hash();
  },
 
  isCommand:function(obj){
   return (
-    obj.implementsProp("id")
+    obj.parent
+    && obj.implementsProp("responseHandlerId")
     && obj.implementsProp("priority")
-    && obj.implementsFunc("QueryStringVariables")
-    && obj.implementsFunc("ParseResponse")
+    && obj.implementsFunc("getJsonToSend")
+    && obj.implementsFunc("parseResponse")
     && obj.implementsProp("type")
+  );
+ },
+
+ isCommandResponse:function(obj){
+  return (
+    obj.implementsProp("responseHandlerId")
+    && (obj.implementsProp("response") || obj.implementsProp("unhandledException"))
+  );
+ },
+
+ isGoodResponse:function(obj){
+  return (
+    obj.implementsProp("commandResponses")
   );
  },
 
@@ -201,58 +188,70 @@ sp2Ajax.CommandQueue.prototype={
  }
 }
 
-sp2Ajax.CommandQueue.onload=function(xmlDoc){
-if(sp2Ajax.debug){
-alert("OnLoad");
-}
+sp2Ajax.CommandQueue.onload=function(responseObject){
+  if(sp2Ajax.debug){alert("OnLoad");}
   //var xmlDoc=sp2Ajax.CommandQueue.loader.responseXML;
-  var elDocRoot=xmlDoc.getElementsByTagName("commands")[0];
-  if (elDocRoot){
-    if(sp2Ajax.debug){
-    alert("Good XML");
-    }
+  //var elDocRoot=xmlDoc.getElementsByTagName("commands")[0];
+  if (sp2Ajax.Base.isGoodResponse(responseObject)){
+    if(sp2Ajax.debug){alert("Good response");}
     var needFireQueue = false;
-    for(var i=0;i<elDocRoot.childNodes.length;i++){
-      elChild=elDocRoot.childNodes[i];
-      if (elChild.nodeName=="command"){
-        var attrs=elChild.attributes;
-        var id=attrs.getNamedItem("id").value;
-         //Get refence from myself here
-            if(sp2Ajax.debug){
-            alert(id);
-            }
-         command = sp2Ajax.Base.sent[id];   
-       if (command){
-           if(sp2Ajax.debug){
-            alert("GotCommand");
-            }
-          var unhandledException = elChild.attributes.getNamedItem("unhandledException");
-          if(unhandledException && unhandledException.value == 'true') {
-	    alert(DecodeText(elChild.attributes.getNamedItem("message").value));
-	  } else {
-	    command.ParseResponse(elChild);
-	    if(!needFireQueue && command.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS && command.priority == sp2Ajax.CommandQueue.PRIORITY_IMMEDIATE) {
-	      for(var j=0; j<sp2Ajax.Base.queued.length; j++) {
-		if(command.ajaxCommand == sp2Ajax.Base.queued[j].ajaxCommand) {
-		  needFireQueue = true;
-		  break;
+    for(var i=0;i<responseObject.commandResponses.length;i++){
+      var commandResponse = responseObject.commandResponses[i];
+      if(sp2Ajax.Base.isCommandResponse(commandResponse)) {
+	if(sp2Ajax.debug) {alert(commandResponse.responseHandlerId);}
+	var command = sp2Ajax.Base.sent[commandResponse.responseHandlerId];
+	if(command) {
+	    if(sp2Ajax.debug){alert("Got Command");}
+	    if(commandResponse.unhandledException && commandResponse.unhandledExeption == 'true') {
+		alert(DecodeText(commandResponse.message));
+	    } else {
+		command.parseResponse(commandResponse.response);
+		if(!needFireQueue && command.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS && command.priority == sp2Ajax.CommandQueue.PRIORITY_IMMEDIATE) {
+		    for(var j=0; j<sp2Ajax.Base.queued.length; j++) {
+			if(command.commandKey == sp2Ajax.Base.queued[j].commandKey) {
+			  needFireQueue = true;
+			  break;
+			}
+		    }
 		}
-	      }
+		sp2Ajax.Base.sent.remove(commandResponse.responseHandlerId);
 	    }
-	    sp2Ajax.Base.sent[id] = null;
-          }
-        }
-      }
-      if(needFireQueue) {
-	sp2Ajax.Base.fireRequest();
+	}
       }
     }
-  }
+    if(needFireQueue) {
+      sp2Ajax.Base.fireRequest();
+    }
+   }
 }
 
 sp2Ajax.CommandQueue.onerror=function(message){
   alert("problem sending the data to the server\n\n" + message);
 }
+
+
+/*--- Base Command Class ---*/
+sp2Ajax.Command = new Class({
+    Implements: [Options],
+    options: {
+	type: sp2Ajax.CommandQueue.TYPE_MULTIPROCESS,
+	priority: sp2Ajax.CommandQueue.PRIORITY_IMMEDIATE,
+	commandKey: '',
+	responseHandlerId: '',
+	parameters: new Hash()
+    },
+    initialize: function(options) {
+	this.setOptions(options);
+	this.type = this.options.type;
+	this.priority = this.options.priority;
+	this.commandKey = this.options.commandKey;
+	this.responseHandlerId = this.options.responseHandlerId;
+	this.parameters = this.options.parameters;
+    },
+    getJsonToSend: function() {
+	return "{commandKey:" + this.commandKey + ",responseHandlerId:" + this.responseHandlerId + ",parameters:" + JSON.encode(this.parameters) + "}";
+    }
+});
 
 
 Object.prototype.implementsProp=function(propName){

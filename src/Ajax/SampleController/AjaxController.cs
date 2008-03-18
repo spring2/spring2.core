@@ -12,11 +12,10 @@ using Spring2.Core.Message;
 
 namespace Spring2.Core.Ajax.SampleController {
     public class AjaxController : ErrorableController {
-        //private bool gotAjaxRequest = false;
         private String ajaxRequest;
-	private String commandName = String.Empty;
-	private Int32 responseHandlerId = 0;
         private NameValueCollection formVariables;
+	private Int32 responseHandlerId;
+	private String commandName = String.Empty;
 
         public NameValueCollection FormVariables {
             get { return formVariables; }
@@ -24,50 +23,24 @@ namespace Spring2.Core.Ajax.SampleController {
         }	
 
         public String AjaxRequest {
-            set {
-                //gotAjaxRequest = true;
-                ajaxRequest = value;
-            }
+            set { ajaxRequest = value; }
 	}
-
-	public Int32 ResponseHandlerId {
-	    get { return responseHandlerId; }
-	    set { responseHandlerId = value; }
-	}
-
-        public String CommandName {
-            get { return commandName; }
-            set { commandName = value; }
-        }
 
 	public override string SafePerform() {
-            //if (gotAjaxRequest) {
-		//CreateCommandMap();
-                String json = String.Empty;
+	    String json = processCommands();
+	    this.ControllerContext.HttpContext.Response.ContentType = "text/plain";
+	    this.ControllerContext.Model = json;
+	    return "ajax";
+	}
 
-                ajaxRequest = @"{""fullyQualifiedNames"":{""0"":""Spring2.Core.Ajax.SampleController.SampleCommand.HelloCommand,Spring2.Core.Ajax.SampleController""},""AjaxCommands"":[";
-                ajaxRequest += @"{""commandkey"":0,""responseHandlerId"":0,""parameters"":{""X"":""MyX"",""Y"":""MyY""}}";
-                ajaxRequest += "]}";
- 
-                //{'ResponseHandlerId':0, 'Response':{'car':'BMW','Truck':'Dodge','House':'Big'}}
-
-
-                json = processCommands(ajaxRequest);
-                this.ControllerContext.HttpContext.Response.ContentType = "text/xml";
-                this.ControllerContext.Model = json;
-                return "ajax";
-            //}
-            //return SUCCESS;
-        }
-
-        public String processCommands(String ajaxCommands) {
+        public String processCommands() {
             String json = String.Empty;
             String jsonWrapper = String.Empty;
             String result = String.Empty;
-            jsonWrapper = "{command:Responses[";
+            jsonWrapper = "{commandResponses:[";
             JsonAjaxUtility util = null;
             try {
-                util = new JsonAjaxUtility(ajaxCommands);
+                util = new JsonAjaxUtility(this.ajaxRequest);
             } catch (Exception ex ) {
                 json += ex.Message;
             }
@@ -86,7 +59,7 @@ namespace Spring2.Core.Ajax.SampleController {
 
         private Command GetCommand() {
 	    Type clazz = Type.GetType(commandName);
-	    object[] args = { this.ResponseHandlerId, this.FormVariables, this.MessageFormatter, this.Errors, this.Request.Cookies };
+	    object[] args = { this.responseHandlerId, this.formVariables, this.MessageFormatter, this.Errors, this.Request.Cookies };
             Object o = System.Activator.CreateInstance(clazz, args);
             return (Command)o;
         }

@@ -38,7 +38,7 @@ regress: build
 	export COMPLUS_Version=net-2.0
 	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit20-results.xml ../build/net-2.0/Spring2.Core.Test.dll
 	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit20withtypes-results.xml ../build/net-2.0/WithTypes/Spring2.Core.WithTypesTest.dll
-	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit20-results.xml ../build/net-2.0/Spring2.Core.Ajax.Test.dll
+	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit20-results.xml ../build/net-2.0/Spring2.Core.Test.Ajax.dll
 
 .PHONY: precommit
 precommit: build regress

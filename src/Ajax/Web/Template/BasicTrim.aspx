@@ -17,42 +17,33 @@ if(Context.Items["ajaxCommands"] != null) {
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<% if(ajaxCommands.Count>0) { %>
 	    <script src="<% =Page.ResolveClientUrl("~/javascript/mootools.js") %>" type="text/javascript"></script>
-	    <script src="<% =Page.ResolveClientUrl("~/javascript/arrayMethods.js") %>" type="text/javascript"></script>
-	    <script src="<% =Page.ResolveClientUrl("~/javascript/Hashtable.js") %>" type="text/javascript"></script>
 	    <script src="<% =Page.ResolveClientUrl("~/javascript/CommandQueue.js") %>" type="text/javascript"></script>
 	    <script src="<% =Page.ResolveClientUrl("~/javascript/HelperFunctions.js") %>" type="text/javascript"></script>
 
 	    <script language="javascript">
-		var Ajax = new Object();
-		Ajax.Commands=new Object();
-		var Queue = null;
-		function GetQueue(){
-		    Queue = new sp2Ajax.CommandQueue('<%=Page.ResolveClientUrl("~/Ajax.m")%>');
-		}
-		this.onload = new Function(" GetQueue(); ");
+		var Queue = new sp2Ajax.CommandQueue('<%=Page.ResolveClientUrl("~/Ajax.m")%>');
+		sp2Ajax.commandCounter = 0;
             	    	          
-		function CreateCommand(id, elementId){
-		    switch(id){
+		function CreateCommand(commandName){
+		    var command =  null;
+		    switch(commandName){
 			<%foreach(Command command in ajaxCommands) { %>
 			    case '<%=command.Name%>':
-				var command = new Ajax.Commands.<%=command.Name%>(elementId,id,counter);
-				sp2Ajax.Base.addCommand(command);
+				command = new sp2Ajax.<%=command.Name%>({commandKey:commandNumberMap.get(commandName),responseHandlerId:sp2Ajax.commandCounter});
 				break;
 			<%}%>
 		    }
-		    IncCounter();
-		 }
-                             
-		 var counter = 0;
-		 function IncCounter(){
-		     counter++;
+		    if(command != null) {
+			sp2Ajax.Base.addCommand(command);
+			sp2Ajax.commandCounter++;
+		    }
 		 }
 		 
-		var commandMap = new Hashtable();
-		var commandNumberMap = new Hashtable();
+		var commandMap = new Hash();
+		var commandNumberMap = new Hash();
 		<%for(Int32 i = 0; i < ajaxCommands.Count; i++) { %>
-		    commandNumberMap.put("<%=ajaxCommands[i].Name%>", "<%=i%>");
-		    commandMap.put("<%=i%>", "<%=ajaxCommands[i].QualifiedName%>");
+		    commandNumberMap.set("<%=ajaxCommands[i].Name%>", "<%=i%>");
+		    commandMap.set("<%=i%>", "<%=ajaxCommands[i].QualifiedName%>");
 		<% } %>
 	    </script>
 	    <%foreach(Command command in ajaxCommands) { %>

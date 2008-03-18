@@ -4,10 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Test.Ajax", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Ajax", "Spring2.Core.Ajax.csproj", "{40C60A12-0493-4B5A-9B48-C8DFD878DFD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Ajax.Json", "Spring2.Core.Ajax.Json.csproj", "{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}"
+EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "AjaxSampleWeb", "http://localhost/AjaxSampleWeb", "{3D5A6999-4148-45A2-AD22-225171D3AD90}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "2.0"
-		ProjectReferences = "{40C60A12-0493-4B5A-9B48-C8DFD878DFD5}|Spring2.Core.Ajax.dll;{D6957485-16AE-4ED7-9A6F-A1EE6767BCEE}|Spring2.Core.Ajax.SampleController.dll;"
+		ProjectReferences = "{40C60A12-0493-4B5A-9B48-C8DFD878DFD5}|Spring2.Core.Ajax.dll;{D6957485-16AE-4ED7-9A6F-A1EE6767BCEE}|Spring2.Core.Ajax.SampleController.dll;{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}|Spring2.Core.Ajax.Json.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/AjaxSampleWeb"
 		Debug.AspNetCompiler.PhysicalPath = "Ajax\Web\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\AjaxSampleWeb\"
@@ -79,6 +81,18 @@ Global
 		{40C60A12-0493-4B5A-9B48-C8DFD878DFD5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{40C60A12-0493-4B5A-9B48-C8DFD878DFD5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{40C60A12-0493-4B5A-9B48-C8DFD878DFD5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}.NET_1_1|.NET.ActiveCfg = NET_2_0|Any CPU
+		{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}.NET_1_1|Any CPU.ActiveCfg = NET_2_0|Any CPU
+		{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}.NET_1_1|Mixed Platforms.ActiveCfg = NET_2_0|Any CPU
+		{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}.NET_2_0|.NET.ActiveCfg = NET_2_0|Any CPU
+		{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}.NET_2_0|Any CPU.ActiveCfg = NET_2_0|Any CPU
+		{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}.NET_2_0|Mixed Platforms.ActiveCfg = NET_2_0|Any CPU
+		{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}.Release|.NET.ActiveCfg = Release|Any CPU
+		{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{3D5A6999-4148-45A2-AD22-225171D3AD90}.Debug|.NET.ActiveCfg = Debug|.NET
 		{3D5A6999-4148-45A2-AD22-225171D3AD90}.Debug|.NET.Build.0 = Debug|.NET
 		{3D5A6999-4148-45A2-AD22-225171D3AD90}.Debug|Any CPU.ActiveCfg = Debug|.NET

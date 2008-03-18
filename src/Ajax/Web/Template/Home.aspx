@@ -21,9 +21,7 @@
 	<div style="float:right; border:solid 2px green;" id="Results">
 	</div>
 	<div>
-	    <%foreach(Command command in ajaxCommands) { %>
-		<div><a href="#" onclick="CreateCommand('<%=command.Name%>', null)"><%=command.Name %></a></div>
-	    <% } %>
+	    <div><a href="#" onclick="CreateCommand('<%=HelloCommand.Instance.Name%>', null)"><%=HelloCommand.Instance.Name%></a>&nbsp;<input id="HelloCommandInput" type="text" value="" /></div>
 	</div>
     </div>
 </div>

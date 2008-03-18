@@ -43,9 +43,9 @@ namespace Spring2.Core.Ajax {
 		}
 	    } catch(MessageListException listException) {
 		this.errors.AddRange(listException.Messages);
-		return String.Format("<command id='{0}' unhandledException='true' message='{1}'></command>", responseHandlerId, LocalizeAndFormatErrorsForJavaScriptAlert());
+		return String.Format("{responseHandlerId:'{0}', unhandledException:'true', message:'{1}'}", responseHandlerId, LocalizeAndFormatErrorsForJavaScriptAlert());
 	    } catch(Exception ex) {
-		return String.Format("<command id='{0}' unhandledException='true' message='{1}'></command>", responseHandlerId, this.PrepairString("There was a problem.\nInform support of the following error and refresh the page.\n\n" + ex.ToString()));
+		return String.Format("{responseHandlerId:'{0}', unhandledException:'true', message:'{1}'}", responseHandlerId, this.PrepairString("There was a problem.\nInform support of the following error and refresh the page.\n\n" + ex.ToString()));
 	    }
 	}
 
