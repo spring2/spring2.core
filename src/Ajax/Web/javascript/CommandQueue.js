@@ -3,27 +3,18 @@ var sp2Ajax=new Object();
 
 sp2Ajax.debug = false;
 
-sp2Ajax.READY_STATE_UNINITIALIZED=0;
-sp2Ajax.READY_STATE_LOADING=1;
-sp2Ajax.READY_STATE_LOADED=2;
-sp2Ajax.READY_STATE_INTERACTIVE=3;
-sp2Ajax.READY_STATE_COMPLETE=4;
-
 
 /*--- content loader object for cross-browser requests ---*/
 sp2Ajax.ContentLoader = new Class({
     Extends: Request.JSON,
     options: {
 	onSuccess: function(){sp2Ajax.CommandQueue.onload(JSON.decode(this.response.text))},
-	onFailure:  function(){sp2Ajax.CommandQueue.onerror(this.xhr.responseText)}
+	onFailure:  function(){sp2Ajax.CommandQueue.onerror(sp2Ajax.debug ? this.xhr.responseText : "")}
     }
 });
 
 
-
-
-
-
+/*--- command queue object ---*/
 sp2Ajax.Base;
 
 sp2Ajax.CommandQueue=function(url,freq){
@@ -38,12 +29,6 @@ sp2Ajax.CommandQueue=function(url,freq){
 }
 
 sp2Ajax.CommandQueue.STATUS_QUEUED=-1;
-sp2Ajax.CommandQueue.STATE_UNINITIALIZED=sp2Ajax.READY_STATE_UNINITIALIZED;
-sp2Ajax.CommandQueue.STATE_LOADING=sp2Ajax.READY_STATE_LOADING;
-sp2Ajax.CommandQueue.STATE_LOADED=sp2Ajax.READY_STATE_LOADED;
-sp2Ajax.CommandQueue.STATE_INTERACTIVE=sp2Ajax.READY_STATE_INTERACTIVE;
-sp2Ajax.CommandQueue.STATE_COMPLETE=sp2Ajax.READY_STATE_COMPLETE;
-sp2Ajax.CommandQueue.STATE_PROCESSED=5;
 
 sp2Ajax.CommandQueue.PRIORITY_NORMAL=0;
 sp2Ajax.CommandQueue.PRIORITY_IMMEDIATE=1;
@@ -249,11 +234,17 @@ sp2Ajax.Command = new Class({
 	this.parameters = this.options.parameters;
     },
     getJsonToSend: function() {
-	return "{commandKey:" + this.commandKey + ",responseHandlerId:" + this.responseHandlerId + ",parameters:" + JSON.encode(this.parameters) + "}";
+	var tempHash = new Hash()
+	Hash.each(this.parameters, function(value, key){
+		tempHash.set(key, value.replace(/\%/g, "%25").replace(/\+/g, "%2B").replace(/\&/g, "%26"));
+	    }
+	)
+	return "{commandKey:" + this.commandKey + ",responseHandlerId:" + this.responseHandlerId + ",parameters:" + JSON.encode(tempHash) + "}";
     }
 });
 
 
+/*--- Helpers to test if object has what we want ---*/
 Object.prototype.implementsProp=function(propName){
   return (this[propName]!=null);
 }
