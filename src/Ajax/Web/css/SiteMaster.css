@@ -1,0 +1,72 @@
+body
+{
+    background-color: #ffe192;
+    color: #000000;
+    margin: 0px;
+    font-family: Arial, Helvetica, Sans-Serif;
+    width: 100%;
+    text-align: center;
+    background-image: url('../images/background.gif');
+    background-repeat: repeat;
+}
+body {
+	background: #ffe192 url(../images/background.gif) repeat-y left;
+	voice-family: "\"}\"";
+	voice-family: inherit;
+	background: #ffe192 url(../images/background.gif) repeat-y center;
+}
+html>body {
+	background: #ffe192 url(../images/background.gif) repeat-y center;
+}
+
+
+img
+{
+    border: 0px;
+}
+a 
+{
+    text-decoration: none;
+    color: #4561a7;
+}
+a:hover 
+{
+    text-decoration: underline;
+}
+
+div.allContent 
+{
+    position: relative;
+    text-align: left;
+    width: 792px;
+    margin: auto;
+    margin-top: 0px;
+}
+div.upperBackground 
+{
+    height: 20px;
+    width: 100%;
+    background: url(../images/background_filler.gif); 
+}
+div.upperBackground 
+{
+    height: 20px;
+    width: 100%;
+    background: url(../images/background_filler.gif); 
+}
+div.leftBorder 
+{
+    float: left;
+    height: 600px;
+    width: 4px;
+}
+div.rightBorder 
+{
+    float: left;
+    width: 4px;
+    height: 600px;
+}
+div.mainContent {
+    padding-right:10px;
+    padding-left:10px;
+}

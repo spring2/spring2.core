@@ -15,6 +15,7 @@ if(Context.Items["ajaxCommands"] != null) {
     <head>
 	<title><%=Context.Items["title"]%> - Spring2 AJAX Framework&trade;</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<link href="<% =Page.ResolveClientUrl("~/css/SiteMaster.css") %>" rel="stylesheet" type="text/css" />
 	<% if(ajaxCommands.Count>0) { %>
 	    <script src="<% =Page.ResolveClientUrl("~/javascript/mootools.js") %>" type="text/javascript"></script>
 	    <script src="<% =Page.ResolveClientUrl("~/javascript/CommandQueue.js") %>" type="text/javascript"></script>
@@ -53,7 +54,13 @@ if(Context.Items["ajaxCommands"] != null) {
     </head>
     <body>
         <div class="allContent">
-	    <%=Context.Items["wrapped"]%>
+	    <div class="upperBackground"></div>
+	    <div class="leftBorder"></div>
+	    <div class="mainContent">
+		<img src="images/logo.gif" alt="" />
+		<%=Context.Items["wrapped"]%>
+	    </div>
+	    <div class="rightBorder"></div>
 	</div>
     </body>
 </html>

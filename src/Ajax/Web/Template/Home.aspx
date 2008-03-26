@@ -18,8 +18,7 @@
 <div>
     <div>Click a command and see results on the right</div>
     <div style="border:solid 1px blue;">
-	<div style="float:right; border:solid 2px green;" id="Results">
-	</div>
+	<input style="float:right;" type="text" id="HelloResults" value="">
 	<div>
 	    <div><a href="#" onclick="CreateCommand('<%=HelloCommand.Instance.Name%>', null)"><%=HelloCommand.Instance.Name%></a>&nbsp;<input id="HelloCommandInput" type="text" value="" /></div>
 	</div>
