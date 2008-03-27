@@ -34,7 +34,7 @@
     </div>
     <div class="commandExample">
 	<input style="float:right;" type="text" id="AutoFireResults" value="">
-	<div><a href="#" onclick="Queue.repeat(5);CreateCommand('<%=AutoFireCommand.Instance.Name%>')"><%=AutoFireCommand.Instance.Name%></a>&nbsp;&nbsp;<input type="button" onclick="Queue.unrepeat();" value="Stop Timmer" /></div>
+	<div><a href="#" onclick="Queue.repeat(5);CreateCommand('<%=AutoFireCommand.Instance.Name%>')"><%=AutoFireCommand.Instance.Name%></a>&nbsp;&nbsp;<input type="button" onclick="Queue.unrepeat();" value="Stop Timer" /></div>
     </div>
     <div class="commandExample">
 	<input style="float:right;" type="text" id="ExtendedHelloResults" value="">

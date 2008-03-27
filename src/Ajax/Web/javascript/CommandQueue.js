@@ -35,7 +35,7 @@ sp2Ajax.CommandQueue.PRIORITY_IMMEDIATE=1;
 
 sp2Ajax.CommandQueue.TYPE_MULTIPROCESS=0;
 sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS=1;
-sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE=2;
+sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQUEUE=2;
 
 sp2Ajax.CommandQueue.holdQueue = false;
 
@@ -47,7 +47,7 @@ sp2Ajax.CommandQueue.prototype={
       alert("isCommand");
     }
     var added = false;
-    if(command.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS || command.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE) {
+    if(command.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS || command.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQUEUE) {
       if(sp2Ajax.debug){alert("Single Process Command");}
       for(var i=0; i<this.queued.length; i++) {
 	if(this.queued[i].ajaxCommand == command.commandKey) {
@@ -85,7 +85,7 @@ sp2Ajax.CommandQueue.prototype={
     var cmd = this.queued[i];
     if (this.isCommand(cmd)){
       var processCommand = true;
-      if(cmd.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS || cmd.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE) {
+      if(cmd.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS || cmd.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQUEUE) {
         Hash.each(this.sent, function(value, key){
 	    if(value.commandKey == cmd.commandKey) {
 		newQueued.push(cmd);
@@ -94,7 +94,7 @@ sp2Ajax.CommandQueue.prototype={
 	});
       }
       if(processCommand) {
-        if(cmd.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQAUEUE) {
+        if(cmd.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS_HOLDQUEUE) {
 	  this.holdQueue = true;
 	}
         commandMapToSend.set(cmd.commandKey, commandMap.get(cmd.commandKey));
@@ -175,8 +175,6 @@ sp2Ajax.CommandQueue.prototype={
 
 sp2Ajax.CommandQueue.onload=function(responseObject){
   if(sp2Ajax.debug){alert("OnLoad");}
-  //var xmlDoc=sp2Ajax.CommandQueue.loader.responseXML;
-  //var elDocRoot=xmlDoc.getElementsByTagName("commands")[0];
   if (sp2Ajax.Base.isGoodResponse(responseObject)){
     if(sp2Ajax.debug){alert("Good response");}
     var needFireQueue = false;
