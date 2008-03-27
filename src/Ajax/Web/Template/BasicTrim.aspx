@@ -25,12 +25,13 @@ if(Context.Items["ajaxCommands"] != null) {
 		var Queue = new sp2Ajax.CommandQueue('<%=Page.ResolveClientUrl("~/Ajax.m")%>');
 		sp2Ajax.commandCounter = 0;
             	    	          
-		function CreateCommand(commandName){
+		function CreateCommand(commandName, clientSideDataToAdd){
 		    var command =  null;
 		    switch(commandName){
 			<%foreach(Command command in ajaxCommands) { %>
 			    case '<%=command.Name%>':
-				command = new sp2Ajax.<%=command.Name%>({commandKey:commandNumberMap.get(commandName),responseHandlerId:sp2Ajax.commandCounter});
+				var options = {commandKey:commandNumberMap.get(commandName),responseHandlerId:sp2Ajax.commandCounter,clientSideData:clientSideDataToAdd};
+				command = new sp2Ajax.<%=command.Name%>(options);
 				break;
 			<%}%>
 		    }

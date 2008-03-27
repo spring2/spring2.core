@@ -5,7 +5,7 @@ sp2Ajax.HelloCommand = new Class({
 
     initialize: function(options) {
 	this.parent(options);
-	this.parameters.set("helloText",$('HelloCommandInput').value);
+	this.parameters.set("helloText","Hello All!");
     },
 
     parseResponse: function(returnObject) {

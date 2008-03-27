@@ -187,7 +187,7 @@ sp2Ajax.CommandQueue.onload=function(responseObject){
 	var command = sp2Ajax.Base.sent[commandResponse.responseHandlerId];
 	if(command) {
 	    if(sp2Ajax.debug){alert("Got Command");}
-	    if(commandResponse.unhandledException && commandResponse.unhandledExeption == 'true') {
+	    if(commandResponse.unhandledException && commandResponse.unhandledException == 'true') {
 		alert(DecodeText(commandResponse.message));
 	    } else {
 		command.parseResponse(commandResponse.response);
@@ -223,9 +223,11 @@ sp2Ajax.Command = new Class({
 	priority: sp2Ajax.CommandQueue.PRIORITY_IMMEDIATE,
 	commandKey: '',
 	responseHandlerId: '',
-	parameters: new Hash()
+	parameters: new Hash(),
+	clientSideData: {}
     },
     initialize: function(options) {
+	this.options.parameters = new Hash();
 	this.setOptions(options);
 	this.type = this.options.type;
 	this.priority = this.options.priority;
@@ -236,7 +238,7 @@ sp2Ajax.Command = new Class({
     getJsonToSend: function() {
 	var tempHash = new Hash()
 	Hash.each(this.parameters, function(value, key){
-		tempHash.set(key, value.replace(/\%/g, "%25").replace(/\+/g, "%2B").replace(/\&/g, "%26"));
+		tempHash.set(key, $type(value) == 'string' ? value.replace(/\%/g, "%25").replace(/\+/g, "%2B").replace(/\&/g, "%26") : value);
 	    }
 	)
 	return "{commandKey:" + this.commandKey + ",responseHandlerId:" + this.responseHandlerId + ",parameters:" + JSON.encode(tempHash) + "}";
