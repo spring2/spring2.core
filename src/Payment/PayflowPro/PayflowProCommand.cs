@@ -64,7 +64,7 @@ namespace Spring2.Core.Payment.PayflowPro {
 		if (value.Length > maxLength) {
 		    value = value.Substring(0, maxLength);
 		}
-		sb.Append("&").Append(command).Append("=").Append(HttpUtility.UrlEncode(value));
+		sb.Append("&").Append(command).Append("=").Append(HttpUtility.UrlPathEncode(value));
 	    }
 	}
     	
