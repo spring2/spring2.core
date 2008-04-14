@@ -67,7 +67,12 @@
     <Compile Include="Ajax\SampleController\AjaxController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Ajax\SampleController\AjaxController_Temp.cs" />
+    <Compile Include="Ajax\SampleController\SampleCommand\AutoFireCommand.cs" />
+    <Compile Include="Ajax\SampleController\SampleCommand\UnHandledSystemExceptionCommand.cs" />
+    <Compile Include="Ajax\SampleController\SampleCommand\UnHandledMessageListExceptionCommand.cs" />
+    <Compile Include="Ajax\SampleController\SampleCommand\EvaluateCheckedCommand.cs" />
+    <Compile Include="Ajax\SampleController\SampleCommand\ExtendedHelloCommand.cs" />
+    <Compile Include="Ajax\SampleController\SampleCommand\RegurgitationCommand.cs" />
     <Compile Include="Ajax\SampleController\SampleCommand\HelloCommand.cs" />
   </ItemGroup>
   <ItemGroup>
