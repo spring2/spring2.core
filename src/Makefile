@@ -26,12 +26,16 @@ build:
 	${NANT} build
 
 .PHONY: regress
-regress: build
+regress: build regressonly
+
+.PHONY: regressonly
+regressonly:
 	export COMPLUS_Version=net-1.1
+	cp Payment/Test/App.config ../build/net-1.1/Spring2.Core.Payment.Test.dll.config
 	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-results.xml ../build/net-1.1/Spring2.Core.Test.dll 
 	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11withtypes-results.xml ../build/net-1.1/WithTypes/Spring2.Core.WithTypesTest.dll
 	#$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-AddressValidation-results.xml ../build/net-1.1/Spring2.Core.AddressValidation.Test.dll
-	#$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-Payment-results.xml ../build/net-1.1/Spring2.Core.Payment.Test.dll
+	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-Payment-results.xml ../build/net-1.1/Spring2.Core.Payment.Test.dll
 	#$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-ResouceManager.AcceptanceTest-results.xml ../build/net-1.1/Spring2.Core.ResourceManager.AcceptanceTest.dll
 	#$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-Tax-results.xml ../build/net-1.1/Spring2.Core.Tax.Test.dll
 
