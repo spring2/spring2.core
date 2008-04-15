@@ -32,6 +32,8 @@ regress: build regressonly
 regressonly:
 	export COMPLUS_Version=net-1.1
 	cp Payment/Test/App.config ../build/net-1.1/Spring2.Core.Payment.Test.dll.config
+	mkdir -p ../build/net-1.1/certs
+	cp ../lib/certs/* ../build/net-1.1/certs
 	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-results.xml ../build/net-1.1/Spring2.Core.Test.dll 
 	$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11withtypes-results.xml ../build/net-1.1/WithTypes/Spring2.Core.WithTypesTest.dll
 	#$(BINDIR)/NUnit/nunit-console /xml=ccnet-nunit11-AddressValidation-results.xml ../build/net-1.1/Spring2.Core.AddressValidation.Test.dll
