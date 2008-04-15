@@ -75,7 +75,7 @@ namespace Spring2.Core.Ajax {
 	abstract protected String Execute();
 
 	internal String PrepairString(String message) {
-	    return HttpUtility.UrlEncode(message.Replace("'", "&#39;"));
+	    return HttpUtility.UrlPathEncode(message.Replace("'", "&#39;"));
 	}
 
 	internal String PrepairString(StringBuilder message) {
@@ -90,7 +90,7 @@ namespace Spring2.Core.Ajax {
 		    sb.Append("\n");
 		}
 	    }
-	    return HttpUtility.UrlEncode(sb.ToString()).Replace("'", "&apos;");
+	    return HttpUtility.UrlPathEncode(sb.ToString()).Replace("'", "&apos;");
 	}
     }
 }
