@@ -188,7 +188,9 @@ namespace Spring2.Core.Test {
 	    	Assert.Fail();
 	    } catch (PaymentFailureException ex) {
 	    	Assert.AreEqual("N", ex.Result.CVVResponseCode, "CVV2 should be invalid.");
-	    	Assert.AreNotEqual("0", ex.Result.ResultCode);
+	    	//Assert.AreNotEqual("0", ex.Result.ResultCode); --> taken from PayflowPro_Guide.pdf, page 51:  The issuing bank may decline the transaction if
+																										//	there is a mismatch. In other cases, the
+																										//	transaction may be approved despite a mismatch.
 	    	Assert.AreEqual(BooleanType.FALSE, ex.Result.ValidCvv);
 	    }
 	}
@@ -238,16 +240,32 @@ namespace Spring2.Core.Test {
 	    SaleCommand command = new SaleCommand("Elmer & Fudd", new CurrencyType(random.Next(999)), "El&F", "Elmer&Fudd", "Elmer & Fudd", "Elmer & Fudd", "Elmer & Fudd", "Elm & Fud", "Elmer & Fudd", "Elmer & Fudd", "Elmer & Fudd");
 	    Console.Write(command.CommandText);
 	    Assert.IsTrue(command.CommandText.Length > 0);
-	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&ACCT=") + 6, 14));
-	    Assert.AreEqual("El%26F", command.CommandText.Substring(command.CommandText.IndexOf("&CVV2=") + 6, 6));
-	    Assert.AreEqual("Elmer%26Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&CUSTREF=") + 9, 12));
-	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&EXPDATE=") + 9, 14));
-	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&NAME=") + 6, 14));
-	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&STREET=") + 8, 14));
-	    Assert.AreEqual("Elm+%26+Fud", command.CommandText.Substring(command.CommandText.IndexOf("&ZIP=") + 5, 11));
-	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&COMMENT1=") + 10, 14));
-	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&COMMENT2=") + 10, 14));
-	    Assert.AreEqual("Elmer+%26+Fudd", command.CommandText.Substring(command.CommandText.IndexOf("&PONUM=") + 7, 14));
+
+	    String commandText = command.CommandText;
+	   	
+	   	// verify the commands
+	   	Assert.AreEqual(commandText.Substring(commandText.IndexOf("&ACCT"), 10),"&ACCT[12]=");
+	   	Assert.AreEqual(commandText.Substring(commandText.IndexOf("&CVV2"), 9), "&CVV2[4]=");
+	    Assert.AreEqual(commandText.Substring(commandText.IndexOf("&CUSTREF"), 13), "&CUSTREF[10]=");
+	    Assert.AreEqual(commandText.Substring(commandText.IndexOf("&EXPDATE"), 13), "&EXPDATE[12]=");
+	    Assert.AreEqual(commandText.Substring(commandText.IndexOf("&NAME"), 10), "&NAME[12]=");
+	    Assert.AreEqual(commandText.Substring(commandText.IndexOf("&STREET"), 12), "&STREET[12]=");
+	    Assert.AreEqual(commandText.Substring(commandText.IndexOf("&ZIP"), 8), "&ZIP[9]=");
+	    Assert.AreEqual(commandText.Substring(commandText.IndexOf("&COMMENT1"), 14), "&COMMENT1[12]=");
+	    Assert.AreEqual(commandText.Substring(commandText.IndexOf("&COMMENT2"), 14), "&COMMENT2[12]=");
+	    Assert.AreEqual(commandText.Substring(commandText.IndexOf("&PONUM"), 11), "&PONUM[12]=");
+	    
+	    // verify the values
+	   	Assert.AreEqual("Elmer & Fudd", commandText.Substring(commandText.IndexOf("&ACCT") + 10, 12)); //&ACCT[12]=
+	    Assert.AreEqual("El&F", commandText.Substring(commandText.IndexOf("&CVV2") + 9, 4));//&CVV2[4]=
+	    Assert.AreEqual("Elmer&Fudd", commandText.Substring(commandText.IndexOf("&CUSTREF") + 13, 10));//&CUSTREF[10]=
+	    Assert.AreEqual("Elmer & Fudd", commandText.Substring(commandText.IndexOf("&EXPDATE") + 13, 12));//&EXPDATE[12]=
+	    Assert.AreEqual("Elmer & Fudd", commandText.Substring(commandText.IndexOf("&NAME") + 10, 12));//&NAME[12]=
+	    Assert.AreEqual("Elmer & Fudd", commandText.Substring(commandText.IndexOf("&STREET") + 12, 12));//&STREET[12]=
+	    Assert.AreEqual("Elm & Fud", commandText.Substring(commandText.IndexOf("&ZIP") + 8, 9));//&ZIP[9]=
+	    Assert.AreEqual("Elmer & Fudd", commandText.Substring(commandText.IndexOf("&COMMENT1") + 14, 12));//&COMMENT1[12]=
+	    Assert.AreEqual("Elmer & Fudd", commandText.Substring(commandText.IndexOf("&COMMENT2") + 14, 12));//&COMMENT2[12]=
+	    Assert.AreEqual("Elmer & Fudd", commandText.Substring(commandText.IndexOf("&PONUM") + 11, 12));//&PONUM[12]=
 	}
 
 	[Test()]

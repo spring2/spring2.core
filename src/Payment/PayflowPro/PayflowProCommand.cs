@@ -64,8 +64,12 @@ namespace Spring2.Core.Payment.PayflowPro {
 		if (value.Length > maxLength) {
 		    value = value.Substring(0, maxLength);
 		}
-		sb.Append("&").Append(command).Append("=").Append(HttpUtility.UrlPathEncode(value));
-	    }
+			
+		// '&' and '=' require the length tag (size of data between two brackets) immediately after the command, so
+		// we just add them for everything (for the sake of easier to maintain tests and code)
+		sb.Append("&").Append(command).Append("[").Append("" + value.Length).Append("]").Append("=").Append(value);
+		
+		}
 	}
     	
 	private PaymentResult ParseResult(string resultString) {
