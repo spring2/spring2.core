@@ -1,7 +1,7 @@
 <VisualStudioProject>
     <CSHARP
         ProjectType = "Local"
-        ProductVersion = "7.10.3077"
+        ProductVersion = "7.10.6030"
         SchemaVersion = "2.0"
         ProjectGuid = "{82A9222F-075A-4B76-BA68-9A421DB09A28}"
     >
@@ -169,6 +169,11 @@
                 />
                 <File
                     RelPath = "Tax\Test\TaxManagerTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tax\Test\TestTaxProviderTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

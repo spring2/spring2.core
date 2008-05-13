@@ -1,7 +1,7 @@
 <VisualStudioProject>
     <CSHARP
         ProjectType = "Local"
-        ProductVersion = "7.10.3077"
+        ProductVersion = "7.10.6030"
         SchemaVersion = "2.0"
         ProjectGuid = "{A64B9B05-C8D0-4298-82D9-441A9D3F2E40}"
     >
@@ -170,6 +170,11 @@
                 />
                 <File
                     RelPath = "Tax\AssemblyInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tax\InvalidTaxAreaIdException.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

@@ -2,6 +2,7 @@ using System;
 using Spring2.Core.Types;
 using Spring2.Core.Tax.Vertex;
 using NotImplementedException = System.NotImplementedException;
+using Spring2.Core.Message;
 
 namespace Spring2.Core.Tax.Test {
     /// <summary>
@@ -13,6 +14,13 @@ namespace Spring2.Core.Tax.Test {
 	}
 
 	public TaxRateInfo GetTaxRateForArea(IdType id, DateType dateType) {
+		if(!id.IsValid)
+		{
+			MessageList errors = new MessageList();
+			errors.Add(new InvalidTaxAreaIdException());
+			throw new MessageListException(errors);
+		}
+
 	    TaxRateInfo taxRateInfo = new TaxRateInfo();
 	    taxRateInfo.CityTaxRate = 1.0M;
 	    taxRateInfo.CountryTaxRate = 1.0M;
