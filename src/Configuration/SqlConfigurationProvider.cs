@@ -2,6 +2,9 @@ using System;
 using System.Collections.Specialized;
 using System.Configuration;
 
+using Spring2.Core.DAO;
+using Spring2.Core.Types;
+
 namespace Spring2.Core.Configuration {
 
     /// <summary>
@@ -18,9 +21,15 @@ namespace Spring2.Core.Configuration {
 	    get {
 		//if (settings == null) {
 		    NameValueCollection settings = new NameValueCollection();
-		    ConfigurationSettingList list = ConfigurationSettingDAO.DAO.GetList();
+                    OrderByClause sort = new OrderByClause("[Key], EffectiveDate desc");
+		    ConfigurationSettingList list = ConfigurationSettingDAO.DAO.GetList(sort);
 		    foreach(IConfigurationSetting setting in list) {
-			settings.Add(setting.Key.ToString(), setting.Value.ToString());
+                        if (setting.EffectiveDate > DateTimeType.Now) {
+                            continue;
+                        }
+                        if (settings[setting.Key.ToString()] == null) {
+                            settings.Add(setting.Key.ToString(), setting.Value.ToString());
+                        }
 		    }
 		//}
 

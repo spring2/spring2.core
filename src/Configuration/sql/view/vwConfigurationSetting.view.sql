@@ -15,7 +15,8 @@ SELECT
     ConfigurationSetting.[Key],
     ConfigurationSetting.Value,
     ConfigurationSetting.LastModifiedDate,
-    ConfigurationSetting.LastModifiedUserId
+    ConfigurationSetting.LastModifiedUserId,
+    ConfigurationSetting.EffectiveDate
 FROM
     ConfigurationSetting
 GO

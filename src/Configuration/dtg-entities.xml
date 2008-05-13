@@ -6,6 +6,7 @@
 			<column name="Value" sqltype="VarChar" length="1024" required="True" />
 			<column name="LastModifiedDate" sqltype="DateTime" required="True" />
 			<column name="LastModifiedUserId" sqltype="Int" required="True" />
+			<column name="EffectiveDate" sqltype="Int" required="True" default="GetDate()" />
 		    </columns>
 		    <constraints>
 			<constraint name="PK_ConfigurationSetting" type="PRIMARY KEY">
@@ -13,6 +14,7 @@
 			</constraint>
 		    <constraint name="UN_ConfigurationSetting" type="UNIQUE">
 			<column name="Key" />
+			<column name="EffectiveDate" />
 		    </constraint>
 		    </constraints>
 		</sqlentity>
@@ -26,13 +28,9 @@
 	    <property name="Value" type="StringType" column="*" />
 	    <property name="LastModifiedDate" type="DateTimeType" column="*" />
 	    <property name="LastModifiedUserId" type="IdType" column="*" />
+		<property name="EffectiveDate" type=DateTimeType" column="*" />
 	</properties>
 	<finders> 
-	    <finder name="FindByKey" unique="True">
-		<properties>
-		    <property name="Key" />
-		</properties>
-	    </finder>	    
 	    <finder name="FindModifications" unique="False" expression="LastModifiedDate >= {0}">
 		<properties>
 		    <property name="LastModifiedDate" />

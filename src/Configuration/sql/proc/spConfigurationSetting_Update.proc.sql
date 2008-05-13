@@ -12,7 +12,8 @@ CREATE PROCEDURE dbo.spConfigurationSetting_Update
 	@Key	VarChar(100) = null,
 	@Value	VarChar(1024) = null,
 	@LastModifiedDate	DateTime = null,
-	@LastModifiedUserId	Int = null
+	@LastModifiedUserId	Int = null,
+	@EffectiveDate DateTime = null
 
 AS
 
@@ -23,7 +24,8 @@ SET
 	[Key] = @Key,
 	Value = @Value,
 	LastModifiedDate = @LastModifiedDate,
-	LastModifiedUserId = @LastModifiedUserId
+	LastModifiedUserId = @LastModifiedUserId,
+	EffectiveDate = @EffectiveDate
 WHERE
 ConfigurationSettingId = @ConfigurationSettingId
 

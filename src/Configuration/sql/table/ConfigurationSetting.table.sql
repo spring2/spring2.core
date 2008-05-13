@@ -26,7 +26,8 @@ CREATE TABLE dbo.ConfigurationSetting (
 	[Key] VarChar(100) NOT NULL,
 	Value VarChar(1024) NOT NULL,
 	LastModifiedDate DateTime NOT NULL,
-	LastModifiedUserId Int NOT NULL
+	LastModifiedUserId Int NOT NULL,
+	EffectiveDate DateTime NOT NULL CONSTRAINT [DF_ConfigurationSetting_EffectiveDate] DEFAULT (getdate())
 )
 GO
 
@@ -95,6 +96,38 @@ if exists(select * from syscolumns where id=object_id('ConfigurationSetting') an
   END
 GO
 
+if not exists(select * from syscolumns where id=object_id('ConfigurationSetting') and name = 'EffectiveDate')
+  BEGIN
+	ALTER TABLE ConfigurationSetting ADD
+	    EffectiveDate DateTime NOT NULL
+	CONSTRAINT
+	    [DF_ConfigurationSetting_EffectiveDate] DEFAULT getdate() WITH VALUES
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('Category') and name = 'EffectiveDate')
+  BEGIN
+	declare @cdefault varchar(1000)
+	select @cdefault = '[' + object_name(cdefault) + ']' from syscolumns where id=object_id('ConfigurationSetting') and name = 'EffectiveDate'
+
+	if @cdefault is not null
+		exec('alter table ConfigurationSetting DROP CONSTRAINT ' + @cdefault)
+		
+	if exists(select * from sysobjects where name = 'DF_ConfigurationSetting_EffectiveDate' and xtype='D')
+          begin
+            declare @table sysname
+            select @table=object_name(parent_obj) from  sysobjects where (name = 'DF_ConfigurationSetting_EffectiveDate' and xtype='D')
+            exec('alter table ' + @table + ' DROP CONSTRAINT [DF_ConfigurationSetting_EffectiveDate]')
+          end
+	
+	update ConfigurationSetting set EffectiveDate = getdate() where EffectiveDate IS NULL
+	exec #spAlterColumn 'ConfigurationSetting', 'EffectiveDate', 'DateTime', 1
+	if not exists(select * from sysobjects where name = 'DF_ConfigurationSetting_EffectiveDate' and xtype='D')
+		alter table ConfigurationSetting
+			ADD CONSTRAINT [DF_ConfigurationSetting_EffectiveDate] DEFAULT getdate() FOR EffectiveDate WITH VALUES
+  END
+GO
+
 if not exists (select * from dbo.sysobjects where id = object_id(N'PK_ConfigrationSetting') and OBJECTPROPERTY(id, N'IsPrimaryKey') = 1)
 ALTER TABLE ConfigurationSetting WITH NOCHECK ADD
 	CONSTRAINT PK_ConfigrationSetting PRIMARY KEY NONCLUSTERED
@@ -103,11 +136,16 @@ ALTER TABLE ConfigurationSetting WITH NOCHECK ADD
 	)
 GO
 
-if not exists (select * from dbo.sysobjects where id = object_id(N'UN_ConfigurationSetting') and OBJECTPROPERTY(id, N'IsUniqueCnst') = 1)
+if exists (select * from dbo.sysobjects where id = object_id(N'UN_ConfigurationSetting') and OBJECTPROPERTY(id, N'IsUniqueCnst') = 1)
+ALTER TABLE ConfigurationSetting DROP CONSTRAINT UN_ConfigurationSetting
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'UN_ConfigurationSettingEffectiveDate') and OBJECTPROPERTY(id, N'IsUniqueCnst') = 1)
 ALTER TABLE ConfigurationSetting ADD
-	CONSTRAINT UN_ConfigurationSetting UNIQUE
+	CONSTRAINT UN_ConfigurationSettingEffectiveDate UNIQUE
 	(
-		[Key]
+		[Key],
+		EffectiveDate
 	)
 GO
 

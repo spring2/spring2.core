@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 using Spring2.Core.Util;
 
-namespace Spring2.Core.Test.Test {
+namespace Spring2.Core.Test {
     /// <summary>
     /// Test PGP encryption/decryption
     /// </summary>

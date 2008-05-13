@@ -22,6 +22,10 @@ namespace Spring2.Core.Test {
 	private static readonly String BINARY_ATTACHMENT1 = "test.pdf";
 	private static readonly String BINARY_ATTACHMENT2 = "test.jpg";
 
+        [Test]
+        public void Temp() {
+        }
+
 	[Test]
 	public void TextAttachment() {
 	    try {

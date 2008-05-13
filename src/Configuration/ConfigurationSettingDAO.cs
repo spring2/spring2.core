@@ -32,7 +32,10 @@ namespace Spring2.Core.Configuration {
 	    if (!propertyToSqlMap.Contains("LastModifiedUserId")) {
 		propertyToSqlMap.Add("LastModifiedUserId",@"LastModifiedUserId");
 	    }
-	}
+            if (!propertyToSqlMap.Contains("EffectiveDate")) {
+                propertyToSqlMap.Add("EffectiveDate", @"EffectiveDate");
+            }
+        }
 
 	private ConfigurationSettingDAO() {}
 	
@@ -289,7 +292,12 @@ namespace Spring2.Core.Configuration {
 	    } else {
 		data.LastModifiedUserId = new IdType(dataReader.GetInt32(dataReader.GetOrdinal("LastModifiedUserId")));
 	    }
-	    return data;
+            if (dataReader.IsDBNull(dataReader.GetOrdinal("EffectiveDate"))) {
+                data.EffectiveDate = DateTimeType.UNSET;
+            } else {
+                data.EffectiveDate = new DateTimeType(dataReader.GetDateTime(dataReader.GetOrdinal("EffectiveDate")));
+            }
+            return data;
 	}
 
 
@@ -314,10 +322,11 @@ namespace Spring2.Core.Configuration {
 	    cmd.Parameters.Add(idParam);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@Key", DbType.Int32, ParameterDirection.Input, data.Key.IsValid ? data.Key.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@Key", DbType.AnsiString, ParameterDirection.Input, data.Key.IsValid ? data.Key.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@Value", DbType.AnsiString, ParameterDirection.Input, data.Value.IsValid ? data.Value.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedDate", DbType.DateTime, ParameterDirection.Input, data.LastModifiedDate.IsValid ? data.LastModifiedDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedUserId", DbType.Int32, ParameterDirection.Input, data.LastModifiedUserId.IsValid ? data.LastModifiedUserId.ToInt32() as Object : DBNull.Value));
+            cmd.Parameters.Add(CreateDataParameter("@EffectiveDate", DbType.DateTime, ParameterDirection.Input, data.EffectiveDate.IsValid ? data.EffectiveDate.ToDateTime() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -355,6 +364,7 @@ namespace Spring2.Core.Configuration {
 	    cmd.Parameters.Add(CreateDataParameter("@Value", DbType.AnsiString, ParameterDirection.Input, data.Value.IsValid ? data.Value.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedDate", DbType.DateTime, ParameterDirection.Input, data.LastModifiedDate.IsValid ? data.LastModifiedDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedUserId", DbType.Int32, ParameterDirection.Input, data.LastModifiedUserId.IsValid ? data.LastModifiedUserId.ToInt32() as Object : DBNull.Value));
+            cmd.Parameters.Add(CreateDataParameter("@EffectiveDate", DbType.DateTime, ParameterDirection.Input, data.EffectiveDate.IsValid ? data.EffectiveDate.ToDateTime() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -393,27 +403,6 @@ namespace Spring2.Core.Configuration {
 	    if (transaction == null) {
 		cmd.Connection.Close();
 	    }
-	}
-
-	/// <summary>
-	/// Returns an object which matches the values for the fields specified.
-	/// </summary>
-	/// <param name="key">A field value to be matched.</param>
-	/// <returns>The object found.</returns>
-	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
-	public ConfigurationSetting FindByKey(StringType key) {
-	    OrderByClause sort = new OrderByClause("Key");
-	    WhereClause filter = new WhereClause();
-	    filter.And("Key", key.IsValid ? key.ToString() as Object : DBNull.Value);
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);
-
-	    if (!dataReader.Read()) {
-		dataReader.Close();
-		throw new FinderException("ConfigurationSetting.FindByKey found no rows.");
-	    }
-	    ConfigurationSetting data = GetDataObjectFromReader(dataReader);
-	    dataReader.Close();
-	    return data;
 	}
 
 	/// <summary>

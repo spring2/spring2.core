@@ -245,5 +245,18 @@ namespace Spring2.Core.Configuration {
 	    }
 	}
 
+        [Generate]
+        public class EffectgiveDateSorter : System.Collections.IComparer {
+            public Int32 Compare(Object a, Object b) {
+                IConfigurationSetting o1 = (IConfigurationSetting)a;
+                IConfigurationSetting o2 = (IConfigurationSetting)b;
+
+                if (o1 == null || o2 == null || !o1.EffectiveDate.IsValid || !o2.EffectiveDate.IsValid) {
+                    return 0;
+                }
+                return o1.EffectiveDate.CompareTo(o2.EffectiveDate);
+            }
+        }
+
     }
 }

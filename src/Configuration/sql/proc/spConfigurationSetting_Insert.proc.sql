@@ -10,7 +10,8 @@ CREATE PROCEDURE dbo.spConfigurationSetting_Insert
 	@Key	VarChar(100) = null,
 	@Value	VarChar(1024) = null,
 	@LastModifiedDate	DateTime = null,
-	@LastModifiedUserId	Int = null
+	@LastModifiedUserId	Int = null,
+	@EffectiveDate DateTime = null
 
 AS
 
@@ -19,12 +20,15 @@ INSERT INTO ConfigurationSetting
 (	[Key],
 	Value,
 	LastModifiedDate,
-	LastModifiedUserId)
+	LastModifiedUserId,
+	EffectiveDate
+	)
 VALUES (
 	@Key,
 	@Value,
 	@LastModifiedDate,
-	@LastModifiedUserId)
+	@LastModifiedUserId,
+	@EffectiveDate)
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN

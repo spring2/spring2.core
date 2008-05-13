@@ -23,6 +23,9 @@ namespace Spring2.Core.Configuration {
         
         [Generate()]
         private IdType lastModifiedUserId = IdType.DEFAULT;
+
+        [Generate()]
+        private DateTimeType effectiveDate = DateTimeType.DEFAULT;
         
         [Generate()]
         internal ConfigurationSetting() {
@@ -73,6 +76,16 @@ namespace Spring2.Core.Configuration {
                 this.lastModifiedDate = value;
             }
         }
+
+        [Generate()]
+        public DateTimeType EffectiveDate {
+            get {
+                return this.effectiveDate;
+            }
+            set {
+                this.effectiveDate = value;
+            }
+        }
         
         [Generate()]
         public IdType LastModifiedUserId {
@@ -101,7 +114,8 @@ namespace Spring2.Core.Configuration {
 	    value = data.Value.IsDefault ? value : data.Value;
 	    lastModifiedDate = data.LastModifiedDate.IsDefault ? lastModifiedDate : data.LastModifiedDate;
 	    lastModifiedUserId = data.LastModifiedUserId.IsDefault ? lastModifiedUserId : data.LastModifiedUserId;
-	    Store();
+            effectiveDate = data.EffectiveDate.IsDefault ? effectiveDate : data.EffectiveDate;
+            Store();
         }
         
         [Generate()]

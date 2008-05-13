@@ -18,6 +18,7 @@ namespace Spring2.Core.Configuration {
 	private StringType value = StringType.DEFAULT;
 	private DateTimeType lastModifiedDate = DateTimeType.DEFAULT;
 	private IdType lastModifiedUserId = IdType.DEFAULT;
+        private DateTimeType effectiveDate = DateTimeType.DEFAULT;
 
 	public IdType ConfigurationSettingId {
 	    get { return this.configurationSettingId; }
@@ -43,6 +44,11 @@ namespace Spring2.Core.Configuration {
 	    get { return this.lastModifiedUserId; }
 	    set { this.lastModifiedUserId = value; }
 	}
+
+        public DateTimeType EffectiveDate {
+            get { return this.effectiveDate; }
+            set { this.effectiveDate = value; }
+        }
 
 	public Boolean IsDefault {
 	    get {

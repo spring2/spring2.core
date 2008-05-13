@@ -18,6 +18,7 @@ namespace Spring2.Core.Configuration {
 	public static readonly String VALUE = "Value";
 	public static readonly String LASTMODIFIEDDATE = "LastModifiedDate";
 	public static readonly String LASTMODIFIEDUSERID = "LastModifiedUserId";
+        public static readonly String EFFECTIVEDATE = "EffectiveDate";
     }
 
     public interface IConfigurationSetting : IBusinessEntity {
@@ -36,5 +37,8 @@ namespace Spring2.Core.Configuration {
 	IdType LastModifiedUserId {
 	    get;
 	}
+        DateTimeType EffectiveDate {
+            get;
+        }
     }
 }
