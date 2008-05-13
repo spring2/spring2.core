@@ -128,7 +128,7 @@ if exists(select * from syscolumns where id=object_id('Category') and name = 'Ef
   END
 GO
 
-if not exists (select * from dbo.sysobjects where id = object_id(N'PK_ConfigrationSetting') and OBJECTPROPERTY(id, N'IsPrimaryKey') = 1)
+if not exists (select * from dbo.sysobjects where id = object_id(N'PK_ConfigurationSetting') and OBJECTPROPERTY(id, N'IsPrimaryKey') = 1)
 ALTER TABLE ConfigurationSetting WITH NOCHECK ADD
 	CONSTRAINT PK_ConfigrationSetting PRIMARY KEY NONCLUSTERED
 	(
