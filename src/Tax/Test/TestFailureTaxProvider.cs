@@ -8,6 +8,9 @@ namespace Spring2.Core.Tax.Test {
     /// </summary>
     public class TestFailureTaxProvider : ITaxProvider {
 
+	public TestTaxProvider(StringType profileKey) {
+	}
+
 	public TaxRateInfo GetTaxRateForArea(Spring2.Core.Types.IdType id, Spring2.Core.Types.DateType dateType) {
 	    throw new NotImplementedException();
 	}
