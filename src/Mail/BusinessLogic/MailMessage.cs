@@ -545,6 +545,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
         
         public void Send() {
             //make sure the attachment directory exists
+// TODO: needs to handle ending on root path
 	    String attachmentDirectory = ConfigurationProvider.Instance.Settings["TempPath"] + @"Attachments\";
 	    if (!Directory.Exists(attachmentDirectory)){
 		Directory.CreateDirectory(attachmentDirectory);

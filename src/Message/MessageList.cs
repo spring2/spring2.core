@@ -5,6 +5,8 @@ namespace Spring2.Core.Message {
 
     public class MessageList : CollectionBase {
 
+// TODO: this class needs to be completed
+
 	public MessageList() {
 	}
 
