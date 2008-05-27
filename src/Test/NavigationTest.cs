@@ -147,10 +147,12 @@ namespace Spring2.Core.Test {
 	}
 
 	private void DeleteMenuLinkGroup(IMenuLinkGroup group) {
+		if (group != null) {
 	    foreach(IMenuLink link in group.MenuLinks) {
 		DeleteMenuLink(link);
 	    }
 	    MenuLinkGroupDAO.DAO.Delete(group.MenuLinkGroupId);
+		}
 	}
 
 	private void DeleteMenuLink(IMenuLink menuLink) {
