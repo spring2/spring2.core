@@ -5,11 +5,13 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using CultureInfo = System.Globalization.CultureInfo;
 using Calendar = System.Globalization.Calendar;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
     [Serializable(), StructLayout(LayoutKind.Auto)]
-    public struct DateTimeType : IComparable, IFormattable, IDataType {
+    public struct DateTimeType : IComparable, IFormattable, IDataType, ISerializable {
 	private DateTime  myValue;
 	private TypeState myState;
 
@@ -813,6 +815,39 @@ namespace Spring2.Core.Types {
 		}
 	    }
 	}
+ 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        DateTimeType(SerializationInfo info, StreamingContext context) {
+            myValue = (DateTime)info.GetValue("myValue", typeof(DateTime));
+            myState = (TypeState)info.GetValue("myState", typeof(TypeState));
+        }
 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(DateTimeType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(DateTimeType_UNSET));
+            } else {
+                info.SetType(typeof(DateTimeType));
+                info.AddValue("myValue", myValue);
+                info.AddValue("myState", myState);
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class DateTimeType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return DateTimeType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class DateTimeType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return DateTimeType.UNSET;
+        }
     }
 }

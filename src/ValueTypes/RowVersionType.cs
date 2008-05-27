@@ -1,11 +1,14 @@
 using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
     /// <summary>
     /// RowVersion type for the Timestamp values in SQL Server.
     /// </summary>
     /// 
-    public struct RowVersionType : IDataType {
+	[Serializable]
+    public struct RowVersionType : IDataType, ISerializable {
 	private byte[]    myValue;
 	private TypeState myState;
 
@@ -67,6 +70,40 @@ namespace Spring2.Core.Types {
 	    return IsValid ? ToString() : String.Empty;
 	}
 
+ 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        RowVersionType(SerializationInfo info, StreamingContext context) {
+            myValue = (byte[])info.GetValue("myValue", typeof(byte[]));
+            myState = (TypeState)info.GetValue("myState", typeof(TypeState));
+        }
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(RowVersionType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(RowVersionType_UNSET));
+            } else {
+                info.SetType(typeof(RowVersionType));
+                info.AddValue("myValue", myValue);
+                info.AddValue("myState", myState);
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class RowVersionType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return RowVersionType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class RowVersionType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return RowVersionType.UNSET;
+        }
     }
 }
 

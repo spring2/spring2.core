@@ -1,11 +1,14 @@
 using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
     /// <summary>
     /// LocaleEnum generic collection
     /// </summary>
-    public class LocaleEnumList : System.Collections.CollectionBase {
+	[Serializable]
+    public class LocaleEnumList : System.Collections.CollectionBase, ISerializable {
 	
 	
 	public static readonly LocaleEnumList UNSET = new LocaleEnumList(true);
@@ -116,5 +119,44 @@ namespace Spring2.Core.Types {
 	}
 
 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        LocaleEnumList(SerializationInfo info, StreamingContext context) {
+            immutable = (Boolean)info.GetValue("immutable", typeof(Boolean));
+            int listCount = (int)info.GetValue("listCount", typeof(int));
+			for(int i = 0;i < listCount; i++) {
+				List.Add((LocaleEnum)info.GetValue("v" + i.ToString(), typeof(LocaleEnum)));
+			}
+        }
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(LocaleEnumList_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(LocaleEnumList_UNSET));
+            } else {
+                info.SetType(typeof(LocaleEnumList));
+                info.AddValue("immutable", immutable);
+				info.AddValue("listCount", List.Count);
+				for(int i = 0;i < List.Count; i++) {
+					info.AddValue("v" + i.ToString(), List[i]);
+				}
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class LocaleEnumList_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return LocaleEnumList.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class LocaleEnumList_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return LocaleEnumList.UNSET;
+        }
     }
 }

@@ -1,9 +1,12 @@
 using System;
 using System.Globalization;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
-    public struct IdType : IDataType {
+	[Serializable]
+    public struct IdType : IDataType, ISerializable {
 
 	private IntegerType myValue;
 
@@ -194,5 +197,37 @@ namespace Spring2.Core.Types {
 	    //return Compare(that);
 	    return Compare(this, that);
 	}
+ 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        IdType(SerializationInfo info, StreamingContext context) {
+            myValue = new IntegerType((Int32)(info.GetValue("myValue", typeof(Int32))));
+        }
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(IdType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(IdType_UNSET));
+            } else {
+                info.SetType(typeof(IdType));
+                info.AddValue("myValue", myValue.ToInt32());
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class IdType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return IdType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class IdType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return IdType.UNSET;
+        }
     }
 }

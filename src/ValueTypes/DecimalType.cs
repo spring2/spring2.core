@@ -2,11 +2,13 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
     [System.Serializable, System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
-    public struct DecimalType : IFormattable, IComparable, IConvertible, IDataType {
+    public struct DecimalType : IFormattable, IComparable, IConvertible, IDataType, ISerializable {
 
 	private Decimal   myValue;
 	private TypeState myState;
@@ -811,6 +813,39 @@ namespace Spring2.Core.Types {
 
 	    return myValue;
 	}
+ 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        DecimalType(SerializationInfo info, StreamingContext context) {
+            myValue = (Decimal)info.GetValue("myValue", typeof(Decimal));
+            myState = (TypeState)info.GetValue("myState", typeof(TypeState));
+        }
 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(DecimalType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(DecimalType_UNSET));
+            } else {
+                info.SetType(typeof(DecimalType));
+                info.AddValue("myValue", myValue);
+                info.AddValue("myState", myState);
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class DecimalType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return DecimalType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class DecimalType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return DecimalType.UNSET;
+        }
     }
 }

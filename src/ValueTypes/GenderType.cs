@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
@@ -8,7 +10,8 @@ namespace Spring2.Core.Types {
 	Female
     }
 
-    public struct GenderType : IComparable, IDataType {
+	[Serializable]
+    public struct GenderType : IComparable, IDataType, ISerializable {
 	private GenderCode myValue;
 	private TypeState  myState;
 
@@ -249,5 +252,46 @@ namespace Spring2.Core.Types {
 	}
 
 	#endregion
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(GenderType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(GenderType_UNSET));
+            } else if (this.Equals(MALE)) {
+                info.SetType(typeof(GenderType_MALE));
+            } else if (this.Equals(FEMALE)) {
+                info.SetType(typeof(GenderType_FEMALE));
+            }
+        }
+    }
+
+    
+    [Serializable]
+    public class GenderType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return GenderType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class GenderType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return GenderType.UNSET;
+        }
+    }
+
+    [Serializable]
+    public class GenderType_MALE : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return GenderType.MALE;
+        }
+    }
+    [Serializable]
+    public class GenderType_FEMALE : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return GenderType.FEMALE;
+        }
     }
 }

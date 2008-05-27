@@ -1,9 +1,11 @@
 using System;
 using System.Globalization;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
     [System.Serializable, System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
-    public struct IntegerType :	System.IComparable, System.IFormattable, IDataType {
+    public struct IntegerType :	System.IComparable, System.IFormattable, IDataType, ISerializable {
 	private System.Int32 myValue;
 	private TypeState    myState;
 
@@ -694,6 +696,39 @@ namespace Spring2.Core.Types {
 	    return TypeCode.Int32;
 	}
 	#endregion
+ 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        IntegerType(SerializationInfo info, StreamingContext context) {
+            myValue = (System.Int32)info.GetValue("myValue", typeof(System.Int32));
+            myState = (TypeState)info.GetValue("myState", typeof(TypeState));
+        }
 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(IntegerType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(IntegerType_UNSET));
+            } else {
+                info.SetType(typeof(IntegerType));
+                info.AddValue("myValue", myValue);
+                info.AddValue("myState", myState);
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class IntegerType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return IntegerType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class IntegerType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return IntegerType.UNSET;
+        }
     }
 }

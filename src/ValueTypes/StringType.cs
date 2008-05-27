@@ -5,11 +5,13 @@ using System.Threading;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using va_list = System.ArgIterator;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
     [Serializable] 
-    public struct StringType : IComparable, ICloneable, IEnumerable, IDataType {
+    public struct StringType : IComparable, ICloneable, IEnumerable, IDataType, ISerializable {
 
 	private string    myValue;
 	private TypeState myState;
@@ -1004,6 +1006,38 @@ namespace Spring2.Core.Types {
 	    get { return !IsValid || String.Empty.Equals(myValue.Trim()); }
 	}
 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        StringType(SerializationInfo info, StreamingContext context) {
+            myValue = (System.String)info.GetValue("myValue", typeof(System.String));
+            myState = (TypeState)info.GetValue("myState", typeof(TypeState));
+        }
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(StringType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(StringType_UNSET));
+            } else {
+                info.SetType(typeof(StringType));
+                info.AddValue("myValue", myValue);
+                info.AddValue("myState", myState);
+            }
+        }
+
     }
 
+    [Serializable]
+    public class StringType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return StringType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class StringType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return StringType.UNSET;
+        }
+    }
 }

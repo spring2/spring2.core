@@ -1,9 +1,12 @@
 using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 
 namespace Spring2.Core.Types {
 
-    public struct QuantityType : IComparable, IDataType {
+	[Serializable]
+    public struct QuantityType : IComparable, IDataType, ISerializable {
 	DecimalType myValue;
 
 	public static readonly QuantityType DEFAULT = new QuantityType(TypeState.DEFAULT);
@@ -139,5 +142,37 @@ namespace Spring2.Core.Types {
 	    return TypeCode.Decimal;
 	}
 	#endregion
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        QuantityType(SerializationInfo info, StreamingContext context) {
+            myValue = new DecimalType((Decimal)(info.GetValue("myValue", typeof(Decimal))));
+        }
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(QuantityType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(QuantityType_UNSET));
+            } else {
+                info.SetType(typeof(QuantityType));
+                info.AddValue("myValue", myValue.ToDecimal());
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class QuantityType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return QuantityType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class QuantityType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return QuantityType.UNSET;
+        }
     }
 }

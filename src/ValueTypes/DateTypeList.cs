@@ -1,11 +1,14 @@
 using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
     /// <summary>
     /// DateType generic collection
     /// </summary>
-    public class DateTypeList : System.Collections.CollectionBase {
+	[Serializable]
+    public class DateTypeList : System.Collections.CollectionBase, ISerializable {
 	
 	public static readonly DateTypeList UNSET = new DateTypeList(true);
 	public static readonly DateTypeList DEFAULT = new DateTypeList(true);
@@ -98,6 +101,45 @@ namespace Spring2.Core.Types {
 		return !(IsDefault || IsUnset);
 	    }
 	}
+ 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        DateTypeList(SerializationInfo info, StreamingContext context) {
+            immutable = (Boolean)info.GetValue("immutable", typeof(Boolean));
+            int listCount = (int)info.GetValue("listCount", typeof(int));
+			for(int i = 0;i < listCount; i++) {
+				List.Add((DateType)info.GetValue("v" + i.ToString(), typeof(DateType)));
+			}
+        }
 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(DateTypeList_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(DateTypeList_UNSET));
+            } else {
+                info.SetType(typeof(DateTypeList));
+                info.AddValue("immutable", immutable);
+				info.AddValue("listCount", List.Count);
+				for(int i = 0;i < List.Count; i++) {
+					info.AddValue("v" + i.ToString(), List[i]);
+				}
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class DateTypeList_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return DateTypeList.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class DateTypeList_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return DateTypeList.UNSET;
+        }
     }
 }

@@ -1,11 +1,14 @@
 using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
     /// <summary>
     /// CurrencyType generic collection
     /// </summary>
-    public class CurrencyTypeList : System.Collections.CollectionBase {
+	[Serializable]
+    public class CurrencyTypeList : System.Collections.CollectionBase, ISerializable {
 	
 	public static readonly CurrencyTypeList UNSET = new CurrencyTypeList(true);
 	public static readonly CurrencyTypeList DEFAULT = new CurrencyTypeList(true);
@@ -98,6 +101,45 @@ namespace Spring2.Core.Types {
 		return !(IsDefault || IsUnset);
 	    }
 	}
+ 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        CurrencyTypeList(SerializationInfo info, StreamingContext context) {
+            immutable = (Boolean)info.GetValue("immutable", typeof(Boolean));
+            int listCount = (int)info.GetValue("listCount", typeof(int));
+			for(int i = 0;i < listCount; i++) {
+				List.Add((CurrencyType)info.GetValue("v" + i.ToString(), typeof(CurrencyType)));
+			}
+        }
 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(CurrencyTypeList_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(CurrencyTypeList_UNSET));
+            } else {
+                info.SetType(typeof(CurrencyTypeList));
+                info.AddValue("immutable", immutable);
+				info.AddValue("listCount", List.Count);
+				for(int i = 0;i < List.Count; i++) {
+					info.AddValue("v" + i.ToString(), List[i]);
+				}
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class CurrencyTypeList_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return CurrencyTypeList.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class CurrencyTypeList_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return CurrencyTypeList.UNSET;
+        }
     }
 }

@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
     [Serializable()] 
-    public struct BooleanType : IComparable, IDataType {
+    public struct BooleanType : IComparable, IDataType, ISerializable {
 	
 	private Boolean myValue;
 	private TypeState myState;
@@ -187,5 +189,46 @@ namespace Spring2.Core.Types {
 	}
 
 
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(BooleanType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(BooleanType_UNSET));
+            } else if (this.Equals(TRUE)) {
+                info.SetType(typeof(BooleanType_TRUE));
+            } else if (this.Equals(FALSE)) {
+                info.SetType(typeof(BooleanType_FALSE));
+            }
+        }
+    }
+
+    
+    [Serializable]
+    public class BooleanType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return BooleanType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class BooleanType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return BooleanType.UNSET;
+        }
+    }
+
+    [Serializable]
+    public class BooleanType_TRUE : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return BooleanType.TRUE;
+        }
+    }
+    [Serializable]
+    public class BooleanType_FALSE : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return BooleanType.FALSE;
+        }
     }
 }

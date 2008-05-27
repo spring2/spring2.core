@@ -1,11 +1,14 @@
 using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
     /// <summary>
     /// DecimalType generic collection
     /// </summary>
-    public class DecimalTypeList : System.Collections.CollectionBase {
+	[Serializable]
+    public class DecimalTypeList : System.Collections.CollectionBase, ISerializable {
 	
 	public static readonly DecimalTypeList UNSET = new DecimalTypeList(true);
 	public static readonly DecimalTypeList DEFAULT = new DecimalTypeList(true);
@@ -98,6 +101,45 @@ namespace Spring2.Core.Types {
 		return !(IsDefault || IsUnset);
 	    }
 	}
+  
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        DecimalTypeList(SerializationInfo info, StreamingContext context) {
+            immutable = (Boolean)info.GetValue("immutable", typeof(Boolean));
+            int listCount = (int)info.GetValue("listCount", typeof(int));
+			for(int i = 0;i < listCount; i++) {
+				List.Add((DecimalType)info.GetValue("v" + i.ToString(), typeof(DecimalType)));
+			}
+        }
 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(DecimalTypeList_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(DecimalTypeList_UNSET));
+            } else {
+                info.SetType(typeof(DecimalTypeList));
+                info.AddValue("immutable", immutable);
+				info.AddValue("listCount", List.Count);
+				for(int i = 0;i < List.Count; i++) {
+					info.AddValue("v" + i.ToString(), List[i]);
+				}
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class DecimalTypeList_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return DecimalTypeList.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class DecimalTypeList_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return DecimalTypeList.UNSET;
+        }
     }
 }

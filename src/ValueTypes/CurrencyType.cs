@@ -1,10 +1,12 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
     [Serializable, StructLayout(LayoutKind.Sequential)]
-    public struct CurrencyType : IFormattable, IComparable, IDataType {
+    public struct CurrencyType : IFormattable, IComparable, IDataType, ISerializable {
 	private Decimal myValue;
 	private TypeState myState;
 
@@ -843,6 +845,39 @@ namespace Spring2.Core.Types {
 
 	    return myValue;
 	}
-    
+ 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        CurrencyType(SerializationInfo info, StreamingContext context) {
+            myValue = (Decimal)info.GetValue("myValue", typeof(Decimal));
+            myState = (TypeState)info.GetValue("myState", typeof(TypeState));
+        }
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(CurrencyType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(CurrencyType_UNSET));
+            } else {
+                info.SetType(typeof(CurrencyType));
+                info.AddValue("myValue", myValue);
+                info.AddValue("myState", myState);
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class CurrencyType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return CurrencyType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class CurrencyType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return CurrencyType.UNSET;
+        }
     }
 }

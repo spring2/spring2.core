@@ -1,8 +1,10 @@
 using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
     [System.Serializable, System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
-    public struct LongType : System.IComparable, System.IFormattable, IDataType {
+    public struct LongType : System.IComparable, System.IFormattable, IDataType, ISerializable {
 	private System.Int64 myValue;
 	private TypeState    myState;
 
@@ -758,5 +760,39 @@ namespace Spring2.Core.Types {
 	    return TypeCode.Int64;
 	}
 	#endregion
+ 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        LongType(SerializationInfo info, StreamingContext context) {
+            myValue = (System.Int64)info.GetValue("myValue", typeof(System.Int64));
+            myState = (TypeState)info.GetValue("myState", typeof(TypeState));
+        }
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(LongType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(LongType_UNSET));
+            } else {
+                info.SetType(typeof(LongType));
+                info.AddValue("myValue", myValue);
+                info.AddValue("myState", myState);
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class LongType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return LongType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class LongType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return LongType.UNSET;
+        }
     }
 }

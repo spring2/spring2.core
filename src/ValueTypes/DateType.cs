@@ -5,11 +5,13 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using CultureInfo = System.Globalization.CultureInfo;
 using Calendar = System.Globalization.Calendar;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
     [Serializable(), StructLayout(LayoutKind.Auto)]
-    public struct DateType : IComparable, IFormattable, IConvertible, IDataType {
+    public struct DateType : IComparable, IFormattable, IConvertible, IDataType, ISerializable {
 	private DateTime  myValue;
 	private TypeState myState;
 
@@ -742,6 +744,39 @@ namespace Spring2.Core.Types {
 	public Boolean SameDayAs(DateType that) {
 	    return this.Date.Equals(that.Date);
 	}
+ 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        DateType(SerializationInfo info, StreamingContext context) {
+            myValue = (DateTime)info.GetValue("myValue", typeof(DateTime));
+            myState = (TypeState)info.GetValue("myState", typeof(TypeState));
+        }
 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(DateType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(DateType_UNSET));
+            } else {
+                info.SetType(typeof(DateType));
+                info.AddValue("myValue", myValue);
+                info.AddValue("myState", myState);
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class DateType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return DateType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class DateType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return DateType.UNSET;
+        }
     }
 }

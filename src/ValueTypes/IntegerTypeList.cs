@@ -1,11 +1,14 @@
 using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
     /// <summary>
     /// IntegerType generic collection
     /// </summary>
-    public class IntegerTypeList : System.Collections.CollectionBase {
+	[Serializable]
+    public class IntegerTypeList : System.Collections.CollectionBase, ISerializable {
 	
 	public static readonly IntegerTypeList UNSET = new IntegerTypeList(true);
 	public static readonly IntegerTypeList DEFAULT = new IntegerTypeList(true);
@@ -98,6 +101,45 @@ namespace Spring2.Core.Types {
 		return !(IsDefault || IsUnset);
 	    }
 	}
+ 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        IntegerTypeList(SerializationInfo info, StreamingContext context) {
+            immutable = (Boolean)info.GetValue("immutable", typeof(Boolean));
+            int listCount = (int)info.GetValue("listCount", typeof(int));
+			for(int i = 0;i < listCount; i++) {
+				List.Add((IntegerType)info.GetValue("v" + i.ToString(), typeof(IntegerType)));
+			}
+        }
 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(IntegerTypeList_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(IntegerTypeList_UNSET));
+            } else {
+                info.SetType(typeof(IntegerTypeList));
+                info.AddValue("immutable", immutable);
+				info.AddValue("listCount", List.Count);
+				for(int i = 0;i < List.Count; i++) {
+					info.AddValue("v" + i.ToString(), List[i]);
+				}
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class IntegerTypeList_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return IntegerTypeList.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class IntegerTypeList_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return IntegerTypeList.UNSET;
+        }
     }
 }

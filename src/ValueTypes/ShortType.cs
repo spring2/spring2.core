@@ -1,8 +1,10 @@
 using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
     [System.Serializable, System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
-    public struct ShortType : System.IComparable, System.IFormattable, IDataType {
+    public struct ShortType : System.IComparable, System.IFormattable, IDataType, ISerializable {
 	private System.Int16 myValue;
 	private TypeState    myState;
 
@@ -653,5 +655,39 @@ namespace Spring2.Core.Types {
 	    return TypeCode.Int16;
 	}
 	#endregion
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        ShortType(SerializationInfo info, StreamingContext context) {
+            myValue = (System.Int16)info.GetValue("myValue", typeof(System.Int16));
+            myState = (TypeState)info.GetValue("myState", typeof(TypeState));
+        }
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(ShortType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(ShortType_UNSET));
+            } else {
+                info.SetType(typeof(ShortType));
+                info.AddValue("myValue", myValue);
+                info.AddValue("myState", myState);
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class ShortType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return ShortType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class ShortType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return ShortType.UNSET;
+        }
     }
 }

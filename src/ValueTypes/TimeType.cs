@@ -1,10 +1,12 @@
 using System.Text;
 using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
     [Serializable]
-    public struct TimeType : IComparable, IDataType {
+    public struct TimeType : IComparable, IDataType, ISerializable {
 	private TimeSpan  myValue;
 	private TypeState myState;
 
@@ -383,5 +385,38 @@ namespace Spring2.Core.Types {
 	}
 	#endregion
 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        TimeType(SerializationInfo info, StreamingContext context) {
+            myValue = (TimeSpan)info.GetValue("myValue", typeof(TimeSpan));
+            myState = (TypeState)info.GetValue("myState", typeof(TypeState));
+        }
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(TimeType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(TimeType_UNSET));
+            } else {
+                info.SetType(typeof(TimeType));
+                info.AddValue("myValue", myValue);
+                info.AddValue("myState", myState);
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class TimeType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return TimeType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class TimeType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return TimeType.UNSET;
+        }
     }
 }

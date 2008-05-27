@@ -1,11 +1,14 @@
 using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
     /// <summary>
     /// StringType generic collection
     /// </summary>
-    public class StringTypeList : System.Collections.CollectionBase {
+	[Serializable]
+    public class StringTypeList : System.Collections.CollectionBase, ISerializable {
 	
 	public static readonly StringTypeList UNSET = new StringTypeList(true);
 	public static readonly StringTypeList DEFAULT = new StringTypeList(true);
@@ -99,5 +102,44 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        StringTypeList(SerializationInfo info, StreamingContext context) {
+            immutable = (Boolean)info.GetValue("immutable", typeof(Boolean));
+            int listCount = (int)info.GetValue("listCount", typeof(int));
+			for(int i = 0;i < listCount; i++) {
+				List.Add((StringType)info.GetValue("v" + i.ToString(), typeof(StringType)));
+			}
+        }
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(StringTypeList_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(StringTypeList_UNSET));
+            } else {
+                info.SetType(typeof(StringTypeList));
+                info.AddValue("immutable", immutable);
+				info.AddValue("listCount", List.Count);
+				for(int i = 0;i < List.Count; i++) {
+					info.AddValue("v" + i.ToString(), List[i]);
+				}
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class StringTypeList_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return StringTypeList.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class StringTypeList_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return StringTypeList.UNSET;
+        }
     }
 }

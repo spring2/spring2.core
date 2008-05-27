@@ -2,13 +2,16 @@ using System;
 using System.Globalization;
 using System.Text;
 using config = System.Configuration.ConfigurationSettings;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Spring2.Core.Types {
 
     /// <summary>
     /// Data type for wrapping phone numbers. 
     /// </summary>
-    public class PhoneNumberType : DataType, IComparable, IDataType {
+	[Serializable]
+    public class PhoneNumberType : DataType, IComparable, IDataType, ISerializable {
 
 	public static readonly new PhoneNumberType DEFAULT = new PhoneNumberType();
 	public static readonly new PhoneNumberType UNSET = new PhoneNumberType();
@@ -409,5 +412,45 @@ namespace Spring2.Core.Types {
 		}
 	    }
 	}
+ 
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        PhoneNumberType(SerializationInfo info, StreamingContext context) {
+			countryCode = (String)info.GetValue("countryCode", typeof(String));
+			areaCode = (String)info.GetValue("areaCode", typeof(String));
+			exchange = (String)info.GetValue("exchange", typeof(String));
+			number = (String)info.GetValue("number", typeof(String));
+			extension = (String)info.GetValue("extension", typeof(String));
+        }
+
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (this.Equals(DEFAULT)) {
+                info.SetType(typeof(PhoneNumberType_DEFAULT));
+            } else if (this.Equals(UNSET)) {
+                info.SetType(typeof(PhoneNumberType_UNSET));
+            } else {
+                info.SetType(typeof(PhoneNumberType));
+				info.AddValue("countryCode", countryCode);
+				info.AddValue("areaCode", areaCode);
+				info.AddValue("exchange", exchange);
+				info.AddValue("number", number);
+				info.AddValue("extension", extension);
+            }
+        }
+
+    }
+
+    [Serializable]
+    public class PhoneNumberType_DEFAULT : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return PhoneNumberType.DEFAULT;
+        }
+    }
+
+    [Serializable]
+    public class PhoneNumberType_UNSET : IObjectReference {
+        public object GetRealObject(StreamingContext context) {
+            return PhoneNumberType.UNSET;
+        }
     }
 }
