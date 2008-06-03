@@ -10,7 +10,6 @@
         <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Maverick.dll" documentation="C:\data\work\spring2\Core\build\Spring2.Core.Maverick.xml" />
         <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Security.dll" documentation="C:\data\work\spring2\Core\build\Spring2.Core.Security.xml" />
         <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.AddressValidation.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.AddressValidation.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Ajax.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.Ajax.xml" />
         <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Log4Net.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.Log4Net.xml" />
         <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Payment.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.Payment.xml" />
         <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.PropertyPopulator.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.PropertyPopulator.xml" />
@@ -22,14 +21,24 @@
         <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Tax.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.Tax.xml" />
     </assemblies>
     <namespaces>
-        <namespace name="ResourceEditor.ResourceManager.Facade"></namespace>
+        <namespace name="Spring2.Core.AddressValidation"></namespace>
+        <namespace name="Spring2.Core.AddressValidation.Test"></namespace>
+        <namespace name="Spring2.Core.AddressValidation.UPS"></namespace>
         <namespace name="Spring2.Core.BusinessEntity"></namespace>
+        <namespace name="Spring2.Core.com.concordebiz.efsnet"></namespace>
+        <namespace name="Spring2.Core.com.teleatlas.na.ezlocate.authentication"></namespace>
+        <namespace name="Spring2.Core.com.teleatlas.na.ezlocate.geocoding"></namespace>
         <namespace name="Spring2.Core.Configuration"></namespace>
         <namespace name="Spring2.Core.Cryptography"></namespace>
         <namespace name="Spring2.Core.DAO">Data access</namespace>
         <namespace name="Spring2.Core.DataObject"></namespace>
         <namespace name="Spring2.Core.Drawing.Graphing"></namespace>
         <namespace name="Spring2.Core.Geocode"></namespace>
+        <namespace name="Spring2.Core.Geocode.BusinessLogic"></namespace>
+        <namespace name="Spring2.Core.Geocode.Dao"></namespace>
+        <namespace name="Spring2.Core.Geocode.DataObject"></namespace>
+        <namespace name="Spring2.Core.Geocode.Types"></namespace>
+        <namespace name="Spring2.Core.Geocode.WebService"></namespace>
         <namespace name="Spring2.Core.Globalization"></namespace>
         <namespace name="Spring2.Core.IO"></namespace>
         <namespace name="Spring2.Core.Log4Net.Appender"></namespace>
@@ -37,9 +46,16 @@
         <namespace name="Spring2.Core.Mail.Dao"></namespace>
         <namespace name="Spring2.Core.Mail.DataObject"></namespace>
         <namespace name="Spring2.Core.Mail.Types"></namespace>
+        <namespace name="Spring2.Core.Maverick"></namespace>
         <namespace name="Spring2.Core.Maverick.Controller"></namespace>
         <namespace name="Spring2.Core.Maverick.DataForm"></namespace>
         <namespace name="Spring2.Core.Message"></namespace>
+        <namespace name="Spring2.Core.net.esalestax.webservices1"></namespace>
+        <namespace name="Spring2.Core.Payment"></namespace>
+        <namespace name="Spring2.Core.Payment.EFSNet"></namespace>
+        <namespace name="Spring2.Core.Payment.Moneris"></namespace>
+        <namespace name="Spring2.Core.Payment.PayflowPro"></namespace>
+        <namespace name="Spring2.Core.Payment.Test"></namespace>
         <namespace name="Spring2.Core.PropertyPopulator"></namespace>
         <namespace name="Spring2.Core.ResourceManager.BusinessLogic"></namespace>
         <namespace name="Spring2.Core.ResourceManager.Dao"></namespace>
@@ -47,25 +63,16 @@
         <namespace name="Spring2.Core.ResourceManager.Facade"></namespace>
         <namespace name="Spring2.Core.ResourceManager.Test"></namespace>
         <namespace name="Spring2.Core.Security"></namespace>
+        <namespace name="Spring2.Core.Soap"></namespace>
+        <namespace name="Spring2.Core.Tax"></namespace>
+        <namespace name="Spring2.Core.Tax.CertiTax"></namespace>
+        <namespace name="Spring2.Core.Tax.Test"></namespace>
+        <namespace name="Spring2.Core.Tax.Vertex"></namespace>
         <namespace name="Spring2.Core.Types"></namespace>
         <namespace name="Spring2.Core.Types.Formatter"></namespace>
         <namespace name="Spring2.Core.Util"></namespace>
         <namespace name="Spring2.Core.WebControl"></namespace>
         <namespace name="Spring2.Core.Xml"></namespace>
-        <namespace name="Spring2.Dss.AddressValidation"></namespace>
-        <namespace name="Spring2.Dss.AddressValidation.Test"></namespace>
-        <namespace name="Spring2.Dss.AddressValidation.UPS"></namespace>
-        <namespace name="Spring2.Dss.com.concordebiz.efsnet"></namespace>
-        <namespace name="Spring2.Dss.net.esalestax.webservices1"></namespace>
-        <namespace name="Spring2.Dss.Payment"></namespace>
-        <namespace name="Spring2.Dss.Payment.EFSNet"></namespace>
-        <namespace name="Spring2.Dss.Payment.Moneris"></namespace>
-        <namespace name="Spring2.Dss.Payment.PayflowPro"></namespace>
-        <namespace name="Spring2.Dss.Payment.Test"></namespace>
-        <namespace name="Spring2.Dss.Soap"></namespace>
-        <namespace name="Spring2.Dss.Tax"></namespace>
-        <namespace name="Spring2.Dss.Tax.CertiTax"></namespace>
-        <namespace name="Spring2.Dss.Tax.Vertex"></namespace>
     </namespaces>
     <documenters>
         <documenter name="JavaDoc">
