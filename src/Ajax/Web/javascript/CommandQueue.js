@@ -185,8 +185,8 @@ sp2Ajax.CommandQueue.onload=function(responseObject){
 	var command = sp2Ajax.Base.sent[commandResponse.responseHandlerId];
 	if(command) {
 	    if(sp2Ajax.debug){alert("Got Command");}
-	    if(commandResponse.unhandledException && commandResponse.unhandledException == 'true') {
-		alert(DecodeText(commandResponse.message));
+	    if(commandResponse.unhandledException && commandResponse.unhandledException == true) {
+		alert(commandResponse.message);
 	    } else {
 		command.parseResponse(commandResponse.response);
 		if(!needFireQueue && command.type == sp2Ajax.CommandQueue.TYPE_SINGLEPROCESS && command.priority == sp2Ajax.CommandQueue.PRIORITY_IMMEDIATE) {

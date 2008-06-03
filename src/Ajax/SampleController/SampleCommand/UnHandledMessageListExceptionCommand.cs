@@ -19,7 +19,7 @@ namespace Spring2.Core.Ajax.SampleController.SampleCommand {
 
 	protected override String Execute() {
 	    MessageList errors = new MessageList();
-	    errors.Add(new MissingRequiredFieldError("FieldNameHere"));
+	    errors.Add(new MissingRequiredFieldError("FieldNameHere Special Char(%26 ' \" & & + + ''')"));
 	    throw new MessageListException(errors);
 	}
     }

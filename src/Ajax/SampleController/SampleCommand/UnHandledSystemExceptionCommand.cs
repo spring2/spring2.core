@@ -18,7 +18,7 @@ namespace Spring2.Core.Ajax.SampleController.SampleCommand {
 	protected UnHandledSystemExceptionCommand() { }
 
 	protected override String Execute() {
-	    throw new NotImplementedException("This is an unhandled system exception");
+	    throw new NotImplementedException("This is an unhandled system exception Special Char(%26 ' \" & & + + ''')");
 	}
     }
 }

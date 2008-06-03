@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Specialized;
 using System.Reflection;
 using System.Text;
@@ -21,6 +22,7 @@ namespace Spring2.Core.Ajax {
 	private String name = String.Empty;
 	private String qualifiedName = String.Empty;
 	private Boolean isValid = false;
+	private JsonAjaxUtility util = new JsonAjaxUtility();
 
 	public Command(Int32 responseHandlerId, NameValueCollection values, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) {
 	    this.isValid = true;
@@ -43,9 +45,9 @@ namespace Spring2.Core.Ajax {
 		}
 	    } catch(MessageListException listException) {
 		this.errors.AddRange(listException.Messages);
-		return "{" + String.Format("responseHandlerId:'{0}', unhandledException:'true', message:'{1}'", responseHandlerId, LocalizeAndFormatErrorsForJavaScriptAlert()) + "}";
+		return util.SerializeUnhandledExceptionResponse(responseHandlerId, LocalizeAndFormatErrorsForJavaScriptAlert());
 	    } catch(Exception ex) {
-		return "{" + String.Format("responseHandlerId:'{0}', unhandledException:'true', message:'{1}'", responseHandlerId, this.PrepairString("There was a problem.\nInform support of the following error and refresh the page.\n\n" + ex.ToString())) + "}";
+		return util.SerializeUnhandledExceptionResponse(responseHandlerId, "There was a problem.\nInform support of the following error and refresh the page.\n\n" + ex.ToString());
 	    }
 	}
 
@@ -74,14 +76,6 @@ namespace Spring2.Core.Ajax {
 
 	abstract protected String Execute();
 
-	internal String PrepairString(String message) {
-	    return HttpUtility.UrlPathEncode(message.Replace("'", "&#39;"));
-	}
-
-	internal String PrepairString(StringBuilder message) {
-	    return PrepairString(message.ToString());
-	}
-
 	public String LocalizeAndFormatErrorsForJavaScriptAlert() {
 	    StringBuilder sb = new StringBuilder();
 	    if(this.errors.Count > 0) {
@@ -90,7 +84,7 @@ namespace Spring2.Core.Ajax {
 		    sb.Append("\n");
 		}
 	    }
-	    return HttpUtility.UrlPathEncode(sb.ToString()).Replace("'", "&apos;");
+	    return sb.ToString();
 	}
     }
 }

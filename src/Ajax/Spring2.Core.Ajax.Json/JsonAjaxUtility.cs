@@ -24,8 +24,14 @@ namespace Spring2.Core.Ajax.Json {
     }
 
     public class Response {
-        public Int32 responseHandlerId; 
+        public Int32 responseHandlerId;
         public Hashtable response;
+    }
+
+    public class UnhandledErrorResponse {
+	public Int32 responseHandlerId;
+	public Boolean unhandledException;
+	public String message;
     }
 
 
@@ -67,6 +73,14 @@ namespace Spring2.Core.Ajax.Json {
             r.responseHandlerId = responseHandlerId;
             r.response = values;
             return JavaScriptConvert.SerializeObject(r);
+	}
+
+	public String SerializeUnhandledExceptionResponse(Int32 responseHandlerId, String message) {
+	    UnhandledErrorResponse r = new UnhandledErrorResponse();
+	    r.responseHandlerId = responseHandlerId;
+	    r.unhandledException = true;
+	    r.message = message;
+	    return JavaScriptConvert.SerializeObject(r);
 	}
 
 	public Response DeserializeResponse(String jSON) {
