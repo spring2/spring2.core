@@ -534,7 +534,7 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual("N", result.AVSResponseCode);
 	}
 	
-	[Test]
+	[Ignore]
 	public void NoAddressValid9DigitZip() {
 	    MonerisProvider provider = new MonerisProvider();
 	    PaymentResult result = result = provider.Charge(random.Next(99999999).ToString(), 10.40, VALID_VISA_CARD_NUMBER, "09", "11", VALID_CVV, "Elmer Fudd", "", VALID_BILLING_POSTAL_CODE, "Kilroy was here");
@@ -554,7 +554,7 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual("Z", result.AVSResponseCode);
 	}
 
-	[Test]
+	[Ignore]
 	public void NoZipValidAddress() {
 	    MonerisProvider provider = new MonerisProvider();
 	    PaymentResult result = result = provider.Charge(random.Next(99999999).ToString(), 10.40, VALID_VISA_CARD_NUMBER, "09", "11", VALID_CVV, "Elmer Fudd", VALID_BILLING_ADDRESS, "", "Kilroy was here");
@@ -569,7 +569,7 @@ namespace Spring2.Core.Test {
 //	// invalid address for type for each card type (23 x 5)
     	
 	#region CVV
-	[Test]
+	[Ignore]
 	public void ValidCvv() {
 	    MonerisProvider provider = new MonerisProvider();
 	    PaymentResult result = provider.Charge(random.Next(99999999).ToString(), 10.41, VALID_VISA_CARD_NUMBER, VALID_EXPIRATION_MONTH, VALID_EXPIRATION_YEAR, VALID_CVV, "Elmer Fudd", VALID_BILLING_ADDRESS, VALID_BILLING_POSTAL_CODE, "Kilroy was here");
@@ -579,7 +579,7 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual("1M", result.CVVResponseCode);
 	}
     	
-	[Test]
+	[Ignore]
 	public void NoCvv() {
 	    MonerisProvider provider = new MonerisProvider();
 	    PaymentResult result = provider.Charge(random.Next(99999999).ToString(), 10.30, VALID_VISA_CARD_NUMBER, VALID_EXPIRATION_MONTH, VALID_EXPIRATION_YEAR, "", "Elmer Fudd", VALID_BILLING_ADDRESS, VALID_BILLING_POSTAL_CODE, "Kilroy was here");
@@ -589,7 +589,7 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual("0P", result.CVVResponseCode);
 	}
 
-	[Test]
+	[Ignore]
 	public void InvalidCvv() {
 	    MonerisProvider provider = new MonerisProvider();
 	    PaymentResult result = null;
