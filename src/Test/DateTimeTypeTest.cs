@@ -129,5 +129,26 @@ namespace Spring2.Core.Test {
     	    DateTimeType endOfDay = DateTimeType.Today.AddHours(23).AddMinutes(59).AddSeconds(59).AddMilliseconds(997);
 	    Assert.AreEqual(endOfDay, date.EndOfDay);
 	}
+		[Test]
+	public void ShoulCalculateEndOfMonth() 
+	{
+		DateTimeType date = new DateTimeType(2007, 1, 1);
+		DateTimeType endOfMonth = new DateTimeType(date.Year, date.Month, DateTimeType.DaysInMonth(date.Year, date.Month));
+		Assert.AreEqual(endOfMonth, date.EndOfMonth);
+	}
+		[Test]
+	public void ShouldCompareDateRanges() 
+	{
+		DateTimeType one = new DateTimeType(2007, 1, 1);
+		DateTimeType two = new DateTimeType(2007, 1, 2);
+		DateTimeType three = new DateTimeType(2007, 1, 3);
+		DateTimeType four = new DateTimeType(2007, 1, 4);
+
+		Assert.IsTrue(DateTimeType.Overlap(one, two, one, two));
+		Assert.IsTrue(DateTimeType.Overlap(one, three, two, four));
+		Assert.IsTrue(DateTimeType.Overlap(two, four, one, three));
+		Assert.IsFalse(DateTimeType.Overlap(three, four, one, two));
+		Assert.IsFalse(DateTimeType.Overlap(one, two, three, four));
+	}
     }
 }

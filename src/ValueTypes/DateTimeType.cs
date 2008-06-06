@@ -199,6 +199,17 @@ namespace Spring2.Core.Types {
 	    // Should never get here.
 	    return 0;
 	}
+
+
+	public static bool Overlap(DateTimeType range1Start, DateTimeType range1end, DateTimeType range2Start, DateTimeType range2end)
+	{
+		if((range1Start > range1end) || (range2Start > range2end))
+		{
+			return false;
+		}
+
+		return !((range2end < range1Start) || (range2Start > range1end));
+	}
 	#endregion
    
 	#region Various methods for extracting parts of a DateTimeType (Date, Now, etc..)
@@ -754,6 +765,14 @@ namespace Spring2.Core.Types {
 		DateTime result = ToDate();
 		return new DateTimeType(new DateTime(result.Year, result.Month, 1));
 	    }
+	}
+	public DateTimeType EndOfMonth 
+	{
+		get 
+		{
+			DateTime result = ToDate();
+			return new DateTimeType(new DateTime(result.Year, result.Month, DaysInMonth(result.Year, result.Month)));
+		}
 	}
 
 	public DateTimeType FirstOfYear {
