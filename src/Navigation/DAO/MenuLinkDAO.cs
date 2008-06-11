@@ -384,7 +384,11 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 
@@ -426,7 +430,11 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -455,7 +463,11 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -516,8 +528,13 @@ namespace Spring2.Core.Navigation.Dao {
 			IDataReader reader = cmd.ExecuteReader();
 
 			result = reader.Read() ? GetDataObjectFromReader(reader) : null;
-
+#if (NET_1_1)
 			cmd.Connection.Close();
+#else
+			if (DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+#endif
 		}
 
 		return result;
@@ -551,7 +568,13 @@ namespace Spring2.Core.Navigation.Dao {
 			IDataReader reader = cmd.ExecuteReader();
 
 			result = reader.Read() ? GetDataObjectFromReader(reader) : null;
+#if (NET_1_1)
 			cmd.Connection.Close();
+#else
+			if (DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+#endif
 		}
 
 		return result;
@@ -579,7 +602,13 @@ namespace Spring2.Core.Navigation.Dao {
 
 			result = (reader.Read() && !reader.IsDBNull(ordinal)) ? new IdType(reader.GetInt32(ordinal)) : 1;
 
+#if (NET_1_1)
 			cmd.Connection.Close();
+#else
+			if (DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+#endif
 		}
 
 		return result;
@@ -607,7 +636,13 @@ namespace Spring2.Core.Navigation.Dao {
 
 			result = (reader.Read() && !reader.IsDBNull(ordinal)) ? new IdType(reader.GetInt32(ordinal)) : 1;
 
+#if (NET_1_1)
 			cmd.Connection.Close();
+#else
+			if (DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+#endif
 		}
 
 		return result;

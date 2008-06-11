@@ -475,7 +475,11 @@ namespace Spring2.Core.Geocode.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 
@@ -526,7 +530,11 @@ namespace Spring2.Core.Geocode.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -555,7 +563,11 @@ namespace Spring2.Core.Geocode.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 	}

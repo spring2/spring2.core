@@ -353,7 +353,11 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 
@@ -390,7 +394,11 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -419,7 +427,11 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -435,8 +447,16 @@ namespace Spring2.Core.Mail.Dao {
 	    String sql = "SELECT * from " + VIEW + filter.Statement + sort.FormatSql();
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
 	    cmd.Parameters.Add(CreateDataParameter("@MailMessage", DbType.AnsiString, ParameterDirection.Input, mailMessage.IsValid ? mailMessage.ToString() as Object : DBNull.Value));
-
+#if (NET_1_1)
 	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+#else
+		IDataReader dataReader = null;
+		if (DbConnectionScope.Current == null) {
+			dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+		} else {
+			dataReader = cmd.ExecuteReader();
+		}
+#endif
 	    return GetList(dataReader);
 	}
     }

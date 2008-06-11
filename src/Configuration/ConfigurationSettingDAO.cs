@@ -332,7 +332,11 @@ namespace Spring2.Core.Configuration {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
- 	    if (transaction == null) {
+#if (NET_1_1)
+	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
  		cmd.Connection.Close();
  	    }
 
@@ -370,7 +374,11 @@ namespace Spring2.Core.Configuration {
 	    cmd.ExecuteNonQuery();
 	    
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -400,7 +408,11 @@ namespace Spring2.Core.Configuration {
 	    cmd.ExecuteNonQuery();
 	    
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -416,7 +428,16 @@ namespace Spring2.Core.Configuration {
 	    String sql = "Select * from " + VIEW + filter.FormatSql() + sort.FormatSql();
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
 	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedDate", DbType.DateTime, ParameterDirection.Input, lastModifiedDate.IsValid ? lastModifiedDate.ToDateTime() as Object : DBNull.Value));
+#if (NET_1_1)
 	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+#else
+		IDataReader dataReader = null;
+	    if (DbConnectionScope.Current == null) {
+			dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+		} else {
+			dataReader = cmd.ExecuteReader();
+		}
+#endif
 	    ConfigurationSettingList list = new ConfigurationSettingList(); 
 
 	    while (dataReader.Read()) {

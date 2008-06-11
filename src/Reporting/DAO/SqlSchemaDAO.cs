@@ -8,10 +8,16 @@ using Spring2.Core.DAO;
 using Spring2.Core.Types;
 
 namespace Spring2.Core.Reporting {
-    public class SqlSchemaDAO : Spring2.Core.DAO.EntityDAO {
+    public class SqlSchemaDAO : Spring2.Core.DAO.SqlEntityDAO {
 
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";
 	private static readonly Int32 COMMAND_TIMEOUT = 300;
+
+	protected override String ConnectionStringKey {
+	    get {
+		return CONNECTION_STRING_KEY;
+  	    }
+	}
 
 	private static SqlObjectData GetSqlObjectDataFromReader(SqlDataReader dataReader) {
 	    SqlObjectData data = new SqlObjectData();
@@ -52,7 +58,7 @@ namespace Spring2.Core.Reporting {
 	}
 
 	public static IList GetSqlObjects(IWhere whereClause, IOrderBy orderByClause) {
-	    SqlDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, "vwSqlObject", whereClause, orderByClause);
+	    SqlDataReader dataReader = (SqlDataReader)(new SqlSchemaDAO().GetListReader(CONNECTION_STRING_KEY, "vwSqlObject", whereClause, orderByClause));
 
 	    ArrayList list = new ArrayList();
 	    while (dataReader.Read()) {
@@ -63,7 +69,7 @@ namespace Spring2.Core.Reporting {
 	}
 
 	public static IList GetSqlColumns(IWhere whereClause, IOrderBy orderByClause) {
-	    SqlDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, "vwSqlColumn", whereClause, orderByClause);
+	    SqlDataReader dataReader = (SqlDataReader)(new SqlSchemaDAO().GetListReader(CONNECTION_STRING_KEY, "vwSqlColumn", whereClause, orderByClause));
 
 	    ArrayList list = new ArrayList();
 	    while (dataReader.Read()) {
@@ -74,8 +80,7 @@ namespace Spring2.Core.Reporting {
 	}
 
 	public static SqlDataReader ExecuteReader(String sql) {
-	    SqlCommand cmd = GetSqlCommand(CONNECTION_STRING_KEY, sql, CommandType.Text, COMMAND_TIMEOUT);
-	    SqlDataReader reader = cmd.ExecuteReader();
+	    SqlDataReader reader = (SqlDataReader)(new SqlSchemaDAO().ExecuteReader(CONNECTION_STRING_KEY, sql, COMMAND_TIMEOUT));
 	    return reader;
 	}
 

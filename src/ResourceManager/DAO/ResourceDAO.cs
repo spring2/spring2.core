@@ -333,7 +333,11 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 
@@ -369,7 +373,11 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -398,7 +406,11 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
+#if (NET_1_1)
 	    if (transaction == null) {
+#else
+	    if (transaction == null && DbConnectionScope.Current == null) {
+#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -471,7 +483,16 @@ namespace Spring2.Core.ResourceManager.Dao {
 	public StringTypeList FindUniqueContexts() {
 	    String sql = "select distinct Context from " + VIEW;
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
-	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+#if (NET_1_1)
+		IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+#else
+		IDataReader dataReader = null;
+	    if (DbConnectionScope.Current == null) {
+			dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+		} else {
+			dataReader = cmd.ExecuteReader();
+		}
+#endif
 	    StringTypeList list = new StringTypeList();
 	    while(dataReader.Read()) {
 		if(!dataReader.IsDBNull(dataReader.GetOrdinal("Context"))) {
@@ -489,7 +510,16 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    String sql = "select distinct Field from " + VIEW + " where Context = @Context";
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
 	    cmd.Parameters.Add(CreateDataParameter("@Context", DbType.String, ParameterDirection.Input, context.Display()));
-	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+#if (NET_1_1)
+		IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+#else
+		IDataReader dataReader = null;
+	    if (DbConnectionScope.Current == null) {
+			dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+		} else {
+			dataReader = cmd.ExecuteReader();
+		}
+#endif
 	    StringTypeList list = new StringTypeList();
 	    while(dataReader.Read()) {
 		if(!dataReader.IsDBNull(dataReader.GetOrdinal("Field"))) {
@@ -508,7 +538,16 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
 	    cmd.Parameters.Add(CreateDataParameter("@Context", DbType.String, ParameterDirection.Input, context.Display()));
 	    cmd.Parameters.Add(CreateDataParameter("@Field", DbType.String, ParameterDirection.Input, field.Display()));
-	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+#if (NET_1_1)
+		IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+#else
+		IDataReader dataReader = null;
+	    if (DbConnectionScope.Current == null) {
+			dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+		} else {
+			dataReader = cmd.ExecuteReader();
+		}
+#endif
 	    IdTypeList list = new IdTypeList();
 	    while(dataReader.Read()) {
 		if(!dataReader.IsDBNull(dataReader.GetOrdinal("ContextIdentity"))) {
