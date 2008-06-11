@@ -1,7 +1,7 @@
 <VisualStudioProject>
     <CSHARP
         ProjectType = "Local"
-        ProductVersion = "7.10.3077"
+        ProductVersion = "7.10.6030"
         SchemaVersion = "2.0"
         ProjectGuid = "{80B94045-4DE6-4BB0-BE22-C5CC0E772695}"
     >
@@ -424,6 +424,11 @@
                 />
                 <File
                     RelPath = "Util\ParseError.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Util\Range.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

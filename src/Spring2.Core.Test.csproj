@@ -233,6 +233,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Test\ConfigurationTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Test\CRC32.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -244,6 +249,11 @@
                 />
                 <File
                     RelPath = "Test\DataFormTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\DataTypeSerializationTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -293,16 +303,6 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Test\ConfigurationTest.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Test\DataTypeSerializationTest.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "Test\MessageTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -329,6 +329,11 @@
                 />
                 <File
                     RelPath = "Test\PropertyPopulatorTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Test\RangeTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
