@@ -6,7 +6,7 @@ sp2Ajax.ExtendedHelloCommand = new Class({
     initialize: function(options) {
 	this.parent(options);
 	this.extended = new sp2Ajax.HelloCommand(options);
-	this.parameters.merge(this.extended.parameters);
+	this.parameters.combine(this.extended.parameters);
     },
 
     parseResponse: function(returnObject) {

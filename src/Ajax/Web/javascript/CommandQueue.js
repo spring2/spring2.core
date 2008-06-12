@@ -121,24 +121,24 @@ sp2Ajax.CommandQueue.prototype={
  isCommand:function(obj){
   return (
     obj.parent
-    && obj.implementsProp("responseHandlerId")
-    && obj.implementsProp("priority")
-    && obj.implementsFunc("getJsonToSend")
-    && obj.implementsFunc("parseResponse")
-    && obj.implementsProp("type")
+    && obj["responseHandlerId"]!=null
+    && obj["priority"]!=null
+    && obj["getJsonToSend"]!=null
+    && obj["parseResponse"]!=null
+    && obj["type"]!=null
   );
  },
 
  isCommandResponse:function(obj){
   return (
-    obj.implementsProp("responseHandlerId")
-    && (obj.implementsProp("response") || obj.implementsProp("unhandledException"))
+    obj["responseHandlerId"]!=null
+    && (obj["response"]!=null || obj["unhandledException"]!=null)
   );
  },
 
  isGoodResponse:function(obj){
   return (
-    obj.implementsProp("commandResponses")
+    obj["commandResponses"]!=null
   );
  },
 
@@ -197,7 +197,7 @@ sp2Ajax.CommandQueue.onload=function(responseObject){
 			}
 		    }
 		}
-		sp2Ajax.Base.sent.remove(commandResponse.responseHandlerId);
+		sp2Ajax.Base.sent.erase(commandResponse.responseHandlerId);
 	    }
 	}
       }
@@ -242,16 +242,5 @@ sp2Ajax.Command = new Class({
 	return "{commandKey:" + this.commandKey + ",responseHandlerId:" + this.responseHandlerId + ",parameters:" + JSON.encode(tempHash) + "}";
     }
 });
-
-
-/*--- Helpers to test if object has what we want ---*/
-Object.prototype.implementsProp=function(propName){
-  return (this[propName]!=null);
-}
-
-Object.prototype.implementsFunc=function(funcName){
-  return (this[funcName]!=null); /*&& this[funcName] instanceof Function;*/
-}
-
 
 
