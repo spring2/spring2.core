@@ -328,6 +328,11 @@
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
+				<File
+                    RelPath = "ValueTypes\USStateAndMilitaryCodeEnum.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
                 <File
                     RelPath = "ValueTypes\Formatter\DataTypeFormatter.cs"
                     SubType = "Code"

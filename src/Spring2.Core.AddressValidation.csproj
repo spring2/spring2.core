@@ -208,6 +208,11 @@
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
+				<File
+                    RelPath = "AddressValidation\USPS\USPSAddressValidationProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
             </Include>
         </Files>
     </CSHARP>

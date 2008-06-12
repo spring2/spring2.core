@@ -10,6 +10,8 @@ namespace Spring2.Core.AddressValidation {
     public class AddressValidationManager {
  
 	private static IAddressValidationProvider instance = new NullAddressValidationProvider();
+	private static IAddressValidationProvider upsInstance = new NullAddressValidationProvider();
+	private static IAddressValidationProvider uspsInstance = new NullAddressValidationProvider();
 
 	public static IAddressValidationProvider Instance {
 	    get {
@@ -22,8 +24,39 @@ namespace Spring2.Core.AddressValidation {
 	    }
 	}
 
+	public static IAddressValidationProvider UPSInstance {
+	    get {
+		lock (upsInstance) {
+		    if (upsInstance is NullAddressValidationProvider) {
+			upsInstance = CreateNewUPSInstance();
+		    }
+		    return upsInstance;
+		}
+	    }
+	}
+
+	public static IAddressValidationProvider USPSInstance {
+	    get {
+		lock (uspsInstance) {
+		    if (uspsInstance is NullAddressValidationProvider) {
+			uspsInstance = CreateNewUSPSInstance();
+		    }
+		    return uspsInstance;
+		}
+	    }
+	}
+
 	private static IAddressValidationProvider CreateNewInstance() {
-	    String clazz = ConfigurationProvider.Instance.Settings["AddressValidationProvider.Class"];
+	    return CreateNewInstance(String.Empty);
+	}
+
+	private static IAddressValidationProvider CreateNewInstance(String specificProvider) {
+	    String clazz = null;
+	    if (specificProvider == null || specificProvider == String.Empty) {
+		clazz = ConfigurationProvider.Instance.Settings["AddressValidationProvider.Class"];
+	    } else {
+		clazz = ConfigurationProvider.Instance.Settings["AddressValidationProvider." + specificProvider + ".Class"];
+	    }
 	    if (clazz == null || clazz.Trim().Length==0) {
 		throw new AddressValidationConfigurationException("AddressValidationProvider.Class setting not set");
 	    }
@@ -39,6 +72,14 @@ namespace Spring2.Core.AddressValidation {
 	    } else {
 		throw new AddressValidationConfigurationException(clazz + " does not support IAddressValidationProvider");
 	    }
+	}
+
+	private static IAddressValidationProvider CreateNewUPSInstance() {
+	    return CreateNewInstance("UPS");
+	}
+
+	private static IAddressValidationProvider CreateNewUSPSInstance() {
+	    return CreateNewInstance("USPS");
 	}
 
 	public static void Reset() {

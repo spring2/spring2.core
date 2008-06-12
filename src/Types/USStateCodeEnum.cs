@@ -78,9 +78,9 @@ namespace Spring2.Core.Types {
 	    return UNSET;
 	}
 
-	private USStateCodeEnum() {}
+	protected USStateCodeEnum() {}
 
-	private USStateCodeEnum(String code, String name) {
+	protected USStateCodeEnum(String code, String name) {
 	    this.code = code;
 	    this.name = name;
 	    OPTIONS.Add(this);
