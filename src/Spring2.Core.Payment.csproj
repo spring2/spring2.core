@@ -308,6 +308,76 @@
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
+				<File
+                    RelPath = "Payment\ProPay\AccountPingCommand.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\AccountPingCommand.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\BalanceRequestCommand.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\ChargeCardCommand.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\GetSignupsCommand.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\MerchantSignupCommand.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\ProPayCommand.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\ProPayProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\ProPayProviderConfiguration.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\ProPayResult.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\SettlementCommand.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\SplitCommand.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\VoidChargeCommand.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\AuthorizationCommand.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
                 <File
                     RelPath = "Payment\Test\TestConnectionFailurePaymentProvider.cs"
                     SubType = "Code"

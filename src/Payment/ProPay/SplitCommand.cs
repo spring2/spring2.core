@@ -46,8 +46,8 @@ namespace Spring2.Core.Payment.ProPay {
 	    xmltextWriter.WriteElementString("transType", "11");
 	    if (chargeAmount.IsValid) {
 		Decimal chargeAsDecimal = chargeAmount.ToDecimal();
-		//Int32 chargeAsPennies = ( Int32 )(chargeAsDecimal * 100M);
-		xmltextWriter.WriteElementString("amount", "" + chargeAsDecimal);
+		Int32 chargeAsPennies = ( Int32 )(chargeAsDecimal * 100M);
+		xmltextWriter.WriteElementString("amount", "" + chargeAsPennies);
 	    }
 	    xmltextWriter.WriteElementString("accountNum", config.CorporateAccountNumber);
 	    if (destAccountNumber.IsValid) {
@@ -89,8 +89,8 @@ namespace Spring2.Core.Payment.ProPay {
 	    xmltextWriter.WriteElementString("transType", "02");
 	    if (chargeAmount.IsValid) {
 		Decimal chargeAsDecimal = chargeAmount.ToDecimal();
-		//Int32 chargeAsPennies = ( Int32 )(chargeAsDecimal * 100M);
-		xmltextWriter.WriteElementString("amount", "" + chargeAsDecimal);
+		Int32 chargeAsPennies = ( Int32 )(chargeAsDecimal * 100M);
+		xmltextWriter.WriteElementString("amount", "" + chargeAsPennies);
 	    }
 	    if (sourceEmail_or_AccountNumber.IsValid) {
 		if (sourceEmail_or_AccountNumber.LastIndexOf("@") != -1) {

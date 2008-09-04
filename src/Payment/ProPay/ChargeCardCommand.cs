@@ -101,8 +101,8 @@ namespace Spring2.Core.Payment.ProPay {
 	    xmltextWriter.WriteElementString("transType", "04");
 	    if (chargeAmount.IsValid) {
 		Decimal chargeAsDecimal = chargeAmount.ToDecimal();
-		//Int32 chargeAsPennies = (Int32)(chargeAsDecimal * 100M);
-		xmltextWriter.WriteElementString("amount", "" + chargeAsDecimal);
+		Int32 chargeAsPennies = (Int32)(chargeAsDecimal * 100M);
+		xmltextWriter.WriteElementString("amount", "" + chargeAsPennies);
 	    }
 	    if (cardholderAddress.IsValid) {
 		xmltextWriter.WriteElementString("addr", cardholderAddress.ToString());			// optional

@@ -1,7 +1,6 @@
 using System;
 using System.Text;
 using Spring2.Core.Payment;
-//using Spring2.Dss.Payment;
 using Spring2.Core.Configuration;
 
 namespace Spring2.Core.Payment.ProPay {

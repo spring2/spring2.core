@@ -4,7 +4,6 @@ using System.Text;
 using log4net;
 using Spring2.Core.Configuration;
 using Spring2.Core.Types;
-//using Spring2.Dss.Payment;
 using Spring2.Core.Payment;
 
 namespace Spring2.Core.Payment.ProPay {
@@ -61,10 +60,10 @@ namespace Spring2.Core.Payment.ProPay {
 	}
 	public PaymentResult Charge(Spring2.Core.Types.StringType referenceNumber, Spring2.Core.Types.CurrencyType amount, Spring2.Core.Types.StringType accountNumber, Spring2.Core.Types.StringType expirationYear, Spring2.Core.Types.StringType expirationMonth, Spring2.Core.Types.StringType cvv, Spring2.Core.Types.StringType name, Spring2.Core.Types.StringType address, Spring2.Core.Types.StringType postalCode, Spring2.Core.Types.StringType comment) {
 	    StringType emptyApartmentNumber = StringType.DEFAULT; // apartment numbers will need to be part of the combined address
-	    StringType emptyInvNumber = StringType.DEFAULT; // optional value
-	    StringType proPayAccountNumber = referenceNumber;
+	    ProPayProviderConfiguration config = new ProPayProviderConfiguration();
+	    StringType proPayAccountNumber = config.CorporateAccountNumber;
 	    StringType cardExpirationDate = new StringType(expirationMonth.ToString() + expirationYear.ToString());
-	    ChargeCardCommand command = new ChargeCardCommand(amount, address, emptyApartmentNumber, postalCode, proPayAccountNumber, accountNumber, cardExpirationDate, cvv, emptyInvNumber);
+	    ChargeCardCommand command = new ChargeCardCommand(amount, address, emptyApartmentNumber, postalCode, proPayAccountNumber, accountNumber, cardExpirationDate, cvv, referenceNumber);
 	    ProPayResult result = command.Execute();
 	    return result;
 	}

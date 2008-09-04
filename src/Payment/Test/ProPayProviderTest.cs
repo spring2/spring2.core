@@ -41,12 +41,12 @@ namespace Spring2.Core.Test {
 
 	public ProPayProviderTest() {
 	}
-        
+
 	#region Success charge scenario for all card types
 	[Test()]
 	public void SuccessfulPayment() {
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	    Assert.AreEqual("00", result.ResultCode, string.Format("Unexpected result of {0}:{1}", result.ResultCode, result.ResultMessage));
 	}
 	#endregion
@@ -57,7 +57,7 @@ namespace Spring2.Core.Test {
 	public void OverLimitPayment() {
 	    // Documentation says that the test system has a value of $20 maximum
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(3500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(35.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	    Assert.AreEqual("FINDME", result, string.Format("Unexpected result of {0}:{1}", result.ResultCode, result.ResultMessage));
 	}
     	
@@ -65,10 +65,10 @@ namespace Spring2.Core.Test {
 	public void InvalidCreditCardNumber() {
 	    ProPayProvider provider = new ProPayProvider();
 	    try {
-		PaymentResult result = provider.Charge(bogusCardNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		PaymentResult result = provider.Charge("orderId-" + DateTime.Now.Ticks, new CurrencyType(5.00), bogusCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 		Assert.Fail();
 	    } catch (PaymentFailureException ex) {
-		Assert.AreEqual("65", ex.Result.ResultCode); // Misc. error??  Not very descriptive for this one
+		Assert.AreEqual("48", ex.Result.ResultCode, "Invalid ccNum");
 	    }
 	}
 
@@ -83,7 +83,7 @@ namespace Spring2.Core.Test {
 		ConfigurationProvider.SetProvider(config);
 
 		ProPayProvider provider = new ProPayProvider();
-		PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 		Assert.Fail();
 	    } catch (WebException) {
 		// this is expected
@@ -98,7 +98,7 @@ namespace Spring2.Core.Test {
 	public void ValidAvsVerification1() {
 	    ProPayProvider provider = new ProPayProvider();
 	    StringType zipMatchValue = testCardholderPostalCode; // by ProPay docs, this should return 'A', Address Match
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    Assert.AreEqual("A", result.AVSResponseCode, "Address should match.");
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidPostalCode);
@@ -108,7 +108,7 @@ namespace Spring2.Core.Test {
 	public void ValidAvsVerification2() {
 	    StringType zipMatchValue = new StringType("85284"); // by ProPay docs, this should return 'Z', Zip Match
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    Assert.AreEqual("Z", result.AVSResponseCode, "Address zip should match.");
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidPostalCode);
@@ -118,7 +118,7 @@ namespace Spring2.Core.Test {
 	public void ValidAvsVerification3() {
 	    StringType zipMatchValue = new StringType("832085284"); // by ProPay docs, this should return 'Y', Exact Match
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    Assert.AreEqual("Y", result.AVSResponseCode, "Address should be an exact match.");
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidPostalCode);
@@ -128,7 +128,7 @@ namespace Spring2.Core.Test {
 	public void ValidAvsVerification4() {
 	    StringType zipMatchValue = new StringType("999970001"); // by ProPay docs, this should return 'B', Address Match
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    Assert.AreEqual("B", result.AVSResponseCode, "Address should match.");
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidPostalCode);
@@ -138,7 +138,7 @@ namespace Spring2.Core.Test {
 	public void ValidAvsVerification5() {
 	    StringType zipMatchValue = new StringType("999970003"); // by ProPay docs, this should return 'D', Exact Match
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    Assert.AreEqual("D", result.AVSResponseCode, "Address should be an exact match.");
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidPostalCode);
@@ -148,7 +148,7 @@ namespace Spring2.Core.Test {
 	public void ValidAvsVerification6() {
 	    StringType zipMatchValue = new StringType("999970005"); // by ProPay docs, this should return 'M', Exact Match
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    Assert.AreEqual("M", result.AVSResponseCode, "Address should be an exact match.");
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidPostalCode);
@@ -158,7 +158,7 @@ namespace Spring2.Core.Test {
 	public void ValidAvsVerification7() {
 	    StringType zipMatchValue = new StringType("999970006"); // by ProPay docs, this should return 'P', Zip Match
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    Assert.AreEqual("P", result.AVSResponseCode, "Address should match.");
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidPostalCode);
@@ -168,7 +168,7 @@ namespace Spring2.Core.Test {
 	public void InvalidAvsVerification1() {
 	    StringType zipMatchValue = new StringType("99994"); // by ProPay docs, this should return 'U', Ver Unavailable
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    Assert.AreEqual("U", result.AVSResponseCode, "Ver unavailable");
 	    Assert.AreEqual(BooleanType.FALSE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.FALSE, result.ValidPostalCode);
@@ -178,7 +178,7 @@ namespace Spring2.Core.Test {
 	public void InvalidAvsVerification2() {
 	    StringType zipMatchValue = new StringType("99998"); // by ProPay docs, this should return 'G', Ver Unavailable
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    Assert.AreEqual("G", result.AVSResponseCode, "Ver unavailable");
 	    Assert.AreEqual(BooleanType.FALSE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.FALSE, result.ValidPostalCode);
@@ -188,7 +188,7 @@ namespace Spring2.Core.Test {
 	public void InvalidAvsVerification3() {
 	    StringType zipMatchValue = new StringType("999970002"); // by ProPay docs, this should return 'C', Serv Unavailable
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    Assert.AreEqual("C", result.AVSResponseCode, "Serv unavailable");
 	    Assert.AreEqual(BooleanType.FALSE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.FALSE, result.ValidPostalCode);
@@ -198,7 +198,7 @@ namespace Spring2.Core.Test {
 	public void InvalidAvsVerification4() {
 	    StringType zipMatchValue = new StringType("999970004"); // by ProPay docs, this should return 'I', Ver Unavailable
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    Assert.AreEqual("I", result.AVSResponseCode, "Ver unavailable");
 	    Assert.AreEqual(BooleanType.FALSE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.FALSE, result.ValidPostalCode);
@@ -208,7 +208,7 @@ namespace Spring2.Core.Test {
 	public void InvalidAvsVerification5() {
 	    StringType zipMatchValue = new StringType("999970009"); // by ProPay docs, this should return 'S', Service Not supported
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    Assert.AreEqual("S", result.AVSResponseCode, "Service Not supported");
 	    Assert.AreEqual(BooleanType.FALSE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.FALSE, result.ValidPostalCode);
@@ -218,7 +218,7 @@ namespace Spring2.Core.Test {
 	public void InvalidAvsVerification6() {
 	    StringType zipMatchValue = new StringType("999970010"); // by ProPay docs, this should return 'R', Issuer system unavailable
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    Assert.AreEqual("R", result.AVSResponseCode, "Issuer system unavailable");
 	    Assert.AreEqual(BooleanType.FALSE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.FALSE, result.ValidPostalCode);
@@ -231,7 +231,7 @@ namespace Spring2.Core.Test {
 	    bool paymentFailureExceptionThrown = false;
 	    PaymentResult result = null;
 	    try {
-		result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
+		result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, zipMatchValue, StringType.UNSET);
 	    } catch (PaymentFailureException ex) {
 		paymentFailureExceptionThrown = true;
 		result = ex.Result;
@@ -250,7 +250,7 @@ namespace Spring2.Core.Test {
 	public void ValidCvv2Verification() {
 	    StringType cvvMatchValue = testCardCVV;
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, cvvMatchValue, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, cvvMatchValue, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	    Assert.AreEqual("M", result.CVVResponseCode, "CVV2 should be valid.");
 	    Assert.AreEqual("00", result.ResultCode);
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidCvv);
@@ -263,7 +263,7 @@ namespace Spring2.Core.Test {
 	    PaymentResult result = null;
 	    bool paymentFailureExceptionThrown = false;
 	    try {
-		provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, cvvMatchValue, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, cvvMatchValue, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	    } catch (PaymentFailureException ex) {
 		paymentFailureExceptionThrown = true;
 		result = ex.Result;
@@ -282,7 +282,7 @@ namespace Spring2.Core.Test {
 	    PaymentResult result = null;
 	    bool paymentFailureExceptionThrown = false;
 	    try {
-		provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, cvvMatchValue, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, cvvMatchValue, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	    } catch (PaymentFailureException ex) {
 		paymentFailureExceptionThrown = true;
 		result = ex.Result;
@@ -299,7 +299,7 @@ namespace Spring2.Core.Test {
 	[Test]
     	public void Charge() {
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	    Assert.AreEqual("00", result.ResultCode);
 	}
     
@@ -308,7 +308,7 @@ namespace Spring2.Core.Test {
 	    ProPayProvider provider = new ProPayProvider();
 	    PaymentResult result = null;
 	    try {
-		result = provider.Authorize(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		result = provider.Authorize(masterAccountNumber, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	    } catch(Exception ex) {
 		String errorMessage = ex.Message;
 		Assert.Fail();
@@ -323,10 +323,10 @@ namespace Spring2.Core.Test {
 	[Test]
 	public void Refund() {
 	    ProPayProvider provider = new ProPayProvider();
-	    CurrencyType originalTransactionAmount = new CurrencyType(500);
-	    PaymentResult chargeResult = provider.Charge(masterAccountNumber, originalTransactionAmount, testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+	    CurrencyType originalTransactionAmount = new CurrencyType(5.00);
+	    PaymentResult chargeResult = provider.Charge("orderId-"+DateTime.Now.Ticks, originalTransactionAmount, testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	    Assert.AreEqual("00", chargeResult.ResultCode);
-	    PaymentResult refundResult = provider.Refund(masterAccountNumber, new CurrencyType(200), chargeResult.TransactionId, originalTransactionAmount);
+	    PaymentResult refundResult = provider.Refund(masterAccountNumber, new CurrencyType(2.00), chargeResult.TransactionId, originalTransactionAmount);
 	    Assert.AreEqual("00", refundResult.ResultCode);
 	}
 		
@@ -338,7 +338,7 @@ namespace Spring2.Core.Test {
 	[Test]
 	public void Settle() {
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult authorizeResult = provider.Authorize(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+	    PaymentResult authorizeResult = provider.Authorize(masterAccountNumber, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	    Assert.AreEqual("00", authorizeResult.ResultCode);
 	    PaymentResult settlementResult = provider.Settle(masterAccountNumber, CurrencyType.UNSET, authorizeResult.TransactionId, CurrencyType.UNSET);
 	    Assert.AreEqual("00", settlementResult.ResultCode);
@@ -349,7 +349,7 @@ namespace Spring2.Core.Test {
 	    ProPayProvider provider = new ProPayProvider();
 	    PaymentResult splitResult = null;
 	    try {
-		splitResult = provider.Split(new CurrencyType(150), testAccountNumber); // the account was initially seeded with $100K, so that should last a very long time
+		splitResult = provider.Split(new CurrencyType(1.50), testAccountNumber); // the account was initially seeded with $100K, so that should last a very long time
 		Assert.AreEqual("00", splitResult.ResultCode);
 	    } catch (PaymentFailureException ex) {
 		Assert.AreEqual("63", ex.Result.ResultCode, "In the case of failure here, verify that it is due to 'insufficient funds' in the master account");
@@ -358,7 +358,7 @@ namespace Spring2.Core.Test {
 
 	[Test()]
 	public void ShouldHandleAmpersandInCommandText() {
-	    ChargeCardCommand command = new ChargeCardCommand(new CurrencyType(500), "Corner of 5th & Vine", "", testCardholderPostalCode, testAccountNumber, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "");
+	    ChargeCardCommand command = new ChargeCardCommand(new CurrencyType(5.00), "Corner of 5th & Vine", "", testCardholderPostalCode, testAccountNumber, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "");
 	    Assert.IsTrue(command.CommandText.Length > 0);
 
 	    String commandText = command.CommandText;
@@ -373,7 +373,7 @@ namespace Spring2.Core.Test {
 	public void UseBadMasterAccount() {
 	    ProPayProvider provider = new ProPayProvider();
 	    try {
-		provider.Charge(invalidMasterAccount, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		provider.Charge(invalidMasterAccount, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	    } catch (PaymentFailureException ex) {
 		Assert.AreEqual("47", ex.Result.ResultCode, "Invalid accntNum");
 	    }
@@ -382,7 +382,7 @@ namespace Spring2.Core.Test {
 	public void ChargeWithDecline() {
 	    ProPayProvider provider = new ProPayProvider();
 	    try {
-		provider.Charge(masterAccountNumber, declineAmount, testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		provider.Charge("orderId-"+DateTime.Now.Ticks, declineAmount, testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 		Assert.Fail("ProPay documentation says this amount should fail, so why are we here?");
 	    } catch (PaymentFailureException ex) {
 		Assert.AreEqual("58", ex.Result.ResultCode, "Credit card declined");
@@ -392,7 +392,7 @@ namespace Spring2.Core.Test {
 	public void UsePastExpDate() {
 	    ProPayProvider provider = new ProPayProvider();
 	    try {
-		provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, "01", testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, "01", testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 		Assert.Fail("Both 1901 and 2001 were a long time ago");
 	    } catch (PaymentFailureException ex) {
 		Assert.AreEqual("49", ex.Result.ResultCode, "Invalid expDate");
@@ -404,7 +404,7 @@ namespace Spring2.Core.Test {
 	public void AuthorizeWithBadMasterAccount() {
 	    ProPayProvider provider = new ProPayProvider();
 	    try {
-		provider.Authorize(invalidMasterAccount, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		provider.Authorize(invalidMasterAccount, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	    } catch (PaymentFailureException ex) {
 		Assert.AreEqual("47", ex.Result.ResultCode, "Invalid accntNum");
 	    }
@@ -413,10 +413,10 @@ namespace Spring2.Core.Test {
 	[Test]
 	public void Refund() {
 	    ProPayProvider provider = new ProPayProvider();
-	    CurrencyType originalTransactionAmount = new CurrencyType(500);
-	    PaymentResult chargeResult = provider.Charge(masterAccountNumber, originalTransactionAmount, testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+	    CurrencyType originalTransactionAmount = new CurrencyType(5.00);
+	    PaymentResult chargeResult = provider.Charge("orderId-"+DateTime.Now.Ticks, originalTransactionAmount, testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	    Assert.AreEqual("00", chargeResult.ResultCode);
-	    PaymentResult refundResult = provider.Refund(masterAccountNumber, new CurrencyType(200), chargeResult.TransactionId, originalTransactionAmount);
+	    PaymentResult refundResult = provider.Refund(masterAccountNumber, new CurrencyType(2.00), chargeResult.TransactionId, originalTransactionAmount);
 	    Assert.AreEqual("00", refundResult.ResultCode);
 	}
 
@@ -428,7 +428,7 @@ namespace Spring2.Core.Test {
 	[Test]
 	public void Settle() {
 	    ProPayProvider provider = new ProPayProvider();
-	    PaymentResult authorizeResult = provider.Authorize(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+	    PaymentResult authorizeResult = provider.Authorize(masterAccountNumber, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	    Assert.AreEqual("00", authorizeResult.ResultCode);
 	    PaymentResult settlementResult = provider.Settle(masterAccountNumber, CurrencyType.UNSET, authorizeResult.TransactionId, CurrencyType.UNSET);
 	    Assert.AreEqual("00", settlementResult.ResultCode);
@@ -439,7 +439,7 @@ namespace Spring2.Core.Test {
 	    ProPayProvider provider = new ProPayProvider();
 	    PaymentResult splitResult = null;
 	    try {
-		splitResult = provider.Split(new CurrencyType(250), testAccountNumber);
+		splitResult = provider.Split(new CurrencyType(2.50), testAccountNumber);
 		Assert.AreEqual("00", splitResult.ResultCode);
 	    } catch (PaymentFailureException ex) {
 		Assert.AreEqual("63", ex.Result.ResultCode, "In the case of failure here, verify that it is due to 'insufficient funds' in the master account");
@@ -448,7 +448,7 @@ namespace Spring2.Core.Test {
 
 	[Test()]
 	public void ShouldHandleAmpersandInCommandText() {
-	    ChargeCardCommand command = new ChargeCardCommand(new CurrencyType(500), "Corner of 5th & Vine", "", testCardholderPostalCode, testAccountNumber, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "");
+	    ChargeCardCommand command = new ChargeCardCommand(new CurrencyType(5.00), "Corner of 5th & Vine", "", testCardholderPostalCode, testAccountNumber, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "");
 	    Assert.IsTrue(command.CommandText.Length > 0);
 
 	    String commandText = command.CommandText;
@@ -472,7 +472,7 @@ namespace Spring2.Core.Test {
 	    	
 		ProPayProvider provider = new ProPayProvider();
 		try {
-		    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 		    Assert.Fail("Should throw PaymentConnectionException");
 		} catch (Exception ex) {
 		    Assert.IsTrue(ex is PaymentException);
@@ -496,7 +496,7 @@ namespace Spring2.Core.Test {
 
 		ProPayProvider provider = new ProPayProvider();
 		try {
-		    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 		    Assert.Fail("Should throw PaymentConnectionException");
 		} catch (Exception ex) {
 		    Assert.IsTrue(ex is PaymentException);
@@ -522,7 +522,7 @@ namespace Spring2.Core.Test {
 
 	//	ProPayProvider provider = new ProPayProvider();
 	//	try {
-	//	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+	//	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	//	    Assert.Fail("Should throw PaymentConnectionException");
 	//	} catch (Exception ex) {
 	//	    Assert.IsTrue(ex is PaymentException);
@@ -548,7 +548,7 @@ namespace Spring2.Core.Test {
 
 	//	ProPayProvider provider = new ProPayProvider();
 	//	try {
-	//	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+	//	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	//	    Assert.Fail("Should throw PaymentConnectionException");
 	//	} catch (Exception ex) {
 	//	    Assert.IsTrue(ex is PaymentException);
@@ -572,7 +572,7 @@ namespace Spring2.Core.Test {
 
 		ProPayProvider provider = new ProPayProvider();
 		try {
-		    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 		    Assert.Fail("Should throw PaymentConnectionException");
 		} catch (Exception ex) {
 		    Assert.IsTrue(ex is PaymentException);
@@ -596,7 +596,7 @@ namespace Spring2.Core.Test {
 
 		ProPayProvider provider = new ProPayProvider();
 		try {
-		    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 		    Assert.Fail("Should throw PaymentConnectionException");
 		} catch (Exception ex) {
 		    Assert.IsTrue(ex is PaymentException);
@@ -620,7 +620,7 @@ namespace Spring2.Core.Test {
 
 		ProPayProvider provider = new ProPayProvider();
 		try {
-		    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 		    Assert.Fail("Should throw PaymentConnectionException");
 		} catch (Exception ex) {
 		    Assert.IsTrue(ex is PaymentException);
@@ -644,7 +644,7 @@ namespace Spring2.Core.Test {
 	    	
 		ProPayProvider provider = new ProPayProvider();
 		try {
-		    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 		    Assert.Fail("Should throw PaymentConnectionException");
 		} catch (Exception ex) {
 		    Assert.IsTrue(ex is WebException);
@@ -669,7 +669,7 @@ namespace Spring2.Core.Test {
 
 	//	ProPayProvider provider = new ProPayProvider();
 	//	try {
-	//	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+	//	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	//	    Assert.Fail("Should throw PaymentConnectionException");
 	//	} catch (Exception ex) {
 	//	    // TODO: these are probably wrong
@@ -721,7 +721,7 @@ namespace Spring2.Core.Test {
 
 		ProPayProvider provider = new ProPayProvider();
 		try {
-		    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+		    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 		    Assert.Fail("Should throw PaymentConnectionException");
 		} catch (Exception ex) {
 		    Assert.IsTrue(ex is PaymentException);
@@ -747,7 +747,7 @@ namespace Spring2.Core.Test {
 
 	//	ProPayProvider provider = new ProPayProvider();
 	//	try {
-	//	    PaymentResult result = provider.Charge(masterAccountNumber, new CurrencyType(500), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
+	//	    PaymentResult result = provider.Charge("orderId-"+DateTime.Now.Ticks, new CurrencyType(5.00), testCardNumber, testCardExpYear, testCardExpMonth, testCardCVV, testCardholderName, testCardholderAddress, testCardholderPostalCode, StringType.UNSET);
 	//	    Assert.Fail("Should throw PaymentConnectionException");
 	//	} catch (Exception ex) {
 	//	    // TODO: these are probably wrong

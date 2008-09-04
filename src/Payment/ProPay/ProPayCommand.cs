@@ -8,7 +8,6 @@ using System.IO;
 
 using log4net;
 
-//using Spring2.Dss.Payment;
 using Spring2.Core.Types;
 using Spring2.Core.Payment;
 using Spring2.Core.Configuration;
@@ -203,6 +202,7 @@ namespace Spring2.Core.Payment.ProPay {
 		objHttpWebRequest.Method = "POST";
 		objHttpWebRequest.ContentLength = bytes.Length;
 		objHttpWebRequest.ContentType = "text/xml; encoding='" + ConfigurationProvider.Instance.Settings[ProPayProviderConfiguration.XMLENCODING_KEY] + "'";
+		objHttpWebRequest.Proxy = null;
 
 		//Get Stream object
 		objRequestStream = objHttpWebRequest.GetRequestStream();

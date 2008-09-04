@@ -2,7 +2,6 @@
 using System.Text;
 
 using Spring2.Core.Types;
-//using Spring2.Dss.Payment;
 using Spring2.Core.Payment;
 
 namespace Spring2.Core.Payment.ProPay {

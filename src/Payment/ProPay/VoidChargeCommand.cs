@@ -58,8 +58,8 @@ namespace Spring2.Core.Payment.ProPay {
 	    }
 	    if (amount.IsValid) {
 		Decimal refundAsDecimal = amount.ToDecimal();
-		//Int32 refundAsPennies = ( Int32 )(refundAsDecimal * 100M);
-		xmltextWriter.WriteElementString("amount", "" + refundAsDecimal);
+		Int32 refundAsPennies = ( Int32 )(refundAsDecimal * 100M);
+		xmltextWriter.WriteElementString("amount", "" + refundAsPennies);
 	    }
 	    xmltextWriter.WriteEndElement(); // </XMLTrans>
 
