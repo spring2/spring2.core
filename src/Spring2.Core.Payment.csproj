@@ -403,6 +403,11 @@
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
+				<File
+                    RelPath = "Payment\Test\TestSplitPaymentProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
                 <File
                     RelPath = "Payment\Web References\com.concordebiz.efsnet\EFSnet2.wsdl"
                     BuildAction = "None"
