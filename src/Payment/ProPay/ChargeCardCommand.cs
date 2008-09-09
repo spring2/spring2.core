@@ -38,8 +38,8 @@ namespace Spring2.Core.Payment.ProPay {
 	StringType creditCardTrack1 = StringType.DEFAULT;   // in place of ccNum, expDate, CVV2
 	StringType creditCardTrack2 = StringType.DEFAULT;   // optional
 
-	public ChargeCardCommand(CurrencyType amount, StringType cardholderAddress, StringType cardholderApartmentNumber, StringType cardholderPostalCode, 
-				 StringType sourceEmail_or_accountNumber, StringType creditCardNumber, StringType creditCardExpirationDate, StringType creditCardCVV2,
+	public ChargeCardCommand(StringType sourceEmail_or_accountNumber, CurrencyType amount, StringType cardholderAddress, StringType cardholderApartmentNumber, StringType cardholderPostalCode, 
+				 StringType creditCardNumber, StringType creditCardExpirationDate, StringType creditCardCVV2,
 				 StringType invNumber) {
 	    init(amount, cardholderAddress, cardholderApartmentNumber, cardholderPostalCode,
 		 sourceEmail_or_accountNumber, creditCardNumber, creditCardExpirationDate, creditCardCVV2,

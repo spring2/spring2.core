@@ -11,10 +11,11 @@ using log4net;
 using Spring2.Core.Types;
 using Spring2.Core.Payment;
 using Spring2.Core.Configuration;
+//using Spring2.Dss.Payment;
 
 namespace Spring2.Core.Payment.ProPay {
     /// <summary>
-    /// Summary description for PayflowProCommand.
+    /// Summary description for ProPayCommand.
     /// </summary>
     public abstract class ProPayCommand {
 

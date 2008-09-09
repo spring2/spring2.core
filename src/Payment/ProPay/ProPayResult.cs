@@ -1,8 +1,11 @@
 ﻿using System;
+using System.IO;
+using System.Xml;
 using System.Text;
 
 using Spring2.Core.Types;
 using Spring2.Core.Payment;
+//using Spring2.Dss.Payment;
 
 namespace Spring2.Core.Payment.ProPay {
     public class ProPayResult : PaymentResult {
@@ -98,6 +101,35 @@ namespace Spring2.Core.Payment.ProPay {
 	public CurrencyType Amount {
 	    get { return TransactionAmount; }
 	    set { TransactionAmount = value; }
+	}
+
+	public StringType GetResultValue(String elementToFind) {
+	    StringTypeList listOfAllElementMatches = GetResultValues(elementToFind);
+	    return listOfAllElementMatches[0];
+	}
+
+	public StringTypeList GetResultValues(String elementToFind) {
+	    StringTypeList result = new StringTypeList();
+	    if (RawResponse.IsValid) {
+		StringReader reader = new StringReader(RawResponse);
+		XmlTextReader xmlReader = new XmlTextReader(reader);
+		String lastNodeName = String.Empty;
+		while (xmlReader.Read()) {
+		    XmlNodeType nodeType = xmlReader.NodeType;
+		    if (nodeType == XmlNodeType.Element) {
+			lastNodeName = xmlReader.Name.Trim();
+		    } else if (nodeType == XmlNodeType.Text) {
+			if (lastNodeName == elementToFind) {
+			    result.Add(xmlReader.Value);
+			}
+		    } else {
+			// this node has no interesting contents, so wipe the value
+			lastNodeName = String.Empty;
+		    }
+		}
+		xmlReader.Close(); xmlReader = null;
+	    }
+	    return result;
 	}
 
 	public override String ToString() {

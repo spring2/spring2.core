@@ -208,6 +208,11 @@
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
+				<File
+                    RelPath = "Payment\ISplitPaymentProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
                 <File
                     RelPath = "Payment\NullPaymentProvider.cs"
                     SubType = "Code"
@@ -314,7 +319,7 @@
                     BuildAction = "Compile"
                 />
 				<File
-                    RelPath = "Payment\ProPay\AccountPingCommand.cs"
+                    RelPath = "Payment\ProPay\AuthorizationCommand.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -325,6 +330,11 @@
                 />
 				<File
                     RelPath = "Payment\ProPay\ChargeCardCommand.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+				<File
+                    RelPath = "Payment\ProPay\FromMasterAccountToMerchantCommand.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -369,12 +379,12 @@
                     BuildAction = "Compile"
                 />
 				<File
-                    RelPath = "Payment\ProPay\VoidChargeCommand.cs"
+                    RelPath = "Payment\ProPay\TransactionStatusCommand.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
 				<File
-                    RelPath = "Payment\ProPay\AuthorizationCommand.cs"
+                    RelPath = "Payment\ProPay\VoidChargeCommand.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

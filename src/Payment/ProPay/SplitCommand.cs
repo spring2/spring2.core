@@ -9,12 +9,16 @@ namespace Spring2.Core.Payment.ProPay {
 
     class SplitCommand : ProPayCommand {
 
-	CurrencyType chargeAmount = CurrencyType.DEFAULT;
-	StringType destAccountNumber = StringType.DEFAULT; // ProPay prefers we use AccountNumber, although either will be OK; email/accountnumber refer to the merchant, not the customer!
+	StringType sourceAccountNumber = StringType.DEFAULT;
+	StringType destAccountNumber = StringType.DEFAULT;
+	CurrencyType transferAmount = CurrencyType.DEFAULT;
+	StringType transactionNumber = StringType.DEFAULT;
 
-	public SplitCommand(CurrencyType amount, StringType destAccountNumber) {
-	    this.chargeAmount = amount;
+	public SplitCommand(StringType sourceAccountNumber, StringType destAccountNumber, CurrencyType amount, StringType transactionNumber) {
+	    this.transferAmount = amount;
+	    this.sourceAccountNumber = sourceAccountNumber;
 	    this.destAccountNumber = destAccountNumber;
+	    this.transactionNumber = transactionNumber;
 	}
 
 
@@ -43,15 +47,20 @@ namespace Spring2.Core.Payment.ProPay {
 	    xmltextWriter.WriteElementString("class", config.BusinessClass); //always "partner" (legacy from ProPay)
 
 	    xmltextWriter.WriteStartElement("XMLTrans");
-	    xmltextWriter.WriteElementString("transType", "11");
-	    if (chargeAmount.IsValid) {
-		Decimal chargeAsDecimal = chargeAmount.ToDecimal();
-		Int32 chargeAsPennies = ( Int32 )(chargeAsDecimal * 100M);
-		xmltextWriter.WriteElementString("amount", "" + chargeAsPennies);
+	    xmltextWriter.WriteElementString("transType", "16");
+	    if (transferAmount.IsValid) {
+		Decimal transferAsDecimal = transferAmount.ToDecimal();
+		Int32 transferAsPennies = ( Int32 )(transferAsDecimal * 100M);
+		xmltextWriter.WriteElementString("Amount", "" + transferAsPennies);
 	    }
-	    xmltextWriter.WriteElementString("accountNum", config.CorporateAccountNumber);
+	    if (sourceAccountNumber.IsValid) {
+		xmltextWriter.WriteElementString("accountNum", sourceAccountNumber);
+	    }
 	    if (destAccountNumber.IsValid) {
 		xmltextWriter.WriteElementString("recAccntNum", destAccountNumber.ToString());
+	    }
+	    if (transactionNumber.IsValid) {
+		xmltextWriter.WriteElementString("transNum", transactionNumber);
 	    }
 	    xmltextWriter.WriteEndElement(); // </XMLTrans>
 
@@ -67,10 +76,10 @@ namespace Spring2.Core.Payment.ProPay {
 	    return resultXML;
 	}
 
-	/* This implements ProPay-toProPay, 3.2 in the documentation
+	/* This implements Pull from a ProPay Account (Spendback), 3.11 from the documentation
 	 * private String GetXml() {
 	    ProPayProviderConfiguration config = new ProPayProviderConfiguration();
-	    StringWriter stringWriter = new VariableEncodingStringWriter(config.XMLEncoding); 
+	    StringWriter stringWriter = new VariableEncodingStringWriter(config.XMLEncoding);
 
 	    XmlTextWriter xmltextWriter =
 		new XmlTextWriter(stringWriter);
@@ -86,21 +95,15 @@ namespace Spring2.Core.Payment.ProPay {
 	    xmltextWriter.WriteElementString("class", config.BusinessClass); //always "partner" (legacy from ProPay)
 
 	    xmltextWriter.WriteStartElement("XMLTrans");
-	    xmltextWriter.WriteElementString("transType", "02");
+	    xmltextWriter.WriteElementString("transType", "11");
 	    if (chargeAmount.IsValid) {
 		Decimal chargeAsDecimal = chargeAmount.ToDecimal();
 		Int32 chargeAsPennies = ( Int32 )(chargeAsDecimal * 100M);
 		xmltextWriter.WriteElementString("amount", "" + chargeAsPennies);
 	    }
-	    if (sourceEmail_or_AccountNumber.IsValid) {
-		if (sourceEmail_or_AccountNumber.LastIndexOf("@") != -1) {
-		    xmltextWriter.WriteElementString("recEmail", sourceEmail_or_AccountNumber.ToString());// may be used in place of accountNum
-		} else {
-		    xmltextWriter.WriteElementString("recAccntNum", sourceEmail_or_AccountNumber.ToString());// may be used in place of sourceEmail
-		}
-	    }
-	    if (invNumber.IsValid) {
-		xmltextWriter.WriteElementString("invNum", invNumber.ToString()); // optional
+	    xmltextWriter.WriteElementString("accountNum", config.CorporateAccountNumber);
+	    if (destAccountNumber.IsValid) {
+		xmltextWriter.WriteElementString("recAccntNum", destAccountNumber.ToString());
 	    }
 	    xmltextWriter.WriteEndElement(); // </XMLTrans>
 

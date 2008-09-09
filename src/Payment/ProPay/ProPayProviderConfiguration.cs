@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using Spring2.Core.Payment;
 using Spring2.Core.Configuration;
+//using Spring2.Dss.Payment;
 
 namespace Spring2.Core.Payment.ProPay {
     public class ProPayProviderConfiguration : BaseConfigurationProvider {
@@ -11,7 +12,7 @@ namespace Spring2.Core.Payment.ProPay {
 	public static readonly String TIMEOUT_KEY = "ProPay.Timeout";
 	public static readonly String SIGNUP_CERTSTRING_KEY = "ProPay.SignupAccess.CertString";
 	public static readonly String CARDPROCESSING_CERTSTRING_KEY = "ProPay.RealTimeCCProcessing.CertString";
-	//public static readonly String COMMISSIONPROCESSING_CERTSTRING_KEY = "ProPay.CommissionProcessing.CertString"; (not used by anything right now)
+	public static readonly String COMMISSIONPROCESSING_CERTSTRING_KEY = "ProPay.CommissionProcessing.CertString"; 
 	//public static readonly String BUSINESSCLASS_KEY = "ProPay.BusinessClass"; (legacy ProPay value)
 	private static readonly String BUSINESSCLASS = "partner";
 	public static readonly String XMLENCODING_KEY = "ProPay.XMLEncoding";
@@ -100,11 +101,10 @@ namespace Spring2.Core.Payment.ProPay {
 		corporateAccountEmail = corporateAccountEmailFromConfig;
 	    }
 
-	    // the commission processing cert isn't currently used by anything
-	    //String commissionProcessingCertStringFromConfig = ConfigurationProvider.Instance.Settings[COMMISSIONPROCESSING_CERTSTRING_KEY];
-	    //if (commissionProcessingCertStringFromConfig != null && commissionProcessingCertStringFromConfig.Length > 0) {
-		//commissionProcessingCertString = commissionProcessingCertStringFromConfig;
-	    //}
+	    String commissionProcessingCertStringFromConfig = ConfigurationProvider.Instance.Settings[COMMISSIONPROCESSING_CERTSTRING_KEY];
+	    if (commissionProcessingCertStringFromConfig != null && commissionProcessingCertStringFromConfig.Length > 0) {
+		commissionProcessingCertString = commissionProcessingCertStringFromConfig;
+	    }
 
 	    String businessClassFromConfig = BUSINESSCLASS; // This is a legacy value from ProPay, who has told us to just always use "partner"
 	    if (businessClassFromConfig != null && businessClassFromConfig.Length > 0) {
@@ -136,7 +136,7 @@ namespace Spring2.Core.Payment.ProPay {
 	    CheckConfigurationValue(TIMEOUT_KEY);
 	    CheckConfigurationValue(SIGNUP_CERTSTRING_KEY);
 	    CheckConfigurationValue(CARDPROCESSING_CERTSTRING_KEY);
-	    //CheckConfigurationValue(COMMISSIONPROCESSING_CERTSTRING_KEY); not used right now
+	    CheckConfigurationValue(COMMISSIONPROCESSING_CERTSTRING_KEY);
 	    //CheckConfigurationValue(BUSINESSCLASS_KEY); ProPay legacy value, always use "partner"
 	    CheckConfigurationValue(XMLENCODING_KEY);
 	    CheckConfigurationValue(CORPORATE_ACCOUNT_NUMBER);
