@@ -37,7 +37,7 @@ namespace Spring2.Core.Test {
 
 	private const String testAccountEmail  = "test1@uppercaseliving.com";
 	private const String testAccountNumber = "1036173";
-	private const String testAccountSSN = "0000";
+	private const String testAccountSSNLast4Digits = "0000";
 
 	private CurrencyType declineAmount = new CurrencyType(113); // the test system will automatically fail with this value, as per the ProPay documentation
 	private const String invalidMasterAccount = "1122345"; // just making this up
@@ -69,12 +69,36 @@ namespace Spring2.Core.Test {
 	}
 	#endregion
 
+	#region User information
+	[Test()]
+	public void SignupAndRetrieveUserData() {
+	    bool exceptionOccurredDuringSignup = false;
+	    try {
+		provider.SignupAccount("US", testAccountEmail, "Test", "E", "Testerson", "45 Testing Circle", "", "Testville", "UT", testCardholderPostalCode,
+		    PhoneNumberType.Parse("801-555-4321"), PhoneNumberType.Parse("801-555-4321"), "000000000", DateTimeType.Parse("1/1/1980"), testCardNumber, testCardExpMonth + testCardExpYear);
+	    } catch(PaymentFailureException ex) {
+		// user has already been added, this is expected, just ignore
+		exceptionOccurredDuringSignup = true;
+		Assert.AreEqual("87", ex.Result.ResultCode, "DuplicateUserID");
+	    }
+	    Assert.IsTrue(exceptionOccurredDuringSignup);
+	    String jan1 = "1/1/2008";// +DateTime.Now.Year;
+	    String dec31 = "12/31/2008";// +DateTime.Now.Year;
+	    ProPayResult signupResult = provider.GetSignupReport(DateType.Parse(jan1), DateType.Parse(dec31));
+	    StringTypeList listOfAccountNumbers = provider.GetUserSignupAccountNumbers(signupResult);
+	    StringTypeList listOfAccountEmails = provider.GetUserSignupEmails(signupResult);
+	    StringTypeList listOfAccountUserIds = provider.GetUserSignupIds(signupResult);
+	    Assert.AreEqual(listOfAccountEmails.Count, listOfAccountNumbers.Count);
+	    Assert.AreEqual(listOfAccountEmails.Count, listOfAccountUserIds.Count);
+	    Assert.IsTrue(listOfAccountNumbers.Contains(testAccountNumber));
+	    Assert.IsTrue(listOfAccountEmails.Contains(testAccountEmail));
+	}
+	#endregion
+
 	#region Failure scenarios
 	[Test()]
 	public void OverLimitPayment() {
 	    // Documentation says that the test system has a value of $20 maximum, but it lies
-	    
-	    PaymentResult result = null;
 	    try {
 		provider.Charge(testAccountNumber, new CurrencyType(15000), testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks);
 		Assert.Fail("Should not have processed a $15,000 transaction");
@@ -527,7 +551,7 @@ namespace Spring2.Core.Test {
 	[Test]
 	public void PingUser() {
 	    
-	    ProPayResult result = provider.Ping(testAccountEmail, testAccountSSN);
+	    ProPayResult result = provider.Ping(testAccountEmail, testAccountSSNLast4Digits);
 	    Assert.AreEqual("00", result.ResultCode);
 	    StringType pingAccountNum = result.GetResultValue("accountNum");
 	    StringType pingExpiration = result.GetResultValue("expiration");

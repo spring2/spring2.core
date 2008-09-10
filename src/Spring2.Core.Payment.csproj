@@ -218,6 +218,11 @@
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
+				<File
+                    RelPath = "Payment\NullSplitPaymentProvider.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
                 <File
                     RelPath = "Payment\PaymentConfigurationException.cs"
                     SubType = "Code"

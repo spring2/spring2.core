@@ -36,6 +36,8 @@ namespace Spring2.Core.Payment.ProPay {
 	}
 
 	public ProPayResult Ping(StringType proPayAccountEmail, StringType ssn) {
+	    log.Info("ProPayProvider:Ping(" + proPayAccountEmail + ", " + "***-**-" + ssn.Substring(ssn.Length-4) + ")");
+
 	    ProPayResult result = null;
 	    try {
 		AccountPingCommand command = new AccountPingCommand(proPayAccountEmail, ssn);
@@ -51,8 +53,26 @@ namespace Spring2.Core.Payment.ProPay {
 	    return result;
 	}
 
+	public StringTypeList GetUserSignupIds(ProPayResult userReportResult) {
+	    return GetUserSignupValues(userReportResult, "userID");
+	}
+
+	public StringTypeList GetUserSignupEmails(ProPayResult userReportResult) {
+	    return GetUserSignupValues(userReportResult, "sourceEmail");
+	}
+
+	public StringTypeList GetUserSignupAccountNumbers(ProPayResult userReportResult) {
+	    return GetUserSignupValues(userReportResult, "accountNum");
+	}
+
+	protected StringTypeList GetUserSignupValues(ProPayResult userReportResult, StringType xmlElement) {
+	    return userReportResult.GetResultValues(xmlElement);
+	}
+
 	// tells ProPay that part of the transaction (specified by transactionNumber) goes to recipientAccount
 	public PaymentResult Split(StringType sourceAccount, StringType recipientAccount, CurrencyType amount, StringType transactionNumber) {
+	    log.Info("ProPayProvider:VoidSplit(" + sourceAccount + ", " + recipientAccount + ", " + amount + ", " + transactionNumber + ")");
+
 	    ProPayResult result = null;
 	    try {
 		SplitCommand command = new SplitCommand(sourceAccount, recipientAccount, amount, transactionNumber);
@@ -74,6 +94,8 @@ namespace Spring2.Core.Payment.ProPay {
 
 	// In a higher level sense, all this method does is push money from master account to the merchant
 	public PaymentResult VoidSplit(StringType recipientAccount, CurrencyType amount, StringType invoiceNumber) {
+	    log.Info("ProPayProvider:VoidSplit(" + recipientAccount+ ", " + amount + ", " + invoiceNumber + ")");
+
 	    ProPayResult result = null;
 	    try {
 		FromMasterAccountToMerchantCommand command = new FromMasterAccountToMerchantCommand(recipientAccount, amount, invoiceNumber);
@@ -93,7 +115,9 @@ namespace Spring2.Core.Payment.ProPay {
 	}
 
 	// This will max out at 500 results
-	public StringType GetSignupReport(DateType startDate, DateType endDate) {
+	public ProPayResult GetSignupReport(DateType startDate, DateType endDate) {
+	    log.Info("ProPayProvider:GetSignupReport(" + startDate + ", " + endDate + ")");
+
 	    ProPayResult result = null;
 	    try {
 		GetSignupsCommand command = new GetSignupsCommand(startDate, endDate);
@@ -106,10 +130,17 @@ namespace Spring2.Core.Payment.ProPay {
 		log.Error(ex.Message);
 		throw ex;
 	    }
+	    return result;
+	}
+
+	public StringType GetSignupReportAsXml(DateType startDate, DateType endDate) {
+	    ProPayResult result = GetSignupReport(startDate, endDate);
 	    return result.RawResponse;
 	}
 
 	public PaymentResult Authorize(CurrencyType amount, StringType address, StringType postalCode, StringType providerAccountNumber, StringType creditCardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber) {
+	    log.Info("ProPayProvider:Authorize(" + amount + ", " + address + ", " + postalCode + ", " + providerAccountNumber + ", " + creditCardNumber + ", " + cardExpirationDate + ", " + cvv2 + ", " + invoiceNumber + ")");
+
 	    ProPayResult result = null;
 	    try {
 		StringType emptyApartmentNumber = StringType.DEFAULT;
@@ -127,6 +158,8 @@ namespace Spring2.Core.Payment.ProPay {
 	}
 
 	public PaymentResult Charge(StringType providerAccountNumber, CurrencyType amount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber) {
+	    log.Info("ProPayProvider:Charge(" + providerAccountNumber + ", " + amount+ ", " + address + ", " + postalCode + ", " + cardNumber + ", " + cardExpirationDate + ", " + cvv2 + ", " + invoiceNumber + ")");
+
 	    ProPayResult result = null;
 	    try {
 		StringType emptyApartmentNumber = StringType.DEFAULT;
@@ -143,12 +176,30 @@ namespace Spring2.Core.Payment.ProPay {
 	    return result;
 	}
 
-	public PaymentResult Credit(StringType orderId, CurrencyType amount, StringType providerAccountNumber, StringType expirationYear, StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode, StringType comment, StringType originalTransactionId) {
-	    return Refund(providerAccountNumber, originalTransactionId, amount);
+	public PaymentResult Credit(StringType providerAccountNumber, CurrencyType amount, StringType invoiceNumber) {
+	    //return Refund(providerAccountNumber, originalTransactionId, amount);
+
+	    log.Info("ProPayProvider:Credit(" + providerAccountNumber + ", " + amount + ", " + invoiceNumber + ")");
+
+	    ProPayResult result = null;
+	    try {
+		FromMasterAccountToMerchantCommand command = new FromMasterAccountToMerchantCommand(providerAccountNumber, amount, invoiceNumber);
+		result = command.Execute();
+	    } catch (PaymentFailureException pex) {
+		result = ( ProPayResult )(pex.Result);
+		log.Error(pex.Message + "\r\n" + result.RawResponse);
+		throw pex;
+	    } catch (Exception ex) {
+		log.Error(ex.Message);
+		throw ex;
+	    }
+	    return result;
 	}
 	
 	// This one automatically assumes that there has been a 75/25 split, checks the transaction status, and voids/moves-money as necessary
 	public PaymentResult Refund(StringType providerAccountNumber, StringType originalTransactionId, CurrencyType refundAmount) {
+	    log.Info("ProPayProvider:Refund(" + providerAccountNumber + ", " + originalTransactionId + ", " + refundAmount + ")");
+
 	    ProPayResult result = null;
 
 	    try {
@@ -159,12 +210,15 @@ namespace Spring2.Core.Payment.ProPay {
 		    refundAmount *= 100M;
 		    // Assuming 75/25 split, favoring the 75 on rounding
 		    double doubleRefundAmount = refundAmount.ToDouble();
-		    Decimal refundFor75InPennies = System.Convert.ToDecimal(Math.Ceiling(doubleRefundAmount * 0.75d));
+		    Decimal refundFor75InPennies = System.Convert.ToDecimal(Math.Floor(doubleRefundAmount * 0.75d));
 		    Decimal refundFor25InPennies = refundAmount.ToDecimal() - refundFor75InPennies;
 		    Decimal refundFor75InDollars = refundFor75InPennies / 100M;
 		    Decimal refundFor25InDollars = refundFor25InPennies / 100M;
-		    ProPayResult splitRefundResult = VoidSplit(providerAccountNumber, refundFor25InDollars);
-		    VoidChargeCommand command = new VoidChargeCommand(providerAccountNumber, originalTransactionId, refundFor75InDollars);
+
+		    // first, push back the 75% to the merchant
+		    ProPayResult splitRefundResult = VoidSplit(providerAccountNumber, refundFor75InDollars);
+		    // then void the transaction
+		    VoidChargeCommand command = new VoidChargeCommand(providerAccountNumber, originalTransactionId, refundAmount);
 		    result = command.Execute();
 		} else {
 		    VoidChargeCommand command = new VoidChargeCommand(providerAccountNumber, originalTransactionId, refundAmount);
@@ -183,6 +237,8 @@ namespace Spring2.Core.Payment.ProPay {
 	}
 
 	public PaymentResult Settle(StringType providerAccountNumber, StringType originalTransactionId) {
+	    log.Info("ProPayProvider:Settle(" + providerAccountNumber + ", " + originalTransactionId + ")");
+
 	    ProPayResult result = null;
 	    try {
 		SettlementCommand command = new SettlementCommand(providerAccountNumber, originalTransactionId);
@@ -199,6 +255,8 @@ namespace Spring2.Core.Payment.ProPay {
 	}
 
 	public PaymentResult Void(StringType providerAccountNumber, StringType transactionId, CurrencyType amount) {
+	    log.Info("ProPayProvider:Void(" + providerAccountNumber + ", " + transactionId + ", " + amount + ")");
+
 	    ProPayResult result = null;
 	    try {
 		VoidChargeCommand command = new VoidChargeCommand(providerAccountNumber, transactionId, amount);
@@ -237,6 +295,8 @@ namespace Spring2.Core.Payment.ProPay {
 		PPDebitSpendBack
 		Other
 	     */
+
+	    log.Info("ProPayProvider:TransactionStatus(" + accountNumber + ", " + transactionNumber + ")");
 
 	    String transactionStatus = String.Empty;
 	    ProPayResult result = null;

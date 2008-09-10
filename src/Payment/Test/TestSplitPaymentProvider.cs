@@ -16,7 +16,7 @@ namespace Spring2.Core.Payment.Test {
 	    return GetResult();
 	}
 
-	public PaymentResult Credit(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear, StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode, StringType comment, StringType transactionId) {
+	public PaymentResult Credit(StringType providerAccountNumber, CurrencyType amount, StringType invoiceNumber) {
 	    return GetResult();
 	}
 
