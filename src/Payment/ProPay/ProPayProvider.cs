@@ -5,7 +5,7 @@ using log4net;
 using Spring2.Core.Configuration;
 using Spring2.Core.Types;
 using Spring2.Core.Payment;
-//using Spring2.Dss.Payment;
+
 
 namespace Spring2.Core.Payment.ProPay {
 
@@ -19,6 +19,7 @@ namespace Spring2.Core.Payment.ProPay {
 				     PhoneNumberType dayPhone, PhoneNumberType eveningPhone, StringType ssn, DateTimeType birthday,
 				     StringType creditCardNumber, StringType creditCardExpiration) {
 	    ProPayResult result = null;
+	    creditCardExpiration = StripSlashFromExpirationDate(creditCardExpiration);
 	    try {
 		MerchantSignupCommand command = new MerchantSignupCommand(country, email, firstName, mi, lastName, address, apartmentNumber,
 									    city, state, postalCode, dayPhone, eveningPhone, ssn,
@@ -142,6 +143,7 @@ namespace Spring2.Core.Payment.ProPay {
 	    log.Info("ProPayProvider:Authorize(" + amount + ", " + address + ", " + postalCode + ", " + providerAccountNumber + ", " + creditCardNumber + ", " + cardExpirationDate + ", " + cvv2 + ", " + invoiceNumber + ")");
 
 	    ProPayResult result = null;
+	    cardExpirationDate = StripSlashFromExpirationDate(cardExpirationDate);
 	    try {
 		StringType emptyApartmentNumber = StringType.DEFAULT;
 		AuthorizeCommand command = new AuthorizeCommand(amount, address, emptyApartmentNumber, postalCode, providerAccountNumber, creditCardNumber, cardExpirationDate, cvv2, invoiceNumber);
@@ -161,6 +163,7 @@ namespace Spring2.Core.Payment.ProPay {
 	    log.Info("ProPayProvider:Charge(" + providerAccountNumber + ", " + amount+ ", " + address + ", " + postalCode + ", " + cardNumber + ", " + cardExpirationDate + ", " + cvv2 + ", " + invoiceNumber + ")");
 
 	    ProPayResult result = null;
+	    cardExpirationDate = StripSlashFromExpirationDate(cardExpirationDate);
 	    try {
 		StringType emptyApartmentNumber = StringType.DEFAULT;
 		ChargeCardCommand command = new ChargeCardCommand(providerAccountNumber, amount, address, emptyApartmentNumber, postalCode, cardNumber, cardExpirationDate, cvv2, invoiceNumber);
@@ -318,6 +321,11 @@ namespace Spring2.Core.Payment.ProPay {
 	public bool IsTransactionSettled(StringType accountNumber, StringType transactionId) {
 	    StringType transactionStatus = TransactionStatus(accountNumber, transactionId);
 	    return transactionStatus.IsValid && transactionStatus.EndsWith("Settled");
+	}
+
+	private String StripSlashFromExpirationDate(String originalExpirationDate) {
+	    String result = originalExpirationDate.Replace("/","");
+	    return result;
 	}
 
     }

@@ -26,7 +26,7 @@ namespace Spring2.Core.Payment {
 	public static ISplitPaymentProvider SplitInstance {
 	    get {
 		lock (splitPaymentProviderInstance) {
-		    if (splitPaymentProviderInstance is NullPaymentProvider) {
+		    if (splitPaymentProviderInstance is NullSplitPaymentProvider) {
 			splitPaymentProviderInstance = CreateNewSplitPaymentInstance();
 		    }
 		    return splitPaymentProviderInstance;
@@ -78,7 +78,7 @@ namespace Spring2.Core.Payment {
 	    }
 
 	    Object o = System.Activator.CreateInstance(t);
-	    if (o is IPaymentProvider) {
+	    if (o is ISplitPaymentProvider) {
 		return o as ISplitPaymentProvider;
 	    } else {
 		throw new PaymentConfigurationException(clazz + " does not support ISplitPaymentProvider");
