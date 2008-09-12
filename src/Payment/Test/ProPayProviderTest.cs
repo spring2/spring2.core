@@ -348,6 +348,12 @@ namespace Spring2.Core.Test {
 	    PaymentResult result = provider.Charge(testAccountNumber, new CurrencyType(5.00), testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks);
 	    Assert.AreEqual("00", result.ResultCode);
 	}
+
+	[Test]
+	public void ChargeAndSplit() {
+	    PaymentResult result = provider.ChargeWithSplit(testAccountNumber, new CurrencyType(5.00), testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks, new DecimalType(0.75M));
+	    Assert.AreEqual("00", result.ResultCode);
+	}
     
 	[Test]
 	public void Authorize() {
@@ -372,7 +378,7 @@ namespace Spring2.Core.Test {
 	    CurrencyType originalTransactionAmount = new CurrencyType(5.00);
 	    PaymentResult chargeResult = provider.Charge(testAccountNumber, originalTransactionAmount, testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks);
 	    Assert.AreEqual("00", chargeResult.ResultCode);
-	    PaymentResult refundResult = provider.Refund(testAccountNumber, chargeResult.TransactionId, originalTransactionAmount);
+	    PaymentResult refundResult = provider.Refund(testAccountNumber, chargeResult.TransactionId, originalTransactionAmount, new DecimalType(0.75M));
 	    Assert.AreEqual("00", refundResult.ResultCode);
 	}
 
@@ -400,7 +406,8 @@ namespace Spring2.Core.Test {
 	    try {
 		result = provider.Charge(testAccountNumber, new CurrencyType(5.00), testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, orderId);
 		Assert.AreEqual("00", result.ResultCode, string.Format("Unexpected result of {0}:{1}", result.ResultCode, result.ResultMessage));
-		refundResult = provider.Credit(orderId, new CurrencyType(4.00), masterAccountNumber, String.Empty, String.Empty, String.Empty, String.Empty, String.Empty, String.Empty, String.Empty, result.TransactionId);
+		//refundResult = provider.Credit(orderId, new CurrencyType(4.00), masterAccountNumber, String.Empty, String.Empty, String.Empty, String.Empty, String.Empty, String.Empty, String.Empty, result.TransactionId);
+		refundResult = provider.Credit(testAccountNumber, new CurrencyType(5.00), String.Empty);
 		Assert.AreEqual("00", refundResult.ResultCode);
 	    } catch(PaymentFailureException ex) {
 		Assert.Fail(ex.Message);
@@ -460,6 +467,7 @@ namespace Spring2.Core.Test {
 
 	[Test]
 	public void DoAChargeSplitReverseWithVoidPostSettle() {
+	    // This test follows the same patter as a refund would, were the transaction status to return as "settled," which only happens in testing when ProPay forces a transaction to that status by hand, by our request to them
 
 	    PaymentResult splitResult = null;
 	    PaymentResult chargeResult = null;
@@ -490,7 +498,7 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test]
-	public void DoAChargeSplitReverseWithRefund() {
+	public void DoAChargeSplitReverseWithRefund1() {
 	    
 	    PaymentResult splitResult = null;
 	    PaymentResult chargeResult = null;
@@ -509,12 +517,34 @@ namespace Spring2.Core.Test {
 
 		String transactionStatus = provider.TransactionStatus(testAccountNumber, chargeResult.TransactionId);
 		if (transactionStatus.EndsWith("Settled")) {
-		    reverseResult = provider.Refund(testAccountNumber, chargeResult.TransactionId, amount);
+		    reverseResult = provider.Refund(testAccountNumber, chargeResult.TransactionId, amount, new DecimalType(0.75M));
 		} else {
 		    reverseResult = provider.Void(testAccountNumber, chargeResult.TransactionId, amount);
 		}
 
 		Assert.AreEqual("00", reverseResult.ResultCode);
+
+	    } catch (PaymentFailureException ex) {
+		Assert.Fail(ex.Message);
+	    }
+	}
+
+	[Test]
+	public void DoAChargeSplitReverseWithRefund2() {
+
+	    PaymentResult chargeResult = null;
+	    PaymentResult refundResult = null;
+	    try {
+		StringType orderId = "orderId-" + DateTime.Now.Ticks;
+		CurrencyType amount = new CurrencyType(5.00);
+
+		// charge the card, paying to the demonstrator and splitting 75% to us
+		chargeResult = provider.ChargeWithSplit(testAccountNumber, amount, testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks, new DecimalType(0.75M));
+		Assert.AreEqual("00", chargeResult.ResultCode);
+
+		refundResult = provider.Refund(testAccountNumber, chargeResult.TransactionId, amount, new DecimalType(0.75M));
+
+		Assert.AreEqual("00", refundResult.ResultCode);
 
 	    } catch (PaymentFailureException ex) {
 		Assert.Fail(ex.Message);

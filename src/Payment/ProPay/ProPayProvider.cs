@@ -5,7 +5,7 @@ using log4net;
 using Spring2.Core.Configuration;
 using Spring2.Core.Types;
 using Spring2.Core.Payment;
-
+//using Spring2.Dss.Payment;
 
 namespace Spring2.Core.Payment.ProPay {
 
@@ -72,7 +72,7 @@ namespace Spring2.Core.Payment.ProPay {
 
 	// tells ProPay that part of the transaction (specified by transactionNumber) goes to recipientAccount
 	public PaymentResult Split(StringType sourceAccount, StringType recipientAccount, CurrencyType amount, StringType transactionNumber) {
-	    log.Info("ProPayProvider:VoidSplit(" + sourceAccount + ", " + recipientAccount + ", " + amount + ", " + transactionNumber + ")");
+	    log.Info("ProPayProvider:Split(" + sourceAccount + ", " + recipientAccount + ", " + amount + ", " + transactionNumber + ")");
 
 	    ProPayResult result = null;
 	    try {
@@ -179,6 +179,34 @@ namespace Spring2.Core.Payment.ProPay {
 	    return result;
 	}
 
+	public PaymentResult ChargeWithSplit(StringType providerAccountNumber, CurrencyType amount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber, DecimalType splitFractionToMaster) {
+	    log.Info("ProPayProvider:ChargeWithSplit(" + providerAccountNumber + ", " + amount + ", " + address + ", " + postalCode + ", " + cardNumber + ", " + cardExpirationDate + ", " + cvv2 + ", " + invoiceNumber + ", " + splitFractionToMaster.ToString() + ")");
+
+	    ProPayResult chargeWithSplitResult = null;
+	    try {
+		DecimalType splitAmount = Math.Ceiling((100.0d * amount.ToDouble()) * splitFractionToMaster.ToDouble()) / 100.0d;
+		PaymentResult chargeResult = Charge(providerAccountNumber, amount, address, postalCode, cardNumber, cardExpirationDate, cvv2, invoiceNumber);
+		try {
+		    PaymentResult splitResult = Split(providerAccountNumber, splitAmount, chargeResult.TransactionId);
+		    chargeWithSplitResult = ( ProPayResult )chargeResult; // notice, NOT splitResult!
+		} catch (Exception ex) {
+		    log.Error("Customer has been charged, but split to master account failed!!: " + ex.ToString());
+		    if(ex is PaymentFailureException) {
+			throw (( PaymentFailureException )ex);
+		    }
+		    throw ex;
+		}
+	    } catch (PaymentFailureException pex) {
+		chargeWithSplitResult = ( ProPayResult )(pex.Result);
+		log.Error(pex.Message + "\r\n" + chargeWithSplitResult.RawResponse);
+		throw pex;
+	    } catch (Exception ex) {
+		log.Error(ex.Message);
+		throw ex;
+	    }
+	    return chargeWithSplitResult;
+	}
+
 	public PaymentResult Credit(StringType providerAccountNumber, CurrencyType amount, StringType invoiceNumber) {
 	    //return Refund(providerAccountNumber, originalTransactionId, amount);
 
@@ -199,30 +227,39 @@ namespace Spring2.Core.Payment.ProPay {
 	    return result;
 	}
 	
-	// This one automatically assumes that there has been a 75/25 split, checks the transaction status, and voids/moves-money as necessary
-	public PaymentResult Refund(StringType providerAccountNumber, StringType originalTransactionId, CurrencyType refundAmount) {
-	    log.Info("ProPayProvider:Refund(" + providerAccountNumber + ", " + originalTransactionId + ", " + refundAmount + ")");
+	// NOTE: for ease of reading comments and variables, a 75/25 split is assumed.  The code DOES NOT assume this, but rather uses the parameter 'percentToSiphon' (75% was siphoned)
+	public PaymentResult Refund(StringType providerAccountNumber, StringType originalTransactionId, CurrencyType refundAmount, DecimalType originalFractionToSplit) {
+	    log.Info("ProPayProvider:Refund(" + providerAccountNumber + ", " + originalTransactionId + ", " + refundAmount + ", " + originalFractionToSplit.ToString() + ")");
 
 	    ProPayResult result = null;
 
 	    try {
-		bool assume_75_25_split = true;
 		bool isTransactionSettled = IsTransactionSettled(providerAccountNumber, originalTransactionId);
-		if (assume_75_25_split && isTransactionSettled) {
+		if (isTransactionSettled) {
 		    // adjust to pennies to figure the 75/25
 		    refundAmount *= 100M;
 		    // Assuming 75/25 split, favoring the 75 on rounding
 		    double doubleRefundAmount = refundAmount.ToDouble();
-		    Decimal refundFor75InPennies = System.Convert.ToDecimal(Math.Floor(doubleRefundAmount * 0.75d));
+		    Decimal refundFor75InPennies = System.Convert.ToDecimal(Math.Floor(doubleRefundAmount * originalFractionToSplit.ToDouble()));
 		    Decimal refundFor25InPennies = refundAmount.ToDecimal() - refundFor75InPennies;
 		    Decimal refundFor75InDollars = refundFor75InPennies / 100M;
 		    Decimal refundFor25InDollars = refundFor25InPennies / 100M;
 
 		    // first, push back the 75% to the merchant
 		    ProPayResult splitRefundResult = VoidSplit(providerAccountNumber, refundFor75InDollars);
-		    // then void the transaction
-		    VoidChargeCommand command = new VoidChargeCommand(providerAccountNumber, originalTransactionId, refundAmount);
-		    result = command.Execute();
+
+		    try {
+			// then void the transaction
+			VoidChargeCommand command = new VoidChargeCommand(providerAccountNumber, originalTransactionId, refundAmount);
+			ProPayResult voidRefundResult = command.Execute();
+			result = voidRefundResult;
+		    } catch (Exception ex) {
+			log.Error("Funds have been transferred back to the merchant from the master account, but refund to customer FAILED!!: " + ex.ToString());
+			if (ex is PaymentFailureException) {
+			    throw (( PaymentFailureException )ex);
+			}
+			throw ex;
+		    }
 		} else {
 		    VoidChargeCommand command = new VoidChargeCommand(providerAccountNumber, originalTransactionId, refundAmount);
 		    result = command.Execute();

@@ -8,9 +8,11 @@ namespace Spring2.Core.Payment {
 
 	PaymentResult Charge(StringType providerAccountNumber, CurrencyType amount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber);
 
+	PaymentResult ChargeWithSplit(StringType providerAccountNumber, CurrencyType amount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber, DecimalType splitFractionToMasterAccount);
+
 	PaymentResult Credit(StringType providerAccountNumber, CurrencyType amount, StringType invoiceNumber);
 
-	PaymentResult Refund(StringType providerAccountNumber, StringType originalTransactionId, CurrencyType refundAmount);
+	PaymentResult Refund(StringType providerAccountNumber, StringType originalTransactionId, CurrencyType refundAmount, DecimalType originalSplitFraction);
 
 	PaymentResult Settle(StringType providerAccountNumber, StringType originalTransactionId);
 
