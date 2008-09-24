@@ -351,7 +351,7 @@ namespace Spring2.Core.Test {
 
 	[Test]
 	public void ChargeAndSplit() {
-	    PaymentResult result = provider.ChargeWithSplit(testAccountNumber, new CurrencyType(5.00), testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks, new DecimalType(0.75M));
+	    PaymentResult result = provider.ChargeWithSplit(testAccountNumber, new CurrencyType(5.00), new CurrencyType(4.00), testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks, new DecimalType(0.75M));
 	    Assert.AreEqual("00", result.ResultCode);
 	}
     
@@ -378,7 +378,7 @@ namespace Spring2.Core.Test {
 	    CurrencyType originalTransactionAmount = new CurrencyType(5.00);
 	    PaymentResult chargeResult = provider.Charge(testAccountNumber, originalTransactionAmount, testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks);
 	    Assert.AreEqual("00", chargeResult.ResultCode);
-	    PaymentResult refundResult = provider.Refund(testAccountNumber, chargeResult.TransactionId, originalTransactionAmount, new DecimalType(0.75M));
+	    PaymentResult refundResult = provider.Refund(testAccountNumber, chargeResult.TransactionId, originalTransactionAmount, originalTransactionAmount, new DecimalType(0.0M));
 	    Assert.AreEqual("00", refundResult.ResultCode);
 	}
 
@@ -506,18 +506,19 @@ namespace Spring2.Core.Test {
 	    try {
 		StringType orderId = "orderId-" + DateTime.Now.Ticks;
 		CurrencyType amount = new CurrencyType(5.00);
+		CurrencyType commissionableAmount = new CurrencyType(5.00);
 
 		// charge the card, paying to the demonstrator
 		chargeResult = provider.Charge(testAccountNumber, amount, testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks);
 		Assert.AreEqual("00", chargeResult.ResultCode);
 
 		// order the split, paying us our share
-		splitResult = provider.Split(testAccountNumber, masterAccountNumber, new CurrencyType(2.50), chargeResult.TransactionId);
+		splitResult = provider.Split(testAccountNumber, masterAccountNumber, new CurrencyType(3.75), chargeResult.TransactionId);
 		Assert.AreEqual("00", splitResult.ResultCode);
 
 		String transactionStatus = provider.TransactionStatus(testAccountNumber, chargeResult.TransactionId);
 		if (transactionStatus.EndsWith("Settled")) {
-		    reverseResult = provider.Refund(testAccountNumber, chargeResult.TransactionId, amount, new DecimalType(0.75M));
+		    reverseResult = provider.Refund(testAccountNumber, chargeResult.TransactionId, amount, commissionableAmount, new DecimalType(0.75M));
 		} else {
 		    reverseResult = provider.Void(testAccountNumber, chargeResult.TransactionId, amount);
 		}
@@ -536,13 +537,14 @@ namespace Spring2.Core.Test {
 	    PaymentResult refundResult = null;
 	    try {
 		StringType orderId = "orderId-" + DateTime.Now.Ticks;
-		CurrencyType amount = new CurrencyType(5.00);
+		CurrencyType amount = new CurrencyType(11.00);
+		CurrencyType commissionableAmount = new CurrencyType(10.00);
 
 		// charge the card, paying to the demonstrator and splitting 75% to us
-		chargeResult = provider.ChargeWithSplit(testAccountNumber, amount, testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks, new DecimalType(0.75M));
+		chargeResult = provider.ChargeWithSplit(testAccountNumber, amount, commissionableAmount, testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks, new DecimalType(0.75M));
 		Assert.AreEqual("00", chargeResult.ResultCode);
 
-		refundResult = provider.Refund(testAccountNumber, chargeResult.TransactionId, amount, new DecimalType(0.75M));
+		refundResult = provider.Refund(testAccountNumber, chargeResult.TransactionId, amount, commissionableAmount, new DecimalType(0.75M));
 
 		Assert.AreEqual("00", refundResult.ResultCode);
 

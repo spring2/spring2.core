@@ -179,13 +179,14 @@ namespace Spring2.Core.Payment.ProPay {
 	    return result;
 	}
 
-	public PaymentResult ChargeWithSplit(StringType providerAccountNumber, CurrencyType amount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber, DecimalType splitFractionToMaster) {
-	    log.Info("ProPayProvider:ChargeWithSplit(" + providerAccountNumber + ", " + amount + ", " + address + ", " + postalCode + ", " + cardNumber + ", " + cardExpirationDate + ", " + cvv2 + ", " + invoiceNumber + ", " + splitFractionToMaster.ToString() + ")");
+	public PaymentResult ChargeWithSplit(StringType providerAccountNumber, CurrencyType totalAmount, CurrencyType commissionableAmount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber, DecimalType splitFractionToMaster) {
+	    log.Info("ProPayProvider:ChargeWithSplit(" + providerAccountNumber + ", " + totalAmount + ", " + commissionableAmount + ", " + address + ", " + postalCode + ", " + cardNumber + ", " + cardExpirationDate + ", " + cvv2 + ", " + invoiceNumber + ", " + splitFractionToMaster.ToString() + ")");
 
 	    ProPayResult chargeWithSplitResult = null;
 	    try {
-		DecimalType splitAmount = Math.Ceiling((100.0d * amount.ToDouble()) * splitFractionToMaster.ToDouble()) / 100.0d;
-		PaymentResult chargeResult = Charge(providerAccountNumber, amount, address, postalCode, cardNumber, cardExpirationDate, cvv2, invoiceNumber);
+		DecimalType splitAmount = Math.Ceiling((100.0d * commissionableAmount.ToDouble()) * splitFractionToMaster.ToDouble()) / 100.0d;
+		splitAmount = splitAmount + (totalAmount - commissionableAmount).ToDecimal(); // the amount we split to the master is the master's portion of the split PLUS the difference between the totalAmount and commissionalbleAmount
+		PaymentResult chargeResult = Charge(providerAccountNumber, totalAmount, address, postalCode, cardNumber, cardExpirationDate, cvv2, invoiceNumber);
 		try {
 		    PaymentResult splitResult = Split(providerAccountNumber, splitAmount, chargeResult.TransactionId);
 		    chargeWithSplitResult = ( ProPayResult )chargeResult; // notice, NOT splitResult!
@@ -226,10 +227,10 @@ namespace Spring2.Core.Payment.ProPay {
 	    }
 	    return result;
 	}
-	
-	// NOTE: for ease of reading comments and variables, a 75/25 split is assumed.  The code DOES NOT assume this, but rather uses the parameter 'percentToSiphon' (75% was siphoned)
-	public PaymentResult Refund(StringType providerAccountNumber, StringType originalTransactionId, CurrencyType refundAmount, DecimalType originalFractionToSplit) {
-	    log.Info("ProPayProvider:Refund(" + providerAccountNumber + ", " + originalTransactionId + ", " + refundAmount + ", " + originalFractionToSplit.ToString() + ")");
+
+	// NOTE: for ease of reading comments and variables, a 75/25 split is assumed.  The code DOES NOT assume this, but rather uses the parameter 'originalFractionToSplit' (75% was siphoned)
+	public PaymentResult Refund(StringType providerAccountNumber, StringType originalTransactionId, CurrencyType refundAmount, CurrencyType commissionableAmount, DecimalType originalFractionToSplit) {
+	    log.Info("ProPayProvider:Refund(" + providerAccountNumber + ", " + originalTransactionId + ", " + refundAmount + ", " + commissionableAmount + ", " + originalFractionToSplit.ToString() + ")");
 
 	    ProPayResult result = null;
 
@@ -237,16 +238,18 @@ namespace Spring2.Core.Payment.ProPay {
 		bool isTransactionSettled = IsTransactionSettled(providerAccountNumber, originalTransactionId);
 		if (isTransactionSettled) {
 		    // adjust to pennies to figure the 75/25
-		    refundAmount *= 100M;
+		    Decimal refundAmountInPennies = refundAmount.ToDecimal() * 100M;
 		    // Assuming 75/25 split, favoring the 75 on rounding
-		    double doubleRefundAmount = refundAmount.ToDouble();
-		    Decimal refundFor75InPennies = System.Convert.ToDecimal(Math.Floor(doubleRefundAmount * originalFractionToSplit.ToDouble()));
-		    Decimal refundFor25InPennies = refundAmount.ToDecimal() - refundFor75InPennies;
-		    Decimal refundFor75InDollars = refundFor75InPennies / 100M;
-		    Decimal refundFor25InDollars = refundFor25InPennies / 100M;
+		    Decimal originalSplitAmountPreRounding = (commissionableAmount.ToDecimal() * (originalFractionToSplit.ToDecimal())) + (refundAmount.ToDecimal() - commissionableAmount.ToDecimal());
+		    Decimal originalSplitAmountInPennies = originalSplitAmountPreRounding * 100;
+		    Decimal roundedSplitAmountInPennies = (Decimal)Math.Ceiling((double)originalSplitAmountInPennies);
+		    Decimal originalSplitAmount = roundedSplitAmountInPennies / 100.0M;
 
 		    // first, push back the 75% to the merchant
-		    ProPayResult splitRefundResult = VoidSplit(providerAccountNumber, refundFor75InDollars);
+		    ProPayResult splitRefundResult = null;
+		    if (originalSplitAmount > 0.0M) {
+			splitRefundResult = VoidSplit(providerAccountNumber, originalSplitAmount);
+		    }
 
 		    try {
 			// then void the transaction

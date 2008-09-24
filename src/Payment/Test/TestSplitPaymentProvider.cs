@@ -16,7 +16,7 @@ namespace Spring2.Core.Payment.Test {
 	    return GetResult();
 	}
 
-	public PaymentResult ChargeWithSplit(StringType providerAccountNumber, CurrencyType amount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber, DecimalType splitFractionToMaster) {
+	public PaymentResult ChargeWithSplit(StringType providerAccountNumber, CurrencyType totalAmount, CurrencyType commissionableAmount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber, DecimalType splitFractionToMaster) {
 	    return GetResult();
 	}
 
@@ -24,7 +24,7 @@ namespace Spring2.Core.Payment.Test {
 	    return GetResult();
 	}
 
-	public PaymentResult Refund(StringType providerAccountNumber, StringType originalTransactionId, CurrencyType refundAmount, DecimalType originalSplitFraction) {
+	public PaymentResult Refund(StringType providerAccountNumber, StringType originalTransactionId, CurrencyType refundAmount, CurrencyType commissionableAmount, DecimalType originalFractionToSplit) {
 	    return GetResult();
 	}
 

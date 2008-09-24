@@ -15,7 +15,7 @@ namespace Spring2.Core.Payment.Test {
 	    throw new PaymentConfigurationException("The NullSplitPaymentProvider is not a valid provider.");
 	}
 
-	public PaymentResult ChargeWithSplit(StringType providerAccountNumber, CurrencyType amount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber, DecimalType splitFractionToMasterAccount) {
+	public PaymentResult ChargeWithSplit(StringType providerAccountNumber, CurrencyType totalAmount, CurrencyType commissionableAmount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber, DecimalType splitFractionToMaster) {
 	    throw new PaymentConfigurationException("The NullSplitPaymentProvider is not a valid provider.");
 	}
 
@@ -23,7 +23,7 @@ namespace Spring2.Core.Payment.Test {
 	    throw new PaymentConfigurationException("The NullSplitPaymentProvider is not a valid provider.");
 	}
 
-	public PaymentResult Refund(StringType providerAccountNumber, StringType originalTransactionId, CurrencyType refundAmount, DecimalType originalSplitFraction) {
+	public PaymentResult Refund(StringType providerAccountNumber, StringType originalTransactionId, CurrencyType refundAmount, CurrencyType commissionableAmount, DecimalType originalFractionToSplit) {
 	    throw new PaymentConfigurationException("The NullSplitPaymentProvider is not a valid provider.");
 	}
 
