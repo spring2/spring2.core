@@ -36,8 +36,12 @@ namespace Spring2.Core.Payment.ProPay {
 	    return result;
 	}
 
-	public ProPayResult Ping(StringType proPayAccountEmail, StringType ssn) {
-	    log.Info("ProPayProvider:Ping(" + proPayAccountEmail + ", " + "***-**-" + ssn.Substring(ssn.Length-4) + ")");
+	public PaymentResult PingAccount(StringType proPayAccountEmail, StringType ssn) {
+	    if (ssn.Length >= 4) {
+		log.Info("ProPayProvider:Ping(" + proPayAccountEmail + ", " + "***-**-" + ssn.Substring(ssn.Length - 4) + ")");
+	    } else {
+		log.Info("ProPayProvider:Ping(" + proPayAccountEmail + ", " + ssn + ")");
+	    }
 
 	    ProPayResult result = null;
 	    try {
@@ -186,6 +190,13 @@ namespace Spring2.Core.Payment.ProPay {
 	    try {
 		DecimalType splitAmount = Math.Ceiling((100.0d * commissionableAmount.ToDouble()) * splitFractionToMaster.ToDouble()) / 100.0d;
 		splitAmount = splitAmount + (totalAmount - commissionableAmount).ToDecimal(); // the amount we split to the master is the master's portion of the split PLUS the difference between the totalAmount and commissionalbleAmount
+
+		// make certain that split + fees is less than totalAmount
+		DecimalType expectedFeeForTransaction = CalcChargeFee(totalAmount.ToDecimal());
+		if ((splitAmount + Math.Ceiling(expectedFeeForTransaction.ToDouble())) > totalAmount.ToDecimal()) {
+		    throw new InvalidArgumentException("Split amount is not allowed to exceed the total charge less fees");
+		}
+
 		PaymentResult chargeResult = Charge(providerAccountNumber, totalAmount, address, postalCode, cardNumber, cardExpirationDate, cvv2, invoiceNumber);
 		try {
 		    PaymentResult splitResult = Split(providerAccountNumber, splitAmount, chargeResult.TransactionId);
@@ -366,6 +377,29 @@ namespace Spring2.Core.Payment.ProPay {
 	private String StripSlashFromExpirationDate(String originalExpirationDate) {
 	    String result = originalExpirationDate.Replace("/","");
 	    return result;
+	}
+
+	private DecimalType CalcChargeFee(DecimalType totalChargeAmount) {
+	    ProPayProviderConfiguration config = new ProPayProviderConfiguration();
+	    Decimal minimumCharge = config.MinimumChargeFee;
+	    Decimal calculatedTotalCharge = 0.0M;
+	    Char[] splitChars = {','};
+	    String[] feeRules = config.ChargeFees.Split(splitChars);
+	    foreach (String feeRule in feeRules) {
+		if(feeRule.IndexOf('%') != -1) { // String.Contains does not exist in earlier .NET versions
+		    String cleanedFeeRule = feeRule.Replace("%","").Trim();
+		    Decimal percentageFee = Decimal.Parse(cleanedFeeRule) * 0.01M;
+		    calculatedTotalCharge += totalChargeAmount.ToDecimal() * percentageFee;
+		} else if (feeRule.IndexOf('$') != -1) { // String.Contains does not exist in earlier .NET versions
+		    String cleanedFeeRule = feeRule.Replace("$", "").Trim();
+		    Decimal flatFee = Decimal.Parse(cleanedFeeRule);
+		    calculatedTotalCharge += flatFee;
+		} else {
+		    throw new InvalidValueException("Fee Rules must include either a % or a $ to specify whether the fee is percentage or flat based");
+		}
+	    }
+	    DecimalType expectedFee = Math.Max(minimumCharge, calculatedTotalCharge);
+	    return expectedFee;
 	}
 
     }

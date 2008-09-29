@@ -43,5 +43,9 @@ namespace Spring2.Core.Payment.Test {
 	    throw new PaymentConfigurationException("The NullSplitPaymentProvider is not a valid provider.");
 	}
 
+	public PaymentResult PingAccount(StringType proPayAccountEmail, StringType ssn) {
+	    throw new PaymentConfigurationException("The NullSplitPaymentProvider is not a valid provider.");
+	}
+
     }
 }

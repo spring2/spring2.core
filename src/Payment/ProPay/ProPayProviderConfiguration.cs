@@ -18,6 +18,8 @@ namespace Spring2.Core.Payment.ProPay {
 	public static readonly String XMLENCODING_KEY = "ProPay.XMLEncoding";
 	public static readonly String CORPORATE_ACCOUNT_NUMBER = "ProPay.CorporateAccountNumber";
 	public static readonly String CORPORATE_ACCOUNT_EMAIL = "ProPay.CorporateAccountEmail";
+	public static readonly String MINUMUM_CHARGE_FEE = "ProPay.MinimumFeeForCharge";
+	public static readonly String CHARGE_FEES = "ProPay.ChargeFee";
 
 	private String hostAddress = String.Empty;
 	private Int32 timeout = 0;
@@ -28,6 +30,8 @@ namespace Spring2.Core.Payment.ProPay {
 	private Encoding xmlEncoding = System.Text.Encoding.Unicode;
 	private String corporateAccountNumber = String.Empty;
 	private String corporateAccountEmail = String.Empty;
+	private Decimal minimumChargeFee = 0.00M;
+	private String chargeFees = String.Empty;
 
 	public ProPayProviderConfiguration() {
 	    Init();
@@ -67,6 +71,14 @@ namespace Spring2.Core.Payment.ProPay {
 
 	public Encoding XMLEncoding {
 	    get { return xmlEncoding; }
+	}
+
+	public Decimal MinimumChargeFee {
+	    get { return minimumChargeFee; }
+	}
+
+	public String ChargeFees {
+	    get { return chargeFees; }
 	}
 
 	public void Init() {
@@ -129,6 +141,16 @@ namespace Spring2.Core.Payment.ProPay {
 		//    break;
 	    }
 
+	    String minimumChargeFeeFromConfig = ConfigurationProvider.Instance.Settings[MINUMUM_CHARGE_FEE];
+	    if (minimumChargeFeeFromConfig != null && minimumChargeFeeFromConfig.Length > 0) {
+		minimumChargeFee = Decimal.Parse(minimumChargeFeeFromConfig);
+	    }
+
+	    String feeRulesFromConfig = ConfigurationProvider.Instance.Settings[CHARGE_FEES];
+	    if (feeRulesFromConfig != null && feeRulesFromConfig.Length > 0) {
+		chargeFees = feeRulesFromConfig;
+	    }
+
 	}
 
 	private void CheckConfiguration() {
@@ -141,6 +163,8 @@ namespace Spring2.Core.Payment.ProPay {
 	    CheckConfigurationValue(XMLENCODING_KEY);
 	    CheckConfigurationValue(CORPORATE_ACCOUNT_NUMBER);
 	    CheckConfigurationValue(CORPORATE_ACCOUNT_EMAIL);
+	    CheckConfigurationValue(MINUMUM_CHARGE_FEE);
+	    CheckConfigurationValue(CHARGE_FEES);
 	}
 
 

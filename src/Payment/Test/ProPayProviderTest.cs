@@ -583,7 +583,7 @@ namespace Spring2.Core.Test {
 	[Test]
 	public void PingUser() {
 	    
-	    ProPayResult result = provider.Ping(testAccountEmail, testAccountSSNLast4Digits);
+	    ProPayResult result = (ProPayResult)provider.PingAccount(testAccountEmail, testAccountSSNLast4Digits);
 	    Assert.AreEqual("00", result.ResultCode);
 	    StringType pingAccountNum = result.GetResultValue("accountNum");
 	    StringType pingExpiration = result.GetResultValue("expiration");
@@ -635,6 +635,16 @@ namespace Spring2.Core.Test {
 		Assert.Fail();
 	    } catch (PaymentFailureException ex) {
 		Assert.AreEqual("51", ex.Result.ResultCode, ex.Message); //{"Failed to process the payment. 51: (ProPay) 'Invalid transNum or unavailable to act on transNum due to funding'."}
+	    }
+	}
+
+	[Test]
+	public void ChargeWithSplitShouldNotBeAttemptedWhenFeesAreTooHigh() {
+	    try {
+		PaymentResult result = provider.ChargeWithSplit(testAccountNumber, new CurrencyType(5.00), new CurrencyType(0.00), testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks, new DecimalType(0.75M));
+		Assert.Fail("Total charge should have been less than the split plus the fees");
+	    } catch (InvalidArgumentException ex) {
+		// this is expected
 	    }
 	}
 

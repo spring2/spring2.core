@@ -21,6 +21,8 @@ namespace Spring2.Core.Payment {
 	PaymentResult Split(StringType sourceAccount, StringType recipientAccount, CurrencyType amount, StringType transactionNumber);
 
 	PaymentResult VoidSplit(StringType recipientAccount, CurrencyType amount, StringType invoiceNumber);
+
+	PaymentResult PingAccount(StringType proPayAccountEmail, StringType ssn);
     }
 
 }

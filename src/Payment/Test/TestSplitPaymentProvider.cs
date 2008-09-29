@@ -44,6 +44,10 @@ namespace Spring2.Core.Payment.Test {
 	    return GetResult();
 	}
 
+	public PaymentResult PingAccount(StringType proPayAccountEmail, StringType ssn) {
+	    return GetResult();
+	}
+
     	private PaymentResult GetResult() {
     	    PaymentResult result = new PaymentResult();
     	    result.ResultCode = "00";
