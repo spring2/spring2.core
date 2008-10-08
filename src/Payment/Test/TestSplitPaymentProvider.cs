@@ -11,87 +11,86 @@ namespace Spring2.Core.Payment.Test {
 
 	public PaymentResult Authorize(CurrencyType amount, StringType address, StringType postalCode, StringType providerAccountNumber, StringType creditCardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber) {
 	    PaymentResult result = GetResult();
+	    result.TransactionAmount = amount;
+	    result.AccountNumber = providerAccountNumber;
 	    CheckForSuccess(result);
 	    return result;
 	}
 
 	public PaymentResult Charge(StringType providerAccountNumber, CurrencyType amount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber) {
 	    PaymentResult result = GetResult();
-	    if (result.ResultCode != "00") {
-		CheckForSuccess(result);
-	    }
+	    result.TransactionAmount = amount;
+	    result.AccountNumber = providerAccountNumber;
+	    CheckForSuccess(result);
 	    return result;
 	}
 
 	public PaymentResult ChargeWithSplit(StringType providerAccountNumber, CurrencyType totalAmount, CurrencyType commissionableAmount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber, DecimalType splitFractionToMaster) {
 	    PaymentResult result = GetResult();
-	    if (result.ResultCode != "00") {
-		CheckForSuccess(result);
-	    }
+	    result.TransactionAmount = totalAmount;
+	    result.AccountNumber = providerAccountNumber;
+	    CheckForSuccess(result);
 	    return result;
 	}
 
 	public PaymentResult Credit(StringType providerAccountNumber, CurrencyType amount, StringType invoiceNumber) {
 	    PaymentResult result = GetResult();
-	    if (result.ResultCode != "00") {
-		CheckForSuccess(result);
-	    }
+	    result.TransactionAmount = amount;
+	    result.AccountNumber = providerAccountNumber;
+	    CheckForSuccess(result);
 	    return result;
 	}
 
 	public PaymentResult Refund(StringType providerAccountNumber, StringType originalTransactionId, CurrencyType refundAmount, CurrencyType commissionableAmount, DecimalType originalFractionToSplit) {
 	    PaymentResult result = GetResult();
-	    if (result.ResultCode != "00") {
-		CheckForSuccess(result);
-	    }
+	    result.TransactionAmount = refundAmount;
+	    result.AccountNumber = providerAccountNumber;
+	    CheckForSuccess(result);
 	    return result;
 	}
 
 	public PaymentResult Settle(StringType providerAccountNumber, StringType originalTransactionId) {
 	    PaymentResult result = GetResult();
-	    if (result.ResultCode != "00") {
-		CheckForSuccess(result);
-	    }
+	    result.AccountNumber = providerAccountNumber;
+	    CheckForSuccess(result);
 	    return result;
 	}
 
 	public PaymentResult Void(StringType referenceNumber, StringType transactionId, CurrencyType amount) {
 	    PaymentResult result = GetResult();
-	    if (result.ResultCode != "00") {
-		CheckForSuccess(result);
-	    }
+	    result.TransactionAmount = amount;
+	    CheckForSuccess(result);
 	    return result;
 	}
 
 	public PaymentResult Split(StringType sourceAccount, CurrencyType amount, StringType transactionNumber) {
 	    PaymentResult result = GetResult();
-	    if (result.ResultCode != "00") {
-		CheckForSuccess(result);
-	    }
+	    result.TransactionAmount = amount;
+	    result.AccountNumber = sourceAccount;
+	    CheckForSuccess(result);
 	    return result;
 	}
 
 	public PaymentResult Split(StringType sourceAccount, StringType recipientAccount, CurrencyType amount, StringType transactionNumber) {
 	    PaymentResult result = GetResult();
-	    if (result.ResultCode != "00") {
-		CheckForSuccess(result);
-	    }
+	    result.TransactionAmount = amount;
+	    result.AccountNumber = sourceAccount;
+	    CheckForSuccess(result);
 	    return result;
 	}
 
 	public PaymentResult VoidSplit(StringType recipientAccount, CurrencyType amount, StringType invoiceNumber) {
 	    PaymentResult result = GetResult();
-	    if (result.ResultCode != "00") {
-		CheckForSuccess(result);
-	    }
+	    result.TransactionAmount = amount;
+	    result.AccountNumber = recipientAccount;
+	    CheckForSuccess(result);
 	    return result;
 	}
 
-	public PaymentResult PingAccount(StringType proPayAccountEmail, StringType ssn) {
+	public PaymentResult PingAccount(StringType proPayAccountEmail, StringType proPayPayAccountNumber, StringType ssn) {
 	    PaymentResult result = GetResult();
-	    if (result.ResultCode != "00") {
-		CheckForSuccess(result);
-	    }
+	    result.AccountNumber = proPayPayAccountNumber;
+	    CheckForSuccess(result);
 	    return result;
 	}
 

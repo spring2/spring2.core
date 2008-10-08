@@ -354,6 +354,12 @@ namespace Spring2.Core.Test {
 	    PaymentResult result = provider.ChargeWithSplit(testAccountNumber, new CurrencyType(5.00), new CurrencyType(4.00), testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks, new DecimalType(0.75M));
 	    Assert.AreEqual("00", result.ResultCode);
 	}
+
+	[Test]
+	public void blahDeleteMe() {
+	    PaymentResult result = provider.ChargeWithSplit(testAccountNumber, new CurrencyType(31.71), new CurrencyType(31.71), StringType.UNSET, StringType.UNSET, "4111111111111111", "12/09", StringType.DEFAULT, "34942-97739", new DecimalType(0.75M));
+	    Assert.AreEqual("00", result.ResultCode);
+	}
     
 	[Test]
 	public void Authorize() {
@@ -583,7 +589,7 @@ namespace Spring2.Core.Test {
 	[Test]
 	public void PingUser() {
 	    
-	    ProPayResult result = (ProPayResult)provider.PingAccount(testAccountEmail, testAccountSSNLast4Digits);
+	    ProPayResult result = (ProPayResult)provider.PingAccount(testAccountEmail, testAccountNumber, testAccountSSNLast4Digits);
 	    Assert.AreEqual("00", result.ResultCode);
 	    StringType pingAccountNum = result.GetResultValue("accountNum");
 	    StringType pingExpiration = result.GetResultValue("expiration");
@@ -642,7 +648,7 @@ namespace Spring2.Core.Test {
 	public void ChargeWithSplitShouldNotBeAttemptedWhenFeesAreTooHigh() {
 	    try {
 		PaymentResult result = provider.ChargeWithSplit(testAccountNumber, new CurrencyType(5.00), new CurrencyType(0.00), testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks, new DecimalType(0.75M));
-		Assert.Fail("Total charge should have been less than the split plus the fees");
+		Assert.Fail("Total charge should have bee less than the split plus the fees");
 	    } catch (InvalidArgumentException ex) {
 		// this is expected
 	    }

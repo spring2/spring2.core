@@ -36,17 +36,22 @@ namespace Spring2.Core.Payment.ProPay {
 	    return result;
 	}
 
-	public PaymentResult PingAccount(StringType proPayAccountEmail, StringType ssn) {
+	public PaymentResult PingAccount(StringType proPayAccountEmail, StringType proPayPayAccountNumber, StringType ssn) {
 	    if (ssn.Length >= 4) {
 		log.Info("ProPayProvider:Ping(" + proPayAccountEmail + ", " + "***-**-" + ssn.Substring(ssn.Length - 4) + ")");
 	    } else {
 		log.Info("ProPayProvider:Ping(" + proPayAccountEmail + ", " + ssn + ")");
 	    }
 
+	    StringType ssnWithoutDashes = ssn.Replace("-", "");
+
 	    ProPayResult result = null;
 	    try {
-		AccountPingCommand command = new AccountPingCommand(proPayAccountEmail, ssn);
+		AccountPingCommand command = new AccountPingCommand(proPayAccountEmail, ssnWithoutDashes);
 		result = command.Execute();
+		if ((( PaymentResult )result).AccountNumber != proPayPayAccountNumber.ToString()) {
+		    throw new InvalidArgumentException("Invalid ProPay account number: " + proPayPayAccountNumber);
+		}
 	    } catch (PaymentFailureException pex) {
 		result = ( ProPayResult )(pex.Result);
 		log.Error(pex.Message + "\r\n" + result.RawResponse);
@@ -92,9 +97,9 @@ namespace Spring2.Core.Payment.ProPay {
 	    }
 	    return result;
 	}
-	public ProPayResult Split(StringType sourceAccount, CurrencyType amount, StringType transactionNumber) {
+	public PaymentResult Split(StringType sourceAccount, CurrencyType amount, StringType transactionNumber) {
 	    ProPayProviderConfiguration config = new ProPayProviderConfiguration();
-	    return (ProPayResult) Split(sourceAccount, config.CorporateAccountNumber, amount, transactionNumber);
+	    return Split(sourceAccount, config.CorporateAccountNumber, amount, transactionNumber);
 	}
 
 	// In a higher level sense, all this method does is push money from master account to the merchant
@@ -183,6 +188,7 @@ namespace Spring2.Core.Payment.ProPay {
 	    return result;
 	}
 
+	//public PaymentResult ChargeWithSplit(StringType providerAccountNumber, CurrencyType totalAmount, CurrencyType commissionableAmount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber, DecimalType splitFractionToMaster) {
 	public PaymentResult ChargeWithSplit(StringType providerAccountNumber, CurrencyType totalAmount, CurrencyType commissionableAmount, StringType address, StringType postalCode, StringType cardNumber, StringType cardExpirationDate, StringType cvv2, StringType invoiceNumber, DecimalType splitFractionToMaster) {
 	    log.Info("ProPayProvider:ChargeWithSplit(" + providerAccountNumber + ", " + totalAmount + ", " + commissionableAmount + ", " + address + ", " + postalCode + ", " + cardNumber + ", " + cardExpirationDate + ", " + cvv2 + ", " + invoiceNumber + ", " + splitFractionToMaster.ToString() + ")");
 

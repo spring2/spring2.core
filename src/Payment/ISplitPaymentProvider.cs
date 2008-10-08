@@ -18,11 +18,12 @@ namespace Spring2.Core.Payment {
 
 	PaymentResult Void(StringType referenceNumber, StringType transactionId, CurrencyType amount);
 
+	PaymentResult Split(StringType sourceAccount, CurrencyType amount, StringType transactionNumber);
 	PaymentResult Split(StringType sourceAccount, StringType recipientAccount, CurrencyType amount, StringType transactionNumber);
 
 	PaymentResult VoidSplit(StringType recipientAccount, CurrencyType amount, StringType invoiceNumber);
 
-	PaymentResult PingAccount(StringType proPayAccountEmail, StringType ssn);
+	PaymentResult PingAccount(StringType proPayAccountEmail, StringType proPayPayAccountNumber, StringType ssn);
     }
 
 }
