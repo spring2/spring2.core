@@ -203,6 +203,11 @@
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
+				<File
+                    RelPath = "Payment\FundsUnavailableException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
                 <File
                     RelPath = "Payment\IPaymentProvider.cs"
                     SubType = "Code"

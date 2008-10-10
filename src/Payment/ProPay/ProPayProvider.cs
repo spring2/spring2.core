@@ -245,6 +245,14 @@ namespace Spring2.Core.Payment.ProPay {
 	    return result;
 	}
 
+	public CurrencyType GetBalance(StringType providerAccountNumber) {
+	    CurrencyType accountBalance = 0.00;
+	    BalanceRequestCommand command = new BalanceRequestCommand(providerAccountNumber);
+	    ProPayResult balanceResult = command.Execute();
+	    accountBalance = balanceResult.Amount;
+	    return accountBalance;
+	}
+
 	// NOTE: for ease of reading comments and variables, a 75/25 split is assumed.  The code DOES NOT assume this, but rather uses the parameter 'originalFractionToSplit' (75% was siphoned)
 	public PaymentResult Refund(StringType providerAccountNumber, StringType originalTransactionId, CurrencyType refundAmount, CurrencyType commissionableAmount, DecimalType originalFractionToSplit) {
 	    log.Info("ProPayProvider:Refund(" + providerAccountNumber + ", " + originalTransactionId + ", " + refundAmount + ", " + commissionableAmount + ", " + originalFractionToSplit.ToString() + ")");
@@ -254,6 +262,7 @@ namespace Spring2.Core.Payment.ProPay {
 	    try {
 		bool isTransactionSettled = IsTransactionSettled(providerAccountNumber, originalTransactionId);
 		if (isTransactionSettled) {
+
 		    // adjust to pennies to figure the 75/25
 		    Decimal refundAmountInPennies = refundAmount.ToDecimal() * 100M;
 		    // Assuming 75/25 split, favoring the 75 on rounding
@@ -261,6 +270,13 @@ namespace Spring2.Core.Payment.ProPay {
 		    Decimal originalSplitAmountInPennies = originalSplitAmountPreRounding * 100;
 		    Decimal roundedSplitAmountInPennies = (Decimal)Math.Ceiling((double)originalSplitAmountInPennies);
 		    Decimal originalSplitAmount = roundedSplitAmountInPennies / 100.0M;
+
+		    // verify that the funds will be available for the refund
+		    CurrencyType merchantAccountBalance = GetBalance(providerAccountNumber);
+		    if(merchantAccountBalance < refundAmount) {
+			// not enough funds in the demonstrator's account, throw error
+			throw new FundsUnavailableException( new CurrencyType(refundAmount.ToDouble() - merchantAccountBalance.ToDouble()) );
+		    }
 
 		    // first, push back the 75% to the merchant
 		    ProPayResult splitRefundResult = null;

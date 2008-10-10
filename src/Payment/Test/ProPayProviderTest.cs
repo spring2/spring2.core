@@ -60,12 +60,18 @@ namespace Spring2.Core.Test {
 	public void GetTransactionStatus() {
 	    // run transaction
 	    
+	    // charge
 	    PaymentResult result = provider.Charge(testAccountNumber, new CurrencyType(5.00), testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks);
 	    Assert.AreEqual("00", result.ResultCode, string.Format("Unexpected result of {0}:{1}", result.ResultCode, result.ResultMessage));
 
 	    // check status
 	    String transactionStatus = provider.TransactionStatus(testAccountNumber, result.TransactionId);
-	    Assert.AreNotEqual(transactionStatus.Length,0);//{CCDebitPending}
+	    Assert.AreEqual(transactionStatus, "CCDebitPending");
+
+	    provider.Void(testAccountNumber, result.TransactionId, new CurrencyType(5.00));
+
+	    transactionStatus = provider.TransactionStatus(testAccountNumber, result.TransactionId);
+	    Assert.AreEqual(transactionStatus, "CCDebitVoided");
 	}
 	#endregion
 
@@ -388,6 +394,7 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual("00", refundResult.ResultCode);
 	}
 
+	[Test]
 	public void DoAVoid() {
 	    
 	    PaymentResult result = null;
@@ -602,6 +609,35 @@ namespace Spring2.Core.Test {
 	    Assert.AreNotEqual(pingTier, StringType.DEFAULT);
 	}
 
+	public void PingUserTmp() {
+
+	    ProPayResult result = null;
+	    ProPayResult result2 = null;
+	    try {
+		result2 = ( ProPayResult )provider.PingAccount("cathyb_test@iwantarav.com2", "1036725", "312082500");
+	    }catch(Exception ex) {
+		String s = ex.Message;
+		s = "";
+	    }
+	    try {
+		result = ( ProPayResult )provider.PingAccount("cathyb_test@iwantarav.com", "1036725", "312082500");
+	    }catch(Exception ex) {
+		String s = ex.Message;
+		s = "";
+	    }
+	    Assert.AreEqual("00", result.ResultCode);
+	    StringType pingAccountNum = result.GetResultValue("accountNum");
+	    StringType pingExpiration = result.GetResultValue("expiration");
+	    StringType pingAffiliation = result.GetResultValue("affiliation");
+	    StringType pingTier = result.GetResultValue("tier");
+
+	    Assert.AreEqual(pingAccountNum.ToString(), testAccountNumber);
+	    Assert.AreNotEqual(pingExpiration, StringType.DEFAULT);
+	    Assert.AreNotEqual(pingAffiliation, StringType.DEFAULT);
+	    Assert.AreNotEqual(pingTier, StringType.DEFAULT);
+	}
+
+	[Test]
 	public void UseBadMasterAccount() {
 	    
 	    try {
@@ -611,6 +647,7 @@ namespace Spring2.Core.Test {
 	    }
 	}
 
+	[Test]
 	public void ChargeWithDecline() {
 	    
 	    try {
@@ -620,7 +657,7 @@ namespace Spring2.Core.Test {
 		Assert.AreEqual("58", ex.Result.ResultCode, "Credit card declined");
 	    }
 	}
-
+	[Test]
 	public void UsePastExpDate() {
 	    
 	    try {

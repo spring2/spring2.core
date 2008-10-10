@@ -94,6 +94,14 @@ namespace Spring2.Core.Payment.Test {
 	    return result;
 	}
 
+	//public CurrencyType GetBalance(StringType providerAccountNumber) {
+	//    PaymentResult result = GetResult();
+	//    if(result.ResultCode != "00") {
+	//	throw new FundsUnavailableException();
+	//    }
+	//    return new CurrencyType(1000);
+	//}
+
     	private PaymentResult GetResult() {
 	    IConfigurationProvider currentConfig = ConfigurationProvider.Instance;
     	    PaymentResult result = new PaymentResult();
