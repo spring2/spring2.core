@@ -20,6 +20,7 @@ namespace Spring2.Core.Payment.ProPay {
 	public static readonly String CORPORATE_ACCOUNT_EMAIL = "ProPay.CorporateAccountEmail";
 	public static readonly String MINUMUM_CHARGE_FEE = "ProPay.MinimumFeeForCharge";
 	public static readonly String CHARGE_FEES = "ProPay.ChargeFee";
+	public static readonly String AFFILIATION = "ProPay.AffiliationString";
 
 	private String hostAddress = String.Empty;
 	private Int32 timeout = 0;
@@ -32,6 +33,7 @@ namespace Spring2.Core.Payment.ProPay {
 	private String corporateAccountEmail = String.Empty;
 	private Decimal minimumChargeFee = 0.00M;
 	private String chargeFees = String.Empty;
+	private String affiliation = String.Empty;
 
 	public ProPayProviderConfiguration() {
 	    Init();
@@ -79,6 +81,10 @@ namespace Spring2.Core.Payment.ProPay {
 
 	public String ChargeFees {
 	    get { return chargeFees; }
+	}
+
+	public String Affiliation {
+	    get { return affiliation; }
 	}
 
 	public void Init() {
@@ -151,6 +157,11 @@ namespace Spring2.Core.Payment.ProPay {
 		chargeFees = feeRulesFromConfig;
 	    }
 
+	    String affiliationFromConfig = ConfigurationProvider.Instance.Settings[AFFILIATION];
+	    if (affiliationFromConfig != null && affiliationFromConfig.Length > 0) {
+		affiliation = affiliationFromConfig;
+	    }
+
 	}
 
 	private void CheckConfiguration() {
@@ -165,6 +176,7 @@ namespace Spring2.Core.Payment.ProPay {
 	    CheckConfigurationValue(CORPORATE_ACCOUNT_EMAIL);
 	    CheckConfigurationValue(MINUMUM_CHARGE_FEE);
 	    CheckConfigurationValue(CHARGE_FEES);
+	    CheckConfigurationValue(AFFILIATION);
 	}
 
 

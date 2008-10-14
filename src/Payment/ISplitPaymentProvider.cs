@@ -25,7 +25,9 @@ namespace Spring2.Core.Payment {
 
 	PaymentResult PingAccount(StringType proPayAccountEmail, StringType proPayPayAccountNumber, StringType ssn);
 
-	//CurrencyType GetBalance(StringType providerAccountNumber);
+	CurrencyType GetBalance(StringType providerAccountNumber);
+
+	StringType GetTransactionStatus(StringType accountNumber, StringType transactionNumber);
     }
 
 }

@@ -94,13 +94,17 @@ namespace Spring2.Core.Payment.Test {
 	    return result;
 	}
 
-	//public CurrencyType GetBalance(StringType providerAccountNumber) {
-	//    PaymentResult result = GetResult();
-	//    if(result.ResultCode != "00") {
-	//	throw new FundsUnavailableException();
-	//    }
-	//    return new CurrencyType(1000);
-	//}
+	public CurrencyType GetBalance(StringType providerAccountNumber) {
+	    PaymentResult result = GetResult();
+	    if(result.ResultCode != "00") {
+		throw new FundsUnavailableException();
+	    }
+	    return new CurrencyType(1000);
+	}
+
+	public StringType GetTransactionStatus(StringType accountNumber, StringType transactionNumber) {
+	    return "CCDebitSettled";
+	}
 
     	private PaymentResult GetResult() {
 	    IConfigurationProvider currentConfig = ConfigurationProvider.Instance;

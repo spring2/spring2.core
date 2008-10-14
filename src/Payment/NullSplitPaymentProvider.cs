@@ -51,9 +51,13 @@ namespace Spring2.Core.Payment.Test {
 	    throw new PaymentConfigurationException("The NullSplitPaymentProvider is not a valid provider.");
 	}
 
-	//public CurrencyType GetBalance(StringType providerAccountNumber) {
-	//    throw new PaymentConfigurationException("The NullSplitPaymentProvider is not a valid provider.");
-	//}
+	public CurrencyType GetBalance(StringType providerAccountNumber) {
+	    throw new PaymentConfigurationException("The NullSplitPaymentProvider is not a valid provider.");
+	}
+
+	public StringType GetTransactionStatus(StringType accountNumber, StringType transactionNumber) {
+	    throw new PaymentConfigurationException("The NullSplitPaymentProvider is not a valid provider.");
+	}
 
     }
 }

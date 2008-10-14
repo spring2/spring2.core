@@ -5,7 +5,6 @@ using log4net;
 using Spring2.Core.Configuration;
 using Spring2.Core.Types;
 using Spring2.Core.Payment;
-//using Spring2.Dss.Payment;
 
 namespace Spring2.Core.Payment.ProPay {
 
@@ -49,9 +48,20 @@ namespace Spring2.Core.Payment.ProPay {
 	    try {
 		AccountPingCommand command = new AccountPingCommand(proPayAccountEmail, ssnWithoutDashes);
 		result = command.Execute();
+
+		// verify the account number
 		if ((( PaymentResult )result).AccountNumber != proPayPayAccountNumber.ToString()) {
 		    throw new InvalidArgumentException("Invalid ProPay account number: " + proPayPayAccountNumber);
 		}
+
+		// verify the affiliation
+		ProPayProviderConfiguration config = new ProPayProviderConfiguration();
+		StringType affiliation = config.Affiliation;
+		StringType resultAffiliation = result.GetResultValue("affiliation");
+		if (affiliation.ToString() != resultAffiliation.ToString()) {
+		    throw new InvalidArgumentException("ProPay account is not affiliated with '" + affiliation + "'");
+		}
+
 	    } catch (PaymentFailureException pex) {
 		result = ( ProPayResult )(pex.Result);
 		log.Error(pex.Message + "\r\n" + result.RawResponse);
@@ -348,7 +358,7 @@ namespace Spring2.Core.Payment.ProPay {
 	    return result;
 	}
 
-	public String TransactionStatus(StringType accountNumber, StringType transactionNumber) {
+	public StringType GetTransactionStatus(StringType accountNumber, StringType transactionNumber) {
 	    /*Possible Transaction states:
 		InvalidTransaction 
 		CCDebitAuthorized
@@ -392,7 +402,7 @@ namespace Spring2.Core.Payment.ProPay {
 	}
 
 	public bool IsTransactionSettled(StringType accountNumber, StringType transactionId) {
-	    StringType transactionStatus = TransactionStatus(accountNumber, transactionId);
+	    StringType transactionStatus = GetTransactionStatus(accountNumber, transactionId);
 	    return transactionStatus.IsValid && transactionStatus.EndsWith("Settled");
 	}
 

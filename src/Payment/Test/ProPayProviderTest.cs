@@ -65,12 +65,12 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual("00", result.ResultCode, string.Format("Unexpected result of {0}:{1}", result.ResultCode, result.ResultMessage));
 
 	    // check status
-	    String transactionStatus = provider.TransactionStatus(testAccountNumber, result.TransactionId);
+	    String transactionStatus = provider.GetTransactionStatus(testAccountNumber, result.TransactionId);
 	    Assert.AreEqual(transactionStatus, "CCDebitPending");
 
 	    provider.Void(testAccountNumber, result.TransactionId, new CurrencyType(5.00));
 
-	    transactionStatus = provider.TransactionStatus(testAccountNumber, result.TransactionId);
+	    transactionStatus = provider.GetTransactionStatus(testAccountNumber, result.TransactionId);
 	    Assert.AreEqual(transactionStatus, "CCDebitVoided");
 	}
 	#endregion
@@ -362,12 +362,6 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test]
-	public void blahDeleteMe() {
-	    PaymentResult result = provider.ChargeWithSplit(testAccountNumber, new CurrencyType(31.71), new CurrencyType(31.71), StringType.UNSET, StringType.UNSET, "4111111111111111", "12/09", StringType.DEFAULT, "34942-97739", new DecimalType(0.75M));
-	    Assert.AreEqual("00", result.ResultCode);
-	}
-    
-	[Test]
 	public void Authorize() {
 	    
 	    PaymentResult result = null;
@@ -394,6 +388,15 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual("00", refundResult.ResultCode);
 	}
 
+	public void deleteme() {
+	    PaymentResult prCharge = provider.Charge("1036726", 29.74, "132 Great Western Road", "83838", "4747474747474747", "01/11", "999", "T1-101008");
+	    Assert.AreEqual("00", prCharge.ResultCode);
+	    PaymentResult prSplit = provider.Split("1036726", 6.98, prCharge.TransactionId);
+	    Assert.AreEqual("00", prSplit.ResultCode);
+	    PaymentResult prRefund = provider.Refund("1036726", prCharge.TransactionId, 29.74, 27.90, .75);
+	    Assert.AreEqual("00", prRefund.ResultCode);
+	}
+
 	[Test]
 	public void DoAVoid() {
 	    
@@ -403,7 +406,7 @@ namespace Spring2.Core.Test {
 		CurrencyType amount = new CurrencyType(5.00);
 		result = provider.Charge(testAccountNumber, amount, testCardholderAddress, testCardholderPostalCode, testCardNumber, testCardExpMonth + testCardExpYear, testCardCVV, "orderId-" + DateTime.Now.Ticks);
 		Assert.AreEqual("00", result.ResultCode, string.Format("Unexpected result of {0}:{1}", result.ResultCode, result.ResultMessage));
-		refundResult = provider.Void(masterAccountNumber, result.TransactionId, amount);
+		refundResult = provider.Void(testAccountNumber, result.TransactionId, amount);
 		Assert.AreEqual("00", refundResult.ResultCode);
 	    } catch (PaymentFailureException ex) {
 		Assert.Fail(ex.Message);
@@ -451,6 +454,11 @@ namespace Spring2.Core.Test {
 	    } catch (PaymentFailureException ex) {
 		Assert.Fail(ex.Message);
 	    }
+	}
+
+	public void GetABalance() {
+	    CurrencyType balanceAmount = provider.GetBalance(testAccountNumber);
+	    Assert.IsTrue(balanceAmount.IsValid);
 	}
 
 	[Test]
@@ -529,7 +537,7 @@ namespace Spring2.Core.Test {
 		splitResult = provider.Split(testAccountNumber, masterAccountNumber, new CurrencyType(3.75), chargeResult.TransactionId);
 		Assert.AreEqual("00", splitResult.ResultCode);
 
-		String transactionStatus = provider.TransactionStatus(testAccountNumber, chargeResult.TransactionId);
+		String transactionStatus = provider.GetTransactionStatus(testAccountNumber, chargeResult.TransactionId);
 		if (transactionStatus.EndsWith("Settled")) {
 		    reverseResult = provider.Refund(testAccountNumber, chargeResult.TransactionId, amount, commissionableAmount, new DecimalType(0.75M));
 		} else {
@@ -603,37 +611,11 @@ namespace Spring2.Core.Test {
 	    StringType pingAffiliation = result.GetResultValue("affiliation");
 	    StringType pingTier = result.GetResultValue("tier");
 
+	    IConfigurationProvider currentConfig = ConfigurationProvider.Instance;
+	    String affiliationFromConfig = currentConfig.Settings[ProPayProviderConfiguration.AFFILIATION];
+	    Assert.AreEqual(affiliationFromConfig, pingAffiliation.ToString());
 	    Assert.AreEqual(pingAccountNum.ToString(), testAccountNumber);
 	    Assert.AreNotEqual(pingExpiration, StringType.DEFAULT);
-	    Assert.AreNotEqual(pingAffiliation, StringType.DEFAULT);
-	    Assert.AreNotEqual(pingTier, StringType.DEFAULT);
-	}
-
-	public void PingUserTmp() {
-
-	    ProPayResult result = null;
-	    ProPayResult result2 = null;
-	    try {
-		result2 = ( ProPayResult )provider.PingAccount("cathyb_test@iwantarav.com2", "1036725", "312082500");
-	    }catch(Exception ex) {
-		String s = ex.Message;
-		s = "";
-	    }
-	    try {
-		result = ( ProPayResult )provider.PingAccount("cathyb_test@iwantarav.com", "1036725", "312082500");
-	    }catch(Exception ex) {
-		String s = ex.Message;
-		s = "";
-	    }
-	    Assert.AreEqual("00", result.ResultCode);
-	    StringType pingAccountNum = result.GetResultValue("accountNum");
-	    StringType pingExpiration = result.GetResultValue("expiration");
-	    StringType pingAffiliation = result.GetResultValue("affiliation");
-	    StringType pingTier = result.GetResultValue("tier");
-
-	    Assert.AreEqual(pingAccountNum.ToString(), testAccountNumber);
-	    Assert.AreNotEqual(pingExpiration, StringType.DEFAULT);
-	    Assert.AreNotEqual(pingAffiliation, StringType.DEFAULT);
 	    Assert.AreNotEqual(pingTier, StringType.DEFAULT);
 	}
 
