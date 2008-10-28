@@ -30,9 +30,30 @@ namespace Spring2.Core.DAO {
 	}
 
 	protected override IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, ParameterDirection direction, Object value) {
+		return CreateDataParameter(parameterName, dbType, direction, value, 0, 0, 0);
+	}
+
+	protected override IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, ParameterDirection direction, Object value, int length) {
+		return CreateDataParameter(parameterName, dbType, direction, value, length, 0, 0);
+	}
+	
+	protected override IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, ParameterDirection direction, Object value, byte precision, byte scale) {
+		return CreateDataParameter(parameterName, dbType, direction, value, 0, precision, scale);
+	}
+	
+	private IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, ParameterDirection direction, Object value,int length, byte precision, byte scale) {
 	    SqlParameter param = new SqlParameter(parameterName, value);
 	    param.DbType = dbType;
 	    param.Direction = direction;
+		if (length > 0) {
+			param.Size = length;
+		}
+		if (precision > 0) {
+			param.Precision = precision;
+		}
+		if (scale > 0) {
+			param.Scale = scale;
+		}
 	    return param;
 	}
 

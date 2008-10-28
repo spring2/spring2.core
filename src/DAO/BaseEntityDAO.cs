@@ -235,6 +235,8 @@ namespace Spring2.Core.DAO {
 	}
 
 	protected abstract IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, ParameterDirection direction, Object value);
+	protected abstract IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, ParameterDirection direction, Object value, int length);
+	protected abstract IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, ParameterDirection direction, Object value, byte precision, byte scale);
 
 	protected abstract IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, ParameterDirection direction);
 
