@@ -425,7 +425,7 @@ namespace Spring2.Core.Tax.CertiTax {
 		    jurisdiction.Amount = taxTrans.NationalTax;
 		} else if (jurisdiction.JurisdictionType.Equals(TaxJurisdictionTypeEnum.COUNTY)) {
 		    jurisdiction.Amount = taxTrans.CountyTax;
-		} else if (jurisdiction.JurisdictionType.Equals(TaxJurisdictionTypeEnum.DISTRICT)) {
+		} else if (jurisdiction.JurisdictionType.Equals(TaxJurisdictionTypeEnum.LOCAL)) {
 		    jurisdiction.Amount = taxTrans.LocalTax;
 		} else if (jurisdiction.JurisdictionType.Equals(TaxJurisdictionTypeEnum.OTHER)) {
 		    jurisdiction.Amount = taxTrans.OtherTax;
