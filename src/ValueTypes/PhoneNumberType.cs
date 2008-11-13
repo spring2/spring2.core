@@ -92,11 +92,11 @@ namespace Spring2.Core.Types {
 		if (phoneNumberGuts.Length > 7){
 		    parsedAreaCode = phoneNumberGuts.Substring(0,3);
 		    parsedExchange = phoneNumberGuts.Substring(3,3);
-		    parsedNumber = phoneNumberGuts.Substring(phoneNumberGuts.Length - 4, 4);
+		    parsedNumber = phoneNumberGuts.Substring(6);
 		}else if (phoneNumberGuts.Length == 7){
 		    //no area code
 		    parsedExchange = phoneNumberGuts.Substring(0,3);
-		    parsedNumber = phoneNumberGuts.Substring(phoneNumberGuts.Length - 4, 4);
+		    parsedNumber = phoneNumberGuts.Substring(3);
 		}else{
 		    //if the length is less than seven, leave the phone number blank rather than throw an exception - this is bad data anyway
 		    //no area code
