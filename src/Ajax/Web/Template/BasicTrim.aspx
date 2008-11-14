@@ -25,12 +25,21 @@ if(Context.Items["ajaxCommands"] != null) {
 		var Queue = new sp2Ajax.CommandQueue('<%=Page.ResolveClientUrl("~/Ajax.m")%>');
 		sp2Ajax.commandCounter = 0;
             	    	          
-		function CreateCommand(commandName, clientSideDataToAdd){
+		function CreateCommand(commandName, clientSideDataToAdd, priority, type){
 		    var command =  null;
+		    var options = {};
+ 		    if(priority != null) {
+ 			options.priority = priority;
+ 		    }
+ 		    if(type != null) {
+ 			options.type = type;
+ 		    }
 		    switch(commandName){
 			<%foreach(Command command in ajaxCommands) { %>
 			    case '<%=command.Name%>':
-				var options = {commandKey:commandNumberMap.get(commandName),responseHandlerId:sp2Ajax.commandCounter,clientSideData:clientSideDataToAdd};
+				options.commandKey = commandNumberMap.get(commandName);
+     				options.responseHandlerId = sp2Ajax.commandCounter;
+     				options.clientSideData = clientSideDataToAdd;
 				command = new sp2Ajax.<%=command.Name%>(options);
 				break;
 			<%}%>
@@ -56,12 +65,10 @@ if(Context.Items["ajaxCommands"] != null) {
     <body>
         <div class="allContent">
 	    <div class="upperBackground"></div>
-	    <div class="leftBorder"></div>
 	    <div class="mainContent">
 		<img src="images/logo.gif" alt="" />
 		<%=Context.Items["wrapped"]%>
 	    </div>
-	    <div class="rightBorder"></div>
 	</div>
     </body>
 </html>

@@ -14,7 +14,7 @@ namespace Spring2.Core.Ajax.Json {
     class Command {
         public Int32 commandKey = 0;
         public Int32 responseHandlerId = 0;
-        public Dictionary<String, String> parameters = new Dictionary<String, String>();
+        public Dictionary<String, String> parameters = new Dictionary<String,String>();
     }
 
 
@@ -45,7 +45,7 @@ namespace Spring2.Core.Ajax.Json {
 
         public JsonAjaxUtility(String jsonText) {
             try {
-                commands = (Commands)JavaScriptConvert.DeserializeObject(jsonText, typeof(Commands));
+		commands = (Commands)JavaScriptConvert.DeserializeObject(jsonText, typeof(Commands));
             } catch (Exception ex) {
                 throw ex; 
             }
@@ -56,10 +56,10 @@ namespace Spring2.Core.Ajax.Json {
                 Command nextCommand = commands.AjaxCommands[commandIndex];
                 fullyQualifiedName = commands.fullyQualifiedNames[nextCommand.commandKey.ToString()];
                 responseHandlerId = nextCommand.responseHandlerId;
-                formVariables = new NameValueCollection();
-                foreach (KeyValuePair<String, String> kvp in nextCommand.parameters) {
-                    formVariables.Add(kvp.Key, kvp.Value);
-                }
+		formVariables = new NameValueCollection();
+                 foreach (KeyValuePair<String, String> kvp in nextCommand.parameters) {
+                     formVariables.Add(kvp.Key, kvp.Value);
+                 }
                 commandIndex++;
                 return true;
 

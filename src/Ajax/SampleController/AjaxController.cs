@@ -13,11 +13,11 @@ using Spring2.Core.Message;
 namespace Spring2.Core.Ajax.SampleController {
     public class AjaxController : ErrorableController {
         private String ajaxRequest;
-        private NameValueCollection formVariables;
+	private NameValueCollection formVariables;
 	private Int32 responseHandlerId;
 	private String commandName = String.Empty;
 
-        public NameValueCollection FormVariables {
+	public NameValueCollection FormVariables {
             get { return formVariables; }
             set { formVariables = value; }
         }	
@@ -39,19 +39,16 @@ namespace Spring2.Core.Ajax.SampleController {
             String result = String.Empty;
             jsonWrapper = "{commandResponses:[";
             JsonAjaxUtility util = null;
-            try {
-                util = new JsonAjaxUtility(this.ajaxRequest);
-            } catch (Exception ex ) {
-                json += ex.Message;
-            }
 
-            while (util.NextCommand(ref commandName, ref responseHandlerId, ref formVariables)) {
-                if (json.Length == 0) {
-                    json += GetCommand().RunCommand();
-                } else {
-                    json += "," + GetCommand().RunCommand();
-                }
-            }
+	    util = new JsonAjaxUtility(this.ajaxRequest);
+	    while(util.NextCommand(ref commandName, ref responseHandlerId, ref formVariables)) {
+		if(json.Length == 0) {
+		    json += GetCommand().RunCommand();
+		} else {
+		    json += "," + GetCommand().RunCommand();
+		}
+	    }
+
             jsonWrapper += json;
             jsonWrapper += "]}";
             return jsonWrapper;

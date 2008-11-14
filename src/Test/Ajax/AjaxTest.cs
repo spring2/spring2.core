@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Web;
 
@@ -18,7 +19,7 @@ namespace Spring2.Core.Test.Ajax {
 
 	[Test()]
 	public void ShouldBeAbleToExtendAndPopulateCommandAbstractClass() {
-	    //set up NameValueCollection
+	    //set up data
 	    NameValueCollection collection = new NameValueCollection();
 	    collection.Add("systemString", "value1");
 	    collection.Add("spring2StringType", "value2");
@@ -36,7 +37,7 @@ namespace Spring2.Core.Test.Ajax {
 
 	[Ignore(),Test()]
 	public void ShouldGetBackUnhandledMessageListExcptionsInXML() {
-	    //set up NameValueCollection
+	    //set up data
 	    NameValueCollection collection = new NameValueCollection();
 
 	    //get instance of SampleAjaxCommand
@@ -50,7 +51,7 @@ namespace Spring2.Core.Test.Ajax {
 
 	[Ignore(),Test()]
 	public void ShouldGetBackUnhandledSystemExcptionsInXML() {
-	    //set up NameValueCollection
+	    //set up data
 	    NameValueCollection collection = new NameValueCollection();
 
 	    //get instance of UnhandledSystemExceptionAjaxCommand
@@ -64,7 +65,7 @@ namespace Spring2.Core.Test.Ajax {
 
 	[Test()]
 	public void ShouldHavePopulationErrorsAvailable() {
-	    //set up NameValueCollection
+	    //set up data
 	    NameValueCollection collection = new NameValueCollection();
 	    collection.Add("systemString", "value1");
 	    collection.Add("spring2StringType", "value2");
@@ -123,7 +124,8 @@ namespace Spring2.Core.Test.Ajax {
 	}
 
 
-	public SampleAjaxCommand (Int32 responseHandlerId, NameValueCollection data, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) : base (responseHandlerId, data, formatter, errors, cookies) {
+	public SampleAjaxCommand(Int32 responseHandlerId, NameValueCollection data, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies)
+	    : base(responseHandlerId, data, formatter, errors, cookies) {
 	}
 
 	private SampleAjaxCommand () {}
@@ -138,7 +140,7 @@ namespace Spring2.Core.Test.Ajax {
 
     public class UnhandledMessageListExceptionAjaxCommand : Command {
 	private Boolean test = true;
-	public UnhandledMessageListExceptionAjaxCommand (Int32 responseHandlerId, NameValueCollection data, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) : base (responseHandlerId, data, formatter, errors, cookies) {}
+	public UnhandledMessageListExceptionAjaxCommand(Int32 responseHandlerId, NameValueCollection data, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) : base(responseHandlerId, data, formatter, errors, cookies) { }
 
 	protected override String Execute() {
 	    if(test == true) {
@@ -155,7 +157,7 @@ namespace Spring2.Core.Test.Ajax {
 
     public class UnhandledSystemExceptionAjaxCommand : Command {
 	private Boolean test = true;
-	public UnhandledSystemExceptionAjaxCommand (Int32 responseHandlerId, NameValueCollection data, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) : base (responseHandlerId, data, formatter, errors, cookies) {}
+	public UnhandledSystemExceptionAjaxCommand(Int32 responseHandlerId, NameValueCollection data, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) : base(responseHandlerId, data, formatter, errors, cookies) { }
 
 	protected override String Execute() {
 	    if(test == true) {

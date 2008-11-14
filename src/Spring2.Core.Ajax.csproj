@@ -120,17 +120,21 @@
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Web">
       <Name>System.Web</Name>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ajax\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Ajax\PopulateBehavior\PopulateWithStrings.cs" />
     <Compile Include="Ajax\Command.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Ajax\PopulateBehavior\IPopulateBehavior.cs" />
     <Compile Include="AssemblyVersionInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -8,6 +8,7 @@ body
     text-align: center;
     background-image: url('../images/background.gif');
     background-repeat: repeat;
+    font-size:15px;
 }
 body {
 	background: #ffe192 url(../images/background.gif) repeat-y left;

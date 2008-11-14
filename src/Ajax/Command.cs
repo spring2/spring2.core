@@ -8,6 +8,7 @@ using System.Web;
 using Spring2.Core.Message;
 using Spring2.Core.PropertyPopulator;
 using Spring2.Core.Ajax.Json;
+using Spring2.Core.Ajax.PopulateBehavior;
 
 namespace Spring2.Core.Ajax {
     /// <summary>
@@ -70,8 +71,12 @@ namespace Spring2.Core.Ajax {
 	    }
 	}
 
-	protected virtual void Populate() {
-	    errors.AddRange(Populator.Instance.Populate(this, commandValues));
+	protected virtual IPopulateBehavior PopulateBehavior {
+	    get { return PopulateWithStrings.Instance; }
+	}
+
+	private void Populate() {
+	    errors.AddRange(this.PopulateBehavior.Populate(this, commandValues));
 	}
 
 	abstract protected String Execute();

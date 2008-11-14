@@ -17,6 +17,7 @@
     ajaxCommands.Add(EvaluateCheckedCommand.Instance);
     ajaxCommands.Add(UnHandledMessageListExceptionCommand.Instance);
     ajaxCommands.Add(UnHandledSystemExceptionCommand.Instance);
+    ajaxCommands.Add(ComplexPostCommand.Instance);
     Context.Items["ajaxCommands"] = ajaxCommands;
     
     Context.Items["title"] = "Home";
@@ -43,19 +44,19 @@
     <div class="commandExample">
 	Multiple Commands At Same time.
 	<div style="margin-left:5px; width:75%">
-	    <div>
+	    <div style="clear:both;">
 		<input style="float:right;" type="text" id="EvaluateChecked1" value="">
 		<div>Evaluate Checked Row 1&nbsp;&nbsp;<input type="checkbox" id="checkBoxRow1" /><input type="button" onclick="CreateCommand('<%=EvaluateCheckedCommand.Instance.Name%>', {row:1});Queue.fireRequest();" value="Evaluate" /></div>
 	    </div>
-	    <div>
+	    <div style="clear:both;">
 		<input style="float:right;" type="text" id="EvaluateChecked2" value="">
 		<div>Evaluate Checked Row 2&nbsp;&nbsp;<input type="checkbox" id="checkBoxRow2" /><input type="button" onclick="CreateCommand('<%=EvaluateCheckedCommand.Instance.Name%>', {row:2});Queue.fireRequest();" value="Evaluate" /></div>
 	    </div>
-	    <div>
+	    <div style="clear:both;">
 		<input style="float:right;" type="text" id="EvaluateChecked3" value="">
 		<div>Evaluate Checked Row 3&nbsp;&nbsp;<input type="checkbox" id="checkBoxRow3" /><input type="button" onclick="CreateCommand('<%=EvaluateCheckedCommand.Instance.Name%>', {row:3});Queue.fireRequest();" value="Evaluate" /></div>
 	    </div>
-	    <div><input type="button" onclick="evaluateAll();" value="Evaluate All" /></td></div>
+	    <div style="clear:both;"><input type="button" onclick="evaluateAll();" value="Evaluate All" /></div>
 	    <script type="text/javascript">
 		function evaluateAll() {
 		    CreateCommand('<%=EvaluateCheckedCommand.Instance.Name%>', {row:1});
@@ -64,6 +65,27 @@
 		    Queue.fireRequest();
 		}
 	    </script>
+	</div>
+    </div>
+    <div class="commandExample">
+	Complex Posts.
+	<div style="margin-left:5px; width:85%">
+	    <div style="clear:both;">
+		<input style="float:right;" type="text" id="complexOut1" value="">
+		<input style="float:right;" type="checkbox" id="complexBoxOut1" />
+		<div>Row 1&nbsp;&nbsp;<input type="checkbox" id="complexBox1" /><input type="text" id="complexIn1" value="" /></div>
+	    </div>
+	    <div style="clear:both;">
+		<input style="float:right;" type="text" id="complexOut2" value="">
+		<input style="float:right;" type="checkbox" id="complexBoxOut2" />
+		<div>Row 2&nbsp;&nbsp;<input type="checkbox" id="complexBox2" /><input type="text" id="complexIn2" value="" /></div>
+	    </div>
+	    <div style="clear:both;">
+		<input style="float:right;" type="text" id="complexOut3" value="">
+		<input style="float:right;" type="checkbox" id="complexBoxOut3" />
+		<div>Row 3&nbsp;&nbsp;<input type="checkbox" id="complexBox3" /><input type="text" id="complexIn3" value="" /></div>
+	    </div>
+	    <div style="clear:both;"><input type="button" onclick="CreateCommand('<%=ComplexPostCommand.Instance.Name%>');" value="Do Complex Post" /></div>
 	</div>
     </div>
     <div class="commandExample">

@@ -212,6 +212,25 @@ sp2Ajax.CommandQueue.onerror=function(message){
   alert("problem sending the data to the server\n\n" + message);
 }
 
+sp2Ajax.escapeStringsInObject = function(obj) {
+    for (var p in obj) {
+	switch ($type(obj[p])) {
+	    case 'string':
+		obj[p] = sp2Ajax.escapeString(obj[p]);
+		break;
+	    case 'object':
+	    case 'hash':
+	    case 'array':
+		sp2Ajax.escapeStringsInObject(obj[p]);
+		break;
+	}
+    }
+}
+
+sp2Ajax.escapeString = function(string) {
+    return string.replace(/\%/g, "%25").replace(/\+/g, "%2B").replace(/\&/g, "%26");
+}
+
 
 /*--- Base Command Class ---*/
 sp2Ajax.Command = new Class({
@@ -236,7 +255,19 @@ sp2Ajax.Command = new Class({
     getJsonToSend: function() {
 	var tempHash = new Hash()
 	Hash.each(this.parameters, function(value, key){
-		tempHash.set(key, $type(value) == 'string' ? value.replace(/\%/g, "%25").replace(/\+/g, "%2B").replace(/\&/g, "%26") : value);
+		switch ($type(value)) {
+		    case 'string':
+			tempHash.set(key, sp2Ajax.escapeString(value));
+			break;
+		    case 'object':
+		    case 'hash':
+		    case 'array':
+			sp2Ajax.escapeStringsInObject(value);
+			tempHash.set(key, JSON.encode(value));
+			break;
+		    default:
+			tempHash.set(key, value);
+		}
 	    }
 	)
 	return "{commandKey:" + this.commandKey + ",responseHandlerId:" + this.responseHandlerId + ",parameters:" + JSON.encode(tempHash) + "}";
