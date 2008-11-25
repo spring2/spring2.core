@@ -94,7 +94,9 @@ namespace Spring2.Core.Tax.Test {
 	    result.Region = region;
 	    result.TaxAreaID = new IdType(1);
 	    result.TotalTaxRate = 6.6M;
-	    result.TotalTax = CurrencyType.Round(total * 0.066M,2);;
+	    result.TotalTax = CurrencyType.Round(total * 0.066M,2);
+
+		result.TaxJurisdictions.AddRange(GetTestTaxJurisdictions(city, county, region, total));
 	    
 	    return result;
 	}
@@ -117,6 +119,8 @@ namespace Spring2.Core.Tax.Test {
 	    result.TotalTax = CurrencyType.Round(total * 0.066M,2);
 	    result.AddressValidated = BooleanType.TRUE;
 	    
+		result.TaxJurisdictions.AddRange(GetTestTaxJurisdictions(city, county, region, total));
+		
 	    return result;
 	}
 
@@ -137,8 +141,44 @@ namespace Spring2.Core.Tax.Test {
 	    result.TotalTaxRate = 6.6M;
 	    result.TotalTax = CurrencyType.Round(total * 0.066M,2);
 	    result.AddressValidated = BooleanType.TRUE;
+
+		result.TaxJurisdictions.AddRange(GetTestTaxJurisdictions(city, county, region, total));
 	    
 	    return result;
+	}
+
+	private System.Collections.ArrayList GetTestTaxJurisdictions(StringType county, StringType city, StringType region, CurrencyType total)
+	{
+		System.Collections.ArrayList results = new System.Collections.ArrayList();
+
+		DecimalType countyRate = new DecimalType(1.5);
+		DecimalType cityRate = new DecimalType(.35);
+		DecimalType stateRate = new DecimalType(4.75);
+
+		TaxJurisdiction tj = null;
+
+		tj = new TaxJurisdiction();
+		tj.Amount = total * countyRate;
+		tj.Description = county;
+		tj.JurisdictionType = TaxJurisdictionTypeEnum.COUNTY;
+		tj.Rate = countyRate;
+		results.Add(tj);
+
+		tj = new TaxJurisdiction();
+		tj.Amount = total * cityRate;
+		tj.Description = city;
+		tj.JurisdictionType = TaxJurisdictionTypeEnum.CITY;
+		tj.Rate = cityRate;
+		results.Add(tj);
+
+		tj = new TaxJurisdiction();
+		tj.Amount = total * stateRate;
+		tj.Description = region;
+		tj.JurisdictionType = TaxJurisdictionTypeEnum.STATE;
+		tj.Rate = stateRate;
+		results.Add(tj);
+
+		return results;
 	}
 
     }
