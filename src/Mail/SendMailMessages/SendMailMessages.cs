@@ -28,7 +28,6 @@ namespace Spring2.Core.Mail.SendMailMessages {
 		//serviceFacade.Login();
 
 		MailMessageList mails = MailMessage.GetMailMessagesToSend();
-	    
 		foreach(MailMessage mail in mails) {
 		    try {
 			mail.Send();

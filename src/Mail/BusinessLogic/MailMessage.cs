@@ -316,26 +316,27 @@ namespace Spring2.Core.Mail.BusinessLogic {
             MailMessageDAO.DAO.Reload(this);
 	    attachments = MailAttachmentList.DEFAULT;
         }
-        
-        public void MarkSent() {
+
+	private void IncreaseAttempts() {
             int attempts = 0;
 	    if(this.NumberOfAttempts.IsValid){
 		attempts = this.NumberOfAttempts.ToInt32() + 1;
 	    }else{
 		attempts = 1;
 	    }
+	    this.NumberOfAttempts = attempts;
+	}
+        
+        public void MarkSent() {
             if (this.MailMessageStatus.Equals(MailMessageStatusEnum.UNPROCESSED) || this.MailMessageStatus.Equals(MailMessageStatusEnum.RELEASED)) {
-		this.ProcessedTime = new DateTimeType();
 		this.MailMessageStatus = MailMessageStatusEnum.SENT;
-		this.NumberOfAttempts  = attempts;
 		this.Store();
 	    } else {
-		this.NumberOfAttempts  = attempts;
 		this.Store();
 		throw new InvalidOperationException("Message can only be marked Sent when it is the Unprocessed or Released state");
 	    }
         }
-        
+
         private void SetInitialState() {
             this.Priority = MailPriorityEnum.NORMAL;
 	    this.BodyFormat = MailBodyFormatEnum.TEXT;
@@ -528,7 +529,9 @@ namespace Spring2.Core.Mail.BusinessLogic {
         }
         
         public static MailMessageList GetMailMessagesToSend() {
-            return MailMessageDAO.DAO.FindByStatus(MailMessageStatusEnum.UNPROCESSED);
+	    SqlFilter filter = new SqlFilter(new SqlEqualityPredicate(MailMessageFields.MAILMESSAGESTATUS, EqualityOperatorEnum.Equal, MailMessageStatusEnum.UNPROCESSED.Code));
+	    filter.And(new SqlLiteralPredicate(String.Format("ScheduleTime is null or ScheduleTime <= '{0}'", DateTime.Now.ToString("yyyy-MM-dd HH:mm"))));
+	    return MailMessageDAO.DAO.GetList(filter);
         }
         
         /// <summary>
@@ -598,8 +601,21 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    }
 
 	    SmtpMail.SmtpServer = ConfigurationProvider.Instance.Settings["SMTPServer"];
-	    SmtpMail.Send(message);
-	    MarkSent();
+	    try {
+		IncreaseAttempts();
+		this.ProcessedTime = DateTimeType.Now;
+		SmtpMail.Send(message);
+		MarkSent();
+	    } catch {
+		IntegerType maxAttempts = IntegerType.Parse(ConfigurationProvider.Instance.Settings["MailMessage.MaxAttempts"]);
+		IntegerType nextAttemptInMinutes = IntegerType.Parse(ConfigurationProvider.Instance.Settings["MailMessage.NextAttemptInMinutes"]);
+		if (this.NumberOfAttempts.ToInt32() >= maxAttempts.ToInt32()) {
+		    this.MailMessageStatus = MailMessageStatusEnum.FAILED;
+		} else {
+		    this.ScheduleTime = DateTimeType.Now.AddMinutes(nextAttemptInMinutes.ToInt32());
+		}
+		this.Store();
+	    }
 
 	    //remove any attachments that were temporarily saved to file
 	    foreach (MailAttachment attachment in this.Attachments){
