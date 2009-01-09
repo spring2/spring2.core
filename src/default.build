@@ -46,7 +46,6 @@
 	    <arg value="/verbosity:minimal" />
 	    <arg value="/target:Build" />
 	</exec>
-	<exec program="${msbuild}" commandline="Spring2.Core.MSBuild.CustomTask.csproj /verbosity:q" />
 	<exec program="${msbuild}" commandline="Spring2.Core.Ajax.Json.csproj /property:configuration=NET_2_0 /verbosity:q" />
 	<exec program="${msbuild}" commandline="Spring2.Core.Ajax.csproj /property:configuration=NET_2_0 /verbosity:q" />
 	<exec program="${msbuild}" commandline="Spring2.Core.Test.Ajax.csproj /property:configuration=NET_2_0 /verbosity:q" />
