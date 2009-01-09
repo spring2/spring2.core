@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.IO;
 using System.Text;
-using System.Web.Mail;
+using System.Net.Mail;
 using Spring2.Core.Configuration;
 using Spring2.Core.DAO;
 using Spring2.Core.BusinessEntity;
@@ -554,25 +554,20 @@ namespace Spring2.Core.Mail.BusinessLogic {
 		Directory.CreateDirectory(attachmentDirectory);
 	    }
 
-	    System.Web.Mail.MailMessage message = new System.Web.Mail.MailMessage();
+	    System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
 
-	    message.From = this.From.ToString();
-	    message.To = this.To.ToString();
+	    message.From = new MailAddress(this.From.ToString());
+	    message.To.Add(new MailAddress(this.To.ToString()));
 	    if (this.Cc.IsValid) {
-		message.Cc = this.Cc.ToString();
+		message.CC.Add(new MailAddress(this.Cc.ToString()));
 	    }
 	    if (this.Bcc.IsValid) {
-		message.Bcc = this.Bcc.ToString();
+		message.Bcc.Add(this.Bcc.ToString());
 	    }
 	    message.Subject = this.Subject.IsValid ? this.Subject.ToString() : String.Empty;
 
 	    message.Body = this.Body.ToString();
-	    if (this.BodyFormat.Equals(MailBodyFormatEnum.HTML)) {
-		message.BodyFormat = MailFormat.Html;
-	    } else {
-		message.BodyFormat = MailFormat.Text;
-	    }
-
+	    message.IsBodyHtml = this.BodyFormat.Equals(MailBodyFormatEnum.HTML);
 		    
 	    if (this.Priority.Equals(MailPriorityEnum.HIGH)) {
 		message.Priority = MailPriority.High;
@@ -596,15 +591,15 @@ namespace Spring2.Core.Mail.BusinessLogic {
 
 		String filename = Path.Combine(messageAttachmentPath, attachment.Filename);
 
-		System.Web.Mail.MailAttachment mailAttachment = new System.Web.Mail.MailAttachment(filename, MailEncoding.UUEncode);
+		System.Net.Mail.Attachment mailAttachment = new System.Net.Mail.Attachment(filename);
 		message.Attachments.Add(mailAttachment);
 	    }
 
-	    SmtpMail.SmtpServer = ConfigurationProvider.Instance.Settings["SMTPServer"];
 	    try {
 		IncreaseAttempts();
 		this.ProcessedTime = DateTimeType.Now;
-		SmtpMail.Send(message);
+		SmtpClient smtpClient = new SmtpClient(ConfigurationProvider.Instance.Settings["SMTPServer"]);
+		smtpClient.Send(message);
 		MarkSent();
 	    } catch {
 		IntegerType maxAttempts = IntegerType.Parse(ConfigurationProvider.Instance.Settings["MailMessage.MaxAttempts"]);

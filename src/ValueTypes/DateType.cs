@@ -588,7 +588,7 @@ namespace Spring2.Core.Types {
 	    throw new InvalidTypeCastException("DateType", "Char");
 	}
 
-	[CLSCompliant(false)]
+	//[CLSCompliant(false)]
 	sbyte IConvertible.ToSByte(IFormatProvider provider) {
 	    throw new InvalidTypeCastException("DateType", "SByte");
 	}
@@ -601,7 +601,7 @@ namespace Spring2.Core.Types {
 	    throw new InvalidTypeCastException("DateType", "Int16");
 	}
 
-	[CLSCompliant(false)]
+	//[CLSCompliant(false)]
 	ushort IConvertible.ToUInt16(IFormatProvider provider) {
 	    throw new InvalidTypeCastException("DateType", "UInt16");
 	}
@@ -610,7 +610,7 @@ namespace Spring2.Core.Types {
 	    throw new InvalidTypeCastException("DateType", "Int32");
 	}
 
-	[CLSCompliant(false)]
+	//[CLSCompliant(false)]
 	uint IConvertible.ToUInt32(IFormatProvider provider) {
 	    throw new InvalidTypeCastException("DateType", "UInt32");
 	}
@@ -619,7 +619,7 @@ namespace Spring2.Core.Types {
 	    throw new InvalidTypeCastException("DateType", "Int64");
 	}
 
-	[CLSCompliant(false)]
+	//[CLSCompliant(false)]
 	ulong IConvertible.ToUInt64(IFormatProvider provider) {
 	    throw new InvalidTypeCastException("DateType", "UInt64");
 	}

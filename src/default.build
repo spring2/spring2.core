@@ -2,7 +2,8 @@
 <project name="Spring2.Core" default="build" xmlnds="http://tempuri.org/nant-vs.xsd">
     <property name="build.dir" value="..\build" />
     <property name="build.configuration" value="debug" />
-    <property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\MSBuild.exe" />
+    <!--<property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\MSBuild.exe" />-->
+    <property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild.exe" />
 
     <property name="debug" value="true" />
     <property name="build.root" value="..\" />
@@ -18,7 +19,7 @@
     </target>
 
     <target name="build">
-	<call target="build-net-1.1" />
+	<!--<call target="build-net-1.1" />-->
 	<call target="build-net-2.0" />
     </target>
 
@@ -36,13 +37,33 @@
     <target name="build-net-2.0">
 	<property name="nant.settings.currentframework" value="net-2.0" />
 	<property name="build.configuration" value="NET_2_0" />
-	<call target="internal-build" />
+	<!--<call target="internal-build" />-->
+	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
+	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
+	<exec program="${msbuild}"  >
+	    <arg value="Spring2.Core.sln" />
+	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
+	    <arg value="/verbosity:minimal" />
+	    <arg value="/target:Build" />
+	</exec>
 	<exec program="${msbuild}" commandline="Spring2.Core.MSBuild.CustomTask.csproj /verbosity:q" />
 	<exec program="${msbuild}" commandline="Spring2.Core.Ajax.Json.csproj /property:configuration=NET_2_0 /verbosity:q" />
 	<exec program="${msbuild}" commandline="Spring2.Core.Ajax.csproj /property:configuration=NET_2_0 /verbosity:q" />
 	<exec program="${msbuild}" commandline="Spring2.Core.Test.Ajax.csproj /property:configuration=NET_2_0 /verbosity:q" />
+	
+	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
+	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
+	<exec program="${msbuild}">
+	    <arg value="Spring2.Core.WithTypes.csproj" />
+	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}\WithTypes" />
+	    <arg value="/verbosity:q" />
+	    <arg value="/t:Rebuild" />
+	</exec>
+	<exec program="${msbuild}" commandline="Spring2.Core.WithTypesTest.csproj /verbosity:q" />
+	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
+	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
     </target>
-
+    
     <target name="internal-build">
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />

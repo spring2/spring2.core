@@ -1,464 +1,371 @@
-<VisualStudioProject>
-    <CSHARP
-        ProjectType = "Local"
-        ProductVersion = "7.10.6030"
-        SchemaVersion = "2.0"
-        ProjectGuid = "{80B94045-4DE6-4BB0-BE22-C5CC0E772695}"
-    >
-        <Build>
-            <Settings
-                ApplicationIcon = ""
-                AssemblyKeyContainerName = ""
-                AssemblyName = "Spring2.Core"
-                AssemblyOriginatorKeyFile = ""
-                DefaultClientScript = "JScript"
-                DefaultHTMLPageLayout = "Flow"
-                DefaultTargetSchema = "IE50"
-                DelaySign = "false"
-                OutputType = "Library"
-                PreBuildEvent = ""
-                PostBuildEvent = ""
-                RootNamespace = "Spring2.Core"
-                RunPostBuildEvent = "OnBuildSuccess"
-                StartupObject = ""
-            >
-                <Config
-                    Name = "Debug"
-                    AllowUnsafeBlocks = "false"
-                    BaseAddress = "285212672"
-                    CheckForOverflowUnderflow = "false"
-                    ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE;NET_1_1"
-                    DocumentationFile = "Spring2.Core.xml"
-                    DebugSymbols = "true"
-                    FileAlignment = "4096"
-                    IncrementalBuild = "false"
-                    NoStdLib = "false"
-                    NoWarn = "1591"
-                    Optimize = "false"
-                    OutputPath = "..\build\Core\"
-                    RegisterForComInterop = "false"
-                    RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "true"
-                    WarningLevel = "4"
-                />
-                <Config
-                    Name = "Release"
-                    AllowUnsafeBlocks = "false"
-                    BaseAddress = "285212672"
-                    CheckForOverflowUnderflow = "false"
-                    ConfigurationOverrideFile = ""
-                    DefineConstants = "TRACE"
-                    DocumentationFile = ""
-                    DebugSymbols = "false"
-                    FileAlignment = "4096"
-                    IncrementalBuild = "false"
-                    NoStdLib = "false"
-                    NoWarn = ""
-                    Optimize = "true"
-                    OutputPath = "..\build\Release\Core\"
-                    RegisterForComInterop = "false"
-                    RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
-                    WarningLevel = "4"
-                />
-                <Config
-                    Name = "NET_1_1"
-                    AllowUnsafeBlocks = "false"
-                    BaseAddress = "285212672"
-                    CheckForOverflowUnderflow = "false"
-                    ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE;NET_1_1;"
-                    DocumentationFile = "Spring2.Core.xml"
-                    DebugSymbols = "true"
-                    FileAlignment = "4096"
-                    IncrementalBuild = "false"
-                    NoStdLib = "false"
-                    NoWarn = "1591"
-                    Optimize = "false"
-                    OutputPath = "..\build\Core\"
-                    RegisterForComInterop = "false"
-                    RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
-                    WarningLevel = "4"
-                />
-                <Config
-                    Name = "NET_2_0"
-                    AllowUnsafeBlocks = "false"
-                    BaseAddress = "285212672"
-                    CheckForOverflowUnderflow = "false"
-                    ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE;NET_2_0;"
-                    DocumentationFile = "Spring2.Core.xml"
-                    DebugSymbols = "true"
-                    FileAlignment = "4096"
-                    IncrementalBuild = "false"
-                    NoStdLib = "false"
-                    NoWarn = "1591,1699,0618"
-                    Optimize = "false"
-                    OutputPath = "..\build\Core\"
-                    RegisterForComInterop = "false"
-                    RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
-                    WarningLevel = "4"
-                />
-            </Settings>
-            <References>
-                <Reference
-                    Name = "System"
-                    AssemblyName = "System"
-                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.0.3705\System.dll"
-                />
-                <Reference
-                    Name = "System.Data"
-                    AssemblyName = "System.Data"
-                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.0.3705\System.Data.dll"
-                />
-                <Reference
-                    Name = "System.XML"
-                    AssemblyName = "System.Xml"
-                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.0.3705\System.XML.dll"
-                />
-                <Reference
-                    Name = "System.Drawing"
-                    AssemblyName = "System.Drawing"
-                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.0.3705\System.Drawing.dll"
-                />
-                <Reference
-                    Name = "System.Data.OracleClient"
-                    AssemblyName = "System.Data.OracleClient"
-                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.OracleClient.dll"
-                />
-            </References>
-        </Build>
-        <Files>
-            <Include>
-                <File
-                    RelPath = "AssemblyInfo.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "AssemblyVersionInfo.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "BusinessEntity\BusinessEntity.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "BusinessEntity\IBusinessEntity.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\BaseEntityDAO.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\DaoException.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\DaoTransaction.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\DatabaseFilter.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\DbConnectionScope.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\EntityDAO.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\EqualityOperatorEnum.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\FinderException.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\IDatabaseExpression.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\IOrderBy.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\IWhere.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\LogicalOperatorEnum.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\OracleEntityDAO.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\OrderByClause.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\SqlBetweenPredicate.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\SqlDaoTransaction.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\SqlEntityDAO.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\SqlEqualityPredicate.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\SqlFilter.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\SqlInPredicate.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\SqlLiteralPredicate.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\SqlParameterList.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\SqlPredicate.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\SqlUtility.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "DAO\WhereClause.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Drawing\Graphing\ChartLine.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Drawing\Graphing\DateLabelFormat.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Drawing\Graphing\LabelFormat.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Drawing\Graphing\LineChart.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Drawing\Graphing\NumberLabelFormat.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Globalization\DaylightTimeRule.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Globalization\IDaylightTimeRule.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Globalization\RegionalTimeZone.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Globalization\RegionalTimeZones.xml"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "Globalization\WeekOfMonth.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Globalization\XmlDaylightTimeRule.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "IO\ResourceLocator.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Message\IMessageFormatter.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Message\InvalidTypeFormatError.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Message\Message.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Message\MessageList.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Message\MessageListException.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Message\MissingRequiredFieldError.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Message\ResourceKey.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Message\SimpleFormatter.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Message\TestMessage.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Util\ApplicationError.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Util\ApplicationErrorCollection.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Util\DateUtil.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Util\ExceptionError.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Util\FTPClient.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Util\GnuPGWrapper.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Util\MissingRequiredFieldError.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Util\PagedList.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Util\ParseError.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Util\Range.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Util\StringUtil.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Util\Timer.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ValueDataObject\DataObject.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Xml\Escape.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Xml\XIncludeReader.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-            </Include>
-        </Files>
-    </CSHARP>
-</VisualStudioProject>
-
+﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{80B94045-4DE6-4BB0-BE22-C5CC0E772695}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Spring2.Core</AssemblyName>
+    <AssemblyOriginatorKeyFile>spring2.snk</AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Flow</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Spring2.Core</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SignAssembly>true</SignAssembly>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\build\net-2.0\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DocumentationFile>Spring2.Core.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>1591</NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\build\Release\Core\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'NET_1_1|AnyCPU' ">
+    <OutputPath>..\build\Core\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE;NET_1_1;</DefineConstants>
+    <DocumentationFile>Spring2.Core.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>1591</NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'NET_2_0|AnyCPU' ">
+    <OutputPath>..\build\Core\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE;NET_2_0;</DefineConstants>
+    <DocumentationFile>Spring2.Core.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>1591,1699,0618</NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.OracleClient">
+      <Name>System.Data.OracleClient</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssemblyVersionInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessEntity\BusinessEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessEntity\IBusinessEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\BaseEntityDAO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\DaoException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\DaoTransaction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\DatabaseFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\DbConnectionScope.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\EntityDAO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\EqualityOperatorEnum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\FinderException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\IDatabaseExpression.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\IOrderBy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\IWhere.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\LogicalOperatorEnum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\OracleEntityDAO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\OrderByClause.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\SqlBetweenPredicate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\SqlDaoTransaction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\SqlEntityDAO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\SqlEqualityPredicate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\SqlFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\SqlInPredicate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\SqlLiteralPredicate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\SqlParameterList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\SqlPredicate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\SqlUtility.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAO\WhereClause.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Drawing\Graphing\ChartLine.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Drawing\Graphing\DateLabelFormat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Drawing\Graphing\LabelFormat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Drawing\Graphing\LineChart.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Drawing\Graphing\NumberLabelFormat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Globalization\DaylightTimeRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Globalization\IDaylightTimeRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Globalization\RegionalTimeZone.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Globalization\WeekOfMonth.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Globalization\XmlDaylightTimeRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IO\ResourceLocator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Message\IMessageFormatter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Message\InvalidTypeFormatError.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Message\Message.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Message\MessageList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Message\MessageListException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Message\MissingRequiredFieldError.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Message\ResourceKey.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Message\SimpleFormatter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Message\TestMessage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\ApplicationError.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\ApplicationErrorCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\DateUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\ExceptionError.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\FTPClient.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\GnuPGWrapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\MissingRequiredFieldError.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\PagedList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\ParseError.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\Range.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\StringUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\Timer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ValueDataObject\DataObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Xml\Escape.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Xml\XIncludeReader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Globalization\RegionalTimeZones.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="spring2.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

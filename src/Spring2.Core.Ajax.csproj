@@ -44,7 +44,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\build\Ajax\</OutputPath>
+    <OutputPath>..\build\net-2.0\</OutputPath>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <BaseAddress>285212672</BaseAddress>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
@@ -109,13 +109,14 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Spring2.Core, Version=1.1.73.5925, Culture=neutral, PublicKeyToken=687bce93d7ce902c, processorArchitecture=MSIL">
+    <Reference Include="Spring2.Core, Version=1.1.86.5059, Culture=neutral, PublicKeyToken=687bce93d7ce902c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\build\net-2.0\Spring2.Core.dll</HintPath>
+      <HintPath>..\build\Core\Spring2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Spring2.Core.PropertyPopulator, Version=1.1.73.5925, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Spring2.Core.Ajax.Json, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Spring2.Core.PropertyPopulator, Version=1.1.86.5059, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\build\net-2.0\Spring2.Core.PropertyPopulator.dll</HintPath>
+      <HintPath>..\build\Spring2.Core.PropertyPopulator.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -155,12 +156,6 @@
       <ProductName>.NET Framework 3.5</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Spring2.Core.Ajax.Json.csproj">
-      <Project>{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}</Project>
-      <Name>Spring2.Core.Ajax.Json</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

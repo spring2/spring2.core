@@ -39,5 +39,5 @@ using System.Reflection;
 //       documentation for more information on this.
 //
 [assembly : AssemblyDelaySign(false)]
-[assembly : AssemblyKeyFile(@"..\..\Spring2.snk")]
+
 [assembly : AssemblyKeyName("")]

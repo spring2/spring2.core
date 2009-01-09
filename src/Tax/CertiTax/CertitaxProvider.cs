@@ -7,7 +7,7 @@ using log4net;
 using Spring2.Core.Configuration;
 using Spring2.Core.Message;
 using Spring2.Core.Types;
-using Spring2.Core.net.esalestax.webservices1;
+using Spring2.Dss.net.esalestax.webservices1;
 using Spring2.Core.Tax.Vertex;
 
 namespace Spring2.Core.Tax.CertiTax {

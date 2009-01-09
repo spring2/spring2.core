@@ -12,7 +12,7 @@ namespace Spring2.Core.Configuration {
 	
 	public System.Collections.Specialized.NameValueCollection Settings {
 	    get {
-		return ConfigurationSettings.AppSettings;
+		return ConfigurationManager.AppSettings;
 	    }
 	}
 

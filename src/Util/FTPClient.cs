@@ -251,7 +251,7 @@ namespace Spring2.Core.Util {
 	    IPEndPoint ep = null;
 
 	    try {
-		ep = new IPEndPoint(Dns.Resolve(remoteHost).AddressList[0], remotePort);
+		ep = new IPEndPoint(Dns.GetHostEntry(remoteHost).AddressList[0], remotePort);
 	    } catch(ArgumentOutOfRangeException) {
 		MessageString = "Invalid port specified.";
 		throw new IOException(MessageString);
@@ -913,7 +913,7 @@ namespace Spring2.Core.Util {
 	    port = port + parts[5];
 
 	    s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-	    ep = new IPEndPoint(Dns.Resolve(ipAddress).AddressList[0], port);
+	    ep = new IPEndPoint(Dns.GetHostEntry(ipAddress).AddressList[0], port);
 
 	    try {
 		s.Connect(ep);

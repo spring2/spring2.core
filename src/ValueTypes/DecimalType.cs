@@ -652,7 +652,7 @@ namespace Spring2.Core.Types {
 	    throw new InvalidTypeCastException("Decimal", "Char");
 	}
 
-	[CLSCompliant(false)]
+	//[CLSCompliant(false)]
 	sbyte IConvertible.ToSByte(IFormatProvider provider) {
 	    return Convert.ToSByte(this);
 	}
@@ -665,7 +665,7 @@ namespace Spring2.Core.Types {
 	    return Convert.ToInt16(this);
 	}
 
-	[CLSCompliant(false)]
+	//[CLSCompliant(false)]
 	ushort IConvertible.ToUInt16(IFormatProvider provider) {
 	    return Convert.ToUInt16(this);
 	}
@@ -674,7 +674,7 @@ namespace Spring2.Core.Types {
 	    return Convert.ToInt32(this);
 	}
 
-	[CLSCompliant(false)]
+	//[CLSCompliant(false)]
 	uint IConvertible.ToUInt32(IFormatProvider provider) {
 	    return Convert.ToUInt32(this);
 	}
@@ -683,7 +683,7 @@ namespace Spring2.Core.Types {
 	    return Convert.ToInt64(this);
 	}
 
-	[CLSCompliant(false)]
+	//[CLSCompliant(false)]
 	ulong IConvertible.ToUInt64(IFormatProvider provider) {
 	    return Convert.ToUInt64(this);
 	}

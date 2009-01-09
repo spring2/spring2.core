@@ -42,16 +42,12 @@ namespace Spring2.Core.Tax {
 		return "";
 	    } else {
 		if (isForDisplay) {
-		    if (isFirst) {
-			area = area;
-		    } else {
+		    if (!isFirst) {
 			area = ", " + area;
 		    }
 		    return area;
 		} else {
-		    if (isFirst) {
-			area = area;
-		    } else {
+		    if (!isFirst) {
 			area = " " + area;
 		    }
 		    return area;
