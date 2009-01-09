@@ -4,7 +4,7 @@ using System.Net;
 using System.Xml.Serialization;
 using Spring2.Core.Types;
 using Spring2.Core.Configuration;
-using Spring2.Dss.Payment.Web_References.com.concordebiz.efsnet;
+using Spring2.Core.Payment.Web_References.com.concordebiz.efsnet;
 
 namespace Spring2.Core.Payment.EFSNet {
 

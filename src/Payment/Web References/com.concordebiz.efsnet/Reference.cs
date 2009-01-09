@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace Spring2.Dss.Payment.Web_References.com.concordebiz.efsnet {
+namespace Spring2.Core.Payment.Web_References.com.concordebiz.efsnet {
     using System.Diagnostics;
     using System.Web.Services;
     using System.ComponentModel;
