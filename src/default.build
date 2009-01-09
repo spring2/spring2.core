@@ -42,7 +42,6 @@
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
 	<exec program="${msbuild}"  >
 	    <arg value="Spring2.Core.sln" />
-	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
 	    <arg value="/verbosity:minimal" />
 	    <arg value="/target:Build" />
 	</exec>
