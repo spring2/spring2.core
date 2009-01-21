@@ -530,7 +530,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
         
         public static MailMessageList GetMailMessagesToSend() {
 	    SqlFilter filter = new SqlFilter(new SqlEqualityPredicate(MailMessageFields.MAILMESSAGESTATUS, EqualityOperatorEnum.Equal, MailMessageStatusEnum.UNPROCESSED.Code));
-	    filter.And(new SqlLiteralPredicate(String.Format("ScheduleTime is null or ScheduleTime <= '{0}'", DateTime.Now.ToString("yyyy-MM-dd HH:mm"))));
+	    filter.And(new SqlLiteralPredicate(String.Format("(ScheduleTime is null or ScheduleTime <= '{0}')", DateTime.Now.ToString("yyyy-MM-dd HH:mm"))));
 	    return MailMessageDAO.DAO.GetList(filter);
         }
         
@@ -548,7 +548,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
         
         public void Send() {
             //make sure the attachment directory exists
-// TODO: needs to handle ending on root path
+	    // TODO: needs to handle ending on root path
 	    String attachmentDirectory = ConfigurationProvider.Instance.Settings["TempPath"] + @"Attachments\";
 	    if (!Directory.Exists(attachmentDirectory)){
 		Directory.CreateDirectory(attachmentDirectory);
@@ -557,12 +557,12 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
 
 	    message.From = new MailAddress(this.From.ToString());
-	    message.To.Add(new MailAddress(this.To.ToString()));
-	    if (this.Cc.IsValid) {
-		message.CC.Add(new MailAddress(this.Cc.ToString()));
+	    message.To.Add(this.to.Replace(';', ',').ToString());
+	    if (!this.Cc.IsEmpty) {
+		message.CC.Add(new MailAddress(this.Cc.Replace(';', ',').ToString()));
 	    }
-	    if (this.Bcc.IsValid) {
-		message.Bcc.Add(this.Bcc.ToString());
+	    if (!this.Bcc.IsEmpty) {
+		message.Bcc.Add(this.Bcc.Replace(';', ',').ToString());
 	    }
 	    message.Subject = this.Subject.IsValid ? this.Subject.ToString() : String.Empty;
 
