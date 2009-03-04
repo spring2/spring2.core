@@ -890,7 +890,6 @@ namespace Spring2.Core.Types {
 	    return TypeCode.String;
 	}
 
-	//should this worry about validity?
 	public override int GetHashCode() {
 	    return myValue.GetHashCode();
 	}

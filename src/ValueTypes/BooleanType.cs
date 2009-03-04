@@ -130,7 +130,6 @@ namespace Spring2.Core.Types {
 	    return TypeCode.Boolean;
 	}
 
-	//should this worry about validity?
 	public override int GetHashCode() {
 	    if (myValue) {
 		return 1;
