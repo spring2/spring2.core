@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{EE6B2078-6D63-47D0-A837-3DC0859DA7E7}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -130,9 +130,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Spring2.Core, Version=1.1.86.5059, Culture=neutral, PublicKeyToken=687bce93d7ce902c, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Spring2.DataTierGenerator.Attribute">
       <Name>Spring2.DataTierGenerator.Attribute</Name>
       <HintPath>..\lib\Spring2.DataTierGenerator.Attribute.dll</HintPath>
@@ -146,6 +143,10 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
+    <ProjectReference Include="Spring2.Core.csproj">
+      <Project>{80B94045-4DE6-4BB0-BE22-C5CC0E772695}</Project>
+      <Name>Spring2.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="Spring2.Core.Types.csproj">
       <Name>Spring2.Core.Types</Name>
       <Project>{FB2D9DAA-2340-468C-8018-138748DA2EAE}</Project>

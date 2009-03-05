@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{3F634E1D-24BE-4729-8B48-B801B85219E2}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -127,10 +127,6 @@
     <Reference Include="Spring2.Core, Version=1.1.73.5925, Culture=neutral, PublicKeyToken=687bce93d7ce902c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\build\net-2.0\Spring2.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Spring2.Core.Ajax, Version=1.1.86.5059, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\build\net-2.0\Spring2.Core.Ajax.dll</HintPath>
     </Reference>
     <Reference Include="Spring2.Core.Ajax.Json, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

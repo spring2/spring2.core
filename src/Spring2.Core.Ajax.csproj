@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{40C60A12-0493-4B5A-9B48-C8DFD878DFD5}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -109,15 +109,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Spring2.Core, Version=1.1.86.5059, Culture=neutral, PublicKeyToken=687bce93d7ce902c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\build\Core\Spring2.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Spring2.Core.Ajax.Json, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="Spring2.Core.PropertyPopulator, Version=1.1.86.5059, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\build\Spring2.Core.PropertyPopulator.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -156,6 +148,16 @@
       <ProductName>.NET Framework 3.5</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Spring2.Core.csproj">
+      <Project>{80B94045-4DE6-4BB0-BE22-C5CC0E772695}</Project>
+      <Name>Spring2.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="Spring2.Core.PropertyPopulator.csproj">
+      <Project>{A82A4D4A-007B-4870-9C24-DE21C287B43D}</Project>
+      <Name>Spring2.Core.PropertyPopulator</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
