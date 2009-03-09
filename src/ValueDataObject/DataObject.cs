@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Text;
 
 namespace Spring2.Core.DataObject {
-    
+
     /// <summary>
     /// Abstract base class for data objects.
     /// </summary>
@@ -27,8 +27,8 @@ namespace Spring2.Core.DataObject {
 
 	public String ToString(Int32 indentLevel) {
 	    return ToString(indentLevel, true);
-	}    
-	    
+	}
+
 	/// <summary>
 	/// Creates a string representation of the DataObject indented to indentLevel (for nested objects)
 	/// </summary>
@@ -50,9 +50,9 @@ namespace Spring2.Core.DataObject {
 
 		    // get the value, but handle any unfriendly exceptions by outputing that as the value
 		    try {
-		    	value = p.GetValue(this, null);
+			value = p.GetValue(this, null);
 		    } catch (Exception ex) {
-		    	value = ex.ToString();
+			value = ex.ToString();
 		    }
 
 		    sb.Append(indent);
@@ -65,9 +65,9 @@ namespace Spring2.Core.DataObject {
 			    sb.Append(Environment.NewLine);
 			    if (recurse) {
 				if (value.GetType().Equals(this.GetType())) {
-				    sb.Append(((DataObject)value).ToString(indentLevel+1, false));
+				    sb.Append(((DataObject)value).ToString(indentLevel + 1, false));
 				} else {
-				    sb.Append(((DataObject)value).ToString(indentLevel+1));
+				    sb.Append(((DataObject)value).ToString(indentLevel + 1));
 				}
 			    }
 			}
@@ -79,9 +79,9 @@ namespace Spring2.Core.DataObject {
 				sb.Append(indent).Append(SINGLE_INDENT).Append("Item: ");
 				if (item is DataObject) {
 				    if (item.GetType().Equals(this.GetType())) {
-					sb.Append(Environment.NewLine).Append(((DataObject)item).ToString(indentLevel+2, false));
+					sb.Append(Environment.NewLine).Append(((DataObject)item).ToString(indentLevel + 2, false));
 				    } else {
-					sb.Append(Environment.NewLine).Append(((DataObject)item).ToString(indentLevel+2));
+					sb.Append(Environment.NewLine).Append(((DataObject)item).ToString(indentLevel + 2));
 				    }
 				} else {
 				    sb.Append(item.ToString());
@@ -122,7 +122,7 @@ namespace Spring2.Core.DataObject {
 	    }
 
 	    if (Object.ReferenceEquals(this, obj)) {
-	    	return true;
+		return true;
 	    }
 
 	    foreach (PropertyInfo p in GetType().GetProperties()) {
@@ -134,7 +134,7 @@ namespace Spring2.Core.DataObject {
 		    if (collection1.Count != collection2.Count) {
 			return false;
 		    }
-		    
+
 		    IEnumerator enumerator1 = collection1.GetEnumerator();
 		    IEnumerator enumerator2 = collection2.GetEnumerator();
 		    while (enumerator1.MoveNext() && enumerator2.MoveNext()) {
@@ -159,7 +159,10 @@ namespace Spring2.Core.DataObject {
 	public override int GetHashCode() {
 	    int hashCode = 0;
 	    foreach (PropertyInfo p in GetType().GetProperties()) {
-		hashCode = (hashCode + p.GetValue(this, null).GetHashCode()) % 2000000000;
+		object value = p.GetValue(this, null);
+		if (value != null) {
+		    hashCode = (hashCode + value.GetHashCode()) % 2000000000;
+		}
 	    }
 
 	    return hashCode;
