@@ -43,12 +43,12 @@
 	    <property name="TargetWindow" type="StringType" column="*" />
 	</properties>
 	<finders>
-	    <finder name="FindByMenuLinkGroup" unique="False" sort="Sequence, Name" >
+	    <finder name="FindByMenuLinkGroup" unique="False" expression="MenuLinkGroupId = {0} AND getdate() between EffectiveDate and ExpirationDate" sort="Sequence, Name" >
 		<properties>
  		    <property name="MenuLinkGroupId" />
 		</properties>
 	    </finder>
-	    <finder name="FindByParentMenuLink" unique="False" sort="Sequence, Name" >
+	    <finder name="FindByParentMenuLink" unique="False" expression="ParentMenuLinkId = {0} AND getdate() between EffectiveDate and ExpirationDate" sort="Sequence, Name" >
 		<properties>
  		    <property name="ParentMenuLinkId" />
 		</properties>
