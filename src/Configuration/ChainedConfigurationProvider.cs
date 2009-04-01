@@ -8,13 +8,18 @@ namespace Spring2.Core.Configuration {
     /// </summary>
     public class ChainedConfigurationProvider : IConfigurationProvider {
 
+    	private SqlConfigurationProvider sqlProvider;
+    	private AppSettingsProvider appProvider;
+
 	public ChainedConfigurationProvider() {
+	    sqlProvider = new SqlConfigurationProvider();
+	    appProvider = new AppSettingsProvider();
 	}
 	
 	public NameValueCollection Settings {
 	    get {
-		NameValueCollection settings = (new SqlConfigurationProvider()).Settings;
-		NameValueCollection appSettings = (new AppSettingsProvider()).Settings;
+		NameValueCollection settings = sqlProvider.Settings;
+		NameValueCollection appSettings = appProvider.Settings;
 
 		foreach (String key in appSettings.Keys) {
 		    if (settings[key] == null) {
