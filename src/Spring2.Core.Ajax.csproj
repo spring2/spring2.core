@@ -109,7 +109,15 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Spring2.Core">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\build\Core\Spring2.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Spring2.Core.Ajax.Json, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Spring2.Core.PropertyPopulator">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\build\Spring2.Core.PropertyPopulator.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>

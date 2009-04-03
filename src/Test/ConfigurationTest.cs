@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.IO;
+using System.Threading;
 using NUnit.Framework;
 using Spring2.Core.DAO;
 using Spring2.Core.Configuration;
@@ -51,15 +52,54 @@ namespace Spring2.Core.Test {
             Assert.AreEqual("SQL Key current", ConfigurationProvider.Instance.Settings["SQLKey"]);
         }
 
+	[Test]
+	public void ShouldNotCacheValues() {
+	    TestUtilities.CreateConfigurationSetting(StringType.Parse("SQLKey"), StringType.Parse("SQL Key old"), DateTimeType.Now.AddDays(-3));
+	    TestUtilities.CreateConfigurationSetting(StringType.Parse("SQLKey"), StringType.Parse("SQL Key current"), DateTimeType.Now.AddDays(-1));
+	    TestUtilities.CreateConfigurationSetting(StringType.Parse("SQLKey"), StringType.Parse("SQL Key future"), DateTimeType.Now.AddDays(1));
+	    SqlConfigurationProvider provider = new SqlConfigurationProvider(0);
+	    ConfigurationProvider.SetProvider(provider);
+	    TestUtilities.CreateConfigurationSetting(StringType.Parse("SQLKey"), StringType.Parse("SQL Key new"), DateTimeType.Now.AddHours(-1));
+	    Assert.AreEqual("SQL Key new", ConfigurationProvider.Instance.Settings["SQLKey"]);
+	    Assert.AreEqual("SQL Key new", ConfigurationProvider.Instance.Settings["SQLKey"]);
+	    Assert.AreEqual(2, provider.Refreshes);
+	    Assert.AreEqual(DateTime.MinValue, provider.LastRefresh);
+	    Thread.Sleep(2000);
+	    Assert.AreEqual("SQL Key new", ConfigurationProvider.Instance.Settings["SQLKey"]);
+	    Assert.AreEqual(3, provider.Refreshes);
+	    Assert.AreEqual(DateTime.MinValue, provider.LastRefresh);
+	}
+
+
+	[Test]
+	public void ShouldHaveCachedValue() {
+	    TestUtilities.CreateConfigurationSetting(StringType.Parse("SQLKey"), StringType.Parse("SQL Key old"), DateTimeType.Now.AddDays(-3));
+	    TestUtilities.CreateConfigurationSetting(StringType.Parse("SQLKey"), StringType.Parse("SQL Key current"), DateTimeType.Now.AddDays(-1));
+	    TestUtilities.CreateConfigurationSetting(StringType.Parse("SQLKey"), StringType.Parse("SQL Key future"), DateTimeType.Now.AddDays(1));
+	    SqlConfigurationProvider provider = new SqlConfigurationProvider(2);
+	    ConfigurationProvider.SetProvider(provider);
+	    DateTime lastRefresh = provider.LastRefresh;
+	    TestUtilities.CreateConfigurationSetting(StringType.Parse("SQLKey"), StringType.Parse("SQL Key new"), DateTimeType.Now.AddHours(-1));
+	    Assert.AreEqual("SQL Key current", ConfigurationProvider.Instance.Settings["SQLKey"]);
+	    Assert.AreEqual("SQL Key current", ConfigurationProvider.Instance.Settings["SQLKey"]);
+	    Assert.AreEqual(lastRefresh, provider.LastRefresh);
+	    Assert.AreEqual(1, provider.Refreshes);
+	    Thread.Sleep(2000);
+	    Assert.AreEqual("SQL Key new", ConfigurationProvider.Instance.Settings["SQLKey"]);
+	    Assert.AreEqual(2, provider.Refreshes);
+	    Assert.AreNotEqual(lastRefresh, provider.LastRefresh);
+	}
+
         [Test]
         public void ChainedEffectiveDate() {
-            ConfigurationProvider.SetProvider(new ChainedConfigurationProvider());
             TestUtilities.CreateConfigurationSetting(StringType.Parse("SQLKey"), StringType.Parse("SQL Key old"), DateTimeType.Now.AddDays(-3));
             TestUtilities.CreateConfigurationSetting(StringType.Parse("SQLKey"), StringType.Parse("SQL Key current"), DateTimeType.Now.AddDays(-1));
             TestUtilities.CreateConfigurationSetting(StringType.Parse("SQLKey"), StringType.Parse("SQL Key future"), DateTimeType.Now.AddDays(1));
             TestUtilities.CreateConfigurationSetting(StringType.Parse("ConfigTest"), StringType.Parse("Config Key old"), DateTimeType.Now.AddDays(-3));
             TestUtilities.CreateConfigurationSetting(StringType.Parse("ConfigTest"), StringType.Parse("Config Key current"), DateTimeType.Now.AddDays(-1));
             TestUtilities.CreateConfigurationSetting(StringType.Parse("ConfigTest"), StringType.Parse("Config Key future"), DateTimeType.Now.AddDays(1));
+
+	    ConfigurationProvider.SetProvider(new ChainedConfigurationProvider());
             Assert.AreEqual("SQL Key current", ConfigurationProvider.Instance.Settings["SQLKey"]);
             Assert.AreEqual("From File", ConfigurationProvider.Instance.Settings["ConfigTest"]);
         }

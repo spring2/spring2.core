@@ -93,3 +93,11 @@ ncoverreports:
 fxcop:
 	mkdir -p ../docs/FxCop
 	-fxcopcmd /p:Spring2.Core.FxCop /out:../docs/FxCop/Spring2.Core.FxCop.xml
+
+fixLineTermination:
+	find . -type f -name '*.cs' -print -exec unix2dos -D --safe \{\} \;
+	find . -type f -name '*.aspx' -print -exec unix2dos -D --safe \{\} \;
+	find . -type f -name '*.ascx' -print -exec unix2dos -D --safe \{\} \;
+	find . -type f -name '*.css' -print -exec unix2dos -D --safe \{\} \;
+	find . -type f -name '*.js' -print -exec unix2dos -D --safe \{\} \;
+	
