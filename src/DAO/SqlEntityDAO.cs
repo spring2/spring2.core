@@ -6,6 +6,12 @@ namespace Spring2.Core.DAO {
 
     public abstract class SqlEntityDAO : BaseEntityDAO {
 
+	public SqlEntityDAO() {
+	}
+
+	public SqlEntityDAO(IConnectionStringStrategy strategy) : base(strategy) {
+	}
+
 	protected override IDbCommand GetDbCommand(String key, IDbTransaction transaction) {
 
 	    if (transaction == null) {

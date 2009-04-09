@@ -1,27 +1,31 @@
 using System;
 using System.Data;
 using System.Collections;
-using System.Collections.Specialized;
-using System.Configuration;
-
-using Microsoft.Win32;
 
 namespace Spring2.Core.DAO {
 
     public abstract class BaseEntityDAO {
 
-	private static StringDictionary connectionStrings = new StringDictionary();
-
-    	/// <summary>
+	/// <summary>
 	/// Hash table mapping entity property names to sql code.
 	/// </summary>
 	private static Hashtable propertyToSqlMap = new Hashtable();
-    	
+	private IConnectionStringStrategy connectionStringStrategy = new DefaultConnectionStringStrategy();
+
     	protected static void AddPropertyMapping(String property, String mapping) {
 	    if (!propertyToSqlMap.Contains(property)) {
 		propertyToSqlMap.Add(property, mapping);
 	    }
     	}
+
+	public BaseEntityDAO() {
+	}
+
+	public BaseEntityDAO(IConnectionStringStrategy strategy) {
+	    if (strategy != null) {
+		this.connectionStringStrategy = strategy;
+	    }
+	}
 
 	/// <summary>
 	/// Creates a where clause object by mapping the given where clause text.  The text may reference
@@ -268,40 +272,7 @@ namespace Spring2.Core.DAO {
 	}
 
 	protected virtual String GetConnectionString(String key) {
-	    String connectionString;
-
-	    lock(connectionStrings.SyncRoot) {
-		// look to see if the connection string has already been cached
-		if (connectionStrings[key]!= null) {
-		    return connectionStrings[key];
-		}
-
-		if (key.ToLower().StartsWith("registry")) {
-		    String subkey = key.Substring(key.LastIndexOf(":")+1);
-		    subkey = subkey.Substring(0, subkey.LastIndexOf("\\"));
-		    String value = key.Substring(key.LastIndexOf("\\")+1);
-		    String hive = key.Substring(9,4).ToUpper();
-		    RegistryKey rkey;
-		    if (hive.Equals("HKLM")) {
-			rkey = Registry.LocalMachine.OpenSubKey(subkey);
-		    } else if (hive.Equals("HKCU")) {
-			rkey = Registry.CurrentUser.OpenSubKey(subkey);
-		    } else {
-			throw new Exception("Unable to determine hive from registry type connection key.  Hive understood: " + hive + "  Key used was: " + key);
-		    }
-		    if (rkey == null) {
-			throw new Exception("Specified subkey was not found.  Subkey: " + subkey);
-		    }
-		    connectionString = rkey.GetValue(value).ToString();
-		} else {
-		    connectionString = ConfigurationSettings.AppSettings[key];
-		}
-
-		// Cache the connection string by key for fast lookup later.
-		connectionStrings.Add(key, connectionString);
-	    }
-
-	    return connectionString;
+	    return connectionStringStrategy.GetConnectionString(key);
 	}
 
 	protected static String ProcessExpression(Hashtable propertyToSqlMap, String expression) {
