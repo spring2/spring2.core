@@ -13,6 +13,7 @@ namespace Spring2.Core.Types {
 
 	public static readonly LongType DEFAULT = new LongType(TypeState.DEFAULT);
 	public static readonly LongType UNSET   = new LongType(TypeState.UNSET);
+	public static readonly LongType ZERO    = new LongType(0L);
 
 	#region	State management
 	public bool IsValid {
@@ -426,6 +427,10 @@ namespace Spring2.Core.Types {
 		return -1;
 	    }
 
+	    if (leftHand.myState == TypeState.VALID) {
+		return 1;
+	    }
+
 	    //should this throw an exception?
 	    return 0;
 	}
@@ -440,7 +445,7 @@ namespace Spring2.Core.Types {
 	    return Compare(leftHand, rightHand) != 0;
 	}
 
-	public static bool operator == (LongType leftHand, int rightHand) {
+	public static bool operator == (LongType leftHand, Int64 rightHand) {
 	    if (!leftHand.IsValid) {
 		return false;
 	    }
@@ -448,7 +453,7 @@ namespace Spring2.Core.Types {
 	    return leftHand.myValue == rightHand;
 	}
 
-	public static bool operator != (LongType leftHand, int rightHand) {
+	public static bool operator != (LongType leftHand, Int64 rightHand) {
 	    if (!leftHand.IsValid) {
 		return false;
 	    }
@@ -467,7 +472,7 @@ namespace Spring2.Core.Types {
 	    return Compare(leftHand, rightHand) > 0;
 	}
 
-	public static bool operator < (LongType leftHand, int rightHand) {
+	public static bool operator < (LongType leftHand, Int64 rightHand) {
 	    if (!leftHand.IsValid) {
 		return false;
 	    }
@@ -475,7 +480,7 @@ namespace Spring2.Core.Types {
 	    return leftHand.myValue < rightHand;
 	}
 
-	public static bool operator > (LongType leftHand, int rightHand) {
+	public static bool operator > (LongType leftHand, Int64 rightHand) {
 	    if (!leftHand.IsValid) {
 		return false;
 	    }
@@ -493,7 +498,7 @@ namespace Spring2.Core.Types {
 	    return Compare(leftHand, rightHand) >= 0;
 	}
 
-	public static bool operator <= (LongType leftHand, int rightHand) {
+	public static bool operator <= (LongType leftHand, Int64 rightHand) {
 	    if (!leftHand.IsValid) {
 		return false;
 	    }
@@ -501,7 +506,7 @@ namespace Spring2.Core.Types {
 	    return leftHand.myValue <= rightHand;
 	}
 
-	public static bool operator >= (LongType leftHand, int rightHand) {
+	public static bool operator >= (LongType leftHand, Int64 rightHand) {
 	    if (!leftHand.IsValid) {
 		return false;
 	    }

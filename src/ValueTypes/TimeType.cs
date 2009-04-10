@@ -334,7 +334,7 @@ namespace Spring2.Core.Types {
 	}
 
 	public static bool operator >=(TimeType leftHand, TimeType rightHand) {
-	    return Compare(leftHand, rightHand) <= 0;
+	    return Compare(leftHand, rightHand) >= 0;
 	}
 	#endregion
 
