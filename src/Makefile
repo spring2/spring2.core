@@ -59,14 +59,16 @@ docs:
 	../bin/NDoc/NDocConsole.exe -documenter=MSDN -project=Spring2.Core.ndoc
 
 
-package: clean build regress changelog docs
+package: clean build regress changelog docs packageonly
+
+packageonly:
 	rm -rf ${BUILDDIR}/Core
-	cp $(DOCDIR)/api/Spring2.Core.chm $(BUILDDIR)
-	cp $(DOCDIR)/api/Spring2.Core.chm $(RELEASEDIR)/Spring2.Core-$(shell getversion.sh).chm
-	cp ../ChangeLog.txt $(RELEASEDIR)/ChangeLog-$(shell getversion.sh).txt
-	jar -cMvf $(RELEASEDIR)/Spring2.Core.$(shell getversion.sh)-net-1.1.zip -C $(BUILDDIR)/net-1.1 .
+	#cp $(DOCDIR)/api/Spring2.Core.chm $(BUILDDIR)
+	#cp $(DOCDIR)/api/Spring2.Core.chm $(RELEASEDIR)/Spring2.Core-$(shell getversion.sh).chm
+	#cp ../ChangeLog.txt $(RELEASEDIR)/ChangeLog-$(shell getversion.sh).txt
+	#jar -cMvf $(RELEASEDIR)/Spring2.Core.$(shell getversion.sh)-net-1.1.zip -C $(BUILDDIR)/net-1.1 .
 	jar -cMvf $(RELEASEDIR)/Spring2.Core.$(shell getversion.sh)-net-2.0.zip -C $(BUILDDIR)/net-2.0 .
-	${NANT} -D:version=$(shell $(GETVERSION)) package_src
+	${NANT} -D:version=$(shell ./getversion.sh) package_src
 
 release: package
 	cvs tag RELEASE_$(subst .,_,$(shell ./getversion.sh))
