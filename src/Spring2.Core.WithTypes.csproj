@@ -404,6 +404,8 @@
     <Compile Include="Xml\XIncludeReader.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DAO\DefaultConnectionStringStrategy.cs" />
+    <Compile Include="DAO\IConnectionStringStrategy.cs" />
     <None Include="DAO\spring2.snk" />
     <EmbeddedResource Include="Globalization\RegionalTimeZones.xml" />
   </ItemGroup>
