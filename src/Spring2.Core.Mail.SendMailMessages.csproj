@@ -153,6 +153,10 @@
       <Project>{80B94045-4DE6-4BB0-BE22-C5CC0E772695}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
+    <ProjectReference Include="Spring2.Core.Log4Net.csproj">
+      <Project>{ADC35D1C-39C8-4980-AE2B-57DBAE0838D1}</Project>
+      <Name>Spring2.Core.Log4Net</Name>
+    </ProjectReference>
     <ProjectReference Include="Spring2.Core.Mail.csproj">
       <Name>Spring2.Core.Mail</Name>
       <Project>{BFE71D4B-66E4-467F-9649-FA699B96AC7A}</Project>
