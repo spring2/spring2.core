@@ -467,7 +467,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <returns>The list of MenuLinkDAO objects found.</returns>
 	public MenuLinkList FindByMenuLinkGroup(IdType menuLinkGroupId) {
 	    OrderByClause sort = new OrderByClause("Sequence, Name");
-	    SqlFilter filter = new SqlFilter(new SqlLiteralPredicate("MenuLinkGroupId = @MenuLinkGroupId AND getdate() between EffectiveDate and ExpirationDate"));
+	    SqlFilter filter = new SqlFilter(new SqlLiteralPredicate("MenuLinkGroupId = @MenuLinkGroupId AND getdate() between ISNULL(EffectiveDate, getdate() - 1) and ISNULL(ExpirationDate, getdate() + 1)"));
 	    String sql = "SELECT * from " + VIEW + filter.Statement + sort.FormatSql();
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
 	    cmd.Parameters.Add(CreateDataParameter("@MenuLinkGroupId", DbType.Int32, ParameterDirection.Input, menuLinkGroupId.IsValid ? menuLinkGroupId.ToInt32() as Object : DBNull.Value));
@@ -483,7 +483,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <returns>The list of MenuLinkDAO objects found.</returns>
 	public MenuLinkList FindByParentMenuLink(IdType parentMenuLinkId) {
 	    OrderByClause sort = new OrderByClause("Sequence, Name");
-	    SqlFilter filter = new SqlFilter(new SqlLiteralPredicate("ParentMenuLinkId = @ParentMenuLinkId AND getdate() between EffectiveDate and ExpirationDate"));
+	    SqlFilter filter = new SqlFilter(new SqlLiteralPredicate("ParentMenuLinkId = @ParentMenuLinkId AND getdate() between ISNULL(EffectiveDate, getdate() - 1) and ISNULL(ExpirationDate, getdate() + 1)"));
 	    String sql = "SELECT * from " + VIEW + filter.Statement + sort.FormatSql();
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
 	    cmd.Parameters.Add(CreateDataParameter("@ParentMenuLinkId", DbType.Int32, ParameterDirection.Input, parentMenuLinkId.IsValid ? parentMenuLinkId.ToInt32() as Object : DBNull.Value));
@@ -504,12 +504,12 @@ namespace Spring2.Core.Navigation.Dao {
 		if(link.ParentMenuLinkId.IsValid)
 		{
 			cmd.Parameters.Add(CreateDataParameter("@ParentMenuLinkId", DbType.Int32, ParameterDirection.Input, link.ParentMenuLinkId.IsValid ? link.ParentMenuLinkId.ToInt32() as Object : DBNull.Value));
-			commandText = "select top(1) * from menulink where ParentMenuLinkId = @ParentMenuLinkId and Sequence < @Sequence AND getdate() between EffectiveDate and ExpirationDate order by Sequence DESC";
+			commandText = "select top(1) * from menulink where ParentMenuLinkId = @ParentMenuLinkId and Sequence < @Sequence AND getdate() between ISNULL(EffectiveDate, getdate() - 1) and ISNULL(ExpirationDate, getdate() + 1) order by Sequence DESC";
 		}
 		else if(link.MenuLinkGroupId.IsValid)
 		{
 			cmd.Parameters.Add(CreateDataParameter("@MenuLinkGroupId", DbType.Int32, ParameterDirection.Input, link.MenuLinkGroupId.IsValid ? link.MenuLinkGroupId.ToInt32() as Object : DBNull.Value));
-			commandText = "select top(1) * from menulink where MenuLinkGroupId = @MenuLinkGroupId and Sequence < @Sequence AND getdate() between EffectiveDate and ExpirationDate order by Sequence DESC";
+			commandText = "select top(1) * from menulink where MenuLinkGroupId = @MenuLinkGroupId and Sequence < @Sequence AND getdate() between ISNULL(EffectiveDate, getdate() - 1) and ISNULL(ExpirationDate, getdate() + 1) order by Sequence DESC";
 		}
 		cmd.Parameters.Add(CreateDataParameter("@Sequence", DbType.Int32, ParameterDirection.Input, link.Sequence.IsValid ? link.Sequence.ToInt32() as Object : DBNull.Value));
 
@@ -544,12 +544,12 @@ namespace Spring2.Core.Navigation.Dao {
 		if(link.ParentMenuLinkId.IsValid)
 		{
 			cmd.Parameters.Add(CreateDataParameter("@ParentMenuLinkId", DbType.Int32, ParameterDirection.Input, link.ParentMenuLinkId.IsValid ? link.ParentMenuLinkId.ToInt32() as Object : DBNull.Value));
-			commandText = "select top(1) * from menulink where ParentMenuLinkId = @ParentMenuLinkId and Sequence > @Sequence AND getdate() between EffectiveDate and ExpirationDate order by Sequence";
+			commandText = "select top(1) * from menulink where ParentMenuLinkId = @ParentMenuLinkId and Sequence > @Sequence AND getdate() between ISNULL(EffectiveDate, getdate() - 1) and ISNULL(ExpirationDate, getdate() + 1) order by Sequence";
 		}
 		else if(link.MenuLinkGroupId.IsValid)
 		{
 			cmd.Parameters.Add(CreateDataParameter("@MenuLinkGroupId", DbType.Int32, ParameterDirection.Input, link.MenuLinkGroupId.IsValid ? link.MenuLinkGroupId.ToInt32() as Object : DBNull.Value));
-			commandText = "select top(1) * from menulink where MenuLinkGroupId = @MenuLinkGroupId and Sequence > @Sequence AND getdate() between EffectiveDate and ExpirationDate order by Sequence";
+			commandText = "select top(1) * from menulink where MenuLinkGroupId = @MenuLinkGroupId and Sequence > @Sequence AND getdate() between ISNULL(EffectiveDate, getdate() - 1) and ISNULL(ExpirationDate, getdate() + 1) order by Sequence";
 		}
 		cmd.Parameters.Add(CreateDataParameter("@Sequence", DbType.Int32, ParameterDirection.Input, link.Sequence.IsValid ? link.Sequence.ToInt32() as Object : DBNull.Value));
 
@@ -577,7 +577,7 @@ namespace Spring2.Core.Navigation.Dao {
 	{
 		IdType result = IdType.DEFAULT;
 
-		string commandText = "select top(1) sequence + 1 Sequence from menulink where ParentMenuLinkId = @ParentMenuLinkId AND getdate() between EffectiveDate and ExpirationDate order by Sequence DESC";
+		string commandText = "select top(1) sequence + 1 Sequence from menulink where ParentMenuLinkId = @ParentMenuLinkId AND getdate() between ISNULL(EffectiveDate, getdate() - 1) and ISNULL(ExpirationDate, getdate() + 1) order by Sequence DESC";
 
 		IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY);
 		cmd.CommandType = CommandType.Text;
@@ -611,7 +611,7 @@ namespace Spring2.Core.Navigation.Dao {
 	{
 		IdType result = IdType.DEFAULT;
 
-		string commandText = "select top(1) sequence + 1 Sequence from menulink where MenuLinkGroupId = @MenuLinkGroupId AND getdate() between EffectiveDate and ExpirationDate order by Sequence DESC";
+		string commandText = "select top(1) sequence + 1 Sequence from menulink where MenuLinkGroupId = @MenuLinkGroupId AND getdate() between ISNULL(EffectiveDate, getdate() - 1) and ISNULL(ExpirationDate, getdate() + 1) order by Sequence DESC";
 
 		IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY);
 		cmd.CommandType = CommandType.Text;

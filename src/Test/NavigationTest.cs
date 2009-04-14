@@ -127,6 +127,25 @@ namespace Spring2.Core.Test {
 	    }
 	}
 
+	[Test]
+	public void ShouldBeAbleToGetChildMenuLinksWithNullEffectiveDateAndNullExpirationDate() {
+	    MenuLinkGroup group = null;
+	    MenuLink expMenuLink = null;
+	    MenuLink expChildLink = null;
+	    try {
+		group = GetTestMenuLinkGroup();
+		expMenuLink = GetTestMenuLinkWithNullEffectiveDateAndNullExpirationDate(group, new StringTypeList());
+		expChildLink = GetTestMenuLinkWithNullEffectiveDateAndNullExpirationDate(expMenuLink, new StringTypeList());
+
+		Assert.AreEqual(1, group.MenuLinks.Count);
+		Assert.AreEqual(1, group.MenuLinks[0].ChildMenuLinks.Count);
+	    } finally {
+		MenuLinkDAO.DAO.Delete(expChildLink.MenuLinkId);
+		MenuLinkDAO.DAO.Delete(expMenuLink.MenuLinkId);
+		MenuLinkGroupDAO.DAO.Delete(group.MenuLinkGroupId);
+	    }
+	}
+
 	#region Helper Methods
 	private MenuLinkGroup GetTestMenuLinkGroup() {
 	    MenuLinkGroupData groupData = new MenuLinkGroupData();
@@ -200,6 +219,46 @@ namespace Spring2.Core.Test {
 	    menuLinkData.Active = BooleanType.TRUE;
 	    menuLinkData.EffectiveDate = DateTimeType.Now.AddDays(-10);
 	    menuLinkData.ExpirationDate = DateTimeType.Now.AddDays(-2);
+	    menuLinkData.ParentMenuLinkId = parent.MenuLinkId;
+	    menuLinkData.Target = MENULINK_TARGET;
+
+	    MenuLink menuLink = MenuLink.Create(menuLinkData);
+
+	    foreach (StringType key in keys) {
+		MenuLinkKeyData keyData = new MenuLinkKeyData();
+		keyData.Key = key;
+		keyData.MenuLinkId = menuLink.MenuLinkId;
+		MenuLinkKey.Create(keyData);
+	    }
+	    return menuLink;
+	}
+
+	private MenuLink GetTestMenuLinkWithNullEffectiveDateAndNullExpirationDate(IMenuLinkGroup group, StringTypeList keys) {
+	    MenuLinkData menuLinkData = new MenuLinkData();
+	    menuLinkData.Name = MENULINK_NAME;
+	    menuLinkData.Active = BooleanType.TRUE;
+	    menuLinkData.EffectiveDate = DateTimeType.UNSET;
+	    menuLinkData.ExpirationDate = DateTimeType.UNSET;
+	    menuLinkData.MenuLinkGroupId = group.MenuLinkGroupId;
+	    menuLinkData.Target = MENULINK_TARGET;
+
+	    MenuLink menuLink = MenuLink.Create(menuLinkData);
+
+	    foreach (StringType key in keys) {
+		MenuLinkKeyData keyData = new MenuLinkKeyData();
+		keyData.Key = key;
+		keyData.MenuLinkId = menuLink.MenuLinkId;
+		MenuLinkKey.Create(keyData);
+	    }
+	    return menuLink;
+	}
+
+	private MenuLink GetTestMenuLinkWithNullEffectiveDateAndNullExpirationDate(IMenuLink parent, StringTypeList keys) {
+	    MenuLinkData menuLinkData = new MenuLinkData();
+	    menuLinkData.Name = MENULINK_NAME;
+	    menuLinkData.Active = BooleanType.TRUE;
+	    menuLinkData.EffectiveDate = DateTimeType.UNSET;
+	    menuLinkData.ExpirationDate = DateTimeType.UNSET;
 	    menuLinkData.ParentMenuLinkId = parent.MenuLinkId;
 	    menuLinkData.Target = MENULINK_TARGET;
 
