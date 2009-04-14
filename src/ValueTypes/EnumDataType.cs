@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace Spring2.Core.Types {
 
+    [Serializable]
     public abstract class EnumDataType : DataType {
 
 	[System.CLSCompliant(false)]
