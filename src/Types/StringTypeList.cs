@@ -98,41 +98,5 @@ namespace Spring2.Core.Types {
 		return !(IsDefault || IsUnset);
 	    }
 	}
-
-	/// <summary>
-	/// Sort a list by a column
-	/// </summary>
-	public void Sort(IComparer comparer) {
-	    InnerList.Sort(comparer);
-        }
-
-	/// <summary>
-	/// Sort the list given the name of a comparer class.
-	/// </summary>
-	public void Sort(String comparerName) {
-	    Type type = GetType().GetNestedType(comparerName);
-	    if (type == null) {
-		throw new ArgumentException(String.Format("Comparer {0} not found in class {1}.", comparerName, GetType().Name));
-	    }
-
-	    IComparer comparer = Activator.CreateInstance(type) as IComparer;
-	    if (comparer == null) {
-		throw new ArgumentException("compareName must be the name of class that implements IComparer.");
-	    }
-
-	    InnerList.Sort(comparer);
-	}
-
-	public class StringTypeSorter : IComparer {
-	    public Int32 Compare(Object a, Object b) {
-		StringType o1 = (StringType)a;
-		StringType o2 = (StringType)b;
-
-		if (o1 == null || o2 == null || !o1.IsValid || !o2.IsValid) {
-		    return 0;
-		}
-		return o1.CompareTo(o2);
-	    }
-	}
     }
 }
