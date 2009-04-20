@@ -601,7 +601,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 		SmtpClient smtpClient = new SmtpClient(ConfigurationProvider.Instance.Settings["SMTPServer"]);
 		smtpClient.Send(message);
 		MarkSent();
-	    } catch {
+	    } catch (Exception ex) {
 		IntegerType maxAttempts = IntegerType.Parse(ConfigurationProvider.Instance.Settings["MailMessage.MaxAttempts"]);
 		IntegerType nextAttemptInMinutes = IntegerType.Parse(ConfigurationProvider.Instance.Settings["MailMessage.NextAttemptInMinutes"]);
 		if (this.NumberOfAttempts.ToInt32() >= maxAttempts.ToInt32()) {
@@ -610,6 +610,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 		    this.ScheduleTime = DateTimeType.Now.AddMinutes(nextAttemptInMinutes.ToInt32());
 		}
 		this.Store();
+		throw ex;   //	Don't swallow the exception
 	    }
 
 	    //remove any attachments that were temporarily saved to file
