@@ -178,6 +178,12 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Spring2.Core.Ajax.csproj">
+      <Project>{40C60A12-0493-4B5A-9B48-C8DFD878DFD5}</Project>
+      <Name>Spring2.Core.Ajax</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

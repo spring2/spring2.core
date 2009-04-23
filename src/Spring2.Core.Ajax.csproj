@@ -113,7 +113,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\build\Core\Spring2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Spring2.Core.Ajax.Json, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Spring2.Core.PropertyPopulator">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\build\Spring2.Core.PropertyPopulator.dll</HintPath>
@@ -158,6 +157,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Spring2.Core.Ajax.Json.csproj">
+      <Project>{9502A28D-9F3A-49C7-8AF6-D5DF01FE6F97}</Project>
+      <Name>Spring2.Core.Ajax.Json</Name>
+    </ProjectReference>
     <ProjectReference Include="Spring2.Core.csproj">
       <Project>{80B94045-4DE6-4BB0-BE22-C5CC0E772695}</Project>
       <Name>Spring2.Core</Name>

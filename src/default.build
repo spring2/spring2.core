@@ -54,7 +54,7 @@
 	</copy>
 	<delete dir="..\build\SendMailMessages" if="${directory::exists('..\build\SendMailMessages')}" failonerror="false" />
 	
-<!--	
+
 	<exec program="${msbuild}"  >
 	    <arg value="Spring2.Core.Ajax.Json.csproj" />
 	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
@@ -73,7 +73,7 @@
 	    <arg value="/verbosity:minimal" />
 	    <arg value="/target:Build" />
 	</exec>
--->	
+
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
 	<exec program="${msbuild}">

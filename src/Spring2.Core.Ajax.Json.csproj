@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Ajax\Spring2.Core.Ajax.Json\JsonAjaxUtility.cs" />
     <Compile Include="Ajax\Spring2.Core.Ajax.Json\AssemblyInfo.cs" />
+    <Compile Include="AssemblyVersionInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
