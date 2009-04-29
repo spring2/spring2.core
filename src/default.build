@@ -9,19 +9,57 @@
     <property name="build.root" value="..\" />
     <property name="build.dir" value="..\build" />
     <property name="release.dir" value="..\release" />
+    <property name="src.dir" value="..\src" />
+    <property name="build.major" value="x" />
+    <property name="build.minor" value="x" />
+    <property name="build.build" value="x" />
+    <property name="build.revision" value="x" />
+    <property name="svn.executable" value="svn" />
 
-    <target name="ccnet">
+    <target name="ccnet-build">
 	<ifnot test="${property::exists('CCNetLabel')}"> 
 	    <fail message="CCNetLabel property not set, so can't create labelled distribution files" />
 	</ifnot>
+	<call target="getSubversionRevision" />
 	<exec program="..\bin\UpdateVersion.exe" commandline="-i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs -rp ${CCNetLabel}" />
-	<exec program="make" commandline="clean build regress" />
+	<exec program="make" commandline="clean build packageonly" />
+    </target>
+
+	<target name="ccnet-publish">
+		<if test="${not property::exists('CCNetLabel')}"> 
+			<fail message="CCNetLabel property not set, so can't create labelled distribution files" />
+		</if>
+		<property name="publish.dir" value="${CCNetArtifactDirectory}\${CCNetLabel}" />
+
+		<mkdir dir="${publish.dir}" />
+		<copy todir="${publish.dir}">
+			<fileset basedir="..\release">
+			<include name="*"/>
+			</fileset>
+		</copy>			
     </target>
 
     <target name="build">
 	<!--<call target="build-net-1.1" />-->
 	<call target="build-net-2.0" />
     </target>
+	
+    <target name="getSubversionRevision">
+		<!-- Retrieve subversion revision number -->
+		<echo message="Retrieving Subversion revision number"/>
+		<property name="svn.revision" value="0"/>
+		<exec
+			program="svn"
+			commandline='log "${src.dir}" --xml --limit 1'
+			output="${src.dir}\_revision.xml"
+			failonerror="false"/>
+		<xmlpeek
+			file="${src.dir}\_revision.xml"
+			xpath="/log/logentry/@revision"
+			property="svn.revision"
+			failonerror="false"/>
+		<echo message="Using Subversion revision number: ${svn.revision}"/>
+	</target>
 
     <target name="build-net-1.1">
 	<property name="nant.settings.currentframework" value="net-1.1" />
