@@ -66,6 +66,7 @@
     <Compile Include="PostSharp\AssemblyInfo.cs" />
     <Compile Include="PostSharp\DbConnectionScopeAttribute.cs" />
     <Compile Include="PostSharp\Log4NetTraceAttribute.cs" />
+    <Compile Include="PostSharp\LogLevel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Spring2.Core.csproj">
