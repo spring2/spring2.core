@@ -5,7 +5,7 @@ using System.Text;
 using PostSharp.Laos;
 using Spring2.Core.DAO;
 
-namespace Spring2.Dss.Facade {
+namespace Spring2.Core.PostSharp {
 
     /// <summary>
     /// Custom attribute that will create a DbConnectionScope for the attributed method.  The default option, if not specified, is Required.
