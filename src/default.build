@@ -81,7 +81,6 @@
 	<exec program="${msbuild}"  >
 	    <arg value="Spring2.Core.sln" />
 	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
-	    <arg value="/verbosity:minimal" />
 	    <arg value="/target:Build" />
 	</exec>
 	
@@ -96,19 +95,16 @@
 	<exec program="${msbuild}"  >
 	    <arg value="Spring2.Core.Ajax.Json.csproj" />
 	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
-	    <arg value="/verbosity:minimal" />
 	    <arg value="/target:Build" />
 	</exec>
 	<exec program="${msbuild}"  >
 	    <arg value="Spring2.Core.Ajax.csproj" />
 	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
-	    <arg value="/verbosity:minimal" />
 	    <arg value="/target:Build" />
 	</exec>
 	<exec program="${msbuild}"  >
 	    <arg value="Spring2.Core.Test.Ajax.csproj" />
 	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
-	    <arg value="/verbosity:minimal" />
 	    <arg value="/target:Build" />
 	</exec>
 
@@ -117,13 +113,11 @@
 	<exec program="${msbuild}">
 	    <arg value="Spring2.Core.WithTypes.csproj" />
 	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}\WithTypes" />
-	    <arg value="/verbosity:q" />
 	    <arg value="/target:Build" />
 	</exec>
 	<exec program="${msbuild}">
 	    <arg value="Spring2.Core.WithTypesTest.csproj" />
 	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}\WithTypes" />
-	    <arg value="/verbosity:q" />
 	    <arg value="/target:Build" />
 	</exec>
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
