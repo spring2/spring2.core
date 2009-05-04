@@ -2,7 +2,6 @@ using System;
 using System.Reflection;
 using System.Text;
 using log4net;
-using PayFlowPro;
 using Spring2.Core.Configuration;
 using Spring2.Core.Types;
 using Spring2.Core.Payment.PayflowPro;

@@ -5,7 +5,10 @@ using System.Web;
 
 using log4net;
 
-using PayFlowPro;
+using PayPal.Payments.Common.Utility;
+using PayPal.Payments.Communication;
+using PayPal.Payments.DataObjects;
+
 
 using Spring2.Core.Types;
 
@@ -19,13 +22,12 @@ namespace Spring2.Core.Payment.PayflowPro {
 
     	public virtual PaymentResult Execute() {
 	    PayflowProProviderConfiguration config = new PayflowProProviderConfiguration();
-	    PNComClass payflowPro = new PNComClass();
 	    Guid correlationId = Guid.NewGuid();
-	    int context = 0;
 	    try {
 		log.Info(string.Format("{0} ~ Submitting payment: {1} ~ RemoteAddress: {2}:{3}", correlationId, CommandText, config.HostAddress, config.HostPort));
-		context = payflowPro.CreateContext(config.HostAddress, config.HostPort, config.Timeout, config.ProxyAddress, config.ProxyPort, config.ProxyLogon, config.ProxyPassword);
-		string response = payflowPro.SubmitTransaction(context, config.ConnectionString + CommandText, CommandText.Length);
+		PayflowNETAPI pfp = new PayflowNETAPI(config.HostAddress, config.HostPort, config.Timeout, config.ProxyAddress, config.ProxyPort, config.ProxyLogon, config.ProxyPassword);
+
+		string response = pfp.SubmitTransaction(config.ConnectionString + CommandText, PayflowUtility.RequestId);
 		log.Info(string.Format("{0} ~ ResultMessage: {1} ~ RemoteAddress: {2}:{3}", correlationId, response, config.HostAddress, config.HostPort));
 
 		PaymentResult result = ParseResult(response);
@@ -49,9 +51,6 @@ namespace Spring2.Core.Payment.PayflowPro {
 		log.Error(string.Format("{0} ~ Exception while submitting payment.", correlationId), ex);
 		throw;
 	    } finally {
-		if (context != 0) {
-		    payflowPro.DestroyContext(context);
-		}
 	    }
     	}
     	

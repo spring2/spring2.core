@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F490E6C4-2B1C-4EC8-8D89-80EC80B93C70}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -144,6 +144,10 @@
     <Reference Include="log4net">
       <Name>log4net</Name>
       <HintPath>..\lib\net-1.1\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Payflow_dotNET, Version=4.3.1.0, Culture=neutral, PublicKeyToken=14aa1e8d77f2a97c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\net-2.0\Payflow_dotNET.dll</HintPath>
     </Reference>
     <Reference Include="Spring2.DataTierGenerator.Attribute">
       <Name>Spring2.DataTierGenerator.Attribute</Name>
