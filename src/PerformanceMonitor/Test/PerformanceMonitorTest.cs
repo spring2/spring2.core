@@ -48,5 +48,9 @@ namespace Spring2.Core.Test {
             Assert.AreEqual(5, machines[0].IntervalInSeconds);
             Assert.AreEqual(20, machines[0].NumberOfSamples);
         }
+
+        [Test]
+        public void MonitorTest() {
+        }
     }
 }
