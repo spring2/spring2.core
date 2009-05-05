@@ -72,6 +72,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.HTTP", "Spring
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.StyleCop", "Spring2.Core.StyleCop.csproj", "{3F95B01D-0285-459C-A1EA-61919B8C8E0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.PerformanceMonitor", "Spring2.Core.PerformanceMonitor.csproj", "{0B65B021-66CF-4810-82D0-878E730F7E1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.PerformanceMonitor.Test", "Spring2.Core.PerformanceMonitor.Test.csproj", "{111D11D4-A5B1-4348-973E-BCB60B6F4A09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -349,6 +353,22 @@ Global
 		{3F95B01D-0285-459C-A1EA-61919B8C8E0F}.NET_2_0|Any CPU.Build.0 = NET_2_0|Any CPU
 		{3F95B01D-0285-459C-A1EA-61919B8C8E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F95B01D-0285-459C-A1EA-61919B8C8E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B65B021-66CF-4810-82D0-878E730F7E1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B65B021-66CF-4810-82D0-878E730F7E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B65B021-66CF-4810-82D0-878E730F7E1A}.NET_1_1|Any CPU.ActiveCfg = Release|Any CPU
+		{0B65B021-66CF-4810-82D0-878E730F7E1A}.NET_1_1|Any CPU.Build.0 = Release|Any CPU
+		{0B65B021-66CF-4810-82D0-878E730F7E1A}.NET_2_0|Any CPU.ActiveCfg = Release|Any CPU
+		{0B65B021-66CF-4810-82D0-878E730F7E1A}.NET_2_0|Any CPU.Build.0 = Release|Any CPU
+		{0B65B021-66CF-4810-82D0-878E730F7E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B65B021-66CF-4810-82D0-878E730F7E1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{111D11D4-A5B1-4348-973E-BCB60B6F4A09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{111D11D4-A5B1-4348-973E-BCB60B6F4A09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{111D11D4-A5B1-4348-973E-BCB60B6F4A09}.NET_1_1|Any CPU.ActiveCfg = Release|Any CPU
+		{111D11D4-A5B1-4348-973E-BCB60B6F4A09}.NET_1_1|Any CPU.Build.0 = Release|Any CPU
+		{111D11D4-A5B1-4348-973E-BCB60B6F4A09}.NET_2_0|Any CPU.ActiveCfg = Release|Any CPU
+		{111D11D4-A5B1-4348-973E-BCB60B6F4A09}.NET_2_0|Any CPU.Build.0 = Release|Any CPU
+		{111D11D4-A5B1-4348-973E-BCB60B6F4A09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{111D11D4-A5B1-4348-973E-BCB60B6F4A09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
