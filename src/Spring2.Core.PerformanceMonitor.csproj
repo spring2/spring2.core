@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=b32731d11ce58905">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -49,11 +53,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PerformanceMonitor\AssemblyInfo.cs" />
+    <Compile Include="PerformanceMonitor\BusinessLogic\PerformanceCounterContainer.cs" />
     <Compile Include="PerformanceMonitor\BusinessLogic\PerformanceCounterDefinition.cs" />
+    <Compile Include="PerformanceMonitor\BusinessLogic\PerformanceData.cs" />
     <Compile Include="PerformanceMonitor\BusinessLogic\PerformanceMachineDefinition.cs" />
     <Compile Include="PerformanceMonitor\DAO\PerformanceCounterDefinitionDAO.cs" />
+    <Compile Include="PerformanceMonitor\DAO\PerformanceDataDAO.cs" />
     <Compile Include="PerformanceMonitor\DAO\PerformanceMachineDefinitionDAO.cs" />
     <Compile Include="PerformanceMonitor\DataObject\IPerformanceCounterDefinition.cs" />
+    <Compile Include="PerformanceMonitor\DataObject\IPerformanceData.cs" />
     <Compile Include="PerformanceMonitor\DataObject\IPerformanceMachineDefinition.cs" />
     <Compile Include="PerformanceMonitor\Types\PerformanceCounterCalculationTypeEnum.cs" />
   </ItemGroup>

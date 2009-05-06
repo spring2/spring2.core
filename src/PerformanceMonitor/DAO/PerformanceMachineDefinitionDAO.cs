@@ -373,11 +373,7 @@ namespace Spring2.Core.PerformanceMonitor.DAO {
             filter.And(new SqlEqualityPredicate("MachineName", EqualityOperatorEnum.Equal, machineName));
             IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);
             try {
-                if (dataReader.Read()) {
-                    return GetDataObject(dataReader);
-                } else {
-                    return null;
-                }
+                return GetDataObject(dataReader);
             } finally {
                 dataReader.Close();
             }

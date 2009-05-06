@@ -93,12 +93,12 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
         /// <param name="counterName"></param>
         /// <param name="instanceName"></param>
         /// <returns></returns>
-        public static PerformanceCounterDefinition Create(Int32? performanceMachineDefinitionId, String categoryName, String counterName, String instanceName) {
+        public static PerformanceCounterDefinition Create(Int32? performanceMachineDefinitionId, PerformanceCounterCalculationTypeEnum calculationType, String categoryName, String counterName, String instanceName) {
             PerformanceCounterDefinition def = new PerformanceCounterDefinition(true);
             def.PerformanceMachineDefinitionId = performanceMachineDefinitionId;
             def.CategoryName = categoryName;
             def.CounterName = counterName;
-            def.CalculationType = PerformanceCounterCalculationTypeEnum.SNAPSHOT;
+            def.CalculationType = calculationType;
             def.InstanceName = instanceName;
 
             def.Store();

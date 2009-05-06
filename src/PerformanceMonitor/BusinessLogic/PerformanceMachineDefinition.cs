@@ -1,4 +1,6 @@
-﻿using Spring2.Core.Message;
+﻿using log4net;
+
+using Spring2.Core.Message;
 using Spring2.Core.PerformanceMonitor.DAO;
 using Spring2.Core.PerformanceMonitor.DataObject;
 using Spring2.Core.PerformanceMonitor.Types;
@@ -18,12 +20,24 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
         Int32? intervalInSeconds = null;
         Int32? numberOfSamples = null;
 
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private PerformanceMachineDefinition() {
             this.isNew = false;
         }
 
         internal PerformanceMachineDefinition(Boolean isNew) {
             this.isNew = IsNew;
+        }
+
+        /// <summary>
+        /// Returns the machine name of the machine we are running on.
+        /// </summary>
+        public static String CurrentMachineName {
+            get {
+                PerformanceCounter x = new PerformanceCounter("Processor", "% Processor Time", "_Total", true);
+                return x.MachineName;
+            }
         }
 
         /// <summary>
@@ -117,54 +131,75 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
         public void Reload() {
             PerformanceMachineDefinitionDAO.DAO.Reload(this);
         }
-        /*
-                public void Monitor(Int32 interval) {
-                    PerformanceData performanceData = new PerformanceData();
-                    //TODO:  Ability to monitor any performance object, counter, and instance
-                    PerformanceCounter cpu = new PerformanceCounter("Processor", "% Processor Time", "_Total", true);
-                    PerformanceCounter currentDiskQueue = new PerformanceCounter("PhysicalDisk", "Current Disk Queue Length", "_Total", true);
-                    performanceData.Interval = StringType.Parse(interval.ToString());
-                    performanceData.MachineName = StringType.Parse(cpu.MachineName.ToString());
-                    performanceData.Instance = StringType.Parse(cpu.InstanceName.ToString());
-                    cpu.NextValue();  // mark the start of the interval
-                    int adjustedInterval = interval * 4;
-                    int counter = 0;
-                    float periodValue = 0;
-                    float maxValue = 0;
-                    float maxDiskQueue = 0;
-                    float preAvg = 0;
-                    float periodDiskQueue = 0;
 
-                    while (!stopNow) {
-                        try {
-                            preAvg = 0;
-                            counter = 0;
+        /// <summary>
+        /// Monitors defined counters until killed
+        /// </summary>
+        public void Monitor() {
+            Monitor(0);
+        }
 
-                            while (counter < adjustedInterval) {
-                                preAvg += currentDiskQueue.NextValue();
-                                System.Threading.Thread.Sleep(250); //sleep for 1/4 sec.
-                                counter++;
+        /// <summary>
+        /// Monitors defined couters for indicated number of interations
+        /// </summary>
+        /// <param name="numberOfIterations">Number of iterations to go. If < 1 then go forever.</param>
+        public void Monitor(Int32 numberOfIterations) {
+            List<PerformanceCounterDefinition> counterDefinitions = PerformanceCounterDefinitionDAO.DAO.FindByPerformanceMachineDefinitionId(PerformanceMachineDefinitionId);
+
+            List<PerformanceCounterContainer> averageCounters = new List<PerformanceCounterContainer>();
+            List<PerformanceCounterContainer> snapshotCounters = new List<PerformanceCounterContainer>();
+            foreach (PerformanceCounterDefinition counterDefinition in counterDefinitions) {
+                PerformanceCounter c = new PerformanceCounter(counterDefinition.CategoryName, counterDefinition.CounterName, counterDefinition.InstanceName, true);
+                PerformanceCounterContainer container = new PerformanceCounterContainer(counterDefinition, c);
+                if (counterDefinition.CalculationType == PerformanceCounterCalculationTypeEnum.AVERAGE) {
+                    averageCounters.Add(container);
+                } else if (counterDefinition.CalculationType == PerformanceCounterCalculationTypeEnum.SNAPSHOT) {
+                    snapshotCounters.Add(container);
+                } else {
+                    log.Error("Unexpected calculation type '" + counterDefinition.CalculationType.ToString() + "' found for machine '" + MachineName + "', Category '" + counterDefinition.CategoryName + "', counter '" + counterDefinition.CounterName + "', instance '" + counterDefinition.InstanceName);
+                }
+            }
+            if (snapshotCounters.Count == 0 && averageCounters.Count == 0) {
+                log.Error("No counter definitions found for machine '" + MachineName + "'.");
+                return;
+            }
+
+            int counter = 0;
+            int iterationCount = 0;
+            int sleepAmount = (((int)IntervalInSeconds) * 1000) / (int)NumberOfSamples;
+            while (numberOfIterations < 1 || iterationCount < numberOfIterations) {
+                try {
+                    iterationCount++;
+                    if (averageCounters.Count > 0) {
+                        counter = 0;
+
+                        while (counter < NumberOfSamples) {
+                            foreach (PerformanceCounterContainer c in averageCounters) {
+                                c.PreAverage += c.counter.NextValue();
                             }
-                            GC.Collect();
-                            periodValue = cpu.NextValue();
-                            periodDiskQueue = preAvg / (adjustedInterval);
-
-                            // log to performance table
-                            performanceData.EventTime = new DateType(DateTime.Now);
-                            performanceData.AverageDbCPU = new DecimalType(periodValue);
-                            performanceData.AverageDataDriveQueueLength = new DecimalType(Convert.ToDecimal(periodDiskQueue));
-                            PerformanceDAO.Insert(performanceData);
-
-                            if (periodValue > maxValue) {
-                                maxValue = periodValue;
-                            }
-                            if (periodDiskQueue > maxDiskQueue) {
-                                maxDiskQueue = periodDiskQueue;
-                            }
-                        } catch (Exception ex) {
-                            LogMessage("Exception in notification class:" + ex.ToString());
+                            System.Threading.Thread.Sleep(sleepAmount);
+                            counter++;
                         }
+
+                        foreach (PerformanceCounterContainer c in averageCounters) {
+                            PerformanceData.Create(this, c.counterDefinition, c.PreAverage / ((float)NumberOfSamples));
+                            c.PreAverage = 0F;
+                        }
+                    } else {
+                        System.Threading.Thread.Sleep((int)IntervalInSeconds * 1000);
                     }
-                }*/
+
+                    foreach (PerformanceCounterContainer c in snapshotCounters) {
+                        PerformanceData.Create(this, c.counterDefinition, c.counter.NextValue());
+                    }
+                    GC.Collect();
+                } catch (Exception ex) {
+                    log.Error("Exception in notification class", ex);
+                    foreach (PerformanceCounterContainer c in averageCounters) {
+                        c.PreAverage = 0F;
+                    }
+                }
+            }
+        }
     }
 }

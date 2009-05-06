@@ -383,7 +383,7 @@ namespace Spring2.Core.PerformanceMonitor.DAO {
 	/// </summary>
         /// <param name="performanceMachineDefinitionId">A field value to be matched.</param>
         /// <returns>The list of PerformanceCounterDefinition objects found.</returns>
-	public List<PerformanceCounterDefinition> FindByPerformanceMachineDefinitionId(String performanceMachineDefinitionId) {
+	public List<PerformanceCounterDefinition> FindByPerformanceMachineDefinitionId(Int32? performanceMachineDefinitionId) {
             OrderByClause sort = new OrderByClause("PerformanceCounterDefinitionId");
 	    SqlFilter filter = new SqlFilter();
             filter.And(new SqlEqualityPredicate("PerformanceMachineDefinitionId", EqualityOperatorEnum.Equal, performanceMachineDefinitionId));
