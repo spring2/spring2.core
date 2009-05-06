@@ -80,17 +80,23 @@
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
 	<exec program="${msbuild}"  >
 	    <arg value="Spring2.Core.sln" />
-	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
+	    <!--<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />-->
 	    <arg value="/target:Build" />
 	</exec>
 	
 	<copy todir="..\build\${nant.settings.currentframework}\">
-	    <fileset basedir="..\build\SendMailMessages\">
-	        <include name="*" />
+	    <fileset basedir="..\build\">
+	        <include name="SendMailMessages\*" />
 	    </fileset>
 	</copy>
 	<delete dir="..\build\SendMailMessages" if="${directory::exists('..\build\SendMailMessages')}" failonerror="false" />
 	
+	<copy todir="..\build\${nant.settings.currentframework}\">
+	    <fileset basedir="..\build\">
+	        <include name="PerformanceMonitorWindowsService\*" />
+	    </fileset>
+	</copy>
+	<delete dir="..\build\PerformanceMonitorWindowsService" if="${directory::exists('..\build\PerformanceMonitorWindowsService')}" failonerror="false" />
 
 	<exec program="${msbuild}"  >
 	    <arg value="Spring2.Core.Ajax.Json.csproj" />
