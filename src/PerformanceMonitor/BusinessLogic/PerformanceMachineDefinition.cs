@@ -214,12 +214,12 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
 
         private void LogMessage(string message) {
             log.Error(message);
-            EventLog.WriteEntry("Spring2.Core.PerformanceMonitor", message, EventLogEntryType.Error);
+            EventLog.WriteEntry("Spring2 Performance Monitor", message, EventLogEntryType.Error);
         }
 
         private void LogMessage(string message, Exception ex) {
             log.Error(message, ex);
-            EventLog.WriteEntry("Spring2.Core.PerformanceMonitor", message + ": " + ex.Message, EventLogEntryType.Error);
+            EventLog.WriteEntry("Spring2 Performance Monitor", message + ": " + ex.Message, EventLogEntryType.Error);
         }
     }
 }

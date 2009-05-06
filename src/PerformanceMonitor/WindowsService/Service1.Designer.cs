@@ -1,5 +1,5 @@
 ﻿namespace PerformanceMonitor.WindowsService {
-    partial class Service1 {
+    partial class Spring2CorePerformanceMonitor {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -23,8 +23,11 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+            // 
+            // Spring2CorePerformanceMonitor
+            // 
+            this.ServiceName = "Spring2 Performance Monitor";
+
         }
 
         #endregion

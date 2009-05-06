@@ -13,7 +13,7 @@ namespace PerformanceMonitor.WindowsService {
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
 			{ 
-				new Service1() 
+				new Spring2CorePerformanceMonitor() 
 			};
             ServiceBase.Run(ServicesToRun);
         }
