@@ -15,10 +15,11 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
     /// Class for handling monitoring performance for a machine
     /// </summary>
     public class PerformanceMachineDefinition : Spring2.Core.BusinessEntity.BusinessEntity, IPerformanceMachineDefinition {
-        Int32? performanceMachineDefinitionId = null;
-        String machineName = null;
-        Int32? intervalInSeconds = null;
-        Int32? numberOfSamples = null;
+        private Int32? performanceMachineDefinitionId = null;
+        private String machineName = null;
+        private Int32? intervalInSeconds = null;
+        private Int32? numberOfSamples = null;
+        private bool stopNow = false;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -35,9 +36,16 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
         /// </summary>
         public static String CurrentMachineName {
             get {
-                PerformanceCounter x = new PerformanceCounter("Processor", "% Processor Time", "_Total", true);
-                return x.MachineName;
+                return Environment.MachineName;
             }
+        }
+
+        /// <summary>
+        /// Setting this to true will cause monitor to stop.
+        /// </summary>
+        public bool StopNow {
+            get { return stopNow; }
+            set { stopNow = value; }
         }
 
         /// <summary>
@@ -144,6 +152,8 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
         /// </summary>
         /// <param name="numberOfIterations">Number of iterations to go. If < 1 then go forever.</param>
         public void Monitor(Int32 numberOfIterations) {
+            // Uncomment following line to allow for attach for debugging.
+            //System.Threading.Thread.Sleep(30000);
             List<PerformanceCounterDefinition> counterDefinitions = PerformanceCounterDefinitionDAO.DAO.FindByPerformanceMachineDefinitionId(PerformanceMachineDefinitionId);
 
             List<PerformanceCounterContainer> averageCounters = new List<PerformanceCounterContainer>();
@@ -156,18 +166,18 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
                 } else if (counterDefinition.CalculationType == PerformanceCounterCalculationTypeEnum.SNAPSHOT) {
                     snapshotCounters.Add(container);
                 } else {
-                    log.Error("Unexpected calculation type '" + counterDefinition.CalculationType.ToString() + "' found for machine '" + MachineName + "', Category '" + counterDefinition.CategoryName + "', counter '" + counterDefinition.CounterName + "', instance '" + counterDefinition.InstanceName);
+                    LogMessage("Unexpected calculation type '" + counterDefinition.CalculationType.ToString() + "' found for machine '" + MachineName + "', Category '" + counterDefinition.CategoryName + "', counter '" + counterDefinition.CounterName + "', instance '" + counterDefinition.InstanceName);
                 }
             }
             if (snapshotCounters.Count == 0 && averageCounters.Count == 0) {
-                log.Error("No counter definitions found for machine '" + MachineName + "'.");
+                LogMessage("No counter definitions found for machine '" + MachineName + "'.");
                 return;
             }
 
             int counter = 0;
             int iterationCount = 0;
             int sleepAmount = (((int)IntervalInSeconds) * 1000) / (int)NumberOfSamples;
-            while (numberOfIterations < 1 || iterationCount < numberOfIterations) {
+            while (!StopNow && (numberOfIterations < 1 || iterationCount < numberOfIterations)) {
                 try {
                     iterationCount++;
                     if (averageCounters.Count > 0) {
@@ -194,12 +204,22 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
                     }
                     GC.Collect();
                 } catch (Exception ex) {
-                    log.Error("Exception in notification class", ex);
+                    LogMessage("Exception in notification class", ex);
                     foreach (PerformanceCounterContainer c in averageCounters) {
                         c.PreAverage = 0F;
                     }
                 }
             }
+        }
+
+        private void LogMessage(string message) {
+            log.Error(message);
+            EventLog.WriteEntry("Spring2.Core.PerformanceMonitor", message, EventLogEntryType.Error);
+        }
+
+        private void LogMessage(string message, Exception ex) {
+            log.Error(message, ex);
+            EventLog.WriteEntry("Spring2.Core.PerformanceMonitor", message + ": " + ex.Message, EventLogEntryType.Error);
         }
     }
 }

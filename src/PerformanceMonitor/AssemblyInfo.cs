@@ -27,3 +27,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDelaySign(false)]
 
 [assembly: AssemblyKeyName("")]
+
+[assembly: log4net.Config.XmlConfigurator(Watch=false)]
+

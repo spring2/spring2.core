@@ -217,6 +217,11 @@
             Returns the machine name of the machine we are running on.
             </summary>
         </member>
+        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.StopNow">
+            <summary>
+            Setting this to true will cause monitor to stop.
+            </summary>
+        </member>
         <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.PerformanceMachineDefinitionId">
             <summary>
             Generated Id
