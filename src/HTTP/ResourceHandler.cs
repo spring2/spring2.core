@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Web;
 using System.Drawing.Imaging;
 using System.Configuration;
+using System.IO;
 
 namespace Spring2.Core.HTTP {
     public class ResourceHandler : IHttpHandler {
@@ -56,7 +57,9 @@ namespace Spring2.Core.HTTP {
 		Image img = Image.FromFile(fileName);
 		img.Save(context.Response.OutputStream, imageFormat);
 	    } else {
-		context.Response.Write(System.IO.File.OpenText(fileName).ReadToEnd());
+		StreamReader sr = File.OpenText(fileName);
+		context.Response.Write(sr.ReadToEnd());
+		sr.Close();
 	    }
 	}
 
