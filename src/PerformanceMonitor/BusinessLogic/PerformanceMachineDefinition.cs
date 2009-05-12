@@ -168,6 +168,8 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
                 } else {
                     LogMessage("Unexpected calculation type '" + counterDefinition.CalculationType.ToString() + "' found for machine '" + MachineName + "', Category '" + counterDefinition.CategoryName + "', counter '" + counterDefinition.CounterName + "', instance '" + counterDefinition.InstanceName);
                 }
+                // Use up value in case it has been a long time (mainly for delta)
+                container.counter.NextValue();
             }
             if (snapshotCounters.Count == 0 && averageCounters.Count == 0) {
                 LogMessage("No counter definitions found for machine '" + MachineName + "'.");
