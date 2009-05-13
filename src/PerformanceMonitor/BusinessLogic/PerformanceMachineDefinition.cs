@@ -160,17 +160,32 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
                 List<PerformanceCounterDefinition> counterDefinitions = PerformanceCounterDefinitionDAO.DAO.FindByPerformanceMachineDefinitionId(PerformanceMachineDefinitionId);
 
                 foreach (PerformanceCounterDefinition counterDefinition in counterDefinitions) {
-                    PerformanceCounter c = new PerformanceCounter(counterDefinition.CategoryName, counterDefinition.CounterName, counterDefinition.InstanceName, true);
+                    if (!PerformanceCounterCategory.Exists(counterDefinition.CategoryName)) {
+                        LogMessage("Undefined category found for machine '" + MachineName + "': " + counterDefinition.CategoryName + ".  Counter Ignored");
+                        continue;
+                    }
+                    if (!PerformanceCounterCategory.CounterExists(counterDefinition.CounterName, counterDefinition.CategoryName)) {
+                        LogMessage("Undefined Counter found for category '" + counterDefinition.CategoryName + "' on Machine '" + MachineName + "': " + counterDefinition.CounterName + ".  Counter ignored.");
+                        continue;
+                    }
+                    PerformanceCounter c = null;
+                    if (!PerformanceCounterCategory.InstanceExists(counterDefinition.InstanceName, counterDefinition.CategoryName)) {
+                        LogMessage("Undefined instance found for category '" + counterDefinition.CategoryName + "' on Machine '" + MachineName + ": " + counterDefinition.InstanceName + ".  Will continue trying.");
+                    } else {
+                        c = new PerformanceCounter(counterDefinition.CategoryName, counterDefinition.CounterName, counterDefinition.InstanceName, true);
+                    }
                     PerformanceCounterContainer container = new PerformanceCounterContainer(counterDefinition, c);
                     if (counterDefinition.CalculationType == PerformanceCounterCalculationTypeEnum.AVERAGE) {
                         averageCounters.Add(container);
                     } else if (counterDefinition.CalculationType == PerformanceCounterCalculationTypeEnum.SNAPSHOT) {
                         snapshotCounters.Add(container);
                     } else {
-                        LogMessage("Unexpected calculation type '" + counterDefinition.CalculationType.ToString() + "' found for machine '" + MachineName + "', Category '" + counterDefinition.CategoryName + "', counter '" + counterDefinition.CounterName + "', instance '" + counterDefinition.InstanceName);
+                        LogMessage("Unexpected calculation type '" + counterDefinition.CalculationType.ToString() + "' found for machine '" + MachineName + "', Category '" + counterDefinition.CategoryName + "', counter '" + counterDefinition.CounterName + "', instance '" + counterDefinition.InstanceName + ".  Counter ignored.");
                     }
                     // Use up value in case it has been a long time (mainly for delta)
-                    container.counter.NextValue();
+                    if (container.counter != null) {
+                        container.counter.NextValue();
+                    }
                 }
                 if (snapshotCounters.Count == 0 && averageCounters.Count == 0) {
                     LogMessage("No counter definitions found for machine '" + MachineName + "'.");
@@ -192,22 +207,39 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
 
                         while (counter < NumberOfSamples) {
                             foreach (PerformanceCounterContainer c in averageCounters) {
-                                c.PreAverage += c.counter.NextValue();
+                                if (c.counter != null) {
+                                    c.PreAverage += c.counter.NextValue();
+                                }
                             }
                             System.Threading.Thread.Sleep(sleepAmount);
                             counter++;
                         }
 
                         foreach (PerformanceCounterContainer c in averageCounters) {
-                            PerformanceData.Create(this, c.counterDefinition, c.PreAverage / ((float)NumberOfSamples));
-                            c.PreAverage = 0F;
+                            if (c.counter != null) {
+                                PerformanceData.Create(this, c.counterDefinition, c.PreAverage / ((float)NumberOfSamples));
+                            } else {
+                                // Try to create counter again
+                                if (PerformanceCounterCategory.InstanceExists(c.counterDefinition.InstanceName, c.counterDefinition.CategoryName)) {
+                                    c.counter = new PerformanceCounter(c.counterDefinition.CategoryName, c.counterDefinition.CounterName, c.counterDefinition.InstanceName, true);
+                                    c.counter.NextValue();
+                                }
+                            }
                         }
                     } else {
                         System.Threading.Thread.Sleep((int)IntervalInSeconds * 1000);
                     }
 
                     foreach (PerformanceCounterContainer c in snapshotCounters) {
-                        PerformanceData.Create(this, c.counterDefinition, c.counter.NextValue());
+                        if (c.counter != null) {
+                            PerformanceData.Create(this, c.counterDefinition, c.counter.NextValue());
+                        } else {
+                            // Try to create counter again
+                            if (PerformanceCounterCategory.InstanceExists(c.counterDefinition.InstanceName, c.counterDefinition.CategoryName)) {
+                                c.counter = new PerformanceCounter(c.counterDefinition.CategoryName, c.counterDefinition.CounterName, c.counterDefinition.InstanceName, true);
+                                c.counter.NextValue();
+                            }
+                        }
                     }
                     GC.Collect();
                 } catch (Exception ex) {
