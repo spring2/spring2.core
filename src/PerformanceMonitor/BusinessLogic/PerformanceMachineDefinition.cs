@@ -154,25 +154,30 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
         public void Monitor(Int32 numberOfIterations) {
             // Uncomment following line to allow for attach for debugging.
             //System.Threading.Thread.Sleep(30000);
-            List<PerformanceCounterDefinition> counterDefinitions = PerformanceCounterDefinitionDAO.DAO.FindByPerformanceMachineDefinitionId(PerformanceMachineDefinitionId);
-
             List<PerformanceCounterContainer> averageCounters = new List<PerformanceCounterContainer>();
             List<PerformanceCounterContainer> snapshotCounters = new List<PerformanceCounterContainer>();
-            foreach (PerformanceCounterDefinition counterDefinition in counterDefinitions) {
-                PerformanceCounter c = new PerformanceCounter(counterDefinition.CategoryName, counterDefinition.CounterName, counterDefinition.InstanceName, true);
-                PerformanceCounterContainer container = new PerformanceCounterContainer(counterDefinition, c);
-                if (counterDefinition.CalculationType == PerformanceCounterCalculationTypeEnum.AVERAGE) {
-                    averageCounters.Add(container);
-                } else if (counterDefinition.CalculationType == PerformanceCounterCalculationTypeEnum.SNAPSHOT) {
-                    snapshotCounters.Add(container);
-                } else {
-                    LogMessage("Unexpected calculation type '" + counterDefinition.CalculationType.ToString() + "' found for machine '" + MachineName + "', Category '" + counterDefinition.CategoryName + "', counter '" + counterDefinition.CounterName + "', instance '" + counterDefinition.InstanceName);
+            try {
+                List<PerformanceCounterDefinition> counterDefinitions = PerformanceCounterDefinitionDAO.DAO.FindByPerformanceMachineDefinitionId(PerformanceMachineDefinitionId);
+
+                foreach (PerformanceCounterDefinition counterDefinition in counterDefinitions) {
+                    PerformanceCounter c = new PerformanceCounter(counterDefinition.CategoryName, counterDefinition.CounterName, counterDefinition.InstanceName, true);
+                    PerformanceCounterContainer container = new PerformanceCounterContainer(counterDefinition, c);
+                    if (counterDefinition.CalculationType == PerformanceCounterCalculationTypeEnum.AVERAGE) {
+                        averageCounters.Add(container);
+                    } else if (counterDefinition.CalculationType == PerformanceCounterCalculationTypeEnum.SNAPSHOT) {
+                        snapshotCounters.Add(container);
+                    } else {
+                        LogMessage("Unexpected calculation type '" + counterDefinition.CalculationType.ToString() + "' found for machine '" + MachineName + "', Category '" + counterDefinition.CategoryName + "', counter '" + counterDefinition.CounterName + "', instance '" + counterDefinition.InstanceName);
+                    }
+                    // Use up value in case it has been a long time (mainly for delta)
+                    container.counter.NextValue();
                 }
-                // Use up value in case it has been a long time (mainly for delta)
-                container.counter.NextValue();
-            }
-            if (snapshotCounters.Count == 0 && averageCounters.Count == 0) {
-                LogMessage("No counter definitions found for machine '" + MachineName + "'.");
+                if (snapshotCounters.Count == 0 && averageCounters.Count == 0) {
+                    LogMessage("No counter definitions found for machine '" + MachineName + "'.");
+                    return;
+                }
+            } catch (Exception ex) {
+                LogMessage("Error setting up counters.", ex);
                 return;
             }
 
