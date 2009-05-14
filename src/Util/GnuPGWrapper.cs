@@ -446,11 +446,6 @@ namespace Spring2.Core.Util {
 		_processObject.StandardInput.Flush();
 	    }
 
-	    // Send input text
-	    _processObject.StandardInput.Write(inputText);
-	    _processObject.StandardInput.Flush();
-	    _processObject.StandardInput.Close();
-
 	    _outputString = "";
 	    _errorString = "";
 
@@ -461,6 +456,11 @@ namespace Spring2.Core.Util {
 	    ThreadStart errorEntry = new ThreadStart(StandardErrorReader);
 	    Thread errorThread = new Thread(errorEntry);
 	    errorThread.Start();
+
+	    // Send input text
+	    _processObject.StandardInput.Write(inputText);
+	    _processObject.StandardInput.Flush();
+	    _processObject.StandardInput.Close();
 
 	    if (_processObject.WaitForExit(ProcessTimeOutMilliseconds)) {
 		// Process exited before timeout...
