@@ -13,7 +13,6 @@ namespace Spring2.Core.HTTP {
 	private String contentType = String.Empty;
 	private ImageFormat imageFormat = null;
 	private const String APPSETTING_RESOURCEDLL = "Spring2.Core.HTTP.ResourceHandler_ResourceDll";
-	private const String APPSETTING_RESOUREFILEPREFIX = "Spring2.Core.HTTP.ResourceHandler_ResourceFilePrefix";
 	private const String APPSETTING_RESOURCETYPE = "Spring2.Core.HTTP.ResourceHandler_Type";
 
 	public void ProcessRequest(HttpContext context) {
@@ -64,7 +63,7 @@ namespace Spring2.Core.HTTP {
 	    String resourceObject = resource.Substring(0, resource.IndexOf("."));
 	    String resourceProperty = resource.Substring(resourceObject.Length + 1).Replace(".", "_").Replace("/", @"\");
 
-	    ResourceManager rm = ResourceManager.CreateFileBasedResourceManager(ConfigurationSettings.AppSettings[APPSETTING_RESOUREFILEPREFIX] + resourceObject, context.Server.MapPath("bin").Replace(@"\~", ""), null);
+	    ResourceManager rm = ResourceManager.CreateFileBasedResourceManager(resourceObject, context.Server.MapPath("bin").Replace(@"\~", ""), null);
 
 	    if(imageFormat != null) {
 		Bitmap bitmap = (Bitmap)rm.GetObject(resourceProperty);
