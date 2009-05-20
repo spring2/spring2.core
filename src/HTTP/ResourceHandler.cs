@@ -53,7 +53,7 @@ namespace Spring2.Core.HTTP {
 
 	    if(imageFormat != null) {
 		Bitmap bitmap = (Bitmap)rm.GetObject(resourceProperty);
-		bitmap.Save(context.Response.OutputStream, imageFormat);
+		ImageToOutputStream(bitmap as Image, context);
 	    } else {
 		context.Response.Write(rm.GetString(resourceProperty));
 	    }
@@ -67,7 +67,7 @@ namespace Spring2.Core.HTTP {
 
 	    if(imageFormat != null) {
 		Bitmap bitmap = (Bitmap)rm.GetObject(resourceProperty);
-		bitmap.Save(context.Response.OutputStream, imageFormat);
+		ImageToOutputStream(bitmap as Image, context);
 	    } else {
 		context.Response.Write(rm.GetString(resourceProperty));
 	    }
@@ -81,12 +81,25 @@ namespace Spring2.Core.HTTP {
 
 	    if(imageFormat != null) {
 		Image img = Image.FromFile(fileName);
-		img.Save(context.Response.OutputStream, imageFormat);
+		ImageToOutputStream(img, context);
 	    } else {
 		StreamReader sr = File.OpenText(fileName);
 		context.Response.Write(sr.ReadToEnd());
 		sr.Close();
 	    }
+	}
+
+	private void ImageToOutputStream(Image img, HttpContext context) {
+	    if(imageFormat == ImageFormat.Png) {
+		//special stuff
+		MemoryStream ms = new MemoryStream();
+		img.Save(ms, ImageFormat.Png);
+		ms.WriteTo(context.Response.OutputStream);
+		ms.Dispose();
+	    } else {
+		img.Save(context.Response.OutputStream, imageFormat);
+	    }
+	    img.Dispose();
 	}
 
 	private String GetExtension(String resource) {
