@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{599950D0-BE0E-4DD8-8D8A-89213A7F2265}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -67,6 +67,7 @@
     <Compile Include="PostSharp\DbConnectionScopeAttribute.cs" />
     <Compile Include="PostSharp\Log4NetTraceAttribute.cs" />
     <Compile Include="PostSharp\LogLevel.cs" />
+    <Compile Include="PostSharp\PerformanceCounterAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Spring2.Core.csproj">
@@ -80,6 +81,9 @@
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
+  <PropertyGroup>
+    <DontImportPostSharp>True</DontImportPostSharp>
+  </PropertyGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\lib\net-2.0\PostSharp\PostSharp-1.5.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
