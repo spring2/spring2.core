@@ -63,7 +63,7 @@ namespace Spring2.Core.HTTP {
 	    String resourceObject = resource.Substring(0, resource.IndexOf("."));
 	    String resourceProperty = resource.Substring(resourceObject.Length + 1).Replace(".", "_").Replace("/", @"\");
 
-	    ResourceManager rm = ResourceManager.CreateFileBasedResourceManager(resourceObject, context.Server.MapPath("bin").Replace(@"\~", ""), null);
+	    ResourceManager rm = ResourceManager.CreateFileBasedResourceManager(resourceObject, context.Server.MapPath("~/Bin").Replace(@"\~", ""), null);
 
 	    if(imageFormat != null) {
 		Bitmap bitmap = (Bitmap)rm.GetObject(resourceProperty);
