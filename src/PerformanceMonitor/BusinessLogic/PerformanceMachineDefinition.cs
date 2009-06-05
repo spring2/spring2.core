@@ -150,7 +150,7 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
         /// <summary>
         /// Monitors defined couters for indicated number of interations
         /// </summary>
-        /// <param name="numberOfIterations">Number of iterations to go. If < 1 then go forever.</param>
+        /// <param name="numberOfIterations">Number of iterations to go. If less than 1 then go forever.</param>
         public void Monitor(Int32 numberOfIterations) {
             // Uncomment following line to allow for attach for debugging.
             //System.Threading.Thread.Sleep(30000);

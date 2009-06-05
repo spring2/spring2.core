@@ -89,6 +89,7 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
         /// Creates a new definition for getting snapshots of a counter.
         /// </summary>
         /// <param name="performanceMachineDefinitionId"></param>
+        /// <param name="calculationType"></param>
         /// <param name="categoryName"></param>
         /// <param name="counterName"></param>
         /// <param name="instanceName"></param>

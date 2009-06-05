@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -10,55 +11,25 @@ using System.Threading;
 
 namespace Spring2.Core.PostSharp {
     [Serializable]
-    public sealed class PerformanceCounterAttribute : OnMethodBoundaryAspect {
+    public abstract class PerformanceCounterAttribute : OnMethodBoundaryAspect {
 
-        private string categoryName = null;
-        private string counterName = null;
-        private string instanceName = null;
-        private string counterType = null;
-        private string instanceParameterName = null;
-        private string instanceParameterPropertyName = null;
-        private bool isDisabled = false;
+        protected string categoryName = null;
+        protected string counterName = null;
+        protected string instanceName = null;
+        protected string instanceParameterName = null;
+        protected string instanceParameterPropertyName = null;
+        protected bool isDisabled = false;
         [NonSerialized]
-        private PropertyInfo instanceProperty = null;
-        private int instancePropertyIndex = -1;
-        private static List<PerformanceCounter> counters = new List<PerformanceCounter>();
+        protected PropertyInfo instanceProperty = null;
+        protected int instancePropertyIndex = -1;
+        protected static List<PerformanceCounter> counters = new List<PerformanceCounter>();
+        private enum InstanceType { Literal, Parameter, Return, ConfigurationSetting };
+        [NonSerialized]
+        private InstanceType instanceType = InstanceType.Literal;
 
-        private PerformanceCounterAttribute() { }
-
-        /// <summary>
-        /// Attribute to indicate a method invocation is used to modify a performance counter
-        /// </summary>
-        /// <param name="categoryName"></param>
-        /// <param name="counterName"></param>
-        /// <param name="instanceName"></param>
-        /// <param name="counterType">"INCREMENT" means increment the counter by one for each invocation.</param>
-        public PerformanceCounterAttribute(string categoryName, string counterName, string instanceName, string counterType) {
-            this.categoryName = categoryName;
-            this.counterName = counterName;
-            this.instanceName = instanceName;
-            this.counterType = counterType.ToUpper();
-        }
-
-        /// <summary>
-        /// Attribute to indicate a method invocation is used to modify a performance counter
-        /// </summary>
-        /// <param name="categoryName"></param>
-        /// <param name="counterName"></param>
-        /// <param name="instanceParameterName"></param>
-        /// <param name="instanceParameterPropertyName"></param>
-        /// <param name="counterType">"INCREMENT" means increment the counter by one for each invocation.</param>
-        public PerformanceCounterAttribute(string categoryName, string counterName, string instanceParameterName, string instanceParameterPropertyName, string counterType) {
-            this.categoryName = categoryName;
-            this.counterName = counterName;
-            this.instanceParameterName = instanceParameterName;
-            this.instanceParameterPropertyName = instanceParameterPropertyName;
-            this.counterType = counterType.ToUpper();
-        }
-
-        private PerformanceCounter FindCounter(string instanceName) {
+        private PerformanceCounter FindCounter(string counterName, string instanceName) {
             foreach (PerformanceCounter c in counters) {
-                if (c.CategoryName.Equals(this.categoryName) && c.CounterName.Equals(this.counterName) && c.InstanceName.Equals(instanceName)) {
+                if (c.CategoryName.Equals(this.categoryName) && c.CounterName.Equals(counterName) && c.InstanceName.Equals(instanceName)) {
                     return c;
                 }
             }
@@ -66,15 +37,21 @@ namespace Spring2.Core.PostSharp {
             return null;
         }
 
-        private PerformanceCounter GetCounter(string instanceName) {
-            PerformanceCounter c = FindCounter(instanceName);
+        protected PerformanceCounter GetCounter(string instanceName) {
+            return GetCounter(counterName, instanceName);
+        }
+
+        protected PerformanceCounter GetCounter(string counterName, string instanceName) {
+            PerformanceCounter c = FindCounter(counterName, instanceName);
             if (c == null) {
                 if (PerformanceCounterCategory.Exists(categoryName) && PerformanceCounterCategory.CounterExists(counterName, categoryName)) {
                     lock (counters) {
-                        c = FindCounter(instanceName);
+                        c = FindCounter(counterName, instanceName);
                         if (c == null) {
-                            c = new PerformanceCounter(categoryName, counterName, instanceName, false);
-                            counters.Add(c);
+                            if (instanceName != null) {
+                                c = new PerformanceCounter(categoryName, counterName, instanceName, false);
+                                counters.Add(c);
+                            }
                         }
                     }
                 }
@@ -84,33 +61,41 @@ namespace Spring2.Core.PostSharp {
         }
 
         public override void RuntimeInitialize(MethodBase method) {
+            instanceType = InstanceType.Literal;
             if (this.instanceName == null) {
                 if (this.instanceParameterName == null) {
                     this.isDisabled = true;
                     return;
                 }
-                if (this.instanceParameterName.ToUpper().Equals("RETURN")) {
+                if (this.instanceParameterName.ToUpper().Equals("CONFIGURATIONSETTING")) {
+                    instanceType = InstanceType.ConfigurationSetting;
                     if (this.instanceParameterPropertyName == null || this.instanceParameterPropertyName.Length == 0) {
-                        return;
-                    }
-                    if (!(method is MethodInfo)) {
                         this.isDisabled = true;
                         return;
                     }
-                    MethodInfo meth = (MethodInfo)method;
-                    Type t = meth.ReturnType;
-                    this.instanceProperty = t.GetProperty(this.instanceParameterPropertyName);
-                    if (this.instanceProperty == null) {
-                        this.isDisabled = true;
-                        return;
+                } else if (this.instanceParameterName.ToUpper().Equals("RETURN")) {
+                    instanceType = InstanceType.Return;
+                    if (this.instanceParameterPropertyName != null || this.instanceParameterPropertyName.Length > 0) {
+                        if (!(method is MethodInfo)) {
+                            this.isDisabled = true;
+                            return;
+                        }
+                        MethodInfo meth = (MethodInfo)method;
+                        Type t = meth.ReturnType;
+                        this.instanceProperty = GetProperty(t, this.instanceParameterPropertyName);
+                        if (this.instanceProperty == null) {
+                            this.isDisabled = true;
+                            return;
+                        }
                     }
                 } else {
+                    instanceType = InstanceType.Parameter;
                     ParameterInfo[] parms = method.GetParameters();
                     for (int i = 0; i < parms.Length; i++) {
                         if (parms[i].Name.Equals(this.instanceParameterName)) {
                             this.instancePropertyIndex = i;
                             if (this.instanceParameterPropertyName != null && this.instanceParameterPropertyName.Length > 0) {
-                                this.instanceProperty = parms[i].ParameterType.GetProperty(this.instanceParameterPropertyName);
+                                this.instanceProperty = GetProperty(parms[i].ParameterType, this.instanceParameterPropertyName);
                                 if (this.instanceProperty == null) {
                                     this.isDisabled = true;
                                     return;
@@ -121,41 +106,57 @@ namespace Spring2.Core.PostSharp {
                     }
                     if (this.instancePropertyIndex == -1) {
                         this.isDisabled = true;
+                        return;
                     }
                 }
             }
         }
 
-        public override void OnSuccess(MethodExecutionEventArgs eventArgs) {
-            if (this.isDisabled) {
-                return;
+        private PropertyInfo GetProperty(Type t, string property) {
+            try {
+                PropertyInfo p = t.GetProperty(property);
+                if (p == null) {
+                    Type[] interfaces = t.GetInterfaces();
+                    foreach (Type intrfc in interfaces) {
+                        p = intrfc.GetProperty(property);
+                        if (p != null) {
+                            break;
+                        }
+                    }
+                }
+                return p;
+            } catch (AmbiguousMatchException) {
+                return null;
             }
+        }
+
+        protected string GetInstanceName(MethodExecutionEventArgs eventArgs) {
             string localInstanceName = this.instanceName;
             if (localInstanceName == null) {
-                object instanceObject = null;
-                if (this.instanceParameterName.ToUpper().Equals("RETURN")) {
-                    instanceObject = eventArgs.ReturnValue;
+                if (instanceType == InstanceType.ConfigurationSetting) {
+                    localInstanceName = (string)ConfigurationSettings.AppSettings[instanceParameterPropertyName];
                 } else {
-                    object[] arguments = eventArgs.GetReadOnlyArgumentArray();
-                    instanceObject = arguments[this.instancePropertyIndex];
-                }
+                    object instanceObject = null;
+                    if (instanceType == InstanceType.Return) {
+                        instanceObject = eventArgs.ReturnValue;
+                    } else {
+                        object[] arguments = eventArgs.GetReadOnlyArgumentArray();
+                        instanceObject = arguments[this.instancePropertyIndex];
+                    }
 
-                if (instanceObject == null) {
-                    return;
-                }
+                    if (instanceObject == null) {
+                        return null;
+                    }
 
-                if (this.instanceProperty == null) {
-                    localInstanceName = instanceObject.ToString();
-                } else {
-                    localInstanceName = this.instanceProperty.GetValue(instanceObject, null).ToString();
+                    if (this.instanceProperty == null) {
+                        localInstanceName = instanceObject.ToString();
+                    } else {
+                        localInstanceName = this.instanceProperty.GetValue(instanceObject, null).ToString();
+                    }
                 }
             }
-            if (counterType.Equals("INCREMENT")) {
-                PerformanceCounter c = GetCounter(localInstanceName);
-                if (c != null) {
-                    c.Increment();
-                }
-            }
+
+            return localInstanceName;
         }
     }
 }

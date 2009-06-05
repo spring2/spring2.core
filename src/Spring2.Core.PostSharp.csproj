@@ -68,6 +68,8 @@
     <Compile Include="PostSharp\Log4NetTraceAttribute.cs" />
     <Compile Include="PostSharp\LogLevel.cs" />
     <Compile Include="PostSharp\PerformanceCounterAttribute.cs" />
+    <Compile Include="PostSharp\PerformanceCounterIncrementAttribute.cs" />
+    <Compile Include="PostSharp\PerformanceCounterResponseTimeAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Spring2.Core.csproj">

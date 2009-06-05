@@ -21,6 +21,7 @@
             Creates a new definition for getting snapshots of a counter.
             </summary>
             <param name="performanceMachineDefinitionId"></param>
+            <param name="calculationType"></param>
             <param name="categoryName"></param>
             <param name="counterName"></param>
             <param name="instanceName"></param>
@@ -83,10 +84,9 @@
             <summary>
             Creates a new definition for getting snapshots of a counter.
             </summary>
-            <param name="performanceMachineDefinitionId"></param>
-            <param name="categoryName"></param>
-            <param name="counterName"></param>
-            <param name="instanceName"></param>
+            <param name="machine"></param>
+            <param name="counter"></param>
+            <param name="sampleValue"></param>
             <returns></returns>
         </member>
         <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceData.Validate">
@@ -187,7 +187,12 @@
             Monitors defined counters until killed
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.Monitor(System.Int32)" -->
+        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.Monitor(System.Int32)">
+            <summary>
+            Monitors defined couters for indicated number of interations
+            </summary>
+            <param name="numberOfIterations">Number of iterations to go. If less than 1 then go forever.</param>
+        </member>
         <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.CurrentMachineName">
             <summary>
             Returns the machine name of the machine we are running on.

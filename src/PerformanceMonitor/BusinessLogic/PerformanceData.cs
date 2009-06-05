@@ -124,10 +124,9 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
         /// <summary>
         /// Creates a new definition for getting snapshots of a counter.
         /// </summary>
-        /// <param name="performanceMachineDefinitionId"></param>
-        /// <param name="categoryName"></param>
-        /// <param name="counterName"></param>
-        /// <param name="instanceName"></param>
+        /// <param name="machine"></param>
+        /// <param name="counter"></param>
+        /// <param name="sampleValue"></param>
         /// <returns></returns>
         public static PerformanceData Create(PerformanceMachineDefinition machine, PerformanceCounterDefinition counter, float sampleValue) {
             PerformanceData def = new PerformanceData(true);
