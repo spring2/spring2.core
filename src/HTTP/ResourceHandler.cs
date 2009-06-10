@@ -12,26 +12,13 @@ namespace Spring2.Core.HTTP {
     public class ResourceHandler : IHttpHandler {
 	private String contentType = String.Empty;
 	private ImageFormat imageFormat = null;
-	private const String APPSETTING_RESOURCEDLL = "Spring2.Core.HTTP.ResourceHandler_ResourceDll";
-	private const String APPSETTING_RESOURCETYPE = "Spring2.Core.HTTP.ResourceHandler_Type";
 
 	public void ProcessRequest(HttpContext context) {
 	    String resource = context.Request.Params["d"];
 	    SetTypeAndImageFormat(resource);
 
-	    String value = ConfigurationSettings.AppSettings[APPSETTING_RESOURCETYPE] != null ? ConfigurationSettings.AppSettings[APPSETTING_RESOURCETYPE].ToUpper() : String.Empty;
-	    switch(value) {
-		case "FILESYSTEM":
-		    this.ProcessResourceFromFile(context, resource);
-		    break;
-		case "RESOURCEFILE":
-		    this.ProcessResourcesFromResourceFile(context, resource);
-		    break;
-		case "RESOURCEASSEMBLY":
-		    this.ProcessResourceFromAssembly(context, resource);
-		    break;
-		default:
-		    throw new FormatException("'" + APPSETTING_RESOURCETYPE + "' app setting needs to be set to 'FileSystem', 'ResourceFile', or 'ResourceAssembly'");
+	    using (MemoryStream stream = ResourceUtility.GetResourceStream(context, resource, imageFormat)) {
+		stream.WriteTo(context.Response.OutputStream);		
 	    }
 
 	    context.Response.ContentType = contentType;
@@ -41,51 +28,6 @@ namespace Spring2.Core.HTTP {
 	public bool IsReusable {
 	    get {
 		return false;
-	    }
-	}
-
-	private void ProcessResourceFromAssembly(HttpContext context, String resource) {
-	    String resourceObject = resource.Substring(0, resource.IndexOf("."));
-	    String resourceProperty = resource.Substring(resourceObject.Length + 1).Replace(".", "_").Replace("/", @"\");
-
-	    Assembly asm = Assembly.Load(ConfigurationSettings.AppSettings[APPSETTING_RESOURCEDLL]);
-	    ResourceManager rm = new ResourceManager(resourceObject, asm);
-
-	    if(imageFormat != null) {
-		Bitmap bitmap = (Bitmap)rm.GetObject(resourceProperty);
-		ImageToOutputStream(bitmap as Image, context);
-	    } else {
-		context.Response.Write(rm.GetString(resourceProperty));
-	    }
-	}
-
-	private void ProcessResourcesFromResourceFile(HttpContext context, String resource) {
-	    String resourceObject = resource.Substring(0, resource.IndexOf("."));
-	    String resourceProperty = resource.Substring(resourceObject.Length + 1).Replace(".", "_").Replace("/", @"\");
-
-	    ResourceManager rm = ResourceManager.CreateFileBasedResourceManager(resourceObject, context.Server.MapPath("~/Bin").Replace(@"\~", ""), null);
-
-	    if(imageFormat != null) {
-		Bitmap bitmap = (Bitmap)rm.GetObject(resourceProperty);
-		ImageToOutputStream(bitmap as Image, context);
-	    } else {
-		context.Response.Write(rm.GetString(resourceProperty));
-	    }
-	}
-
-	private void ProcessResourceFromFile(HttpContext context, String resource) {
-	    String resourceObject = resource.Substring(0, resource.IndexOf("."));
-	    String resourceProperty = resource.Substring(resourceObject.Length + 1);
-
-	    String fileName = ConfigurationSettings.AppSettings[resourceObject] + @"\" + resourceProperty;
-
-	    if(imageFormat != null) {
-		Image img = Image.FromFile(fileName);
-		ImageToOutputStream(img, context);
-	    } else {
-		StreamReader sr = File.OpenText(fileName);
-		context.Response.Write(sr.ReadToEnd());
-		sr.Close();
 	    }
 	}
 
