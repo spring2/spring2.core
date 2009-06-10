@@ -118,10 +118,12 @@
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web">
       <Name>System.Web</Name>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyVersionInfo.cs">
@@ -133,6 +135,7 @@
     <Compile Include="HTTP\ResourceHandler.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="HTTP\ResourceUtility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
