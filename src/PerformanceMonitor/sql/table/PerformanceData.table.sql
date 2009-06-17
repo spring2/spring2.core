@@ -8,7 +8,7 @@ CREATE TABLE PerformanceData (
 	MachineName Varchar(50) NOT NULL,
 	CategoryName Varchar(50) NOT NULL,
 	CounterName Varchar(50) NOT NULL,
-	InstanceName Varchar(50) NOT NULL,
+	InstanceName Varchar(200) NOT NULL,
 	CalculationType Varchar(50) NOT NULL,
 	IntervalInSeconds int NOT NULL,
 	NumberOfSamples int NOT NULL,
