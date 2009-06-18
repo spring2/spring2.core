@@ -90,6 +90,7 @@ namespace Spring2.Core.HTTP {
 		    image.Save(stream, desiredFormat);
 		}
 	    }
+	    stream.Position = 0;
 	    return stream;
 	}
     }
