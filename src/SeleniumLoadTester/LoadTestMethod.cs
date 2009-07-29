@@ -2,13 +2,13 @@
 using Spring2.Core.SeleniumLoadTest;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 
 namespace Spring2.Core.SeleniumLoadTester {
-//    <loadtest serverhost="localhost" serverport="4444" browserstrring="*firefox" browserurl="http://localhost:4444" dllpath="xxxx.dll" testclass="Spring2.Dss.Loadtest" testmethod="AddCustomDesignToShoppingCart" numiterations="1" /> 
-
     public class LoadTestMethod {
         private string dllPath = "";
         private string testClass = "";
@@ -20,6 +20,10 @@ namespace Spring2.Core.SeleniumLoadTester {
         private Object obj = null;
         private int numSuccess = 0;
         private int numFailure = 0;
+
+        public string DllPath {
+            get { return dllPath; }
+        }
 
         public string TestClass {
             get { return testClass; }
@@ -75,13 +79,36 @@ namespace Spring2.Core.SeleniumLoadTester {
 
         public void Run() {
             if (obj != null) {
+                Stopwatch stopWatch = new Stopwatch();
                 for (int i = 0; i < numIterations; i++) {
+                    bool success = false;
+                    string exception = null;
+                    DateTime startTime = DateTime.Now;
+                    DateTime endTime = DateTime.Now;
+
                     try {
+                        startTime = DateTime.Now;
+                        stopWatch.Reset();
+                        stopWatch.Start();
                         method.Invoke(obj, null);
+                        stopWatch.Stop();
+                        endTime = DateTime.Now;
                         numSuccess++;
+                        success = true;
                     } catch (Exception ex) {
+                        stopWatch.Stop();
                         Console.WriteLine("Method " + testClass + "." + testMethod + " failure: " + ex.ToString());
                         numFailure++;
+                        success = false;
+                        exception = ex.ToString();
+                    }
+
+                    if (ConfigurationSettings.AppSettings["ConnectionString"] != null) {
+                        try {
+                            LoadTestLog.Create(this, startTime, endTime, (int)(stopWatch.ElapsedMilliseconds), success, exception);
+                        } catch (Exception ex) {
+                            Console.WriteLine("Unable to log data: " + ex.ToString());
+                        }
                     }
                 }
             } else {

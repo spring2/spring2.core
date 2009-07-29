@@ -49,6 +49,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SeleniumLoadTester\LoadTestLog.cs" />
+    <Compile Include="SeleniumLoadTester\LoadTestLogDAO.cs" />
     <Compile Include="SeleniumLoadTester\LoadTestMethod.cs" />
     <Compile Include="SeleniumLoadTester\LoadTestThread.cs" />
     <Compile Include="SeleniumLoadTester\Program.cs" />
