@@ -97,6 +97,13 @@
 	    </fileset>
 	</copy>
 	<delete dir="..\build\PerformanceMonitorWindowsService" if="${directory::exists('..\build\PerformanceMonitorWindowsService')}" failonerror="false" />
+	
+	<copy todir="..\build\${nant.settings.currentframework}\">
+	    <fileset basedir="..\build\">
+	        <include name="SeleniumLoadTester\*" />
+	    </fileset>
+	</copy>
+	<delete dir="..\build\SeleniumLoadTester" if="${directory::exists('..\build\SeleniumLoadTester')}" failonerror="false" />
 
 	<exec program="${msbuild}"  >
 	    <arg value="Spring2.Core.Ajax.Json.csproj" />

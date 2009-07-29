@@ -78,6 +78,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.PerformanceMon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.PerformanceMonitor.WindowsService", "Spring2.Core.PerformanceMonitor.WindowsService.csproj", "{F2BB1376-2228-4D32-8220-E8D6CD61EFD2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.SeleniumLoadTester", "Spring2.Core.SeleniumLoadTester.csproj", "{EF0FE527-1B39-4739-9F60-581B2D56789B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.SeleniumLoadTest", "Spring2.Core.SeleniumLoadTest.csproj", "{703A4208-BE66-4039-890E-572F937F8D17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -379,6 +383,22 @@ Global
 		{F2BB1376-2228-4D32-8220-E8D6CD61EFD2}.NET_2_0|Any CPU.Build.0 = Release|Any CPU
 		{F2BB1376-2228-4D32-8220-E8D6CD61EFD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2BB1376-2228-4D32-8220-E8D6CD61EFD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF0FE527-1B39-4739-9F60-581B2D56789B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF0FE527-1B39-4739-9F60-581B2D56789B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF0FE527-1B39-4739-9F60-581B2D56789B}.NET_1_1|Any CPU.ActiveCfg = Release|Any CPU
+		{EF0FE527-1B39-4739-9F60-581B2D56789B}.NET_1_1|Any CPU.Build.0 = Release|Any CPU
+		{EF0FE527-1B39-4739-9F60-581B2D56789B}.NET_2_0|Any CPU.ActiveCfg = Release|Any CPU
+		{EF0FE527-1B39-4739-9F60-581B2D56789B}.NET_2_0|Any CPU.Build.0 = Release|Any CPU
+		{EF0FE527-1B39-4739-9F60-581B2D56789B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF0FE527-1B39-4739-9F60-581B2D56789B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{703A4208-BE66-4039-890E-572F937F8D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{703A4208-BE66-4039-890E-572F937F8D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{703A4208-BE66-4039-890E-572F937F8D17}.NET_1_1|Any CPU.ActiveCfg = Release|Any CPU
+		{703A4208-BE66-4039-890E-572F937F8D17}.NET_1_1|Any CPU.Build.0 = Release|Any CPU
+		{703A4208-BE66-4039-890E-572F937F8D17}.NET_2_0|Any CPU.ActiveCfg = Release|Any CPU
+		{703A4208-BE66-4039-890E-572F937F8D17}.NET_2_0|Any CPU.Build.0 = Release|Any CPU
+		{703A4208-BE66-4039-890E-572F937F8D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{703A4208-BE66-4039-890E-572F937F8D17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
