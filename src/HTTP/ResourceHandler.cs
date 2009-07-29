@@ -78,6 +78,9 @@ namespace Spring2.Core.HTTP {
 		case "JS":
 		    contentType = "text/javascript";
 		    break;
+		case "SWF":
+		    contentType = "application/x-shockwave-flash";
+		    break;
 		default:
 		    contentType = "text/plain";
 		    break;

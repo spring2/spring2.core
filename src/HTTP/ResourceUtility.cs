@@ -82,8 +82,13 @@ namespace Spring2.Core.HTTP {
 	private static MemoryStream GetMemoryStreamFromObject(object o, ImageFormat desiredFormat) {
 	    MemoryStream stream = new MemoryStream();
 	    if (desiredFormat == null) { // We only expect image files and text files.
-		UTF8Encoding enc = new UTF8Encoding();
-		byte[] bytes = enc.GetBytes(o as string);
+		byte[] bytes = null;
+		if(o is byte[]) {
+		    bytes = o as byte[];
+		} else {
+		    UTF8Encoding enc = new UTF8Encoding();
+		    bytes = enc.GetBytes(o as string);
+		}
 		stream.Write(bytes, 0, bytes.Length);
 	    } else {
 		using (Bitmap image = o as Bitmap) {
