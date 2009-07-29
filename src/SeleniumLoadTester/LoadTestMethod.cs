@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -58,8 +59,15 @@ namespace Spring2.Core.SeleniumLoadTester {
         }
 
         private void InitMethodInfo() {
-            assembly = Assembly.LoadFile(dllPath);
+            FileInfo dllFile = new FileInfo(dllPath);
+            if (!dllFile.Exists) {
+                throw new InvalidOperationException("Dll file '" + dllPath + "' not found.");
+            }
+            assembly = Assembly.LoadFile(dllFile.FullName);
             type = assembly.GetType(testClass);
+            if (type == null) {
+                throw new InvalidOperationException("Test class '" + testClass + "' not found in assembly '" + dllPath + "'");
+            }
             method = type.GetMethod(testMethod);
             if (method.GetParameters().Length > 0) {
                 throw new InvalidOperationException("Method '" + testClass + "." + testMethod + "' has parameters.  Method Ignored.");
