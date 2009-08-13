@@ -10,10 +10,18 @@ using System.Resources;
 
 namespace Spring2.Core.HTTP {
     public class ResourceHandler : IHttpHandler {
+	private const String APPSETTING_CACHELENGTH = "Spring2.Core.HTTP.ResourceHandler_CacheLengthInDays";
+
 	private String contentType = String.Empty;
 	private ImageFormat imageFormat = null;
 
 	public void ProcessRequest(HttpContext context) {
+	    Int32 days = 0;
+	    try {
+		days = Int32.Parse(ConfigurationSettings.AppSettings[APPSETTING_CACHELENGTH] ?? "0");
+	    } catch(Exception) { }
+	    context.Response.Cache.SetCacheability(HttpCacheability.Public);
+	    context.Response.Cache.SetExpires(DateTime.Now.AddDays(days));
 	    String resource = context.Request.Params["d"];
 	    SetTypeAndImageFormat(resource);
 
