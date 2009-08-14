@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Configuration;
 using System.Reflection;
 using System.Text;
 using System.Web;
@@ -15,6 +16,7 @@ namespace Spring2.Core.Ajax {
     /// Summary description for Command.
     /// </summary>
     abstract public class Command {
+	private const String APPSETTING_CACHELENGTH = "Spring2.Core.Ajax.CacheLengthInDays";
 	protected Int32 responseHandlerId;
 	protected IMessageFormatter messageFormatter = null;
 	protected NameValueCollection commandValues = null;
@@ -24,6 +26,7 @@ namespace Spring2.Core.Ajax {
 	private String qualifiedName = String.Empty;
 	private Boolean isValid = false;
 	private JsonAjaxUtility util = new JsonAjaxUtility();
+	private Boolean cacheCommand = false;
 
 	public Command(Int32 responseHandlerId, NameValueCollection values, IMessageFormatter formatter, MessageList errors, HttpCookieCollection cookies) {
 	    this.isValid = true;
@@ -40,6 +43,15 @@ namespace Spring2.Core.Ajax {
 	public String RunCommand() {
 	    try {
 		if(isValid) {
+		    if(this.cacheCommand) {
+			HttpContext context = HttpContext.Current;
+			Int32 days = 0;
+			try {
+			    days = Int32.Parse(ConfigurationSettings.AppSettings[APPSETTING_CACHELENGTH] ?? "0");
+			} catch(Exception) { }
+			context.Response.Cache.SetCacheability(HttpCacheability.Public);
+			context.Response.Cache.SetExpires(DateTime.Now.AddDays(days));
+		    }
 		    return Execute();
 		} else {
 		    throw new System.InvalidOperationException("Command not constructed to run.");
@@ -90,6 +102,11 @@ namespace Spring2.Core.Ajax {
 		}
 	    }
 	    return sb.ToString();
+	}
+
+	public Boolean CacheCommand {
+	    get { return this.cacheCommand;}
+	    set { this.cacheCommand = value;}
 	}
     }
 }
