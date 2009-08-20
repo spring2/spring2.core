@@ -629,6 +629,18 @@
             <param name="instanceName"></param>
             <returns></returns>
         </member>
+        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.Create(System.Nullable{System.Int32},Spring2.Core.PerformanceMonitor.Types.PerformanceCounterCalculationTypeEnum,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new definition for getting snapshots of a counter.
+            </summary>
+            <param name="performanceMachineDefinitionId"></param>
+            <param name="calculationType"></param>
+            <param name="categoryName"></param>
+            <param name="counterName"></param>
+            <param name="instanceName"></param>
+            <param name="instanceMatchName"></param>
+            <returns></returns>
+        </member>
         <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.Validate">
             <summary>
             Validates the object is correct before persistance.
@@ -663,6 +675,22 @@
         <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.InstanceName">
             <summary>
             Instance value (if any) of the counter to be monitored.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.InstanceMatchName">
+            <summary>
+            Regular expression to be used for matching the instance name in cases where full InstanceName is not deterministic (ADO.Net connection counters).
+            If this is specified (i.e. not null) then InstanceName will be put in PerformanceData but not used to match the actual performance counter instance name.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.ActualInstanceName">
+            <summary>
+             The actual performance counter instance name.  This is different from from InstanceName if InstanceMatchName is specified.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.InstanceExists">
+            <summary>
+            Indicates if the instance exists on the current machine.
             </summary>
         </member>
         <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.CalculationType">

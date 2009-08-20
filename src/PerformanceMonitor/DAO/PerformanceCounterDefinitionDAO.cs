@@ -29,6 +29,7 @@ namespace Spring2.Core.PerformanceMonitor.DAO {
             AddPropertyMapping("CategoryName", @"CategoryName");
             AddPropertyMapping("CounterName", @"CounterName");
             AddPropertyMapping("InstanceName", @"InstanceName");
+            AddPropertyMapping("InstanceMatchName", @"InstanceMatchName");
             AddPropertyMapping("CalculationType", @"CalculationType");
 	}
 
@@ -296,6 +297,11 @@ namespace Spring2.Core.PerformanceMonitor.DAO {
             } else {
                 data.InstanceName = dataReader.GetString(ordinals.InstanceName);
             }
+            if (dataReader.IsDBNull(ordinals.InstanceMatchName)) {
+                data.InstanceMatchName = null;
+            } else {
+                data.InstanceMatchName = dataReader.GetString(ordinals.InstanceMatchName);
+            }
             if (dataReader.IsDBNull(ordinals.CalculationType)) {
                 data.CalculationType = null;
             } else {
@@ -320,6 +326,7 @@ namespace Spring2.Core.PerformanceMonitor.DAO {
 	    cmd.Parameters.Add(CreateDataParameter("@CategoryName", DbType.AnsiString, ParameterDirection.Input, data.CategoryName));
 	    cmd.Parameters.Add(CreateDataParameter("@CounterName", DbType.AnsiString, ParameterDirection.Input, data.CounterName));
             cmd.Parameters.Add(CreateDataParameter("@InstanceName", DbType.AnsiString, ParameterDirection.Input, data.InstanceName));
+            cmd.Parameters.Add(CreateDataParameter("@InstanceMatchName", DbType.AnsiString, ParameterDirection.Input, data.InstanceMatchName));
             cmd.Parameters.Add(CreateDataParameter("@CalculationType", DbType.AnsiString, ParameterDirection.Input, data.CalculationType.DBValue));
 
 	    // Execute the query
@@ -348,6 +355,7 @@ namespace Spring2.Core.PerformanceMonitor.DAO {
             cmd.Parameters.Add(CreateDataParameter("@CategoryName", DbType.AnsiString, ParameterDirection.Input, data.CategoryName));
             cmd.Parameters.Add(CreateDataParameter("@CounterName", DbType.AnsiString, ParameterDirection.Input, data.CounterName));
             cmd.Parameters.Add(CreateDataParameter("@InstanceName", DbType.AnsiString, ParameterDirection.Input, data.InstanceName));
+            cmd.Parameters.Add(CreateDataParameter("@InstanceMatchName", DbType.AnsiString, ParameterDirection.Input, data.InstanceMatchName));
             cmd.Parameters.Add(CreateDataParameter("@CalculationType", DbType.AnsiString, ParameterDirection.Input, data.CalculationType.DBValue));
 
 	    // Execute the query
@@ -398,6 +406,7 @@ namespace Spring2.Core.PerformanceMonitor.DAO {
             public Int32 CategoryName;
             public Int32 CounterName;
             public Int32 InstanceName;
+            public Int32 InstanceMatchName;
             public Int32 CalculationType;
             
 	    internal ColumnOrdinals(IDataReader reader) {
@@ -414,6 +423,7 @@ namespace Spring2.Core.PerformanceMonitor.DAO {
                 CategoryName = reader.GetOrdinal("CategoryName");
                 CounterName = reader.GetOrdinal("CounterName");
                 InstanceName = reader.GetOrdinal("InstanceName");
+                InstanceMatchName = reader.GetOrdinal("InstanceMatchName");
                 CalculationType = reader.GetOrdinal("CalculationType");
 	    }
 	}

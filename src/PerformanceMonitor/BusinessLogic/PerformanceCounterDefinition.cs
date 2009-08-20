@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
     /// <summary>
@@ -18,6 +19,8 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
         String categoryName = null;
         String counterName = null;
         String instanceName = null;
+        String instanceMatchName = null;
+        String actualInstanceName = null;
         PerformanceCounterCalculationTypeEnum calculationType = null;
 
         private PerformanceCounterDefinition() {
@@ -69,6 +72,51 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
         }
 
         /// <summary>
+        /// Regular expression to be used for matching the instance name in cases where full InstanceName is not deterministic (ADO.Net connection counters).
+        /// If this is specified (i.e. not null) then InstanceName will be put in PerformanceData but not used to match the actual performance counter instance name.
+        /// </summary>
+        public String InstanceMatchName {
+            get { return instanceMatchName; }
+            set { instanceMatchName = value; }
+        }
+
+        /// <summary>
+        ///  The actual performance counter instance name.  This is different from from InstanceName if InstanceMatchName is specified.
+        /// </summary>
+        public String ActualInstanceName {
+            get {
+                if (actualInstanceName == null) {
+                    // InstanceExists populates actualInstanceName as a side effectg
+                    if (!InstanceExists) {
+                        return null;
+                    }
+                }
+                return actualInstanceName;
+            }
+        }
+
+        /// <summary>
+        /// Indicates if the instance exists on the current machine.
+        /// </summary>
+        public Boolean InstanceExists {
+            get {
+                if (InstanceMatchName == null || InstanceMatchName.Length == 0) {
+                    actualInstanceName = instanceName;
+                    return PerformanceCounterCategory.InstanceExists(instanceName, CategoryName);
+                } else {
+                    PerformanceCounterCategory cat = new PerformanceCounterCategory(CategoryName);
+                    foreach (String name in cat.GetInstanceNames()) {
+                        if (Regex.IsMatch(name, InstanceMatchName)) {
+                            actualInstanceName = name;
+                            return true;
+                        }
+                    }
+                    return false;
+                }   
+            }
+        }
+
+        /// <summary>
         /// Indicates if we are monitoring a snapshot of the counter or an average over the interval.
         /// </summary>
         public PerformanceCounterCalculationTypeEnum CalculationType {
@@ -101,6 +149,29 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
             def.CounterName = counterName;
             def.CalculationType = calculationType;
             def.InstanceName = instanceName;
+
+            def.Store();
+            return def;
+        }
+
+        /// <summary>
+        /// Creates a new definition for getting snapshots of a counter.
+        /// </summary>
+        /// <param name="performanceMachineDefinitionId"></param>
+        /// <param name="calculationType"></param>
+        /// <param name="categoryName"></param>
+        /// <param name="counterName"></param>
+        /// <param name="instanceName"></param>
+        /// <param name="instanceMatchName"></param>
+        /// <returns></returns>
+        public static PerformanceCounterDefinition Create(Int32? performanceMachineDefinitionId, PerformanceCounterCalculationTypeEnum calculationType, String categoryName, String counterName, String instanceName, String instanceMatchName) {
+            PerformanceCounterDefinition def = new PerformanceCounterDefinition(true);
+            def.PerformanceMachineDefinitionId = performanceMachineDefinitionId;
+            def.CategoryName = categoryName;
+            def.CounterName = counterName;
+            def.CalculationType = calculationType;
+            def.InstanceName = instanceName;
+            def.instanceMatchName = instanceMatchName;
 
             def.Store();
             return def;

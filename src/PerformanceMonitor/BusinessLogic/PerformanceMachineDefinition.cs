@@ -169,10 +169,10 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
                         continue;
                     }
                     PerformanceCounter c = null;
-                    if (!PerformanceCounterCategory.InstanceExists(counterDefinition.InstanceName, counterDefinition.CategoryName)) {
+                    if (!counterDefinition.InstanceExists) {
                         LogMessage("Undefined instance found for category '" + counterDefinition.CategoryName + "' on Machine '" + MachineName + ": " + counterDefinition.InstanceName + ".  Will continue trying.");
                     } else {
-                        c = new PerformanceCounter(counterDefinition.CategoryName, counterDefinition.CounterName, counterDefinition.InstanceName, true);
+                        c = new PerformanceCounter(counterDefinition.CategoryName, counterDefinition.CounterName, counterDefinition.ActualInstanceName, true);
                     }
                     PerformanceCounterContainer container = new PerformanceCounterContainer(counterDefinition, c);
                     if (counterDefinition.CalculationType == PerformanceCounterCalculationTypeEnum.AVERAGE) {
@@ -220,8 +220,8 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
                                 PerformanceData.Create(this, c.counterDefinition, c.PreAverage / ((float)NumberOfSamples));
                             } else {
                                 // Try to create counter again
-                                if (PerformanceCounterCategory.InstanceExists(c.counterDefinition.InstanceName, c.counterDefinition.CategoryName)) {
-                                    c.counter = new PerformanceCounter(c.counterDefinition.CategoryName, c.counterDefinition.CounterName, c.counterDefinition.InstanceName, true);
+                                if (c.counterDefinition.InstanceExists) {
+                                    c.counter = new PerformanceCounter(c.counterDefinition.CategoryName, c.counterDefinition.CounterName, c.counterDefinition.ActualInstanceName, true);
                                     c.counter.NextValue();
                                 }
                             }
@@ -235,8 +235,8 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
                             PerformanceData.Create(this, c.counterDefinition, c.counter.NextValue());
                         } else {
                             // Try to create counter again
-                            if (PerformanceCounterCategory.InstanceExists(c.counterDefinition.InstanceName, c.counterDefinition.CategoryName)) {
-                                c.counter = new PerformanceCounter(c.counterDefinition.CategoryName, c.counterDefinition.CounterName, c.counterDefinition.InstanceName, true);
+                            if (c.counterDefinition.InstanceExists) {
+                                c.counter = new PerformanceCounter(c.counterDefinition.CategoryName, c.counterDefinition.CounterName, c.counterDefinition.ActualInstanceName, true);
                                 c.counter.NextValue();
                             }
                         }

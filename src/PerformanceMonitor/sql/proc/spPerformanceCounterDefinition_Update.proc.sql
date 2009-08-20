@@ -13,6 +13,7 @@ CREATE PROCEDURE spPerformanceCounterDefinition_Update
 	@CategoryName Varchar(50) = null,
 	@CounterName Varchar(50) = null,
 	@InstanceName Varchar(50) = null,
+	@InstanceMatchName Varchar(100) = null,
 	@CalculationType Varchar(50) = null
 
 AS
@@ -25,6 +26,7 @@ SET
 	CategoryName = @CategoryName,
 	CounterName = @CounterName,
 	InstanceName = @InstanceName,
+	InstanceMatchName = @InstanceMatchName,
 	CalculationType = @CalculationType
 WHERE
 PerformanceCounterDefinitionId = @PerformanceCounterDefinitionId

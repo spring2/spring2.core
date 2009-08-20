@@ -11,6 +11,7 @@ CREATE PROCEDURE spPerformanceCounterDefinition_Insert
 	@CategoryName Varchar(50) = null,
 	@CounterName Varchar(50) = null,
 	@InstanceName Varchar(50) = null,
+	@InstanceMatchName Varchar(100) = null,
 	@CalculationType Varchar(50) = null
 
 AS
@@ -21,12 +22,14 @@ INSERT INTO PerformanceCounterDefinition
 	CategoryName,
 	CounterName,
 	InstanceName,
+	InstanceMatchName,
 	CalculationType)
 VALUES (
 	@PerformanceMachineDefinitionId,
 	@CategoryName,
 	@CounterName,
 	@InstanceName,
+	@InstanceMatchName,
 	@CalculationType)
 
 if @@rowcount <> 1 or @@error!=0

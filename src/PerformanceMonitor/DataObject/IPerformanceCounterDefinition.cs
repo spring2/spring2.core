@@ -13,6 +13,7 @@ namespace Spring2.Core.PerformanceMonitor.DataObject {
         public static readonly String CATEGORYNAME = "CategoryName";
         public static readonly String COUNTERNAME = "CounterName";
         public static readonly String INSTANCENAME = "InstanceName";
+        public static readonly String INSTANCEMATCHNAME = "InstanceMatchName";
         public static readonly String CALCULATIONTYPE = "CalculationType";
     }
 
@@ -34,6 +35,10 @@ namespace Spring2.Core.PerformanceMonitor.DataObject {
         }
 
         String InstanceName {
+            get;
+        }
+
+        String InstanceMatchName {
             get;
         }
 
