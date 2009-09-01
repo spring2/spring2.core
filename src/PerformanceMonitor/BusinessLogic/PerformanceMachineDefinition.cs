@@ -218,6 +218,7 @@ namespace Spring2.Core.PerformanceMonitor.BusinessLogic {
                         foreach (PerformanceCounterContainer c in averageCounters) {
                             if (c.counter != null) {
                                 PerformanceData.Create(this, c.counterDefinition, c.PreAverage / ((float)NumberOfSamples));
+                                c.PreAverage = 0f;
                             } else {
                                 // Try to create counter again
                                 if (c.counterDefinition.InstanceExists) {
