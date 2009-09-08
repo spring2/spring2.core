@@ -21,7 +21,7 @@ namespace Spring2.Core.ResourceManager.Facade {
 	private static Int32 refreshes = 0;
     	private static Dictionary<ResourceKey, Resource> resources = new Dictionary<ResourceKey, Resource>();
 	private static Dictionary<LocalizedResourceKey, LocalizedResource> localizedResources = new Dictionary<LocalizedResourceKey, LocalizedResource>();
-
+        private static String resourceLock = "";
 
 	public ResourceLocalizer(ILocaleFactory localeFactory, ILanguageFactory languageFactory) {
 	    LocalizedResourceDAO.DAO.LanguageFactory = languageFactory;
@@ -44,7 +44,7 @@ namespace Spring2.Core.ResourceManager.Facade {
 	/// Should only be needed for testing purposes.
 	/// </summary>
 	public static void ResetCache() {
-	    lock (resources) {
+	    lock (resourceLock) {
 		cacheTimeout = 0;
 		lastRefresh = DateTime.MinValue;
 		refreshes = 0;
@@ -55,7 +55,7 @@ namespace Spring2.Core.ResourceManager.Facade {
 
 	private static void RefreshCache() {
 	    if (cacheTimeout > 0 && DateTime.Now > lastRefresh.AddSeconds(cacheTimeout)) {
-		lock (resources) {
+		lock (resourceLock) {
 		    //Console.Out.WriteLine("refresshing cache");
 		    resources = new Dictionary<ResourceKey, Resource>();
 		    foreach (Resource resource in ResourceDAO.DAO.GetList()) {

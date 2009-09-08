@@ -146,14 +146,14 @@ namespace Spring2.Core.ResourceManager.Test {
 	    Assert.IsTrue(localText.Equals(localizedResource.Content.Display()), "Should have gotten same string when localized.");
 	    Assert.AreEqual(1, localizer.Refreshes);
 
-	    System.Threading.Thread.Sleep(2000);
+	    System.Threading.Thread.Sleep(3000);
 	    localText = String.Empty;
 	    try {
 		localText = localizer.Localize(localizedResource.Resource.Context, localizedResource.Resource.Field, localizedResource.Resource.Identity, localizedResource.Locale, localizedResource.Language);
 	    } catch {
 		Assert.Fail("Should have been able to localize");
 	    }
-	    Assert.IsTrue(localText.Equals("foo"));
+	    Assert.AreEqual("foo", localText);
 	    Assert.AreEqual(2, localizer.Refreshes);
 
 	}
