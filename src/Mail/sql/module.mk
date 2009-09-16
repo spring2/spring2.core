@@ -9,12 +9,12 @@ BCP := bcp
 SQL_FLAGS := -b -n -r -i
 SQL_LOGIN := /S "${SQL_SERVER}" /U "${SQL_USER}" /P "${SQL_PASSWORD}" -d "${SQL_DATABASE}"
 
-TABLELOGS := $(patsubst sql/table/%.sql, sql/table/%.log, $(wildcard sql/table/*.sql))
-VIEWLOGS  := $(patsubst sql/view/%.sql, sql/view/%.log, $(wildcard sql/view/*.sql))
-FUNCTIONLOGS  := $(patsubst sql/function/%.sql, sql/function/%.log, $(wildcard sql/function/*.sql))
-PROCLOGS  := $(patsubst sql/proc/%.sql, sql/proc/%.log, $(wildcard sql/proc/*.sql))
-DATALOGS  := $(patsubst sql/data/%.sql, sql/data/%.log, $(wildcard sql/data/*.sql))
-REPORTLOGS  := $(patsubst sql/report/%.sql, sql/report/%.log, $(wildcard sql/report/*.sql))
+TABLELOGS := $(patsubst Mail/sql/table/%.sql, Mail/sql/table/%.log, $(wildcard Mail/sql/table/*.sql))
+VIEWLOGS  := $(patsubst Mail/sql/view/%.sql, Mail/sql/view/%.log, $(wildcard Mail/sql/view/*.sql))
+FUNCTIONLOGS  := $(patsubst Mail/sql/function/%.sql, Mail/sql/function/%.log, $(wildcard Mail/sql/function/*.sql))
+PROCLOGS  := $(patsubst Mail/sql/proc/%.sql, Mail/sql/proc/%.log, $(wildcard Mail/sql/proc/*.sql))
+DATALOGS  := $(patsubst Mail/sql/data/%.sql, Mail/sql/data/%.log, $(wildcard Mail/sql/data/*.sql))
+REPORTLOGS  := $(patsubst Mail/sql/report/%.sql, Mail/sql/report/%.log, $(wildcard Mail/sql/report/*.sql))
 
 .PHONY : db_info clean_db build_db load_daa tables views procs debug_db
 
