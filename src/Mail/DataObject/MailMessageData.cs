@@ -34,6 +34,13 @@ namespace Spring2.Core.Mail.DataObject {
 	private StringType mailMessageType = StringType.DEFAULT;
 	private IntegerType numberOfAttempts = IntegerType.DEFAULT;
 	private DateTimeType messageQueueDate = DateTimeType.DEFAULT;
+	private StringType referenceKey = StringType.DEFAULT;
+	private StringType uniqueKey = StringType.DEFAULT;
+	private StringType checksum = StringType.DEFAULT;
+	private IntegerType openCount = IntegerType.DEFAULT;
+	private IntegerType bounces = IntegerType.DEFAULT;
+	private DateTimeType lastOpenDate = DateTimeType.DEFAULT;
+	private StringType smtpServer = StringType.DEFAULT;
 
 	public IdType MailMessageId {
 	    get { return this.mailMessageId; }
@@ -118,6 +125,41 @@ namespace Spring2.Core.Mail.DataObject {
 	public DateTimeType MessageQueueDate {
 	    get { return this.messageQueueDate; }
 	    set { this.messageQueueDate = value; }
+	}
+
+	public StringType ReferenceKey {
+	    get { return this.referenceKey; }
+	    set { this.referenceKey = value; }
+	}
+
+	public StringType UniqueKey {
+	    get { return this.uniqueKey; }
+	    set { this.uniqueKey = value; }
+	}
+
+	public StringType Checksum {
+	    get { return this.checksum; }
+	    set { this.checksum = value; }
+	}
+
+	public IntegerType OpenCount {
+	    get { return this.openCount; }
+	    set { this.openCount = value; }
+	}
+
+	public IntegerType Bounces {
+	    get { return this.bounces; }
+	    set { this.bounces = value; }
+	}
+
+	public DateTimeType LastOpenDate {
+	    get { return this.lastOpenDate; }
+	    set { this.lastOpenDate = value; }
+	}
+
+	public StringType SmtpServer {
+	    get { return this.smtpServer; }
+	    set { this.smtpServer = value; }
 	}
 
 	public Boolean IsDefault {

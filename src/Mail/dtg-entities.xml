@@ -19,11 +19,23 @@
 	    <property name="MailMessageType" column="*" type="StringType" />
 	    <property name="NumberOfAttempts" column="*" type="IntegerType" />
 	    <property name="MessageQueueDate" column="*" type="DateTimeType" />
+	    <property name="ReferenceKey" column="*" type="StringType" />
+	    <property name="UniqueKey" column="*" type="StringType" />
+	    <property name="Checksum" column="*" type="StringType" />
+	    <property name="OpenCount" column="*" type="IntegerType" />
+	    <property name="Bounces" column="*" type="IntegerType" />
+	    <property name="LastOpenDate" column="*" type="DateTimeType" />
+	    <property name="SmtpServer" column="*" type="StringType" />
 	</properties>
 	<finders>
 	    <finder name="FindByStatus" unique="False">
  		<properties>
  		    <property name="MailMessageStatus" />
+ 		</properties>
+	    </finder>
+	    <finder name="FindByUniqueKey" unique="True">
+ 		<properties>
+ 		    <property name="UniqueKey" />
  		</properties>
 	    </finder>
 	</finders>

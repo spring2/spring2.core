@@ -23,7 +23,14 @@ CREATE PROCEDURE spMailMessage_Update
 	@ReleasedByUserId	Int = null,
 	@MailMessageType	VarChar(80) = null,
 	@NumberOfAttempts	Int = null,
-	@MessageQueueDate	DateTime = null
+	@MessageQueueDate	DateTime = null,
+	@ReferenceKey	VarChar(50) = null,
+	@UniqueKey	VarChar(50) = null,
+	@Checksum	VarChar(50) = null,
+	@OpenCount	Int = null,
+	@Bounces	Int = null,
+	@LastOpenDate	DateTime = null,
+	@SmtpServer	VarChar(50) = null
 
 AS
 
@@ -46,7 +53,14 @@ SET
 	ReleasedByUserId = @ReleasedByUserId,
 	MailMessageType = @MailMessageType,
 	NumberOfAttempts = @NumberOfAttempts,
-	MessageQueueDate = @MessageQueueDate
+	MessageQueueDate = @MessageQueueDate,
+	ReferenceKey = @ReferenceKey,
+	UniqueKey = @UniqueKey,
+	Checksum = @Checksum,
+	OpenCount = @OpenCount,
+	Bounces = @Bounces,
+	LastOpenDate = @LastOpenDate,
+	SmtpServer = @SmtpServer
 WHERE
 MailMessageId = @MailMessageId
 

@@ -26,7 +26,14 @@ SELECT
     MailMessage.ReleasedByUserId,
     MailMessage.MailMessageType,
     MailMessage.NumberOfAttempts,
-    MailMessage.MessageQueueDate
+    MailMessage.MessageQueueDate,
+    MailMessage.ReferenceKey,
+    MailMessage.UniqueKey,
+    MailMessage.Checksum,
+    MailMessage.OpenCount,
+    MailMessage.Bounces,
+    MailMessage.LastOpenDate,
+    MailMessage.SmtpServer
 FROM
     MailMessage
 GO

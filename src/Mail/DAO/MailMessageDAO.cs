@@ -366,6 +366,42 @@ namespace Spring2.Core.Mail.Dao {
 	    } else {
 		data.MessageQueueDate = new DateTimeType(dataReader.GetDateTime(ordinals.MessageQueueDate));
 	    }
+
+	    if (dataReader.IsDBNull(ordinals.ReferenceKey)) {
+		data.ReferenceKey = StringType.UNSET;
+	    } else {
+		data.ReferenceKey = StringType.Parse(dataReader.GetString(ordinals.ReferenceKey));
+	    }
+	    if (dataReader.IsDBNull(ordinals.UniqueKey)) {
+		data.UniqueKey = StringType.UNSET;
+	    } else {
+		data.UniqueKey = StringType.Parse(dataReader.GetString(ordinals.UniqueKey));
+	    }
+	    if (dataReader.IsDBNull(ordinals.Checksum)) {
+		data.Checksum = StringType.UNSET;
+	    } else {
+		data.Checksum = StringType.Parse(dataReader.GetString(ordinals.Checksum));
+	    }
+	    if (dataReader.IsDBNull(ordinals.OpenCount)) {
+		data.OpenCount = IntegerType.UNSET;
+	    } else {
+		data.OpenCount = new IntegerType(dataReader.GetInt32(ordinals.OpenCount));
+	    }
+	    if (dataReader.IsDBNull(ordinals.Bounces)) {
+		data.Bounces = IntegerType.UNSET;
+	    } else {
+		data.Bounces = new IntegerType(dataReader.GetInt32(ordinals.Bounces));
+	    }
+	    if (dataReader.IsDBNull(ordinals.LastOpenDate)) {
+		data.LastOpenDate = DateTimeType.UNSET;
+	    } else {
+		data.LastOpenDate = new DateTimeType(dataReader.GetDateTime(ordinals.LastOpenDate));
+	    }
+	    if (dataReader.IsDBNull(ordinals.SmtpServer)) {
+		data.SmtpServer = StringType.UNSET;
+	    } else {
+		data.SmtpServer = StringType.Parse(dataReader.GetString(ordinals.SmtpServer));
+	    }
 	    return data;
 	}
         
@@ -405,6 +441,14 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.Parameters.Add(CreateDataParameter("@MailMessageType", DbType.AnsiString, ParameterDirection.Input, data.MailMessageType.IsValid ? data.MailMessageType.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@NumberOfAttempts", DbType.Int32, ParameterDirection.Input, data.NumberOfAttempts.IsValid ? data.NumberOfAttempts.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@MessageQueueDate", DbType.DateTime, ParameterDirection.Input, data.MessageQueueDate.IsValid ? data.MessageQueueDate.ToDateTime() as Object : DBNull.Value));
+
+	    cmd.Parameters.Add(CreateDataParameter("@ReferenceKey", DbType.AnsiString, ParameterDirection.Input, data.ReferenceKey.IsValid ? data.ReferenceKey.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@UniqueKey", DbType.AnsiString, ParameterDirection.Input, data.UniqueKey.IsValid ? data.UniqueKey.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@Checksum", DbType.AnsiString, ParameterDirection.Input, data.Checksum.IsValid ? data.Checksum.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@OpenCount", DbType.Int32, ParameterDirection.Input, data.OpenCount.IsValid ? data.OpenCount.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@Bounces", DbType.Int32, ParameterDirection.Input, data.Bounces.IsValid ? data.Bounces.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@LastOpenDate", DbType.DateTime, ParameterDirection.Input, data.LastOpenDate.IsValid ? data.LastOpenDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@SmtpServer", DbType.AnsiString, ParameterDirection.Input, data.SmtpServer.IsValid ? data.SmtpServer.ToString() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -456,6 +500,13 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.Parameters.Add(CreateDataParameter("@MailMessageType", DbType.AnsiString, ParameterDirection.Input, data.MailMessageType.IsValid ? data.MailMessageType.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@NumberOfAttempts", DbType.Int32, ParameterDirection.Input, data.NumberOfAttempts.IsValid ? data.NumberOfAttempts.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@MessageQueueDate", DbType.DateTime, ParameterDirection.Input, data.MessageQueueDate.IsValid ? data.MessageQueueDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@ReferenceKey", DbType.AnsiString, ParameterDirection.Input, data.ReferenceKey.IsValid ? data.ReferenceKey.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@UniqueKey", DbType.AnsiString, ParameterDirection.Input, data.UniqueKey.IsValid ? data.UniqueKey.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@Checksum", DbType.AnsiString, ParameterDirection.Input, data.Checksum.IsValid ? data.Checksum.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@OpenCount", DbType.Int32, ParameterDirection.Input, data.OpenCount.IsValid ? data.OpenCount.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@Bounces", DbType.Int32, ParameterDirection.Input, data.Bounces.IsValid ? data.Bounces.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@LastOpenDate", DbType.DateTime, ParameterDirection.Input, data.LastOpenDate.IsValid ? data.LastOpenDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter("@SmtpServer", DbType.AnsiString, ParameterDirection.Input, data.SmtpServer.IsValid ? data.SmtpServer.ToString() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -515,7 +566,16 @@ namespace Spring2.Core.Mail.Dao {
 
 	    return GetList(dataReader);
 	}
-        
+
+	#region
+	public MailMessage FindByUniqueKey(StringType uniqueKey) {
+	    SqlFilter filter = new SqlFilter();
+	    filter.And(new SqlEqualityPredicate("UniqueKey", EqualityOperatorEnum.Equal, uniqueKey.IsValid ? uniqueKey.ToString() as Object : DBNull.Value));
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);
+	    return GetDataObject(dataReader);
+	}
+	#endregion
+
 	public sealed class ColumnOrdinals {
             
 	    public Int32 MailMessageId;
@@ -549,6 +609,14 @@ namespace Spring2.Core.Mail.Dao {
 	    public Int32 NumberOfAttempts;
             
 	    public Int32 MessageQueueDate;
+
+	    public Int32 ReferenceKey;
+	    public Int32 UniqueKey;
+	    public Int32 Checksum;
+	    public Int32 OpenCount;
+	    public Int32 Bounces;
+	    public Int32 LastOpenDate;
+	    public Int32 SmtpServer;
             
 	    internal ColumnOrdinals(IDataReader reader) {
 		MailMessageId = reader.GetOrdinal("MailMessageId");
@@ -567,6 +635,14 @@ namespace Spring2.Core.Mail.Dao {
 		MailMessageType = reader.GetOrdinal("MailMessageType");
 		NumberOfAttempts = reader.GetOrdinal("NumberOfAttempts");
 		MessageQueueDate = reader.GetOrdinal("MessageQueueDate");
+
+		ReferenceKey = reader.GetOrdinal("ReferenceKey");
+		UniqueKey = reader.GetOrdinal("UniqueKey");
+		Checksum = reader.GetOrdinal("Checksum");
+		OpenCount = reader.GetOrdinal("OpenCount");
+		Bounces = reader.GetOrdinal("Bounces");
+		LastOpenDate = reader.GetOrdinal("LastOpenDate");
+		SmtpServer = reader.GetOrdinal("SmtpServer");
 	    }
             
 	    internal ColumnOrdinals(IDataReader reader, String prefix) {
@@ -586,6 +662,14 @@ namespace Spring2.Core.Mail.Dao {
 		MailMessageType = reader.GetOrdinal(prefix + "MailMessageType");
 		NumberOfAttempts = reader.GetOrdinal(prefix + "NumberOfAttempts");
 		MessageQueueDate = reader.GetOrdinal(prefix + "MessageQueueDate");
+
+		ReferenceKey = reader.GetOrdinal(prefix + "ReferenceKey");
+		UniqueKey = reader.GetOrdinal(prefix + "UniqueKey");
+		Checksum = reader.GetOrdinal(prefix + "Checksum");
+		OpenCount = reader.GetOrdinal(prefix + "OpenCount");
+		Bounces = reader.GetOrdinal(prefix + "Bounces");
+		LastOpenDate = reader.GetOrdinal(prefix + "LastOpenDate");
+		SmtpServer = reader.GetOrdinal(prefix + "SmtpServer");
 	    }
 	}
     }

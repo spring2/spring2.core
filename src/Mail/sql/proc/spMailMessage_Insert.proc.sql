@@ -21,7 +21,14 @@ CREATE PROCEDURE spMailMessage_Insert
 	@ReleasedByUserId	Int = null,
 	@MailMessageType	VarChar(80) = null,
 	@NumberOfAttempts	Int = null,
-	@MessageQueueDate	DateTime = null
+	@MessageQueueDate	DateTime = null,
+	@ReferenceKey	VarChar(50) = null,
+	@UniqueKey	VarChar(50) = null,
+	@Checksum	VarChar(50) = null,
+	@OpenCount	Int = null,
+	@Bounces	Int = null,
+	@LastOpenDate	DateTime = null,
+	@SmtpServer	VarChar(50) = null
 
 AS
 
@@ -42,7 +49,14 @@ INSERT INTO MailMessage
 	ReleasedByUserId,
 	MailMessageType,
 	NumberOfAttempts,
-	MessageQueueDate)
+	MessageQueueDate,
+	ReferenceKey,
+	UniqueKey,
+	Checksum,
+	OpenCount,
+	Bounces,
+	LastOpenDate,
+	SmtpServer)
 VALUES (
 	@ScheduleTime,
 	@ProcessedTime,
@@ -58,7 +72,14 @@ VALUES (
 	@ReleasedByUserId,
 	@MailMessageType,
 	@NumberOfAttempts,
-	@MessageQueueDate)
+	@MessageQueueDate,
+	@ReferenceKey,
+	@UniqueKey,
+	@Checksum,
+	@OpenCount,
+	@Bounces,
+	@LastOpenDate,
+	@SmtpServer)
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN

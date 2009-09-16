@@ -33,6 +33,13 @@ namespace Spring2.Core.Mail.DataObject {
 	public static readonly String MAILMESSAGETYPE = "MailMessageType";
 	public static readonly String NUMBEROFATTEMPTS = "NumberOfAttempts";
 	public static readonly String MESSAGEQUEUEDATE = "MessageQueueDate";
+	public static readonly String REFERENCEKEY = "ReferenceKey";
+	public static readonly String UNIQUEKEY = "UniqueKey";
+	public static readonly String CHECKSUM = "Checksum";
+	public static readonly String OPENCOUNT = "OpenCount";
+	public static readonly String BOUNCES = "Bounces";
+	public static readonly String LASTOPENDATE = "LastOpenDate";
+	public static readonly String SMTPSERVER = "SmtpServer";
     }
 
     public interface IMailMessage : IBusinessEntity {
@@ -85,6 +92,27 @@ namespace Spring2.Core.Mail.DataObject {
 	    get;
 	}
 	DateTimeType MessageQueueDate {
+	    get;
+	}
+	StringType ReferenceKey {
+	    get;
+	}
+	StringType UniqueKey {
+	    get;
+	}
+	StringType Checksum {
+	    get;
+	}
+	IntegerType OpenCount {
+	    get;
+	}
+	IntegerType Bounces {
+	    get;
+	}
+	DateTimeType LastOpenDate {
+	    get;
+	}
+	StringType SmtpServer {
 	    get;
 	}
     }

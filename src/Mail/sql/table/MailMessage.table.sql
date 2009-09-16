@@ -37,7 +37,14 @@ CREATE TABLE MailMessage (
 	ReleasedByUserId Int NULL,
 	MailMessageType VarChar(80) NOT NULL CONSTRAINT [DF_MailMessage_MailMessageType] DEFAULT (''),
 	NumberOfAttempts Int NULL,
-	MessageQueueDate DateTime NULL
+	MessageQueueDate DateTime NULL,
+	ReferenceKey VarChar(50) NULL,
+	UniqueKey VarChar(50) NULL,
+	Checksum VarChar(50) NULL,
+	OpenCount Int NOT NULL CONSTRAINT [DF_MailMessage_OpenCount] DEFAULT (0),
+	Bounces Int NOT NULL CONSTRAINT [DF_MailMessage_Bounces] DEFAULT (0),
+	LastOpenDate DateTime NULL,
+	SmtpServer VarChar(50) NULL
 )
 GO
 
@@ -263,6 +270,133 @@ if exists(select * from syscolumns where id=object_id('MailMessage') and name = 
   END
 GO
 
+if not exists(select * from syscolumns where id=object_id('MailMessage') and name = 'ReferenceKey')
+  BEGIN
+	ALTER TABLE MailMessage ADD
+	    ReferenceKey VarChar(50) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'ReferenceKey')
+  BEGIN
+	exec #spAlterColumn 'MailMessage', 'ReferenceKey', 'VarChar(50)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('MailMessage') and name = 'UniqueKey')
+  BEGIN
+	ALTER TABLE MailMessage ADD
+	    UniqueKey VarChar(50) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'UniqueKey')
+  BEGIN
+	exec #spAlterColumn 'MailMessage', 'UniqueKey', 'VarChar(50)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('MailMessage') and name = 'Checksum')
+  BEGIN
+	ALTER TABLE MailMessage ADD
+	    Checksum VarChar(50) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'Checksum')
+  BEGIN
+	exec #spAlterColumn 'MailMessage', 'Checksum', 'VarChar(50)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('MailMessage') and name = 'OpenCount')
+  BEGIN
+	ALTER TABLE MailMessage ADD
+	    OpenCount Int NOT NULL
+	CONSTRAINT
+	    [DF_MailMessage_OpenCount] DEFAULT 0 WITH VALUES
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'OpenCount')
+  BEGIN
+	declare @cdefault varchar(1000)
+	select @cdefault = '[' + object_name(cdefault) + ']' from syscolumns where id=object_id('MailMessage') and name = 'OpenCount'
+
+	if @cdefault is not null
+		exec('alter table MailMessage DROP CONSTRAINT ' + @cdefault)
+		
+	if exists(select * from sysobjects where name = 'DF_MailMessage_OpenCount' and xtype='D')
+          begin
+            declare @table sysname
+            select @table=object_name(parent_obj) from  sysobjects where (name = 'DF_MailMessage_OpenCount' and xtype='D')
+            exec('alter table ' + @table + ' DROP CONSTRAINT [DF_MailMessage_OpenCount]')
+          end
+	
+	exec #spAlterColumn 'MailMessage', 'OpenCount', 'Int', 0
+	if not exists(select * from sysobjects where name = 'DF_MailMessage_OpenCount' and xtype='D')
+		alter table MailMessage
+			ADD CONSTRAINT [DF_MailMessage_OpenCount] DEFAULT 0 FOR OpenCount WITH VALUES
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('MailMessage') and name = 'Bounces')
+  BEGIN
+	ALTER TABLE MailMessage ADD
+	    Bounces Int NOT NULL
+	CONSTRAINT
+	    [DF_MailMessage_Bounces] DEFAULT 0 WITH VALUES
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'Bounces')
+  BEGIN
+	declare @cdefault varchar(1000)
+	select @cdefault = '[' + object_name(cdefault) + ']' from syscolumns where id=object_id('MailMessage') and name = 'Bounces'
+
+	if @cdefault is not null
+		exec('alter table MailMessage DROP CONSTRAINT ' + @cdefault)
+		
+	if exists(select * from sysobjects where name = 'DF_MailMessage_Bounces' and xtype='D')
+          begin
+            declare @table sysname
+            select @table=object_name(parent_obj) from  sysobjects where (name = 'DF_MailMessage_Bounces' and xtype='D')
+            exec('alter table ' + @table + ' DROP CONSTRAINT [DF_MailMessage_Bounces]')
+          end
+	
+	exec #spAlterColumn 'MailMessage', 'Bounces', 'Int', 0
+	if not exists(select * from sysobjects where name = 'DF_MailMessage_Bounces' and xtype='D')
+		alter table MailMessage
+			ADD CONSTRAINT [DF_MailMessage_Bounces] DEFAULT 0 FOR Bounces WITH VALUES
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('MailMessage') and name = 'LastOpenDate')
+  BEGIN
+	ALTER TABLE MailMessage ADD
+	    LastOpenDate DateTime NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'LastOpenDate')
+  BEGIN
+	exec #spAlterColumn 'MailMessage', 'LastOpenDate', 'DateTime', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('MailMessage') and name = 'SmtpServer')
+  BEGIN
+	ALTER TABLE MailMessage ADD
+	    SmtpServer VarChar(50) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'SmtpServer')
+  BEGIN
+	exec #spAlterColumn 'MailMessage', 'SmtpServer', 'VarChar(50)', 0
+  END
+GO
+
 if not exists (select * from dbo.sysobjects where id = object_id(N'PK_MailMessage') and OBJECTPROPERTY(id, N'IsPrimaryKey') = 1)
 ALTER TABLE MailMessage WITH NOCHECK ADD
 	CONSTRAINT PK_MailMessage PRIMARY KEY CLUSTERED
@@ -293,5 +427,11 @@ if not exists (select * from sysindexes where name='IxMailMessage_Subject' and i
 	CREATE INDEX IxMailMessage_Subject ON MailMessage
 	(
         	Subject
+	)
+GO
+if not exists (select * from sysindexes where name='IxMailMessage_UniqueKey' and id=object_id(N'[MailMessage]'))
+	CREATE INDEX IxMailMessage_UniqueKey ON MailMessage
+	(
+        	UniqueKey
 	)
 GO

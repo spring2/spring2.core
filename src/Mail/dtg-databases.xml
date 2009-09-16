@@ -24,6 +24,13 @@
 		    <column name="MailMessageType" sqltype="VarChar" length="80" required="True" default="''" />
 		    <column name="NumberOfAttempts" sqltype="Int" />
 		    <column name="MessageQueueDate" sqltype="DateTime" />
+		    <column name="ReferenceKey" sqltype="VarChar" length="50" />
+		    <column name="UniqueKey" sqltype="VarChar" length="50" />
+		    <column name="Checksum" sqltype="VarChar" length="50" />
+		    <column name="OpenCount" sqltype="Int" default="0" />
+		    <column name="Bounces" sqltype="Int" default="0" />
+		    <column name="LastOpenDate" sqltype="DateTime" />
+		    <column name="SmtpServer" sqltype="VarChar" length="50" />
 		</columns>
 		<constraints>
 		    <constraint name="PK_MailMessage" type="PRIMARY KEY" clustered="true">
@@ -42,6 +49,9 @@
 		    </index>
 		    <index name="IxMailMessage_Subject">
 			<column name="Subject" />
+		    </index>
+		    <index name="IxMailMessage_UniqueKey">
+			<column name="UniqueKey" />
 		    </index>
 		</indexes>
 	    </sqlentity>

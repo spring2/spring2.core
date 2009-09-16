@@ -338,5 +338,70 @@ namespace Spring2.Core.Mail.DataObject {
 	    }
 	}
 
+	[Generate]
+	public class ReferenceKeySorter : System.Collections.IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailMessage o1 = (IMailMessage)a;
+		IMailMessage o2 = (IMailMessage)b;
+
+		if (o1 == null || o2 == null || !o1.ReferenceKey.IsValid || !o2.ReferenceKey.IsValid) {
+		    return 0;
+		}
+		return o1.ReferenceKey.CompareTo(o2.ReferenceKey);
+	    }
+	}
+
+	[Generate]
+	public class UniqueKeySorter : System.Collections.IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailMessage o1 = (IMailMessage)a;
+		IMailMessage o2 = (IMailMessage)b;
+
+		if (o1 == null || o2 == null || !o1.UniqueKey.IsValid || !o2.UniqueKey.IsValid) {
+		    return 0;
+		}
+		return o1.UniqueKey.CompareTo(o2.UniqueKey);
+	    }
+	}
+
+	[Generate]
+	public class ChecksumSorter : System.Collections.IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailMessage o1 = (IMailMessage)a;
+		IMailMessage o2 = (IMailMessage)b;
+
+		if (o1 == null || o2 == null || !o1.Checksum.IsValid || !o2.Checksum.IsValid) {
+		    return 0;
+		}
+		return o1.Checksum.CompareTo(o2.Checksum);
+	    }
+	}
+
+	[Generate]
+	public class LastOpenDateSorter : System.Collections.IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailMessage o1 = (IMailMessage)a;
+		IMailMessage o2 = (IMailMessage)b;
+
+		if (o1 == null || o2 == null || !o1.LastOpenDate.IsValid || !o2.LastOpenDate.IsValid) {
+		    return 0;
+		}
+		return o1.LastOpenDate.CompareTo(o2.LastOpenDate);
+	    }
+	}
+
+	[Generate]
+	public class SmtpServerSorter : System.Collections.IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailMessage o1 = (IMailMessage)a;
+		IMailMessage o2 = (IMailMessage)b;
+
+		if (o1 == null || o2 == null || !o1.SmtpServer.IsValid || !o2.SmtpServer.IsValid) {
+		    return 0;
+		}
+		return o1.SmtpServer.CompareTo(o2.SmtpServer);
+	    }
+	}
+
     }
 }
