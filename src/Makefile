@@ -1,3 +1,6 @@
+#
+# Makefile for Spring2.Core
+#
 RM		:= rm -rf
 MKDIR		:= mkdir -p
 NUNIT		:= ../bin/NUnit/nunit-console.exe
@@ -10,6 +13,8 @@ RELEASEDIR	:= ../release
 BUILDDIR	:= ../build
 NANT		:= ../bin/NAnt/nant.exe
 
+include Mail/sql/*.mk
+
 all: build
 
 .DELETE_ON_ERROR:
@@ -21,6 +26,10 @@ clean:
 	$(RM) obj
 	$(RM) bin
 
+	
+gen:
+	cd Mail; ../$(BINDIR)/DTG/DataTierGenerator.exe Mail/DataTierGenerator.config.xml
+	
 .PHONY: build
 build:
 	${NANT} build
