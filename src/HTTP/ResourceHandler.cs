@@ -23,12 +23,23 @@ namespace Spring2.Core.HTTP {
 	    context.Response.Cache.SetCacheability(HttpCacheability.Public);
 	    context.Response.Cache.SetExpires(DateTime.Now.AddDays(days));
 	    String resource = context.Request.Params["d"];
-	    SetTypeAndImageFormat(resource);
-
-	    using (MemoryStream stream = ResourceUtility.GetResourceStream(context, resource, imageFormat)) {
-		stream.WriteTo(context.Response.OutputStream);		
+	    if(resource != null && resource.Length > 3 && resource.Contains(".")) {
+		SetTypeAndImageFormat(resource);
+		try {
+		    using(MemoryStream stream = ResourceUtility.GetResourceStream(context, resource, imageFormat)) {
+			stream.WriteTo(context.Response.OutputStream);
+		    }
+		} catch(Exception ex) {
+		    contentType = "text/plain";
+		    context.Response.StatusCode = 404;
+		    context.Response.Write("Not Found!\n");
+		    context.Response.Write("Exception::\n" + ex.ToString());
+		}
+	    } else {
+		contentType = "text/plain";
+		context.Response.StatusCode = 400;
+		context.Response.Write(" ");
 	    }
-
 	    context.Response.ContentType = contentType;
 	    context.Response.End();
 	}
