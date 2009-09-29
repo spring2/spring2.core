@@ -21,7 +21,7 @@ end
 GO
 
 if not exists (select * from dbo.sysobjects where id = object_id(N'[Resource]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-CREATE TABLE Resource (
+CREATE TABLE dbo.Resource (
 	ResourceId Int IDENTITY(1,1) NOT NULL,
 	Context VarChar(100) NOT NULL,
 	Field VarChar(100) NOT NULL,

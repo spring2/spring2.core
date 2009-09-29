@@ -8,8 +8,13 @@ using Spring2.Core.Types;
 
 using Spring2.Core.ResourceManager.BusinessLogic;
 using Spring2.Core.ResourceManager.DataObject;
+using Spring2.Core.ResourceManager.Types;
 
 namespace Spring2.Core.ResourceManager.Dao {
+
+    /// <summary>
+    /// Data access class for Resource business entity.
+    /// </summary>
     public class ResourceDAO : Spring2.Core.DAO.SqlEntityDAO {
 
 	public static readonly ResourceDAO DAO = new ResourceDAO();
@@ -19,6 +24,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	private static ColumnOrdinals columnOrdinals = null;
 
 	internal sealed class ColumnOrdinals {
+	    public String Prefix = String.Empty;
 	    public Int32 ResourceId;
 	    public Int32 Context;
 	    public Int32 Field;
@@ -32,6 +38,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    }
 
 	    internal ColumnOrdinals(IDataReader reader, String prefix) {
+		Prefix = prefix;
 		ResourceId = reader.GetOrdinal(prefix + "ResourceId");
 		Context = reader.GetOrdinal(prefix + "Context");
 		Field = reader.GetOrdinal(prefix + "Field");
@@ -159,7 +166,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	/// <summary>
 	/// Finds a Resource entity using it's primary key.
 	/// </summary>
-	/// <param name="ResourceId">A key field.</param>
+	/// <param name="resourceId">A key field.</param>
 	/// <returns>A Resource object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public Resource Load(IdType resourceId) {
@@ -223,22 +230,14 @@ namespace Spring2.Core.ResourceManager.Dao {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data">Entity to be populated from data reader</param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal static Resource GetDataObjectFromReader(Resource data, IDataReader dataReader, ColumnOrdinals ordinals) {
-	    return GetDataObjectFromReader(data, dataReader, String.Empty, ordinals);
-	}
-
-	/// <summary>
-	/// Builds a data object from the current row in a data reader..
-	/// </summary>
-	/// <param name="dataReader">Container for database row.</param>
-	/// <returns>Data object built from current row.</returns>
-	internal static Resource GetDataObjectFromReader(Resource data, IDataReader dataReader) {
+	internal Resource GetDataObjectFromReader(Resource data, IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
-	    return GetDataObjectFromReader(data, dataReader, String.Empty, columnOrdinals);
+	    return GetDataObjectFromReader(data, dataReader, columnOrdinals);
 	}
 
 	/// <summary>
@@ -246,40 +245,33 @@ namespace Spring2.Core.ResourceManager.Dao {
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal static Resource GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
-	    Resource data = new Resource(false);
-	    return GetDataObjectFromReader(data, dataReader, String.Empty, ordinals);
-	}
-
-	/// <summary>
-	/// Builds a data object from the current row in a data reader..
-	/// </summary>
-	/// <param name="dataReader">Container for database row.</param>
-	/// <returns>Data object built from current row.</returns>
-	internal static Resource GetDataObjectFromReader(IDataReader dataReader) {
+	internal Resource GetDataObjectFromReader(IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
 	    Resource data = new Resource(false);
-	    return GetDataObjectFromReader(data, dataReader, String.Empty, columnOrdinals);
+	    return GetDataObjectFromReader(data, dataReader, columnOrdinals);
 	}
 
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal static Resource GetDataObjectFromReader(IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
+	internal Resource GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
 	    Resource data = new Resource(false);
-	    return GetDataObjectFromReader(data, dataReader, prefix, columnOrdinals);
+	    return GetDataObjectFromReader(data, dataReader, ordinals);
 	}
 
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
+	/// <param name="data">Entity to be populated from data reader</param>
 	/// <param name="dataReader">Container for database row.</param>
+	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal static Resource GetDataObjectFromReader(Resource data, IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
+	internal Resource GetDataObjectFromReader(Resource data, IDataReader dataReader, ColumnOrdinals ordinals) {
 	    if (dataReader.IsDBNull(ordinals.ResourceId)) {
 		data.ResourceId = IdType.UNSET;
 	    } else {
@@ -333,11 +325,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-#if (NET_1_1)
-	    if (transaction == null) {
-#else
 	    if (transaction == null && DbConnectionScope.Current == null) {
-#endif
 		cmd.Connection.Close();
 	    }
 
@@ -373,11 +361,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-#if (NET_1_1)
-	    if (transaction == null) {
-#else
 	    if (transaction == null && DbConnectionScope.Current == null) {
-#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -386,7 +370,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	/// <summary>
 	/// Deletes a record from the Resource table by ResourceId.
 	/// </summary>
-	/// <param name="ResourceId">A key field.</param>
+	/// <param name="resourceId">A key field.</param>
 	public void Delete(IdType resourceId) {
 	    Delete(resourceId, null);
 	}
@@ -394,7 +378,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	/// <summary>
 	/// Deletes a record from the Resource table by ResourceId.
 	/// </summary>
-	/// <param name="ResourceId">A key field.</param>
+	/// <param name="resourceId">A key field.</param>
 	/// <param name="transaction"></param>
 	public void Delete(IdType resourceId, IDbTransaction transaction) {
 	    // Create and execute the command
@@ -406,11 +390,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-#if (NET_1_1)
-	    if (transaction == null) {
-#else
 	    if (transaction == null && DbConnectionScope.Current == null) {
-#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -418,9 +398,9 @@ namespace Spring2.Core.ResourceManager.Dao {
 	/// <summary>
 	/// Returns an object which matches the values for the fields specified.
 	/// </summary>
-	/// <param name="Context">A field value to be matched.</param>
-	/// <param name="Field">A field value to be matched.</param>
-	/// <param name="ContextIdentity">A field value to be matched.</param>
+	/// <param name="context">A field value to be matched.</param>
+	/// <param name="field">A field value to be matched.</param>
+	/// <param name="contextIdentity">A field value to be matched.</param>
 	/// <returns>The object found.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
 	public Resource FindByContextFieldAndIdentity(StringType context, StringType field, IdType identity) {
@@ -437,7 +417,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="Context">A field value to be matched.</param>
+	/// <param name="context">A field value to be matched.</param>
 	/// <returns>The list of ResourceDAO objects found.</returns>
 	public ResourceList FindByContext(StringType context) {
 	    OrderByClause sort = new OrderByClause("Context");
@@ -451,8 +431,8 @@ namespace Spring2.Core.ResourceManager.Dao {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="Context">A field value to be matched.</param>
-	/// <param name="Field">A field value to be matched.</param>
+	/// <param name="context">A field value to be matched.</param>
+	/// <param name="field">A field value to be matched.</param>
 	/// <returns>The list of ResourceDAO objects found.</returns>
 	public ResourceList FindListByContextAndField(StringType context, StringType field) {
 	    OrderByClause sort = new OrderByClause("Context, Field");

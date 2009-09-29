@@ -1,12 +1,12 @@
-if exists (select * from sysobjects where id = object_id(N'[vwMailMessageRoute]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [vwMailMessageRoute]
+if exists (select * from sysobjects where id = object_id(N'dbo.[vwMailMessageRoute]') and OBJECTPROPERTY(id, N'IsView') = 1)
+drop view dbo.[vwMailMessageRoute]
 GO
 
 SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE VIEW [vwMailMessageRoute]
+CREATE VIEW dbo.[vwMailMessageRoute]
 
 AS
 

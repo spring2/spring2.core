@@ -17,6 +17,8 @@ namespace Spring2.Core.Mail.DataObject {
 
     public class MailAttachmentFields {
 	private MailAttachmentFields() {}
+	public static readonly String MAILATTACHMENT = "MailAttachment"; //Entity Name
+	
 	public static readonly String MAILATTACHMENTID = "MailAttachmentId";
 	public static readonly String MAILMESSAGEID = "MailMessageId";
 	public static readonly String FILENAME = "Filename";

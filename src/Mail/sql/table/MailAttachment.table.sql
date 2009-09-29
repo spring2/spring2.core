@@ -21,7 +21,7 @@ end
 GO
 
 if not exists (select * from dbo.sysobjects where id = object_id(N'[MailAttachment]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-CREATE TABLE MailAttachment (
+CREATE TABLE dbo.MailAttachment (
 	MailAttachmentId Int IDENTITY(1,1) NOT NULL,
 	MailMessageId Int NOT NULL,
 	Filename VarChar(50) NULL,

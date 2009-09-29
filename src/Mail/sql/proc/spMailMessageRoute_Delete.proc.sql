@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spMailMessageRoute_Delete
+CREATE PROCEDURE dbo.spMailMessageRoute_Delete
 
 @MailMessageRouteId	Int
 

@@ -4,6 +4,8 @@ using System.Collections;
 using Spring2.Core.Types;
 using Spring2.DataTierGenerator.Attribute;
 
+using Spring2.Core.Geocode.Types;
+
 namespace Spring2.Core.Geocode.DataObject {
 
     /// <summary>

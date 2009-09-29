@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spMenuLink_Insert
+CREATE PROCEDURE dbo.spMenuLink_Insert
 	@Name	VarChar(75) = null,
 	@Target	VarChar(150) = null,
 	@Active	Bit = null,

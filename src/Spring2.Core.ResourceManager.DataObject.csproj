@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{EE6B2078-6D63-47D0-A837-3DC0859DA7E7}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -179,6 +179,10 @@
     <Compile Include="ResourceManager\DataObject\ResourceList.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ResourceManager\Types\LanguageEnum.cs" />
+    <Compile Include="ResourceManager\Types\LanguageEnumList.cs" />
+    <Compile Include="ResourceManager\Types\LocaleEnum.cs" />
+    <Compile Include="ResourceManager\Types\LocaleEnumList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="spring2.snk" />

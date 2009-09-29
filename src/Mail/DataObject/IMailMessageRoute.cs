@@ -16,6 +16,8 @@ namespace Spring2.Core.Mail.DataObject {
 
     public class MailMessageRouteFields {
 	private MailMessageRouteFields() {}
+	public static readonly String MAILMESSAGEROUTE = "MailMessageRoute"; //Entity Name
+	
 	public static readonly String MAILMESSAGEROUTEID = "MailMessageRouteId";
 	public static readonly String MAILMESSAGE = "MailMessage";
 	public static readonly String ROUTINGTYPE = "RoutingType";

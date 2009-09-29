@@ -62,7 +62,7 @@
     <entities-ref xinc:href="dtg-entities.xml" />
     <collections-ref xinc:href="dtg-collections.xml" />
     <enums-ref xinc:href="dtg-enums.xml" />
-    <types-ref xinc:href="types.inc.xml" />
-    <sqltypes-ref xinc:href="sqltypes.xml" />
+    <types-ref xinc:href="..\types.inc.xml" />
+    <sqltypes-ref xinc:href="..\sqltypes.xml" />
     <databases-ref xinc:href="dtg-databases.xml" />
 </DataTierGenerator>

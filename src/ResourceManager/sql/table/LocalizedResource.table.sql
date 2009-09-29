@@ -21,7 +21,7 @@ end
 GO
 
 if not exists (select * from dbo.sysobjects where id = object_id(N'[LocalizedResource]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-CREATE TABLE LocalizedResource (
+CREATE TABLE dbo.LocalizedResource (
 	LocalizedResourceId Int IDENTITY(1,1) NOT NULL,
 	ResourceId Int NOT NULL,
 	Locale VarChar(100) NOT NULL,

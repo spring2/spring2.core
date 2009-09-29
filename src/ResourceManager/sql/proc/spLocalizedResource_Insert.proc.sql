@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spLocalizedResource_Insert
+CREATE PROCEDURE dbo.spLocalizedResource_Insert
 	@ResourceId	Int = null,
 	@Locale	VarChar(100) = null,
 	@Language	VarChar(100) = null,

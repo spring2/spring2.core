@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spMailMessageRoute_Insert
+CREATE PROCEDURE dbo.spMailMessageRoute_Insert
 	@MailMessage	VarChar(50) = null,
 	@RoutingType	VarChar(10) = null,
 	@Status	VarChar(1) = null,

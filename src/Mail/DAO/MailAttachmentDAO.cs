@@ -11,6 +11,10 @@ using Spring2.Core.Mail.DataObject;
 using Spring2.Core.Mail.Types;
 
 namespace Spring2.Core.Mail.Dao {
+
+    /// <summary>
+    /// Data access class for MailAttachment business entity.
+    /// </summary>
     public class MailAttachmentDAO : Spring2.Core.DAO.SqlEntityDAO {
 
 	public static readonly MailAttachmentDAO DAO = new MailAttachmentDAO();
@@ -20,6 +24,7 @@ namespace Spring2.Core.Mail.Dao {
 	private static ColumnOrdinals columnOrdinals = null;
 
 	internal sealed class ColumnOrdinals {
+	    public String Prefix = String.Empty;
 	    public Int32 MailAttachmentId;
 	    public Int32 MailMessageId;
 	    public Int32 Filename;
@@ -33,6 +38,7 @@ namespace Spring2.Core.Mail.Dao {
 	    }
 
 	    internal ColumnOrdinals(IDataReader reader, String prefix) {
+		Prefix = prefix;
 		MailAttachmentId = reader.GetOrdinal(prefix + "MailAttachmentId");
 		MailMessageId = reader.GetOrdinal(prefix + "MailMessageId");
 		Filename = reader.GetOrdinal(prefix + "Filename");
@@ -221,39 +227,17 @@ namespace Spring2.Core.Mail.Dao {
 	    return data;
 	}
 
-    	/// <summary>
-    	/// Builds a data object from the current row in a data reader..
-    	/// </summary>
-    	/// <param name="data"></param>
-    	/// <param name="dataReader"></param>
-    	/// <param name="ordinals"></param>
-    	/// <returns></returns>
-	internal static MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader, ColumnOrdinals ordinals) {
-	    return GetDataObjectFromReader(data, dataReader, String.Empty, ordinals);
-	}
-
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
-	/// <param name="data"></param>
-	/// <param name="dataReader"></param>
-	/// <returns></returns>
-    	internal static MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader) {
+	/// <param name="data">Entity to be populated from data reader</param>
+	/// <param name="dataReader">Container for database row.</param>
+	/// <returns>Data object built from current row.</returns>
+	internal MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
-	    return GetDataObjectFromReader(data, dataReader, String.Empty, columnOrdinals);
-	}
-
-	/// <summary>
-	/// Builds a data object from the current row in a data reader..
-	/// </summary>
-	/// <param name="dataReader">Container for database row.</param>
-	/// <param name="ordinals"></param>
-	/// <returns>Data object built from current row.</returns>
-	internal static MailAttachment GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
-	    MailAttachment data = new MailAttachment(false);
-	    return GetDataObjectFromReader(data, dataReader, String.Empty, ordinals);
+	    return GetDataObjectFromReader(data, dataReader, columnOrdinals);
 	}
 
 	/// <summary>
@@ -261,35 +245,33 @@ namespace Spring2.Core.Mail.Dao {
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal static MailAttachment GetDataObjectFromReader(IDataReader dataReader) {
+	internal MailAttachment GetDataObjectFromReader(IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
 	    MailAttachment data = new MailAttachment(false);
-	    return GetDataObjectFromReader(data, dataReader, String.Empty, columnOrdinals);
+	    return GetDataObjectFromReader(data, dataReader, columnOrdinals);
 	}
 
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
-	/// <param name="prefix"></param>
-	/// <param name="ordinals"></param>
+	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal static MailAttachment GetDataObjectFromReader(IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
+	internal MailAttachment GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
 	    MailAttachment data = new MailAttachment(false);
-	    return GetDataObjectFromReader(data, dataReader, prefix, columnOrdinals);
+	    return GetDataObjectFromReader(data, dataReader, ordinals);
 	}
 
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
-	/// <param name="data"></param>
+	/// <param name="data">Entity to be populated from data reader</param>
 	/// <param name="dataReader">Container for database row.</param>
-	/// <param name="prefix"></param>
-	/// <param name="ordinals"></param>
+	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal static MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
+	internal MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader, ColumnOrdinals ordinals) {
 	    if (dataReader.IsDBNull(ordinals.MailAttachmentId)) {
 		data.MailAttachmentId = IdType.UNSET;
 	    } else {
@@ -345,11 +327,7 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-#if (NET_1_1)
-	    if (transaction == null) {
-#else
 	    if (transaction == null && DbConnectionScope.Current == null) {
-#endif
 		cmd.Connection.Close();
 	    }
 
@@ -385,11 +363,7 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-#if (NET_1_1)
-	    if (transaction == null) {
-#else
 	    if (transaction == null && DbConnectionScope.Current == null) {
-#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -418,11 +392,7 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-#if (NET_1_1)
-	    if (transaction == null) {
-#else
 	    if (transaction == null && DbConnectionScope.Current == null) {
-#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -436,7 +406,7 @@ namespace Spring2.Core.Mail.Dao {
 	    OrderByClause sort = new OrderByClause("MailMessageId");
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(new SqlEqualityPredicate("MailMessageId", EqualityOperatorEnum.Equal, mailMessageId.IsValid ? mailMessageId.ToInt32() as Object : DBNull.Value));
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
 
 	    return GetList(dataReader);
 	}

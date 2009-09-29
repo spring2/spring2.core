@@ -23,7 +23,7 @@
 		<type name="{element.Name}List" newinstanceformat="{element.Name}List.DEFAULT" nullinstanceformat="{element.Name}List.UNSET" />
 	    </task>
 
-	    <task name="dao" element="entity" template="Template\PassThroughInterface\DAO.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region" >
+	    <task name="dao" element="entity" template="Template\PassThroughInterface\DAO-SqlFilter.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region" >
 	    </task> 
 
 	    <task name="enum" element="enum" template="Template\enum.vm" directory="Types" filenameformat="{element.Name}.cs" writer="region" >
@@ -60,7 +60,7 @@
     <entities-ref xinc:href="dtg-entities.xml" />
     <collections-ref xinc:href="dtg-collections.xml" />
     <enums-ref xinc:href="dtg-enums.xml" />
-    <types-ref xinc:href="types.inc.xml" />
-    <sqltypes-ref xinc:href="sqltypes.xml" />
+    <types-ref xinc:href="..\types.inc.xml" />
+    <sqltypes-ref xinc:href="..\sqltypes.xml" />
     <databases-ref xinc:href="dtg-databases.xml" />
 </DataTierGenerator>

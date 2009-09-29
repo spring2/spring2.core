@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spMailMessage_Insert
+CREATE PROCEDURE dbo.spMailMessage_Insert
 	@ScheduleTime	DateTime = null,
 	@ProcessedTime	DateTime = null,
 	@Priority	VarChar(10) = null,

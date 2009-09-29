@@ -23,7 +23,7 @@
 		<type name="{element.Name}List" newinstanceformat="{element.Name}List.DEFAULT" nullinstanceformat="{element.Name}List.UNSET" />
 	    </task>
 
-	    <task name="dao" element="entity" template=".\DAO.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region" >
+	    <task name="dao" element="entity" template="Template\PassThroughInterface\DAO-SqlFilter.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region" >
 		<excludes>
 		    <exclude name="LocalizedResource" />
 		</excludes>
@@ -57,7 +57,7 @@
     -->
     <config>
 	<setting name="RootDirectory" value="." />
-	<setting name="RootNameSpace" value="Spring2.ResourceManager" />
+	<setting name="RootNameSpace" value="Spring2.Core.ResourceManager" />
 	<setting name="DAOBaseClass" value="Spring2.Core.DAO.SqlEntityDAO" />
     </config>
     <entities-ref xinc:href="dtg-entities.xml" />

@@ -22,6 +22,7 @@
 	-->
     <sqltypes>
 	<sqltype name="VarChar" sqldbtype="VarChar" dbtype="AnsiString" length="50" type="StringType" readermethodformat='{0}.GetString({2})' declarationformat="{0}({1})" />
+	<sqltype name="VarChar(max)" sqldbtype="VarChar(max)" dbtype="AnsiString" type="StringType" readermethodformat='{0}.GetString({2})' />
 	<sqltype name="Char" sqldbtype="Char" dbtype="AnsiStringFixedLength" type="StringType" readermethodformat='{0}.GetString({2})' declarationformat="{0}({1})" />
 	<sqltype name="Bit" sqldbtype="Bit" dbtype="Boolean" type="BooleanType" readermethodformat='{0}.GetBoolean({2})' />
 	<sqltype name="TinyInt" sqldbtype="TinyInt" dbtype="Byte" type="Byte" readermethodformat='{0}.GetByte({2})' />

@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spAddressCache_Delete
+CREATE PROCEDURE dbo.spAddressCache_Delete
 
 @AddressId	Int
 

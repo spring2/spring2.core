@@ -226,7 +226,7 @@ namespace Spring2.Core.Geocode.Dao {
 	/// <summary>
 	/// Finds a AddressCache entity using it's primary key.
 	/// </summary>
-	/// <param name="AddressId">A key field.</param>
+	/// <param name="addressId">A key field.</param>
 	/// <returns>A AddressCache object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public AddressCache Load(IdType addressId) {
@@ -475,11 +475,7 @@ namespace Spring2.Core.Geocode.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-#if (NET_1_1)
-	    if (transaction == null) {
-#else
 	    if (transaction == null && DbConnectionScope.Current == null) {
-#endif
 		cmd.Connection.Close();
 	    }
 
@@ -530,11 +526,7 @@ namespace Spring2.Core.Geocode.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-#if (NET_1_1)
-	    if (transaction == null) {
-#else
 	    if (transaction == null && DbConnectionScope.Current == null) {
-#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -543,7 +535,7 @@ namespace Spring2.Core.Geocode.Dao {
 	/// <summary>
 	/// Deletes a record from the AddressCache table by AddressId.
 	/// </summary>
-	/// <param name="AddressId">A key field.</param>
+	/// <param name="addressId">A key field.</param>
 	public void Delete(IdType addressId) {
 	    Delete(addressId, null);
 	}
@@ -551,7 +543,7 @@ namespace Spring2.Core.Geocode.Dao {
 	/// <summary>
 	/// Deletes a record from the AddressCache table by AddressId.
 	/// </summary>
-	/// <param name="AddressId">A key field.</param>
+	/// <param name="addressId">A key field.</param>
 	/// <param name="transaction"></param>
 	public void Delete(IdType addressId, IDbTransaction transaction) {
 	    // Create and execute the command
@@ -563,11 +555,7 @@ namespace Spring2.Core.Geocode.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-#if (NET_1_1)
-	    if (transaction == null) {
-#else
 	    if (transaction == null && DbConnectionScope.Current == null) {
-#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -575,8 +563,8 @@ namespace Spring2.Core.Geocode.Dao {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="Address1">A field value to be matched.</param>
-	/// <param name="PostalCode">A field value to be matched.</param>
+	/// <param name="address1">A field value to be matched.</param>
+	/// <param name="postalCode">A field value to be matched.</param>
 	/// <returns>The list of AddressCacheDAO objects found.</returns>
 	public AddressCacheList FindAddressByStreetAndPostalCode(StringType address1, StringType postalCode) {
 	    OrderByClause sort = new OrderByClause("Address1, PostalCode");
@@ -591,9 +579,9 @@ namespace Spring2.Core.Geocode.Dao {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="Address1">A field value to be matched.</param>
-	/// <param name="City">A field value to be matched.</param>
-	/// <param name="Region">A field value to be matched.</param>
+	/// <param name="address1">A field value to be matched.</param>
+	/// <param name="city">A field value to be matched.</param>
+	/// <param name="region">A field value to be matched.</param>
 	/// <returns>The list of AddressCacheDAO objects found.</returns>
 	public AddressCacheList FindAddressByStreetAndCityAndState(StringType address1, StringType city, StringType region) {
 	    OrderByClause sort = new OrderByClause("Address1, City, Region");

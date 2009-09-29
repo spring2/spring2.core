@@ -5,8 +5,8 @@ using System.Data;
 using System.Data.SqlClient;
 
 using Spring2.Core.DAO;
-using Spring2.Core.Types;
 using Spring2.Core.ResourceManager.DataObject;
+using Spring2.Core.Types;
 
 
 using Spring2.Core.BusinessEntity;

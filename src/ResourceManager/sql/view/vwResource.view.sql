@@ -1,12 +1,12 @@
-if exists (select * from sysobjects where id = object_id(N'[vwResource]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [vwResource]
+if exists (select * from sysobjects where id = object_id(N'dbo.[vwResource]') and OBJECTPROPERTY(id, N'IsView') = 1)
+drop view dbo.[vwResource]
 GO
 
 SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE VIEW [vwResource]
+CREATE VIEW dbo.[vwResource]
 
 AS
 

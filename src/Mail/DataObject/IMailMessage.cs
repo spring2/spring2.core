@@ -16,6 +16,8 @@ namespace Spring2.Core.Mail.DataObject {
 
     public class MailMessageFields {
 	private MailMessageFields() {}
+	public static readonly String MAILMESSAGE = "MailMessage"; //Entity Name
+	
 	public static readonly String MAILMESSAGEID = "MailMessageId";
 	public static readonly String SCHEDULETIME = "ScheduleTime";
 	public static readonly String PROCESSEDTIME = "ProcessedTime";

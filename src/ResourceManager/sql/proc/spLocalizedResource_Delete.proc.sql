@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spLocalizedResource_Delete
+CREATE PROCEDURE dbo.spLocalizedResource_Delete
 
 @LocalizedResourceId	Int
 

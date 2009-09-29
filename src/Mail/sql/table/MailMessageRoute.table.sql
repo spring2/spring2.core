@@ -21,7 +21,7 @@ end
 GO
 
 if not exists (select * from dbo.sysobjects where id = object_id(N'[MailMessageRoute]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-CREATE TABLE MailMessageRoute (
+CREATE TABLE dbo.MailMessageRoute (
 	MailMessageRouteId Int IDENTITY(1,1) NOT NULL,
 	MailMessage VarChar(50) NOT NULL,
 	RoutingType VarChar(10) NOT NULL,

@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spAddressCache_Insert
+CREATE PROCEDURE dbo.spAddressCache_Insert
 	@Address1	VarChar(80) = null,
 	@City	VarChar(40) = null,
 	@Region	Char(2) = null,

@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spMailAttachment_Delete
+CREATE PROCEDURE dbo.spMailAttachment_Delete
 
 @MailAttachmentId	Int
 

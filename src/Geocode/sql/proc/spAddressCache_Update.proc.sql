@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spAddressCache_Update
+CREATE PROCEDURE dbo.spAddressCache_Update
 
 	@AddressId	Int = null,
 	@Address1	VarChar(80) = null,

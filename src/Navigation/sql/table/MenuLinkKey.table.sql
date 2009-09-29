@@ -21,7 +21,7 @@ end
 GO
 
 if not exists (select * from dbo.sysobjects where id = object_id(N'[MenuLinkKey]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-CREATE TABLE MenuLinkKey (
+CREATE TABLE dbo.MenuLinkKey (
 	MenuLinkId Int NOT NULL,
 	[Key] VarChar(100) NOT NULL
 )

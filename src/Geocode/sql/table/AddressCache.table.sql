@@ -21,7 +21,7 @@ end
 GO
 
 if not exists (select * from dbo.sysobjects where id = object_id(N'[AddressCache]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-CREATE TABLE AddressCache (
+CREATE TABLE dbo.AddressCache (
 	AddressId Int IDENTITY(1,1) NOT NULL,
 	Address1 VarChar(80) NULL,
 	City VarChar(40) NULL,

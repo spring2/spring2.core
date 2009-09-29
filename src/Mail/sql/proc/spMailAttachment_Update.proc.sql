@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spMailAttachment_Update
+CREATE PROCEDURE dbo.spMailAttachment_Update
 
 	@MailAttachmentId	Int = null,
 	@MailMessageId	Int = null,

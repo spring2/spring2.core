@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 
 using Spring2.Core.Types;
 using Spring2.DataTierGenerator.Attribute;
@@ -10,8 +11,8 @@ namespace Spring2.Core.Mail.DataObject {
     /// <summary>
     /// IMailMessage generic collection
     /// </summary>
-    public class MailMessageList : System.Collections.CollectionBase {
-	
+    public class MailMessageList : CollectionBase {
+
 	[Generate]
 	public static readonly MailMessageList UNSET = new MailMessageList(true);
 	[Generate]
@@ -19,23 +20,36 @@ namespace Spring2.Core.Mail.DataObject {
 
 	[Generate]
 	private Boolean immutable = false;
-	
+
 	[Generate]
-	private MailMessageList (Boolean immutable) {
-	        this.immutable = immutable;
+	private Hashtable keys = new Hashtable();
+
+	[Generate]
+	private MailMessageList(Boolean immutable) {
+	    this.immutable = immutable;
 	}
 
 	[Generate]
 	public MailMessageList() {
 	}
 
+	[Generate]
+	public ICollection Keys {
+	    get {
+		return new ArrayList(keys.Keys);
+	    }
+	}
+
 	// Indexer implementation.
 	[Generate]
 	public IMailMessage this[int index] {
-	    get { return (IMailMessage) List[index]; }
-	    set { 
+	    get {
+		return (IMailMessage)List[index];
+	    }
+	    set {
 		if (!immutable) {
 		    List[index] = value;
+		    keys[value.MailMessageId] = value;
 		} else {
 		    throw new System.Data.ReadOnlyException();
 		}
@@ -46,6 +60,7 @@ namespace Spring2.Core.Mail.DataObject {
 	public void Add(IMailMessage value) {
 	    if (!immutable) {
 		List.Add(value);
+		keys[value.MailMessageId] = value;
 	    } else {
 		throw new System.Data.ReadOnlyException();
 	    }
@@ -55,16 +70,17 @@ namespace Spring2.Core.Mail.DataObject {
 	public Boolean Contains(IMailMessage value) {
 	    return List.Contains(value);
 	}
-	
+
 	[Generate]
 	public Int32 IndexOf(IMailMessage value) {
 	    return List.IndexOf(value);
 	}
-	
+
 	[Generate]
 	public void Insert(Int32 index, IMailMessage value) {
 	    if (!immutable) {
-	    	List.Insert(index, value);
+		List.Insert(index, value);
+		keys[value.MailMessageId] = value;
 	    } else {
 		throw new System.Data.ReadOnlyException();
 	    }
@@ -76,7 +92,9 @@ namespace Spring2.Core.Mail.DataObject {
 		if (index > Count - 1 || index < 0) {
 		    throw new IndexOutOfRangeException();
 		} else {
-		    List.RemoveAt(index); 
+		    IMailMessage value = this[index];
+		    keys.Remove(value.MailMessageId);
+		    List.RemoveAt(index);
 		}
 	    } else {
 		throw new System.Data.ReadOnlyException();
@@ -86,33 +104,38 @@ namespace Spring2.Core.Mail.DataObject {
 	[Generate]
 	public void Remove(IMailMessage value) {
 	    if (!immutable) {
-		List.Remove(value); 
+		List.Remove(value);
+		keys.Remove(value.MailMessageId);
 	    } else {
 		throw new System.Data.ReadOnlyException();
 	    }
 	}
 
 	[Generate]
-	public void AddRange(System.Collections.IList list) {
+	public void AddRange(IList list) {
 	    foreach(Object o in list) {
 		if (o is IMailMessage) {
 		    Add((IMailMessage)o);
 		} else {
-		    throw new System.InvalidCastException("object in list could not be cast to IMailMessage");
+		    throw new InvalidCastException("object in list could not be cast to IMailMessage");
 		}
 	    }
 	}
-	
+
 	[Generate]
 	public Boolean IsDefault {
-	    get { return Object.ReferenceEquals(this, DEFAULT); }
+	    get {
+		return ReferenceEquals(this, DEFAULT);
+	    }
 	}
 
 	[Generate]
 	public Boolean IsUnset {
-	    get { return Object.ReferenceEquals(this, UNSET); }
+	    get {
+		return ReferenceEquals(this, UNSET);
+	    }
 	}
-	
+
 	[Generate]
 	public Boolean IsValid {
 	    get {
@@ -125,12 +148,7 @@ namespace Spring2.Core.Mail.DataObject {
 	/// </summary>
 	[Generate]
 	public Boolean Contains(IdType mailMessageId) {
-	    foreach(IMailMessage o in List) {
-		if (o.MailMessageId.Equals(mailMessageId)) {
-		    return true;
-		}
-	    }
-	    return false;
+	    return keys.Contains(mailMessageId);
 	}
 
 	/// <summary>
@@ -138,18 +156,11 @@ namespace Spring2.Core.Mail.DataObject {
 	/// </summary>
 	[Generate]
 	public IMailMessage this[IdType mailMessageId] {
-	    get { 
-		foreach(IMailMessage o in List) {
-		    if (o.MailMessageId.Equals(mailMessageId)) {
-			return o;
-		    }
-		}
-
-		// not found
-		return null;
+	    get {
+		return keys[mailMessageId] as IMailMessage;
 	    }
 	}
-	
+
 	/// <summary>
 	/// Returns a new list that contains all of the elements that are in both lists
 	/// </summary>
@@ -186,8 +197,8 @@ namespace Spring2.Core.Mail.DataObject {
 	/// Sort a list by a column
 	/// </summary>
 	[Generate]
-	public void Sort(System.Collections.IComparer comparer) {
-	    this.InnerList.Sort(comparer);
+	public void Sort(IComparer comparer) {
+	    InnerList.Sort(comparer);
 	}
 
 	/// <summary>
@@ -197,19 +208,19 @@ namespace Spring2.Core.Mail.DataObject {
 	public void Sort(String comparerName) {
 	    Type type = GetType().GetNestedType(comparerName);
 	    if (type == null) {
-		throw new System.ArgumentException(String.Format("Comparer {0} not found in class {1}.", comparerName, GetType().Name));
+		throw new ArgumentException(String.Format("Comparer {0} not found in class {1}.", comparerName, GetType().Name));
 	    }
 
-	    System.Collections.IComparer comparer = Activator.CreateInstance(type) as System.Collections.IComparer;
+	    IComparer comparer = Activator.CreateInstance(type) as IComparer;
 	    if (comparer == null) {
-		throw new System.ArgumentException("compareName must be the name of class that implements IComparer.");
+		throw new ArgumentException("compareName must be the name of class that implements IComparer.");
 	    }
 
-	    this.InnerList.Sort(comparer);
+	    InnerList.Sort(comparer);
 	}
 
 	[Generate]
-	public class ScheduleTimeSorter : System.Collections.IComparer {
+	public class ScheduleTimeSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -222,7 +233,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class ProcessedTimeSorter : System.Collections.IComparer {
+	public class ProcessedTimeSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -235,7 +246,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class FromSorter : System.Collections.IComparer {
+	public class FromSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -248,7 +259,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class ToSorter : System.Collections.IComparer {
+	public class ToSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -261,7 +272,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class CcSorter : System.Collections.IComparer {
+	public class CcSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -274,7 +285,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class BccSorter : System.Collections.IComparer {
+	public class BccSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -287,7 +298,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class SubjectSorter : System.Collections.IComparer {
+	public class SubjectSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -300,7 +311,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class BodySorter : System.Collections.IComparer {
+	public class BodySorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -313,7 +324,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class MailMessageTypeSorter : System.Collections.IComparer {
+	public class MailMessageTypeSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -326,7 +337,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class MessageQueueDateSorter : System.Collections.IComparer {
+	public class MessageQueueDateSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -339,7 +350,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class ReferenceKeySorter : System.Collections.IComparer {
+	public class ReferenceKeySorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -352,7 +363,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class UniqueKeySorter : System.Collections.IComparer {
+	public class UniqueKeySorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -365,7 +376,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class ChecksumSorter : System.Collections.IComparer {
+	public class ChecksumSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -378,7 +389,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class LastOpenDateSorter : System.Collections.IComparer {
+	public class LastOpenDateSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;
@@ -391,7 +402,7 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public class SmtpServerSorter : System.Collections.IComparer {
+	public class SmtpServerSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
 		IMailMessage o2 = (IMailMessage)b;

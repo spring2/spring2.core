@@ -1,12 +1,12 @@
-if exists (select * from sysobjects where id = object_id(N'[vwMailAttachment]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [vwMailAttachment]
+if exists (select * from sysobjects where id = object_id(N'dbo.[vwMailAttachment]') and OBJECTPROPERTY(id, N'IsView') = 1)
+drop view dbo.[vwMailAttachment]
 GO
 
 SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE VIEW [vwMailAttachment]
+CREATE VIEW dbo.[vwMailAttachment]
 
 AS
 

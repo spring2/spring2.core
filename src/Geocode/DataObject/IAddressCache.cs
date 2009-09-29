@@ -10,14 +10,13 @@ using Spring2.Core.Geocode.Types;
 using Spring2.Core.Types;
 
 
-
 using Spring2.Core.BusinessEntity;
 
 namespace Spring2.Core.Geocode.DataObject {
 
     public class AddressCacheFields {
 	private AddressCacheFields() {}
-	public static readonly String ENTITY_NAME = "AddressCache";
+	public static readonly String ADDRESSCACHE = "AddressCache"; //Entity Name
 	
 	public static readonly String ADDRESSID = "AddressId";
 	public static readonly String ADDRESS1 = "Address1";

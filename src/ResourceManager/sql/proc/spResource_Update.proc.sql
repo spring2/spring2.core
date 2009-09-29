@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spResource_Update
+CREATE PROCEDURE dbo.spResource_Update
 
 	@ResourceId	Int = null,
 	@Context	VarChar(100) = null,

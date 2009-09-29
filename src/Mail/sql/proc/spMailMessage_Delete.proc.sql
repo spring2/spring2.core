@@ -6,7 +6,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE spMailMessage_Delete
+CREATE PROCEDURE dbo.spMailMessage_Delete
 
 @MailMessageId	Int
 

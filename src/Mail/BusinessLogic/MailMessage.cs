@@ -21,79 +21,55 @@ namespace Spring2.Core.Mail.BusinessLogic {
 
 	[Generate()]
 	private IdType mailMessageId = IdType.DEFAULT;
-
 	[Generate()]
 	private DateTimeType scheduleTime = DateTimeType.DEFAULT;
-
 	[Generate()]
 	private DateTimeType processedTime = DateTimeType.DEFAULT;
-
 	[Generate()]
 	private MailPriorityEnum priority = MailPriorityEnum.DEFAULT;
-
 	[Generate()]
 	private StringType mailMessageType = StringType.DEFAULT;
-
 	[Generate()]
 	private DateTimeType messageQueueDate = DateTimeType.DEFAULT;
-
 	[Generate()]
-	private StringType from = StringType.DEFAULT;
-
+	private StringType @from = StringType.DEFAULT;
 	[Generate()]
 	private StringType to = StringType.DEFAULT;
-
 	[Generate()]
 	private StringType cc = StringType.DEFAULT;
-
 	[Generate()]
 	private StringType bcc = StringType.DEFAULT;
-
 	[Generate()]
 	private StringType subject = StringType.DEFAULT;
-
 	[Generate()]
 	private MailBodyFormatEnum bodyFormat = MailBodyFormatEnum.DEFAULT;
-
 	[Generate()]
 	private StringType body = StringType.DEFAULT;
-
 	[Generate()]
 	private MailMessageStatusEnum mailMessageStatus = MailMessageStatusEnum.DEFAULT;
-
 	[Generate()]
 	private IdType releasedByUserId = IdType.DEFAULT;
-
 	[Generate()]
 	private MailAttachmentList attachments = MailAttachmentList.DEFAULT;
-
 	[Generate()]
 	private IntegerType numberOfAttempts = IntegerType.DEFAULT;
-
 	[Generate()]
 	private StringType referenceKey = StringType.DEFAULT;
-
 	[Generate()]
 	private StringType uniqueKey = StringType.DEFAULT;
-
 	[Generate()]
 	private StringType checksum = StringType.DEFAULT;
-
 	[Generate()]
 	private IntegerType openCount = IntegerType.DEFAULT;
-
 	[Generate()]
 	private IntegerType bounces = IntegerType.DEFAULT;
-
 	[Generate()]
 	private DateTimeType lastOpenDate = DateTimeType.DEFAULT;
-
 	[Generate()]
 	private StringType smtpServer = StringType.DEFAULT;
 
 	[Generate()]
 	internal MailMessage() {
-
 	}
 
 	[Generate()]
@@ -101,154 +77,95 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    this.isNew = isNew;
 	}
 
+
 	[Generate()]
 	public IdType MailMessageId {
-	    get {
-		return this.mailMessageId;
-	    }
-	    set {
-		this.mailMessageId = value;
-	    }
+	    get { return this.mailMessageId; }
+	    set { this.mailMessageId = value; }
 	}
 
 	[Generate()]
 	public StringType MailMessageType {
-	    get {
-		return this.mailMessageType;
-	    }
-	    set {
-		this.mailMessageType = value;
-	    }
+	    get { return this.mailMessageType; }
+	    set { this.mailMessageType = value; }
 	}
 
 	[Generate()]
 	public DateTimeType MessageQueueDate {
-	    get {
-		return this.messageQueueDate;
-	    }
-	    set {
-		this.messageQueueDate = value;
-	    }
+	    get { return this.messageQueueDate; }
+	    set { this.messageQueueDate = value; }
 	}
 
 	[Generate()]
 	public DateTimeType ScheduleTime {
-	    get {
-		return this.scheduleTime;
-	    }
-	    set {
-		this.scheduleTime = value;
-	    }
+	    get { return this.scheduleTime; }
+	    set { this.scheduleTime = value; }
 	}
 
 	[Generate()]
 	public DateTimeType ProcessedTime {
-	    get {
-		return this.processedTime;
-	    }
-	    set {
-		this.processedTime = value;
-	    }
+	    get { return this.processedTime; }
+	    set { this.processedTime = value; }
 	}
 
 	[Generate()]
 	public MailPriorityEnum Priority {
-	    get {
-		return this.priority;
-	    }
-	    set {
-		this.priority = value;
-	    }
+	    get { return this.priority; }
+	    set { this.priority = value; }
 	}
 
 	[Generate()]
 	public StringType From {
-	    get {
-		return this.from;
-	    }
-	    set {
-		this.from = value;
-	    }
+	    get { return this.@from; }
+	    set { this.@from = value; }
 	}
 
 	[Generate()]
 	public StringType To {
-	    get {
-		return this.to;
-	    }
-	    set {
-		this.to = value;
-	    }
+	    get { return this.to; }
+	    set { this.to = value; }
 	}
 
 	[Generate()]
 	public StringType Cc {
-	    get {
-		return this.cc;
-	    }
-	    set {
-		this.cc = value;
-	    }
+	    get { return this.cc; }
+	    set { this.cc = value; }
 	}
 
 	[Generate()]
 	public StringType Bcc {
-	    get {
-		return this.bcc;
-	    }
-	    set {
-		this.bcc = value;
-	    }
+	    get { return this.bcc; }
+	    set { this.bcc = value; }
 	}
 
 	[Generate()]
 	public StringType Subject {
-	    get {
-		return this.subject;
-	    }
-	    set {
-		this.subject = value;
-	    }
+	    get { return this.subject; }
+	    set { this.subject = value; }
 	}
 
 	[Generate()]
 	public MailBodyFormatEnum BodyFormat {
-	    get {
-		return this.bodyFormat;
-	    }
-	    set {
-		this.bodyFormat = value;
-	    }
+	    get { return this.bodyFormat; }
+	    set { this.bodyFormat = value; }
 	}
 
 	[Generate()]
 	public StringType Body {
-	    get {
-		return this.body;
-	    }
-	    set {
-		this.body = value;
-	    }
+	    get { return this.body; }
+	    set { this.body = value; }
 	}
 
 	[Generate()]
 	public MailMessageStatusEnum MailMessageStatus {
-	    get {
-		return this.mailMessageStatus;
-	    }
-	    set {
-		this.mailMessageStatus = value;
-	    }
+	    get { return this.mailMessageStatus; }
+	    set { this.mailMessageStatus = value; }
 	}
 
 	[Generate()]
 	public IdType ReleasedByUserId {
-	    get {
-		return this.releasedByUserId;
-	    }
-	    set {
-		this.releasedByUserId = value;
-	    }
+	    get { return this.releasedByUserId; }
+	    set { this.releasedByUserId = value; }
 	}
 
 	public MailAttachmentList Attachments {
@@ -261,89 +178,55 @@ namespace Spring2.Core.Mail.BusinessLogic {
 		}
 		return this.attachments;
 	    }
-	    set {
-		this.attachments = value;
-	    }
+	    set { this.attachments = value; }
 	}
 
 	[Generate()]
 	public IntegerType NumberOfAttempts {
-	    get {
-		return this.numberOfAttempts;
-	    }
-	    set {
-		this.numberOfAttempts = value;
-	    }
+	    get { return this.numberOfAttempts; }
+	    set { this.numberOfAttempts = value; }
 	}
 
 	[Generate()]
 	public StringType ReferenceKey {
-	    get {
-		return this.referenceKey;
-	    }
-	    set {
-		this.referenceKey = value;
-	    }
+	    get { return this.referenceKey; }
+	    set { this.referenceKey = value; }
 	}
 
 	[Generate()]
 	public StringType UniqueKey {
-	    get {
-		return this.uniqueKey;
-	    }
-	    set {
-		this.uniqueKey = value;
-	    }
+	    get { return this.uniqueKey; }
+	    set { this.uniqueKey = value; }
 	}
 
 	[Generate()]
 	public StringType Checksum {
-	    get {
-		return this.checksum;
-	    }
-	    set {
-		this.checksum = value;
-	    }
+	    get { return this.checksum; }
+	    set { this.checksum = value; }
 	}
 
 	[Generate()]
 	public IntegerType OpenCount {
-	    get {
-		return this.openCount;
-	    }
-	    set {
-		this.openCount = value;
-	    }
+	    get { return this.openCount; }
+	    set { this.openCount = value; }
 	}
 
 	[Generate()]
 	public IntegerType Bounces {
-	    get {
-		return this.bounces;
-	    }
-	    set {
-		this.bounces = value;
-	    }
+	    get { return this.bounces; }
+	    set { this.bounces = value; }
 	}
 
 	[Generate()]
 	public DateTimeType LastOpenDate {
-	    get {
-		return this.lastOpenDate;
-	    }
-	    set {
-		this.lastOpenDate = value;
-	    }
+	    get { return this.lastOpenDate; }
+	    set { this.lastOpenDate = value; }
 	}
 
 	[Generate()]
 	public StringType SmtpServer {
-	    get {
-		return this.smtpServer;
-	    }
-	    set {
-		this.smtpServer = value;
-	    }
+	    get { return this.smtpServer; }
+	    set { this.smtpServer = value; }
 	}
 
 	[Generate()]
@@ -366,7 +249,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    scheduleTime = data.ScheduleTime.IsDefault ? scheduleTime : data.ScheduleTime;
 	    processedTime = data.ProcessedTime.IsDefault ? processedTime : data.ProcessedTime;
 	    priority = data.Priority.IsDefault ? priority : data.Priority;
-	    from = data.From.IsDefault ? from : data.From;
+	    @from = data.From.IsDefault ? @from : data.From;
 	    to = data.To.IsDefault ? to : data.To;
 	    cc = data.Cc.IsDefault ? cc : data.Cc;
 	    bcc = data.Bcc.IsDefault ? bcc : data.Bcc;
@@ -408,9 +291,9 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	}
 
 	[Generate()]
-	public MessageList Validate() {
-	    MessageList errors = new MessageList();
+	public virtual MessageList Validate() {
 
+	    MessageList errors = new MessageList();
 	    return errors;
 	}
 
@@ -475,7 +358,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    if (!message.MailMessageType.IsEmpty) {
 		messageType = message.MailMessageType;
 	    }
-	    return Create(messageType, message.From, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[] { }
+	    return Create(messageType, message.From, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[] {  }
 	    );
 	}
 
@@ -487,7 +370,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    if (@from.IsEmpty) {
 		@from = GetFromAddress(messageType);
 	    }
-	    return Create(messageType, @from, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[] { }
+	    return Create(messageType, @from, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[] {  }
 	    );
 	}
 
@@ -496,7 +379,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	/// </summary>
 	public static MailMessage Create(StringType messageType, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
 	    StringType @from = GetFromAddress(messageType);
-	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[] { }
+	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[] {  }
 	    );
 	}
 
@@ -517,32 +400,33 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	/// <summary>
 	/// Creates and persists a new MailMessage
 	/// </summary>
-	public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
-	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, DateTimeType.DEFAULT, new String[] { }
-			);
+	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
+	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, DateTimeType.DEFAULT, new String[] {  }
+	    );
 	}
 
 	/// <summary>
 	/// Creates and persists a new MailMessage
 	/// </summary>
-	public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, String[] attachmentFilenames) {
+	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, String[] attachmentFilenames) {
 	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, DateTimeType.DEFAULT, attachmentFilenames
-			);
+	    );
 	}
 
 	/// <summary>
 	/// Creates and persists a new MailMessage
 	/// </summary>
-	public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
-	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[] { }
-			);
+	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
+	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[] {  }
+	    );
 	}
 
 	/// <summary>
 	/// Creates and persists a new MailMessage
 	/// This is THE method that really does the work
 	/// </summary>
-	public static MailMessage Create(StringType messageType, StringType from, StringType to, StringType cc, StringType bcc, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime, String[] attachmentFilenames) {
+	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType cc, StringType bcc, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime, String[] attachmentFilenames
+	) {
 	    MailMessageData mailMessageData = new MailMessageData();
 	    MailMessage mailMessage = new MailMessage();
 	    mailMessage.SetInitialState();

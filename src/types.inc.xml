@@ -25,7 +25,8 @@ conversion format replacement parameters:
 	<type name="IList" namespace="System.Collections" />
 	<type name="ArrayList" namespace="System.Collections" newinstanceformat="new ArrayList()" />
 	<type name="Hashtable" namespace="System.Collections" newinstanceformat="new Hashtable()" />
-
+	<type name="Bitmap" namespace="System.Drawing" newinstanceformat="new Bitmap()" />
+	
 	<!-- Spring2.Core.Types -->
 	<type name="BooleanType" namespace="Spring2.Core.Types" converttosqltypeformat="{1}.IsValid ? {1}.ToBoolean() as Object : DBNull.Value" convertfromsqltypeformat="BooleanType.GetInstance({2})" newinstanceformat="BooleanType.DEFAULT" nullinstanceformat="BooleanType.UNSET" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" />
 	<type name="StringType" namespace="Spring2.Core.Types" converttosqltypeformat="{1}.IsValid ? {1}.ToString() as Object : DBNull.Value" convertfromsqltypeformat="StringType.Parse({2})" newinstanceformat="StringType.DEFAULT" nullinstanceformat="StringType.UNSET" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" />
@@ -39,9 +40,11 @@ conversion format replacement parameters:
 	<type name="USStateCodeEnum" namespace="Spring2.Core.Types" converttosqltypeformat="{1}.IsValid ? {1}.Code as Object : DBNull.Value" convertfromsqltypeformat="USStateCodeEnum.GetInstance({2})" newinstanceformat="USStateCodeEnum.DEFAULT" nullinstanceformat="USStateCodeEnum.UNSET" convertforcompare="{0}.ToString().CompareTo({1})" />
 	<type name="PhoneNumberType" namespace="Spring2.Core.Types" converttosqltypeformat="{1}.IsValid ? {1}.ToString() as Object : DBNull.Value" convertfromsqltypeformat="PhoneNumberType.Parse({2})" newinstanceformat="PhoneNumberType.DEFAULT" nullinstanceformat="PhoneNumberType.UNSET" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" />
 	<type name="StringTypeList" namespace="System.Collections" newinstanceformat="new StringTypeList()" />
-	<type name="ILocale" namespace="Spring2.Core.Types" newinstanceformat="null" converttosqltypeformat="{1}.IsValid ? {1}.Code as Object : DBNull.Value" convertfromsqltypeformat="{0}.SetValue({2})" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" />
-	<type name="ILanguage" namespace="Spring2.Core.Types" newinstanceformat="null" converttosqltypeformat="{1}.IsValid ? {1}.Code as Object : DBNull.Value" convertfromsqltypeformat="{0}.SetValue({2})" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" />
+	<type name="ResourceKey" namespace="Spring2.Core.Message" newinstanceformat="null" nullinstanceformat="null" />
 	
+	<type name="SupportedLocaleEnum" namespace="Spring2.Dss.Types" converttosqltypeformat="{1}.IsValid ? {1}.Code as Object : DBNull.Value" convertfromsqltypeformat="SupportedLocaleEnum.GetInstance({2})" newinstanceformat="SupportedLocaleEnum.DEFAULT" nullinstanceformat="SupportedLocaleEnum.UNSET"  convertforcompare="{0}.ToString().CompareTo({1}.ToString())"/>
+	<type name="SupportedLanguageEnum" namespace="Spring2.Dss.Types" converttosqltypeformat="{1}.IsValid ? {1}.Code as Object : DBNull.Value" convertfromsqltypeformat="SupportedLanguageEnum.GetInstance({2})" newinstanceformat="SupportedLanguageEnum.DEFAULT" nullinstanceformat="SupportedLanguageEnum.UNSET"  convertforcompare="{0}.ToString().CompareTo({1}.ToString())"/>
+
 	<!-- TODO: need to be able to specify that the type implements IDataType -->
 	<type name="Message" namespace="Spring2.Core.Message" newinstanceformat="null" nullinstanceformat="null" />
 	<type name="MessageList" namespace="Spring2.Core.Message" newinstanceformat="new MessageList()" nullinstanceformat="null" />

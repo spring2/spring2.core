@@ -157,7 +157,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Finds a MenuLinkGroup entity using it's primary key.
 	/// </summary>
-	/// <param name="MenuLinkGroupId">A key field.</param>
+	/// <param name="menuLinkGroupId">A key field.</param>
 	/// <returns>A MenuLinkGroup object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MenuLinkGroup Load(IdType menuLinkGroupId) {
@@ -304,7 +304,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-	    if (transaction == null) {
+	    if (transaction == null && DbConnectionScope.Current == null) {
 		cmd.Connection.Close();
 	    }
 
@@ -338,7 +338,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-	    if (transaction == null) {
+	    if (transaction == null && DbConnectionScope.Current == null) {
 		cmd.Connection.Close();
 	    }
 	}
@@ -347,7 +347,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Deletes a record from the MenuLinkGroup table by MenuLinkGroupId.
 	/// </summary>
-	/// <param name="MenuLinkGroupId">A key field.</param>
+	/// <param name="menuLinkGroupId">A key field.</param>
 	public void Delete(IdType menuLinkGroupId) {
 	    Delete(menuLinkGroupId, null);
 	}
@@ -355,7 +355,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Deletes a record from the MenuLinkGroup table by MenuLinkGroupId.
 	/// </summary>
-	/// <param name="MenuLinkGroupId">A key field.</param>
+	/// <param name="menuLinkGroupId">A key field.</param>
 	/// <param name="transaction"></param>
 	public void Delete(IdType menuLinkGroupId, IDbTransaction transaction) {
 	    // Create and execute the command
@@ -367,7 +367,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-	    if (transaction == null) {
+	    if (transaction == null && DbConnectionScope.Current == null) {
 		cmd.Connection.Close();
 	    }
 	}
@@ -375,7 +375,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Returns an object which matches the values for the fields specified.
 	/// </summary>
-	/// <param name="Name">A field value to be matched.</param>
+	/// <param name="name">A field value to be matched.</param>
 	/// <returns>The object found.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
 	public MenuLinkGroup FindByName(StringType name) {

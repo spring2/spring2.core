@@ -14,6 +14,10 @@ BUILDDIR	:= ../build
 NANT		:= ../bin/NAnt/nant.exe
 
 include Mail/sql/*.mk
+include Configuration/sql/*.mk
+include Navigation/sql/*.mk
+include PerformanceMonitor/sql/*.mk
+include ResourceManager/sql/*.mk
 
 all: build
 
@@ -26,9 +30,13 @@ clean:
 	$(RM) obj
 	$(RM) bin
 
-	
 gen:
-	cd Mail; ../$(BINDIR)/DTG/DataTierGenerator.exe Mail/DataTierGenerator.config.xml
+	cd Mail; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
+	cd Geocode; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
+	cd Navigation; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
+	cd ResourceManager; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
+
+build_db: build_db_mail build_db_config build_db_nav build_db_pm build_db_rscman
 	
 .PHONY: build
 build:

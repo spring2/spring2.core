@@ -189,7 +189,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Finds a MenuLink entity using it's primary key.
 	/// </summary>
-	/// <param name="MenuLinkId">A key field.</param>
+	/// <param name="menuLinkId">A key field.</param>
 	/// <returns>A MenuLink object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MenuLink Load(IdType menuLinkId) {
@@ -384,7 +384,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-	    if (transaction == null) {
+	    if (transaction == null && DbConnectionScope.Current == null) {
 		cmd.Connection.Close();
 	    }
 
@@ -426,7 +426,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-	    if (transaction == null) {
+	    if (transaction == null && DbConnectionScope.Current == null) {
 		cmd.Connection.Close();
 	    }
 	}
@@ -435,7 +435,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Deletes a record from the MenuLink table by MenuLinkId.
 	/// </summary>
-	/// <param name="MenuLinkId">A key field.</param>
+	/// <param name="menuLinkId">A key field.</param>
 	public void Delete(IdType menuLinkId) {
 	    Delete(menuLinkId, null);
 	}
@@ -443,7 +443,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Deletes a record from the MenuLink table by MenuLinkId.
 	/// </summary>
-	/// <param name="MenuLinkId">A key field.</param>
+	/// <param name="menuLinkId">A key field.</param>
 	/// <param name="transaction"></param>
 	public void Delete(IdType menuLinkId, IDbTransaction transaction) {
 	    // Create and execute the command
@@ -455,7 +455,7 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-	    if (transaction == null) {
+	    if (transaction == null && DbConnectionScope.Current == null) {
 		cmd.Connection.Close();
 	    }
 	}
@@ -463,7 +463,7 @@ namespace Spring2.Core.Navigation.Dao {
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="MenuLinkGroupId">A field value to be matched.</param>
+	/// <param name="menuLinkGroupId">A field value to be matched.</param>
 	/// <returns>The list of MenuLinkDAO objects found.</returns>
 	public MenuLinkList FindByMenuLinkGroup(IdType menuLinkGroupId) {
 	    OrderByClause sort = new OrderByClause("Sequence, Name");
@@ -472,14 +472,19 @@ namespace Spring2.Core.Navigation.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
 	    cmd.Parameters.Add(CreateDataParameter("@MenuLinkGroupId", DbType.Int32, ParameterDirection.Input, menuLinkGroupId.IsValid ? menuLinkGroupId.ToInt32() as Object : DBNull.Value));
 
-	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+	    IDataReader dataReader = null;
+	    if (DbConnectionScope.Current == null) {
+		dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+	    } else {
+		dataReader = cmd.ExecuteReader();
+	    }
 	    return GetList(dataReader);
 	}
 
 	/// <summary>
 	/// Returns a list of objects which match the values for the fields specified.
 	/// </summary>
-	/// <param name="ParentMenuLinkId">A field value to be matched.</param>
+	/// <param name="parentMenuLinkId">A field value to be matched.</param>
 	/// <returns>The list of MenuLinkDAO objects found.</returns>
 	public MenuLinkList FindByParentMenuLink(IdType parentMenuLinkId) {
 	    OrderByClause sort = new OrderByClause("Sequence, Name");
@@ -488,7 +493,12 @@ namespace Spring2.Core.Navigation.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
 	    cmd.Parameters.Add(CreateDataParameter("@ParentMenuLinkId", DbType.Int32, ParameterDirection.Input, parentMenuLinkId.IsValid ? parentMenuLinkId.ToInt32() as Object : DBNull.Value));
 
-	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+	    IDataReader dataReader = null;
+	    if (DbConnectionScope.Current == null) {
+		dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+	    } else {
+		dataReader = cmd.ExecuteReader();
+	    }
 	    return GetList(dataReader);
 	}
 

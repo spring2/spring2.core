@@ -11,6 +11,10 @@ using Spring2.Core.Mail.DataObject;
 using Spring2.Core.Mail.Types;
 
 namespace Spring2.Core.Mail.Dao {
+
+    /// <summary>
+    /// Data access class for MailMessageRoute business entity.
+    /// </summary>
     public class MailMessageRouteDAO : Spring2.Core.DAO.SqlEntityDAO {
 
 	public static readonly MailMessageRouteDAO DAO = new MailMessageRouteDAO();
@@ -20,6 +24,7 @@ namespace Spring2.Core.Mail.Dao {
 	private static ColumnOrdinals columnOrdinals = null;
 
 	internal sealed class ColumnOrdinals {
+	    public String Prefix = String.Empty;
 	    public Int32 MailMessageRouteId;
 	    public Int32 MailMessage;
 	    public Int32 RoutingType;
@@ -35,6 +40,7 @@ namespace Spring2.Core.Mail.Dao {
 	    }
 
 	    internal ColumnOrdinals(IDataReader reader, String prefix) {
+		Prefix = prefix;
 		MailMessageRouteId = reader.GetOrdinal(prefix + "MailMessageRouteId");
 		MailMessage = reader.GetOrdinal(prefix + "MailMessage");
 		RoutingType = reader.GetOrdinal(prefix + "RoutingType");
@@ -228,36 +234,14 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
-	/// <param name="data"></param>
-	/// <param name="dataReader">Container for database row.</param>
-	/// <param name="ordinals"></param>
-	/// <returns>Data object built from current row.</returns>
-	internal static MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader, ColumnOrdinals ordinals) {
-	    return GetDataObjectFromReader(data, dataReader, String.Empty, ordinals);
-	}
-
-	/// <summary>
-	/// Builds a data object from the current row in a data reader..
-	/// </summary>
-	/// <param name="data"></param>
+	/// <param name="data">Entity to be populated from data reader</param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal static MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader) {
+	internal MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
-	    return GetDataObjectFromReader(data, dataReader, String.Empty, columnOrdinals);
-	}
-
-	/// <summary>
-	/// Builds a data object from the current row in a data reader..
-	/// </summary>
-	/// <param name="dataReader">Container for database row.</param>
-	/// <param name="ordinals"></param>
-	/// <returns>Data object built from current row.</returns>
-	internal static MailMessageRoute GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
-	    MailMessageRoute data = new MailMessageRoute(false);
-	    return GetDataObjectFromReader(data, dataReader, String.Empty, ordinals);
+	    return GetDataObjectFromReader(data, dataReader, columnOrdinals);
 	}
 
 	/// <summary>
@@ -265,35 +249,33 @@ namespace Spring2.Core.Mail.Dao {
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal static MailMessageRoute GetDataObjectFromReader(IDataReader dataReader) {
+	internal MailMessageRoute GetDataObjectFromReader(IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
 	    MailMessageRoute data = new MailMessageRoute(false);
-	    return GetDataObjectFromReader(data, dataReader, String.Empty, columnOrdinals);
+	    return GetDataObjectFromReader(data, dataReader, columnOrdinals);
 	}
 
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
-	/// <param name="prefix"></param>
-	/// <param name="ordinals"></param>
+	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal static MailMessageRoute GetDataObjectFromReader(IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
+	internal MailMessageRoute GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
 	    MailMessageRoute data = new MailMessageRoute(false);
-	    return GetDataObjectFromReader(data, dataReader, prefix, columnOrdinals);
+	    return GetDataObjectFromReader(data, dataReader, ordinals);
 	}
 
 	/// <summary>
 	/// Builds a data object from the current row in a data reader..
 	/// </summary>
-	/// <param name="data"></param>
+	/// <param name="data">Entity to be populated from data reader</param>
 	/// <param name="dataReader">Container for database row.</param>
-	/// <param name="prefix"></param>
-	/// <param name="ordinals"></param>
+	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal static MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader, String prefix, ColumnOrdinals ordinals) {
+	internal MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader, ColumnOrdinals ordinals) {
 	    if (dataReader.IsDBNull(ordinals.MailMessageRouteId)) {
 		data.MailMessageRouteId = IdType.UNSET;
 	    } else {
@@ -353,11 +335,7 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-#if (NET_1_1)
-	    if (transaction == null) {
-#else
 	    if (transaction == null && DbConnectionScope.Current == null) {
-#endif
 		cmd.Connection.Close();
 	    }
 
@@ -394,11 +372,7 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-#if (NET_1_1)
-	    if (transaction == null) {
-#else
 	    if (transaction == null && DbConnectionScope.Current == null) {
-#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -427,11 +401,7 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.ExecuteNonQuery();
 
 	    // do not close the connection if it is part of a transaction
-#if (NET_1_1)
-	    if (transaction == null) {
-#else
 	    if (transaction == null && DbConnectionScope.Current == null) {
-#endif
 		cmd.Connection.Close();
 	    }
 	}
@@ -447,16 +417,13 @@ namespace Spring2.Core.Mail.Dao {
 	    String sql = "SELECT * from " + VIEW + filter.Statement + sort.FormatSql();
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
 	    cmd.Parameters.Add(CreateDataParameter("@MailMessage", DbType.AnsiString, ParameterDirection.Input, mailMessage.IsValid ? mailMessage.ToString() as Object : DBNull.Value));
-#if (NET_1_1)
-	    IDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-#else
-		IDataReader dataReader = null;
-		if (DbConnectionScope.Current == null) {
-			dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-		} else {
-			dataReader = cmd.ExecuteReader();
-		}
-#endif
+
+	    IDataReader dataReader = null;
+	    if (DbConnectionScope.Current == null) {
+		dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+	    } else {
+		dataReader = cmd.ExecuteReader();
+	    }
 	    return GetList(dataReader);
 	}
     }

@@ -1,12 +1,12 @@
-if exists (select * from sysobjects where id = object_id(N'[vwAddressCache]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [vwAddressCache]
+if exists (select * from sysobjects where id = object_id(N'dbo.[vwAddressCache]') and OBJECTPROPERTY(id, N'IsView') = 1)
+drop view dbo.[vwAddressCache]
 GO
 
 SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE VIEW [vwAddressCache]
+CREATE VIEW dbo.[vwAddressCache]
 
 AS
 
