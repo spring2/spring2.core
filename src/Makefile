@@ -39,9 +39,15 @@ gen:
 .PHONY: build_db
 build_db: build_db_mail build_db_config build_db_nav build_db_pm build_db_rscman
 
+.PHONY: clean_db
+clean_db: clean_db_mail clean_db_config clean_db_nav clean_db_pm clean_db_rscman
+
 .PHONY: build
 build:
 	${NANT} build
+
+clean_release:
+	$(RM) ../release/*	
 
 .PHONY: regress
 regress: build
@@ -102,7 +108,7 @@ release: package
 ncover: 
 	rm -rf ../docs/NCover
 	mkdir -p ../docs/NCover
-	../bin/NCover/NCover.Console.exe /l ../docs/NCover/Coverage.log /o ../docs/NCover/Coverage.xml /c ../bin/nunit/nunit-console.exe "../build/Spring2.Core.Test.dll /noshadow"
+	../bin/NCover/NCover.Console.exe /l ../docs/NCover/Coverage.log /o ../docs/NCover/Coverage.xml /c ../bin/nunit/nunit-console.exe "../build/Test/Spring2.Core.Test.dll /noshadow"
 	
 ncoverreports:
 	@#../bin/nxslt ../docs/NCover/Coverage.xml ../docs/NCover/Coverage.xsl  -o ../docs/NCover/Coverage.html
