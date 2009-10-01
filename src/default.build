@@ -20,16 +20,16 @@
 	<ifnot test="${property::exists('CCNetLabel')}"> 
 	    <fail message="CCNetLabel property not set, so can't create labelled distribution files" />
 	</ifnot>
+	<call target="CreateAssemblyVersionInfo" />
 	<call target="getSubversionRevision" />
-	<exec program="..\bin\UpdateVersion.exe" commandline="-i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs -rp ${CCNetLabel}" />
-	<exec program="make" commandline="clean regress packageonly" />
+	<exec program="make" commandline="clean regress build_db packageonly" />
     </target>
 
 	<target name="ccnet-publish">
 		<if test="${not property::exists('CCNetLabel')}"> 
 			<fail message="CCNetLabel property not set, so can't create labelled distribution files" />
 		</if>
-		<property name="publish.dir" value="${CCNetArtifactDirectory}\${CCNetLabel}" />
+		<property name="publish.dir" value="${CCNetArtifactDirectory}\" />
 
 		<mkdir dir="${publish.dir}" />
 		<copy todir="${publish.dir}">
@@ -60,6 +60,26 @@
 			failonerror="false"/>
 		<echo message="Using Subversion revision number: ${svn.revision}"/>
 	</target>
+
+     <target name="CreateAssemblyVersionInfo" description="Create an assembly info file with the current build number" >
+	<if test="${not property::exists('CCNetLabel')}"> 
+	    <fail message="CCNetLabel property not set, so can't create labelled distribution files" />
+	</if>
+	<asminfo output="AssemblyVersionInfo.cs" language="CSharp">
+	    <imports>
+		<import namespace="System.Reflection" />
+	    </imports>
+	    <attributes>
+		<attribute type="System.Reflection.AssemblyVersionAttribute" value="${CCNetLabel}" />
+		<!--
+		<attribute type="AssemblyCopyrightAttribute" value="Copyright 2008 Spring2 Technologies" />
+		<attribute type="AssemblyCompanyAttribute" value="Spring2 Technologies" />
+		<attribute type="AssemblyProductAttribute" value="Spring2 Dss" /> 
+		-->
+	    </attributes>
+	</asminfo>
+    </target>
+	
 
     <target name="build-net-1.1">
 	<property name="nant.settings.currentframework" value="net-1.1" />

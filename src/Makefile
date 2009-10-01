@@ -36,8 +36,9 @@ gen:
 	cd Navigation; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
 	cd ResourceManager; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
 
+.PHONY: build_db
 build_db: build_db_mail build_db_config build_db_nav build_db_pm build_db_rscman
-	
+
 .PHONY: build
 build:
 	${NANT} build
