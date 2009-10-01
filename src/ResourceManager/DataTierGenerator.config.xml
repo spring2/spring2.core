@@ -23,7 +23,7 @@
 		<type name="{element.Name}List" newinstanceformat="{element.Name}List.DEFAULT" nullinstanceformat="{element.Name}List.UNSET" />
 	    </task>
 
-	    <task name="dao" element="entity" template="Template\PassThroughInterface\DAO-SqlFilter.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region" >
+	    <task name="dao" element="entity" template=".\DAO-SqlFilter.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region" >
 		<excludes>
 		    <exclude name="LocalizedResource" />
 		</excludes>

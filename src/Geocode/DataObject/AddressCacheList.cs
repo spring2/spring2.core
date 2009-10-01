@@ -67,16 +67,6 @@ namespace Spring2.Core.Geocode.DataObject {
 	}
 
 	[Generate]
-	public Boolean Contains(IAddressCache value) {
-	    return List.Contains(value);
-	}
-
-	[Generate]
-	public Int32 IndexOf(IAddressCache value) {
-	    return List.IndexOf(value);
-	}
-
-	[Generate]
 	public void Insert(Int32 index, IAddressCache value) {
 	    if (!immutable) {
 		List.Insert(index, value);
@@ -96,16 +86,6 @@ namespace Spring2.Core.Geocode.DataObject {
 		    keys.Remove(value.AddressId);
 		    List.RemoveAt(index);
 		}
-	    } else {
-		throw new System.Data.ReadOnlyException();
-	    }
-	}
-
-	[Generate]
-	public void Remove(IAddressCache value) {
-	    if (!immutable) {
-		List.Remove(value);
-		keys.Remove(value.AddressId);
 	    } else {
 		throw new System.Data.ReadOnlyException();
 	    }
@@ -194,6 +174,20 @@ namespace Spring2.Core.Geocode.DataObject {
 	}
 
 	/// <summary>
+	/// removes value by identity
+	/// </summary>
+	[Generate]
+	public void Remove(IdType addressId) {
+	    if(!immutable) {
+		IAddressCache objectInList = this[addressId];
+		List.Remove(objectInList);
+		keys.Remove(addressId);
+	    } else {
+		throw new System.Data.ReadOnlyException();
+	    }
+	}
+
+	/// <summary>
 	/// Sort a list by a column
 	/// </summary>
 	[Generate]
@@ -217,6 +211,19 @@ namespace Spring2.Core.Geocode.DataObject {
 	    }
 
 	    InnerList.Sort(comparer);
+	}
+
+	[Generate]
+	public class AddressIdSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IAddressCache o1 = (IAddressCache)a;
+		IAddressCache o2 = (IAddressCache)b;
+
+		if (o1 == null || o2 == null || !o1.AddressId.IsValid || !o2.AddressId.IsValid) {
+		    return 0;
+		}
+		return o1.AddressId.CompareTo(o2.AddressId);
+	    }
 	}
 
 	[Generate]
@@ -424,6 +431,19 @@ namespace Spring2.Core.Geocode.DataObject {
 		    return 0;
 		}
 		return o1.MatPostalCode.CompareTo(o2.MatPostalCode);
+	    }
+	}
+
+	[Generate]
+	public class MatchTypeSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IAddressCache o1 = (IAddressCache)a;
+		IAddressCache o2 = (IAddressCache)b;
+
+		if (o1 == null || o2 == null || !o1.MatchType.IsValid || !o2.MatchType.IsValid) {
+		    return 0;
+		}
+		return o1.MatchType.CompareTo(o2.MatchType);
 	    }
 	}
 

@@ -162,6 +162,7 @@
     <Compile Include="DAO\BaseEntityDAO.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DAO\ColumnMetaData.cs" />
     <Compile Include="DAO\DaoException.cs">
       <SubType>Code</SubType>
     </Compile>

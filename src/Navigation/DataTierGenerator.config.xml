@@ -9,6 +9,9 @@
 	<writer name="c#" class="Spring2.DataTierGenerator.Generator.Writer.CSharpCodeWriter,Spring2.DataTierGenerator">
 	    <option name="bracing style" value="block" />
 	</writer>
+	<styler name="c#" class="Spring2.DataTierGenerator.Generator.Styler.CSharpStyler,Spring2.DataTierGenerator">
+	    <option name="bracing style" value="block" />
+	</styler>
 	<tasks>
 	    <task name="business entities" element="entity" template="Template\PassThroughInterface\BusinessEntity.vm" directory="BusinessLogic" filenameformat="{element.Name}.cs" writer="c#" >
 	        <type name="{element.Name}" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}.GetInstance({2})" newinstanceformat="{element.Name}.NewInstance()" nullinstanceformat="null" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" />
@@ -24,7 +27,7 @@
 	    </task>
 
 	    <task name="dao" element="entity" template="Template\PassThroughInterface\DAO-SqlFilter.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region" >
-	    </task> 
+	    </task>
 
 	    <task name="enum" element="enum" template="Template\enum.vm" directory="Types" filenameformat="{element.Name}.cs" writer="region" >
 		<type name="{element.Name}" concretetype="{element.Name}" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}.GetInstance({2})" newinstanceformat="{element.Name}.DEFAULT" nullinstanceformat="{element.Name}.UNSET" />

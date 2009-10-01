@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 
@@ -15,15 +16,29 @@ namespace Spring2.Core.Mail.Dao {
     /// <summary>
     /// Data access class for MailAttachment business entity.
     /// </summary>
-    public class MailAttachmentDAO : Spring2.Core.DAO.SqlEntityDAO {
-
-	public static readonly MailAttachmentDAO DAO = new MailAttachmentDAO();
+    public class MailAttachmentDAO : Spring2.Core.DAO.SqlEntityDAO, IMailAttachmentDAO {
+	private static IMailAttachmentDAO instance = new MailAttachmentDAO();
+	public static IMailAttachmentDAO DAO{
+	    get{ return instance; }
+	}
+	
+	/// <summary>
+	/// Sets the singleton DAO instance of IMailAttachmentDAO
+	/// </summary>
+	public void SetInstance(IMailAttachmentDAO dao) {
+	    if(dao != null){
+			instance = dao;
+	    }else{
+			instance = new MailAttachmentDAO();
+	    }
+	}
+	
 	private static readonly String VIEW = "vwMailAttachment";
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";
 	private static readonly Int32 COMMAND_TIMEOUT = 15;
 	private static ColumnOrdinals columnOrdinals = null;
 
-	internal sealed class ColumnOrdinals {
+	public sealed class ColumnOrdinals {
 	    public String Prefix = String.Empty;
 	    public Int32 MailAttachmentId;
 	    public Int32 MailMessageId;
@@ -171,7 +186,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MailAttachment Load(IdType mailAttachmentId) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("MailAttachmentId", EqualityOperatorEnum.Equal, mailAttachmentId.IsValid ? mailAttachmentId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(MailAttachmentFields.MAILATTACHMENTID, EqualityOperatorEnum.Equal, mailAttachmentId.IsValid ? mailAttachmentId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 	    return GetDataObject(dataReader);
 	}
@@ -181,7 +196,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// </summary>
 	public void Reload(MailAttachment instance) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("MailAttachmentId", EqualityOperatorEnum.Equal, instance.MailAttachmentId.IsValid ? instance.MailAttachmentId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(MailAttachmentFields.MAILATTACHMENTID, EqualityOperatorEnum.Equal, instance.MailAttachmentId.IsValid ? instance.MailAttachmentId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 
 	    if (!dataReader.Read()) {
@@ -233,7 +248,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="data">Entity to be populated from data reader</param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader) {
+	public MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
@@ -245,7 +260,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal MailAttachment GetDataObjectFromReader(IDataReader dataReader) {
+	public MailAttachment GetDataObjectFromReader(IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
@@ -259,7 +274,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal MailAttachment GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
+	public MailAttachment GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
 	    MailAttachment data = new MailAttachment(false);
 	    return GetDataObjectFromReader(data, dataReader, ordinals);
 	}
@@ -271,7 +286,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader, ColumnOrdinals ordinals) {
+	public MailAttachment GetDataObjectFromReader(MailAttachment data, IDataReader dataReader, ColumnOrdinals ordinals) {
 	    if (dataReader.IsDBNull(ordinals.MailAttachmentId)) {
 		data.MailAttachmentId = IdType.UNSET;
 	    } else {
@@ -319,9 +334,9 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.Parameters.Add(idParam);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageId", DbType.Int32, ParameterDirection.Input, data.MailMessageId.IsValid ? data.MailMessageId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Filename", DbType.AnsiString, ParameterDirection.Input, data.Filename.IsValid ? data.Filename.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Text", DbType.Binary, ParameterDirection.Input, data.Buffer));
+	    cmd.Parameters.Add(CreateDataParameter(MailAttachmentFields.MAILMESSAGEID, data.MailMessageId.IsValid ? data.MailMessageId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailAttachmentFields.FILENAME, data.Filename.IsValid ? data.Filename.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailAttachmentFields.BUFFER, data.Buffer));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -354,10 +369,10 @@ namespace Spring2.Core.Mail.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spMailAttachment_Update", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@MailAttachmentId", DbType.Int32, ParameterDirection.Input, data.MailAttachmentId.IsValid ? data.MailAttachmentId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageId", DbType.Int32, ParameterDirection.Input, data.MailMessageId.IsValid ? data.MailMessageId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Filename", DbType.AnsiString, ParameterDirection.Input, data.Filename.IsValid ? data.Filename.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Text", DbType.Binary, ParameterDirection.Input, data.Buffer));
+	    cmd.Parameters.Add(CreateDataParameter(MailAttachmentFields.MAILATTACHMENTID, data.MailAttachmentId.IsValid ? data.MailAttachmentId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailAttachmentFields.MAILMESSAGEID, data.MailMessageId.IsValid ? data.MailMessageId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailAttachmentFields.FILENAME, data.Filename.IsValid ? data.Filename.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailAttachmentFields.BUFFER, data.Buffer));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -387,7 +402,7 @@ namespace Spring2.Core.Mail.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spMailAttachment_Delete", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    // Create and append the parameters
-	    cmd.Parameters.Add(CreateDataParameter("@MailAttachmentId", DbType.Int32, ParameterDirection.Input, mailAttachmentId.IsValid ? mailAttachmentId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailAttachmentFields.MAILATTACHMENTID, mailAttachmentId.IsValid ? mailAttachmentId.ToInt32() as Object : DBNull.Value));
 	    // Execute the query and return the result
 	    cmd.ExecuteNonQuery();
 
@@ -405,7 +420,7 @@ namespace Spring2.Core.Mail.Dao {
 	public MailAttachmentList FindByMailMessageId(IdType mailMessageId) {
 	    OrderByClause sort = new OrderByClause("MailMessageId");
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("MailMessageId", EqualityOperatorEnum.Equal, mailMessageId.IsValid ? mailMessageId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(MailAttachmentFields.MAILMESSAGEID, EqualityOperatorEnum.Equal, mailMessageId.IsValid ? mailMessageId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
 
 	    return GetList(dataReader);

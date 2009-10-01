@@ -16,32 +16,32 @@ namespace Spring2.Core.Mail.DataObject {
 
     public class MailMessageFields {
 	private MailMessageFields() {}
-	public static readonly String MAILMESSAGE = "MailMessage"; //Entity Name
+	public static readonly String ENTITY_NAME = "MailMessage";
 	
-	public static readonly String MAILMESSAGEID = "MailMessageId";
-	public static readonly String SCHEDULETIME = "ScheduleTime";
-	public static readonly String PROCESSEDTIME = "ProcessedTime";
-	public static readonly String PRIORITY = "Priority";
-	public static readonly String FROM = "From";
-	public static readonly String TO = "To";
-	public static readonly String CC = "Cc";
-	public static readonly String BCC = "Bcc";
-	public static readonly String SUBJECT = "Subject";
-	public static readonly String BODYFORMAT = "BodyFormat";
-	public static readonly String BODY = "Body";
-	public static readonly String MAILMESSAGESTATUS = "MailMessageStatus";
-	public static readonly String RELEASEDBYUSERID = "ReleasedByUserId";
-	public static readonly String ATTACHMENTS = "Attachments";
-	public static readonly String MAILMESSAGETYPE = "MailMessageType";
-	public static readonly String NUMBEROFATTEMPTS = "NumberOfAttempts";
-	public static readonly String MESSAGEQUEUEDATE = "MessageQueueDate";
-	public static readonly String REFERENCEKEY = "ReferenceKey";
-	public static readonly String UNIQUEKEY = "UniqueKey";
-	public static readonly String CHECKSUM = "Checksum";
-	public static readonly String OPENCOUNT = "OpenCount";
-	public static readonly String BOUNCES = "Bounces";
-	public static readonly String LASTOPENDATE = "LastOpenDate";
-	public static readonly String SMTPSERVER = "SmtpServer";
+	public static readonly ColumnMetaData MAILMESSAGEID = new ColumnMetaData("MailMessageId", "MailMessageId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
+	public static readonly ColumnMetaData SCHEDULETIME = new ColumnMetaData("ScheduleTime", "ScheduleTime", DbType.DateTime, SqlDbType.DateTime, 0, 0, 0);
+	public static readonly ColumnMetaData PROCESSEDTIME = new ColumnMetaData("ProcessedTime", "ProcessedTime", DbType.DateTime, SqlDbType.DateTime, 0, 0, 0);
+	public static readonly ColumnMetaData PRIORITY = new ColumnMetaData("Priority", "Priority", DbType.AnsiString, SqlDbType.VarChar, 10, 0, 0);
+	public static readonly ColumnMetaData FROM = new ColumnMetaData("From", "From", DbType.AnsiString, SqlDbType.VarChar, 250, 0, 0);
+	public static readonly ColumnMetaData TO = new ColumnMetaData("To", "To", DbType.AnsiString, SqlDbType.VarChar, 6000, 0, 0);
+	public static readonly ColumnMetaData CC = new ColumnMetaData("Cc", "Cc", DbType.AnsiString, SqlDbType.VarChar, 250, 0, 0);
+	public static readonly ColumnMetaData BCC = new ColumnMetaData("Bcc", "Bcc", DbType.AnsiString, SqlDbType.VarChar, 250, 0, 0);
+	public static readonly ColumnMetaData SUBJECT = new ColumnMetaData("Subject", "Subject", DbType.AnsiString, SqlDbType.VarChar, 80, 0, 0);
+	public static readonly ColumnMetaData BODYFORMAT = new ColumnMetaData("BodyFormat", "BodyFormat", DbType.AnsiString, SqlDbType.VarChar, 10, 0, 0);
+	public static readonly ColumnMetaData BODY = new ColumnMetaData("Body", "Body", DbType.AnsiString, SqlDbType.Text, 0, 0, 0);
+	public static readonly ColumnMetaData MAILMESSAGESTATUS = new ColumnMetaData("MailMessageStatus", "MailMessageStatus", DbType.AnsiString, SqlDbType.VarChar, 30, 0, 0);
+	public static readonly ColumnMetaData RELEASEDBYUSERID = new ColumnMetaData("ReleasedByUserId", "ReleasedByUserId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
+	public static readonly ColumnMetaData ATTACHMENTS = new ColumnMetaData("Attachments", "", DbType.Int32, SqlDbType.Int, 0, 0, 0);
+	public static readonly ColumnMetaData MAILMESSAGETYPE = new ColumnMetaData("MailMessageType", "MailMessageType", DbType.AnsiString, SqlDbType.VarChar, 80, 0, 0);
+	public static readonly ColumnMetaData NUMBEROFATTEMPTS = new ColumnMetaData("NumberOfAttempts", "NumberOfAttempts", DbType.Int32, SqlDbType.Int, 0, 10, 0);
+	public static readonly ColumnMetaData MESSAGEQUEUEDATE = new ColumnMetaData("MessageQueueDate", "MessageQueueDate", DbType.DateTime, SqlDbType.DateTime, 0, 0, 0);
+	public static readonly ColumnMetaData REFERENCEKEY = new ColumnMetaData("ReferenceKey", "ReferenceKey", DbType.AnsiString, SqlDbType.VarChar, 50, 0, 0);
+	public static readonly ColumnMetaData UNIQUEKEY = new ColumnMetaData("UniqueKey", "UniqueKey", DbType.AnsiString, SqlDbType.VarChar, 50, 0, 0);
+	public static readonly ColumnMetaData CHECKSUM = new ColumnMetaData("Checksum", "Checksum", DbType.AnsiString, SqlDbType.VarChar, 50, 0, 0);
+	public static readonly ColumnMetaData OPENCOUNT = new ColumnMetaData("OpenCount", "OpenCount", DbType.Int32, SqlDbType.Int, 0, 10, 0);
+	public static readonly ColumnMetaData BOUNCES = new ColumnMetaData("Bounces", "Bounces", DbType.Int32, SqlDbType.Int, 0, 10, 0);
+	public static readonly ColumnMetaData LASTOPENDATE = new ColumnMetaData("LastOpenDate", "LastOpenDate", DbType.DateTime, SqlDbType.DateTime, 0, 0, 0);
+	public static readonly ColumnMetaData SMTPSERVER = new ColumnMetaData("SmtpServer", "SmtpServer", DbType.AnsiString, SqlDbType.VarChar, 50, 0, 0);
     }
 
     public interface IMailMessage : IBusinessEntity {

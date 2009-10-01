@@ -16,13 +16,13 @@ namespace Spring2.Core.Mail.DataObject {
 
     public class MailMessageRouteFields {
 	private MailMessageRouteFields() {}
-	public static readonly String MAILMESSAGEROUTE = "MailMessageRoute"; //Entity Name
+	public static readonly String ENTITY_NAME = "MailMessageRoute";
 	
-	public static readonly String MAILMESSAGEROUTEID = "MailMessageRouteId";
-	public static readonly String MAILMESSAGE = "MailMessage";
-	public static readonly String ROUTINGTYPE = "RoutingType";
-	public static readonly String STATUS = "Status";
-	public static readonly String EMAILADDRESS = "EmailAddress";
+	public static readonly ColumnMetaData MAILMESSAGEROUTEID = new ColumnMetaData("MailMessageRouteId", "MailMessageRouteId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
+	public static readonly ColumnMetaData MAILMESSAGE = new ColumnMetaData("MailMessage", "MailMessage", DbType.AnsiString, SqlDbType.VarChar, 50, 0, 0);
+	public static readonly ColumnMetaData ROUTINGTYPE = new ColumnMetaData("RoutingType", "RoutingType", DbType.AnsiString, SqlDbType.VarChar, 10, 0, 0);
+	public static readonly ColumnMetaData STATUS = new ColumnMetaData("Status", "Status", DbType.AnsiString, SqlDbType.VarChar, 1, 0, 0);
+	public static readonly ColumnMetaData EMAILADDRESS = new ColumnMetaData("EmailAddress", "EmailAddress", DbType.AnsiString, SqlDbType.VarChar, 200, 0, 0);
     }
 
     public interface IMailMessageRoute : IBusinessEntity {

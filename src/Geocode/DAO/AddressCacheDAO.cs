@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 
@@ -15,15 +16,29 @@ namespace Spring2.Core.Geocode.Dao {
     /// <summary>
     /// Data access class for AddressCache business entity.
     /// </summary>
-    public class AddressCacheDAO : Spring2.Core.DAO.SqlEntityDAO {
-
-	public static readonly AddressCacheDAO DAO = new AddressCacheDAO();
+    public class AddressCacheDAO : Spring2.Core.DAO.SqlEntityDAO, IAddressCacheDAO {
+	private static IAddressCacheDAO instance = new AddressCacheDAO();
+	public static IAddressCacheDAO DAO{
+	    get{ return instance; }
+	}
+	
+	/// <summary>
+	/// Sets the singleton DAO instance of IAddressCacheDAO
+	/// </summary>
+	public void SetInstance(IAddressCacheDAO dao) {
+	    if(dao != null){
+			instance = dao;
+	    }else{
+			instance = new AddressCacheDAO();
+	    }
+	}
+	
 	private static readonly String VIEW = "vwAddressCache";
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";
 	private static readonly Int32 COMMAND_TIMEOUT = 15;
 	private static ColumnOrdinals columnOrdinals = null;
 
-	internal sealed class ColumnOrdinals {
+	public sealed class ColumnOrdinals {
 	    public String Prefix = String.Empty;
 	    public Int32 AddressId;
 	    public Int32 Address1;
@@ -231,7 +246,7 @@ namespace Spring2.Core.Geocode.Dao {
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public AddressCache Load(IdType addressId) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("AddressId", EqualityOperatorEnum.Equal, addressId.IsValid ? addressId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(AddressCacheFields.ADDRESSID, EqualityOperatorEnum.Equal, addressId.IsValid ? addressId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 	    return GetDataObject(dataReader);
 	}
@@ -241,7 +256,7 @@ namespace Spring2.Core.Geocode.Dao {
 	/// </summary>
 	public void Reload(AddressCache instance) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("AddressId", EqualityOperatorEnum.Equal, instance.AddressId.IsValid ? instance.AddressId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(AddressCacheFields.ADDRESSID, EqualityOperatorEnum.Equal, instance.AddressId.IsValid ? instance.AddressId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 
 	    if (!dataReader.Read()) {
@@ -293,7 +308,7 @@ namespace Spring2.Core.Geocode.Dao {
 	/// <param name="data">Entity to be populated from data reader</param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal AddressCache GetDataObjectFromReader(AddressCache data, IDataReader dataReader) {
+	public AddressCache GetDataObjectFromReader(AddressCache data, IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
@@ -305,7 +320,7 @@ namespace Spring2.Core.Geocode.Dao {
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal AddressCache GetDataObjectFromReader(IDataReader dataReader) {
+	public AddressCache GetDataObjectFromReader(IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
@@ -319,7 +334,7 @@ namespace Spring2.Core.Geocode.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal AddressCache GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
+	public AddressCache GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
 	    AddressCache data = new AddressCache(false);
 	    return GetDataObjectFromReader(data, dataReader, ordinals);
 	}
@@ -331,7 +346,7 @@ namespace Spring2.Core.Geocode.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal AddressCache GetDataObjectFromReader(AddressCache data, IDataReader dataReader, ColumnOrdinals ordinals) {
+	public AddressCache GetDataObjectFromReader(AddressCache data, IDataReader dataReader, ColumnOrdinals ordinals) {
 	    if (dataReader.IsDBNull(ordinals.AddressId)) {
 		data.AddressId = IdType.UNSET;
 	    } else {
@@ -452,24 +467,24 @@ namespace Spring2.Core.Geocode.Dao {
 	    cmd.Parameters.Add(idParam);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@Address1", DbType.AnsiString, ParameterDirection.Input, data.Address1.IsValid ? data.Address1.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@City", DbType.AnsiString, ParameterDirection.Input, data.City.IsValid ? data.City.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Region", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.Region.IsValid ? data.Region.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@PostalCode", DbType.AnsiString, ParameterDirection.Input, data.PostalCode.IsValid ? data.PostalCode.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Latitude", DbType.Decimal, ParameterDirection.Input, data.Latitude.IsValid ? data.Latitude.ToDecimal() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Longitude", DbType.Decimal, ParameterDirection.Input, data.Longitude.IsValid ? data.Longitude.ToDecimal() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Result", DbType.AnsiString, ParameterDirection.Input, data.Result.IsValid ? data.Result.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Status", DbType.AnsiString, ParameterDirection.Input, data.Status.DBValue));
-	    cmd.Parameters.Add(CreateDataParameter("@StdAddress1", DbType.AnsiString, ParameterDirection.Input, data.StdAddress1.IsValid ? data.StdAddress1.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@StdCity", DbType.AnsiString, ParameterDirection.Input, data.StdCity.IsValid ? data.StdCity.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@StdRegion", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.StdRegion.IsValid ? data.StdRegion.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@StdPostalCode", DbType.AnsiString, ParameterDirection.Input, data.StdPostalCode.IsValid ? data.StdPostalCode.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@StdPlus4", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.StdPlus4.IsValid ? data.StdPlus4.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MatAddress1", DbType.AnsiString, ParameterDirection.Input, data.MatAddress1.IsValid ? data.MatAddress1.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MatCity", DbType.AnsiString, ParameterDirection.Input, data.MatCity.IsValid ? data.MatCity.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MatRegion", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.MatRegion.IsValid ? data.MatRegion.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MatPostalCode", DbType.AnsiString, ParameterDirection.Input, data.MatPostalCode.IsValid ? data.MatPostalCode.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MatchType", DbType.Int32, ParameterDirection.Input, data.MatchType.IsValid ? data.MatchType.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.ADDRESS1, data.Address1.IsValid ? data.Address1.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.CITY, data.City.IsValid ? data.City.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.REGION, data.Region.IsValid ? data.Region.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.POSTALCODE, data.PostalCode.IsValid ? data.PostalCode.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.LATITUDE, data.Latitude.IsValid ? data.Latitude.ToDecimal() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.LONGITUDE, data.Longitude.IsValid ? data.Longitude.ToDecimal() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.RESULT, data.Result.IsValid ? data.Result.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.STATUS, data.Status.DBValue));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.STDADDRESS1, data.StdAddress1.IsValid ? data.StdAddress1.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.STDCITY, data.StdCity.IsValid ? data.StdCity.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.STDREGION, data.StdRegion.IsValid ? data.StdRegion.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.STDPOSTALCODE, data.StdPostalCode.IsValid ? data.StdPostalCode.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.STDPLUS4, data.StdPlus4.IsValid ? data.StdPlus4.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.MATADDRESS1, data.MatAddress1.IsValid ? data.MatAddress1.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.MATCITY, data.MatCity.IsValid ? data.MatCity.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.MATREGION, data.MatRegion.IsValid ? data.MatRegion.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.MATPOSTALCODE, data.MatPostalCode.IsValid ? data.MatPostalCode.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.MATCHTYPE, data.MatchType.IsValid ? data.MatchType.ToInt32() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -502,25 +517,25 @@ namespace Spring2.Core.Geocode.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spAddressCache_Update", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@AddressId", DbType.Int32, ParameterDirection.Input, data.AddressId.IsValid ? data.AddressId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Address1", DbType.AnsiString, ParameterDirection.Input, data.Address1.IsValid ? data.Address1.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@City", DbType.AnsiString, ParameterDirection.Input, data.City.IsValid ? data.City.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Region", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.Region.IsValid ? data.Region.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@PostalCode", DbType.AnsiString, ParameterDirection.Input, data.PostalCode.IsValid ? data.PostalCode.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Latitude", DbType.Decimal, ParameterDirection.Input, data.Latitude.IsValid ? data.Latitude.ToDecimal() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Longitude", DbType.Decimal, ParameterDirection.Input, data.Longitude.IsValid ? data.Longitude.ToDecimal() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Result", DbType.AnsiString, ParameterDirection.Input, data.Result.IsValid ? data.Result.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Status", DbType.AnsiString, ParameterDirection.Input, data.Status.DBValue));
-	    cmd.Parameters.Add(CreateDataParameter("@StdAddress1", DbType.AnsiString, ParameterDirection.Input, data.StdAddress1.IsValid ? data.StdAddress1.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@StdCity", DbType.AnsiString, ParameterDirection.Input, data.StdCity.IsValid ? data.StdCity.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@StdRegion", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.StdRegion.IsValid ? data.StdRegion.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@StdPostalCode", DbType.AnsiString, ParameterDirection.Input, data.StdPostalCode.IsValid ? data.StdPostalCode.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@StdPlus4", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.StdPlus4.IsValid ? data.StdPlus4.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MatAddress1", DbType.AnsiString, ParameterDirection.Input, data.MatAddress1.IsValid ? data.MatAddress1.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MatCity", DbType.AnsiString, ParameterDirection.Input, data.MatCity.IsValid ? data.MatCity.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MatRegion", DbType.AnsiStringFixedLength, ParameterDirection.Input, data.MatRegion.IsValid ? data.MatRegion.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MatPostalCode", DbType.AnsiString, ParameterDirection.Input, data.MatPostalCode.IsValid ? data.MatPostalCode.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MatchType", DbType.Int32, ParameterDirection.Input, data.MatchType.IsValid ? data.MatchType.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.ADDRESSID, data.AddressId.IsValid ? data.AddressId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.ADDRESS1, data.Address1.IsValid ? data.Address1.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.CITY, data.City.IsValid ? data.City.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.REGION, data.Region.IsValid ? data.Region.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.POSTALCODE, data.PostalCode.IsValid ? data.PostalCode.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.LATITUDE, data.Latitude.IsValid ? data.Latitude.ToDecimal() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.LONGITUDE, data.Longitude.IsValid ? data.Longitude.ToDecimal() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.RESULT, data.Result.IsValid ? data.Result.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.STATUS, data.Status.DBValue));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.STDADDRESS1, data.StdAddress1.IsValid ? data.StdAddress1.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.STDCITY, data.StdCity.IsValid ? data.StdCity.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.STDREGION, data.StdRegion.IsValid ? data.StdRegion.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.STDPOSTALCODE, data.StdPostalCode.IsValid ? data.StdPostalCode.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.STDPLUS4, data.StdPlus4.IsValid ? data.StdPlus4.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.MATADDRESS1, data.MatAddress1.IsValid ? data.MatAddress1.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.MATCITY, data.MatCity.IsValid ? data.MatCity.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.MATREGION, data.MatRegion.IsValid ? data.MatRegion.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.MATPOSTALCODE, data.MatPostalCode.IsValid ? data.MatPostalCode.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.MATCHTYPE, data.MatchType.IsValid ? data.MatchType.ToInt32() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -550,7 +565,7 @@ namespace Spring2.Core.Geocode.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spAddressCache_Delete", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    // Create and append the parameters
-	    cmd.Parameters.Add(CreateDataParameter("@AddressId", DbType.Int32, ParameterDirection.Input, addressId.IsValid ? addressId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(AddressCacheFields.ADDRESSID, addressId.IsValid ? addressId.ToInt32() as Object : DBNull.Value));
 	    // Execute the query and return the result
 	    cmd.ExecuteNonQuery();
 
@@ -569,8 +584,8 @@ namespace Spring2.Core.Geocode.Dao {
 	public AddressCacheList FindAddressByStreetAndPostalCode(StringType address1, StringType postalCode) {
 	    OrderByClause sort = new OrderByClause("Address1, PostalCode");
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("Address1", EqualityOperatorEnum.Equal, address1.IsValid ? address1.ToString() as Object : DBNull.Value));
-	    filter.And(new SqlEqualityPredicate("PostalCode", EqualityOperatorEnum.Equal, postalCode.IsValid ? postalCode.ToString() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(AddressCacheFields.ADDRESS1, EqualityOperatorEnum.Equal, address1.IsValid ? address1.ToString() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(AddressCacheFields.POSTALCODE, EqualityOperatorEnum.Equal, postalCode.IsValid ? postalCode.ToString() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
 
 	    return GetList(dataReader);
@@ -586,9 +601,9 @@ namespace Spring2.Core.Geocode.Dao {
 	public AddressCacheList FindAddressByStreetAndCityAndState(StringType address1, StringType city, StringType region) {
 	    OrderByClause sort = new OrderByClause("Address1, City, Region");
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("Address1", EqualityOperatorEnum.Equal, address1.IsValid ? address1.ToString() as Object : DBNull.Value));
-	    filter.And(new SqlEqualityPredicate("City", EqualityOperatorEnum.Equal, city.IsValid ? city.ToString() as Object : DBNull.Value));
-	    filter.And(new SqlEqualityPredicate("Region", EqualityOperatorEnum.Equal, region.IsValid ? region.ToString() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(AddressCacheFields.ADDRESS1, EqualityOperatorEnum.Equal, address1.IsValid ? address1.ToString() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(AddressCacheFields.CITY, EqualityOperatorEnum.Equal, city.IsValid ? city.ToString() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(AddressCacheFields.REGION, EqualityOperatorEnum.Equal, region.IsValid ? region.ToString() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
 
 	    return GetList(dataReader);

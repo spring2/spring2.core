@@ -183,6 +183,7 @@
     <Compile Include="Geocode\DAO\AddressCacheDAO.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Geocode\DAO\IAddressCacheDAO.cs" />
     <Compile Include="Geocode\DataObject\AddressCacheData.cs">
       <SubType>Code</SubType>
     </Compile>

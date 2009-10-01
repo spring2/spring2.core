@@ -113,5 +113,12 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	public void Reload() {
 	    MailMessageRouteDAO.DAO.Reload(this);
 	}
+
+
+
+	[Generate()]
+	public override String ToString() {
+	    return GetType().ToString() + "@" + MailMessageRouteId.ToString();
+	}
     }
 }

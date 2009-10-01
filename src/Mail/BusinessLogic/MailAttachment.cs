@@ -204,5 +204,12 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
 	    return enc.GetString(bytes);
 	}
+
+
+
+	[Generate()]
+	public override String ToString() {
+	    return GetType().ToString() + "@" + MailAttachmentId.ToString();
+	}
     }
 }

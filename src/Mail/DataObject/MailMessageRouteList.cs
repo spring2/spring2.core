@@ -67,16 +67,6 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public Boolean Contains(IMailMessageRoute value) {
-	    return List.Contains(value);
-	}
-
-	[Generate]
-	public Int32 IndexOf(IMailMessageRoute value) {
-	    return List.IndexOf(value);
-	}
-
-	[Generate]
 	public void Insert(Int32 index, IMailMessageRoute value) {
 	    if (!immutable) {
 		List.Insert(index, value);
@@ -96,16 +86,6 @@ namespace Spring2.Core.Mail.DataObject {
 		    keys.Remove(value.MailMessageRouteId);
 		    List.RemoveAt(index);
 		}
-	    } else {
-		throw new System.Data.ReadOnlyException();
-	    }
-	}
-
-	[Generate]
-	public void Remove(IMailMessageRoute value) {
-	    if (!immutable) {
-		List.Remove(value);
-		keys.Remove(value.MailMessageRouteId);
 	    } else {
 		throw new System.Data.ReadOnlyException();
 	    }
@@ -194,6 +174,20 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	/// <summary>
+	/// removes value by identity
+	/// </summary>
+	[Generate]
+	public void Remove(IdType mailMessageRouteId) {
+	    if(!immutable) {
+		IMailMessageRoute objectInList = this[mailMessageRouteId];
+		List.Remove(objectInList);
+		keys.Remove(mailMessageRouteId);
+	    } else {
+		throw new System.Data.ReadOnlyException();
+	    }
+	}
+
+	/// <summary>
 	/// Sort a list by a column
 	/// </summary>
 	[Generate]
@@ -217,6 +211,19 @@ namespace Spring2.Core.Mail.DataObject {
 	    }
 
 	    InnerList.Sort(comparer);
+	}
+
+	[Generate]
+	public class MailMessageRouteIdSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailMessageRoute o1 = (IMailMessageRoute)a;
+		IMailMessageRoute o2 = (IMailMessageRoute)b;
+
+		if (o1 == null || o2 == null || !o1.MailMessageRouteId.IsValid || !o2.MailMessageRouteId.IsValid) {
+		    return 0;
+		}
+		return o1.MailMessageRouteId.CompareTo(o2.MailMessageRouteId);
+	    }
 	}
 
 	[Generate]

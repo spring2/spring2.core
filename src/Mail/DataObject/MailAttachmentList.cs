@@ -67,16 +67,6 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public Boolean Contains(IMailAttachment value) {
-	    return List.Contains(value);
-	}
-
-	[Generate]
-	public Int32 IndexOf(IMailAttachment value) {
-	    return List.IndexOf(value);
-	}
-
-	[Generate]
 	public void Insert(Int32 index, IMailAttachment value) {
 	    if (!immutable) {
 		List.Insert(index, value);
@@ -96,16 +86,6 @@ namespace Spring2.Core.Mail.DataObject {
 		    keys.Remove(value.MailAttachmentId);
 		    List.RemoveAt(index);
 		}
-	    } else {
-		throw new System.Data.ReadOnlyException();
-	    }
-	}
-
-	[Generate]
-	public void Remove(IMailAttachment value) {
-	    if (!immutable) {
-		List.Remove(value);
-		keys.Remove(value.MailAttachmentId);
 	    } else {
 		throw new System.Data.ReadOnlyException();
 	    }
@@ -194,6 +174,20 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	/// <summary>
+	/// removes value by identity
+	/// </summary>
+	[Generate]
+	public void Remove(IdType mailAttachmentId) {
+	    if(!immutable) {
+		IMailAttachment objectInList = this[mailAttachmentId];
+		List.Remove(objectInList);
+		keys.Remove(mailAttachmentId);
+	    } else {
+		throw new System.Data.ReadOnlyException();
+	    }
+	}
+
+	/// <summary>
 	/// Sort a list by a column
 	/// </summary>
 	[Generate]
@@ -217,6 +211,32 @@ namespace Spring2.Core.Mail.DataObject {
 	    }
 
 	    InnerList.Sort(comparer);
+	}
+
+	[Generate]
+	public class MailAttachmentIdSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailAttachment o1 = (IMailAttachment)a;
+		IMailAttachment o2 = (IMailAttachment)b;
+
+		if (o1 == null || o2 == null || !o1.MailAttachmentId.IsValid || !o2.MailAttachmentId.IsValid) {
+		    return 0;
+		}
+		return o1.MailAttachmentId.CompareTo(o2.MailAttachmentId);
+	    }
+	}
+
+	[Generate]
+	public class MailMessageIdSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailAttachment o1 = (IMailAttachment)a;
+		IMailAttachment o2 = (IMailAttachment)b;
+
+		if (o1 == null || o2 == null || !o1.MailMessageId.IsValid || !o2.MailMessageId.IsValid) {
+		    return 0;
+		}
+		return o1.MailMessageId.CompareTo(o2.MailMessageId);
+	    }
 	}
 
 	[Generate]

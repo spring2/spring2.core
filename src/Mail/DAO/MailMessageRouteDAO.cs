@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 
@@ -15,15 +16,29 @@ namespace Spring2.Core.Mail.Dao {
     /// <summary>
     /// Data access class for MailMessageRoute business entity.
     /// </summary>
-    public class MailMessageRouteDAO : Spring2.Core.DAO.SqlEntityDAO {
-
-	public static readonly MailMessageRouteDAO DAO = new MailMessageRouteDAO();
+    public class MailMessageRouteDAO : Spring2.Core.DAO.SqlEntityDAO, IMailMessageRouteDAO {
+	private static IMailMessageRouteDAO instance = new MailMessageRouteDAO();
+	public static IMailMessageRouteDAO DAO{
+	    get{ return instance; }
+	}
+	
+	/// <summary>
+	/// Sets the singleton DAO instance of IMailMessageRouteDAO
+	/// </summary>
+	public void SetInstance(IMailMessageRouteDAO dao) {
+	    if(dao != null){
+			instance = dao;
+	    }else{
+			instance = new MailMessageRouteDAO();
+	    }
+	}
+	
 	private static readonly String VIEW = "vwMailMessageRoute";
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";
 	private static readonly Int32 COMMAND_TIMEOUT = 15;
 	private static ColumnOrdinals columnOrdinals = null;
 
-	internal sealed class ColumnOrdinals {
+	public sealed class ColumnOrdinals {
 	    public String Prefix = String.Empty;
 	    public Int32 MailMessageRouteId;
 	    public Int32 MailMessage;
@@ -175,7 +190,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MailMessageRoute Load(IdType mailMessageRouteId) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("MailMessageRouteId", EqualityOperatorEnum.Equal, mailMessageRouteId.IsValid ? mailMessageRouteId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(MailMessageRouteFields.MAILMESSAGEROUTEID, EqualityOperatorEnum.Equal, mailMessageRouteId.IsValid ? mailMessageRouteId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 	    return GetDataObject(dataReader);
 	}
@@ -185,7 +200,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// </summary>
 	public void Reload(MailMessageRoute instance) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("MailMessageRouteId", EqualityOperatorEnum.Equal, instance.MailMessageRouteId.IsValid ? instance.MailMessageRouteId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(MailMessageRouteFields.MAILMESSAGEROUTEID, EqualityOperatorEnum.Equal, instance.MailMessageRouteId.IsValid ? instance.MailMessageRouteId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 
 	    if (!dataReader.Read()) {
@@ -237,7 +252,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="data">Entity to be populated from data reader</param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader) {
+	public MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
@@ -249,7 +264,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal MailMessageRoute GetDataObjectFromReader(IDataReader dataReader) {
+	public MailMessageRoute GetDataObjectFromReader(IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
@@ -263,7 +278,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal MailMessageRoute GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
+	public MailMessageRoute GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
 	    MailMessageRoute data = new MailMessageRoute(false);
 	    return GetDataObjectFromReader(data, dataReader, ordinals);
 	}
@@ -275,7 +290,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader, ColumnOrdinals ordinals) {
+	public MailMessageRoute GetDataObjectFromReader(MailMessageRoute data, IDataReader dataReader, ColumnOrdinals ordinals) {
 	    if (dataReader.IsDBNull(ordinals.MailMessageRouteId)) {
 		data.MailMessageRouteId = IdType.UNSET;
 	    } else {
@@ -326,10 +341,10 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.Parameters.Add(idParam);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessage", DbType.AnsiString, ParameterDirection.Input, data.MailMessage.IsValid ? data.MailMessage.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@RoutingType", DbType.AnsiString, ParameterDirection.Input, data.RoutingType.DBValue));
-	    cmd.Parameters.Add(CreateDataParameter("@Status", DbType.AnsiString, ParameterDirection.Input, data.Status.DBValue));
-	    cmd.Parameters.Add(CreateDataParameter("@EmailAddress", DbType.AnsiString, ParameterDirection.Input, data.EmailAddress.IsValid ? data.EmailAddress.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageRouteFields.MAILMESSAGE, data.MailMessage.IsValid ? data.MailMessage.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageRouteFields.ROUTINGTYPE, data.RoutingType.DBValue));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageRouteFields.STATUS, data.Status.DBValue));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageRouteFields.EMAILADDRESS, data.EmailAddress.IsValid ? data.EmailAddress.ToString() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -362,11 +377,11 @@ namespace Spring2.Core.Mail.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spMailMessageRoute_Update", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageRouteId", DbType.Int32, ParameterDirection.Input, data.MailMessageRouteId.IsValid ? data.MailMessageRouteId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessage", DbType.AnsiString, ParameterDirection.Input, data.MailMessage.IsValid ? data.MailMessage.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@RoutingType", DbType.AnsiString, ParameterDirection.Input, data.RoutingType.DBValue));
-	    cmd.Parameters.Add(CreateDataParameter("@Status", DbType.AnsiString, ParameterDirection.Input, data.Status.DBValue));
-	    cmd.Parameters.Add(CreateDataParameter("@EmailAddress", DbType.AnsiString, ParameterDirection.Input, data.EmailAddress.IsValid ? data.EmailAddress.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageRouteFields.MAILMESSAGEROUTEID, data.MailMessageRouteId.IsValid ? data.MailMessageRouteId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageRouteFields.MAILMESSAGE, data.MailMessage.IsValid ? data.MailMessage.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageRouteFields.ROUTINGTYPE, data.RoutingType.DBValue));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageRouteFields.STATUS, data.Status.DBValue));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageRouteFields.EMAILADDRESS, data.EmailAddress.IsValid ? data.EmailAddress.ToString() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -396,7 +411,7 @@ namespace Spring2.Core.Mail.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spMailMessageRoute_Delete", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    // Create and append the parameters
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageRouteId", DbType.Int32, ParameterDirection.Input, mailMessageRouteId.IsValid ? mailMessageRouteId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageRouteFields.MAILMESSAGEROUTEID, mailMessageRouteId.IsValid ? mailMessageRouteId.ToInt32() as Object : DBNull.Value));
 	    // Execute the query and return the result
 	    cmd.ExecuteNonQuery();
 
@@ -415,15 +430,9 @@ namespace Spring2.Core.Mail.Dao {
 	    OrderByClause sort = new OrderByClause("MailMessage");
 	    SqlFilter filter = new SqlFilter(new SqlLiteralPredicate(" MailMessage = @MailMessage"));
 	    String sql = "SELECT * from " + VIEW + filter.Statement + sort.FormatSql();
-	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, sql, CommandType.Text);
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessage", DbType.AnsiString, ParameterDirection.Input, mailMessage.IsValid ? mailMessage.ToString() as Object : DBNull.Value));
-
-	    IDataReader dataReader = null;
-	    if (DbConnectionScope.Current == null) {
-		dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-	    } else {
-		dataReader = cmd.ExecuteReader();
-	    }
+		IDataParameterCollection parameters = new SqlParameterList();
+	    parameters.Add(CreateDataParameter("@MailMessage", MailMessageRouteFields.MAILMESSAGE, mailMessage.IsValid ? mailMessage.ToString() as Object : DBNull.Value));
+		IDataReader dataReader = ExecuteReader(CONNECTION_STRING_KEY, sql, parameters, COMMAND_TIMEOUT);
 	    return GetList(dataReader);
 	}
     }

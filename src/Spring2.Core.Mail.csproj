@@ -178,6 +178,9 @@
     <Compile Include="Mail\BusinessLogic\MailMessageRoute.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Mail\DAO\IMailAttachmentDAO.cs" />
+    <Compile Include="Mail\DAO\IMailMessageDAO.cs" />
+    <Compile Include="Mail\DAO\IMailMessageRouteDAO.cs" />
     <Compile Include="Mail\DAO\MailAttachmentDAO.cs">
       <SubType>Code</SubType>
     </Compile>

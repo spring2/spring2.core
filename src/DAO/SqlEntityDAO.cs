@@ -35,6 +35,27 @@ namespace Spring2.Core.DAO {
 	    return new SqlCommand();
 	}
 
+	protected IDbDataParameter CreateDataParameter(ColumnMetaData meta, Object value) {
+	    return CreateDataParameter(meta, ParameterDirection.Input, value);
+	}
+
+	protected IDbDataParameter CreateDataParameter(ColumnMetaData meta, ParameterDirection direction, Object value) {
+	    return CreateDataParameter("@" + meta.SqlName, meta, direction, value);
+	}
+
+	protected IDbDataParameter CreateDataParameter(string parameterName, ColumnMetaData meta, Object value) {
+	    return CreateDataParameter(parameterName, meta, ParameterDirection.Input, value);
+	}
+
+	protected IDbDataParameter CreateDataParameter(string parameterName, ColumnMetaData meta, ParameterDirection direction,
+						       Object value) {
+	    if (meta.Length == 0) {
+		return CreateDataParameter(parameterName, meta.DBType, direction, value, meta.Precision, meta.Scale);
+	    } else {
+		return CreateDataParameter(parameterName, meta.DBType, direction, value, meta.Length);
+	    }
+	}
+
 	protected override IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, ParameterDirection direction, Object value) {
 		return CreateDataParameter(parameterName, dbType, direction, value, 0, 0, 0);
 	}
@@ -68,6 +89,14 @@ namespace Spring2.Core.DAO {
 	    param.DbType = dbType;
 	    param.Direction = direction;
 	    return param;
+	}
+
+	protected SqlEqualityPredicate CreateEqualityPredicate(ColumnMetaData meta, EqualityOperatorEnum op, Object value) {
+	    if (meta.Length == 0) {
+		return new SqlEqualityPredicate(meta.SqlName, op, value, meta.Precision, meta.Scale);
+	    } else {
+		return new SqlEqualityPredicate(meta.SqlName, op, value, meta.Length);
+	    }
 	}
 
 //	protected override IDbDataParameter CreateDataParameter(String parameterName, DbType dbType, Int32 size, ParameterDirection direction, Boolean isNullable, Byte precision, Byte scale, String sourceColumn, DataRowVersion sourceVersion, Object value) {

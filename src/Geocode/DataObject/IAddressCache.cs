@@ -16,27 +16,27 @@ namespace Spring2.Core.Geocode.DataObject {
 
     public class AddressCacheFields {
 	private AddressCacheFields() {}
-	public static readonly String ADDRESSCACHE = "AddressCache"; //Entity Name
+	public static readonly String ENTITY_NAME = "AddressCache";
 	
-	public static readonly String ADDRESSID = "AddressId";
-	public static readonly String ADDRESS1 = "Address1";
-	public static readonly String CITY = "City";
-	public static readonly String REGION = "Region";
-	public static readonly String POSTALCODE = "PostalCode";
-	public static readonly String LATITUDE = "Latitude";
-	public static readonly String LONGITUDE = "Longitude";
-	public static readonly String RESULT = "Result";
-	public static readonly String STATUS = "Status";
-	public static readonly String STDADDRESS1 = "StdAddress1";
-	public static readonly String STDCITY = "StdCity";
-	public static readonly String STDREGION = "StdRegion";
-	public static readonly String STDPOSTALCODE = "StdPostalCode";
-	public static readonly String STDPLUS4 = "StdPlus4";
-	public static readonly String MATADDRESS1 = "MatAddress1";
-	public static readonly String MATCITY = "MatCity";
-	public static readonly String MATREGION = "MatRegion";
-	public static readonly String MATPOSTALCODE = "MatPostalCode";
-	public static readonly String MATCHTYPE = "MatchType";
+	public static readonly ColumnMetaData ADDRESSID = new ColumnMetaData("AddressId", "AddressId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
+	public static readonly ColumnMetaData ADDRESS1 = new ColumnMetaData("Address1", "Address1", DbType.AnsiString, SqlDbType.VarChar, 80, 0, 0);
+	public static readonly ColumnMetaData CITY = new ColumnMetaData("City", "City", DbType.AnsiString, SqlDbType.VarChar, 40, 0, 0);
+	public static readonly ColumnMetaData REGION = new ColumnMetaData("Region", "Region", DbType.AnsiStringFixedLength, SqlDbType.Char, 2, 0, 0);
+	public static readonly ColumnMetaData POSTALCODE = new ColumnMetaData("PostalCode", "PostalCode", DbType.AnsiString, SqlDbType.VarChar, 10, 0, 0);
+	public static readonly ColumnMetaData LATITUDE = new ColumnMetaData("Latitude", "Latitude", DbType.Decimal, SqlDbType.Decimal, 0, 18, 8);
+	public static readonly ColumnMetaData LONGITUDE = new ColumnMetaData("Longitude", "Longitude", DbType.Decimal, SqlDbType.Decimal, 0, 18, 8);
+	public static readonly ColumnMetaData RESULT = new ColumnMetaData("Result", "Result", DbType.AnsiString, SqlDbType.VarChar, 1000, 0, 0);
+	public static readonly ColumnMetaData STATUS = new ColumnMetaData("Status", "Status", DbType.AnsiString, SqlDbType.VarChar, 20, 0, 0);
+	public static readonly ColumnMetaData STDADDRESS1 = new ColumnMetaData("StdAddress1", "StdAddress1", DbType.AnsiString, SqlDbType.VarChar, 80, 0, 0);
+	public static readonly ColumnMetaData STDCITY = new ColumnMetaData("StdCity", "StdCity", DbType.AnsiString, SqlDbType.VarChar, 40, 0, 0);
+	public static readonly ColumnMetaData STDREGION = new ColumnMetaData("StdRegion", "StdRegion", DbType.AnsiStringFixedLength, SqlDbType.Char, 2, 0, 0);
+	public static readonly ColumnMetaData STDPOSTALCODE = new ColumnMetaData("StdPostalCode", "StdPostalCode", DbType.AnsiString, SqlDbType.VarChar, 10, 0, 0);
+	public static readonly ColumnMetaData STDPLUS4 = new ColumnMetaData("StdPlus4", "StdPlus4", DbType.AnsiStringFixedLength, SqlDbType.Char, 4, 0, 0);
+	public static readonly ColumnMetaData MATADDRESS1 = new ColumnMetaData("MatAddress1", "MatAddress1", DbType.AnsiString, SqlDbType.VarChar, 80, 0, 0);
+	public static readonly ColumnMetaData MATCITY = new ColumnMetaData("MatCity", "MatCity", DbType.AnsiString, SqlDbType.VarChar, 40, 0, 0);
+	public static readonly ColumnMetaData MATREGION = new ColumnMetaData("MatRegion", "MatRegion", DbType.AnsiStringFixedLength, SqlDbType.Char, 2, 0, 0);
+	public static readonly ColumnMetaData MATPOSTALCODE = new ColumnMetaData("MatPostalCode", "MatPostalCode", DbType.AnsiString, SqlDbType.VarChar, 10, 0, 0);
+	public static readonly ColumnMetaData MATCHTYPE = new ColumnMetaData("MatchType", "MatchType", DbType.Int32, SqlDbType.Int, 0, 10, 0);
     }
 
     public interface IAddressCache : IBusinessEntity {

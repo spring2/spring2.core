@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 
@@ -15,15 +16,29 @@ namespace Spring2.Core.Mail.Dao {
     /// <summary>
     /// Data access class for MailMessage business entity.
     /// </summary>
-    public class MailMessageDAO : Spring2.Core.DAO.SqlEntityDAO {
-
-	public static readonly MailMessageDAO DAO = new MailMessageDAO();
+    public class MailMessageDAO : Spring2.Core.DAO.SqlEntityDAO, IMailMessageDAO {
+	private static IMailMessageDAO instance = new MailMessageDAO();
+	public static IMailMessageDAO DAO{
+	    get{ return instance; }
+	}
+	
+	/// <summary>
+	/// Sets the singleton DAO instance of IMailMessageDAO
+	/// </summary>
+	public void SetInstance(IMailMessageDAO dao) {
+	    if(dao != null){
+			instance = dao;
+	    }else{
+			instance = new MailMessageDAO();
+	    }
+	}
+	
 	private static readonly String VIEW = "vwMailMessage";
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";
 	private static readonly Int32 COMMAND_TIMEOUT = 15;
 	private static ColumnOrdinals columnOrdinals = null;
 
-	internal sealed class ColumnOrdinals {
+	public sealed class ColumnOrdinals {
 	    public String Prefix = String.Empty;
 	    public Int32 MailMessageId;
 	    public Int32 ScheduleTime;
@@ -247,7 +262,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public MailMessage Load(IdType mailMessageId) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("MailMessageId", EqualityOperatorEnum.Equal, mailMessageId.IsValid ? mailMessageId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(MailMessageFields.MAILMESSAGEID, EqualityOperatorEnum.Equal, mailMessageId.IsValid ? mailMessageId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 	    return GetDataObject(dataReader);
 	}
@@ -257,7 +272,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// </summary>
 	public void Reload(MailMessage instance) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("MailMessageId", EqualityOperatorEnum.Equal, instance.MailMessageId.IsValid ? instance.MailMessageId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(MailMessageFields.MAILMESSAGEID, EqualityOperatorEnum.Equal, instance.MailMessageId.IsValid ? instance.MailMessageId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 
 	    if (!dataReader.Read()) {
@@ -309,7 +324,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="data">Entity to be populated from data reader</param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal MailMessage GetDataObjectFromReader(MailMessage data, IDataReader dataReader) {
+	public MailMessage GetDataObjectFromReader(MailMessage data, IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
@@ -321,7 +336,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal MailMessage GetDataObjectFromReader(IDataReader dataReader) {
+	public MailMessage GetDataObjectFromReader(IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
@@ -335,7 +350,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal MailMessage GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
+	public MailMessage GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
 	    MailMessage data = new MailMessage(false);
 	    return GetDataObjectFromReader(data, dataReader, ordinals);
 	}
@@ -347,7 +362,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal MailMessage GetDataObjectFromReader(MailMessage data, IDataReader dataReader, ColumnOrdinals ordinals) {
+	public MailMessage GetDataObjectFromReader(MailMessage data, IDataReader dataReader, ColumnOrdinals ordinals) {
 	    if (dataReader.IsDBNull(ordinals.MailMessageId)) {
 		data.MailMessageId = IdType.UNSET;
 	    } else {
@@ -488,28 +503,28 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.Parameters.Add(idParam);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@ScheduleTime", DbType.DateTime, ParameterDirection.Input, data.ScheduleTime.IsValid ? data.ScheduleTime.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@ProcessedTime", DbType.DateTime, ParameterDirection.Input, data.ProcessedTime.IsValid ? data.ProcessedTime.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Priority", DbType.AnsiString, ParameterDirection.Input, data.Priority.DBValue));
-	    cmd.Parameters.Add(CreateDataParameter("@From", DbType.AnsiString, ParameterDirection.Input, data.From.IsValid ? data.From.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@To", DbType.AnsiString, ParameterDirection.Input, data.To.IsValid ? data.To.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Cc", DbType.AnsiString, ParameterDirection.Input, data.Cc.IsValid ? data.Cc.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Bcc", DbType.AnsiString, ParameterDirection.Input, data.Bcc.IsValid ? data.Bcc.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Subject", DbType.AnsiString, ParameterDirection.Input, data.Subject.IsValid ? data.Subject.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@BodyFormat", DbType.AnsiString, ParameterDirection.Input, data.BodyFormat.DBValue));
-	    cmd.Parameters.Add(CreateDataParameter("@Body", DbType.AnsiString, ParameterDirection.Input, data.Body.IsValid ? data.Body.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageStatus", DbType.AnsiString, ParameterDirection.Input, data.MailMessageStatus.DBValue));
-	    cmd.Parameters.Add(CreateDataParameter("@ReleasedByUserId", DbType.Int32, ParameterDirection.Input, data.ReleasedByUserId.IsValid ? data.ReleasedByUserId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageType", DbType.AnsiString, ParameterDirection.Input, data.MailMessageType.IsValid ? data.MailMessageType.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@NumberOfAttempts", DbType.Int32, ParameterDirection.Input, data.NumberOfAttempts.IsValid ? data.NumberOfAttempts.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MessageQueueDate", DbType.DateTime, ParameterDirection.Input, data.MessageQueueDate.IsValid ? data.MessageQueueDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@ReferenceKey", DbType.AnsiString, ParameterDirection.Input, data.ReferenceKey.IsValid ? data.ReferenceKey.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@UniqueKey", DbType.AnsiString, ParameterDirection.Input, data.UniqueKey.IsValid ? data.UniqueKey.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Checksum", DbType.AnsiString, ParameterDirection.Input, data.Checksum.IsValid ? data.Checksum.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@OpenCount", DbType.Int32, ParameterDirection.Input, data.OpenCount.IsValid ? data.OpenCount.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Bounces", DbType.Int32, ParameterDirection.Input, data.Bounces.IsValid ? data.Bounces.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@LastOpenDate", DbType.DateTime, ParameterDirection.Input, data.LastOpenDate.IsValid ? data.LastOpenDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@SmtpServer", DbType.AnsiString, ParameterDirection.Input, data.SmtpServer.IsValid ? data.SmtpServer.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.SCHEDULETIME, data.ScheduleTime.IsValid ? data.ScheduleTime.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.PROCESSEDTIME, data.ProcessedTime.IsValid ? data.ProcessedTime.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.PRIORITY, data.Priority.DBValue));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.FROM, data.From.IsValid ? data.From.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.TO, data.To.IsValid ? data.To.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.CC, data.Cc.IsValid ? data.Cc.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.BCC, data.Bcc.IsValid ? data.Bcc.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.SUBJECT, data.Subject.IsValid ? data.Subject.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.BODYFORMAT, data.BodyFormat.DBValue));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.BODY, data.Body.IsValid ? data.Body.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.MAILMESSAGESTATUS, data.MailMessageStatus.DBValue));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.RELEASEDBYUSERID, data.ReleasedByUserId.IsValid ? data.ReleasedByUserId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.MAILMESSAGETYPE, data.MailMessageType.IsValid ? data.MailMessageType.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.NUMBEROFATTEMPTS, data.NumberOfAttempts.IsValid ? data.NumberOfAttempts.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.MESSAGEQUEUEDATE, data.MessageQueueDate.IsValid ? data.MessageQueueDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.REFERENCEKEY, data.ReferenceKey.IsValid ? data.ReferenceKey.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.UNIQUEKEY, data.UniqueKey.IsValid ? data.UniqueKey.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.CHECKSUM, data.Checksum.IsValid ? data.Checksum.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.OPENCOUNT, data.OpenCount.IsValid ? data.OpenCount.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.BOUNCES, data.Bounces.IsValid ? data.Bounces.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.LASTOPENDATE, data.LastOpenDate.IsValid ? data.LastOpenDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.SMTPSERVER, data.SmtpServer.IsValid ? data.SmtpServer.ToString() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -542,29 +557,29 @@ namespace Spring2.Core.Mail.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spMailMessage_Update", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageId", DbType.Int32, ParameterDirection.Input, data.MailMessageId.IsValid ? data.MailMessageId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@ScheduleTime", DbType.DateTime, ParameterDirection.Input, data.ScheduleTime.IsValid ? data.ScheduleTime.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@ProcessedTime", DbType.DateTime, ParameterDirection.Input, data.ProcessedTime.IsValid ? data.ProcessedTime.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Priority", DbType.AnsiString, ParameterDirection.Input, data.Priority.DBValue));
-	    cmd.Parameters.Add(CreateDataParameter("@From", DbType.AnsiString, ParameterDirection.Input, data.From.IsValid ? data.From.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@To", DbType.AnsiString, ParameterDirection.Input, data.To.IsValid ? data.To.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Cc", DbType.AnsiString, ParameterDirection.Input, data.Cc.IsValid ? data.Cc.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Bcc", DbType.AnsiString, ParameterDirection.Input, data.Bcc.IsValid ? data.Bcc.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Subject", DbType.AnsiString, ParameterDirection.Input, data.Subject.IsValid ? data.Subject.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@BodyFormat", DbType.AnsiString, ParameterDirection.Input, data.BodyFormat.DBValue));
-	    cmd.Parameters.Add(CreateDataParameter("@Body", DbType.AnsiString, ParameterDirection.Input, data.Body.IsValid ? data.Body.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageStatus", DbType.AnsiString, ParameterDirection.Input, data.MailMessageStatus.DBValue));
-	    cmd.Parameters.Add(CreateDataParameter("@ReleasedByUserId", DbType.Int32, ParameterDirection.Input, data.ReleasedByUserId.IsValid ? data.ReleasedByUserId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageType", DbType.AnsiString, ParameterDirection.Input, data.MailMessageType.IsValid ? data.MailMessageType.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@NumberOfAttempts", DbType.Int32, ParameterDirection.Input, data.NumberOfAttempts.IsValid ? data.NumberOfAttempts.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MessageQueueDate", DbType.DateTime, ParameterDirection.Input, data.MessageQueueDate.IsValid ? data.MessageQueueDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@ReferenceKey", DbType.AnsiString, ParameterDirection.Input, data.ReferenceKey.IsValid ? data.ReferenceKey.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@UniqueKey", DbType.AnsiString, ParameterDirection.Input, data.UniqueKey.IsValid ? data.UniqueKey.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Checksum", DbType.AnsiString, ParameterDirection.Input, data.Checksum.IsValid ? data.Checksum.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@OpenCount", DbType.Int32, ParameterDirection.Input, data.OpenCount.IsValid ? data.OpenCount.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Bounces", DbType.Int32, ParameterDirection.Input, data.Bounces.IsValid ? data.Bounces.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@LastOpenDate", DbType.DateTime, ParameterDirection.Input, data.LastOpenDate.IsValid ? data.LastOpenDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@SmtpServer", DbType.AnsiString, ParameterDirection.Input, data.SmtpServer.IsValid ? data.SmtpServer.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.MAILMESSAGEID, data.MailMessageId.IsValid ? data.MailMessageId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.SCHEDULETIME, data.ScheduleTime.IsValid ? data.ScheduleTime.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.PROCESSEDTIME, data.ProcessedTime.IsValid ? data.ProcessedTime.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.PRIORITY, data.Priority.DBValue));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.FROM, data.From.IsValid ? data.From.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.TO, data.To.IsValid ? data.To.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.CC, data.Cc.IsValid ? data.Cc.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.BCC, data.Bcc.IsValid ? data.Bcc.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.SUBJECT, data.Subject.IsValid ? data.Subject.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.BODYFORMAT, data.BodyFormat.DBValue));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.BODY, data.Body.IsValid ? data.Body.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.MAILMESSAGESTATUS, data.MailMessageStatus.DBValue));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.RELEASEDBYUSERID, data.ReleasedByUserId.IsValid ? data.ReleasedByUserId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.MAILMESSAGETYPE, data.MailMessageType.IsValid ? data.MailMessageType.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.NUMBEROFATTEMPTS, data.NumberOfAttempts.IsValid ? data.NumberOfAttempts.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.MESSAGEQUEUEDATE, data.MessageQueueDate.IsValid ? data.MessageQueueDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.REFERENCEKEY, data.ReferenceKey.IsValid ? data.ReferenceKey.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.UNIQUEKEY, data.UniqueKey.IsValid ? data.UniqueKey.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.CHECKSUM, data.Checksum.IsValid ? data.Checksum.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.OPENCOUNT, data.OpenCount.IsValid ? data.OpenCount.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.BOUNCES, data.Bounces.IsValid ? data.Bounces.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.LASTOPENDATE, data.LastOpenDate.IsValid ? data.LastOpenDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.SMTPSERVER, data.SmtpServer.IsValid ? data.SmtpServer.ToString() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -594,7 +609,7 @@ namespace Spring2.Core.Mail.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spMailMessage_Delete", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    // Create and append the parameters
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageId", DbType.Int32, ParameterDirection.Input, mailMessageId.IsValid ? mailMessageId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.MAILMESSAGEID, mailMessageId.IsValid ? mailMessageId.ToInt32() as Object : DBNull.Value));
 	    // Execute the query and return the result
 	    cmd.ExecuteNonQuery();
 
@@ -612,7 +627,7 @@ namespace Spring2.Core.Mail.Dao {
 	public MailMessageList FindByStatus(MailMessageStatusEnum mailMessageStatus) {
 	    OrderByClause sort = new OrderByClause("MailMessageStatus");
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("MailMessageStatus", EqualityOperatorEnum.Equal, mailMessageStatus.DBValue));
+	    filter.And(CreateEqualityPredicate(MailMessageFields.MAILMESSAGESTATUS, EqualityOperatorEnum.Equal, mailMessageStatus.DBValue));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
 
 	    return GetList(dataReader);
@@ -627,7 +642,7 @@ namespace Spring2.Core.Mail.Dao {
 	public MailMessage FindByUniqueKey(StringType uniqueKey) {
 	    OrderByClause sort = new OrderByClause("UniqueKey");
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("UniqueKey", EqualityOperatorEnum.Equal, uniqueKey.IsValid ? uniqueKey.ToString() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(MailMessageFields.UNIQUEKEY, EqualityOperatorEnum.Equal, uniqueKey.IsValid ? uniqueKey.ToString() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
 
 	    return GetDataObject(dataReader);

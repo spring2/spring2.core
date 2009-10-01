@@ -67,16 +67,6 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
-	public Boolean Contains(IMailMessage value) {
-	    return List.Contains(value);
-	}
-
-	[Generate]
-	public Int32 IndexOf(IMailMessage value) {
-	    return List.IndexOf(value);
-	}
-
-	[Generate]
 	public void Insert(Int32 index, IMailMessage value) {
 	    if (!immutable) {
 		List.Insert(index, value);
@@ -96,16 +86,6 @@ namespace Spring2.Core.Mail.DataObject {
 		    keys.Remove(value.MailMessageId);
 		    List.RemoveAt(index);
 		}
-	    } else {
-		throw new System.Data.ReadOnlyException();
-	    }
-	}
-
-	[Generate]
-	public void Remove(IMailMessage value) {
-	    if (!immutable) {
-		List.Remove(value);
-		keys.Remove(value.MailMessageId);
 	    } else {
 		throw new System.Data.ReadOnlyException();
 	    }
@@ -194,6 +174,20 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	/// <summary>
+	/// removes value by identity
+	/// </summary>
+	[Generate]
+	public void Remove(IdType mailMessageId) {
+	    if(!immutable) {
+		IMailMessage objectInList = this[mailMessageId];
+		List.Remove(objectInList);
+		keys.Remove(mailMessageId);
+	    } else {
+		throw new System.Data.ReadOnlyException();
+	    }
+	}
+
+	/// <summary>
 	/// Sort a list by a column
 	/// </summary>
 	[Generate]
@@ -217,6 +211,19 @@ namespace Spring2.Core.Mail.DataObject {
 	    }
 
 	    InnerList.Sort(comparer);
+	}
+
+	[Generate]
+	public class MailMessageIdSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailMessage o1 = (IMailMessage)a;
+		IMailMessage o2 = (IMailMessage)b;
+
+		if (o1 == null || o2 == null || !o1.MailMessageId.IsValid || !o2.MailMessageId.IsValid) {
+		    return 0;
+		}
+		return o1.MailMessageId.CompareTo(o2.MailMessageId);
+	    }
 	}
 
 	[Generate]
@@ -324,6 +331,19 @@ namespace Spring2.Core.Mail.DataObject {
 	}
 
 	[Generate]
+	public class ReleasedByUserIdSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailMessage o1 = (IMailMessage)a;
+		IMailMessage o2 = (IMailMessage)b;
+
+		if (o1 == null || o2 == null || !o1.ReleasedByUserId.IsValid || !o2.ReleasedByUserId.IsValid) {
+		    return 0;
+		}
+		return o1.ReleasedByUserId.CompareTo(o2.ReleasedByUserId);
+	    }
+	}
+
+	[Generate]
 	public class MailMessageTypeSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IMailMessage o1 = (IMailMessage)a;
@@ -333,6 +353,19 @@ namespace Spring2.Core.Mail.DataObject {
 		    return 0;
 		}
 		return o1.MailMessageType.CompareTo(o2.MailMessageType);
+	    }
+	}
+
+	[Generate]
+	public class NumberOfAttemptsSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailMessage o1 = (IMailMessage)a;
+		IMailMessage o2 = (IMailMessage)b;
+
+		if (o1 == null || o2 == null || !o1.NumberOfAttempts.IsValid || !o2.NumberOfAttempts.IsValid) {
+		    return 0;
+		}
+		return o1.NumberOfAttempts.CompareTo(o2.NumberOfAttempts);
 	    }
 	}
 
@@ -385,6 +418,32 @@ namespace Spring2.Core.Mail.DataObject {
 		    return 0;
 		}
 		return o1.Checksum.CompareTo(o2.Checksum);
+	    }
+	}
+
+	[Generate]
+	public class OpenCountSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailMessage o1 = (IMailMessage)a;
+		IMailMessage o2 = (IMailMessage)b;
+
+		if (o1 == null || o2 == null || !o1.OpenCount.IsValid || !o2.OpenCount.IsValid) {
+		    return 0;
+		}
+		return o1.OpenCount.CompareTo(o2.OpenCount);
+	    }
+	}
+
+	[Generate]
+	public class BouncesSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IMailMessage o1 = (IMailMessage)a;
+		IMailMessage o2 = (IMailMessage)b;
+
+		if (o1 == null || o2 == null || !o1.Bounces.IsValid || !o2.Bounces.IsValid) {
+		    return 0;
+		}
+		return o1.Bounces.CompareTo(o2.Bounces);
 	    }
 	}
 

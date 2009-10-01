@@ -22,7 +22,7 @@
 	</ifnot>
 	<call target="getSubversionRevision" />
 	<exec program="..\bin\UpdateVersion.exe" commandline="-i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs -rp ${CCNetLabel}" />
-	<exec program="make" commandline="clean build packageonly" />
+	<exec program="make" commandline="clean regress packageonly" />
     </target>
 
 	<target name="ccnet-publish">
