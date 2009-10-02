@@ -13,6 +13,9 @@ RELEASEDIR	:= ../release
 BUILDDIR	:= ../build
 NANT		:= ../bin/NAnt/nant.exe
 
+RELEASE_REVISION	:= 2247
+GETVERSION	:= $(BINDIR)/getversion.sh
+
 include Mail/sql/*.mk
 include Configuration/sql/*.mk
 include Navigation/sql/*.mk
@@ -78,10 +81,10 @@ changelog:
 	@cp ../ChangeLog.txt $(BUILDDIR)
 
 docs:
-	@chmod a+x ../bin/NDoc/*
+	@chmod a+x ../bin/NDoc2/*
 	@rm -rf ../docs/api
-	../bin/NDoc/NDocConsole.exe -documenter=MSDN -project=Spring2.Core.ndoc
-
+	../bin/NDoc2/NDocConsole.exe -documenter=MSDN-CHM -project=Spring2.Core.ndoc -HtmlHelpName=Spring2.Core-$(shell $(GETVERSION)) -Version=$(shell $(GETVERSION))
+	
 
 package: clean build regress changelog docs packageonly
 
@@ -103,6 +106,35 @@ release: package
 	$(BINDIR)/UpdateVersion -b Increment -i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs
 	cvs commit -m "update to next version" AssemblyVersionInfo.cs
 
+package_sql: scriptorder combine_sql_scripts
+	$(JAR) -cMvf $(RELEASEDIR)/${CLIENT_NAME}.Dss.sql-$(shell $(GETVERSION)).zip ScriptOrder.txt combined_sql_scripts.sql @ScriptOrder.txt
+	$(RM) ScriptOrder.txt combined_sql_scripts.sql
+
+.PHONY: scriptorder
+scriptorder:
+	$(RM) ScriptOrder.txt
+	#CVS
+	#cvs rdiff -s -r $(RELEASE_TAG) -r $(BRANCH_TAG) $(CVS_MODULE)/src/sql > s.txt
+	## 26 is the lenght of the module to parse ouf of s.txt
+	#gawk '/changed from/ {print substr($$2,25)} /is new/ {print substr($$2,25)}' s.txt > script.txt
+	#SVN
+	svn log -r ${RELEASE_REVISION}:BASE --verbose --xml --stop-on-copy ./ResourceManager/sql > svnlog.xml
+	#svn log -r ${RELEASE_REVISION} --verbose ${SVN_URL}${CLIENT_NAME}/trunk/Dss/src/sql
+	#chmod a+x ../bin/xml2csv.exe
+	../bin/xml2csv.exe svnlog.xml svnlog.csv ",path" -N -S
+	gawk -F"," "{print $2}" svnlog.csv | sed -e "s/,\/$(BRANCH_TAG)\/Dss\/src\///" | grep -v path > script.txt
+	#ANY
+	make -nB build_db > o.txt
+	gawk '/sqlcmd/ {print $$14}' o.txt > order.txt
+	-- for line in $$(cat order.txt); do grep $$line script.txt >> so.txt; done
+	# strip out the blank lines 
+	grep -v "^$$" so.txt > so1.txt
+	# make sure the file has dos line endings,
+	unix2dos -D so1.txt
+	# strip off the last end of line
+	awk 'NR > 1 { print h } { h = $$0 } END { ORS = ""; print h }' so1.txt > ScriptOrder.txt
+	dos2unix ScriptOrder.txt
+	$(RM) s.txt script.txt o.txt order.txt so.txt so1.txt svnlog.xml svnlog.csv
 
 .PHONY: ncover
 ncover: 
@@ -126,4 +158,13 @@ fixLineTermination:
 	find . -type f -name '*.ascx' -print -exec unix2dos -D --safe \{\} \;
 	find . -type f -name '*.css' -print -exec unix2dos -D --safe \{\} \;
 	find . -type f -name '*.js' -print -exec unix2dos -D --safe \{\} \;
+
+cleanlogs:
+	rm -rf *.log
+	rm -rf nvelocity.log.*
+
+package_cl:
+	#-cvs log -r${BRANCH_TAG} | perl ../bin/cvs2cl.pl --stdin -f ../release/ChangeLog-$(shell $(GETVERSION)).txt
+	#svn log --xml --verbose | xsltproc ../bin/svn2cl/svn2cl.xsl - > ChangeLog
+	../bin/svn2cl/svn2cl.sh -r ${RELEASE_REVISION}:BASE -o ../release/ChangeLog-$(shell $(GETVERSION)).txt
 	

@@ -1,24 +1,24 @@
 <project>
     <assemblies>
-        <assembly location="C:\Data\work\spring2\Core\build\Spring2.Core.dll" documentation="C:\Data\work\spring2\Core\build\Spring2.Core.xml" />
-        <assembly location="C:\Data\work\spring2\Core\build\Spring2.Core.WebControl.dll" documentation="C:\Data\work\spring2\Core\build\Spring2.Core.WebControl.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Types.dll" documentation="C:\data\work\spring2\Core\build\Spring2.Core.Types.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Configuration.dll" documentation="C:\data\work\spring2\Core\build\Spring2.Core.Configuration.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Cryptography.dll" documentation="C:\data\work\spring2\Core\build\Spring2.Core.Cryptography.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Geocode.dll" documentation="C:\data\work\spring2\Core\build\Spring2.Core.Geocode.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Mail.dll" documentation="C:\data\work\spring2\Core\build\Spring2.Core.Mail.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Maverick.dll" documentation="C:\data\work\spring2\Core\build\Spring2.Core.Maverick.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Security.dll" documentation="C:\data\work\spring2\Core\build\Spring2.Core.Security.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.AddressValidation.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.AddressValidation.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Log4Net.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.Log4Net.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Payment.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.Payment.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.PropertyPopulator.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.PropertyPopulator.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.ResourceManager.BusinessLogic.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.ResourceManager.BusinessLogic.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.ResourceManager.DataObject.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.ResourceManager.DataObject.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.ResourceManager.ResourceEditor.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.ResourceManager.ResourceEditor.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.ResourceManager.ResourceLocalizer.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.ResourceManager.ResourceLocalizer.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Soap.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.Soap.xml" />
-        <assembly location="C:\data\work\spring2\Core\build\Spring2.Core.Tax.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.Tax.xml" />
+        <assembly location="C:\Data\work\spring2\Core\build\net-2.0\Spring2.Core.dll" documentation="C:\Data\work\spring2\Core\build\net-2.0\Spring2.Core.xml" />
+        <assembly location="C:\Data\work\spring2\Core\build\net-2.0\Spring2.Core.WebControl.dll" documentation="C:\Data\work\spring2\Core\build\net-2.0\Spring2.Core.WebControl.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Types.dll" documentation="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Types.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Configuration.dll" documentation="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Configuration.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Cryptography.dll" documentation="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Cryptography.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Geocode.dll" documentation="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Geocode.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Mail.dll" documentation="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Mail.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Maverick.dll" documentation="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Maverick.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Security.dll" documentation="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Security.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.AddressValidation.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.AddressValidation.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Log4Net.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.Log4Net.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Payment.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.Payment.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.PropertyPopulator.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.PropertyPopulator.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.ResourceManager.BusinessLogic.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.ResourceManager.BusinessLogic.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.ResourceManager.DataObject.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.ResourceManager.DataObject.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.ResourceManager.ResourceEditor.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.ResourceManager.ResourceEditor.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.ResourceManager.ResourceLocalizer.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.ResourceManager.ResourceLocalizer.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Soap.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.Soap.xml" />
+        <assembly location="C:\data\work\spring2\Core\build\net-2.0\Spring2.Core.Tax.dll" documentation="C:\data\work\spring2\Core\src\Spring2.Core.Tax.xml" />
     </assemblies>
     <namespaces>
         <namespace name="Spring2.Core.AddressValidation"></namespace>
@@ -121,7 +121,7 @@
             <property name="DocumentedAttributes" value="" />
             <property name="GetExternalSummaries" value="True" />
         </documenter>
-        <documenter name="MSDN">
+        <documenter name="MSDN-CHM">
             <property name="OutputDirectory" value="..\docs\api\" />
             <property name="HtmlHelpName" value="Spring2.Core" />
             <property name="IncludeFavorites" value="False" />
