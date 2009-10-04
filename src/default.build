@@ -22,7 +22,7 @@
 	</ifnot>
 	<call target="CreateAssemblyVersionInfo" />
 	<call target="getSubversionRevision" />
-	<exec program="make" commandline="clean clean_db cleanlogs" />
+	<exec program="make" commandline="clean clean_db clean_release cleanlogs" />
 	<exec program="make" commandline="build build_db packageonly package_cl docs ncover" />
     </target>
 
