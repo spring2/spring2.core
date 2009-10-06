@@ -9,55 +9,55 @@ BCP := bcp
 SQL_FLAGS := -b -n -r -i
 SQL_LOGIN := /S "${SQL_SERVER}" /U "${SQL_USER}" /P "${SQL_PASSWORD}" -d "${SQL_DATABASE}"
 
-TABLELOGS_MAIL := $(patsubst Mail/sql/table/%.sql, Mail/sql/table/%.log, $(wildcard Mail/sql/table/*.sql))
-VIEWLOGS_MAIL  := $(patsubst Mail/sql/view/%.sql, Mail/sql/view/%.log, $(wildcard Mail/sql/view/*.sql))
-FUNCTIONLOGS_MAIL  := $(patsubst Mail/sql/function/%.sql, Mail/sql/function/%.log, $(wildcard Mail/sql/function/*.sql))
-PROCLOGS_MAIL  := $(patsubst Mail/sql/proc/%.sql, Mail/sql/proc/%.log, $(wildcard Mail/sql/proc/*.sql))
-DATALOGS_MAIL  := $(patsubst Mail/sql/data/%.sql, Mail/sql/data/%.log, $(wildcard Mail/sql/data/*.sql))
-REPORTLOGS_MAIL  := $(patsubst Mail/sql/report/%.sql, Mail/sql/report/%.log, $(wildcard Mail/sql/report/*.sql))
+TABLELOGS := $(patsubst sql/table/%.sql, sql/table/%.log, $(wildcard sql/table/*.sql))
+VIEWLOGS  := $(patsubst sql/view/%.sql, sql/view/%.log, $(wildcard sql/view/*.sql))
+FUNCTIONLOGS  := $(patsubst sql/function/%.sql, sql/function/%.log, $(wildcard sql/function/*.sql))
+PROCLOGS  := $(patsubst sql/proc/%.sql, sql/proc/%.log, $(wildcard sql/proc/*.sql))
+DATALOGS  := $(patsubst sql/data/%.sql, sql/data/%.log, $(wildcard sql/data/*.sql))
+REPORTLOGS  := $(patsubst sql/report/%.sql, sql/report/%.log, $(wildcard sql/report/*.sql))
 
-.PHONY : db_info_mail clean_db_mail build_db_mail load_data_mail tables_mail views_mail procs_mail debug_db_mail
+.PHONY : db_info clean_db build_db load_data tables views procs debug_db
 
-db_info_mail:
+db_info:
 	@echo SQL_SERVER = $(SQL_SERVER)
 	@echo SQL_DATABASE = $(SQL_DATABASE)
 	@echo SQL_USER = $(SQL_USER)
 	@echo SQL_PASSWORD = $(SQL_PASSWORD)
 	@echo
-	@echo Usage: db_info_mail clean_db_mail build_db_mail load_data_mail
+	@echo Usage: db_info clean_db build_db load_data
 
-clean_db_mail:
-	rm -rf $(TABLELOGS_MAIL) $(PROCLOGS_MAIL) $(VIEWLOGS_MAIL) $(DATALOGS_MAIL) $(TESTDATALOGS_MAIL) $(FUNCTIONLOGS_MAIL) $(REPORTLOGS_MAIL)
+clean_db:
+	rm -rf $(TABLELOGS) $(PROCLOGS) $(VIEWLOGS) $(DATALOGS) $(TESTDATALOGS) $(FUNCTIONLOGS) $(REPORTLOGS)
 
-build_db_mail: $(TABLELOGS_MAIL) $(VIEWLOGS_MAIL) $(FUNCTIONLOGS_MAIL) $(PROCLOGS_MAIL) $(DATALOGS_MAIL) $(REPORTLOGS_MAIL)
+build_db: $(TABLELOGS) $(VIEWLOGS) $(FUNCTIONLOGS) $(PROCLOGS) $(DATALOGS) $(REPORTLOGS)
 
-load_data_mail: db_info_mail build_db_mail $(TESTDATALOGS_MAIL)
+load_data: db_info build_db $(TESTDATALOGS)
 
-tables_mail: $(TABLELOGS_MAIL)
+tables: $(TABLELOGS)
 
-views_mail: $(VIEWLOGS_MAIL)
+views: $(VIEWLOGS)
 
-functions: $(FUNCTIONLOGS_MAIL)
+functions: $(FUNCTIONLOGS)
 
-procs_mail: $(PROCLOGS_MAIL)
+procs: $(PROCLOGS)
 
-data: $(DATALOGS_MAIL)
+data: $(DATALOGS)
 
-report: $(REPORTLOGS_MAIL)
+report: $(REPORTLOGS)
 
 %.log: %.sql 
 	$(SQL) $(SQL_LOGIN) $(SQL_FLAGS) $< > $@
 
 .DELETE_ON_ERROR:
 
-debug_db_mail:
-	@echo TABLELOGS_MAIL = $(TABLELOGS_MAIL)
-	@echo VIEWLOGS_MAIL = $(VIEWLOGS_MAIL)
-	@echo FUNCTIONLOGS_MAIL = $(FUNCTIONLOGS_MAIL)
-	@echo PROCLOGS_MAIL = $(PROCLOGS_MAIL)
-	@echo DATALOGS_MAIL = $(DATALOGS_MAIL)
-	@echo REPORTLOGS_MAIL = $(REPORTLOGS_MAIL)
-	@echo TESTDATALOGS_MAIL = $(TESTDATALOGS_MAIL)
+debug_db:
+	@echo TABLELOGS = $(TABLELOGS)
+	@echo VIEWLOGS = $(VIEWLOGS)
+	@echo FUNCTIONLOGS = $(FUNCTIONLOGS)
+	@echo PROCLOGS = $(PROCLOGS)
+	@echo DATALOGS = $(DATALOGS)
+	@echo REPORTLOGS = $(REPORTLOGS)
+	@echo TESTDATALOGS = $(TESTDATALOGS)
 
 
 sql/data/DirectSalesAgentBusiness.data.log: sql/data/DirectSalesAgent.data.log

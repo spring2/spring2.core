@@ -16,12 +16,6 @@ NANT		:= ../bin/NAnt/nant.exe
 RELEASE_REVISION	:= 2247
 GETVERSION	:= $(BINDIR)/getversion.sh
 
-include Mail/sql/*.mk
-include Configuration/sql/*.mk
-include Navigation/sql/*.mk
-include PerformanceMonitor/sql/*.mk
-include ResourceManager/sql/*.mk
-
 all: build
 
 .DELETE_ON_ERROR:
@@ -40,10 +34,25 @@ gen:
 	cd ResourceManager; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
 
 .PHONY: build_db
-build_db: build_db_mail build_db_config build_db_nav build_db_pm build_db_rscman
+build_db:
+	cd Configuration; make build_db;
+	cd Geocode; make build_db
+	cd Mail; make build_db
+	cd Navigation; make build_db
+	cd PerformanceMonitor; make build_db
+	cd ResourceManager; make build_db
+	cd SeleniumLoadTester; make build_db
 
 .PHONY: clean_db
-clean_db: clean_db_mail clean_db_config clean_db_nav clean_db_pm clean_db_rscman
+clean_db: 	
+	cd Configuration; make clean_db
+	cd Geocode; make clean_db
+	cd Mail; make clean_db
+	cd Navigation; make clean_db
+	cd PerformanceMonitor; make clean_db
+	cd ResourceManager; make clean_db
+	cd SeleniumLoadTester; make clean_db
+
 
 .PHONY: build
 build:
@@ -106,47 +115,30 @@ release: package
 	$(BINDIR)/UpdateVersion -b Increment -i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs
 	cvs commit -m "update to next version" AssemblyVersionInfo.cs
 
-package_sql: scriptorder combine_sql_scripts
-	$(JAR) -cMvf $(RELEASEDIR)/${CLIENT_NAME}.Dss.sql-$(shell $(GETVERSION)).zip ScriptOrder.txt combined_sql_scripts.sql @ScriptOrder.txt
-	$(RM) ScriptOrder.txt combined_sql_scripts.sql
+package_sql:
+	cd Configuration; make package_sql
+	mv $(RELEASEDIR)/Spring2.Core.Configuration.sql.zip $(RELEASEDIR)/Spring2.Core.Configuration.sql-$(shell $(GETVERSION)).zip
+	cd Geocode; make package_sql
+	mv $(RELEASEDIR)/Spring2.Core.Geocode.sql.zip $(RELEASEDIR)/Spring2.Core.Geocode.sql-$(shell $(GETVERSION)).zip
+	cd Mail; make package_sql
+	mv $(RELEASEDIR)/Spring2.Core.Mail.sql.zip $(RELEASEDIR)/Spring2.Core.Mail.sql-$(shell $(GETVERSION)).zip
+	cd Navigation; make package_sql
+	mv $(RELEASEDIR)/Spring2.Core.Navigation.sql.zip $(RELEASEDIR)/Spring2.Core.Navigation.sql-$(shell $(GETVERSION)).zip
+	cd PerformanceMonitor; make package_sql
+	mv $(RELEASEDIR)/Spring2.Core.PerformanceMonitor.sql.zip $(RELEASEDIR)/Spring2.Core.PerformanceMonitor.sql-$(shell $(GETVERSION)).zip
+	cd ResourceManager; make package_sql
+	mv $(RELEASEDIR)/Spring2.Core.ResourceManager.sql.zip $(RELEASEDIR)/Spring2.Core.ResourceManager.sql-$(shell $(GETVERSION)).zip
+	cd SeleniumLoadTester; make package_sql
+	mv $(RELEASEDIR)/Spring2.Core.SeleniumLoadTester.sql.zip $(RELEASEDIR)/Spring2.Core.SeleniumLoadTester.sql-$(shell $(GETVERSION)).zip
 
-.PHONY: scriptorder
-scriptorder:
-	$(RM) ScriptOrder.txt
-	#CVS
-	#cvs rdiff -s -r $(RELEASE_TAG) -r $(BRANCH_TAG) $(CVS_MODULE)/src/sql > s.txt
-	## 26 is the lenght of the module to parse ouf of s.txt
-	#gawk '/changed from/ {print substr($$2,25)} /is new/ {print substr($$2,25)}' s.txt > script.txt
-	#SVN
-	svn log -r ${RELEASE_REVISION}:BASE --verbose --xml --stop-on-copy ./ResourceManager/sql > svnlog.xml
-	#svn log -r ${RELEASE_REVISION} --verbose ${SVN_URL}${CLIENT_NAME}/trunk/Dss/src/sql
-	#chmod a+x ../bin/xml2csv.exe
-	../bin/xml2csv.exe svnlog.xml svnlog.csv ",path" -N -S
-	gawk -F"," "{print $2}" svnlog.csv | sed -e "s/,\/$(BRANCH_TAG)\/Dss\/src\///" | grep -v path > script.txt
-	#ANY
-	make -nB build_db > o.txt
-	gawk '/sqlcmd/ {print $$14}' o.txt > order.txt
-	-- for line in $$(cat order.txt); do grep $$line script.txt >> so.txt; done
-	# strip out the blank lines 
-	grep -v "^$$" so.txt > so1.txt
-	# make sure the file has dos line endings,
-	unix2dos -D so1.txt
-	# strip off the last end of line
-	awk 'NR > 1 { print h } { h = $$0 } END { ORS = ""; print h }' so1.txt > ScriptOrder.txt
-	dos2unix ScriptOrder.txt
-	$(RM) s.txt script.txt o.txt order.txt so.txt so1.txt svnlog.xml svnlog.csv
-
+	
+	
 .PHONY: ncover
 ncover: 
 	rm -rf ../docs/NCover
 	mkdir -p ../docs/NCover
 	../bin/NCover/NCover.Console.exe /l ../docs/NCover/Coverage.log /o ../docs/NCover/Coverage.xml /c ../bin/nunit/nunit-console.exe "../build/Test/Spring2.Core.Test.dll /noshadow"
 	
-ncoverreports:
-	@#../bin/nxslt ../docs/NCover/Coverage.xml ../docs/NCover/Coverage.xsl  -o ../docs/NCover/Coverage.html
-	../bin/NCover/NCoverReport.exe ../docs/NCover/Coverage.xml
-	cp ../bin/NCover/NCoverReport.css ../docs/NCover/
-
 .PHONY: fxcop
 fxcop:
 	mkdir -p ../docs/FxCop

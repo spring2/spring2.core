@@ -60,17 +60,5 @@ debug_db:
 	@echo TESTDATALOGS = $(TESTDATALOGS)
 
 
-sql/data/DirectSalesAgentBusiness.data.log: sql/data/DirectSalesAgent.data.log
-sql/data/DirectSalesAgent.data.log:  sql/data/Title.data.log sql/data/Business.data.log 
-sql/data/DirectSalesAgentUpline.data.log:  sql/data/User.data.log
-sql/data/ShippingOrderTypeLookup.data.log: sql/data/ShippingOrderType.data.log
-sql/data/ShippingRegionLookup.data.log: sql/data/ShippingRegion.data.log
-sql/data/ShippingRate.data.log:  sql/data/ShippingOrderType.data.log sql/data/ShippingRegion.data.log
-sql/data/CommissionRate_CharterLevelOverrides.data.log: sql/data/Title.data.log
-sql/data/CommissionRate.data.log: sql/data/Title.data.log
-sql/data/Resource.data.log: sql/data/ResourceKey.data.log
-
-sql/table/MailAttachment.table.log:  sql/table/MailMessage.table.log
-
 deleteunittestdata:
 	$(SQL) $(SQL_LOGIN) -r -Q "set ANSI_WARNINGS on; set ANSI_PADDING on; set CONCAT_NULL_YIELDS_NULL on; exec spDeleteTestData"
