@@ -116,6 +116,7 @@ release: package
 	cvs commit -m "update to next version" AssemblyVersionInfo.cs
 
 package_sql:
+	@chmod a+x ../bin/*.exe
 	cd Configuration; make package_sql
 	mv $(RELEASEDIR)/Spring2.Core.Configuration.sql.zip $(RELEASEDIR)/Spring2.Core.Configuration.sql-$(shell $(GETVERSION)).zip
 	cd Geocode; make package_sql
