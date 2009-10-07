@@ -17,7 +17,7 @@ NUNIT		:= $(BINDIR)/NUnit/nunit-console
 
 all:
 
-modules := $(shell /usr/bin/find . -name module.mk)
+modules := $(shell /usr/bin/find . -name *.mk)
 include $(modules)
 
 .DELETE_ON_ERROR:
