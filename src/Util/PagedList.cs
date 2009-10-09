@@ -13,11 +13,11 @@ namespace Spring2.Core.Util {
     public class PagedList<T> : IPagedList where T : IList, new() {
 	private Int32 pageSize;
 	private T completeList;
-	
+
 	public PagedList(Int32 pageSize) {
 	    this.pageSize = pageSize;
 	}
-	
+
 	public PagedList(Int32 pageSize, T initialList) {
 	    this.pageSize = pageSize;
 	    this.completeList = initialList;
@@ -27,7 +27,7 @@ namespace Spring2.Core.Util {
 	    CheckPageNumberInRange(pageNumber);
 	    Int32 minRecord = pageSize * (pageNumber - 1);
 	    T tempList = new T();
-	    for (int i = minRecord; i < (minRecord + pageSize) && i < completeList.Count; i++ ) {
+	    for (int i = minRecord; i < (minRecord + pageSize) && i < completeList.Count; i++) {
 		tempList.Add(completeList[i]);
 	    }
 	    return tempList;
@@ -41,7 +41,7 @@ namespace Spring2.Core.Util {
 	public Int32 TotalPages {
 	    get {
 		Int32 totalPages = completeList.Count / pageSize;
-		if(completeList.Count % pageSize > 0) {
+		if (completeList.Count % pageSize > 0) {
 		    totalPages++;
 		}
 		return totalPages;
@@ -49,10 +49,10 @@ namespace Spring2.Core.Util {
 	}
 
 	public void AddRange(T listToAdd) {
-	    if(completeList == null) {
+	    if (completeList == null) {
 		completeList = new T();
 	    }
-	    foreach(object t in listToAdd) {
+	    foreach (object t in listToAdd) {
 		completeList.Add(t);
 	    }
 	}
@@ -68,7 +68,7 @@ namespace Spring2.Core.Util {
 	}
 
 	public Int32 GetPageNumber(Int32 index) {
-	    if(index < 0 || index >= completeList.Count) {
+	    if (index < 0 || index >= completeList.Count) {
 		throw new IndexOutOfRangeException();
 	    }
 	    return (index / pageSize) + 1;
@@ -85,7 +85,7 @@ namespace Spring2.Core.Util {
 
 	public Int32 GetEndNumber(Int32 pageNumber) {
 	    CheckPageNumberInRange(pageNumber);
-	    if(pageNumber.Equals(TotalPages)) {
+	    if (pageNumber.Equals(TotalPages)) {
 		return completeList.Count;
 	    } else {
 		return pageNumber * PageSize;
@@ -93,28 +93,37 @@ namespace Spring2.Core.Util {
 	}
 
 	private void CheckPageNumberInRange(Int32 pageNumber) {
-	    if(pageNumber < 1 || (completeList.Count > 0 && pageNumber > TotalPages)) {
+	    if (pageNumber < 1 || (completeList.Count > 0 && pageNumber > TotalPages)) {
 		throw new IndexOutOfRangeException();
 	    }
 	}
+
+	public Int32 GetPageNumberFromIndexOfItem(Int32 indexOfItem) {
+	    int pageNumber = (++indexOfItem / pageSize);
+	    if (indexOfItem % pageSize > 0) pageNumber++;
+	    CheckPageNumberInRange(pageNumber);
+	    return pageNumber;
+	}
     }
 
-	public interface IPagedList {
-	    Int32 PageSize { get; }
+    public interface IPagedList {
+	Int32 PageSize { get; }
 
-	    Int32 TotalPages { get; }
+	Int32 TotalPages { get; }
 
-	    Int32 TotalRecords { get;}
+	Int32 TotalRecords { get; }
 
-	    Boolean HasPrevious(Int32 pageNumber);
+	Boolean HasPrevious(Int32 pageNumber);
 
-	    Boolean HasNext(Int32 pageNumber);
+	Boolean HasNext(Int32 pageNumber);
 
-	    Int32 GetPageNumber(Int32 index);
+	Int32 GetPageNumber(Int32 index);
 
-	    Int32 GetStartNumber(Int32 pageNumber);
+	Int32 GetStartNumber(Int32 pageNumber);
 
-	    Int32 GetEndNumber(Int32 pageNumber);
-	}
+	Int32 GetEndNumber(Int32 pageNumber);
+
+	Int32 GetPageNumberFromIndexOfItem(Int32 indexOfItem);
+    }
 }
 #endif

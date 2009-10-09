@@ -300,6 +300,28 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test()]
+	public void ShouldGetPageFromIndexOfItem() {
+	    ArrayList list = new ArrayList();
+	    for (Int32 i = 0; i < 20; i++) {
+		list.Add(i);
+	    }
+
+	    PagedList<ArrayList> pagedList = new PagedList<ArrayList>(5, list);
+	    Assert.AreEqual(1, pagedList.GetPageNumberFromIndexOfItem(0));
+	    Assert.AreEqual(1, pagedList.GetPageNumberFromIndexOfItem(4));
+	    Assert.AreEqual(2, pagedList.GetPageNumberFromIndexOfItem(5));
+	    Assert.AreEqual(4, pagedList.GetPageNumberFromIndexOfItem(19));
+	    try {
+		pagedList.GetPageNumberFromIndexOfItem(-1);
+		Assert.Fail("Should've thrown IndexOutOfRangeException");
+	    } catch (IndexOutOfRangeException) { }
+	    try {
+		pagedList.GetPageNumberFromIndexOfItem(20);
+		Assert.Fail("Should've thrown IndexOutOfRangeException");
+	    } catch (IndexOutOfRangeException) { }
+	}
+
+	[Test()]
 	public void ShouldBeAbleToUseContainsMethodOnGeneratedList() {
 	    //WebFacade facade = new WebFacade();
 	    //IDirectSalesAgentUser dsaUser = null;
