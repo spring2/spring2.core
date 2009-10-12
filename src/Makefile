@@ -138,7 +138,7 @@ package_sql:
 ncover: 
 	rm -rf ../docs/NCover
 	mkdir -p ../docs/NCover
-	../bin/NCover/NCover.Console.exe /l ../docs/NCover/Coverage.log /o ../docs/NCover/Coverage.xml /c ../bin/nunit/nunit-console.exe "../build/Test/Spring2.Core.Test.dll /noshadow"
+	../bin/NCover/NCover.Console.exe //reg //l ../docs/NCover/Coverage.log //x ../docs/NCover/Coverage.xml ../bin/nunit/nunit-console.exe "../build/Test/Spring2.Core.Test.dll"
 	
 .PHONY: fxcop
 fxcop:
