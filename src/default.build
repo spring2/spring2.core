@@ -30,7 +30,7 @@
 		<if test="${not property::exists('CCNetLabel')}"> 
 			<fail message="CCNetLabel property not set, so can't create labelled distribution files" />
 		</if>
-		<property name="publish.dir" value="${CCNetArtifactDirectory}\" />
+		<property name="publish.dir" value="${CCNetArtifactDirectory}\${CCNetLabel}" />
 
 		<mkdir dir="${publish.dir}" />
 		<copy todir="${publish.dir}">
