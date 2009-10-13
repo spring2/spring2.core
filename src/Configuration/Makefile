@@ -3,7 +3,7 @@ BINDIR		:= ../../bin
 RELEASEDIR	:= ../../release
 
 JAR		?= $(BINDIR)/jar.exe
-RELEASE_REVISION	:= 2247
+RELEASE_REVISION	:= 1
 BRANCH_TAG 		:= trunk
 
 include sql/*.mk
@@ -34,3 +34,4 @@ scriptorder:
 combine_sql_scripts:
 	$(RM) combined_sql_scripts.sql
 	-- for line in $$(cat ScriptOrder.txt); do printf '\n-- START OF: ' >> combined_sql_scripts.sql; echo $$line >> combined_sql_scripts.sql; printf '\n' >> combined_sql_scripts.sql; cat $$line >> combined_sql_scripts.sql; printf '\n-- END OF: ' >> combined_sql_scripts.sql; echo $$line >> combined_sql_scripts.sql; printf '\nGO\n' >> combined_sql_scripts.sql; done
+	cp combined_sql_scripts.sql $(RELEASEDIR)/Spring2.Core.Configuration.sql
