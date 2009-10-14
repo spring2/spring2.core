@@ -97,13 +97,6 @@ namespace Spring2.Core.Util {
 		throw new IndexOutOfRangeException();
 	    }
 	}
-
-	public Int32 GetPageNumberFromIndexOfItem(Int32 indexOfItem) {
-	    int pageNumber = (++indexOfItem / pageSize);
-	    if (indexOfItem % pageSize > 0) pageNumber++;
-	    CheckPageNumberInRange(pageNumber);
-	    return pageNumber;
-	}
     }
 
     public interface IPagedList {
@@ -122,8 +115,6 @@ namespace Spring2.Core.Util {
 	Int32 GetStartNumber(Int32 pageNumber);
 
 	Int32 GetEndNumber(Int32 pageNumber);
-
-	Int32 GetPageNumberFromIndexOfItem(Int32 indexOfItem);
     }
 }
 #endif
