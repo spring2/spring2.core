@@ -358,8 +358,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    if (!message.MailMessageType.IsEmpty) {
 		messageType = message.MailMessageType;
 	    }
-	    return Create(messageType, message.From, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[] {  }
-	    );
+	    return Create(messageType, message.From, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[] {  }, message.UniqueKey);
 	}
 
 	/// <summary>
@@ -370,8 +369,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    if (@from.IsEmpty) {
 		@from = GetFromAddress(messageType);
 	    }
-	    return Create(messageType, @from, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[] {  }
-	    );
+	    return Create(messageType, @from, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[] {  }, message.UniqueKey);
 	}
 
 	/// <summary>
@@ -379,8 +377,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	/// </summary>
 	public static MailMessage Create(StringType messageType, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
 	    StringType @from = GetFromAddress(messageType);
-	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[] {  }
-	    );
+	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[] {  }, StringType.DEFAULT);
 	}
 
 	/// <summary>
@@ -401,32 +398,28 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	/// Creates and persists a new MailMessage
 	/// </summary>
 	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
-	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, DateTimeType.DEFAULT, new String[] {  }
-	    );
+	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, DateTimeType.DEFAULT, new String[] {  }, StringType.DEFAULT );
 	}
 
 	/// <summary>
 	/// Creates and persists a new MailMessage
 	/// </summary>
 	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, String[] attachmentFilenames) {
-	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, DateTimeType.DEFAULT, attachmentFilenames
-	    );
+	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, DateTimeType.DEFAULT, attachmentFilenames, StringType.DEFAULT);
 	}
 
 	/// <summary>
 	/// Creates and persists a new MailMessage
 	/// </summary>
 	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
-	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[] {  }
-	    );
+	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[] { }, StringType.DEFAULT);
 	}
 
 	/// <summary>
 	/// Creates and persists a new MailMessage
 	/// This is THE method that really does the work
 	/// </summary>
-	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType cc, StringType bcc, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime, String[] attachmentFilenames
-	) {
+	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType cc, StringType bcc, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime, String[] attachmentFilenames, StringType uniqueKeyAsStringType) {
 	    MailMessageData mailMessageData = new MailMessageData();
 	    MailMessage mailMessage = new MailMessage();
 	    mailMessage.SetInitialState();
@@ -444,9 +437,11 @@ namespace Spring2.Core.Mail.BusinessLogic {
 
 	    mailMessage.OpenCount = 0;
 	    mailMessage.Bounces = 0;
-	    Guid g = Guid.NewGuid();
-	    mailMessage.UniqueKey = g.ToString();
-	    mailMessage.Checksum = g.ToString("N").Substring(0, 8);
+
+	    Guid g = (uniqueKeyAsStringType.IsValid) ? new Guid(uniqueKeyAsStringType) : GetMessageUniqueKey();
+	    StringType checksum = GetMessageChecksumFromUniqueKey(g);
+	    mailMessage.UniqueKey = uniqueKeyAsStringType.IsValid ? uniqueKeyAsStringType : new StringType(g.ToString());
+	    mailMessage.Checksum = checksum;
 
 	    mailMessage.Store();
 
@@ -456,6 +451,14 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    }
 
 	    return mailMessage;
+	}
+
+	public static Guid GetMessageUniqueKey() {
+	    return Guid.NewGuid();
+	}
+
+	public static StringType GetMessageChecksumFromUniqueKey(Guid uniqueKeyAsGuid) {
+	    return uniqueKeyAsGuid.ToString("N").Substring(0, 8);
 	}
 
 	private static StringType GetFromAddress(StringType messageType) {

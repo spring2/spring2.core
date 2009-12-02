@@ -405,6 +405,29 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual(0, message.Attachments.Count);
 	}
 
+	[Test()]
+	public void CreateMailMessage8() {
+	    //route = TestUtility.CreateMailMessageRoute(RoutingTypeEnum.FROM, FROM_ADDRESS);
+	    DateTimeType now = DateTimeType.Now;
+	    MailMessageData data = new MailMessageData();
+	    data.Bcc = BCC_ADDRESS;
+	    data.Body = BODY;
+	    data.BodyFormat = MailBodyFormatEnum.TEXT;
+	    data.Cc = CC_ADDRESS;
+	    data.From = FROM_ADDRESS;
+	    data.Priority = MailPriorityEnum.NORMAL;
+	    data.ScheduleTime = now;
+	    data.Subject = SUBJECT;
+	    data.To = TO_ADDRESS;
+	    Guid uniqueKey = MailMessage.GetMessageUniqueKey();
+	    data.UniqueKey = uniqueKey.ToString();
+	    data.MailMessageType = MailMessageTypeEnum.UNIT_TEST;
+	    message = MailMessage.Create(data);
+
+	    Assert.IsTrue(message.UniqueKey.ToString() == uniqueKey.ToString());
+	    Assert.IsTrue(message.Checksum == MailMessage.GetMessageChecksumFromUniqueKey(uniqueKey));
+	}
+
 	// [Test()]
 	// public void GetMailMessage() {
 	//
