@@ -2,7 +2,7 @@ using System;
 using Spring2.Core.Types;
 
 namespace Spring2.Core.Tax {
-    public class TaxAreaData {
+    public class TaxAreaData : Spring2.Core.DataObject.DataObject {
 	public static readonly TaxAreaData DEFAULT = new TaxAreaData();
 
 	private IdType taxAreaID = IdType.DEFAULT;

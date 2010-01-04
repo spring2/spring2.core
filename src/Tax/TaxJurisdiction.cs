@@ -3,7 +3,7 @@ using Spring2.Core.Types;
 
 namespace Spring2.Core.Tax {
     
-    public class TaxJurisdiction {
+    public class TaxJurisdiction : DataObject.DataObject {
 
 	public static readonly TaxJurisdiction DEFAULT = new TaxJurisdiction();
 

@@ -78,87 +78,14 @@ namespace Spring2.Core.Tax.CertiTax {
 	}
 
 	public TaxResult Commit(TaxOrder order, StringType currencyCode) {
-	    //		try { 
-	    //		    //Create Tax Transaction object from the web service.
-	    //		    TaxTransaction taxTrans = new Spring2.Core.net.esalestax.webservices1.TaxTransaction();
-	    //    			 
-	    //		    GetQuoteTaxTotal(ref taxTrans, order);
-	    //    	
-	    //		    CertiCalc ws = new CertiCalc();
-	    //		    ws.Commit(taxTrans.CertiTAXTransactionId, taxTrans.SerialNumber);
-	    //                    
-	    //		    CurrencyType currencyType = new CurrencyType();
-	    //		    currencyType = taxTrans.TotalTax;
-	    //
-	    //		    return currencyType;
-	    //		} catch (SoapException ex) {
-	    //		    MessageList errors = new MessageList();
-	    //		    errors.Add(new VertexWrapperSoapExceptionError(ex.Message.ToString()));
-	    //		    throw new MessageListException(errors);
-	    //		}
-
 	    throw new System.NotImplementedException();
 	}
 
 	public TaxResult GetQuoteTaxTotal(TaxOrder order, StringType currencyCode) {
-	    //	    //Create Tax Transaction object from the web service.
-	    //	    TaxTransaction taxTrans = new Spring2.Core.net.esalestax.webservices1.TaxTransaction();
-	    //	    taxTrans.CertiTAXTransactionId = ConfigurationProvider.Instance.Settings["CertiTax.TransactionId"];
-	    //	    return GetQuoteTaxTotal(ref taxTrans, order);
-
 	    throw new System.NotImplementedException();
 	}
 
 	public TaxResult GetQuoteTaxTotal(ref TaxTransaction taxTrans, TaxOrder order, StringType currencyCode) {
-	    //	    //Create Order object and populate it.
-	    //	    Order certiTaxOrder = new Spring2.Core.net.esalestax.webservices1.Order();
-	    //	    Address clsAddr = new Spring2.Core.net.esalestax.webservices1.Address();
-	    //            
-	    //	    //Populate main fields
-	    //	    certiTaxOrder.SerialNumber = ConfigurationProvider.Instance.Settings["CertiTaxSerialNum"];
-	    //	    certiTaxOrder.Nexus = ConfigurationProvider.Instance.Settings["CertiTaxNexus"];
-	    //	    certiTaxOrder.MerchantTransactionId = ConfigurationProvider.Instance.Settings["CertiTaxMerchantId"];
-	    //	    certiTaxOrder.CalculateTax = true;
-	    //	    certiTaxOrder.ConfirmAddress = false;
-	    //	    certiTaxOrder.CertiTAXTransactionId = taxTrans.CertiTAXTransactionId;
-	    //
-	    //	    //Populate address fields for the order
-	    //	    certiTaxOrder.Address = clsAddr;
-	    //	    certiTaxOrder.Address.Nation = ConfigurationProvider.Instance.Settings["CertiTaxNation"];
-	    //	    certiTaxOrder.Address.PostalCode = order.TaxAreaId.ToString();
-	    //
-	    //	    try { 
-	    //		//populate orderline items
-	    //		OrderLineItem orderLineItem = new OrderLineItem();
-	    //		OrderLineItem[] certiTaxOrderLineItemArray  = new OrderLineItem[order.Lines.Count];
-	    //                
-	    //		certiTaxOrder.LineItems = new OrderLineItem[order.Lines.Count];
-	    //
-	    //		for (IntegerType i = 0; i < certiTaxOrder.LineItems.Length; i ++) {
-	    //
-	    //		    //Determine if the order line item is a shipping cost related one. If it is pass build it as a "SHIPPING" SKU
-	    //		    if (order.Lines[i.ToInt32()].ItemNumber.ToString() == "SHIPPING")
-	    //			certiTaxOrderLineItemArray =  BuildOrderLineItems(i, order.Lines[i.ToInt32()].Price, order.Lines[i.ToInt32()].Quantity, order.Lines[i.ToInt32()].ItemNumber, 0, "SHIPPING");		    
-	    //		    else 
-	    //			certiTaxOrderLineItemArray =  BuildOrderLineItems(i, order.Lines[i.ToInt32()].Price, order.Lines[i.ToInt32()].Quantity, order.Lines[i.ToInt32()].ItemNumber, 0, "");
-	    //		    certiTaxOrder.LineItems[i] = new OrderLineItem();
-	    //		    certiTaxOrder.LineItems[i] = certiTaxOrderLineItemArray[i];
-	    //
-	    //		    certiTaxOrder.Total =  certiTaxOrder.Total + certiTaxOrderLineItemArray[i].ExtendedPrice;
-	    //		}
-	    //		CertiCalc ws = new CertiCalc();
-	    //		taxTrans = ws.Calculate(certiTaxOrder);
-	    //
-	    //		CurrencyType currencyType = taxTrans.TotalTax;
-	    //
-	    //		return currencyType;
-	    //	    } 
-	    //	    catch (SoapException ex) {
-	    //		MessageList errors = new MessageList();
-	    //		errors.Add(new VertexWrapperSoapExceptionError(ex.Message.ToString()));
-	    //		throw new MessageListException(errors);
-	    //	    }
-
 	    throw new System.NotImplementedException();
 	}
 
@@ -194,55 +121,6 @@ namespace Spring2.Core.Tax.CertiTax {
 	    }
 
 	    return area;
-
-	    //	    //Create Tax Transaction object from the web service.
-	    //	    TaxTransaction taxTrans = new Spring2.Core.net.esalestax.webservices1.TaxTransaction();
-	    //
-	    //	    //Create Order object and populate it.
-	    //	    Order certiTaxOrder = new Spring2.Core.net.esalestax.webservices1.Order();
-	    //	    Address clsAddr = new Spring2.Core.net.esalestax.webservices1.Address();
-	    //            
-	    //	    //Populate main fields
-	    //	    certiTaxOrder.SerialNumber = ConfigurationProvider.Instance.Settings["CertiTaxSerialNum"];
-	    //	    certiTaxOrder.Nexus = ConfigurationProvider.Instance.Settings["CertiTaxNexus"];
-	    //	    certiTaxOrder.MerchantTransactionId = ConfigurationProvider.Instance.Settings["CertiTaxMerchantId"];
-	    //	    certiTaxOrder.CalculateTax = false;
-	    //	    certiTaxOrder.ConfirmAddress = true;
-	    //	    certiTaxOrder.CertiTAXTransactionId = ConfigurationProvider.Instance.Settings["CertiTax.TransactionId"];
-	    //
-	    //	    //Populate address fields for the order
-	    //	    certiTaxOrder.Address = clsAddr;
-	    //	    certiTaxOrder.Address.Street1 = street;
-	    //	    certiTaxOrder.Address.City = city;
-	    //	    certiTaxOrder.Address.State = region;
-	    //	    certiTaxOrder.Address.PostalCode = postalCode;
-	    //	    certiTaxOrder.Address.Nation = country;
-	    //	    certiTaxOrder.Address.Name = "";
-	    //
-	    //	    try { 
-	    //		CertiCalc ws = new CertiCalc();
-	    //		taxTrans = ws.Calculate(certiTaxOrder);
-	    //
-	    //		TaxAreaData taxAreaData = new TaxAreaData();
-	    //			
-	    //		taxAreaData.CityTaxRate = (DecimalType) taxTrans.CityTax;
-	    //		taxAreaData.CountyTaxRate = (DecimalType) taxTrans.CountyTax;
-	    //		taxAreaData.RegionTaxRate = (DecimalType) taxTrans.StateTax;
-	    //		taxAreaData.TotalTaxRate = (DecimalType) taxTrans.TotalTax;
-	    //		taxAreaData.Street = taxTrans.CorrectedAddress.Street1;
-	    //		taxAreaData.City = taxTrans.CorrectedAddress.City;
-	    //		taxAreaData.Region = taxTrans.CorrectedAddress.State;
-	    //		taxAreaData.PostalCode = taxTrans.CorrectedAddress.PostalCode;
-	    //
-	    //		if (taxTrans.CorrectedAddress.PostalCode.Length > 0)
-	    //		    taxAreaData.TaxAreaID = IdType.Parse(taxTrans.CorrectedAddress.PostalCode.Substring(0, 5) + taxTrans.CorrectedAddress.PostalCode.Substring(6, 4));               
-	    //
-	    //		return taxAreaData;
-	    //	    } catch (SoapException ex) {
-	    //		MessageList errors = new MessageList();
-	    //		errors.Add(new VertexWrapperSoapExceptionError(ex.Message.ToString()));
-	    //		throw new MessageListException(errors);
-	    //	    }
 	}
 
 	public TaxAreaList LookupTaxArea(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, BooleanType booleanType) {
@@ -343,12 +221,14 @@ namespace Spring2.Core.Tax.CertiTax {
 	    result.City = taxTrans.CorrectedAddress.City;
 	    result.Region = taxTrans.CorrectedAddress.State;
 	    result.PostalCode = taxTrans.CorrectedAddress.PostalCode;
-	    if (taxTrans.CorrectedAddress.PostalCode.Length > 0) {
-		if (taxTrans.CorrectedAddress.PostalCode.Length > 5) {
-		    result.TaxAreaID = IdType.Parse(taxTrans.CorrectedAddress.PostalCode.Substring(0, 5) + taxTrans.CorrectedAddress.PostalCode.Substring(6, 4));
-		} else {
-		    result.TaxAreaID = IdType.Parse(taxTrans.CorrectedAddress.PostalCode.Substring(0, 5));
-		}
+
+	    String pc = taxTrans.CorrectedAddress.PostalCode.Replace("-", "").Replace(" ", "");
+	    Int32 pci;
+	    if (Int32.TryParse(pc, out pci)) {
+		result.TaxAreaID = new IdType(pci);
+	    } else {
+		//  TODO: hack to put something in tax area
+		result.TaxAreaID = ConvertToId(taxTrans.CorrectedAddress.PostalCode);
 	    }
 
 	    AddTaxJurisidctionsToResult(taxTrans, certiTaxOrder, result);
@@ -385,6 +265,7 @@ namespace Spring2.Core.Tax.CertiTax {
 		Debug.WriteLine(taxTrans.CertiTAXTransactionId);
 		result.TotalTax = taxTrans.TotalTax;
 
+	    	AddTaxJurisidctionsToResult(taxTrans, certiTaxOrder, result);
 		UpdateTaxJurisdictionAmounts(taxTrans, result);
 
 		return result;
@@ -396,23 +277,39 @@ namespace Spring2.Core.Tax.CertiTax {
 	    }
 	}
 
+	private IdType ConvertToId(String s) {
+	    String code = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	    Int32 result = 0;
+	    Int32 power = 1;
+	    for (Int32 i = s.Length; i > 0; i--) {
+		Char c = s[i-1];
+		if (c != ' ') {
+		    Int32 v = code.IndexOf(c) * power;
+		    result += v;
+		    power *= 10;
+		}
+	    }
+
+	    return new IdType(result);
+	}
+
 	private void AddTaxJurisidctionsToResult(TaxTransaction taxTrans, Order certiTaxOrder, TaxResult result) {
-	    if (taxTrans.CityTax > 0) {
+	    if (taxTrans.CityTax > 0 && result.TaxJurisdictions[TaxJurisdictionTypeEnum.CITY] == null) {
 		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.CITY, taxTrans.CityTaxAuthority, (taxTrans.CityTax / certiTaxOrder.Total) * 100, 0);
 	    }
-	    if (taxTrans.CountyTax > 0) {
+	    if (taxTrans.CountyTax > 0 && result.TaxJurisdictions[TaxJurisdictionTypeEnum.COUNTY] == null) {
 		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.COUNTY, taxTrans.CountyTaxAuthority, (taxTrans.CountyTax / certiTaxOrder.Total) * 100, 0);
 	    }
-	    if (taxTrans.NationalTax > 0) {
+	    if (taxTrans.NationalTax > 0 && result.TaxJurisdictions[TaxJurisdictionTypeEnum.COUNTRY] == null) {
 		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.COUNTRY, taxTrans.NationalTaxAuthority, (taxTrans.NationalTax / certiTaxOrder.Total) * 100, 0);
 	    }
-	    if (taxTrans.StateTax > 0) {
+	    if (taxTrans.StateTax > 0 && result.TaxJurisdictions[TaxJurisdictionTypeEnum.STATE] == null) {
 		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.STATE, taxTrans.StateTaxAuthority, (taxTrans.StateTax / certiTaxOrder.Total) * 100, 0);
 	    }
-	    if (taxTrans.OtherTax > 0) {
+	    if (taxTrans.OtherTax > 0 && result.TaxJurisdictions[TaxJurisdictionTypeEnum.OTHER] == null) {
 		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.OTHER, taxTrans.OtherTaxAuthority, (taxTrans.OtherTax / certiTaxOrder.Total) * 100, 0);
 	    }
-	    if (taxTrans.LocalTax > 0) {
+	    if (taxTrans.LocalTax > 0 && result.TaxJurisdictions[TaxJurisdictionTypeEnum.LOCAL] == null) {
 		result.AddTaxJurisdiction(TaxJurisdictionTypeEnum.LOCAL, taxTrans.LocalTaxAuthority, (taxTrans.LocalTax / certiTaxOrder.Total) * 100, 0);
 	    }
 	}
