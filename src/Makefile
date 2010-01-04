@@ -156,6 +156,14 @@ cleanlogs:
 	rm -rf *.log
 	rm -rf nvelocity.log.*
 
+cleandtgbackups:
+	find -iname '*cs~' -exec rm {} \;
+	find -iname '*sql~' -exec rm {} \;
+	find -iname '*orig' -exec rm {} \;
+	find -iname '*mk~' -exec rm {} \;
+	
+reallyclean: clean cleanlogs cleandtgbackups
+	
 package_cl:
 	#-cvs log -r${BRANCH_TAG} | perl ../bin/cvs2cl.pl --stdin -f ../release/ChangeLog-$(shell $(GETVERSION)).txt
 	#svn log --xml --verbose | xsltproc ../bin/svn2cl/svn2cl.xsl - > ChangeLog
