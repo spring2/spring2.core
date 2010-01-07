@@ -84,6 +84,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.SeleniumLoadTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Currency", "Spring2.Core.Currency.csproj", "{1CA600DC-4B3A-4B1A-A3E8-E505594B853D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Currency.CurrencyExe", "Spring2.Core.Currency.CurrencyExe.csproj", "{95BA6975-BE85-4439-ACF8-2FDCC5238AD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -409,6 +411,14 @@ Global
 		{1CA600DC-4B3A-4B1A-A3E8-E505594B853D}.NET_2_0|Any CPU.Build.0 = NET_2_0|Any CPU
 		{1CA600DC-4B3A-4B1A-A3E8-E505594B853D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CA600DC-4B3A-4B1A-A3E8-E505594B853D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95BA6975-BE85-4439-ACF8-2FDCC5238AD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95BA6975-BE85-4439-ACF8-2FDCC5238AD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95BA6975-BE85-4439-ACF8-2FDCC5238AD8}.NET_1_1|Any CPU.ActiveCfg = NET_1_1|Any CPU
+		{95BA6975-BE85-4439-ACF8-2FDCC5238AD8}.NET_1_1|Any CPU.Build.0 = NET_1_1|Any CPU
+		{95BA6975-BE85-4439-ACF8-2FDCC5238AD8}.NET_2_0|Any CPU.ActiveCfg = NET_2_0|Any CPU
+		{95BA6975-BE85-4439-ACF8-2FDCC5238AD8}.NET_2_0|Any CPU.Build.0 = NET_2_0|Any CPU
+		{95BA6975-BE85-4439-ACF8-2FDCC5238AD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95BA6975-BE85-4439-ACF8-2FDCC5238AD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
