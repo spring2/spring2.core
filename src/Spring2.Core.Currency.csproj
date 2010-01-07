@@ -67,7 +67,7 @@
     <Compile Include="Currency\DataObject\CurrencyExchangeData.cs" />
     <Compile Include="Currency\DataObject\CurrencyExchangeList.cs" />
     <Compile Include="Currency\DataObject\ICurrencyExchange.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
+    <Compile Include="Currency\Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -79,7 +79,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Settings.settings">
+    <None Include="Currency\Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
