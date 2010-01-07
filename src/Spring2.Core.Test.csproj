@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A67DCBD3-90C1-49EF-BBD4-AEE42E3670B3}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -156,6 +156,10 @@
       <Project>{80B94045-4DE6-4BB0-BE22-C5CC0E772695}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
+    <ProjectReference Include="Spring2.Core.Currency.csproj">
+      <Project>{1CA600DC-4B3A-4B1A-A3E8-E505594B853D}</Project>
+      <Name>Spring2.Core.Currency</Name>
+    </ProjectReference>
     <ProjectReference Include="Spring2.Core.Geocode.csproj">
       <Name>Spring2.Core.Geocode</Name>
       <Project>{71F4E2DB-E4C3-4C06-AD03-E9F3463D0EC8}</Project>
@@ -223,6 +227,7 @@
     <Compile Include="Test\CRC32.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Test\CurrencyExchangeTest.cs" />
     <Compile Include="Test\CurrencyTypeTest.cs">
       <SubType>Code</SubType>
     </Compile>
