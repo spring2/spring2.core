@@ -1,0 +1,18 @@
+<!-- Entity definitions -->
+<entities>
+    <entity name="CurrencyExchange" sqlentity="CurrencyExchange">
+	<properties>
+	    <property name="CurrencyExchangeId" column="*" type="IdType" />
+	    <property name="CurrencyCode" column="*" type="StringType" />
+	    <property name="EffectiveDate" column="*" type="DateTimeType" />
+	    <property name="Rate" column="*" type="DecimalType" />
+	</properties>
+	<finders>
+	    <finder name="FindEffectiveRateByCode" unique="True" expression="CurrencyCode = {0} AND EffectiveDate &lt;= getdate()" sort="EffectiveDate DESC">
+		<properties>
+		    <property name="CurrencyCode" />
+		</properties>
+	    </finder>
+	</finders>
+    </entity>
+</entities>

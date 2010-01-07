@@ -1,0 +1,24 @@
+<!--
+    
+      Database/SqlEntity definitions
+
+-->
+<databases generateinsertstoredprocscript="True" generateupdatestoredprocscript="True" generatedeletestoredprocscript="True" generateselectstoredprocscript="True" generateviewscript="True" generatetablescript="True" useview="True">
+    <database name="Database" key="ConnectionString">
+	<sqlentities>
+	    <sqlentity name="CurrencyExchange" view="vwCurrencyExchange">
+		<columns>
+		    <column name="CurrencyExchangeId" sqltype="Int" identity="True" required="True" />
+		    <column name="CurrencyCode" sqltype="VarChar" length="3" required="True" />
+		    <column name="EffectiveDate" sqltype="DateTime" length="40" required="True" default="getdate()" />
+		    <column name="Rate" sqltype="Decimal" precision="9" scale="5" required="True" />
+		</columns>
+		<constraints>
+		    <constraint name="PK_Currency" type="PRIMARY KEY" clustered="true">
+			<column name="CurrencyExchangeId" />
+		    </constraint>
+		</constraints>
+	    </sqlentity>
+	</sqlentities>
+    </database>
+</databases>

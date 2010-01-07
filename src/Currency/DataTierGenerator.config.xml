@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<?dtg parser="Spring2.DataTierGenerator.Parser.XmlParser,Spring2.DataTierGenerator.Alpha" ?>
+<DataTierGenerator xmlns:xinc="http://www.w3.org/1999/XML/xinclude">
+    <generator class="Spring2.DataTierGenerator.Generator.GeneratorTaskManager,Spring2.DataTierGenerator">
+	<writer name="region" class="Spring2.DataTierGenerator.Generator.Writer.RegionMergeWriter,Spring2.DataTierGenerator">
+	    <option name="BeginMarker" value="#region" />
+	    <option name="EndMarker" value="#endregion" />
+	</writer>
+	<writer name="c#" class="Spring2.DataTierGenerator.Generator.Writer.CSharpCodeWriter,Spring2.DataTierGenerator">
+	    <option name="bracing style" value="block" />
+	</writer>
+	<styler name="c#" class="Spring2.DataTierGenerator.Generator.Styler.CSharpStyler,Spring2.DataTierGenerator">
+	    <option name="bracing style" value="block" />
+	</styler>
+	<tasks>
+	    <task name="business entities" element="entity" template="Template\PassThroughInterface\BusinessEntity.vm" directory="BusinessLogic" filenameformat="{element.Name}.cs" writer="c#" >
+	        <type name="{element.Name}" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}.GetInstance({2})" newinstanceformat="{element.Name}.NewInstance()" nullinstanceformat="null" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" />
+	    </task>
+
+	    <task name="interface" element="entity" template="Template\PassThroughInterface\interface.vm" directory="DataObject" filenameformat="I{element.Name}.cs" writer="region"  >
+		<type name="I{element.Name}" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}.GetInstance({2})" newinstanceformat="new {element.Name}()" nullinstanceformat="null" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" concretetype="{element.Name}" />
+	    </task>
+	    <task name="data object" element="entity" template="Template\PassThroughInterface\dataobject.vm" directory="DataObject" filenameformat="{element.Name}Data.cs" writer="region"  >
+		<type name="{element.Name}Data" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}Data.GetInstance({2})" newinstanceformat="{element.Name}Data.DEFAULT" nullinstanceformat="null" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" concretetype="{element.Name}Data" />
+	    </task>
+
+	    <task name="dataobject lists" element="entity" template="Template\PassThroughInterface\dataobject-collection.vm" directory="DataObject" filenameformat="{element.Name}List.cs" writer="region" >
+		<type name="{element.Name}List" newinstanceformat="{element.Name}List.DEFAULT" nullinstanceformat="{element.Name}List.UNSET" />
+	    </task>
+
+	    <task name="dao" element="entity" template="Template\PassThroughInterface\DAO-SqlFilter.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region" >
+	    </task>
+	    <task name="dao interface" element="entity" template="Template\PassThroughInterface\DAO-Interface.vm" directory="DAO"
+	    filenameformat="I{element.Name}DAO.cs" writer="region" styler="c#">
+	    </task>
+
+	    <task name="enum" element="enum" template="Template\enum.vm" directory="Types" filenameformat="{element.Name}.cs" writer="region" >
+		<type name="{element.Name}" concretetype="{element.Name}" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}.GetInstance({2})" newinstanceformat="{element.Name}.DEFAULT" nullinstanceformat="{element.Name}.UNSET" />
+	    </task>
+
+	    <task name="enum lists" element="enum" template="Template\enum-collection.vm" directory="Types" filenameformat="{element.Name}List.cs" writer="region" >
+		<type name="{element.Name}List" newinstanceformat="{element.Name}List.DEFAULT" nullinstanceformat="{element.Name}List.UNSET" />
+	    </task>
+
+	    <task name="collection" element="collection" template="Template\collection.vm" directory="Types" filenameformat="{element.Name}.cs" writer="region" >
+		<type name="{element.Name}" newinstanceformat="{element.Name}.DEFAULT" nullinstanceformat="{element.Name}.UNSET" />
+	    </task>
+
+	    <task name="table" element="sqlentity" template="Template\sql_table.vm" directory="sql\table" filenameformat="{element.Name}.table.sql" writer="region" />
+	    <task name="view" element="sqlentity" template="Template\sql_view.vm" directory="sql\view" filenameformat="vw{element.Name}.view.sql" writer="region" />
+	    <task name="delete procs" element="sqlentity" template="Template\sql_delete.vm" directory="sql\proc" filenameformat="sp{element.Name}_Delete.proc.sql" writer="region" />
+	    <task name="insert procs" element="sqlentity" template="Template\sql_insert.vm" directory="sql\proc" filenameformat="sp{element.Name}_Insert.proc.sql" writer="region" />
+	    <task name="update procs" element="sqlentity" template="Template\sql_update.vm" directory="sql\proc" filenameformat="sp{element.Name}_Update.proc.sql" writer="region" />
+	    <task name="sql dependencies" element="sqlentities" template="Template\sql-dependencies.vm" directory="sql" filenameformat="CurrencyExchange.mk" writer="region" />
+	</tasks>
+	<tools>
+	    <tool name="sql" class="Spring2.DataTierGenerator.Tool.MSSqlServerTool,Spring2.DataTierGenerator.Tool" />
+	</tools>
+    </generator>
+    <!--
+	Configuration settings goverening basic generation
+    -->
+    <config>
+	<setting name="RootDirectory" value="." />
+	<setting name="RootNameSpace" value="Spring2.Core.Currency" />
+	<setting name="DAOBaseClass" value="Spring2.Core.DAO.SqlEntityDAO" />
+    </config>
+    <entities-ref xinc:href="dtg-entities.xml" />
+    <collections-ref xinc:href="dtg-collections.xml" />
+    <types-ref xinc:href="..\types.inc.xml" />
+    <sqltypes-ref xinc:href="..\sqltypes.xml" />
+    <databases-ref xinc:href="dtg-databases.xml" />
+</DataTierGenerator>
