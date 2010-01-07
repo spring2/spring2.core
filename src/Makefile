@@ -30,6 +30,7 @@ clean:
 gen:
 	cd Mail; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
 	cd Geocode; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
+	cd Currency; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
 	cd Navigation; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
 	cd ResourceManager; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
 
@@ -37,6 +38,7 @@ gen:
 build_db:
 	cd Configuration; make build_db;
 	cd Geocode; make build_db
+	cd Currency; make build_db
 	cd Mail; make build_db
 	cd Navigation; make build_db
 	cd PerformanceMonitor; make build_db
@@ -47,6 +49,7 @@ build_db:
 clean_db: 	
 	cd Configuration; make clean_db
 	cd Geocode; make clean_db
+	cd Currency; make clean_db
 	cd Mail; make clean_db
 	cd Navigation; make clean_db
 	cd PerformanceMonitor; make clean_db
@@ -121,6 +124,8 @@ package_sql:
 	mv $(RELEASEDIR)/Spring2.Core.Configuration.sql.zip $(RELEASEDIR)/Spring2.Core.Configuration.sql-$(shell $(GETVERSION)).zip
 	cd Geocode; make package_sql
 	mv $(RELEASEDIR)/Spring2.Core.Geocode.sql.zip $(RELEASEDIR)/Spring2.Core.Geocode.sql-$(shell $(GETVERSION)).zip
+	cd Currency; make package_sql
+	mv $(RELEASEDIR)/Spring2.Core.Currency.sql.zip $(RELEASEDIR)/Spring2.Core.Currency.sql-$(shell $(GETVERSION)).zip
 	cd Mail; make package_sql
 	mv $(RELEASEDIR)/Spring2.Core.Mail.sql.zip $(RELEASEDIR)/Spring2.Core.Mail.sql-$(shell $(GETVERSION)).zip
 	cd Navigation; make package_sql
