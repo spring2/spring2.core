@@ -4,251 +4,251 @@
 	<value name="Invalid" code="Invalid" />
 </enum>
 <enum name="CountryCodeEnum">
-	<value name="AFGHANISTAN" code="AF" />
-	<value name="ALAND ISLANDS" code="AX" />
-	<value name="ALBANIA" code="AL" />
-	<value name="ALGERIA" code="DZ" />
-	<value name="AMERICAN SAMOA" code="AS" />
-	<value name="ANDORRA" code="AD" />
-	<value name="ANGOLA" code="AO" />
-	<value name="ANGUILLA" code="AI" />
-	<value name="ANTARCTICA" code="AQ" />
-	<value name="ANTIGUA AND BARBUDA" code="AG" />
-	<value name="ARGENTINA" code="AR" />
-	<value name="ARMENIA" code="AM" />
-	<value name="ARUBA" code="AW" />
-	<value name="AUSTRALIA" code="AU" />
-	<value name="AUSTRIA" code="AT" />
-	<value name="AZERBAIJAN" code="AZ" />
-	<value name="BAHAMAS" code="BS" />
-	<value name="BAHRAIN" code="BH" />
-	<value name="BANGLADESH" code="BD" />
-	<value name="BARBADOS" code="BB" />
-	<value name="BELARUS" code="BY" />
-	<value name="BELGIUM" code="BE" />
-	<value name="BELIZE" code="BZ" />
-	<value name="BENIN" code="BJ" />
-	<value name="BERMUDA" code="BM" />
-	<value name="BHUTAN" code="BT" />
-	<value name="BOLIVIA, PLURINATIONAL STATE OF" code="BO" />
-	<value name="BOSNIA AND HERZEGOVINA" code="BA" />
-	<value name="BOTSWANA" code="BW" />
-	<value name="BOUVET ISLAND" code="BV" />
-	<value name="BRAZIL" code="BR" />
-	<value name="BRITISH INDIAN OCEAN TERRITORY" code="IO" />
-	<value name="BRUNEI DARUSSALAM" code="BN" />
-	<value name="BULGARIA" code="BG" />
-	<value name="BURKINA FASO" code="BF" />
-	<value name="BURUNDI" code="BI" />
-	<value name="CAMBODIA" code="KH" />
-	<value name="CAMEROON" code="CM" />
-	<value name="CANADA" code="CA" />
-	<value name="CAPE VERDE" code="CV" />
-	<value name="CAYMAN ISLANDS" code="KY" />
-	<value name="CENTRAL AFRICAN REPUBLIC" code="CF" />
-	<value name="CHAD" code="TD" />
-	<value name="CHILE" code="CL" />
-	<value name="CHINA" code="CN" />
-	<value name="CHRISTMAS ISLAND" code="CX" />
-	<value name="COCOS (KEELING) ISLANDS" code="CC" />
-	<value name="COLOMBIA" code="CO" />
-	<value name="COMOROS" code="KM" />
-	<value name="CONGO" code="CG" />
-	<value name="CONGO, THE DEMOCRATIC REPUBLIC OF THE" code="CD" />
-	<value name="COOK ISLANDS" code="CK" />
-	<value name="COSTA RICA" code="CR" />
-	<value name="COTE D'IVOIRE" code="CI" />
-	<value name="CROATIA" code="HR" />
-	<value name="CUBA" code="CU" />
-	<value name="CYPRUS" code="CY" />
-	<value name="CZECH REPUBLIC" code="CZ" />
-	<value name="DENMARK" code="DK" />
-	<value name="DJIBOUTI" code="DJ" />
-	<value name="DOMINICA" code="DM" />
-	<value name="DOMINICAN REPUBLIC" code="DO" />
-	<value name="ECUADOR" code="EC" />
-	<value name="EGYPT" code="EG" />
-	<value name="EL SALVADOR" code="SV" />
-	<value name="EQUATORIAL GUINEA" code="GQ" />
-	<value name="ERITREA" code="ER" />
-	<value name="ESTONIA" code="EE" />
-	<value name="ETHIOPIA" code="ET" />
-	<value name="FALKLAND ISLANDS (MALVINAS)" code="FK" />
-	<value name="FAROE ISLANDS" code="FO" />
-	<value name="FIJI" code="FJ" />
-	<value name="FINLAND" code="FI" />
-	<value name="FRANCE" code="FR" />
-	<value name="FRENCH GUIANA" code="GF" />
-	<value name="FRENCH POLYNESIA" code="PF" />
-	<value name="FRENCH SOUTHERN TERRITORIES" code="TF" />
-	<value name="GABON" code="GA" />
-	<value name="GAMBIA" code="GM" />
-	<value name="GEORGIA" code="GE" />
-	<value name="GERMANY" code="DE" />
-	<value name="GHANA" code="GH" />
-	<value name="GIBRALTAR" code="GI" />
-	<value name="GREECE" code="GR" />
-	<value name="GREENLAND" code="GL" />
-	<value name="GRENADA" code="GD" />
-	<value name="GUADELOUPE" code="GP" />
-	<value name="GUAM" code="GU" />
-	<value name="GUATEMALA" code="GT" />
-	<value name="GUERNSEY" code="GG" />
-	<value name="GUINEA" code="GN" />
-	<value name="GUINEA-BISSAU" code="GW" />
-	<value name="GUYANA" code="GY" />
-	<value name="HAITI" code="HT" />
-	<value name="HEARD ISLAND AND MCDONALD ISLANDS" code="HM" />
-	<value name="HOLY SEE (VATICAN CITY STATE)" code="VA" />
-	<value name="HONDURAS" code="HN" />
-	<value name="HONG KONG" code="HK" />
-	<value name="HUNGARY" code="HU" />
-	<value name="ICELAND" code="IS" />
-	<value name="INDIA" code="IN" />
-	<value name="INDONESIA" code="ID" />
-	<value name="IRAN, ISLAMIC REPUBLIC OF" code="IR" />
-	<value name="IRAQ" code="IQ" />
-	<value name="IRELAND" code="IE" />
-	<value name="ISLE OF MAN" code="IM" />
-	<value name="ISRAEL" code="IL" />
-	<value name="ITALY" code="IT" />
-	<value name="JAMAICA" code="JM" />
-	<value name="JAPAN" code="JP" />
-	<value name="JERSEY" code="JE" />
-	<value name="JORDAN" code="JO" />
-	<value name="KAZAKHSTAN" code="KZ" />
-	<value name="KENYA" code="KE" />
-	<value name="KIRIBATI" code="KI" />
-	<value name="KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF" code="KP" />
-	<value name="KOREA, REPUBLIC OF" code="KR" />
-	<value name="KUWAIT" code="KW" />
-	<value name="KYRGYZSTAN" code="KG" />
-	<value name="LAO PEOPLE'S DEMOCRATIC REPUBLIC" code="LA" />
-	<value name="LATVIA" code="LV" />
-	<value name="LEBANON" code="LB" />
-	<value name="LESOTHO" code="LS" />
-	<value name="LIBERIA" code="LR" />
-	<value name="LIBYAN ARAB JAMAHIRIYA" code="LY" />
-	<value name="LIECHTENSTEIN" code="LI" />
-	<value name="LITHUANIA" code="LT" />
-	<value name="LUXEMBOURG" code="LU" />
-	<value name="MACAO" code="MO" />
-	<value name="MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF" code="MK" />
-	<value name="MADAGASCAR" code="MG" />
-	<value name="MALAWI" code="MW" />
-	<value name="MALAYSIA" code="MY" />
-	<value name="MALDIVES" code="MV" />
-	<value name="MALI" code="ML" />
-	<value name="MALTA" code="MT" />
-	<value name="MARSHALL ISLANDS" code="MH" />
-	<value name="MARTINIQUE" code="MQ" />
-	<value name="MAURITANIA" code="MR" />
-	<value name="MAURITIUS" code="MU" />
-	<value name="MAYOTTE" code="YT" />
-	<value name="MEXICO" code="MX" />
-	<value name="MICRONESIA, FEDERATED STATES OF" code="FM" />
-	<value name="MOLDOVA, REPUBLIC OF" code="MD" />
-	<value name="MONACO" code="MC" />
-	<value name="MONGOLIA" code="MN" />
-	<value name="MONTENEGRO" code="ME" />
-	<value name="MONTSERRAT" code="MS" />
-	<value name="MOROCCO" code="MA" />
-	<value name="MOZAMBIQUE" code="MZ" />
-	<value name="MYANMAR" code="MM" />
-	<value name="NAMIBIA" code="NA" />
-	<value name="NAURU" code="NR" />
-	<value name="NEPAL" code="NP" />
-	<value name="NETHERLANDS" code="NL" />
-	<value name="NETHERLANDS ANTILLES" code="AN" />
-	<value name="NEW CALEDONIA" code="NC" />
-	<value name="NEW ZEALAND" code="NZ" />
-	<value name="NICARAGUA" code="NI" />
-	<value name="NIGER" code="NE" />
-	<value name="NIGERIA" code="NG" />
-	<value name="NIUE" code="NU" />
-	<value name="NORFOLK ISLAND" code="NF" />
-	<value name="NORTHERN MARIANA ISLANDS" code="MP" />
-	<value name="NORWAY" code="NO" />
-	<value name="OMAN" code="OM" />
-	<value name="PAKISTAN" code="PK" />
-	<value name="PALAU" code="PW" />
-	<value name="PALESTINIAN TERRITORY, OCCUPIED" code="PS" />
-	<value name="PANAMA" code="PA" />
-	<value name="PAPUA NEW GUINEA" code="PG" />
-	<value name="PARAGUAY" code="PY" />
-	<value name="PERU" code="PE" />
-	<value name="PHILIPPINES" code="PH" />
-	<value name="PITCAIRN" code="PN" />
-	<value name="POLAND" code="PL" />
-	<value name="PORTUGAL" code="PT" />
-	<value name="PUERTO RICO" code="PR" />
-	<value name="QATAR" code="QA" />
-	<value name="REUNION" code="RE" />
-	<value name="ROMANIA" code="RO" />
-	<value name="RUSSIAN FEDERATION" code="RU" />
-	<value name="RWANDA" code="RW" />
-	<value name="SAINT BARTHELEMY" code="BL" />
-	<value name="SAINT HELENA" code="SH" />
-	<value name="SAINT KITTS AND NEVIS" code="KN" />
-	<value name="SAINT LUCIA" code="LC" />
-	<value name="SAINT MARTIN" code="MF" />
-	<value name="SAINT PIERRE AND MIQUELON" code="PM" />
-	<value name="SAINT VINCENT AND THE GRENADINES" code="VC" />
-	<value name="SAMOA" code="WS" />
-	<value name="SAN MARINO" code="SM" />
-	<value name="SAO TOME AND PRINCIPE" code="ST" />
-	<value name="SAUDI ARABIA" code="SA" />
-	<value name="SENEGAL" code="SN" />
-	<value name="SERBIA" code="RS" />
-	<value name="SEYCHELLES" code="SC" />
-	<value name="SIERRA LEONE" code="SL" />
-	<value name="SINGAPORE" code="SG" />
-	<value name="SLOVAKIA" code="SK" />
-	<value name="SLOVENIA" code="SI" />
-	<value name="SOLOMON ISLANDS" code="SB" />
-	<value name="SOMALIA" code="SO" />
-	<value name="SOUTH AFRICA" code="ZA" />
-	<value name="SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS" code="GS" />
-	<value name="SPAIN" code="ES" />
-	<value name="SRI LANKA" code="LK" />
-	<value name="SUDAN" code="SD" />
-	<value name="SURINAME" code="SR" />
-	<value name="SVALBARD AND JAN MAYEN" code="SJ" />
-	<value name="SWAZILAND" code="SZ" />
-	<value name="SWEDEN" code="SE" />
-	<value name="SWITZERLAND" code="CH" />
-	<value name="SYRIAN ARAB REPUBLIC" code="SY" />
-	<value name="TAIWAN, PROVINCE OF CHINA" code="TW" />
-	<value name="TAJIKISTAN" code="TJ" />
-	<value name="TANZANIA, UNITED REPUBLIC OF" code="TZ" />
-	<value name="THAILAND" code="TH" />
-	<value name="TIMOR-LESTE" code="TL" />
-	<value name="TOGO" code="TG" />
-	<value name="TOKELAU" code="TK" />
-	<value name="TONGA" code="TO" />
-	<value name="TRINIDAD AND TOBAGO" code="TT" />
-	<value name="TUNISIA" code="TN" />
-	<value name="TURKEY" code="TR" />
-	<value name="TURKMENISTAN" code="TM" />
-	<value name="TURKS AND CAICOS ISLANDS" code="TC" />
-	<value name="TUVALU" code="TV" />
-	<value name="UGANDA" code="UG" />
-	<value name="UKRAINE" code="UA" />
-	<value name="UNITED ARAB EMIRATES" code="AE" />
-	<value name="UNITED KINGDOM" code="GB" />
-	<value name="UNITED STATES" code="US" />
-	<value name="UNITED STATES MINOR OUTLYING ISLANDS" code="UM" />
-	<value name="URUGUAY" code="UY" />
-	<value name="UZBEKISTAN" code="UZ" />
-	<value name="VANUATU" code="VU" />
-	<value name="VENEZUELA, BOLIVARIAN REPUBLIC OF" code="VE" />
-	<value name="VIET NAM" code="VN" />
-	<value name="VIRGIN ISLANDS, BRITISH" code="VG" />
-	<value name="VIRGIN ISLANDS, U.S." code="VI" />
-	<value name="WALLIS AND FUTUNA" code="WF" />
-	<value name="WESTERN SAHARA" code="EH" />
-	<value name="YEMEN" code="YE" />
-	<value name="ZAMBIA" code="ZM" />
-	<value name="ZIMBABWE" code="ZW" />
+	<value code="ABW" name="Aruba" />
+	<value code="AFG" name="Afghanistan" />
+	<value code="AGO" name="Angola" />
+	<value code="AIA" name="Anguilla" />
+	<value code="ALA" name="Aland Islands" />
+	<value code="ALB" name="Albania" />
+	<value code="AND" name="Andorra" />
+	<value code="ANT" name="Netherlands Antilles" />
+	<value code="ARE" name="United Arab Emirates" />
+	<value code="ARG" name="Argentina" />
+	<value code="ARM" name="Armenia" />
+	<value code="ASM" name="American Samoa" />
+	<value code="ATA" name="Antarctica" />
+	<value code="ATF" name="French Southern Territories" />
+	<value code="ATG" name="Antigua and Barbuda" />
+	<value code="AUS" name="Australia" />
+	<value code="AUT" name="Austria" />
+	<value code="AZE" name="Azerbaijan" />
+	<value code="BDI" name="Burundi" />
+	<value code="BEL" name="Belgium" />
+	<value code="BEN" name="Benin" />
+	<value code="BFA" name="Burkina Faso" />
+	<value code="BGD" name="Bangladesh" />
+	<value code="BGR" name="Bulgaria" />
+	<value code="BHR" name="Bahrain" />
+	<value code="BHS" name="Bahamas" />
+	<value code="BIH" name="Bosnia and Herzegovina" />
+	<value code="BLM" name="Saint Barthelemy" />
+	<value code="BLR" name="Belarus" />
+	<value code="BLZ" name="Belize" />
+	<value code="BMU" name="Bermuda" />
+	<value code="BOL" name="Bolivia, Plurinational State of" />
+	<value code="BRA" name="Brazil" />
+	<value code="BRB" name="Barbados" />
+	<value code="BRN" name="Brunei Darussalam" />
+	<value code="BTN" name="Bhutan" />
+	<value code="BVT" name="Bouvet Island" />
+	<value code="BWA" name="Botswana" />
+	<value code="CAF" name="Central African Republic" />
+	<value code="CAN" name="Canada" />
+	<value code="CCK" name="Cocos (Keeling) Islands" />
+	<value code="CHE" name="Switzerland" />
+	<value code="CHL" name="Chile" />
+	<value code="CHN" name="China" />
+	<value code="CIV" name="Cote d'Ivoire" />
+	<value code="CMR" name="Cameroon" />
+	<value code="COD" name="Congo, the Democratic Republic of the" />
+	<value code="COG" name="Congo" />
+	<value code="COK" name="Cook Islands" />
+	<value code="COL" name="Colombia" />
+	<value code="COM" name="Comoros" />
+	<value code="CPV" name="Cape Verde" />
+	<value code="CRI" name="Costa Rica" />
+	<value code="CUB" name="Cuba" />
+	<value code="CXR" name="Christmas Island" />
+	<value code="CYM" name="Cayman Islands" />
+	<value code="CYP" name="Cyprus" />
+	<value code="CZE" name="Czech Republic" />
+	<value code="DEU" name="Germany" />
+	<value code="DJI" name="Djibouti" />
+	<value code="DMA" name="Dominica" />
+	<value code="DNK" name="Denmark" />
+	<value code="DOM" name="Dominican Republic" />
+	<value code="DZA" name="Algeria" />
+	<value code="ECU" name="Ecuador" />
+	<value code="EGY" name="Egypt" />
+	<value code="ERI" name="Eritrea" />
+	<value code="ESH" name="Western Sahara" />
+	<value code="ESP" name="Spain" />
+	<value code="EST" name="Estonia" />
+	<value code="ETH" name="Ethiopia" />
+	<value code="FIN" name="Finland" />
+	<value code="FJI" name="Fiji" />
+	<value code="FLK" name="Falkland Islands (Malvinas)" />
+	<value code="FRA" name="France" />
+	<value code="FRO" name="Faroe Islands" />
+	<value code="FSM" name="Micronesia, Federated States of" />
+	<value code="GAB" name="Gabon" />
+	<value code="GBR" name="United Kingdom" />
+	<value code="GEO" name="Georgia" />
+	<value code="GGY" name="Guernsey" />
+	<value code="GHA" name="Ghana" />
+	<value code="GIB" name="Gibraltar" />
+	<value code="GIN" name="Guinea" />
+	<value code="GLP" name="Guadeloupe" />
+	<value code="GMB" name="Gambia" />
+	<value code="GNB" name="Guinea-Bissau" />
+	<value code="GNQ" name="Equatorial Guinea" />
+	<value code="GRC" name="Greece" />
+	<value code="GRD" name="Grenada" />
+	<value code="GRL" name="Greenland" />
+	<value code="GTM" name="Guatemala" />
+	<value code="GUF" name="French Guiana" />
+	<value code="GUM" name="Guam" />
+	<value code="GUY" name="Guyana" />
+	<value code="HKG" name="Hong Kong" />
+	<value code="HMD" name="Heard Island and McDonald Islands" />
+	<value code="HND" name="Honduras" />
+	<value code="HRV" name="Croatia" />
+	<value code="HTI" name="Haiti" />
+	<value code="HUN" name="Hungary" />
+	<value code="IDN" name="Indonesia" />
+	<value code="IMN" name="Isle of Man" />
+	<value code="IND" name="India" />
+	<value code="IOT" name="British Indian Ocean Territory" />
+	<value code="IRL" name="Ireland" />
+	<value code="IRN" name="Iran, Islamic Republic of" />
+	<value code="IRQ" name="Iraq" />
+	<value code="ISL" name="Iceland" />
+	<value code="ISR" name="Israel" />
+	<value code="ITA" name="Italy" />
+	<value code="JAM" name="Jamaica" />
+	<value code="JEY" name="Jersey" />
+	<value code="JOR" name="Jordan" />
+	<value code="JPN" name="Japan" />
+	<value code="KAZ" name="Kazakhstan" />
+	<value code="KEN" name="Kenya" />
+	<value code="KGZ" name="Kyrgyzstan" />
+	<value code="KHM" name="Cambodia" />
+	<value code="KIR" name="Kiribati" />
+	<value code="KNA" name="Saint Kitts and Nevis" />
+	<value code="KOR" name="Korea, Republic of" />
+	<value code="KWT" name="Kuwait" />
+	<value code="LAO" name="Lao People's Democratic Republic" />
+	<value code="LBN" name="Lebanon" />
+	<value code="LBR" name="Liberia" />
+	<value code="LBY" name="Libyan Arab Jamahiriya" />
+	<value code="LCA" name="Saint Lucia" />
+	<value code="LIE" name="Liechtenstein" />
+	<value code="LKA" name="Sri Lanka" />
+	<value code="LSO" name="Lesotho" />
+	<value code="LTU" name="Lithuania" />
+	<value code="LUX" name="Luxembourg" />
+	<value code="LVA" name="Latvia" />
+	<value code="MAC" name="Macao" />
+	<value code="MAF" name="Saint Martin (French part)" />
+	<value code="MAR" name="Morocco" />
+	<value code="MCO" name="Monaco" />
+	<value code="MDA" name="Moldova, Republic of" />
+	<value code="MDG" name="Madagascar" />
+	<value code="MDV" name="Maldives" />
+	<value code="MEX" name="Mexico" />
+	<value code="MHL" name="Marshall Islands" />
+	<value code="MKD" name="Macedonia, the former Yugoslav Republic of" />
+	<value code="MLI" name="Mali" />
+	<value code="MLT" name="Malta" />
+	<value code="MMR" name="Myanmar" />
+	<value code="MNE" name="Montenegro" />
+	<value code="MNG" name="Mongolia" />
+	<value code="MNP" name="Northern Mariana Islands" />
+	<value code="MOZ" name="Mozambique" />
+	<value code="MRT" name="Mauritania" />
+	<value code="MSR" name="Montserrat" />
+	<value code="MTQ" name="Martinique" />
+	<value code="MUS" name="Mauritius" />
+	<value code="MWI" name="Malawi" />
+	<value code="MYS" name="Malaysia" />
+	<value code="MYT" name="Mayotte" />
+	<value code="NAM" name="Namibia" />
+	<value code="NCL" name="New Caledonia" />
+	<value code="NER" name="Niger" />
+	<value code="NFK" name="Norfolk Island" />
+	<value code="NGA" name="Nigeria" />
+	<value code="NIC" name="Nicaragua" />
+	<value code=" NI" name=" Niue" />
+	<value code="NLD" name="Netherlands" />
+	<value code="NOR" name="Norway" />
+	<value code="NPL" name="Nepal" />
+	<value code="NRU" name="Nauru" />
+	<value code="NZL" name="New Zealand" />
+	<value code="OMN" name="Oman" />
+	<value code="PAK" name="Pakistan" />
+	<value code="PAN" name="Panama" />
+	<value code="PCN" name="Pitcairn" />
+	<value code="PER" name="Peru" />
+	<value code="PHL" name="Philippines" />
+	<value code="PLW" name="Palau" />
+	<value code="PNG" name="Papua New Guinea" />
+	<value code="POL" name="Poland" />
+	<value code="PRI" name="Puerto Rico" />
+	<value code="PRK" name="Korea, Democratic People's Republic of" />
+	<value code="PRT" name="Portugal" />
+	<value code="PRY" name="Paraguay" />
+	<value code="PSE" name="Palestinian Territory, Occupied" />
+	<value code="PYF" name="French Polynesia" />
+	<value code="QAT" name="Qatar" />
+	<value code="REU" name="Reunion" />
+	<value code="ROU" name="Romania" />
+	<value code="RUS" name="Russian Federation" />
+	<value code="RWA" name="Rwanda" />
+	<value code="SAU" name="Saudi Arabia" />
+	<value code="SDN" name="Sudan" />
+	<value code="SEN" name="Senegal" />
+	<value code="SGP" name="Singapore" />
+	<value code="SGS" name="South Georgia and the South Sandwich Islands" />
+	<value code="SHN" name="Saint Helena" />
+	<value code="SJM" name="Svalbard and Jan Mayen" />
+	<value code="SLB" name="Solomon Islands" />
+	<value code="SLE" name="Sierra Leone" />
+	<value code="SLV" name="El Salvador" />
+	<value code="SMR" name="San Marino" />
+	<value code="SOM" name="Somalia" />
+	<value code="SPM" name="Saint Pierre and Miquelon" />
+	<value code="SRB" name="Serbia" />
+	<value code="STP" name="Sao Tome and Principe" />
+	<value code="SUR" name="Suriname" />
+	<value code="SVK" name="Slovakia" />
+	<value code="SVN" name="Slovenia" />
+	<value code="SWE" name="Sweden" />
+	<value code="SWZ" name="Swaziland" />
+	<value code="SYC" name="Seychelles" />
+	<value code="SYR" name="Syrian Arab Republic" />
+	<value code="TCA" name="Turks and Caicos Islands" />
+	<value code="TCD" name="Chad" />
+	<value code="TGO" name="Togo" />
+	<value code="THA" name="Thailand" />
+	<value code="TJK" name="Tajikistan" />
+	<value code="TKL" name="Tokelau" />
+	<value code="TKM" name="Turkmenistan" />
+	<value code="TLS" name="Timor-Leste" />
+	<value code="TON" name="Tonga" />
+	<value code="TTO" name="Trinidad and Tobago" />
+	<value code="TUN" name="Tunisia" />
+	<value code="TUR" name="Turkey" />
+	<value code="TUV" name="Tuvalu" />
+	<value code="TWN" name="Taiwan, Province of China" />
+	<value code="TZA" name="Tanzania, United Republic of" />
+	<value code="UGA" name="Uganda" />
+	<value code="UKR" name="Ukraine" />
+	<value code="UMI" name="United States Minor Outlying Islands" />
+	<value code="URY" name="Uruguay" />
+	<value code="USA" name="United States" />
+	<value code="UZB" name="Uzbekistan" />
+	<value code="VAT" name="Holy See (Vatican City State)" />
+	<value code="VCT" name="Saint Vincent and the Grenadines" />
+	<value code="VEN" name="Venezuela, Bolivarian Republic of" />
+	<value code="VGB" name="Virgin Islands, British" />
+	<value code="VIR" name="Virgin Islands, U.S." />
+	<value code="VNM" name="Viet Nam" />
+	<value code="VUT" name="Vanuatu" />
+	<value code="WLF" name="Wallis and Futuna" />
+	<value code="WSM" name="Samoa" />
+	<value code="YEM" name="Yemen" />
+	<value code="ZAF" name="South Africa" />
+	<value code="ZMB" name="Zambia" />
+	<value code="ZWE" name="Zimbabwe" />
 </enum>
 </enums>
