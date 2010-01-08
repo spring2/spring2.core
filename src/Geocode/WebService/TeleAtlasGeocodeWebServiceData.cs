@@ -3,7 +3,7 @@ using Spring2.Core.Types;
 
 namespace Spring2.Core.Geocode.WebService {
     /// <summary>
-    /// Summary description for GeocodeData.
+    /// Summary description for TeleAtlasGeocodeWebServiceData.
     /// </summary>
     public class TeleAtlasGeocodeWebServiceData {
 
@@ -50,23 +50,23 @@ namespace Spring2.Core.Geocode.WebService {
 	}
 
 	public string StdAddress {
-	    get {return stdAddress;}
+	    get {return stdAddress.Display();}
 	}
 
 	public string StdCity {
-	    get {return stdCity;}
+	    get {return stdCity.Display();}
 	}
 
 	public string StdState {
-	    get {return stdState;}
+	    get {return stdState.Display();}
 	}
 
 	public string StdZipCode {
-	    get {return stdZip;}
+	    get {return stdZip.Display();}
 	}
 
 	public string StdZipCodePlus4 {
-	    get {return stdPlus4;}
+	    get {return stdPlus4.Display();}
 	}
 
 	public string MatchAddress {
@@ -79,11 +79,11 @@ namespace Spring2.Core.Geocode.WebService {
 	}
 
 	public string MatchState {
-	    get {return matState;}
+	    get {return matState.Display();}
 	}
 
 	public string MatchZipCode {
-	    get {return matZip;}
+	    get {return matZip.Display();}
 	}
 
 	public DecimalType MatchLatitude {
@@ -107,20 +107,38 @@ namespace Spring2.Core.Geocode.WebService {
 	/// Parses the hash and extracts the data
 	/// </summary>
 	private void ParseOutput() {
-	    stdAddress = StringType.Parse(output["STD_ADDR"].ToString());
-	    stdCity = StringType.Parse(output["STD_CITY"].ToString());
-	    stdState = StringType.Parse(output["STD_ST"].ToString());
-	    stdZip = StringType.Parse(output["STD_ZIP"].ToString());
-	    stdPlus4 = StringType.Parse(output["STD_P4"].ToString());
+	    stdAddress = ParseStringType("STD_ADDR");
+	    stdCity = ParseStringType("STD_CITY");
+	    stdState = ParseStringType("STD_ST");
+	    stdZip = ParseStringType("STD_ZIP");
+	    stdPlus4 = ParseStringType("STD_P4");
 
-	    matAddress = StringType.Parse(output["MAT_ADDR"].ToString());
-	    matCity = StringType.Parse(output["MAT_CITY"].ToString());
-	    matState = StringType.Parse(output["MAT_ST"].ToString());
-	    matZip = StringType.Parse(output["MAT_ZIP"].ToString());
+	    matAddress = ParseStringType("MAT_ADDR");
+	    matCity = ParseStringType("MAT_CITY");
+	    if (output.ContainsKey("MAT_ST")) {
+		matState = ParseStringType("MAT_ST");
+	    } else  {
+		matState = ParseStringType("MAT_PROV");
+	    }
+
+	    if (output.ContainsKey("MAT_ZIP")) {
+		matZip = ParseStringType("MAT_ZIP");
+	    } else {
+		matZip = ParseStringType("MAT_FSA");
+	    }
+
 	    matLatitude = DecimalType.Parse(output["MAT_LAT"].ToString());
 	    matLongitude = DecimalType.Parse(output["MAT_LON"].ToString());
 
 	    matchType = IntegerType.Parse(output["MAT_TYPE"].ToString());
+	}
+
+	private StringType ParseStringType(String key) {
+	    if (output.ContainsKey(key)) {
+		return StringType.Parse(output[key].ToString());
+	    } else {
+		return StringType.EMPTY;
+	    }
 	}
 
 	/// <summary>
@@ -130,18 +148,18 @@ namespace Spring2.Core.Geocode.WebService {
 	private void CreateDBOutput() {
 	    System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
-	    sb.Append("STD_ADDR=" + stdAddress + ",");
-	    sb.Append("STD_CITY=" + stdCity + ",");
-	    sb.Append("STD_ST=" + stdState + ",");
-	    sb.Append("STD_ZIP=" + stdZip + ",");
-	    sb.Append("STD_P4=" + stdPlus4 + ",");
-	    sb.Append("MAT_ADDR=" + matAddress + ",");
-	    sb.Append("MAT_CITY=" + matCity + ",");
-	    sb.Append("MAT_ST=" + matState + ",");
-	    sb.Append("MAT_ZIP=" + matZip + ",");
-	    sb.Append("MAT_LAT=" + matLatitude + ",");
-	    sb.Append("MAT_LON=" + matLongitude + ",");
-	    sb.Append("MAT_TYPE=" + matchType);
+	    sb.Append("STD_ADDR=" + stdAddress.Display() + ",");
+	    sb.Append("STD_CITY=" + stdCity.Display() + ",");
+	    sb.Append("STD_ST=" + stdState.Display() + ",");
+	    sb.Append("STD_ZIP=" + stdZip.Display() + ",");
+	    sb.Append("STD_P4=" + stdPlus4.Display() + ",");
+	    sb.Append("MAT_ADDR=" + matAddress.Display() + ",");
+	    sb.Append("MAT_CITY=" + matCity.Display() + ",");
+	    sb.Append("MAT_ST=" + matState.Display() + ",");
+	    sb.Append("MAT_ZIP=" + matZip.Display() + ",");
+	    sb.Append("MAT_LAT=" + matLatitude.Display() + ",");
+	    sb.Append("MAT_LON=" + matLongitude.Display() + ",");
+	    sb.Append("MAT_TYPE=" + matchType.Display());
 
 	    this.dbOutput = sb.ToString();
 	}
@@ -183,9 +201,11 @@ namespace Spring2.Core.Geocode.WebService {
 		    case "MAT_CITY":
 			matCity = data;
 			break;
+		    case "MAT_PROV":
 		    case "MAT_ST":
 			matState = data;
 			break;
+		    case "MAT_FDA":
 		    case "MAT_ZIP":
 			matZip = data;
 			break;

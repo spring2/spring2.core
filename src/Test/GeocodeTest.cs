@@ -76,6 +76,31 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test]
+	public void ShouldBeAbleToGeocodeCanadianAddressWithoutMatch() {
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("575 Broadway Boulvard", "Grand Falls", "NB", "E3Z 2L2", "");
+	    Assert.AreEqual("", geocode.MatchAddress.ToString());
+	    Assert.AreEqual("", geocode.MatchCity.ToString());
+	    Assert.AreEqual("", geocode.MatchState.ToString());
+	    Assert.AreEqual("", geocode.MatchZipCode.ToString());
+	}
+
+	public void ShouldBeAbleToGeocodeCanadianAddress() {
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("5400 Robinson St", "Niagara Falls", "ON", "L2G 2A6", "");
+	    Assert.AreEqual("5400 ROBINSON ST", geocode.MatchAddress.ToString());
+	    Assert.AreEqual("NIAGARA FALLS", geocode.MatchCity.ToString());
+	    Assert.AreEqual("ON", geocode.MatchState.ToString());
+	    Assert.AreEqual("L2G", geocode.MatchZipCode.ToString());
+	}
+
+
+	[Test]
+	public void ShouldBeAbletToGeocodeCanadianZipCode() {
+	    GeocodeData geocode = GeocodeProvider.Instance.GetCityAndStateOfZipCode("E3Z 2L2");
+	    Assert.AreEqual("GRAND FALLS", geocode.StdCity);
+	    Assert.AreEqual("NB", geocode.StdState);
+	}
+
+	[Test]
 	public void ShouldBeAbleToPopulateGeocodeDataWithString() {
 	    String delimitedString = "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17";
 

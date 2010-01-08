@@ -149,6 +149,10 @@ namespace Spring2.Core.Geocode.WebService {
 	    addressCacheData.StdRegion = teleAtlasgeocodeData.StdState;
 	    addressCacheData.StdPostalCode = teleAtlasgeocodeData.StdZipCode;
 	    addressCacheData.StdPlus4 = teleAtlasgeocodeData.StdZipCodePlus4;
+	    addressCacheData.MatAddress1 = teleAtlasgeocodeData.MatchAddress;
+	    addressCacheData.MatCity = teleAtlasgeocodeData.MatchCity;
+	    addressCacheData.MatRegion = teleAtlasgeocodeData.MatchState;
+	    addressCacheData.MatPostalCode = teleAtlasgeocodeData.MatchZipCode;
 	    addressCacheData.MatchType = teleAtlasgeocodeData.MatchType;
 
 	    if (list.Count > 0) {
@@ -188,7 +192,7 @@ namespace Spring2.Core.Geocode.WebService {
 	    geocodeData.StdZipCode = StringType.Parse(teleAtlasgeocodeData.StdZipCode);
 	    geocodeData.StdZipCodePlus4 = StringType.Parse(teleAtlasgeocodeData.StdZipCodePlus4);
 	    geocodeData.MatchAddress = StringType.Parse(teleAtlasgeocodeData.MatchAddress);
-	    geocodeData.MatchCity = StringType.Parse(teleAtlasgeocodeData.MatchAddress);
+	    geocodeData.MatchCity = StringType.Parse(teleAtlasgeocodeData.MatchCity);
 	    geocodeData.MatchState = StringType.Parse(teleAtlasgeocodeData.MatchState);
 	    geocodeData.MatchZipCode = StringType.Parse(teleAtlasgeocodeData.MatchZipCode);
 	    geocodeData.MatchLatitude = teleAtlasgeocodeData.MatchLatitude;
@@ -221,12 +225,10 @@ namespace Spring2.Core.Geocode.WebService {
 			}
 			data.ParseData(); // this tells the class to take action with the hashed data
 		    }
-		}
-		else { 
+		} else { 
 		    log.Info("The webservice call to findAddress failed.  The return value was " + retval.ToString() + ".");
 		}
-	    } 
-	    else {
+	    } else {
 		log.Info("An error occurred authenticating with the Tele Atlas server.");
 	    }
 
@@ -245,6 +247,11 @@ namespace Spring2.Core.Geocode.WebService {
 	    retval[2] = NewNamedPair("State", state.ToString());
 	    retval[3] = NewNamedPair("ZIP", zipCode.ToString());
 	    retval[4] = NewNamedPair("Plus4", plus4.ToString());
+
+	    retval[2] = NewNamedPair("Prov", state.ToString());
+	    retval[3] = NewNamedPair("FSA", zipCode.ToString());
+	    retval[4] = NewNamedPair("LDU", String.Empty);
+
 	    return retval;
 	}
 

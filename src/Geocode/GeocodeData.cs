@@ -8,7 +8,16 @@ namespace Spring2.Core.Geocode {
     /// </summary>
     public class GeocodeData {
 
+// TODO: need to have knowledge if this was from cache or not
+// TODO: should this be readonly?
+
+	public GeocodeData(Boolean fromCache) {
+	}
+
 	public GeocodeData() {
+	}
+
+	public GeocodeData(Boolean fromCache, String delimitedString) {
 	}
 
 	public GeocodeData(String delimitedString) {
