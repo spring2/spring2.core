@@ -4,6 +4,7 @@ using NUnit.Framework;
 using Spring2.Core.Types;
 using Spring2.Core.Geocode;
 using Spring2.Core.Geocode.WebService;
+using Spring2.Core.Geocode.Types;
 using Spring2.Core.Configuration;
 
 namespace Spring2.Core.Test {
@@ -19,7 +20,7 @@ namespace Spring2.Core.Test {
 	    StringType city = "Sandy";
 	    StringType zip = "84070";
 	    StringType state = "UT";
-	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode(street, city, state, zip, StringType.UNSET);
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode(street, city, state, zip, StringType.UNSET, CountryCodeEnum.UNITED_STATES);
 	    Assert.AreEqual(new DecimalType(40.566941), geocode.MatchLatitude);
 	    Assert.AreEqual(new DecimalType(-111.895122), geocode.MatchLongitude);
 	    Assert.AreEqual("10150 CENTENNIAL PKWY", geocode.StdAddress.ToString().Trim());
@@ -32,7 +33,7 @@ namespace Spring2.Core.Test {
 	[Test]
 	[Ignore("Requires a tele atlas login to run.")]
 	public void GetGeocodeForZipCode() {
-	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode(StringType.EMPTY, StringType.EMPTY, StringType.EMPTY, StringType.Parse("84070"), StringType.EMPTY);
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode(StringType.EMPTY, StringType.EMPTY, StringType.EMPTY, StringType.Parse("84070"), StringType.EMPTY, CountryCodeEnum.UNITED_STATES);
 	    Assert.AreEqual(new DecimalType(40.577445), geocode.MatchLatitude);
 	    Assert.AreEqual(new DecimalType(-111.885068), geocode.MatchLongitude);
 	}
@@ -60,7 +61,7 @@ namespace Spring2.Core.Test {
 	[Test]
 	[Ignore("Requires a tele atlas login to run.")]
 	public void GetGeocodeFromWebServiceByFullAddress() {
-	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("5892 South Acheron Avenue","Boise","ID","", "");
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("5892 South Acheron Avenue","Boise","ID","", "", CountryCodeEnum.UNITED_STATES);
 	    Assert.AreEqual("5892 S ACHERON AVE", geocode.StdAddress.ToString());
 	    Assert.AreEqual("BOISE", geocode.StdCity.ToString());
 	    Assert.AreEqual("ID", geocode.StdState.ToString());
@@ -77,7 +78,7 @@ namespace Spring2.Core.Test {
 
 	[Test]
 	public void ShouldBeAbleToGeocodeCanadianAddressWithoutMatch() {
-	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("575 Broadway Boulvard", "Grand Falls", "NB", "E3Z 2L2", "");
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("575 Broadway Boulvard", "Grand Falls", "NB", "E3Z 2L2", "", CountryCodeEnum.UNITED_STATES);
 	    Assert.AreEqual("", geocode.MatchAddress.ToString());
 	    Assert.AreEqual("", geocode.MatchCity.ToString());
 	    Assert.AreEqual("", geocode.MatchState.ToString());
@@ -85,7 +86,7 @@ namespace Spring2.Core.Test {
 	}
 
 	public void ShouldBeAbleToGeocodeCanadianAddress() {
-	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("5400 Robinson St", "Niagara Falls", "ON", "L2G 2A6", "");
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("5400 Robinson St", "Niagara Falls", "ON", "L2G 2A6", "", CountryCodeEnum.UNITED_STATES);
 	    Assert.AreEqual("5400 ROBINSON ST", geocode.MatchAddress.ToString());
 	    Assert.AreEqual("NIAGARA FALLS", geocode.MatchCity.ToString());
 	    Assert.AreEqual("ON", geocode.MatchState.ToString());
