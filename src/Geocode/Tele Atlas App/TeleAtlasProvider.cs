@@ -1,6 +1,8 @@
 using System;
 using Spring2.Core.Types;
 
+using Spring2.Core.Geocode.Types;
+
 namespace Spring2.Core.Geocode {
     /// <summary>
     /// Summary description for TeleAtlasProvider.
@@ -19,13 +21,13 @@ namespace Spring2.Core.Geocode {
 	    return wrapper.GetCityAndStateOfZipCode(zipCode);
 	}
 
-	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode) {
-	    return DoGeocode (street, city, state, postalCode, String.Empty);
+	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, CountryCodeEnum ccode) {
+	    return DoGeocode (street, city, state, postalCode, String.Empty, ccode);
 	}
 
-	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType path) {
+	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType path, CountryCodeEnum ccode) {
 	    GeocodeWrapper wrapper = new GeocodeWrapper();
-	    return wrapper.DoGeocode(street, city, state, postalCode, path);
+	    return wrapper.DoGeocode(street, city, state, postalCode, path, ccode);
 	}
     }
 }

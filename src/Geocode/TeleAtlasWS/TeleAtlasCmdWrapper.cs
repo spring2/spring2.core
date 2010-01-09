@@ -49,7 +49,7 @@ namespace Spring2.Core.Geocode.TeleAtlasWS {
 	    set { _exeDirectory = value; }
 	}
 
-	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType path){
+	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType path, CountryCodeEnum ccode){
 	    this.street = street;
 	    this.city = city;
 	    this.state = state;

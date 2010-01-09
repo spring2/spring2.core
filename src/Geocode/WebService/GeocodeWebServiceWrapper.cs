@@ -41,7 +41,6 @@ namespace Spring2.Core.Geocode.WebService {
 		    this.password = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodePassword"]);
 		    this.userName = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodeUserName"]);
 		    this.host = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodeHost"]);
-		    this.serviceName = StringType.Parse(ConfigurationProvider.Instance.Settings["GeoCodeServiceName"]);
 		    int retval = TeleAtlasAuthenticator.Instance.Authenticate(this.userName, this.password, this.host);
 		    this.credential = new IntegerType(retval);
 		}
@@ -49,12 +48,20 @@ namespace Spring2.Core.Geocode.WebService {
 	    }
 	}
 
-	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType plus4){
+	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType plus4, CountryCodeEnum ccode){
 	    TeleAtlasGeocodeWebServiceData teleAtlasgeocodeData = new TeleAtlasGeocodeWebServiceData();
 	    GeocodeData geocodeData = new GeocodeData();
 	    AddressCacheList list = null;
 	    AddressCacheData addressCacheData;
 	    AddressCache addressCache;
+
+	    if (ccode.Equals(CountryCodeEnum.UNITED_STATES)) {
+		this.serviceName = "USA_Geo_002";
+	    } else if (ccode.Equals(CountryCodeEnum.CANADA)) {
+		this.serviceName = "CAN_Geo_001";
+	    } else {
+		throw new Exception(string.Format("DoGeocode() received an invalid country code: {0}", ccode.Name));
+	    }
 
 	    if(postalCode.ToString().Length > 0){
 		list = AddressCacheDAO.DAO.FindAddressByStreetAndPostalCode(street,postalCode);		

@@ -24,6 +24,7 @@ namespace Spring2.Core.Geocode {
 	protected StringType zipCode;
 	protected StringType password;
 	protected StringType userName;
+	protected StringType serviceName;
 
 	// Variables used to store property values (prefix: underscore "_")
 	private string _exeDirectory = "C:\\data\\work\\goldcanyon\\dss\\lib";
@@ -48,7 +49,7 @@ namespace Spring2.Core.Geocode {
 	}
 
 	public GeocodeData GetCityAndStateOfZipCode(StringType postalCode){
-	    return DoGeocode(StringType.EMPTY,StringType.EMPTY, StringType.EMPTY, postalCode,StringType.DEFAULT);
+	    return DoGeocode(StringType.EMPTY,StringType.EMPTY, StringType.EMPTY, postalCode,StringType.DEFAULT, CountryCodeEnum.UNSET);
 	}
 
 	public IntegerType GetGeocodeCount() {
@@ -77,7 +78,7 @@ namespace Spring2.Core.Geocode {
 	    return limit - used;
 	}
 
-	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType path){
+	public GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType path, CountryCodeEnum ccode){
 	    TeleAtlasGeocodeData teleAtlasgeocodeData = new TeleAtlasGeocodeData();
 	    GeocodeData geocodeData = new GeocodeData();
 	    AddressCacheList list = null;
