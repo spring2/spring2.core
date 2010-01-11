@@ -205,7 +205,7 @@ namespace Spring2.Core.Geocode.WebService {
 		    case "MAT_ST":
 			matState = data;
 			break;
-		    case "MAT_FDA":
+		    case "MAT_FSA":
 		    case "MAT_ZIP":
 			matZip = data;
 			break;
