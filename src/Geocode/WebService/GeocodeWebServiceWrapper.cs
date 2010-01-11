@@ -251,13 +251,18 @@ namespace Spring2.Core.Geocode.WebService {
 	    com.teleatlas.na.ezlocate.geocoding.NameValue[] retval = new com.teleatlas.na.ezlocate.geocoding.NameValue[5];
 	    retval[0] = NewNamedPair("Addr", street.ToString());
 	    retval[1] = NewNamedPair("City", city.ToString());
-	    retval[2] = NewNamedPair("State", state.ToString());
-	    retval[3] = NewNamedPair("ZIP", zipCode.ToString());
-	    retval[4] = NewNamedPair("Plus4", plus4.ToString());
 
-	    retval[2] = NewNamedPair("Prov", state.ToString());
-	    retval[3] = NewNamedPair("FSA", zipCode.ToString());
-	    retval[4] = NewNamedPair("LDU", String.Empty);
+	    if (this.serviceName == "USA_Geo_002") {
+		retval[2] = NewNamedPair("State", state.ToString());
+		retval[3] = NewNamedPair("ZIP", zipCode.ToString());
+		retval[4] = NewNamedPair("Plus4", plus4.ToString());
+	    } else if (this.serviceName == "CAN_Geo_001") {
+		retval[2] = NewNamedPair("Prov", state.ToString());
+		retval[3] = NewNamedPair("FSA", zipCode.ToString());
+		retval[4] = NewNamedPair("LDU", String.Empty);
+	    } else {
+		throw new Exception(string.Format("MakeGeocodeParamString() received an invalid service name: {0}", this.serviceName));
+	    }
 
 	    return retval;
 	}

@@ -76,30 +76,6 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual("UT", geocode.StdState);
 	}
 
-	[Test]
-	public void ShouldBeAbleToGeocodeCanadianAddressWithoutMatch() {
-	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("575 Broadway Boulvard", "Grand Falls", "NB", "E3Z 2L2", "", CountryCodeEnum.UNITED_STATES);
-	    Assert.AreEqual("", geocode.MatchAddress.ToString());
-	    Assert.AreEqual("", geocode.MatchCity.ToString());
-	    Assert.AreEqual("", geocode.MatchState.ToString());
-	    Assert.AreEqual("", geocode.MatchZipCode.ToString());
-	}
-
-	public void ShouldBeAbleToGeocodeCanadianAddress() {
-	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("5400 Robinson St", "Niagara Falls", "ON", "L2G 2A6", "", CountryCodeEnum.UNITED_STATES);
-	    Assert.AreEqual("5400 ROBINSON ST", geocode.MatchAddress.ToString());
-	    Assert.AreEqual("NIAGARA FALLS", geocode.MatchCity.ToString());
-	    Assert.AreEqual("ON", geocode.MatchState.ToString());
-	    Assert.AreEqual("L2G", geocode.MatchZipCode.ToString());
-	}
-
-
-	[Test]
-	public void ShouldBeAbletToGeocodeCanadianZipCode() {
-	    GeocodeData geocode = GeocodeProvider.Instance.GetCityAndStateOfZipCode("E3Z 2L2");
-	    Assert.AreEqual("GRAND FALLS", geocode.StdCity);
-	    Assert.AreEqual("NB", geocode.StdState);
-	}
 
 	[Test]
 	public void ShouldBeAbleToPopulateGeocodeDataWithString() {
@@ -149,5 +125,34 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual("1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17", data.ToDelimitedString());
 	}
 
+	[Test]
+	[Ignore("Requires a tele atlas login to run.")]
+	public void GetGeocodeFromWebServiceByFullCanadianAddress() {
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("1644 Rue de Champigny", "Montreal", "QC", "H4E 1M1", "", CountryCodeEnum.CANADA);
+	    Assert.AreEqual("1644 RUE DE CHAMPIGNY", geocode.MatchAddress.ToString());
+	    Assert.AreEqual("MONTRÉAL", geocode.MatchCity.ToString());
+	    Assert.AreEqual("QC", geocode.MatchState.ToString());
+	    Assert.AreEqual("H4E", geocode.MatchZipCode.ToString());
+	}
+
+	[Test]
+	[Ignore("Requires a tele atlas login to run.")]
+	public void ShouldBeAbleToGeocodeCanadianAddressWithoutMatch() {
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("575 Broadway Boulvard", "Grand Falls", "NB", "E3Z 2L2", "", CountryCodeEnum.CANADA);
+	    Assert.AreEqual("", geocode.MatchAddress.ToString());
+	    Assert.AreEqual("", geocode.MatchCity.ToString());
+	    Assert.AreEqual("", geocode.MatchState.ToString());
+	    Assert.AreEqual("", geocode.MatchZipCode.ToString());
+	}
+
+	[Test]
+	[Ignore("Requires a tele atlas login to run.")]
+	public void ShouldBeAbleToGeocodeCanadianAddress() {
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("5400 Robinson St", "Niagara Falls", "ON", "L2G 2A6", "", CountryCodeEnum.CANADA);
+	    Assert.AreEqual("5400 ROBINSON ST", geocode.MatchAddress.ToString());
+	    Assert.AreEqual("NIAGARA FALLS", geocode.MatchCity.ToString());
+	    Assert.AreEqual("ON", geocode.MatchState.ToString());
+	    Assert.AreEqual("L2G", geocode.MatchZipCode.ToString());
+	}
     }
 }
