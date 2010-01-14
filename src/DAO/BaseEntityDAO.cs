@@ -2,6 +2,8 @@ using System;
 using System.Data;
 using System.Collections;
 
+using Spring2.Core.IoC;
+
 namespace Spring2.Core.DAO {
 
     public abstract class BaseEntityDAO {
@@ -19,6 +21,9 @@ namespace Spring2.Core.DAO {
     	}
 
 	public BaseEntityDAO() {
+	    if (ClassRegistry.CanReslove<IConnectionStringStrategy>()) {
+		this.connectionStringStrategy = ClassRegistry.Resolve<IConnectionStringStrategy>();
+	    }
 	}
 
 	public BaseEntityDAO(IConnectionStringStrategy strategy) {
