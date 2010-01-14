@@ -5,8 +5,8 @@ using System.Reflection;
 
 namespace Spring2.Core.IoC {
     public static class ClassRegistry {
-	[AttributeUsage(AttributeTargets.Constructor)]
-	public class InjectionConstructorAttribute : Attribute { }
+	//[AttributeUsage(AttributeTargets.Constructor)]
+	//public class InjectionConstructorAttribute : Attribute { }
 
 	private enum DependencyType {
 	    None = 0,   // Type is unset
