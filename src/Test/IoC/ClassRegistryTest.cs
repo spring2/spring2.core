@@ -17,7 +17,7 @@ namespace Spring2.Core.Test.IoC {
 	}
 
 	[Test]
-	public void CanResolveTegisteredInstance() {
+	public void CanResolveRegisteredInstance() {
 	    DefaultConnectionStringStrategy instance = new DefaultConnectionStringStrategy();
 	    ClassRegistry.Register<IConnectionStringStrategy>(instance);
 	    IConnectionStringStrategy resolvedInstance = ClassRegistry.Resolve<IConnectionStringStrategy>();
@@ -25,7 +25,7 @@ namespace Spring2.Core.Test.IoC {
 	}
 
 	[Test]
-	public void CanTesolveTransientType() {
+	public void CanResolveTransientType() {
 	    ClassRegistry.Register<DefaultConnectionStringStrategy, DefaultConnectionStringStrategy>();
 
 	    DefaultConnectionStringStrategy instance1 = ClassRegistry.Resolve<DefaultConnectionStringStrategy>();
