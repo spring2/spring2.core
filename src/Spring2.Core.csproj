@@ -264,6 +264,7 @@
     <Compile Include="Globalization\XmlDaylightTimeRule.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IoC\ClassRegistry.cs" />
     <Compile Include="IO\ResourceLocator.cs">
       <SubType>Code</SubType>
     </Compile>

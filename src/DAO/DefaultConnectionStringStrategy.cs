@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using Microsoft.Win32;
 
 namespace Spring2.Core.DAO {
-    class DefaultConnectionStringStrategy : IConnectionStringStrategy {
+    public class DefaultConnectionStringStrategy : IConnectionStringStrategy {
 	private static StringDictionary connectionStrings = new StringDictionary();
 	public String GetConnectionString(String key) {
 
