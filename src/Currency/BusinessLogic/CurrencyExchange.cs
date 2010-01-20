@@ -129,15 +129,7 @@ namespace Spring2.Core.Currency.BusinessLogic {
 	}
 
 	public static double GetRate(string fromCurrency, string toCurrency) {
-	    double retval = 0;
-
-	    try {
-		retval = CurrencyProvider.Instance.GetConversionRate(fromCurrency, toCurrency);
-	    } catch {
-		retval = 0;
-	    }
-
-	    return retval;
+	    return CurrencyProvider.Instance.GetConversionRate(fromCurrency, toCurrency);
 	}
 
 	public static ICurrencyExchange CheckForRateAndUpdate(StringType currencyCode) {

@@ -31,11 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'NET_2_0|AnyCPU' ">
-    <OutputPath>..\build\Currency\</OutputPath>
+    <OutputPath>..\build\Currency\CurrencyExe\</OutputPath>
     <DefineConstants>TRACE;DEBUG;NET_2_0</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'NET_1_1|AnyCPU' ">
-    <OutputPath>..\build\Currency\</OutputPath>
+    <OutputPath>..\build\Currency\CurrencyExe\</OutputPath>
     <DefineConstants>TRACE;DEBUG;NET_1_1</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
