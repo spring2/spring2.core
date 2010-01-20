@@ -1,6 +1,6 @@
 using System;
 using Spring2.Core.Geocode.WebService;
-using Spring2.Core.Geocode.Types;
+using Spring2.Core.Types;
 
 namespace Spring2.Core.Geocode.TeleAtlasExe {
     /// <summary>

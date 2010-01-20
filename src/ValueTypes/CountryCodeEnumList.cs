@@ -2,7 +2,7 @@ using System;
 using Spring2.DataTierGenerator.Attribute;
 
 
-namespace Spring2.Core.Geocode.Types {
+namespace Spring2.Core.Types {
 
     /// <summary>
     /// CountryCodeEnum generic collection

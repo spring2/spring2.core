@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using Spring2.Core.Types;
 
-namespace Spring2.Core.Geocode.Types {
+namespace Spring2.Core.Types {
 
     public class CountryCodeEnum : Spring2.Core.Types.EnumDataType {
 

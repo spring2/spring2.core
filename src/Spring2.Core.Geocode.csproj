@@ -217,8 +217,6 @@
     <Compile Include="Geocode\Tele Atlas App\TeleAtlasProvider.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Geocode\Types\CountryCodeEnum.cs" />
-    <Compile Include="Geocode\Types\CountryCodeEnumList.cs" />
     <Compile Include="Geocode\Types\GeocodeStatusEnum.cs">
       <SubType>Code</SubType>
     </Compile>

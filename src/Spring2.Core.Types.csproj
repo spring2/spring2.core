@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FB2D9DAA-2340-468C-8018-138748DA2EAE}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -130,6 +130,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Spring2.DataTierGenerator.Attribute, Version=1.0.0.0, Culture=neutral, PublicKeyToken=687bce93d7ce902c">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Spring2.DataTierGenerator.Attribute.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -150,6 +154,8 @@
     <Compile Include="ValueTypes\BooleanType.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ValueTypes\CountryCodeEnum.cs" />
+    <Compile Include="ValueTypes\CountryCodeEnumList.cs" />
     <Compile Include="ValueTypes\CurrencyType.cs">
       <SubType>Code</SubType>
     </Compile>
