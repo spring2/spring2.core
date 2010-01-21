@@ -138,19 +138,31 @@ namespace Spring2.Core.Currency.BusinessLogic {
 
 	    // if it doesn't exist or it's a different date create one
 	    if ((line.IsNew) || (line.EffectiveDate.ToDate().CompareTo(DateType.Now.ToDate()) != 0)) {
+		CurrencyExchangeData data = new CurrencyExchangeData();
+		data.CurrencyCode = currencyCode;
+		rate = GetRate(currencyCode); // calls the provider
+		data.Rate = new DecimalType(rate);
+		data.EffectiveDate = DateTimeType.Now;
+		
 		CurrencyExchange line2 = CurrencyExchange.NewInstance();
-		line2.CurrencyCode = currencyCode;
-		rate = GetRate(currencyCode);
-		line2.Rate = new DecimalType(rate);
-		line2.Store();
+		line2.Update(data);
+		
 		return line2;
 	    }
 
 	    rate = GetRate(currencyCode);
 
+	    // always insert a new rate when the recently retrieved and the most recent in the db are different
 	    if (line.Rate != rate && rate > 0) {
-		((CurrencyExchange)line).Rate = rate;
-		((CurrencyExchange)line).Store();
+		CurrencyExchangeData data = new CurrencyExchangeData();
+		data.Rate = rate;
+		data.EffectiveDate = DateTimeType.Now;
+		data.CurrencyCode = currencyCode;
+
+		CurrencyExchange line2 = CurrencyExchange.NewInstance();
+		line2.Update(data);
+
+		return line2;
 	    }
 	    return line;
 	}
