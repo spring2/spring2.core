@@ -34,7 +34,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\build\net-2.0\</OutputPath>
+    <OutputPath>..\build\UpdateCurrencyExchange\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -100,6 +100,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Currency\UpdateCurrencyExchange\AssemblyInfo.cs" />
     <Compile Include="Currency\UpdateCurrencyExchange\UpdateCurrencyExchange.cs" />
   </ItemGroup>
   <ItemGroup>
