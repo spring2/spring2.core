@@ -56,6 +56,10 @@
     <DefineConstants>TRACE;DEBUG;NET_1_1</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=b32731d11ce58905">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -68,6 +72,10 @@
     <ProjectReference Include="Spring2.Core.Currency.csproj">
       <Project>{1CA600DC-4B3A-4B1A-A3E8-E505594B853D}</Project>
       <Name>Spring2.Core.Currency</Name>
+    </ProjectReference>
+    <ProjectReference Include="Spring2.Core.Log4Net.csproj">
+      <Project>{ADC35D1C-39C8-4980-AE2B-57DBAE0838D1}</Project>
+      <Name>Spring2.Core.Log4Net</Name>
     </ProjectReference>
     <ProjectReference Include="Spring2.Core.Types.csproj">
       <Project>{FB2D9DAA-2340-468C-8018-138748DA2EAE}</Project>
