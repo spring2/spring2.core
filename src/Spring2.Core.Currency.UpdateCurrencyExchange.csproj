@@ -100,7 +100,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Currency\UpdateCurrencyExchange\AssemblyInfo.cs" />
     <Compile Include="Currency\UpdateCurrencyExchange\UpdateCurrencyExchange.cs" />
   </ItemGroup>
   <ItemGroup>
