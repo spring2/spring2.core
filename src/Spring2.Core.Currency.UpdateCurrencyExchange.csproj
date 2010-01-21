@@ -75,9 +75,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Currency\CurrencyExe\App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
       <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
@@ -95,7 +92,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Currency\CurrencyExe\UpdateCurrencyExchange.cs" />
+    <Compile Include="Currency\UpdateCurrencyExchange\UpdateCurrencyExchange.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Currency\UpdateCurrencyExchange\App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -106,6 +106,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy/Y "$(ProjectDir)\Currency\CurrencyExe\App.Config" "$(TargetPath).config"</PostBuildEvent>
+    <PostBuildEvent>copy/Y "$(ProjectDir)\Currency\UpdateCurrencyExchange\App.Config" "$(TargetPath).config"</PostBuildEvent>
   </PropertyGroup>
 </Project>
