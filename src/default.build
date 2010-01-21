@@ -108,9 +108,10 @@
 	<copy todir="..\build\${nant.settings.currentframework}\">
 	    <fileset basedir="..\build\">
 	        <include name="SendMailMessages\*" />
+	        <include name="UpdateCurrencyExchange\*" />
 	    </fileset>
 	</copy>
-	<delete dir="..\build\SendMailMessages" if="${directory::exists('..\build\SendMailMessages')}" failonerror="false" />
+	<delete dir="..\build\UpdateCurrencyExchange" if="${directory::exists('..\build\UpdateCurrencyExchange')}" failonerror="false" />
 	
 	<copy todir="..\build\${nant.settings.currentframework}\">
 	    <fileset basedir="..\build\">
@@ -177,6 +178,8 @@
 			<include name="Spring2.Core.Geocode.TeleAtlasWS.csproj" />
 	        <include name="Spring2.Core.Mail.csproj" />
 	        <include name="Spring2.Core.Mail.SendMailMessages.csproj" />
+	        <include name="Spring2.Core.Currency.csproj" />
+	        <include name="Spring2.Core.Currency.UpdateCurrencyExchange.csproj" />
 	        <include name="Spring2.Core.Log4Net.csproj" />
 	        <include name="Spring2.Core.PropertyPopulator.csproj" />
 	        <include name="Spring2.Core.Maverick.csproj" />
