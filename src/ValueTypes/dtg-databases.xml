@@ -1,0 +1,2 @@
+<databases generateinsertstoredprocscript="True" generateupdatestoredprocscript="True" generatedeletestoredprocscript="True" generateselectstoredprocscript="True" generateviewscript="True" generatetablescript="True" useview="True">
+</databases>

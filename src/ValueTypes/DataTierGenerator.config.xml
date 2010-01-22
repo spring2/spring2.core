@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<?dtg parser="Spring2.DataTierGenerator.Parser.XmlParser,Spring2.DataTierGenerator.Alpha" ?>
+<DataTierGenerator xmlns:xinc="http://www.w3.org/1999/XML/xinclude">
+    <generator class="Spring2.DataTierGenerator.Generator.GeneratorTaskManager,Spring2.DataTierGenerator">
+	<writer name="region" class="Spring2.DataTierGenerator.Generator.Writer.RegionMergeWriter,Spring2.DataTierGenerator">
+	    <option name="BeginMarker" value="#region" />
+	    <option name="EndMarker" value="#endregion" />
+	</writer>
+	<writer name="c#" class="Spring2.DataTierGenerator.Generator.Writer.CSharpCodeWriter,Spring2.DataTierGenerator">
+	    <option name="bracing style" value="block" />
+	</writer>
+	<styler name="c#" class="Spring2.DataTierGenerator.Generator.Styler.CSharpStyler,Spring2.DataTierGenerator">
+	    <option name="bracing style" value="block" />
+	</styler>
+	<tasks>
+	    <task name="enum" element="enum" template="Template\enum.vm" directory="" filenameformat="{element.Name}.cs" writer="region" >
+		<type name="{element.Name}" concretetype="{element.Name}" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}.GetInstance({2})" newinstanceformat="{element.Name}.DEFAULT" nullinstanceformat="{element.Name}.UNSET" />
+	    </task>
+
+	    <task name="enum lists" element="enum" template="Template\enum-collection.vm" directory="" filenameformat="{element.Name}List.cs" writer="region" >
+		<type name="{element.Name}List" newinstanceformat="{element.Name}List.DEFAULT" nullinstanceformat="{element.Name}List.UNSET" />
+	    </task>
+	</tasks>
+	<tools>
+	</tools>
+    </generator>
+    <!--
+	Configuration settings goverening basic generation
+    -->
+    <config>
+	<setting name="RootDirectory" value="." />
+	<setting name="RootNameSpace" value="Spring2.Core.Types" />
+	<setting name="DAOBaseClass" value="Spring2.Core.DAO.SqlEntityDAO" />
+    </config>
+   <entities-ref xinc:href="dtg-entities.xml" />
+    <collections-ref xinc:href="dtg-collections.xml" />
+    <enums-ref xinc:href="dtg-enums.xml" />
+    <types-ref xinc:href="..\types.inc.xml" />
+    <sqltypes-ref xinc:href="..\sqltypes.xml" />
+    <databases-ref xinc:href="dtg-databases.xml" />
+</DataTierGenerator>
