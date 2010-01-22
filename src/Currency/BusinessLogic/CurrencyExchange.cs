@@ -132,7 +132,7 @@ namespace Spring2.Core.Currency.BusinessLogic {
 	    return CurrencyProvider.Instance.GetConversionRate(fromCurrency, toCurrency);
 	}
 
-	public static ICurrencyExchange CheckForRateAndUpdate(StringType currencyCode) {
+	public static ICurrencyExchange CheckForNewRate(StringType currencyCode) {
 	    ICurrencyExchange line = GetCurrentRate(currencyCode);
 	    double rate = 0;
 

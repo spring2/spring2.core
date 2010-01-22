@@ -36,7 +36,7 @@ namespace Spring2.Core.Test {
 		Spring2.Core.Configuration.SimpleConfigurationProvider provider = GetTestConfigurationProvider();
 		provider.Settings["CurrencyProvider"] = "Spring2.Core.Currency.WebServiceXProvider";
 
-		line = CurrencyExchange.CheckForRateAndUpdate(StringType.Parse("CAD"));
+		line = CurrencyExchange.CheckForNewRate(StringType.Parse("CAD"));
 
 		line = CurrencyExchange.GetCurrentRate(StringType.Parse("CAD"));
 
