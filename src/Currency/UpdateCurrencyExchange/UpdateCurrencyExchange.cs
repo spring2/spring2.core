@@ -16,17 +16,21 @@ namespace Spring2.Core.Currency.UpdateCurrencyExchange {
 	    // use MDC to set the hostname for log messages -- MDC is thread specific
 	    log4net.MDC.Set("hostname", Environment.MachineName);
 
+	    log.Info("starting");
 	    try {
-		// For now assume USD -> CAD
-		StringType currency = "CAD";
-		if (args.Length > 0) {
-		    // check for currency code if passed in
+		StringType currency = StringType.EMPTY;
+		if (args.Length > 1) {
+		    currency = args[1];
+		    log.Info(string.Format("Checking for new currency exchange rate for currency code {0}", currency));
+		    ICurrencyExchange line = CurrencyExchange.CheckForNewRate(currency);
+		    log.Info(string.Format("Exchange rate for {0} based on USD (US Dollar) is {1} on {2}", currency, line.Rate, line.EffectiveDate));
+		} else {
+		    log.Fatal("Missing required input parameter: currency code");
 		}
-		ICurrencyExchange line = CurrencyExchange.CheckForNewRate(currency);
-		log.Info(string.Format("Exchange rate for CAD (Canadian Dollar) based on USD (US Dollar) is {0} on {1}.", line.Rate, line.EffectiveDate));
 	    } catch (Exception ex) {
-		log.Error(String.Format("An error occurred checking for a new exchange rate.\nThe exception message is: {0}", ex.Message));
+		log.Fatal(String.Format("An error occurred checking for a new exchange rate.\nThe exception message is: {0}", ex.Message));
 	    }
+	    log.Info("finished");
 	}
     }
 }
