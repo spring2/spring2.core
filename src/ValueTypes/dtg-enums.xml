@@ -247,4 +247,177 @@
 	<value code="ZMB" name="Zambia" />
 	<value code="ZWE" name="Zimbabwe" />
 </enum>
+<enum name="CurrencyCodeEnum">
+	<value code="AED" name="United Arab Emirates, Dirhams" />
+	<value code="AFN" name="Afghanistan, Afghanis" />
+	<value code="ALL" name="Albania, Leke" />
+	<value code="AMD" name="Armenia, Drams" />
+	<value code="ANG" name="Netherlands Antilles, Guilders (also called Florins)" />
+	<value code="AOA" name="Angola, Kwanza" />
+	<value code="ARS" name="Argentina, Pesos" />
+	<value code="AUD" name="Australia, Dollars" />
+	<value code="AWG" name="Aruba, Guilders (also called Florins)" />
+	<value code="AZN" name="Azerbaijan, New Manats" />
+	<value code="BAM" name="Bosnia and Herzegovina, Convertible Marka" />
+	<value code="BBD" name="Barbados, Dollars" />
+	<value code="BDT" name="Bangladesh, Taka" />
+	<value code="BGN" name="Bulgaria, Leva" />
+	<value code="BHD" name="Bahrain, Dinars" />
+	<value code="BIF" name="Burundi, Francs" />
+	<value code="BMD" name="Bermuda, Dollars" />
+	<value code="BND" name="Brunei Darussalam, Dollars" />
+	<value code="BOB" name="Bolivia, Bolivianos" />
+	<value code="BRL" name="Brazil, Brazil Real" />
+	<value code="BSD" name="Bahamas, Dollars" />
+	<value code="BTN" name="Bhutan, Ngultrum" />
+	<value code="BWP" name="Botswana, Pulas" />
+	<value code="BYR" name="Belarus, Rubles" />
+	<value code="BZD" name="Belize, Dollars" />
+	<value code="CAD" name="Canada, Dollars" />
+	<value code="CDF" name="Congo/Kinshasa, Congolese Francs" />
+	<value code="CHF" name="Switzerland, Francs" />
+	<value code="CLP" name="Chile, Pesos" />
+	<value code="CNY" name="China, Yuan Renminbi" />
+	<value code="COP" name="Colombia, Pesos" />
+	<value code="CRC" name="Costa Rica, Colones" />
+	<value code="CUP" name="Cuba, Pesos" />
+	<value code="CVE" name="Cape Verde, Escudos" />
+	<value code="CYP" name="Cyprus, Pounds (expires 2008-Jan-31)" />
+	<value code="CZK" name="Czech Republic, Koruny" />
+	<value code="DJF" name="Djibouti, Francs" />
+	<value code="DKK" name="Denmark, Kroner" />
+	<value code="DOP" name="Dominican Republic, Pesos" />
+	<value code="DZD" name="Algeria, Algeria Dinars" />
+	<value code="EEK" name="Estonia, Krooni" />
+	<value code="EGP" name="Egypt, Pounds" />
+	<value code="ERN" name="Eritrea, Nakfa" />
+	<value code="ETB" name="Ethiopia, Birr" />
+	<value code="EUR" name="Euro Member Countries, Euro" />
+	<value code="FJD" name="Fiji, Dollars" />
+	<value code="FKP" name="Falkland Islands (Malvinas), Pounds" />
+	<value code="GBP" name="United Kingdom, Pounds" />
+	<value code="GEL" name="Georgia, Lari" />
+	<value code="GGP" name="Guernsey, Pounds" />
+	<value code="GHS" name="Ghana, Cedis" />
+	<value code="GIP" name="Gibraltar, Pounds" />
+	<value code="GMD" name="Gambia, Dalasi" />
+	<value code="GNF" name="Guinea, Francs" />
+	<value code="GTQ" name="Guatemala, Quetzales" />
+	<value code="GYD" name="Guyana, Dollars" />
+	<value code="HKD" name="Hong Kong, Dollars" />
+	<value code="HNL" name="Honduras, Lempiras" />
+	<value code="HRK" name="Croatia, Kuna" />
+	<value code="HTG" name="Haiti, Gourdes" />
+	<value code="HUF" name="Hungary, Forint" />
+	<value code="IDR" name="Indonesia, Rupiahs" />
+	<value code="ILS" name="Israel, New Shekels" />
+	<value code="IMP" name="Isle of Man, Pounds" />
+	<value code="INR" name="India, Rupees" />
+	<value code="IQD" name="Iraq, Dinars" />
+	<value code="IRR" name="Iran, Rials" />
+	<value code="ISK" name="Iceland, Kronur" />
+	<value code="JEP" name="Jersey, Pounds" />
+	<value code="JMD" name="Jamaica, Dollars" />
+	<value code="JOD" name="Jordan, Dinars" />
+	<value code="JPY" name="Japan, Yen" />
+	<value code="KES" name="Kenya, Shillings" />
+	<value code="KGS" name="Kyrgyzstan, Soms" />
+	<value code="KHR" name="Cambodia, Riels" />
+	<value code="KMF" name="Comoros, Francs" />
+	<value code="KPW" name="Korea (North), Won" />
+	<value code="KRW" name="Korea (South), Won" />
+	<value code="KWD" name="Kuwait, Dinars" />
+	<value code="KYD" name="Cayman Islands, Dollars" />
+	<value code="KZT" name="Kazakhstan, Tenge" />
+	<value code="LAK" name="Laos, Kips" />
+	<value code="LBP" name="Lebanon, Pounds" />
+	<value code="LKR" name="Sri Lanka, Rupees" />
+	<value code="LRD" name="Liberia, Dollars" />
+	<value code="LSL" name="Lesotho, Maloti" />
+	<value code="LTL" name="Lithuania, Litai" />
+	<value code="LVL" name="Latvia, Lati" />
+	<value code="LYD" name="Libya, Dinars" />
+	<value code="MAD" name="Morocco, Dirhams" />
+	<value code="MDL" name="Moldova, Lei" />
+	<value code="MGA" name="Madagascar, Ariary" />
+	<value code="MKD" name="Macedonia, Denars" />
+	<value code="MMK" name="Myanmar (Burma), Kyats" />
+	<value code="MNT" name="Mongolia, Tugriks" />
+	<value code="MOP" name="Macau, Patacas" />
+	<value code="MRO" name="Mauritania, Ouguiyas" />
+	<value code="MTL" name="Malta, Liri (expires 2008-Jan-31)" />
+	<value code="MUR" name="Mauritius, Rupees" />
+	<value code="MVR" name="Maldives (Maldive Islands), Rufiyaa" />
+	<value code="MWK" name="Malawi, Kwachas" />
+	<value code="MXN" name="Mexico, Pesos" />
+	<value code="MYR" name="Malaysia, Ringgits" />
+	<value code="MZN" name="Mozambique, Meticais" />
+	<value code="NAD" name="Namibia, Dollars" />
+	<value code="NGN" name="Nigeria, Nairas" />
+	<value code="NIO" name="Nicaragua, Cordobas" />
+	<value code="NOK" name="Norway, Krone" />
+	<value code="NPR" name="Nepal, Nepal Rupees" />
+	<value code="NZD" name="New Zealand, Dollars" />
+	<value code="OMR" name="Oman, Rials" />
+	<value code="PAB" name="Panama, Balboa" />
+	<value code="PEN" name="Peru, Nuevos Soles" />
+	<value code="PGK" name="Papua New Guinea, Kina" />
+	<value code="PHP" name="Philippines, Pesos" />
+	<value code="PKR" name="Pakistan, Rupees" />
+	<value code="PLN" name="Poland, Zlotych" />
+	<value code="PYG" name="Paraguay, Guarani" />
+	<value code="QAR" name="Qatar, Rials" />
+	<value code="RON" name="Romania, New Lei" />
+	<value code="RSD" name="Serbia, Dinars" />
+	<value code="RUB" name="Russia, Rubles" />
+	<value code="RWF" name="Rwanda, Rwanda Francs" />
+	<value code="SAR" name="Saudi Arabia, Riyals" />
+	<value code="SBD" name="Solomon Islands, Dollars" />
+	<value code="SCR" name="Seychelles, Rupees" />
+	<value code="SDG" name="Sudan, Pounds" />
+	<value code="SEK" name="Sweden, Kronor" />
+	<value code="SGD" name="Singapore, Dollars" />
+	<value code="SHP" name="Saint Helena, Pounds" />
+	<value code="SLL" name="Sierra Leone, Leones" />
+	<value code="SOS" name="Somalia, Shillings" />
+	<value code="SPL" name="Seborga, Luigini" />
+	<value code="SRD" name="Suriname, Dollars" />
+	<value code="STD" name="Sao Tome and Principe, Dobras" />
+	<value code="SVC" name="El Salvador, Colones" />
+	<value code="SYP" name="Syria, Pounds" />
+	<value code="SZL" name="Swaziland, Emalangeni" />
+	<value code="THB" name="Thailand, Baht" />
+	<value code="TJS" name="Tajikistan, Somoni" />
+	<value code="TMM" name="Turkmenistan, Manats" />
+	<value code="TND" name="Tunisia, Dinars" />
+	<value code="TOP" name="Tonga, Pa'anga" />
+	<value code="TRY" name="Turkey, New Lira" />
+	<value code="TTD" name="Trinidad and Tobago, Dollars" />
+	<value code="TVD" name="Tuvalu, Tuvalu Dollars" />
+	<value code="TWD" name="Taiwan, New Dollars" />
+	<value code="TZS" name="Tanzania, Shillings" />
+	<value code="UAH" name="Ukraine, Hryvnia" />
+	<value code="UGX" name="Uganda, Shillings" />
+	<value code="USD" name="United States of America, Dollars" />
+	<value code="UYU" name="Uruguay, Pesos" />
+	<value code="UZS" name="Uzbekistan, Sums" />
+	<value code="VEB" name="Venezuela, Bolivares (expires 2008-Jun-30)" />
+	<value code="VEF" name="Venezuela, Bolivares Fuertes" />
+	<value code="VND" name="Viet Nam, Dong" />
+	<value code="VUV" name="Vanuatu, Vatu" />
+	<value code="WST" name="Samoa, Tala" />
+	<value code="XAF" name="Communaute Financiere Africaine BEAC, Francs" />
+	<value code="XAG" name="Silver, Ounces" />
+	<value code="XAU" name="Gold, Ounces" />
+	<value code="XCD" name="East Caribbean Dollars" />
+	<value code="XDR" name="International Monetary Fund (IMF) Special Drawing Rights" />
+	<value code="XOF" name="Communaute Financiere Africaine BCEAO, Francs" />
+	<value code="XPD" name="Palladium Ounces" />
+	<value code="XPF" name="Comptoirs Francais du Pacifique Francs" />
+	<value code="XPT" name="Platinum, Ounces" />
+	<value code="YER" name="Yemen, Rials" />
+	<value code="ZAR" name="South Africa, Rand" />
+	<value code="ZMK" name="Zambia, Kwacha" />
+	<value code="ZWD" name="Zimbabwe, Zimbabwe Dollars" />
+</enum>
 </enums>
