@@ -156,6 +156,8 @@
     </Compile>
     <Compile Include="ValueTypes\CountryCodeEnum.cs" />
     <Compile Include="ValueTypes\CountryCodeEnumList.cs" />
+    <Compile Include="ValueTypes\CurrencyCodeEnum.cs" />
+    <Compile Include="ValueTypes\CurrencyCodeEnumList.cs" />
     <Compile Include="ValueTypes\CurrencyType.cs">
       <SubType>Code</SubType>
     </Compile>
