@@ -1,0 +1,135 @@
+using System;
+using System.Collections;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
+
+##
+## formulate the namespace, class name and the collected class name
+##
+#set ($directory = $task.Directory)
+#if($directory.StartsWith('.\'))
+#set ($directory = $directory.Substring(2))
+#end
+#set ($namespace = "$options.RootNameSpace$directory.Replace('\','.')")
+namespace $namespace {
+	[Serializable]
+    public class $element.Name : $options.EnumBaseClass, ISerializable {
+
+	private static readonly ArrayList OPTIONS = new ArrayList();
+
+	public static readonly new $element.Name DEFAULT = new ${element.Name}();
+	public static readonly new $element.Name UNSET = new ${element.Name}();
+
+#foreach ($value in $element.Values)
+#if ( !$value.Description.Equals("") )
+	/// <summary>
+	/// $value.Description
+	/// </summary>
+#end
+	public static readonly $element.Name $value.StaticName() = new ${element.Name}("$value.Code", "$value.Name");
+#end
+
+	public static $element.Name GetInstance(Object value) {
+	    if (value is String) {
+		foreach ($element.Name t in OPTIONS) {
+		    if (t.Value.Equals(value)) {
+			return t;
+		    }
+		}
+	    }
+#if ( $element.IntegerBased )
+	    if (value is Int32) {
+		foreach ($element.Name t in OPTIONS) {
+		    try {
+			if (Int32.Parse(t.Code).Equals(value)) {
+			    return t;
+			}
+		    } catch (Exception) {
+			// parse exception - continue
+		    }
+		}
+	    }
+#end
+
+	    return UNSET;
+	}
+
+	private ${element.Name}() {}
+
+	private ${element.Name}(String code, String name) {
+	    this.code = code;
+	    this.name = name;
+	    OPTIONS.Add(this);
+	}
+
+	public override Boolean IsDefault {
+	    get { return Object.ReferenceEquals(this, DEFAULT); }
+	}
+
+	public override Boolean IsUnset {
+	    get { return Object.ReferenceEquals(this, UNSET); }
+	}
+
+	public static IList Options {
+	    get { return OPTIONS; }
+	}
+	
+	[SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+	void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) {
+		if (this.Equals(DEFAULT)) {
+			info.SetType(typeof(${element.Name}_DEFAULT));
+		} else if (this.Equals(UNSET)) {
+			info.SetType(typeof(${element.Name}_UNSET));
+		}
+		#foreach ($value in $element.Values)
+		  else if (this.Equals($value.StaticName())) {
+			info.SetType(typeof(${element.Name}_$value.StaticName()));
+		}
+		#end
+	}
+	
+#if ( $element.IntegerBased )
+
+	/// <summary>
+	/// Convert a $element.Name instance to an Int32;
+	/// </summary>
+	/// <returns>the Int32 representation for the enum instance.</returns>
+	/// <exception cref="InvalidCastException">when converting DEFAULT or UNSET to an Int32.</exception>
+	public Int32 ToInt32() {
+	    if (IsValid) {
+		try {
+		    return Int32.Parse(code);
+		} catch (Exception) {
+		    // parse error  - don't do anything - an acceptable exception will be thrown below
+		}
+	    }
+
+	    // instance was !IsValid or there was a parser error
+	    throw new InvalidCastException(); 
+	}
+#end
+    }
+	
+	[Serializable]
+    public class ${element.Name}_DEFAULT : IObjectReference {
+		public object GetRealObject(StreamingContext context) {
+			return ${element.Name}.DEFAULT;
+		}
+    }
+	
+	[Serializable]
+    public class ${element.Name}_UNSET : IObjectReference {
+		public object GetRealObject(StreamingContext context) {
+			return ${element.Name}.UNSET;
+		}
+    }
+	
+	#foreach ($value in $element.Values)
+	[Serializable]
+	public class ${element.Name}_$value.StaticName() : IObjectReference {
+		public object GetRealObject(StreamingContext context) {
+			return ${element.Name}.$value.StaticName();
+		}
+	}
+	#end
+}
