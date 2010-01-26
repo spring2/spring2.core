@@ -15,6 +15,7 @@ namespace Spring2.Core.Test {
     [TestFixture]
     public class CurrencyConversionTest {
 	[Test]
+	[Ignore]
 	public void ShouldGetValidRate() {
 	    double rate = 0;
 	    try {
@@ -30,6 +31,7 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test]
+	[Ignore]
 	public void ShouldGetValidRate2() {
 	    ICurrencyExchange line = null;
 	    try {
