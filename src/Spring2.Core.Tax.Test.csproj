@@ -141,7 +141,7 @@
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
     <ProjectReference Include="Spring2.Core.Tax.csproj">
-      <Name>Spring2.Dss.Tax</Name>
+      <Name>Spring2.Core.Tax</Name>
       <Project>{A64B9B05-C8D0-4298-82D9-441A9D3F2E40}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
