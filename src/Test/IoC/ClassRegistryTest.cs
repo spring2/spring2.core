@@ -52,24 +52,24 @@ namespace Spring2.Core.Test.IoC {
 	public void CanResolveIsTrueForRegisteredType() {
 	    DefaultConnectionStringStrategy instance = new DefaultConnectionStringStrategy();
 	    ClassRegistry.Register<IConnectionStringStrategy>(instance);
-	    Assert.IsTrue(ClassRegistry.CanReslove(typeof(IConnectionStringStrategy)));
+	    Assert.IsTrue(ClassRegistry.CanResolve(typeof(IConnectionStringStrategy)));
 	}
 
 	[Test]
 	public void CanResolveIsFalseForUnregisteredType() {
-	    Assert.IsFalse(ClassRegistry.CanReslove(typeof(IComparable)));
+	    Assert.IsFalse(ClassRegistry.CanResolve(typeof(IComparable)));
 	}
 
 	[Test]
 	public void CanResolveIsTrueForRegisteredContract() {
 	    DefaultConnectionStringStrategy instance = new DefaultConnectionStringStrategy();
 	    ClassRegistry.Register<IConnectionStringStrategy>(instance);
-	    Assert.IsTrue(ClassRegistry.CanReslove<IConnectionStringStrategy>());
+	    Assert.IsTrue(ClassRegistry.CanResolve<IConnectionStringStrategy>());
 	}
 
 	[Test]
 	public void CanResolveIsFalseForUnregisteredContract() {
-	    Assert.IsFalse(ClassRegistry.CanReslove<IComparable>());
+	    Assert.IsFalse(ClassRegistry.CanResolve<IComparable>());
 	}
     }
 }

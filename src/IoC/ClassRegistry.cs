@@ -85,12 +85,12 @@ namespace Spring2.Core.IoC {
 	    return instance;
 	}
 
-	public static bool CanReslove(Type contract) {
+	public static bool CanResolve(Type contract) {
 	    return dependencies.ContainsKey(contract);
 	}
 
-	public static bool CanReslove<TContract>() {
-	    return CanReslove(typeof(TContract));
+	public static bool CanResolve<TContract>() {
+	    return CanResolve(typeof(TContract));
 	}
     }
 }

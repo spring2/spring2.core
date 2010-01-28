@@ -21,7 +21,7 @@ namespace Spring2.Core.DAO {
     	}
 
 	public BaseEntityDAO() {
-	    if (ClassRegistry.CanReslove<IConnectionStringStrategy>()) {
+	    if (ClassRegistry.CanResolve<IConnectionStringStrategy>()) {
 		this.connectionStringStrategy = ClassRegistry.Resolve<IConnectionStringStrategy>();
 	    }
 	}
