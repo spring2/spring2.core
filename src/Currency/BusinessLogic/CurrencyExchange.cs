@@ -166,5 +166,15 @@ namespace Spring2.Core.Currency.BusinessLogic {
 	    }
 	    return line;
 	}
+
+	public static ICurrencyExchange GetRateByCodeAndDate(StringType currencyCode, DateTimeType date) {
+	    ICurrencyExchange line = null;
+	    try {
+		line = CurrencyExchangeDAO.DAO.FindRateByCodeAndDate(currencyCode, date);
+	    } catch {
+		line = CurrencyExchange.NewInstance();
+	    }
+	    return line;
+	}
     }
 }

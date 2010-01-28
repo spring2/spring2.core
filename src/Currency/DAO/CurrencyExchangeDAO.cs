@@ -424,5 +424,25 @@ namespace Spring2.Core.Currency.Dao {
 		IDataReader dataReader = ExecuteReader(CONNECTION_STRING_KEY, sql, parameters, COMMAND_TIMEOUT);
 	    return GetDataObject(dataReader);
 	}
+
+	#region
+	/// <summary>
+	/// Returns an object which matches the values for the fields specified.
+	/// </summary>
+	/// <param name="currencyCode">A field value to be matched.</param>
+	/// <param name="data">A field to be matched.</param>
+	/// <returns>The object found.</returns>
+	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+	public CurrencyExchange FindRateByCodeAndDate(StringType currencyCode, DateTimeType date) {
+	    OrderByClause sort = new OrderByClause("EffectiveDate DESC");
+	    SqlFilter filter = new SqlFilter(new SqlLiteralPredicate("CurrencyCode = @CurrencyCode AND EffectiveDate <= @EffectiveDate"));
+	    String sql = "SELECT top 1 * from " + VIEW + filter.Statement + sort.FormatSql();
+	    IDataParameterCollection parameters = new SqlParameterList();
+	    parameters.Add(CreateDataParameter("@CurrencyCode", CurrencyExchangeFields.CURRENCYCODE, currencyCode.IsValid ? currencyCode.ToString() as Object : DBNull.Value));
+	    parameters.Add(CreateDataParameter("@EffectiveDate", CurrencyExchangeFields.EFFECTIVEDATE, date.IsValid ? date.ToDateTime() as Object : DBNull.Value));
+	    IDataReader dataReader = ExecuteReader(CONNECTION_STRING_KEY, sql, parameters, COMMAND_TIMEOUT);
+	    return GetDataObject(dataReader);
+	}
+	#endregion
     }
 }

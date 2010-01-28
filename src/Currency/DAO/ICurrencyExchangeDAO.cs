@@ -186,6 +186,15 @@ namespace Spring2.Core.Currency.Dao {
 	[Generate]
 	CurrencyExchange FindEffectiveRateByCode(StringType currencyCode);
 
-	//}
+	#region
+	/// <summary>
+	/// Returns an object which matches the values for the fields specified.
+	/// </summary>
+	/// <param name="currencyCode">A field value to be matched.</param>
+	/// <param name="data">A field to be matched.</param>
+	/// <returns>The object found.</returns>
+	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+	CurrencyExchange FindRateByCodeAndDate(StringType currencyCode, DateTimeType date);
+	#endregion
     }
 }
