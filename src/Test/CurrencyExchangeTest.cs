@@ -49,6 +49,30 @@ namespace Spring2.Core.Test {
 	    Assert.Greater(line.Rate, DecimalType.ZERO);
 	}
 
+	[Test]
+	public void ShouldBeAbleToGetRateByDateAndCurrencyCode() {
+	    try {
+		CurrencyExchangeData data = new CurrencyExchangeData() {
+		    CurrencyCode = "TEST",
+		    EffectiveDate = DateTimeType.Now.AddDays(-200),
+		    Rate = 200
+		};
+		CurrencyExchange one = TestUtilities.CreateCurrencyExchange(data);
+		data.EffectiveDate = DateTimeType.Now.AddDays(-100);
+		data.Rate = 100;
+		CurrencyExchange two = TestUtilities.CreateCurrencyExchange(data);
+		data.EffectiveDate = DateTimeType.Now.AddDays(1);
+		data.Rate = 10;
+		CurrencyExchange three = TestUtilities.CreateCurrencyExchange(data);
+		ICurrencyExchange result = CurrencyExchange.GetRateByCodeAndDate("TEST", DateTimeType.Now.AddDays(-80));
+		Assert.AreEqual(two.CurrencyExchangeId, result.CurrencyExchangeId);
+		result = CurrencyExchange.GetRateByCodeAndDate("TEST", DateTimeType.Now.AddDays(-180));
+		Assert.AreEqual(one.CurrencyExchangeId, result.CurrencyExchangeId);
+	    } finally {
+		TestUtilities.DeleteObjects();
+	    }
+	}
+
 	internal static SimpleConfigurationProvider GetTestConfigurationProvider() {
 	    IConfigurationProvider originalProvider = ConfigurationProvider.Instance;
 	    IConfigurationProvider currentProvider = ConfigurationProvider.Instance;

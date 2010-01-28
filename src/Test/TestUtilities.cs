@@ -6,6 +6,9 @@ using Spring2.Core.Configuration;
 using Spring2.Core.Types;
 
 using NUnit.Framework;
+using Spring2.Core.Currency.BusinessLogic;
+using Spring2.Core.Currency.DataObject;
+using Spring2.Core.Currency.Dao;
 
 namespace Spring2.Core.Test {
     /// <summary>
@@ -15,6 +18,7 @@ namespace Spring2.Core.Test {
 
 	private static readonly int COMPAREBUFFERSIZE = 512;
         private static ConfigurationSettingList configurationSettingsToDelete = new ConfigurationSettingList();
+	private static CurrencyExchangeList currencyExchangesToDelete = new CurrencyExchangeList();
 	
 	/// <summary>
 	/// All methods are static.
@@ -58,6 +62,11 @@ namespace Spring2.Core.Test {
                 ConfigurationSettingDAO.DAO.Delete(c.ConfigurationSettingId);
             }
             configurationSettingsToDelete = new ConfigurationSettingList();
+
+	    foreach(CurrencyExchange c in currencyExchangesToDelete) {
+		CurrencyExchangeDAO.DAO.Delete(c.CurrencyExchangeId);
+	    }
+	    currencyExchangesToDelete = new CurrencyExchangeList();
         }
 
         public static ConfigurationSetting CreateConfigurationSetting(StringType key, StringType value) {
@@ -81,5 +90,12 @@ namespace Spring2.Core.Test {
 
             return setting;
         }
+
+	public static CurrencyExchange CreateCurrencyExchange(CurrencyExchangeData data) {
+	    CurrencyExchange cExchange = CurrencyExchange.NewInstance();
+	    cExchange.Update(data);
+	    currencyExchangesToDelete.Add(cExchange);
+	    return cExchange;
+	}
     }
 }
