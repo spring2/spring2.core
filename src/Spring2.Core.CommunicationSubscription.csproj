@@ -10,8 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Spring2.Core</RootNamespace>
     <AssemblyName>Spring2.Core.CommunicationSubscription</AssemblyName>
+    <AssemblyOriginatorKeyFile>spring2.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -26,9 +30,20 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;NET_2_0</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\build\CommunicationSubscription\Spring2.Core.CommunicationSubscription.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'NET_2_0|AnyCPU' ">
+    <OutputPath>..\build\CommunicationSubscription\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET_2_0</DefineConstants>
+    <DocumentationFile>Spring2.Core.CommunicationSubscription.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'NET_1_1|AnyCPU' ">
+    <OutputPath>..\build\CommunicationSubscription\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET_1_1</DefineConstants>
+    <DocumentationFile>Spring2.Core.CommunicationSubscription.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Spring2.DataTierGenerator.Attribute, Version=1.0.0.0, Culture=neutral, PublicKeyToken=687bce93d7ce902c">
@@ -43,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyVersionInfo.cs" />
-    <Compile Include="CommunicationSubscription.cs" />
     <Compile Include="CommunicationSubscription\BusinessLogic\CommunicationSubscriptionTracking.cs" />
     <Compile Include="CommunicationSubscription\BusinessLogic\CommunicationSubscriptionType.cs" />
     <Compile Include="CommunicationSubscription\DAO\CommunicationSubscriptionTrackingDAO.cs" />
@@ -75,6 +89,9 @@
       <Project>{FB2D9DAA-2340-468C-8018-138748DA2EAE}</Project>
       <Name>Spring2.Core.Types</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="spring2.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
