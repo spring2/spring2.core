@@ -28,7 +28,7 @@ namespace Spring2.Core.Geocode.TeleAtlasWS {
 	protected StringType userName;
 
 	// Variables used to store property values (prefix: underscore "_")
-	private string _exeDirectory = "C:\\data\\work\\goldcanyon\\dss\\lib";
+	private string _exeDirectory = @".\";
 	private int processTimeOutMilliseconds = 20000; // 20 seconds
 	private int _exitcode = 0;
 	string inputText = string.Empty;
