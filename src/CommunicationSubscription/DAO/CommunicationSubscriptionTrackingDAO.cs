@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 
@@ -14,30 +15,44 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
     /// <summary>
     /// Data access class for CommunicationSubscriptionTracking business entity.
     /// </summary>
-    public class CommunicationSubscriptionTrackingDAO : Spring2.Core.DAO.SqlEntityDAO {
-
-	public static readonly CommunicationSubscriptionTrackingDAO DAO = new CommunicationSubscriptionTrackingDAO();
+    public class CommunicationSubscriptionTrackingDAO : Spring2.Core.DAO.SqlEntityDAO, ICommunicationSubscriptionTrackingDAO {
+	private static ICommunicationSubscriptionTrackingDAO instance = new CommunicationSubscriptionTrackingDAO();
+	public static ICommunicationSubscriptionTrackingDAO DAO{
+	    get{ return instance; }
+	}
+	
+	/// <summary>
+	/// Sets the singleton DAO instance of ICommunicationSubscriptionTrackingDAO
+	/// </summary>
+	public void SetInstance(ICommunicationSubscriptionTrackingDAO dao) {
+	    if(dao != null){
+			instance = dao;
+	    }else{
+			instance = new CommunicationSubscriptionTrackingDAO();
+	    }
+	}
+	
 	private static readonly String VIEW = "vwCommunicationSubscriptionTracking";
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";
 	private static readonly Int32 COMMAND_TIMEOUT = 15;
 	private static ColumnOrdinals columnOrdinals = null;
 
-	internal sealed class ColumnOrdinals {
+	public sealed class ColumnOrdinals {
 	    public String Prefix = String.Empty;
 	    public Int32 CommunicationPrimaryKeyId;
 	    public Int32 CommunicationSubscriptionTypeId;
 	    public Int32 CreateDate;
 	    public Int32 CreateUserId;
-	    public Int32 LastModifiedUserId;
 	    public Int32 LastModifiedDate;
+	    public Int32 LastModifiedUserId;
 
 	    internal ColumnOrdinals(IDataReader reader) {
 		CommunicationPrimaryKeyId = reader.GetOrdinal("CommunicationPrimaryKeyId");
 		CommunicationSubscriptionTypeId = reader.GetOrdinal("CommunicationSubscriptionTypeId");
 		CreateDate = reader.GetOrdinal("CreateDate");
 		CreateUserId = reader.GetOrdinal("CreateUserId");
-		LastModifiedUserId = reader.GetOrdinal("LastModifiedUserId");
 		LastModifiedDate = reader.GetOrdinal("LastModifiedDate");
+		LastModifiedUserId = reader.GetOrdinal("LastModifiedUserId");
 	    }
 
 	    internal ColumnOrdinals(IDataReader reader, String prefix) {
@@ -46,8 +61,8 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 		CommunicationSubscriptionTypeId = reader.GetOrdinal(prefix + "CommunicationSubscriptionTypeId");
 		CreateDate = reader.GetOrdinal(prefix + "CreateDate");
 		CreateUserId = reader.GetOrdinal(prefix + "CreateUserId");
-		LastModifiedUserId = reader.GetOrdinal(prefix + "LastModifiedUserId");
 		LastModifiedDate = reader.GetOrdinal(prefix + "LastModifiedDate");
+		LastModifiedUserId = reader.GetOrdinal(prefix + "LastModifiedUserId");
 	    }
 	}
 
@@ -178,7 +193,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public CommunicationSubscriptionTracking Load(IdType communicationPrimaryKeyId) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("CommunicationPrimaryKeyId", EqualityOperatorEnum.Equal, communicationPrimaryKeyId.IsValid ? communicationPrimaryKeyId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(CommunicationSubscriptionTrackingFields.COMMUNICATIONPRIMARYKEYID, EqualityOperatorEnum.Equal, communicationPrimaryKeyId.IsValid ? communicationPrimaryKeyId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 	    return GetDataObject(dataReader);
 	}
@@ -188,7 +203,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	/// </summary>
 	public void Reload(CommunicationSubscriptionTracking instance) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("CommunicationPrimaryKeyId", EqualityOperatorEnum.Equal, instance.CommunicationPrimaryKeyId.IsValid ? instance.CommunicationPrimaryKeyId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(CommunicationSubscriptionTrackingFields.COMMUNICATIONPRIMARYKEYID, EqualityOperatorEnum.Equal, instance.CommunicationPrimaryKeyId.IsValid ? instance.CommunicationPrimaryKeyId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 
 	    if (!dataReader.Read()) {
@@ -240,7 +255,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	/// <param name="data">Entity to be populated from data reader</param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal CommunicationSubscriptionTracking GetDataObjectFromReader(CommunicationSubscriptionTracking data, IDataReader dataReader) {
+	public CommunicationSubscriptionTracking GetDataObjectFromReader(CommunicationSubscriptionTracking data, IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
@@ -252,7 +267,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal CommunicationSubscriptionTracking GetDataObjectFromReader(IDataReader dataReader) {
+	public CommunicationSubscriptionTracking GetDataObjectFromReader(IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
@@ -266,7 +281,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal CommunicationSubscriptionTracking GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
+	public CommunicationSubscriptionTracking GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
 	    CommunicationSubscriptionTracking data = new CommunicationSubscriptionTracking(false);
 	    return GetDataObjectFromReader(data, dataReader, ordinals);
 	}
@@ -278,7 +293,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal CommunicationSubscriptionTracking GetDataObjectFromReader(CommunicationSubscriptionTracking data, IDataReader dataReader, ColumnOrdinals ordinals) {
+	public CommunicationSubscriptionTracking GetDataObjectFromReader(CommunicationSubscriptionTracking data, IDataReader dataReader, ColumnOrdinals ordinals) {
 	    if (dataReader.IsDBNull(ordinals.CommunicationPrimaryKeyId)) {
 		data.CommunicationPrimaryKeyId = IdType.UNSET;
 	    } else {
@@ -334,11 +349,11 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	    cmd.Parameters.Add(idParam);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@CommunicationSubscriptionTypeId", DbType.Int32, ParameterDirection.Input, data.CommunicationSubscriptionTypeId.IsValid ? data.CommunicationSubscriptionTypeId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@CreateDate", DbType.DateTime, ParameterDirection.Input, data.CreateDate.IsValid ? data.CreateDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@CreateUserId", DbType.Int32, ParameterDirection.Input, data.CreateUserId.IsValid ? data.CreateUserId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedUserId", DbType.Int32, ParameterDirection.Input, data.LastModifiedUserId.IsValid ? data.LastModifiedUserId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedDate", DbType.DateTime, ParameterDirection.Input, data.LastModifiedDate.IsValid ? data.LastModifiedDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTrackingFields.COMMUNICATIONSUBSCRIPTIONTYPEID, data.CommunicationSubscriptionTypeId.IsValid ? data.CommunicationSubscriptionTypeId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTrackingFields.CREATEDATE, data.CreateDate.IsValid ? data.CreateDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTrackingFields.CREATEUSERID, data.CreateUserId.IsValid ? data.CreateUserId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTrackingFields.LASTMODIFIEDUSERID, data.LastModifiedUserId.IsValid ? data.LastModifiedUserId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTrackingFields.LASTMODIFIEDDATE, data.LastModifiedDate.IsValid ? data.LastModifiedDate.ToDateTime() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -371,12 +386,12 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spCommunicationSubscriptionTracking_Update", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@CommunicationPrimaryKeyId", DbType.Int32, ParameterDirection.Input, data.CommunicationPrimaryKeyId.IsValid ? data.CommunicationPrimaryKeyId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@CommunicationSubscriptionTypeId", DbType.Int32, ParameterDirection.Input, data.CommunicationSubscriptionTypeId.IsValid ? data.CommunicationSubscriptionTypeId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@CreateDate", DbType.DateTime, ParameterDirection.Input, data.CreateDate.IsValid ? data.CreateDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@CreateUserId", DbType.Int32, ParameterDirection.Input, data.CreateUserId.IsValid ? data.CreateUserId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedUserId", DbType.Int32, ParameterDirection.Input, data.LastModifiedUserId.IsValid ? data.LastModifiedUserId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedDate", DbType.DateTime, ParameterDirection.Input, data.LastModifiedDate.IsValid ? data.LastModifiedDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTrackingFields.COMMUNICATIONPRIMARYKEYID, data.CommunicationPrimaryKeyId.IsValid ? data.CommunicationPrimaryKeyId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTrackingFields.COMMUNICATIONSUBSCRIPTIONTYPEID, data.CommunicationSubscriptionTypeId.IsValid ? data.CommunicationSubscriptionTypeId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTrackingFields.CREATEDATE, data.CreateDate.IsValid ? data.CreateDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTrackingFields.CREATEUSERID, data.CreateUserId.IsValid ? data.CreateUserId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTrackingFields.LASTMODIFIEDUSERID, data.LastModifiedUserId.IsValid ? data.LastModifiedUserId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTrackingFields.LASTMODIFIEDDATE, data.LastModifiedDate.IsValid ? data.LastModifiedDate.ToDateTime() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -406,7 +421,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spCommunicationSubscriptionTracking_Delete", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    // Create and append the parameters
-	    cmd.Parameters.Add(CreateDataParameter("@CommunicationPrimaryKeyId", DbType.Int32, ParameterDirection.Input, communicationPrimaryKeyId.IsValid ? communicationPrimaryKeyId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTrackingFields.COMMUNICATIONPRIMARYKEYID, communicationPrimaryKeyId.IsValid ? communicationPrimaryKeyId.ToInt32() as Object : DBNull.Value));
 	    // Execute the query and return the result
 	    cmd.ExecuteNonQuery();
 

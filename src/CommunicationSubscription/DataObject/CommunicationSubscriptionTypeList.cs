@@ -4,6 +4,7 @@ using System.Collections;
 using Spring2.Core.Types;
 using Spring2.DataTierGenerator.Attribute;
 
+
 namespace Spring2.Core.CommunicationSubscription.DataObject {
 
     /// <summary>
@@ -65,16 +66,6 @@ namespace Spring2.Core.CommunicationSubscription.DataObject {
 	}
 
 	[Generate]
-	public Boolean Contains(ICommunicationSubscriptionType value) {
-	    return List.Contains(value);
-	}
-
-	[Generate]
-	public Int32 IndexOf(ICommunicationSubscriptionType value) {
-	    return List.IndexOf(value);
-	}
-
-	[Generate]
 	public void Insert(Int32 index, ICommunicationSubscriptionType value) {
 	    if (!immutable) {
 		List.Insert(index, value);
@@ -94,16 +85,6 @@ namespace Spring2.Core.CommunicationSubscription.DataObject {
 		    keys.Remove(value.CommunicationSubscriptionTypeId);
 		    List.RemoveAt(index);
 		}
-	    } else {
-		throw new System.Data.ReadOnlyException();
-	    }
-	}
-
-	[Generate]
-	public void Remove(ICommunicationSubscriptionType value) {
-	    if (!immutable) {
-		List.Remove(value);
-		keys.Remove(value.CommunicationSubscriptionTypeId);
 	    } else {
 		throw new System.Data.ReadOnlyException();
 	    }
@@ -192,6 +173,20 @@ namespace Spring2.Core.CommunicationSubscription.DataObject {
 	}
 
 	/// <summary>
+	/// removes value by identity
+	/// </summary>
+	[Generate]
+	public void Remove(IdType communicationSubscriptionTypeId) {
+	    if(!immutable) {
+		ICommunicationSubscriptionType objectInList = this[communicationSubscriptionTypeId];
+		List.Remove(objectInList);
+		keys.Remove(communicationSubscriptionTypeId);
+	    } else {
+		throw new System.Data.ReadOnlyException();
+	    }
+	}
+
+	/// <summary>
 	/// Sort a list by a column
 	/// </summary>
 	[Generate]
@@ -215,6 +210,19 @@ namespace Spring2.Core.CommunicationSubscription.DataObject {
 	    }
 
 	    InnerList.Sort(comparer);
+	}
+
+	[Generate]
+	public class CommunicationSubscriptionTypeIdSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		ICommunicationSubscriptionType o1 = (ICommunicationSubscriptionType)a;
+		ICommunicationSubscriptionType o2 = (ICommunicationSubscriptionType)b;
+
+		if (o1 == null || o2 == null || !o1.CommunicationSubscriptionTypeId.IsValid || !o2.CommunicationSubscriptionTypeId.IsValid) {
+		    return 0;
+		}
+		return o1.CommunicationSubscriptionTypeId.CompareTo(o2.CommunicationSubscriptionTypeId);
+	    }
 	}
 
 	[Generate]
@@ -296,6 +304,19 @@ namespace Spring2.Core.CommunicationSubscription.DataObject {
 	}
 
 	[Generate]
+	public class FrequencyInMinutesSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		ICommunicationSubscriptionType o1 = (ICommunicationSubscriptionType)a;
+		ICommunicationSubscriptionType o2 = (ICommunicationSubscriptionType)b;
+
+		if (o1 == null || o2 == null || !o1.FrequencyInMinutes.IsValid || !o2.FrequencyInMinutes.IsValid) {
+		    return 0;
+		}
+		return o1.FrequencyInMinutes.CompareTo(o2.FrequencyInMinutes);
+	    }
+	}
+
+	[Generate]
 	public class ProviderNameSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		ICommunicationSubscriptionType o1 = (ICommunicationSubscriptionType)a;
@@ -344,6 +365,32 @@ namespace Spring2.Core.CommunicationSubscription.DataObject {
 		    return 0;
 		}
 		return o1.CreateDate.CompareTo(o2.CreateDate);
+	    }
+	}
+
+	[Generate]
+	public class CreateUserIdSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		ICommunicationSubscriptionType o1 = (ICommunicationSubscriptionType)a;
+		ICommunicationSubscriptionType o2 = (ICommunicationSubscriptionType)b;
+
+		if (o1 == null || o2 == null || !o1.CreateUserId.IsValid || !o2.CreateUserId.IsValid) {
+		    return 0;
+		}
+		return o1.CreateUserId.CompareTo(o2.CreateUserId);
+	    }
+	}
+
+	[Generate]
+	public class LastModifiedUserIdSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		ICommunicationSubscriptionType o1 = (ICommunicationSubscriptionType)a;
+		ICommunicationSubscriptionType o2 = (ICommunicationSubscriptionType)b;
+
+		if (o1 == null || o2 == null || !o1.LastModifiedUserId.IsValid || !o2.LastModifiedUserId.IsValid) {
+		    return 0;
+		}
+		return o1.LastModifiedUserId.CompareTo(o2.LastModifiedUserId);
 	    }
 	}
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 
@@ -14,15 +15,29 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
     /// <summary>
     /// Data access class for CommunicationSubscriptionType business entity.
     /// </summary>
-    public class CommunicationSubscriptionTypeDAO : Spring2.Core.DAO.SqlEntityDAO {
-
-	public static readonly CommunicationSubscriptionTypeDAO DAO = new CommunicationSubscriptionTypeDAO();
+    public class CommunicationSubscriptionTypeDAO : Spring2.Core.DAO.SqlEntityDAO, ICommunicationSubscriptionTypeDAO {
+	private static ICommunicationSubscriptionTypeDAO instance = new CommunicationSubscriptionTypeDAO();
+	public static ICommunicationSubscriptionTypeDAO DAO{
+	    get{ return instance; }
+	}
+	
+	/// <summary>
+	/// Sets the singleton DAO instance of ICommunicationSubscriptionTypeDAO
+	/// </summary>
+	public void SetInstance(ICommunicationSubscriptionTypeDAO dao) {
+	    if(dao != null){
+			instance = dao;
+	    }else{
+			instance = new CommunicationSubscriptionTypeDAO();
+	    }
+	}
+	
 	private static readonly String VIEW = "vwCommunicationSubscriptionType";
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";
 	private static readonly Int32 COMMAND_TIMEOUT = 15;
 	private static ColumnOrdinals columnOrdinals = null;
 
-	internal sealed class ColumnOrdinals {
+	public sealed class ColumnOrdinals {
 	    public String Prefix = String.Empty;
 	    public Int32 CommunicationSubscriptionTypeId;
 	    public Int32 Name;
@@ -39,8 +54,8 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	    public Int32 ExpirationDate;
 	    public Int32 CreateDate;
 	    public Int32 CreateUserId;
-	    public Int32 LastModifiedUserId;
 	    public Int32 LastModifiedDate;
+	    public Int32 LastModifiedUserId;
 
 	    internal ColumnOrdinals(IDataReader reader) {
 		CommunicationSubscriptionTypeId = reader.GetOrdinal("CommunicationSubscriptionTypeId");
@@ -58,8 +73,8 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 		ExpirationDate = reader.GetOrdinal("ExpirationDate");
 		CreateDate = reader.GetOrdinal("CreateDate");
 		CreateUserId = reader.GetOrdinal("CreateUserId");
-		LastModifiedUserId = reader.GetOrdinal("LastModifiedUserId");
 		LastModifiedDate = reader.GetOrdinal("LastModifiedDate");
+		LastModifiedUserId = reader.GetOrdinal("LastModifiedUserId");
 	    }
 
 	    internal ColumnOrdinals(IDataReader reader, String prefix) {
@@ -79,8 +94,8 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 		ExpirationDate = reader.GetOrdinal(prefix + "ExpirationDate");
 		CreateDate = reader.GetOrdinal(prefix + "CreateDate");
 		CreateUserId = reader.GetOrdinal(prefix + "CreateUserId");
-		LastModifiedUserId = reader.GetOrdinal(prefix + "LastModifiedUserId");
 		LastModifiedDate = reader.GetOrdinal(prefix + "LastModifiedDate");
+		LastModifiedUserId = reader.GetOrdinal(prefix + "LastModifiedUserId");
 	    }
 	}
 
@@ -222,7 +237,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	public CommunicationSubscriptionType Load(IdType communicationSubscriptionTypeId) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("CommunicationSubscriptionTypeId", EqualityOperatorEnum.Equal, communicationSubscriptionTypeId.IsValid ? communicationSubscriptionTypeId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(CommunicationSubscriptionTypeFields.COMMUNICATIONSUBSCRIPTIONTYPEID, EqualityOperatorEnum.Equal, communicationSubscriptionTypeId.IsValid ? communicationSubscriptionTypeId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 	    return GetDataObject(dataReader);
 	}
@@ -232,7 +247,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	/// </summary>
 	public void Reload(CommunicationSubscriptionType instance) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(new SqlEqualityPredicate("CommunicationSubscriptionTypeId", EqualityOperatorEnum.Equal, instance.CommunicationSubscriptionTypeId.IsValid ? instance.CommunicationSubscriptionTypeId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(CommunicationSubscriptionTypeFields.COMMUNICATIONSUBSCRIPTIONTYPEID, EqualityOperatorEnum.Equal, instance.CommunicationSubscriptionTypeId.IsValid ? instance.CommunicationSubscriptionTypeId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 
 	    if (!dataReader.Read()) {
@@ -284,7 +299,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	/// <param name="data">Entity to be populated from data reader</param>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal CommunicationSubscriptionType GetDataObjectFromReader(CommunicationSubscriptionType data, IDataReader dataReader) {
+	public CommunicationSubscriptionType GetDataObjectFromReader(CommunicationSubscriptionType data, IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
@@ -296,7 +311,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	/// </summary>
 	/// <param name="dataReader">Container for database row.</param>
 	/// <returns>Data object built from current row.</returns>
-	internal CommunicationSubscriptionType GetDataObjectFromReader(IDataReader dataReader) {
+	public CommunicationSubscriptionType GetDataObjectFromReader(IDataReader dataReader) {
 	    if (columnOrdinals == null) {
 		columnOrdinals = new ColumnOrdinals(dataReader);
 	    }
@@ -310,7 +325,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal CommunicationSubscriptionType GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
+	public CommunicationSubscriptionType GetDataObjectFromReader(IDataReader dataReader, ColumnOrdinals ordinals) {
 	    CommunicationSubscriptionType data = new CommunicationSubscriptionType(false);
 	    return GetDataObjectFromReader(data, dataReader, ordinals);
 	}
@@ -322,7 +337,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	/// <param name="dataReader">Container for database row.</param>
 	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
-	internal CommunicationSubscriptionType GetDataObjectFromReader(CommunicationSubscriptionType data, IDataReader dataReader, ColumnOrdinals ordinals) {
+	public CommunicationSubscriptionType GetDataObjectFromReader(CommunicationSubscriptionType data, IDataReader dataReader, ColumnOrdinals ordinals) {
 	    if (dataReader.IsDBNull(ordinals.CommunicationSubscriptionTypeId)) {
 		data.CommunicationSubscriptionTypeId = IdType.UNSET;
 	    } else {
@@ -433,22 +448,22 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	    cmd.Parameters.Add(idParam);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@Name", DbType.AnsiString, ParameterDirection.Input, data.Name.IsValid ? data.Name.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@EmailSubject", DbType.AnsiString, ParameterDirection.Input, data.EmailSubject.IsValid ? data.EmailSubject.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@EmailBody", DbType.AnsiString, ParameterDirection.Input, data.EmailBody.IsValid ? data.EmailBody.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@EmailBodyType", DbType.AnsiString, ParameterDirection.Input, data.EmailBodyType.IsValid ? data.EmailBodyType.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageType", DbType.AnsiString, ParameterDirection.Input, data.MailMessageType.IsValid ? data.MailMessageType.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@LastSentDate", DbType.DateTime, ParameterDirection.Input, data.LastSentDate.IsValid ? data.LastSentDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@FrequencyInMinutes", DbType.Int32, ParameterDirection.Input, data.FrequencyInMinutes.IsValid ? data.FrequencyInMinutes.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@ProviderName", DbType.AnsiString, ParameterDirection.Input, data.ProviderName.IsValid ? data.ProviderName.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@AllowSubscription", DbType.Boolean, ParameterDirection.Input, data.AllowSubscription.IsValid ? data.AllowSubscription.ToBoolean() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@AutoSubscribe", DbType.Boolean, ParameterDirection.Input, data.AutoSubscribe.IsValid ? data.AutoSubscribe.ToBoolean() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@EffectiveDate", DbType.DateTime, ParameterDirection.Input, data.EffectiveDate.IsValid ? data.EffectiveDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@ExpirationDate", DbType.DateTime, ParameterDirection.Input, data.ExpirationDate.IsValid ? data.ExpirationDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@CreateDate", DbType.DateTime, ParameterDirection.Input, data.CreateDate.IsValid ? data.CreateDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@CreateUserId", DbType.Int32, ParameterDirection.Input, data.CreateUserId.IsValid ? data.CreateUserId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedUserId", DbType.Int32, ParameterDirection.Input, data.LastModifiedUserId.IsValid ? data.LastModifiedUserId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedDate", DbType.DateTime, ParameterDirection.Input, data.LastModifiedDate.IsValid ? data.LastModifiedDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.NAME, data.Name.IsValid ? data.Name.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.EMAILSUBJECT, data.EmailSubject.IsValid ? data.EmailSubject.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.EMAILBODY, data.EmailBody.IsValid ? data.EmailBody.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.EMAILBODYTYPE, data.EmailBodyType.IsValid ? data.EmailBodyType.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.MAILMESSAGETYPE, data.MailMessageType.IsValid ? data.MailMessageType.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.LASTSENTDATE, data.LastSentDate.IsValid ? data.LastSentDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.FREQUENCYINMINUTES, data.FrequencyInMinutes.IsValid ? data.FrequencyInMinutes.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.PROVIDERNAME, data.ProviderName.IsValid ? data.ProviderName.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.ALLOWSUBSCRIPTION, data.AllowSubscription.IsValid ? data.AllowSubscription.ToBoolean() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.AUTOSUBSCRIBE, data.AutoSubscribe.IsValid ? data.AutoSubscribe.ToBoolean() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.EFFECTIVEDATE, data.EffectiveDate.IsValid ? data.EffectiveDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.EXPIRATIONDATE, data.ExpirationDate.IsValid ? data.ExpirationDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.CREATEDATE, data.CreateDate.IsValid ? data.CreateDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.CREATEUSERID, data.CreateUserId.IsValid ? data.CreateUserId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.LASTMODIFIEDUSERID, data.LastModifiedUserId.IsValid ? data.LastModifiedUserId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.LASTMODIFIEDDATE, data.LastModifiedDate.IsValid ? data.LastModifiedDate.ToDateTime() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -481,23 +496,23 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spCommunicationSubscriptionType_Update", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    //Create the parameters and append them to the command object
-	    cmd.Parameters.Add(CreateDataParameter("@CommunicationSubscriptionTypeId", DbType.Int32, ParameterDirection.Input, data.CommunicationSubscriptionTypeId.IsValid ? data.CommunicationSubscriptionTypeId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@Name", DbType.AnsiString, ParameterDirection.Input, data.Name.IsValid ? data.Name.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@EmailSubject", DbType.AnsiString, ParameterDirection.Input, data.EmailSubject.IsValid ? data.EmailSubject.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@EmailBody", DbType.AnsiString, ParameterDirection.Input, data.EmailBody.IsValid ? data.EmailBody.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@EmailBodyType", DbType.AnsiString, ParameterDirection.Input, data.EmailBodyType.IsValid ? data.EmailBodyType.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@MailMessageType", DbType.AnsiString, ParameterDirection.Input, data.MailMessageType.IsValid ? data.MailMessageType.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@LastSentDate", DbType.DateTime, ParameterDirection.Input, data.LastSentDate.IsValid ? data.LastSentDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@FrequencyInMinutes", DbType.Int32, ParameterDirection.Input, data.FrequencyInMinutes.IsValid ? data.FrequencyInMinutes.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@ProviderName", DbType.AnsiString, ParameterDirection.Input, data.ProviderName.IsValid ? data.ProviderName.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@AllowSubscription", DbType.Boolean, ParameterDirection.Input, data.AllowSubscription.IsValid ? data.AllowSubscription.ToBoolean() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@AutoSubscribe", DbType.Boolean, ParameterDirection.Input, data.AutoSubscribe.IsValid ? data.AutoSubscribe.ToBoolean() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@EffectiveDate", DbType.DateTime, ParameterDirection.Input, data.EffectiveDate.IsValid ? data.EffectiveDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@ExpirationDate", DbType.DateTime, ParameterDirection.Input, data.ExpirationDate.IsValid ? data.ExpirationDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@CreateDate", DbType.DateTime, ParameterDirection.Input, data.CreateDate.IsValid ? data.CreateDate.ToDateTime() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@CreateUserId", DbType.Int32, ParameterDirection.Input, data.CreateUserId.IsValid ? data.CreateUserId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedUserId", DbType.Int32, ParameterDirection.Input, data.LastModifiedUserId.IsValid ? data.LastModifiedUserId.ToInt32() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter("@LastModifiedDate", DbType.DateTime, ParameterDirection.Input, data.LastModifiedDate.IsValid ? data.LastModifiedDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.COMMUNICATIONSUBSCRIPTIONTYPEID, data.CommunicationSubscriptionTypeId.IsValid ? data.CommunicationSubscriptionTypeId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.NAME, data.Name.IsValid ? data.Name.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.EMAILSUBJECT, data.EmailSubject.IsValid ? data.EmailSubject.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.EMAILBODY, data.EmailBody.IsValid ? data.EmailBody.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.EMAILBODYTYPE, data.EmailBodyType.IsValid ? data.EmailBodyType.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.MAILMESSAGETYPE, data.MailMessageType.IsValid ? data.MailMessageType.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.LASTSENTDATE, data.LastSentDate.IsValid ? data.LastSentDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.FREQUENCYINMINUTES, data.FrequencyInMinutes.IsValid ? data.FrequencyInMinutes.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.PROVIDERNAME, data.ProviderName.IsValid ? data.ProviderName.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.ALLOWSUBSCRIPTION, data.AllowSubscription.IsValid ? data.AllowSubscription.ToBoolean() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.AUTOSUBSCRIBE, data.AutoSubscribe.IsValid ? data.AutoSubscribe.ToBoolean() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.EFFECTIVEDATE, data.EffectiveDate.IsValid ? data.EffectiveDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.EXPIRATIONDATE, data.ExpirationDate.IsValid ? data.ExpirationDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.CREATEDATE, data.CreateDate.IsValid ? data.CreateDate.ToDateTime() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.CREATEUSERID, data.CreateUserId.IsValid ? data.CreateUserId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.LASTMODIFIEDUSERID, data.LastModifiedUserId.IsValid ? data.LastModifiedUserId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.LASTMODIFIEDDATE, data.LastModifiedDate.IsValid ? data.LastModifiedDate.ToDateTime() as Object : DBNull.Value));
 
 	    // Execute the query
 	    cmd.ExecuteNonQuery();
@@ -527,7 +542,7 @@ namespace Spring2.Core.CommunicationSubscription.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spCommunicationSubscriptionType_Delete", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    // Create and append the parameters
-	    cmd.Parameters.Add(CreateDataParameter("@CommunicationSubscriptionTypeId", DbType.Int32, ParameterDirection.Input, communicationSubscriptionTypeId.IsValid ? communicationSubscriptionTypeId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(CommunicationSubscriptionTypeFields.COMMUNICATIONSUBSCRIPTIONTYPEID, communicationSubscriptionTypeId.IsValid ? communicationSubscriptionTypeId.ToInt32() as Object : DBNull.Value));
 	    // Execute the query and return the result
 	    cmd.ExecuteNonQuery();
 

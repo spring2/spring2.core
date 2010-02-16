@@ -9,7 +9,6 @@ using Spring2.Core.DAO;
 using Spring2.Core.Types;
 
 
-
 using Spring2.Core.BusinessEntity;
 
 namespace Spring2.Core.CommunicationSubscription.DataObject {
@@ -18,12 +17,12 @@ namespace Spring2.Core.CommunicationSubscription.DataObject {
 	private CommunicationSubscriptionTrackingFields() {}
 	public static readonly String ENTITY_NAME = "CommunicationSubscriptionTracking";
 	
-	public static readonly String COMMUNICATIONPRIMARYKEYID = "CommunicationPrimaryKeyId";
-	public static readonly String COMMUNICATIONSUBSCRIPTIONTYPEID = "CommunicationSubscriptionTypeId";
-	public static readonly String CREATEDATE = "CreateDate";
-	public static readonly String CREATEUSERID = "CreateUserId";
-	public static readonly String LASTMODIFIEDUSERID = "LastModifiedUserId";
-	public static readonly String LASTMODIFIEDDATE = "LastModifiedDate";
+	public static readonly ColumnMetaData COMMUNICATIONPRIMARYKEYID = new ColumnMetaData("CommunicationPrimaryKeyId", "CommunicationPrimaryKeyId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
+	public static readonly ColumnMetaData COMMUNICATIONSUBSCRIPTIONTYPEID = new ColumnMetaData("CommunicationSubscriptionTypeId", "CommunicationSubscriptionTypeId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
+	public static readonly ColumnMetaData CREATEDATE = new ColumnMetaData("CreateDate", "CreateDate", DbType.DateTime, SqlDbType.DateTime, 0, 0, 0);
+	public static readonly ColumnMetaData CREATEUSERID = new ColumnMetaData("CreateUserId", "CreateUserId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
+	public static readonly ColumnMetaData LASTMODIFIEDUSERID = new ColumnMetaData("LastModifiedUserId", "LastModifiedUserId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
+	public static readonly ColumnMetaData LASTMODIFIEDDATE = new ColumnMetaData("LastModifiedDate", "LastModifiedDate", DbType.DateTime, SqlDbType.DateTime, 0, 0, 0);
     }
 
     public interface ICommunicationSubscriptionTracking : IBusinessEntity {
