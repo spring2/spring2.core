@@ -11,22 +11,21 @@ namespace Spring2.Core.Test {
     /// </summary>
     [TestFixture]
     public class EnumDataTypeListTest {
-
 	[Test]
-	public void SortByName() {
+	public void EnumDataTypeListNameSorter() {
 	    USStateCodeEnum.Options.Sort(new EnumDataTypeNameSorter());
 	    Assert.AreEqual("AK", USStateCodeEnum.Options[0].Name);
 	}
 
 	[Test]
-	public void SortByNameDesc() {
-	    USStateCodeEnum.Options.Sort(new EnumDataTypeReverseNameSorter());
+	public void EnumDataTypeNameSorterDesc() {
+	    USStateCodeEnum.Options.Sort(new EnumDataTypeNameSorterDesc());
 	    Assert.AreEqual("WY", USStateCodeEnum.Options[0].Name);
 	}
 
 	[Test]
 	public void SortByNameMethod() {
-	    USStateCodeEnum.Options.Sort(new EnumDataTypeReverseNameSorter());
+	    USStateCodeEnum.Options.Sort(new EnumDataTypeNameSorterDesc());
 	    USStateCodeEnum.Options.SortByName();
 	    Assert.AreEqual("AK", USStateCodeEnum.Options[0].Name);
 	}
