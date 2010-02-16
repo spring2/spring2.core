@@ -42,6 +42,12 @@ gen:
 	@chmod a+x $(BINDIR)/NAnt/*.exe
 	@chmod a+x $(BINDIR)/NAnt/*.dll
 	$(DTGDIR)/DataTierGenerator.exe DataTierGenerator.config.xml
+	
+.PHONY: build_db
+build_db:
+
+.PHONY: clean_db
+clean_db: 	
 
 .PHONY: regress
 regress: build_db build
