@@ -1,0 +1,36 @@
+<!-- Entity definitions -->
+<entities>
+    <entity name="CommunicationSubscriptionType" sqlentity="CommunicationSubscriptionType">
+	<description>Communication Subscription Type</description>
+	<properties>
+	    <property name="CommunicationSubscriptionTypeId" type="IdType" column="*" writable="False" />
+	    <property name="Name" type="StringType" column="*" />
+	    <property name="EmailSubject" type="StringType" column="*" />
+	    <property name="EmailBody" type="StringType" column="*" />
+	    <property name="EmailBodyType" type="StringType" column="*" />
+	    <property name="MailMessageType" type="StringType" column="*" />
+	    <property name="LastSentDate" type="DateTimeType" column="*" />
+	    <property name="FrequencyInMinutes" type="IntegerType" column="*" />
+	    <property name="ProviderName" type="StringType" column="*" />
+	    <property name="AllowSubscription" type="BooleanType" column="*" />
+	    <property name="AutoSubscribe" type="BooleanType" column="*" />
+	    <property name="EffectiveDate" type="DateTimeType" column="*" />
+	    <property name="ExpirationDate" type="DateTimeType" column="*" />
+	    <property name="CreateDate" type="DateTimeType" column="*" />
+	    <property name="CreateUserId" type="IdType" column="*" />
+	    <property name="LastModifiedUserId" type="IdType" column="*" writable="False" />
+	    <property name="LastModifiedDate" type="DateTimeType" column="*" writable="False" />
+	</properties>
+    </entity>
+    <entity name="CommunicationSubscriptionTracking" sqlentity="CommunicationSubscriptionTracking">
+	<description>Communication Subscription Tracking</description>
+	<properties>
+	    <property name="CommunicationPrimaryKeyId" type="IdType" column="*" writable="False" />
+	    <property name="CommunicationSubscriptionTypeId" type="IdType" column="*" />
+	    <property name="CreateDate" type="DateTimeType" column="*" />
+	    <property name="CreateUserId" type="IdType" column="*" />
+	    <property name="LastModifiedUserId" type="IdType" column="*" writable="False" />
+	    <property name="LastModifiedDate" type="DateTimeType" column="*" writable="False" />
+	</properties>
+    </entity>
+</entities>

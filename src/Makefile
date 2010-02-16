@@ -33,6 +33,7 @@ gen:
 	cd Currency; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
 	cd Navigation; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
 	cd ResourceManager; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
+	cd CommunicationSubscription; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
 
 .PHONY: build_db
 build_db:
@@ -44,6 +45,7 @@ build_db:
 	cd PerformanceMonitor; make build_db
 	cd ResourceManager; make build_db
 	cd SeleniumLoadTester; make build_db
+	cd CommunicationSubscription; make build_db
 
 .PHONY: clean_db
 clean_db: 	
@@ -55,7 +57,7 @@ clean_db:
 	cd PerformanceMonitor; make clean_db
 	cd ResourceManager; make clean_db
 	cd SeleniumLoadTester; make clean_db
-
+	cd CommunicationSubscription; make clean_db
 
 .PHONY: build
 build:
@@ -136,8 +138,9 @@ package_sql:
 	mv $(RELEASEDIR)/Spring2.Core.ResourceManager.sql.zip $(RELEASEDIR)/Spring2.Core.ResourceManager.sql-$(shell $(GETVERSION)).zip
 	cd SeleniumLoadTester; make package_sql
 	mv $(RELEASEDIR)/Spring2.Core.SeleniumLoadTester.sql.zip $(RELEASEDIR)/Spring2.Core.SeleniumLoadTester.sql-$(shell $(GETVERSION)).zip
+	cd CommunicationSubscription; make package_sql
+	mv $(RELEASEDIR)/Spring2.Core.CommunicationSubscription.sql.zip $(RELEASEDIR)/Spring2.Core.CommunicationSubscription.sql-$(shell $(GETVERSION)).zip
 
-	
 	
 .PHONY: ncover
 ncover: 

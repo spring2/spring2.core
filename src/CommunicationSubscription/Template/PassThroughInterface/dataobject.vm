@@ -1,0 +1,34 @@
+#if($element.WritableProperties.Count > 0)
+#set ($namespaces = "#nameSpaces($options $element true)")
+#set ($namespaces = $namespaces.Replace("using ${options.RootNameSpace}.BusinessLogic;", ""))
+$namespaces
+
+namespace $options.GetDONameSpace($element.Name) {
+
+    public class ${element.Name}Data #if($options.DataObjectBaseClass.Length > 0): $options.DataObjectBaseClass #end{
+
+	public static readonly ${element.Name}Data DEFAULT = new ${element.Name}Data();
+
+#foreach($field in $element.Fields)
+#if ($field.Writable && $field.Name.IndexOf('.')<0)
+	$field.AccessModifier $field.DataObjectType.Name $field.GetFieldFormat() = $field.DataObjectType.NewInstanceFormat;
+#end
+#end
+#foreach($field in $element.Fields)
+#if ($field.Writable && $field.Name.IndexOf('.')<0)
+
+	public $field.DataObjectType.Name $field.GetMethodFormat() {
+	    get { return this.$field.GetFieldFormat(); }
+	    set { this.$field.GetFieldFormat() = value; }
+	}
+#end
+#end
+
+	public Boolean IsDefault {
+	    get {
+		return Object.ReferenceEquals(DEFAULT, this);
+	    }
+        }
+    }
+}
+#end

@@ -1,0 +1,57 @@
+<!--
+    
+      Database/SqlEntity definitions
+
+-->
+<databases generateinsertstoredprocscript="True" generateupdatestoredprocscript="True" generatedeletestoredprocscript="True" generateselectstoredprocscript="True" generateviewscript="True" generatetablescript="True" useview="True">
+    <database name="Database" key="ConnectionString">
+	<sqlentities>
+	    <sqlentity name="CommunicationSubscriptionType" view="vwCommunicationSubscriptionType">
+		<columns>
+		    <column name="CommunicationSubscriptionTypeId" sqltype="Int" identity="True" required="True" />
+		    <column name="Name" sqltype="VarChar" length="50" required="True" />
+		    <column name="EmailSubject" sqltype="VarChar" length="100" required="True" />
+		    <column name="EmailBody" sqltype="Text" />
+		    <column name="EmailBodyType" sqltype="VarChar" length="100" />
+		    <column name="MailMessageType" sqltype="VarChar" length="100" />
+		    <column name="LastSentDate" sqltype="DateTime" required="True" default="getdate()" />
+		    <column name="FrequencyInMinutes" sqltype="Int" required="True" />
+		    <column name="ProviderName" sqltype="VarChar" length="100" required="True" />
+		    <column name="AllowSubscription" sqltype="Bit" required="True" />
+		    <column name="AutoSubscribe" sqltype="Bit" required="True" />
+		    <column name="EffectiveDate" sqltype="DateTime" required="True" default="getdate()"  />
+		    <column name="ExpirationDate" sqltype="DateTime" />
+		    <column name="CreateDate" sqltype="DateTime" required="True" />
+		    <column name="CreateUserId" sqltype="Int" required="True" />
+		    <column name="LastModifiedDate" sqltype="DateTime" required="True" />
+		    <column name="LastModifiedUserId" sqltype="Int" required="True" />
+		</columns>
+		<constraints>
+		    <constraint name="PK_CommunicationSubscriptionType" type="PRIMARY KEY" clustered="true">
+			<column name="CommunicationSubscriptionTypeId" />
+		    </constraint>
+		</constraints>
+	    </sqlentity>
+		
+	    <sqlentity name="CommunicationSubscriptionTracking" view="vwCommunicationSubscriptionTracking">
+		<columns>
+		    <column name="CommunicationPrimaryKeyId" sqltype="Int" identity="True" required="True" />
+		    <column name="CommunicationSubscriptionTypeId" sqltype="Int" required="True" />
+		    <column name="CreateDate" sqltype="DateTime" required="True" />
+		    <column name="CreateUserId" sqltype="Int" required="True" />
+		    <column name="LastModifiedDate" sqltype="DateTime" required="True" />
+		    <column name="LastModifiedUserId" sqltype="Int" required="True" />
+		</columns>
+		<constraints>
+		    <constraint name="PK_CommunicationSubscriptionTracking" type="PRIMARY KEY" clustered="true">
+			<column name="CommunicationPrimaryKeyId" />
+		    </constraint>
+		    <constraint name="FK_CommunicationSubscriptionTracking_Type" type="FOREIGN KEY" foreignentity="CommunicationSubscriptionType">
+			<column name="CommunicationSubscriptionTypeId" foreigncolumn="CommunicationSubscriptionTypeId" />
+		    </constraint>
+		</constraints>
+	    </sqlentity>
+		
+	</sqlentities>
+    </database>
+</databases>
