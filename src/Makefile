@@ -57,7 +57,7 @@ clean_db:
 	cd PerformanceMonitor; make clean_db
 	cd ResourceManager; make clean_db
 	cd SeleniumLoadTester; make clean_db
-	cd CommunicationSubscription; make clean_db
+	#cd CommunicationSubscription; make clean_db
 
 .PHONY: build
 build:
