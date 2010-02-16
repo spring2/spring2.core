@@ -38,12 +38,6 @@
     <Reference Include="System" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Services" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -54,6 +48,8 @@
     <Compile Include="CommunicationSubscription\BusinessLogic\CommunicationSubscriptionType.cs" />
     <Compile Include="CommunicationSubscription\DAO\CommunicationSubscriptionTrackingDAO.cs" />
     <Compile Include="CommunicationSubscription\DAO\CommunicationSubscriptionTypeDAO.cs" />
+    <Compile Include="CommunicationSubscription\DAO\ICommunicationSubscriptionTrackingDAO.cs" />
+    <Compile Include="CommunicationSubscription\DAO\ICommunicationSubscriptionTypeDAO.cs" />
     <Compile Include="CommunicationSubscription\DataObject\CommunicationSubscriptionTrackingData.cs" />
     <Compile Include="CommunicationSubscription\DataObject\CommunicationSubscriptionTrackingList.cs" />
     <Compile Include="CommunicationSubscription\DataObject\CommunicationSubscriptionTypeData.cs" />
@@ -71,9 +67,9 @@
       <Project>{80B94045-4DE6-4BB0-BE22-C5CC0E772695}</Project>
       <Name>Spring2.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="Spring2.Core.Currency.UpdateCurrencyExchange.csproj">
-      <Project>{95BA6975-BE85-4439-ACF8-2FDCC5238AD8}</Project>
-      <Name>Spring2.Core.Currency.UpdateCurrencyExchange</Name>
+    <ProjectReference Include="Spring2.Core.Security.csproj">
+      <Project>{AE5DC4B5-476C-441F-88F2-EEB268D90121}</Project>
+      <Name>Spring2.Core.Security</Name>
     </ProjectReference>
     <ProjectReference Include="Spring2.Core.Types.csproj">
       <Project>{FB2D9DAA-2340-468C-8018-138748DA2EAE}</Project>
