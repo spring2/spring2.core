@@ -132,11 +132,11 @@ namespace Spring2.Core.ResourceManager.Facade {
 	/// <param name="identity"></param>
 	/// <returns></returns>
 	public StringType LocalizeWithDefault(StringType context, StringType field, IdType identity) {
-	    if (System.Threading.Thread.CurrentPrincipal is ISpring2Principal) {
-		ISpring2Principal currentPrincipal = (ISpring2Principal)System.Threading.Thread.CurrentPrincipal;
+	    if (System.Threading.Thread.CurrentPrincipal is IUserPrincipal) {
+		IUserPrincipal currentPrincipal = (IUserPrincipal)System.Threading.Thread.CurrentPrincipal;
 		return LocalizeWithDefault(context, field, identity, currentPrincipal.Locale, currentPrincipal.Language);
 	    } else {
-		throw new ApplicationException("Principal on thread is not the correct type");
+		throw new ApplicationException("Principal on thread does not implement IUserPrincipal");
 	    }
 	}
 
@@ -186,11 +186,11 @@ namespace Spring2.Core.ResourceManager.Facade {
 	/// <param name="identity"></param>
 	/// <returns></returns>
 	public StringType Localize(StringType context, StringType field, IdType identity) {
-	    if (System.Threading.Thread.CurrentPrincipal is ISpring2Principal) {
-		ISpring2Principal currentPrincipal = (ISpring2Principal)System.Threading.Thread.CurrentPrincipal;
+	    if (System.Threading.Thread.CurrentPrincipal is IUserPrincipal) {
+		IUserPrincipal currentPrincipal = (IUserPrincipal)System.Threading.Thread.CurrentPrincipal;
 		return Localize(context, field, identity, currentPrincipal.Locale, currentPrincipal.Language);
 	    } else {
-		throw new ApplicationException("Principal on thread is not the correct type");
+		throw new ApplicationException("Principal on thread does not implement IUserPrincipal");
 	    }
 	}
 

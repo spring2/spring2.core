@@ -5,12 +5,16 @@ using Spring2.Core.Types;
 namespace Spring2.Core.Security
 {
 
-    public interface ISpring2Principal : IPrincipal {
+    public interface IUserPrincipal : IPrincipal {
 	ILocale Locale{
 	    get;
 	}
 
 	ILanguage Language{
+	    get;
+	}
+
+	IdType UserId {
 	    get;
 	}
 	
