@@ -10,6 +10,7 @@ using Spring2.Core.Types;
 using Spring2.Core.CommunicationSubscription.BusinessLogic;
 using Spring2.Core.CommunicationSubscription.DataObject;
 
+
 namespace Spring2.Core.CommunicationSubscription.Dao {
 
     /// <summary>

@@ -10,6 +10,8 @@ using Spring2.Core.Types;
 
 
 
+
+
 namespace Spring2.Core.CommunicationSubscription.DataObject {
 
     public class CommunicationSubscriptionTypeData : Spring2.Core.DataObject.DataObject {
@@ -28,8 +30,6 @@ namespace Spring2.Core.CommunicationSubscription.DataObject {
 	private BooleanType autoSubscribe = BooleanType.DEFAULT;
 	private DateTimeType effectiveDate = DateTimeType.DEFAULT;
 	private DateTimeType expirationDate = DateTimeType.DEFAULT;
-	private DateTimeType createDate = DateTimeType.DEFAULT;
-	private IdType createUserId = IdType.DEFAULT;
 
 	public StringType Name {
 	    get { return this.name; }
@@ -89,16 +89,6 @@ namespace Spring2.Core.CommunicationSubscription.DataObject {
 	public DateTimeType ExpirationDate {
 	    get { return this.expirationDate; }
 	    set { this.expirationDate = value; }
-	}
-
-	public DateTimeType CreateDate {
-	    get { return this.createDate; }
-	    set { this.createDate = value; }
-	}
-
-	public IdType CreateUserId {
-	    get { return this.createUserId; }
-	    set { this.createUserId = value; }
 	}
 
 	public Boolean IsDefault {

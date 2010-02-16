@@ -13,52 +13,52 @@ namespace Spring2.Core.CommunicationSubscription.BusinessLogic {
     /// <summary>
     /// Communication Subscription Type
     /// </summary>
-    public  class CommunicationSubscriptionType : Spring2.Core.BusinessEntity.BusinessEntity, ICommunicationSubscriptionType {
+    public class CommunicationSubscriptionType : Spring2.Core.BusinessEntity.BusinessEntity, ICommunicationSubscriptionType {
 
 	[Generate]
-		private IdType communicationSubscriptionTypeId = IdType.DEFAULT;
-		[Generate]
-		private StringType name = StringType.DEFAULT;
-		[Generate]
-		private StringType emailSubject = StringType.DEFAULT;
-		[Generate]
-		private StringType emailBody = StringType.DEFAULT;
-		[Generate]
-		private StringType emailBodyType = StringType.DEFAULT;
-		[Generate]
-		private StringType mailMessageType = StringType.DEFAULT;
-		[Generate]
-		private DateTimeType lastSentDate = DateTimeType.DEFAULT;
-		[Generate]
-		private IntegerType frequencyInMinutes = IntegerType.DEFAULT;
-		[Generate]
-		private StringType providerName = StringType.DEFAULT;
-		[Generate]
-		private BooleanType allowSubscription = BooleanType.DEFAULT;
-		[Generate]
-		private BooleanType autoSubscribe = BooleanType.DEFAULT;
-		[Generate]
-		private DateTimeType effectiveDate = DateTimeType.DEFAULT;
-		[Generate]
-		private DateTimeType expirationDate = DateTimeType.DEFAULT;
-		[Generate]
-		private DateTimeType createDate = DateTimeType.DEFAULT;
-		[Generate]
-		private IdType createUserId = IdType.DEFAULT;
-		[Generate]
-		private IdType lastModifiedUserId = IdType.DEFAULT;
-		[Generate]
-		private DateTimeType lastModifiedDate = DateTimeType.DEFAULT;
-	
-        [Generate]
-        internal CommunicationSubscriptionType() {}
+	private IdType communicationSubscriptionTypeId = IdType.DEFAULT;
+	[Generate]
+	private StringType name = StringType.DEFAULT;
+	[Generate]
+	private StringType emailSubject = StringType.DEFAULT;
+	[Generate]
+	private StringType emailBody = StringType.DEFAULT;
+	[Generate]
+	private StringType emailBodyType = StringType.DEFAULT;
+	[Generate]
+	private StringType mailMessageType = StringType.DEFAULT;
+	[Generate]
+	private DateTimeType lastSentDate = DateTimeType.DEFAULT;
+	[Generate]
+	private IntegerType frequencyInMinutes = IntegerType.DEFAULT;
+	[Generate]
+	private StringType providerName = StringType.DEFAULT;
+	[Generate]
+	private BooleanType allowSubscription = BooleanType.DEFAULT;
+	[Generate]
+	private BooleanType autoSubscribe = BooleanType.DEFAULT;
+	[Generate]
+	private DateTimeType effectiveDate = DateTimeType.DEFAULT;
+	[Generate]
+	private DateTimeType expirationDate = DateTimeType.DEFAULT;
+	[Generate]
+	private DateTimeType createDate = DateTimeType.DEFAULT;
+	[Generate]
+	private IdType createUserId = IdType.DEFAULT;
+	[Generate]
+	private IdType lastModifiedUserId = IdType.DEFAULT;
+	[Generate]
+	private DateTimeType lastModifiedDate = DateTimeType.DEFAULT;
 
-        [Generate]
-        internal CommunicationSubscriptionType(Boolean isNew) {
+	[Generate]
+	internal CommunicationSubscriptionType() { }
+
+	[Generate]
+	internal CommunicationSubscriptionType(Boolean isNew) {
 	    this.isNew = isNew;
-        }
+	}
 
-        [Generate]
+	[Generate]
 	public static CommunicationSubscriptionType NewInstance() {
 	    return new CommunicationSubscriptionType();
 	}
@@ -82,8 +82,6 @@ namespace Spring2.Core.CommunicationSubscription.BusinessLogic {
 	    autoSubscribe = data.AutoSubscribe.IsDefault ? autoSubscribe : data.AutoSubscribe;
 	    effectiveDate = data.EffectiveDate.IsDefault ? effectiveDate : data.EffectiveDate;
 	    expirationDate = data.ExpirationDate.IsDefault ? expirationDate : data.ExpirationDate;
-	    createDate = data.CreateDate.IsDefault ? createDate : data.CreateDate;
-	    createUserId = data.CreateUserId.IsDefault ? createUserId : data.CreateUserId;
 	    Store();
 	}
 
@@ -96,15 +94,15 @@ namespace Spring2.Core.CommunicationSubscription.BusinessLogic {
 		    this.Reload();
 		}
 		throw new MessageListException(errors);
-            }
+	    }
 
-																																																																									    SetAuditStamps();
+	    SetAuditStamps();
 	    if (isNew) {
 		this.CommunicationSubscriptionTypeId = CommunicationSubscriptionTypeDAO.DAO.Insert(this);
 		isNew = false;
-            } else {
+	    } else {
 		CommunicationSubscriptionTypeDAO.DAO.Update(this);
-            }
+	    }
 	}
 
 	[Generate]
@@ -120,11 +118,35 @@ namespace Spring2.Core.CommunicationSubscription.BusinessLogic {
 	    this.LastModifiedDate = DateTimeType.Now;
 	    this.LastModifiedUserId = userId;
 	}
-	
-	[Generate]
-	public virtual MessageList Validate() {
+
+	public MessageList Validate() {
 
 	    MessageList errors = new MessageList();
+	    if (Name.IsEmpty) {
+		errors.Add(new MissingRequiredFieldError(CommunicationSubscriptionTypeFields.NAME.Name));
+	    }
+	    if (EmailSubject.IsEmpty) {
+		errors.Add(new MissingRequiredFieldError(CommunicationSubscriptionTypeFields.EMAILSUBJECT.Name));
+	    }
+	    if (!LastSentDate.IsValid) {
+		errors.Add(new MissingRequiredFieldError(CommunicationSubscriptionTypeFields.LASTSENTDATE.Name));
+	    }
+	    if (!FrequencyInMinutes.IsValid) {
+		errors.Add(new MissingRequiredFieldError(CommunicationSubscriptionTypeFields.FREQUENCYINMINUTES.Name));
+	    }
+	    if (ProviderName.IsEmpty) {
+		errors.Add(new MissingRequiredFieldError(CommunicationSubscriptionTypeFields.PROVIDERNAME.Name));
+	    }
+	    if (!AllowSubscription.IsValid) {
+		errors.Add(new MissingRequiredFieldError(CommunicationSubscriptionTypeFields.ALLOWSUBSCRIPTION.Name));
+	    }
+	    if (!AutoSubscribe.IsValid) {
+		errors.Add(new MissingRequiredFieldError(CommunicationSubscriptionTypeFields.AUTOSUBSCRIBE.Name));
+	    }
+	    if (!EffectiveDate.IsValid) {
+		errors.Add(new MissingRequiredFieldError(CommunicationSubscriptionTypeFields.EFFECTIVEDATE.Name));
+	    }
+
 	    return errors;
 	}
 
@@ -231,16 +253,16 @@ namespace Spring2.Core.CommunicationSubscription.BusinessLogic {
 	    set { this.lastModifiedDate = value; }
 	}
 
-	[Generate]    
+	[Generate]
 	public void Reload() {
 	    CommunicationSubscriptionTypeDAO.DAO.Reload(this);
-    }
-    
+	}
+
 
 
 	[Generate()]
 	public override String ToString() {
-	    return GetType().ToString() + "@" + CommunicationSubscriptionTypeId.ToString(); 
+	    return GetType().ToString() + "@" + CommunicationSubscriptionTypeId.ToString();
 	}
 
     }

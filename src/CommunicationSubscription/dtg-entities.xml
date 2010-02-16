@@ -16,8 +16,8 @@
 	    <property name="AutoSubscribe" type="BooleanType" column="*" />
 	    <property name="EffectiveDate" type="DateTimeType" column="*" />
 	    <property name="ExpirationDate" type="DateTimeType" column="*" />
-	    <property name="CreateDate" type="DateTimeType" column="*" />
-	    <property name="CreateUserId" type="IdType" column="*" />
+	    <property name="CreateDate" type="DateTimeType" column="*" writable="False" />
+	    <property name="CreateUserId" type="IdType" column="*" writable="False" />
 	    <property name="LastModifiedUserId" type="IdType" column="*" writable="False" />
 	    <property name="LastModifiedDate" type="DateTimeType" column="*" writable="False" />
 	</properties>
@@ -27,8 +27,8 @@
 	<properties>
 	    <property name="CommunicationPrimaryKeyId" type="IdType" column="*" writable="False" />
 	    <property name="CommunicationSubscriptionTypeId" type="IdType" column="*" />
-	    <property name="CreateDate" type="DateTimeType" column="*" />
-	    <property name="CreateUserId" type="IdType" column="*" />
+	    <property name="CreateDate" type="DateTimeType" column="*" writable="False" />
+	    <property name="CreateUserId" type="IdType" column="*" writable="False" />
 	    <property name="LastModifiedUserId" type="IdType" column="*" writable="False" />
 	    <property name="LastModifiedDate" type="DateTimeType" column="*" writable="False" />
 	</properties>
