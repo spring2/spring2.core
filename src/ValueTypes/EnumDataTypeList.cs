@@ -99,5 +99,28 @@ namespace Spring2.Core.Types {
 	    }
 	}
 
+	public void Sort(System.Collections.IComparer sorter) {
+	    InnerList.Sort(sorter);
+	}
+
+	public void SortByName() {
+	    InnerList.Sort(new EnumDataTypeNameSorter());
+	}
+
+	public void SortByNameDesc() {
+	    InnerList.Sort(new EnumDataTypeReverseNameSorter());
+	}
+    }
+
+    public class EnumDataTypeNameSorter : System.Collections.IComparer {
+	public int Compare(object x, object y) {
+	    return ((EnumDataType)x).Name.CompareTo(((EnumDataType)y).Name);
+	}
+    }
+
+    public class EnumDataTypeReverseNameSorter : System.Collections.IComparer {
+	public int Compare(object x, object y) {
+	    return ((EnumDataType)y).Name.CompareTo(((EnumDataType)x).Name);
+	}
     }
 }
