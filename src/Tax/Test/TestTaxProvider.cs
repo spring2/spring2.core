@@ -162,21 +162,21 @@ namespace Spring2.Core.Tax.Test {
 
 	    tj = new TaxJurisdiction();
 	    tj.Amount = total * countyRate/100.0;
-	    tj.Description = county;
+	    tj.Description = county.IsEmpty ? new StringType("COUNTY") : county;
 	    tj.JurisdictionType = TaxJurisdictionTypeEnum.COUNTY;
 	    tj.Rate = countyRate;
 	    results.Add(tj);
 
 	    tj = new TaxJurisdiction();
 	    tj.Amount = total * cityRate / 100.0;
-	    tj.Description = city;
+	    tj.Description = city.IsEmpty ? new StringType("CITY") : city;
 	    tj.JurisdictionType = TaxJurisdictionTypeEnum.CITY;
 	    tj.Rate = cityRate;
 	    results.Add(tj);
 
 	    tj = new TaxJurisdiction();
 	    tj.Amount = total * stateRate / 100.0;
-	    tj.Description = region;
+	    tj.Description = region.IsEmpty? new StringType("REGION") : region;
 	    tj.JurisdictionType = TaxJurisdictionTypeEnum.STATE;
 	    tj.Rate = stateRate;
 	    results.Add(tj);
