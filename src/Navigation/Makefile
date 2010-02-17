@@ -87,7 +87,7 @@ gen_xsd:
 	xsd DataObject/*.xsd /d /o:DataObject
 
 JAR		?= $(BINDIR)/jar.exe
-RELEASE_REVISION	:= 2247
+RELEASE_REVISION	:= 1
 BRANCH_TAG 		:= trunk
 
 package_sql: scriptorder combine_sql_scripts

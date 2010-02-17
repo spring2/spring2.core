@@ -13,7 +13,7 @@ RELEASEDIR	:= ../release
 BUILDDIR	:= ../build
 NANT		:= ../bin/NAnt/nant.exe
 
-RELEASE_REVISION	:= 2247
+RELEASE_REVISION:= 1
 GETVERSION	:= $(BINDIR)/getversion.sh
 
 all: build
