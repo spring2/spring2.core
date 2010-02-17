@@ -116,9 +116,3 @@ scriptorder:
 combine_sql_scripts:
 	$(RM) combined_sql_scripts.sql
 	-- for line in $$(cat ScriptOrder.txt); do printf '\n-- START OF: ' >> combined_sql_scripts.sql; echo $$line >> combined_sql_scripts.sql; printf '\n' >> combined_sql_scripts.sql; cat $$line >> combined_sql_scripts.sql; printf '\n-- END OF: ' >> combined_sql_scripts.sql; echo $$line >> combined_sql_scripts.sql; printf '\nGO\n' >> combined_sql_scripts.sql; done
-
-.PHONY: build_db
-build_db:
-
-.PHONY: clean_db
-clean_db: 

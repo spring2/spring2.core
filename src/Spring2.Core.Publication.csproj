@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Spring2.Core</RootNamespace>
-    <AssemblyName>Spring2.Core.CommunicationSubscription</AssemblyName>
+    <AssemblyName>Spring2.Core.Publication</AssemblyName>
     <AssemblyOriginatorKeyFile>spring2.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -33,20 +33,20 @@
     <DefineConstants>TRACE;NET_2_0</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\build\CommunicationSubscription\Spring2.Core.CommunicationSubscription.xml</DocumentationFile>
+    <DocumentationFile>..\build\Publication\Spring2.Core.Publication.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'NET_2_0|AnyCPU' ">
-    <OutputPath>..\build\CommunicationSubscription\</OutputPath>
+    <OutputPath>..\build\Publication\</OutputPath>
     <DefineConstants>TRACE;DEBUG;NET_2_0</DefineConstants>
-    <DocumentationFile>Spring2.Core.CommunicationSubscription.xml</DocumentationFile>
+    <DocumentationFile>Spring2.Core.Publication.xml</DocumentationFile>
     <WarningsAsErrors>
     </WarningsAsErrors>
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'NET_1_1|AnyCPU' ">
-    <OutputPath>..\build\CommunicationSubscription\</OutputPath>
+    <OutputPath>..\build\Publication\</OutputPath>
     <DefineConstants>TRACE;DEBUG;NET_1_1</DefineConstants>
-    <DocumentationFile>Spring2.Core.CommunicationSubscription.xml</DocumentationFile>
+    <DocumentationFile>Spring2.Core.Publication.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Spring2.DataTierGenerator.Attribute, Version=1.0.0.0, Culture=neutral, PublicKeyToken=687bce93d7ce902c">
@@ -61,18 +61,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyVersionInfo.cs" />
-    <Compile Include="CommunicationSubscription\BusinessLogic\CommunicationSubscriptionTracking.cs" />
-    <Compile Include="CommunicationSubscription\BusinessLogic\CommunicationSubscriptionType.cs" />
-    <Compile Include="CommunicationSubscription\DAO\CommunicationSubscriptionTrackingDAO.cs" />
-    <Compile Include="CommunicationSubscription\DAO\CommunicationSubscriptionTypeDAO.cs" />
-    <Compile Include="CommunicationSubscription\DAO\ICommunicationSubscriptionTrackingDAO.cs" />
-    <Compile Include="CommunicationSubscription\DAO\ICommunicationSubscriptionTypeDAO.cs" />
-    <Compile Include="CommunicationSubscription\DataObject\CommunicationSubscriptionTrackingData.cs" />
-    <Compile Include="CommunicationSubscription\DataObject\CommunicationSubscriptionTrackingList.cs" />
-    <Compile Include="CommunicationSubscription\DataObject\CommunicationSubscriptionTypeData.cs" />
-    <Compile Include="CommunicationSubscription\DataObject\CommunicationSubscriptionTypeList.cs" />
-    <Compile Include="CommunicationSubscription\DataObject\ICommunicationSubscriptionTracking.cs" />
-    <Compile Include="CommunicationSubscription\DataObject\ICommunicationSubscriptionType.cs" />
+    <Compile Include="Publication\AssemblyInfo.cs" />
+    <Compile Include="Publication\BusinessLogic\PublicationTracking.cs" />
+    <Compile Include="Publication\BusinessLogic\PublicationType.cs" />
+    <Compile Include="Publication\DAO\IPublicationTrackingDAO.cs" />
+    <Compile Include="Publication\DAO\IPublicationTypeDAO.cs" />
+    <Compile Include="Publication\DAO\PublicationTrackingDAO.cs" />
+    <Compile Include="Publication\DAO\PublicationTypeDAO.cs" />
+    <Compile Include="Publication\DataObject\IPublicationTracking.cs" />
+    <Compile Include="Publication\DataObject\IPublicationType.cs" />
+    <Compile Include="Publication\DataObject\PublicationTrackingData.cs" />
+    <Compile Include="Publication\DataObject\PublicationTrackingList.cs" />
+    <Compile Include="Publication\DataObject\PublicationTypeData.cs" />
+    <Compile Include="Publication\DataObject\PublicationTypeList.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Spring2.Core.Configuration.csproj">
@@ -94,6 +95,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="spring2.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Publication\Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

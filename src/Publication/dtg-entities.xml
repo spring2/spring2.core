@@ -1,9 +1,9 @@
 <!-- Entity definitions -->
 <entities>
-    <entity name="CommunicationSubscriptionType" sqlentity="CommunicationSubscriptionType">
-	<description>Communication Subscription Type</description>
+    <entity name="PublicationType" sqlentity="PublicationType">
+	<description>Publication Type</description>
 	<properties>
-	    <property name="CommunicationSubscriptionTypeId" type="IdType" column="*" writable="False" />
+	    <property name="PublicationTypeId" type="IdType" column="*" writable="False" />
 	    <property name="Name" type="StringType" column="*" />
 	    <property name="EmailSubject" type="StringType" column="*" />
 	    <property name="EmailBody" type="StringType" column="*" />
@@ -22,11 +22,11 @@
 	    <property name="LastModifiedDate" type="DateTimeType" column="*" writable="False" />
 	</properties>
     </entity>
-    <entity name="CommunicationSubscriptionTracking" sqlentity="CommunicationSubscriptionTracking">
-	<description>Communication Subscription Tracking</description>
+    <entity name="PublicationTracking" sqlentity="PublicationTracking">
+	<description>Publication Tracking</description>
 	<properties>
-	    <property name="CommunicationPrimaryKeyId" type="IdType" column="*" writable="False" />
-	    <property name="CommunicationSubscriptionTypeId" type="IdType" column="*" />
+	    <property name="PublicationPrimaryKeyId" type="IdType" column="*" writable="False" />
+	    <property name="PublicationTypeId" type="IdType" column="*" />
 	    <property name="CreateDate" type="DateTimeType" column="*" writable="False" />
 	    <property name="CreateUserId" type="IdType" column="*" writable="False" />
 	    <property name="LastModifiedUserId" type="IdType" column="*" writable="False" />

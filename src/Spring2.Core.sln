@@ -90,7 +90,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Shipping", "Sp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Shipping.Test", "Spring2.Core.Shipping.Test.csproj", "{DE0FCF96-8BDA-4A8E-9FBA-FD25CA1CD012}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.CommunicationSubscription", "Spring2.Core.CommunicationSubscription.csproj", "{2DD981E6-ECCB-4D2E-BCF9-9A0D194BDE8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Publication", "Spring2.Core.Publication.csproj", "{2DD981E6-ECCB-4D2E-BCF9-9A0D194BDE8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

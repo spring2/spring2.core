@@ -51,7 +51,7 @@
 	    <task name="delete procs" element="sqlentity" template="Template\sql_delete.vm" directory="sql\proc" filenameformat="sp{element.Name}_Delete.proc.sql" writer="region" />
 	    <task name="insert procs" element="sqlentity" template="Template\sql_insert.vm" directory="sql\proc" filenameformat="sp{element.Name}_Insert.proc.sql" writer="region" />
 	    <task name="update procs" element="sqlentity" template="Template\sql_update.vm" directory="sql\proc" filenameformat="sp{element.Name}_Update.proc.sql" writer="region" />
-	    <task name="sql dependencies" element="sqlentities" template="Template\sql-dependencies.vm" directory="sql" filenameformat="CommunicationSubscription.mk" writer="region" />
+	    <task name="sql dependencies" element="sqlentities" template="Template\sql-dependencies.vm" directory="sql" filenameformat="Publication.mk" writer="region" />
 	</tasks>
 	<tools>
 	    <tool name="sql" class="Spring2.DataTierGenerator.Tool.MSSqlServerTool,Spring2.DataTierGenerator.Tool" />
