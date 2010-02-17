@@ -45,7 +45,7 @@
 		</columns>
 		<constraints>
 		    <constraint name="PK_PublicationTracking" type="PRIMARY KEY" clustered="true">
-			<column name="PublicationPrimaryKeyId" />
+			<column name="PublicationTrackingId" />
 		    </constraint>
 		    <constraint name="UN_PublicationPrimaryKey_Type" type="UNIQUE">
 			<column name="PublicationPrimaryKeyId" />

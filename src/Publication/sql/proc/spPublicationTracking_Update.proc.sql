@@ -22,6 +22,7 @@ AS
 UPDATE
 	PublicationTracking
 SET
+	PublicationPrimaryKeyId = @PublicationPrimaryKeyId,
 	PublicationTypeId = @PublicationTypeId,
 	CreateDate = @CreateDate,
 	CreateUserId = @CreateUserId,

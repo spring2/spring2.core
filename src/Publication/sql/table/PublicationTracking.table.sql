@@ -1,11 +1,6 @@
 SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
-if not exists(select * from syscolumns where id=object_id('PublicationTracking') and name = 'PublicationTrackingId')
-Begin
-	drop table dbo.PublicationTracking
-End
-GO
 
 if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
 drop procedure #spAlterColumn
@@ -132,7 +127,7 @@ if not exists (select * from dbo.sysobjects where id = object_id(N'PK_Publicatio
 ALTER TABLE PublicationTracking WITH NOCHECK ADD
 	CONSTRAINT PK_PublicationTracking PRIMARY KEY CLUSTERED
 	(
-		PublicationPrimaryKeyId
+		PublicationTrackingId
 	)
 GO
 
