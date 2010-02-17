@@ -7,11 +7,11 @@ using System.Data;
 using Spring2.Core.DAO;
 using Spring2.Core.Types;
 
-using Spring2.Core.CommunicationSubscription.BusinessLogic;
-using Spring2.Core.CommunicationSubscription.DataObject;
+using Spring2.Core.Publication.BusinessLogic;
+using Spring2.Core.Publication.DataObject;
 
 
-namespace Spring2.Core.CommunicationSubscription.Dao {
+namespace Spring2.Core.Publication.Dao {
 
     /// <summary>
     /// Data access class for PublicationTracking business entity.

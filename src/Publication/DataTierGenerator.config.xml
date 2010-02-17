@@ -62,7 +62,7 @@
     -->
     <config>
 	<setting name="RootDirectory" value="." />
-	<setting name="RootNameSpace" value="Spring2.Core.CommunicationSubscription" />
+	<setting name="RootNameSpace" value="Spring2.Core.Publication" />
 	<setting name="DAOBaseClass" value="Spring2.Core.DAO.SqlEntityDAO" />
     </config>
     <entities-ref xinc:href="dtg-entities.xml" />

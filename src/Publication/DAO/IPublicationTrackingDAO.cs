@@ -4,19 +4,19 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-using Spring2.Core.CommunicationSubscription.DataObject;
+using Spring2.Core.Publication.DataObject;
 using Spring2.Core.DAO;
 using Spring2.Core.Types;
 
 
 
-using Spring2.Core.CommunicationSubscription.BusinessLogic;
+using Spring2.Core.Publication.BusinessLogic;
 using Spring2.Core.BusinessEntity;
 
 using Spring2.DataTierGenerator.Attribute;
 
 
-namespace Spring2.Core.CommunicationSubscription.Dao {
+namespace Spring2.Core.Publication.Dao {
     /// <summary>
     /// Data access interface for PublicationTracking business entity.
     /// </summary>

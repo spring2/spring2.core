@@ -6,12 +6,12 @@ using Spring2.Core.Security;
 using Spring2.Core.Types;
 using Spring2.DataTierGenerator.Attribute;
 
-using Spring2.Core.CommunicationSubscription.Dao;
-using Spring2.Core.CommunicationSubscription.DataObject;
+using Spring2.Core.Publication.Dao;
+using Spring2.Core.Publication.DataObject;
 
 
 
-namespace Spring2.Core.CommunicationSubscription.BusinessLogic {
+namespace Spring2.Core.Publication.BusinessLogic {
 
     /// <summary>
     /// Publication Tracking

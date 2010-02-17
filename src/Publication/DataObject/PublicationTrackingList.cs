@@ -6,7 +6,7 @@ using Spring2.DataTierGenerator.Attribute;
 
 
 
-namespace Spring2.Core.CommunicationSubscription.DataObject {
+namespace Spring2.Core.Publication.DataObject {
 
     /// <summary>
     /// IPublicationTracking generic collection
