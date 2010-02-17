@@ -138,8 +138,8 @@ package_sql:
 	mv $(RELEASEDIR)/Spring2.Core.ResourceManager.sql.zip $(RELEASEDIR)/Spring2.Core.ResourceManager.sql-$(shell $(GETVERSION)).zip
 	cd SeleniumLoadTester; make package_sql
 	mv $(RELEASEDIR)/Spring2.Core.SeleniumLoadTester.sql.zip $(RELEASEDIR)/Spring2.Core.SeleniumLoadTester.sql-$(shell $(GETVERSION)).zip
-	cd CommunicationSubscription; make package_sql
-	mv $(RELEASEDIR)/Spring2.Core.CommunicationSubscription.sql.zip $(RELEASEDIR)/Spring2.Core.CommunicationSubscription.sql-$(shell $(GETVERSION)).zip
+	cd Publication; make package_sql
+	mv $(RELEASEDIR)/Spring2.Core.Publication.sql.zip $(RELEASEDIR)/Spring2.Core.Publication.sql-$(shell $(GETVERSION)).zip
 
 	
 .PHONY: ncover
