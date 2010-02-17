@@ -11,13 +11,13 @@ using Spring2.Core.Publication.DataObject;
 
 
 
+
 namespace Spring2.Core.Publication.BusinessLogic {
 
     /// <summary>
     /// Publication Tracking
     /// </summary>
     public class PublicationTracking : Spring2.Core.BusinessEntity.BusinessEntity, IPublicationTracking {
-
 	[Generate()]
 	private IdType publicationPrimaryKeyId = IdType.DEFAULT;
 	[Generate()]
@@ -46,12 +46,13 @@ namespace Spring2.Core.Publication.BusinessLogic {
 	}
 
 	[Generate()]
-	public static PublicationTracking GetInstance(IdType publicationPrimaryKeyId) {
-	    return PublicationTrackingDAO.DAO.Load(publicationPrimaryKeyId);
+	public static PublicationTracking GetInstance(IdType publicationTrackingId) {
+	    return PublicationTrackingDAO.DAO.Load(publicationTrackingId);
 	}
 
 	[Generate()]
 	public void Update(PublicationTrackingData data) {
+	    publicationPrimaryKeyId = data.PublicationPrimaryKeyId.IsDefault ? publicationPrimaryKeyId : data.PublicationPrimaryKeyId;
 	    publicationTypeId = data.PublicationTypeId.IsDefault ? publicationTypeId : data.PublicationTypeId;
 	    Store();
 	}
@@ -69,7 +70,7 @@ namespace Spring2.Core.Publication.BusinessLogic {
 
 	    SetAuditStamps();
 	    if (isNew) {
-		this.PublicationPrimaryKeyId = PublicationTrackingDAO.DAO.Insert(this);
+		this.PublicationTrackingId = PublicationTrackingDAO.DAO.Insert(this);
 		isNew = false;
 	    } else {
 		PublicationTrackingDAO.DAO.Update(this);
@@ -93,12 +94,14 @@ namespace Spring2.Core.Publication.BusinessLogic {
 	public MessageList Validate() {
 
 	    MessageList errors = new MessageList();
+	    if (!PublicationPrimaryKeyId.IsValid) {
+		errors.Add(new MissingRequiredFieldError(PublicationTrackingFields.PUBLICATIONPRIMARYKEYID.Name));
+	    }
 	    if (!PublicationTypeId.IsValid) {
 		errors.Add(new MissingRequiredFieldError(PublicationTrackingFields.PUBLICATIONTYPEID.Name));
 	    }
 	    return errors;
 	}
-
 
 	[Generate()]
 	public IdType PublicationPrimaryKeyId {
@@ -139,13 +142,40 @@ namespace Spring2.Core.Publication.BusinessLogic {
 	[Generate()]
 	public void Reload() {
 	    PublicationTrackingDAO.DAO.Reload(this);
+	    publicationType = PublicationType.NewInstance();
 	}
 
 
 
 	[Generate()]
 	public override String ToString() {
-	    return GetType().ToString() + "@" + PublicationPrimaryKeyId.ToString();
+	    return GetType().ToString() + "@" + PublicationTrackingId.ToString();
+	}
+
+	[Generate()]
+	private IdType publicationTrackingId = IdType.DEFAULT;
+	[Generate()]
+	private PublicationType publicationType = PublicationType.NewInstance();
+
+
+	[Generate()]
+	public IdType PublicationTrackingId {
+	    get { return this.publicationTrackingId; }
+	    set { this.publicationTrackingId = value; }
+	}
+
+	public PublicationType PublicationType {
+	    get {
+		if (publicationType.IsNew && PublicationTypeId.IsValid) {
+		    publicationType = PublicationType.GetInstance(PublicationTypeId);
+		}
+		return this.publicationType as PublicationType;
+	    }
+	}
+
+	[Generate()]
+	IPublicationType IPublicationTracking.PublicationType {
+	    get { return this.PublicationType; }
 	}
 
     }

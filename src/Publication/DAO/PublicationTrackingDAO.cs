@@ -40,6 +40,7 @@ namespace Spring2.Core.Publication.Dao {
 
 	public sealed class ColumnOrdinals {
 	    public String Prefix = String.Empty;
+	    public Int32 PublicationTrackingId;
 	    public Int32 PublicationPrimaryKeyId;
 	    public Int32 PublicationTypeId;
 	    public Int32 CreateDate;
@@ -48,6 +49,7 @@ namespace Spring2.Core.Publication.Dao {
 	    public Int32 LastModifiedUserId;
 
 	    internal ColumnOrdinals(IDataReader reader) {
+		PublicationTrackingId = reader.GetOrdinal("PublicationTrackingId");
 		PublicationPrimaryKeyId = reader.GetOrdinal("PublicationPrimaryKeyId");
 		PublicationTypeId = reader.GetOrdinal("PublicationTypeId");
 		CreateDate = reader.GetOrdinal("CreateDate");
@@ -58,6 +60,7 @@ namespace Spring2.Core.Publication.Dao {
 
 	    internal ColumnOrdinals(IDataReader reader, String prefix) {
 		Prefix = prefix;
+		PublicationTrackingId = reader.GetOrdinal(prefix + "PublicationTrackingId");
 		PublicationPrimaryKeyId = reader.GetOrdinal(prefix + "PublicationPrimaryKeyId");
 		PublicationTypeId = reader.GetOrdinal(prefix + "PublicationTypeId");
 		CreateDate = reader.GetOrdinal(prefix + "CreateDate");
@@ -71,6 +74,7 @@ namespace Spring2.Core.Publication.Dao {
 	/// Initializes the static map of property names to sql expressions.
 	/// </summary>
 	static PublicationTrackingDAO() {
+	    AddPropertyMapping("PublicationTrackingId", @"PublicationTrackingId");
 	    AddPropertyMapping("PublicationPrimaryKeyId", @"PublicationPrimaryKeyId");
 	    AddPropertyMapping("PublicationTypeId", @"PublicationTypeId");
 	    AddPropertyMapping("CreateDate", @"CreateDate");
@@ -189,12 +193,12 @@ namespace Spring2.Core.Publication.Dao {
 	/// <summary>
 	/// Finds a PublicationTracking entity using it's primary key.
 	/// </summary>
-	/// <param name="publicationPrimaryKeyId">A key field.</param>
+	/// <param name="publicationTrackingId">A key field.</param>
 	/// <returns>A PublicationTracking object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
-	public PublicationTracking Load(IdType publicationPrimaryKeyId) {
+	public PublicationTracking Load(IdType publicationTrackingId) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(CreateEqualityPredicate(PublicationTrackingFields.PUBLICATIONPRIMARYKEYID, EqualityOperatorEnum.Equal, publicationPrimaryKeyId.IsValid ? publicationPrimaryKeyId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(PublicationTrackingFields.PUBLICATIONTRACKINGID, EqualityOperatorEnum.Equal, publicationTrackingId.IsValid ? publicationTrackingId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 	    return GetDataObject(dataReader);
 	}
@@ -204,7 +208,7 @@ namespace Spring2.Core.Publication.Dao {
 	/// </summary>
 	public void Reload(PublicationTracking instance) {
 	    SqlFilter filter = new SqlFilter();
-	    filter.And(CreateEqualityPredicate(PublicationTrackingFields.PUBLICATIONPRIMARYKEYID, EqualityOperatorEnum.Equal, instance.PublicationPrimaryKeyId.IsValid ? instance.PublicationPrimaryKeyId.ToInt32() as Object : DBNull.Value));
+	    filter.And(CreateEqualityPredicate(PublicationTrackingFields.PUBLICATIONTRACKINGID, EqualityOperatorEnum.Equal, instance.PublicationTrackingId.IsValid ? instance.PublicationTrackingId.ToInt32() as Object : DBNull.Value));
 	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 
 	    if (!dataReader.Read()) {
@@ -295,6 +299,11 @@ namespace Spring2.Core.Publication.Dao {
 	/// <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
 	/// <returns>Data object built from current row.</returns>
 	public PublicationTracking GetDataObjectFromReader(PublicationTracking data, IDataReader dataReader, ColumnOrdinals ordinals) {
+	    if (dataReader.IsDBNull(ordinals.PublicationTrackingId)) {
+		data.PublicationTrackingId = IdType.UNSET;
+	    } else {
+		data.PublicationTrackingId = new IdType(dataReader.GetInt32(ordinals.PublicationTrackingId));
+	    }
 	    if (dataReader.IsDBNull(ordinals.PublicationPrimaryKeyId)) {
 		data.PublicationPrimaryKeyId = IdType.UNSET;
 	    } else {
@@ -350,6 +359,7 @@ namespace Spring2.Core.Publication.Dao {
 	    cmd.Parameters.Add(idParam);
 
 	    //Create the parameters and append them to the command object
+	    cmd.Parameters.Add(CreateDataParameter(PublicationTrackingFields.PUBLICATIONPRIMARYKEYID, data.PublicationPrimaryKeyId.IsValid ? data.PublicationPrimaryKeyId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTrackingFields.PUBLICATIONTYPEID, data.PublicationTypeId.IsValid ? data.PublicationTypeId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTrackingFields.CREATEDATE, data.CreateDate.IsValid ? data.CreateDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTrackingFields.CREATEUSERID, data.CreateUserId.IsValid ? data.CreateUserId.ToInt32() as Object : DBNull.Value));
@@ -387,6 +397,7 @@ namespace Spring2.Core.Publication.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spPublicationTracking_Update", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    //Create the parameters and append them to the command object
+	    cmd.Parameters.Add(CreateDataParameter(PublicationTrackingFields.PUBLICATIONTRACKINGID, data.PublicationTrackingId.IsValid ? data.PublicationTrackingId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTrackingFields.PUBLICATIONPRIMARYKEYID, data.PublicationPrimaryKeyId.IsValid ? data.PublicationPrimaryKeyId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTrackingFields.PUBLICATIONTYPEID, data.PublicationTypeId.IsValid ? data.PublicationTypeId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTrackingFields.CREATEDATE, data.CreateDate.IsValid ? data.CreateDate.ToDateTime() as Object : DBNull.Value));
@@ -405,24 +416,24 @@ namespace Spring2.Core.Publication.Dao {
 
 
 	/// <summary>
-	/// Deletes a record from the PublicationTracking table by PublicationPrimaryKeyId.
+	/// Deletes a record from the PublicationTracking table by PublicationTrackingId.
 	/// </summary>
-	/// <param name="publicationPrimaryKeyId">A key field.</param>
-	public void Delete(IdType publicationPrimaryKeyId) {
-	    Delete(publicationPrimaryKeyId, null);
+	/// <param name="publicationTrackingId">A key field.</param>
+	public void Delete(IdType publicationTrackingId) {
+	    Delete(publicationTrackingId, null);
 	}
 
 	/// <summary>
-	/// Deletes a record from the PublicationTracking table by PublicationPrimaryKeyId.
+	/// Deletes a record from the PublicationTracking table by PublicationTrackingId.
 	/// </summary>
-	/// <param name="publicationPrimaryKeyId">A key field.</param>
+	/// <param name="publicationTrackingId">A key field.</param>
 	/// <param name="transaction"></param>
-	public void Delete(IdType publicationPrimaryKeyId, IDbTransaction transaction) {
+	public void Delete(IdType publicationTrackingId, IDbTransaction transaction) {
 	    // Create and execute the command
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spPublicationTracking_Delete", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    // Create and append the parameters
-	    cmd.Parameters.Add(CreateDataParameter(PublicationTrackingFields.PUBLICATIONPRIMARYKEYID, publicationPrimaryKeyId.IsValid ? publicationPrimaryKeyId.ToInt32() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(PublicationTrackingFields.PUBLICATIONTRACKINGID, publicationTrackingId.IsValid ? publicationTrackingId.ToInt32() as Object : DBNull.Value));
 	    // Execute the query and return the result
 	    cmd.ExecuteNonQuery();
 

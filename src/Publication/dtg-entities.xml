@@ -25,7 +25,9 @@
     <entity name="PublicationTracking" sqlentity="PublicationTracking">
 	<description>Publication Tracking</description>
 	<properties>
-	    <property name="PublicationPrimaryKeyId" type="IdType" column="*" writable="False" />
+	    <property name="PublicationTrackingId" type="IdType" column="*" writable="False" />
+	    <property name="PublicationPrimaryKeyId" type="IdType" column="*" />
+	    <property name="PublicationType" type="IPublicationType" concretetype="PublicationType" writable="False"></property>
 	    <property name="PublicationTypeId" type="IdType" column="*" />
 	    <property name="CreateDate" type="DateTimeType" column="*" writable="False" />
 	    <property name="CreateUserId" type="IdType" column="*" writable="False" />

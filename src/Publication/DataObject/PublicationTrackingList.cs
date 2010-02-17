@@ -49,7 +49,7 @@ namespace Spring2.Core.Publication.DataObject {
 	    set {
 		if (!immutable) {
 		    List[index] = value;
-		    keys[value.PublicationPrimaryKeyId] = value;
+		    keys[value.PublicationTrackingId] = value;
 		} else {
 		    throw new System.Data.ReadOnlyException();
 		}
@@ -60,7 +60,7 @@ namespace Spring2.Core.Publication.DataObject {
 	public void Add(IPublicationTracking value) {
 	    if (!immutable) {
 		List.Add(value);
-		keys[value.PublicationPrimaryKeyId] = value;
+		keys[value.PublicationTrackingId] = value;
 	    } else {
 		throw new System.Data.ReadOnlyException();
 	    }
@@ -70,7 +70,7 @@ namespace Spring2.Core.Publication.DataObject {
 	public void Insert(Int32 index, IPublicationTracking value) {
 	    if (!immutable) {
 		List.Insert(index, value);
-		keys[value.PublicationPrimaryKeyId] = value;
+		keys[value.PublicationTrackingId] = value;
 	    } else {
 		throw new System.Data.ReadOnlyException();
 	    }
@@ -83,7 +83,7 @@ namespace Spring2.Core.Publication.DataObject {
 		    throw new IndexOutOfRangeException();
 		} else {
 		    IPublicationTracking value = this[index];
-		    keys.Remove(value.PublicationPrimaryKeyId);
+		    keys.Remove(value.PublicationTrackingId);
 		    List.RemoveAt(index);
 		}
 	    } else {
@@ -127,17 +127,17 @@ namespace Spring2.Core.Publication.DataObject {
 	/// See if the list contains an instance by identity
 	/// </summary>
 	[Generate]
-	public Boolean Contains(IdType publicationPrimaryKeyId) {
-	    return keys.Contains(publicationPrimaryKeyId);
+	public Boolean Contains(IdType publicationTrackingId) {
+	    return keys.Contains(publicationTrackingId);
 	}
 
 	/// <summary>
 	/// returns the instance by identity or null if it not found
 	/// </summary>
 	[Generate]
-	public IPublicationTracking this[IdType publicationPrimaryKeyId] {
+	public IPublicationTracking this[IdType publicationTrackingId] {
 	    get {
-		return keys[publicationPrimaryKeyId] as IPublicationTracking;
+		return keys[publicationTrackingId] as IPublicationTracking;
 	    }
 	}
 
@@ -149,7 +149,7 @@ namespace Spring2.Core.Publication.DataObject {
 	    PublicationTrackingList result = new PublicationTrackingList();
 
 	    foreach(IPublicationTracking data in List) {
-		if (list.Contains(data.PublicationPrimaryKeyId)) {
+		if (list.Contains(data.PublicationTrackingId)) {
 		    result.Add(data);
 		}
 	    }
@@ -165,7 +165,7 @@ namespace Spring2.Core.Publication.DataObject {
 	    PublicationTrackingList result = new PublicationTrackingList();
 
 	    foreach(IPublicationTracking data in List) {
-		if (!list.Contains(data.PublicationPrimaryKeyId)) {
+		if (!list.Contains(data.PublicationTrackingId)) {
 		    result.Add(data);
 		}
 	    }
@@ -177,11 +177,11 @@ namespace Spring2.Core.Publication.DataObject {
 	/// removes value by identity
 	/// </summary>
 	[Generate]
-	public void Remove(IdType publicationPrimaryKeyId) {
+	public void Remove(IdType publicationTrackingId) {
 	    if(!immutable) {
-		IPublicationTracking objectInList = this[publicationPrimaryKeyId];
+		IPublicationTracking objectInList = this[publicationTrackingId];
 		List.Remove(objectInList);
-		keys.Remove(publicationPrimaryKeyId);
+		keys.Remove(publicationTrackingId);
 	    } else {
 		throw new System.Data.ReadOnlyException();
 	    }
@@ -211,6 +211,19 @@ namespace Spring2.Core.Publication.DataObject {
 	    }
 
 	    InnerList.Sort(comparer);
+	}
+
+	[Generate]
+	public class PublicationTrackingIdSorter : IComparer {
+	    public Int32 Compare(Object a, Object b) {
+		IPublicationTracking o1 = (IPublicationTracking)a;
+		IPublicationTracking o2 = (IPublicationTracking)b;
+
+		if (o1 == null || o2 == null || !o1.PublicationTrackingId.IsValid || !o2.PublicationTrackingId.IsValid) {
+		    return 0;
+		}
+		return o1.PublicationTrackingId.CompareTo(o2.PublicationTrackingId);
+	    }
 	}
 
 	[Generate]

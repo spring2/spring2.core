@@ -4,8 +4,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-using Spring2.Core.Publication.DataObject;
 using Spring2.Core.DAO;
+
+using Spring2.Core.Publication.DataObject;
 using Spring2.Core.Types;
 
 
@@ -19,7 +20,9 @@ namespace Spring2.Core.Publication.DataObject {
 	private PublicationTrackingFields() {}
 	public static readonly String ENTITY_NAME = "PublicationTracking";
 	
+	public static readonly ColumnMetaData PUBLICATIONTRACKINGID = new ColumnMetaData("PublicationTrackingId", "PublicationTrackingId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
 	public static readonly ColumnMetaData PUBLICATIONPRIMARYKEYID = new ColumnMetaData("PublicationPrimaryKeyId", "PublicationPrimaryKeyId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
+	public static readonly ColumnMetaData PUBLICATIONTYPE = new ColumnMetaData("PublicationType", "", DbType.Int32, SqlDbType.Int, 0, 0, 0);
 	public static readonly ColumnMetaData PUBLICATIONTYPEID = new ColumnMetaData("PublicationTypeId", "PublicationTypeId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
 	public static readonly ColumnMetaData CREATEDATE = new ColumnMetaData("CreateDate", "CreateDate", DbType.DateTime, SqlDbType.DateTime, 0, 0, 0);
 	public static readonly ColumnMetaData CREATEUSERID = new ColumnMetaData("CreateUserId", "CreateUserId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
@@ -28,7 +31,13 @@ namespace Spring2.Core.Publication.DataObject {
     }
 
     public interface IPublicationTracking : IBusinessEntity {
+	IdType PublicationTrackingId {
+	    get;
+	}
 	IdType PublicationPrimaryKeyId {
+	    get;
+	}
+	IPublicationType PublicationType {
 	    get;
 	}
 	IdType PublicationTypeId {

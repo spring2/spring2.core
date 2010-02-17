@@ -1,6 +1,11 @@
 SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
+if not exists(select * from syscolumns where id=object_id('PublicationTracking') and name = 'PublicationTrackingId')
+Begin
+	drop table dbo.PublicationTracking
+End
+GO
 
 if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
 drop procedure #spAlterColumn
@@ -22,7 +27,8 @@ GO
 
 if not exists (select * from dbo.sysobjects where id = object_id(N'[PublicationTracking]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
 CREATE TABLE dbo.PublicationTracking (
-	PublicationPrimaryKeyId Int IDENTITY(1,1) NOT NULL,
+	PublicationTrackingId Int IDENTITY(1,1) NOT NULL,
+	PublicationPrimaryKeyId Int NOT NULL,
 	PublicationTypeId Int NOT NULL,
 	CreateDate DateTime NOT NULL,
 	CreateUserId Int NOT NULL,
@@ -31,10 +37,23 @@ CREATE TABLE dbo.PublicationTracking (
 )
 GO
 
+if not exists(select * from syscolumns where id=object_id('PublicationTracking') and name = 'PublicationTrackingId')
+  BEGIN
+	ALTER TABLE PublicationTracking ADD
+	    PublicationTrackingId Int IDENTITY(1,1) NOT NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('PublicationTracking') and name = 'PublicationTrackingId')
+  BEGIN
+	exec #spAlterColumn 'PublicationTracking', 'PublicationTrackingId', 'Int', 1
+  END
+GO
+
 if not exists(select * from syscolumns where id=object_id('PublicationTracking') and name = 'PublicationPrimaryKeyId')
   BEGIN
 	ALTER TABLE PublicationTracking ADD
-	    PublicationPrimaryKeyId Int IDENTITY(1,1) NOT NULL
+	    PublicationPrimaryKeyId Int NOT NULL
   END
 GO
 
@@ -114,6 +133,16 @@ ALTER TABLE PublicationTracking WITH NOCHECK ADD
 	CONSTRAINT PK_PublicationTracking PRIMARY KEY CLUSTERED
 	(
 		PublicationPrimaryKeyId
+	)
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'UN_PublicationPrimaryKey_Type') and OBJECTPROPERTY(id, N'IsUniqueCnst') = 1)
+ALTER TABLE PublicationTracking ADD
+	CONSTRAINT UN_PublicationPrimaryKey_Type UNIQUE
+	(
+		PublicationPrimaryKeyId
+,
+		PublicationTypeId
 	)
 GO
 

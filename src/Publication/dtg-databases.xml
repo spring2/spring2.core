@@ -35,7 +35,8 @@
 		
 	    <sqlentity name="PublicationTracking" view="vwPublicationTracking">
 		<columns>
-		    <column name="PublicationPrimaryKeyId" sqltype="Int" identity="True" required="True" />
+		    <column name="PublicationTrackingId" sqltype="Int" identity="True" required="True" />
+		    <column name="PublicationPrimaryKeyId" sqltype="Int" required="True" />
 		    <column name="PublicationTypeId" sqltype="Int" required="True" />
 		    <column name="CreateDate" sqltype="DateTime" required="True" />
 		    <column name="CreateUserId" sqltype="Int" required="True" />
@@ -45,6 +46,10 @@
 		<constraints>
 		    <constraint name="PK_PublicationTracking" type="PRIMARY KEY" clustered="true">
 			<column name="PublicationPrimaryKeyId" />
+		    </constraint>
+		    <constraint name="UN_PublicationPrimaryKey_Type" type="UNIQUE">
+			<column name="PublicationPrimaryKeyId" />
+			<column name="PublicationTypeId" />
 		    </constraint>
 		    <constraint name="FK_PublicationTracking_Type" type="FOREIGN KEY" foreignentity="PublicationType">
 			<column name="PublicationTypeId" foreigncolumn="PublicationTypeId" />

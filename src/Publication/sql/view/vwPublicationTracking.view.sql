@@ -11,6 +11,7 @@ CREATE VIEW dbo.[vwPublicationTracking]
 AS
 
 SELECT
+    PublicationTracking.PublicationTrackingId,
     PublicationTracking.PublicationPrimaryKeyId,
     PublicationTracking.PublicationTypeId,
     PublicationTracking.CreateDate,

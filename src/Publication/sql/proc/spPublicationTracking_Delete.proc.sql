@@ -8,11 +8,11 @@ GO
 
 CREATE PROCEDURE dbo.spPublicationTracking_Delete
 
-@PublicationPrimaryKeyId	Int
+@PublicationTrackingId	Int
 
 AS
 
-if not exists(SELECT * FROM PublicationTracking WHERE (	PublicationPrimaryKeyId = @PublicationPrimaryKeyId
+if not exists(SELECT * FROM PublicationTracking WHERE (	PublicationTrackingId = @PublicationTrackingId
 ))
     BEGIN
         RAISERROR  ('spPublicationTracking_Delete: record not found to delete', 16,1)
@@ -23,6 +23,6 @@ DELETE
 FROM
 	PublicationTracking
 WHERE 
-	PublicationPrimaryKeyId = @PublicationPrimaryKeyId
+	PublicationTrackingId = @PublicationTrackingId
 GO
 

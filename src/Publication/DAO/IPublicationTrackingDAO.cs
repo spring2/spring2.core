@@ -4,8 +4,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-using Spring2.Core.Publication.DataObject;
 using Spring2.Core.DAO;
+
+using Spring2.Core.Publication.DataObject;
 using Spring2.Core.Types;
 
 
@@ -106,11 +107,11 @@ namespace Spring2.Core.Publication.Dao {
 	/// <summary>
 	/// Finds a PublicationTracking entity using it's primary key.
 	/// </summary>
-	/// <param name="publicationPrimaryKeyId">A key field.</param>
+	/// <param name="publicationTrackingId">A key field.</param>
 	/// <returns>A PublicationTracking object.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
 	[Generate]
-	PublicationTracking Load(IdType publicationPrimaryKeyId);
+	PublicationTracking Load(IdType publicationTrackingId);
 
 	/// <summary>
 	/// Repopulates an existing business entity instance
@@ -171,11 +172,11 @@ namespace Spring2.Core.Publication.Dao {
 	void Update(PublicationTracking data);
 
 	/// <summary>
-	/// Deletes a record from the PublicationTracking table by PublicationPrimaryKeyId.
+	/// Deletes a record from the PublicationTracking table by PublicationTrackingId.
 	/// </summary>
-	/// <param name="publicationPrimaryKeyId">A key field.</param>
+	/// <param name="publicationTrackingId">A key field.</param>
 	[Generate]
-	void Delete(IdType publicationPrimaryKeyId);
+	void Delete(IdType publicationTrackingId);
 
 
 	//}

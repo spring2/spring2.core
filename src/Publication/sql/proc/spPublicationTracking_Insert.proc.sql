@@ -7,6 +7,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE dbo.spPublicationTracking_Insert
+	@PublicationPrimaryKeyId	Int = null,
 	@PublicationTypeId	Int = null,
 	@CreateDate	DateTime = null,
 	@CreateUserId	Int = null,
@@ -17,12 +18,14 @@ AS
 
 
 INSERT INTO PublicationTracking
-(	PublicationTypeId,
+(	PublicationPrimaryKeyId,
+	PublicationTypeId,
 	CreateDate,
 	CreateUserId,
 	LastModifiedDate,
 	LastModifiedUserId)
 VALUES (
+	@PublicationPrimaryKeyId,
 	@PublicationTypeId,
 	@CreateDate,
 	@CreateUserId,

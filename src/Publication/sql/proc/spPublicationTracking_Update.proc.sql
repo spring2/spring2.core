@@ -8,6 +8,7 @@ GO
 
 CREATE PROCEDURE dbo.spPublicationTracking_Update
 
+	@PublicationTrackingId	Int = null,
 	@PublicationPrimaryKeyId	Int = null,
 	@PublicationTypeId	Int = null,
 	@CreateDate	DateTime = null,
@@ -27,7 +28,7 @@ SET
 	LastModifiedDate = @LastModifiedDate,
 	LastModifiedUserId = @LastModifiedUserId
 WHERE
-PublicationPrimaryKeyId = @PublicationPrimaryKeyId
+PublicationTrackingId = @PublicationTrackingId
 
 
 if @@ROWCOUNT <> 1

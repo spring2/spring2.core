@@ -4,8 +4,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-using Spring2.Core.Publication.DataObject;
 using Spring2.Core.DAO;
+
+using Spring2.Core.Publication.DataObject;
 using Spring2.Core.Types;
 
 
@@ -18,7 +19,13 @@ namespace Spring2.Core.Publication.DataObject {
 
 	public static readonly PublicationTrackingData DEFAULT = new PublicationTrackingData();
 
+	private IdType publicationPrimaryKeyId = IdType.DEFAULT;
 	private IdType publicationTypeId = IdType.DEFAULT;
+
+	public IdType PublicationPrimaryKeyId {
+	    get { return this.publicationPrimaryKeyId; }
+	    set { this.publicationPrimaryKeyId = value; }
+	}
 
 	public IdType PublicationTypeId {
 	    get { return this.publicationTypeId; }
