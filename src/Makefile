@@ -33,7 +33,7 @@ gen:
 	cd Currency; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
 	cd Navigation; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
 	cd ResourceManager; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
-	cd CommunicationSubscription; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
+	cd Publication; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
 
 .PHONY: build_db
 build_db:
@@ -45,7 +45,7 @@ build_db:
 	cd PerformanceMonitor; make build_db
 	cd ResourceManager; make build_db
 	cd SeleniumLoadTester; make build_db
-	cd CommunicationSubscription; make build_db
+	cd Publication; make build_db
 
 .PHONY: clean_db
 clean_db: 	
@@ -57,7 +57,7 @@ clean_db:
 	cd PerformanceMonitor; make clean_db
 	cd ResourceManager; make clean_db
 	cd SeleniumLoadTester; make clean_db
-	#cd CommunicationSubscription; make clean_db
+	cd Publication; make clean_db
 
 .PHONY: build
 build:
