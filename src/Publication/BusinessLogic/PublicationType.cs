@@ -263,15 +263,17 @@ namespace Spring2.Core.Publication.BusinessLogic {
 	    PublicationTypeDAO.DAO.Reload(this);
 	}
 
-
-
 	[Generate()]
 	public override String ToString() {
 	    return GetType().ToString() + "@" + PublicationTypeId.ToString();
 	}
 
-	public static PublicationTypeList GetActivePublications() {
-	    return PublicationTypeDAO.DAO.FindActivePublicationTypeByDate(DateTimeType.Now);
+	public static PublicationTypeList GetActivePublicationsForProcessing() {
+	    return PublicationTypeDAO.DAO.FindActivePublicationTypeForProcessingByDate(DateTimeType.Now);
+	}
+
+	public static PublicationTypeList GetActiveSubscribablePublications() {
+	    return PublicationTypeDAO.DAO.FindActiveSubscribablePublicationTypeByDate(DateTimeType.Now);
 	}
     }
 }

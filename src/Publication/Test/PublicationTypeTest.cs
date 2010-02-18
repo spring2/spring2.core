@@ -60,7 +60,8 @@ namespace Spring2.Core.Publication.Test {
 	}
 
 	[Test()]
-	public void ShouldBeAbleToRetreiveTheActivePublicationTypes() {
+	public void ShouldBeAbleToRetreiveTheActivePublicationTypesToProcess() {
+	    //effective and past the frequency for being processed.
 	    PublicationTypeData data1 = new PublicationTypeData() {
 		AllowSubscription = true,
 		AutoSubscribe = false,
@@ -71,22 +72,22 @@ namespace Spring2.Core.Publication.Test {
 		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
 	    };
 
+	    //future effective date
 	    PublicationTypeData data2 = new PublicationTypeData() {
 		AllowSubscription = true,
 		AutoSubscribe = false,
 		EffectiveDate = DateTimeType.Now.AddMonths(1),
-		EmailSubject = "ONE",
 		FrequencyInMinutes = 4,
 		LastSentDate = DateTimeType.Now.AddMinutes(-5),
 		Name = "Two",
 		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
 	    };
 
+	    //Not yet available for processing
 	    PublicationTypeData data3 = new PublicationTypeData() {
 		AllowSubscription = true,
 		AutoSubscribe = false,
 		EffectiveDate = DateTimeType.Now.AddMonths(-1),
-		EmailSubject = "ONE",
 		FrequencyInMinutes = 100,
 		LastSentDate = DateTimeType.Now.AddMinutes(-5),
 		Name = "Three",
@@ -99,7 +100,54 @@ namespace Spring2.Core.Publication.Test {
 		type3.Update(data3);
 	    }
 
-	    PublicationTypeList publications = PublicationType.GetActivePublications();
+	    PublicationTypeList publications = PublicationType.GetActivePublicationsForProcessing();
+	    Assert.AreEqual(1, publications.Count);
+	    Assert.AreEqual("One", publications[0].Name.Display());
+	}
+
+	[Test()]
+	public void ShouldBeAbleToRetreiveTheActiveSubscribablePublicationTypes() {
+	    //effective and subscribable
+	    PublicationTypeData data1 = new PublicationTypeData() {
+		AllowSubscription = true,
+		AutoSubscribe = false,
+		EffectiveDate = DateTimeType.Now.AddMonths(-1),
+		FrequencyInMinutes = 4,
+		LastSentDate = DateTimeType.Now.AddMinutes(-5),
+		Name = "One",
+		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
+	    };
+
+	    //not subscribable
+	    PublicationTypeData data2 = new PublicationTypeData() {
+		AllowSubscription = true,
+		AutoSubscribe = false,
+		EffectiveDate = DateTimeType.Now.AddMonths(1),
+		FrequencyInMinutes = 4,
+		LastSentDate = DateTimeType.Now.AddMinutes(-5),
+		Name = "Two",
+		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
+	    };
+
+	    //expired
+	    PublicationTypeData data3 = new PublicationTypeData() {
+		AllowSubscription = true,
+		AutoSubscribe = false,
+		EffectiveDate = DateTimeType.Now.AddMonths(-2),
+		ExpirationDate = DateTimeType.Now.AddMonths(-1),
+		FrequencyInMinutes = 100,
+		LastSentDate = DateTimeType.Now.AddMinutes(-5),
+		Name = "Three",
+		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
+	    };
+
+	    using (repository.Playback()) {
+		type1.Update(data1);
+		type2.Update(data2);
+		type3.Update(data3);
+	    }
+
+	    PublicationTypeList publications = PublicationType.GetActiveSubscribablePublications();
 	    Assert.AreEqual(1, publications.Count);
 	    Assert.AreEqual("One", publications[0].Name.Display());
 	}

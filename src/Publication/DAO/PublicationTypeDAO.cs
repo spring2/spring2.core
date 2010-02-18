@@ -557,9 +557,24 @@ namespace Spring2.Core.Publication.Dao {
 	/// </summary>
 	/// <param name="effectiveDate">A field value to be matched.</param>
 	/// <returns>The list of PublicationTypeDAO objects found.</returns>
-	public PublicationTypeList FindActivePublicationTypeByDate(DateTimeType effectiveDate) {
+	public PublicationTypeList FindActivePublicationTypeForProcessingByDate(DateTimeType effectiveDate) {
 	    OrderByClause sort = new OrderByClause("EffectiveDate");
 	    SqlFilter filter = new SqlFilter(new SqlLiteralPredicate("@EffectiveDate >= EffectiveDate and (ExpirationDate is null or @EffectiveDate < ExpirationDate) and dateadd(minute, FrequencyInMinutes, LastSentDate) <= @EffectiveDate"));
+	    String sql = "SELECT * from " + VIEW + filter.Statement + sort.FormatSql();
+		IDataParameterCollection parameters = new SqlParameterList();
+	    parameters.Add(CreateDataParameter("@EffectiveDate", PublicationTypeFields.EFFECTIVEDATE, effectiveDate.IsValid ? effectiveDate.ToDateTime() as Object : DBNull.Value));
+		IDataReader dataReader = ExecuteReader(CONNECTION_STRING_KEY, sql, parameters, COMMAND_TIMEOUT);
+	    return GetList(dataReader);
+	}
+
+	/// <summary>
+	/// Returns a list of objects which match the values for the fields specified.
+	/// </summary>
+	/// <param name="effectiveDate">A field value to be matched.</param>
+	/// <returns>The list of PublicationTypeDAO objects found.</returns>
+	public PublicationTypeList FindActiveSubscribablePublicationTypeByDate(DateTimeType effectiveDate) {
+	    OrderByClause sort = new OrderByClause("EffectiveDate");
+	    SqlFilter filter = new SqlFilter(new SqlLiteralPredicate("@EffectiveDate >= EffectiveDate and (ExpirationDate is null or @EffectiveDate < ExpirationDate) and AllowSubscription=1"));
 	    String sql = "SELECT * from " + VIEW + filter.Statement + sort.FormatSql();
 		IDataParameterCollection parameters = new SqlParameterList();
 	    parameters.Add(CreateDataParameter("@EffectiveDate", PublicationTypeFields.EFFECTIVEDATE, effectiveDate.IsValid ? effectiveDate.ToDateTime() as Object : DBNull.Value));

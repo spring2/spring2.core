@@ -22,8 +22,14 @@
 			<property name="LastModifiedDate" type="DateTimeType" column="*" writable="False" />
 		</properties>
 		<finders>
-			<finder name="FindActivePublicationTypeByDate" unique="False" 
+			<finder name="FindActivePublicationTypeForProcessingByDate" unique="False" 
 			expression="{0} &gt;= EffectiveDate and (ExpirationDate is null or {0} &lt; ExpirationDate) and dateadd(minute, FrequencyInMinutes, LastSentDate) &lt;= {0}">
+				<properties>
+					<property name="EffectiveDate">Not really the effective date, but the date of which it falls between the EffectiveDate and the ExpirationDate on the entity.</property>
+				</properties>
+			</finder>
+			<finder name="FindActiveSubscribablePublicationTypeByDate" unique="False"
+				expression="{0} &gt;= EffectiveDate and (ExpirationDate is null or {0} &lt; ExpirationDate) and AllowSubscription=1" >
 				<properties>
 					<property name="EffectiveDate">Not really the effective date, but the date of which it falls between the EffectiveDate and the ExpirationDate on the entity.</property>
 				</properties>

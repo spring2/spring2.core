@@ -15,7 +15,7 @@ namespace Spring2.Core.Publication.PublicationService {
 	    MDC.Set("hostname", Environment.MachineName);
 
 	    log.Info("starting");
-	    PublicationTypeList publications = PublicationType.GetActivePublications();
+	    PublicationTypeList publications = PublicationType.GetActivePublicationsForProcessing();
 	    foreach (PublicationType publication in publications) {
 		try {
 		    IPublicationServiceProvider provider = GetProvider(publication.ProviderName);
