@@ -109,23 +109,15 @@
 	    <fileset basedir="..\build\">
 	        <include name="SendMailMessages\*" />
 	        <include name="UpdateCurrencyExchange\*" />
+			<include name="PerformanceMonitorWindowsService\*" />
+			<include name="SeleniumLoadTester\*" />
+			<include name="PublicationService\*" />
 	    </fileset>
 	</copy>
 	<delete dir="..\build\UpdateCurrencyExchange" if="${directory::exists('..\build\UpdateCurrencyExchange')}" failonerror="false" />
-	
-	<copy todir="..\build\${nant.settings.currentframework}\">
-	    <fileset basedir="..\build\">
-	        <include name="PerformanceMonitorWindowsService\*" />
-	    </fileset>
-	</copy>
 	<delete dir="..\build\PerformanceMonitorWindowsService" if="${directory::exists('..\build\PerformanceMonitorWindowsService')}" failonerror="false" />
-	
-	<copy todir="..\build\${nant.settings.currentframework}\">
-	    <fileset basedir="..\build\">
-	        <include name="SeleniumLoadTester\*" />
-	    </fileset>
-	</copy>
 	<delete dir="..\build\SeleniumLoadTester" if="${directory::exists('..\build\SeleniumLoadTester')}" failonerror="false" />
+	<delete dir="..\build\PublicationService" if="${directory::exists('..\build\PublicationService')}" failonerror="false" />
 
 	<exec program="${msbuild}"  >
 	    <arg value="Spring2.Core.Ajax.Json.csproj" />
