@@ -304,3 +304,11 @@ ALTER TABLE PublicationType WITH NOCHECK ADD
 	)
 GO
 
+if not exists (select * from dbo.sysobjects where id = object_id(N'UN_PublicationType_Name') and OBJECTPROPERTY(id, N'IsUniqueCnst') = 1)
+ALTER TABLE PublicationType ADD
+	CONSTRAINT UN_PublicationType_Name UNIQUE
+	(
+		Name
+	)
+GO
+

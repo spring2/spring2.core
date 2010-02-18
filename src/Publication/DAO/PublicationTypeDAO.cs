@@ -581,5 +581,20 @@ namespace Spring2.Core.Publication.Dao {
 		IDataReader dataReader = ExecuteReader(CONNECTION_STRING_KEY, sql, parameters, COMMAND_TIMEOUT);
 	    return GetList(dataReader);
 	}
+
+	/// <summary>
+	/// Returns an object which matches the values for the fields specified.
+	/// </summary>
+	/// <param name="name">A field value to be matched.</param>
+	/// <returns>The object found.</returns>
+	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+	public PublicationType GetByName(StringType name) {
+	    OrderByClause sort = new OrderByClause("Name");
+	    SqlFilter filter = new SqlFilter();
+	    filter.And(CreateEqualityPredicate(PublicationTypeFields.NAME, EqualityOperatorEnum.Equal, name.IsValid ? name.ToString() as Object : DBNull.Value));
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
+
+	    return GetDataObject(dataReader);
+	}
     }
 }

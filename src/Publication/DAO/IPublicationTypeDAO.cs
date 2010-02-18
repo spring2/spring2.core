@@ -193,6 +193,15 @@ namespace Spring2.Core.Publication.Dao {
 	[Generate]
 	PublicationTypeList FindActiveSubscribablePublicationTypeByDate(DateTimeType effectiveDate);
 
+	/// <summary>
+	/// Returns an object which matches the values for the fields specified.
+	/// </summary>
+	/// <param name="name">A field value to be matched.</param>
+	/// <returns>The object found.</returns>
+	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+	[Generate]
+	PublicationType GetByName(StringType name);
+
 	//}
     }
 }

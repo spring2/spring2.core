@@ -30,6 +30,9 @@
 		    <constraint name="PK_PublicationType" type="PRIMARY KEY" clustered="true">
 			<column name="PublicationTypeId" />
 		    </constraint>
+		    <constraint name="UN_PublicationType_Name" type="UNIQUE">
+			<column name="Name" />
+		    </constraint>
 		</constraints>
 	    </sqlentity>
 		
