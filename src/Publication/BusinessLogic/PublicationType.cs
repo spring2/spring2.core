@@ -75,6 +75,10 @@ namespace Spring2.Core.Publication.BusinessLogic {
 	    return PublicationTypeDAO.DAO.Load(publicationTypeId);
 	}
 
+	public static PublicationType GetInstance(StringType name) {
+	    return PublicationTypeDAO.DAO.GetByName(name);
+	}
+
 	[Generate()]
 	public void Update(PublicationTypeData data) {
 	    name = data.Name.IsDefault ? name : data.Name;
