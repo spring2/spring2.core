@@ -18,7 +18,7 @@ namespace Spring2.Core.Publication.PublicationService {
 	    PublicationTypeList publications = PublicationType.GetActivePublicationsForProcessing();
 	    foreach (PublicationType publication in publications) {
 		try {
-		    IPublicationServiceProvider provider = GetProvider(publication.ProviderName);
+		    IPublisher provider = GetProvider(publication.ProviderName);
 		    provider.Process();
 		    publication.Update(new PublicationTypeData() { LastSentDate = DateTimeType.Now });
 
@@ -31,7 +31,7 @@ namespace Spring2.Core.Publication.PublicationService {
 	    log.Info("finished");
 	}
 
-	public static IPublicationServiceProvider GetProvider(StringType providerName) {
+	public static IPublisher GetProvider(StringType providerName) {
 	    if (providerName == null || providerName.IsEmpty) {
 		throw new ArgumentException("The ProviderName for a PublicationType cannot be empty.");
 	    }
@@ -42,11 +42,11 @@ namespace Spring2.Core.Publication.PublicationService {
 	    }
 
 	    Object provider = Activator.CreateInstance(t);
-	    if (!(provider is IPublicationServiceProvider)) {
+	    if (!(provider is IPublisher)) {
 		throw new InvalidTypeException("IPublicationServiceProvider");
 	    }
 
-	    return provider as IPublicationServiceProvider;
+	    return provider as IPublisher;
 	}
     }
 }

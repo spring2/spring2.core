@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Spring2.Core.Publication {
-    public interface IPublicationServiceProvider {
+    public interface IPublisher {
 	void Process();
     }
 }

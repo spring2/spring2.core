@@ -74,7 +74,7 @@
     <Compile Include="Publication\DataObject\PublicationTrackingList.cs" />
     <Compile Include="Publication\DataObject\PublicationTypeData.cs" />
     <Compile Include="Publication\DataObject\PublicationTypeList.cs" />
-    <Compile Include="Publication\IPublicationServiceProvider.cs" />
+    <Compile Include="Publication\IPublisher.cs" />
     <Compile Include="Publication\PublicationTypeException.cs" />
     <Compile Include="Publication\Test\TestPublicationServiceProvider.cs" />
   </ItemGroup>
