@@ -25,7 +25,7 @@ namespace Spring2.Core.Mail.Dao {
 	/// <summary>
 	/// Sets the singleton DAO instance of IMailMessageRouteDAO
 	/// </summary>
-	public void SetInstance(IMailMessageRouteDAO dao) {
+	public static void SetInstance(IMailMessageRouteDAO dao) {
 	    if(dao != null){
 			instance = dao;
 	    }else{

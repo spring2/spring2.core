@@ -17,6 +17,7 @@ using Spring2.Core.Types;
 
 using ${options.RootNameSpace}.BusinessLogic;
 using ${options.RootNameSpace}.DataObject;
+using ${options.RootNameSpace}.Types;
 
 namespace $options.GetDAONameSpace($element.Name) {
 

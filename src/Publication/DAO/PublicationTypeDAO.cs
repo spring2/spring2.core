@@ -24,7 +24,7 @@ namespace Spring2.Core.Publication.Dao {
 	/// <summary>
 	/// Sets the singleton DAO instance of IPublicationTypeDAO
 	/// </summary>
-	public void SetInstance(IPublicationTypeDAO dao) {
+	public static void SetInstance(IPublicationTypeDAO dao) {
 	    if(dao != null){
 			instance = dao;
 	    }else{

@@ -11,7 +11,6 @@ using Spring2.Core.Types;
 
 
 using Spring2.Core.Mail.BusinessLogic;
-
 using Spring2.Core.BusinessEntity;
 
 using Spring2.DataTierGenerator.Attribute;
@@ -22,11 +21,6 @@ namespace Spring2.Core.Mail.Dao {
     /// Data access interface for MailMessage business entity.
     /// </summary>
     public interface IMailMessageDAO {
-	/// <summary>
-	/// Sets the singleton DAO instance of IMailMessageDAO
-	/// </summary>
-	[Generate]
-	void SetInstance(IMailMessageDAO instance);
 
 	/// <summary>
 	/// Returns a list of all MailMessage rows.

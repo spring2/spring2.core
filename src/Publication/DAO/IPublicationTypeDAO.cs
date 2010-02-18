@@ -20,11 +20,6 @@ namespace Spring2.Core.Publication.Dao {
     /// Data access interface for PublicationType business entity.
     /// </summary>
     public interface IPublicationTypeDAO {
-	/// <summary>
-	/// Sets the singleton DAO instance of IPublicationTypeDAO
-	/// </summary>
-	[Generate]
-	void SetInstance(IPublicationTypeDAO instance);
 
 	/// <summary>
 	/// Returns a list of all PublicationType rows.

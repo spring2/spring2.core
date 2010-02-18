@@ -2,6 +2,9 @@
 #set ($namespaces = "#nameSpaces($options $element true)")
 #set ($namespaces = $namespaces.Replace("using ${options.RootNameSpace}.BusinessLogic;", ""))
 $namespaces
+#if ($namespaces.IndexOf("${options.RootNameSpace}.Types") < 0)
+using ${options.RootNameSpace}.Types;
+#end
 using ${options.RootNameSpace}.BusinessLogic;
 using Spring2.Core.BusinessEntity;
 

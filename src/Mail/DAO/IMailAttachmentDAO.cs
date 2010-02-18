@@ -11,7 +11,6 @@ using Spring2.Core.Types;
 
 using Spring2.Core.Mail.Types;
 using Spring2.Core.Mail.BusinessLogic;
-
 using Spring2.Core.BusinessEntity;
 
 using Spring2.DataTierGenerator.Attribute;
@@ -22,11 +21,6 @@ namespace Spring2.Core.Mail.Dao {
     /// Data access interface for MailAttachment business entity.
     /// </summary>
     public interface IMailAttachmentDAO {
-	/// <summary>
-	/// Sets the singleton DAO instance of IMailAttachmentDAO
-	/// </summary>
-	[Generate]
-	void SetInstance(IMailAttachmentDAO instance);
 
 	/// <summary>
 	/// Returns a list of all MailAttachment rows.

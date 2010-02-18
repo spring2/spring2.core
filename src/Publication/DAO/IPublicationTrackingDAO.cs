@@ -21,11 +21,6 @@ namespace Spring2.Core.Publication.Dao {
     /// Data access interface for PublicationTracking business entity.
     /// </summary>
     public interface IPublicationTrackingDAO {
-	/// <summary>
-	/// Sets the singleton DAO instance of IPublicationTrackingDAO
-	/// </summary>
-	[Generate]
-	void SetInstance(IPublicationTrackingDAO instance);
 
 	/// <summary>
 	/// Returns a list of all PublicationTracking rows.
