@@ -1,26 +1,34 @@
 <!-- Entity definitions -->
 <entities>
     <entity name="PublicationType" sqlentity="PublicationType">
-	<description>Publication Type</description>
-	<properties>
-	    <property name="PublicationTypeId" type="IdType" column="*" writable="False" />
-	    <property name="Name" type="StringType" column="*" />
-	    <property name="EmailSubject" type="StringType" column="*" />
-	    <property name="EmailBody" type="StringType" column="*" />
-	    <property name="EmailBodyType" type="StringType" column="*" />
-	    <property name="MailMessageType" type="StringType" column="*" />
-	    <property name="LastSentDate" type="DateTimeType" column="*" />
-	    <property name="FrequencyInMinutes" type="IntegerType" column="*" />
-	    <property name="ProviderName" type="StringType" column="*" />
-	    <property name="AllowSubscription" type="BooleanType" column="*" />
-	    <property name="AutoSubscribe" type="BooleanType" column="*" />
-	    <property name="EffectiveDate" type="DateTimeType" column="*" />
-	    <property name="ExpirationDate" type="DateTimeType" column="*" />
-	    <property name="CreateDate" type="DateTimeType" column="*" writable="False" />
-	    <property name="CreateUserId" type="IdType" column="*" writable="False" />
-	    <property name="LastModifiedUserId" type="IdType" column="*" writable="False" />
-	    <property name="LastModifiedDate" type="DateTimeType" column="*" writable="False" />
-	</properties>
+		<description>Publication Type</description>
+		<properties>
+			<property name="PublicationTypeId" type="IdType" column="*" writable="False" />
+			<property name="Name" type="StringType" column="*" />
+			<property name="EmailSubject" type="StringType" column="*" />
+			<property name="EmailBody" type="StringType" column="*" />
+			<property name="EmailBodyType" type="StringType" column="*" />
+			<property name="MailMessageType" type="StringType" column="*" />
+			<property name="LastSentDate" type="DateTimeType" column="*" />
+			<property name="FrequencyInMinutes" type="IntegerType" column="*" />
+			<property name="ProviderName" type="StringType" column="*" />
+			<property name="AllowSubscription" type="BooleanType" column="*" />
+			<property name="AutoSubscribe" type="BooleanType" column="*" />
+			<property name="EffectiveDate" type="DateTimeType" column="*" />
+			<property name="ExpirationDate" type="DateTimeType" column="*" />
+			<property name="CreateDate" type="DateTimeType" column="*" writable="False" />
+			<property name="CreateUserId" type="IdType" column="*" writable="False" />
+			<property name="LastModifiedUserId" type="IdType" column="*" writable="False" />
+			<property name="LastModifiedDate" type="DateTimeType" column="*" writable="False" />
+		</properties>
+		<finders>
+			<finder name="FindActivePublicationTypeByDate" unique="False" 
+			expression="{0} &gt;= EffectiveDate and (ExpirationDate is null or {0} &lt; ExpirationDate) and dateadd(minute, FrequencyInMinutes, LastSentDate) &lt;= {0}">
+				<properties>
+					<property name="EffectiveDate">Not really the effective date, but the date of which it falls between the EffectiveDate and the ExpirationDate on the entity.</property>
+				</properties>
+			</finder>
+		</finders>
     </entity>
     <entity name="PublicationTracking" sqlentity="PublicationTracking">
 	<description>Publication Tracking</description>

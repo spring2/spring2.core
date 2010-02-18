@@ -13,24 +13,24 @@
 	    <option name="bracing style" value="block" />
 	</styler>
 	<tasks>
-	    <task name="business entities" element="entity" template="Template\PassThroughInterface\BusinessEntity.vm" directory="BusinessLogic" filenameformat="{element.Name}.cs" writer="c#" >
+	    <task name="business entities" element="entity" template="BusinessEntity.vm" directory="BusinessLogic" filenameformat="{element.Name}.cs" writer="c#" >
 	        <type name="{element.Name}" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}.GetInstance({2})" newinstanceformat="{element.Name}.NewInstance()" nullinstanceformat="null" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" />
 	    </task>
 
-	    <task name="interface" element="entity" template="Template\PassThroughInterface\interface.vm" directory="DataObject" filenameformat="I{element.Name}.cs" writer="region"  >
+	    <task name="interface" element="entity" template="interface.vm" directory="DataObject" filenameformat="I{element.Name}.cs" writer="region"  >
 		<type name="I{element.Name}" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}.GetInstance({2})" newinstanceformat="new {element.Name}()" nullinstanceformat="null" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" concretetype="{element.Name}" />
 	    </task>
-	    <task name="data object" element="entity" template="Template\PassThroughInterface\dataobject.vm" directory="DataObject" filenameformat="{element.Name}Data.cs" writer="region"  >
+	    <task name="data object" element="entity" template="dataobject.vm" directory="DataObject" filenameformat="{element.Name}Data.cs" writer="region"  >
 		<type name="{element.Name}Data" converttosqltypeformat="{1}.DBValue" convertfromsqltypeformat="{element.Name}Data.GetInstance({2})" newinstanceformat="{element.Name}Data.DEFAULT" nullinstanceformat="null" convertforcompare="{0}.ToString().CompareTo({1}.ToString())" concretetype="{element.Name}Data" />
 	    </task>
 
-	    <task name="dataobject lists" element="entity" template="Template\PassThroughInterface\dataobject-collection.vm" directory="DataObject" filenameformat="{element.Name}List.cs" writer="region" >
+	    <task name="dataobject lists" element="entity" template="dataobject-collection.vm" directory="DataObject" filenameformat="{element.Name}List.cs" writer="region" >
 		<type name="{element.Name}List" newinstanceformat="{element.Name}List.DEFAULT" nullinstanceformat="{element.Name}List.UNSET" />
 	    </task>
 
-	    <task name="dao" element="entity" template="Template\PassThroughInterface\DAO-SqlFilter.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region" >
+	    <task name="dao" element="entity" template="DAO-SqlFilter.vm" directory="DAO" filenameformat="{element.Name}DAO.cs" writer="region" >
 	    </task>
-	    <task name="dao interface" element="entity" template="Template\PassThroughInterface\DAO-Interface.vm" directory="DAO"
+	    <task name="dao interface" element="entity" template="DAO-Interface.vm" directory="DAO"
 	    filenameformat="I{element.Name}DAO.cs" writer="region" styler="c#">
 	    </task>
 

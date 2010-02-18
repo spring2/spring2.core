@@ -4,8 +4,6 @@ using System.Collections;
 using Spring2.Core.Types;
 using Spring2.DataTierGenerator.Attribute;
 
-
-
 namespace Spring2.Core.Publication.DataObject {
 
     /// <summary>

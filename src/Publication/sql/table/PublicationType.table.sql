@@ -24,7 +24,7 @@ if not exists (select * from dbo.sysobjects where id = object_id(N'[PublicationT
 CREATE TABLE dbo.PublicationType (
 	PublicationTypeId Int IDENTITY(1,1) NOT NULL,
 	Name VarChar(50) NOT NULL,
-	EmailSubject VarChar(100) NOT NULL,
+	EmailSubject VarChar(100) NULL,
 	EmailBody Text NULL,
 	EmailBodyType VarChar(100) NULL,
 	MailMessageType VarChar(100) NULL,
@@ -71,13 +71,13 @@ GO
 if not exists(select * from syscolumns where id=object_id('PublicationType') and name = 'EmailSubject')
   BEGIN
 	ALTER TABLE PublicationType ADD
-	    EmailSubject VarChar(100) NOT NULL
+	    EmailSubject VarChar(100) NULL
   END
 GO
 
 if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'EmailSubject')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'EmailSubject', 'VarChar(100)', 1
+	exec #spAlterColumn 'PublicationType', 'EmailSubject', 'VarChar(100)', 0
   END
 GO
 

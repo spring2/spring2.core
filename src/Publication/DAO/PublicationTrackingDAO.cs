@@ -10,7 +10,6 @@ using Spring2.Core.Types;
 using Spring2.Core.Publication.BusinessLogic;
 using Spring2.Core.Publication.DataObject;
 
-
 namespace Spring2.Core.Publication.Dao {
 
     /// <summary>

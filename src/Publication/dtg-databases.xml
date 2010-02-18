@@ -10,7 +10,7 @@
 		<columns>
 		    <column name="PublicationTypeId" sqltype="Int" identity="True" required="True" />
 		    <column name="Name" sqltype="VarChar" length="50" required="True" />
-		    <column name="EmailSubject" sqltype="VarChar" length="100" required="True" />
+		    <column name="EmailSubject" sqltype="VarChar" length="100" />
 		    <column name="EmailBody" sqltype="Text" />
 		    <column name="EmailBodyType" sqltype="VarChar" length="100" />
 		    <column name="MailMessageType" sqltype="VarChar" length="100" />

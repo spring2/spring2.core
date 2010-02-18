@@ -74,6 +74,9 @@
     <Compile Include="Publication\DataObject\PublicationTrackingList.cs" />
     <Compile Include="Publication\DataObject\PublicationTypeData.cs" />
     <Compile Include="Publication\DataObject\PublicationTypeList.cs" />
+    <Compile Include="Publication\IPublicationServiceProvider.cs" />
+    <Compile Include="Publication\PublicationTypeException.cs" />
+    <Compile Include="Publication\Test\TestPublicationServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Spring2.Core.Configuration.csproj">
@@ -95,9 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="spring2.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Publication\Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

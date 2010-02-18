@@ -1,0 +1,233 @@
+#if(!$element.JoinTable)
+using System;
+
+using Spring2.Core.BusinessEntity;
+using Spring2.Core.Message;
+using Spring2.Core.Types;
+using Spring2.DataTierGenerator.Attribute;
+
+using ${options.RootNameSpace}.Dao;
+using ${options.RootNameSpace}.DataObject;
+
+namespace ${options.RootNameSpace}.BusinessLogic {
+
+#if ($element.Description != "")
+    /// <summary>
+    /// $element.Description
+    /// </summary>
+#end
+    public #if($element.IsAbstract)abstract #end class $element.Name#if(!$element.JoinTable) :#if($element.IsDerived) $element.BaseEntity.Name,#else BusinessEntity,#end I$element.Name#end {
+
+#foreach($field in $element.PrivateFields)
+#if($field.Name.IndexOf('.')<0 && !$field.Derived)
+	[Generate]
+	#if ($element.IsAbstract)
+	/// <summary>Protected member</summary>
+	protected $field.Type.ConcreteType $field.GetFieldFormat() = $field.Type.NewInstanceFormat;
+	#else
+	$field.AccessModifier $field.Type.ConcreteType $field.GetFieldFormat() = $field.Type.NewInstanceFormat;
+	#end
+#end
+#end
+
+        [Generate]
+        internal ${element.Name}() {}
+
+        [Generate]
+        internal ${element.Name}(Boolean isNew) {
+	    this.isNew = isNew;
+        }
+
+#if(!$element.IsAbstract)
+        [Generate]
+	public static $element.Name NewInstance() {
+	    return new ${element.Name}();
+	}
+
+#if(!$element.SqlEntity.Name.Equals("") && !$element.JoinTable)
+	[Generate]
+	public static $element.Name GetInstance(#parameterList(true $element.GetPrimaryKeyFields())) {
+	    return ${element.Name}DAO.DAO.Load(#argumentList(true $element.GetPrimaryKeyFields()));
+	}
+
+#if($element.WritableFields.Count>0)
+	[Generate]
+	public#if($element.IsDerived && !$element.BaseEntity.IsAbstract) override#end void Update(${element.Name}Data data) {
+#foreach($field in $element.WritableFields) 
+	    $field.GetFieldFormat().Replace("_", ".") = data.${field.Name}.IsDefault ? $field.GetFieldFormat.Replace("_", ".") : data.${field.Name};
+#end
+	    Store();
+	}
+## commented out because this signature of create is not always good and there is currently no way to have a method matching without argument and there is no way to signify that a method only be generated when the file is first create
+##
+##	[Generate]
+##	public#if($element.IsDerived && !$element.BaseEntity.IsAbstract) override#end $element.Name Create(${element.Name}Data data) {
+###set($entityVariable = "$element.Name.Substring(0,1).ToLower()$element.Name.Substring(1)")	
+##	    $element.Name $entityVariable = new ${element.Name}();
+##	    ${entityVariable}.Update(data);
+##	    
+##	    return $entityVariable;
+##	}
+#end
+
+	[Generate]
+	public#if($element.IsDerived) override#end void Store() {
+	    MessageList errors = Validate();
+
+	    if (errors.Count > 0) {
+		if (!isNew) {
+		    this.Reload();
+		}
+		throw new MessageListException(errors);
+            }
+
+#set ($setAuditStamps = "N")
+#set ($createDate = "N")
+#set ($createUserId = "N")
+#set ($lastModifiedDate = "N")
+#set ($lastModifiedUserId = "N")
+#foreach ($field in $element.PrivateFields)
+	#if ($field.Name.IndexOf("CreateDate")>-1)
+		#set ($createDate = "Y")
+		#set ($setAuditStamps = "Y")
+	#end
+	#if ($field.Name.IndexOf("CreateUserId")>-1)
+		#set ($createUserId = "Y")
+		#set ($setAuditStamps = "Y")
+	#end
+	#if ($field.Name.IndexOf("LastModifiedUserId")>-1)
+		#set ($lastModifiedUserId = "Y")
+		#set ($setAuditStamps = "Y")
+	#end
+	#if ($field.Name.IndexOf("LastModifiedDate")>-1)
+		#set ($lastModifiedDate = "Y")
+		#set ($setAuditStamps = "Y")
+	#end
+#end
+#if ($setAuditStamps == "Y")
+	    SetAuditStamps();
+#end
+#if($element.GetIdentityField())
+	    if (isNew) {
+		this.$element.GetIdentityField().GetMethodFormat() = ${element.Name}DAO.DAO.Insert(this);
+		isNew = false;
+            } else {
+		${element.Name}DAO.DAO.Update(this);
+            }
+#end
+	}
+#end
+#end
+
+#if (!$element.IsDerived && !$element.BaseEntity.IsAbstract && $setAuditStamps == "Y")
+	[Generate]
+	private void SetAuditStamps() {
+	    IdType userId = IdType.DEFAULT;
+	    if (System.Threading.Thread.CurrentPrincipal.Identity.Name.Length > 0) {
+		userId = (System.Threading.Thread.CurrentPrincipal as IUserPrincipal).UserId;
+	    }
+#if ($createDate == "Y" || $createUserId == "Y")
+	    if (IsNew) {
+#if ($createDate == "Y")
+		this.CreateDate = DateTimeType.Now;
+#end
+#if ($createUserId == "Y")
+		this.CreateUserId = userId;
+#end
+	    }
+#end
+#if ($lastModifiedDate == "Y")
+	    this.LastModifiedDate = DateTimeType.Now;
+#end
+#if ($lastModifiedUserId == "Y")
+	    this.LastModifiedUserId = userId;
+#end
+	}
+	
+#end
+	[Generate]
+	public#if($element.IsDerived) override#else virtual#end MessageList Validate() {
+
+	    MessageList errors = new MessageList();
+#if($element.IsDerived)
+	    errors.AddRange(base.Validate());		
+#end
+	    return errors;
+	}
+
+#foreach($field in $element.PrivateFields)
+#if($field.Name.IndexOf('.')<0 && !$field.IsDerived)
+#if ($field.Type.ConcreteType.Equals("") || $field.Type.ConcreteType.Equals($field.Type.Name))
+
+#if ($field.Derived)
+	public $field.Type.Name $field.GetMethodFormat() {
+#if ($field.Readable)
+	    get { throw new System.NotImplementedException(); }
+#end	    
+#if ($field.Writable)
+	    set { throw new System.NotImplementedException(); }
+#end	    
+	}
+#else
+	[Generate]
+	public $field.Type.Name $field.GetMethodFormat() {
+	    get { return this.$field.GetFieldFormat(); }
+	    set { this.$field.GetFieldFormat() = value; }
+	}
+#end
+#else
+	[Generate]
+	public $field.Type.ConcreteType $field.GetMethodFormat() {
+	    get { return this.$field.GetFieldFormat() as $field.Type.ConcreteType; }
+	    set { this.$field.GetFieldFormat() = value; }
+	}
+
+	[Generate]
+	$field.Type.Name I${element.Name}.$field.GetMethodFormat() {
+#if ($field.Readable)
+	    get { return this.$field.GetMethodFormat(); }
+#end
+###if ($field.Writable)
+##	    set { this.$field.GetFieldFormat() = value; }
+###end
+        }
+#end
+#end
+#end
+
+	[Generate]    
+	public#if($element.IsDerived) new#end void Reload() {
+#if($element.IsDerived)
+	    base.Reload();
+#end
+#if(!$element.IsAbstract && !$element.SqlEntity.Name.Equals(""))
+	    ${element.Name}DAO.DAO.Reload(this);
+#end
+#foreach($field in $element.PrivateFields)
+#if($field.Name.IndexOf('.')<0 && !$field.Derived && $field.Column.Name.Length == 0)
+	    $field.GetFieldFormat() = $field.Type.NewInstanceFormat;
+#end
+#end
+    }
+    
+
+#if($element.IsAbstract  && $element.BaseEntity.Name.Length == 0)
+
+	public abstract void Store();
+
+##	public abstract void Update(${element.Name}Data data);
+
+#end
+
+	[Generate()]
+	public override String ToString() {
+#if($element.GetIdentityField())	
+	    return GetType().ToString() + "@" + ${element.GetIdentityField().Name}.ToString(); 
+#else
+	    return GetType().ToString() + "@" + GetHashCode().ToString(); 
+#end		
+	}
+
+    }
+}
+#end

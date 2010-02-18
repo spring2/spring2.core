@@ -10,7 +10,6 @@ using Spring2.Core.Types;
 using Spring2.Core.Publication.BusinessLogic;
 using Spring2.Core.Publication.DataObject;
 
-
 namespace Spring2.Core.Publication.Dao {
 
     /// <summary>
@@ -551,6 +550,21 @@ namespace Spring2.Core.Publication.Dao {
 	    if (transaction == null && DbConnectionScope.Current == null) {
 		cmd.Connection.Close();
 	    }
+	}
+
+	/// <summary>
+	/// Returns a list of objects which match the values for the fields specified.
+	/// </summary>
+	/// <param name="effectiveDate">A field value to be matched.</param>
+	/// <returns>The list of PublicationTypeDAO objects found.</returns>
+	public PublicationTypeList FindActivePublicationTypeByDate(DateTimeType effectiveDate) {
+	    OrderByClause sort = new OrderByClause("EffectiveDate");
+	    SqlFilter filter = new SqlFilter(new SqlLiteralPredicate("@EffectiveDate >= EffectiveDate and (ExpirationDate is null or @EffectiveDate < ExpirationDate) and dateadd(minute, FrequencyInMinutes, LastSentDate) <= @EffectiveDate"));
+	    String sql = "SELECT * from " + VIEW + filter.Statement + sort.FormatSql();
+		IDataParameterCollection parameters = new SqlParameterList();
+	    parameters.Add(CreateDataParameter("@EffectiveDate", PublicationTypeFields.EFFECTIVEDATE, effectiveDate.IsValid ? effectiveDate.ToDateTime() as Object : DBNull.Value));
+		IDataReader dataReader = ExecuteReader(CONNECTION_STRING_KEY, sql, parameters, COMMAND_TIMEOUT);
+	    return GetList(dataReader);
 	}
     }
 }

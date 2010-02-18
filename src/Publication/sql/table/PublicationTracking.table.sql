@@ -2,12 +2,6 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if not exists(select * from syscolumns where id=object_id('PublicationTracking') and name = 'PublicationTrackingId')
-Begin
-   drop table dbo.PublicationTracking
-End
-GO
-
 if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
 drop procedure #spAlterColumn
 GO

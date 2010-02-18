@@ -10,8 +10,6 @@ using Spring2.Core.Types;
 
 
 
-
-
 namespace Spring2.Core.Publication.DataObject {
 
     public class PublicationTypeData : Spring2.Core.DataObject.DataObject {

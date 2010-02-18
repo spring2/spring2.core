@@ -8,6 +8,8 @@ using Spring2.DataTierGenerator.Attribute;
 
 using Spring2.Core.Publication.Dao;
 using Spring2.Core.Publication.DataObject;
+using System.Collections.Generic;
+using Spring2.Core.Publication;
 
 
 
@@ -130,9 +132,6 @@ namespace Spring2.Core.Publication.BusinessLogic {
 	    MessageList errors = new MessageList();
 	    if (Name.IsEmpty) {
 		errors.Add(new MissingRequiredFieldError(PublicationTypeFields.NAME.Name));
-	    }
-	    if (EmailSubject.IsEmpty) {
-		errors.Add(new MissingRequiredFieldError(PublicationTypeFields.EMAILSUBJECT.Name));
 	    }
 	    if (!LastSentDate.IsValid) {
 		errors.Add(new MissingRequiredFieldError(PublicationTypeFields.LASTSENTDATE.Name));
@@ -271,5 +270,8 @@ namespace Spring2.Core.Publication.BusinessLogic {
 	    return GetType().ToString() + "@" + PublicationTypeId.ToString();
 	}
 
+	public static PublicationTypeList GetActivePublications() {
+	    return PublicationTypeDAO.DAO.FindActivePublicationTypeByDate(DateTimeType.Now);
+	}
     }
 }
