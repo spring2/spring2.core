@@ -441,5 +441,19 @@ namespace Spring2.Core.Publication.Dao {
 		cmd.Connection.Close();
 	    }
 	}
+
+	/// <summary>
+	/// Returns a list of objects which match the values for the fields specified.
+	/// </summary>
+	/// <param name="publicationTypeId">A field value to be matched.</param>
+	/// <returns>The list of PublicationTrackingDAO objects found.</returns>
+	public PublicationTrackingList FindByPublicationTypeId(IdType publicationTypeId) {
+	    OrderByClause sort = new OrderByClause("PublicationTypeId");
+	    SqlFilter filter = new SqlFilter();
+	    filter.And(CreateEqualityPredicate(PublicationTrackingFields.PUBLICATIONTYPEID, EqualityOperatorEnum.Equal, publicationTypeId.IsValid ? publicationTypeId.ToInt32() as Object : DBNull.Value));
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
+
+	    return GetList(dataReader);
+	}
     }
 }

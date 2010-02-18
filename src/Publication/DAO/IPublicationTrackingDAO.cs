@@ -178,6 +178,14 @@ namespace Spring2.Core.Publication.Dao {
 	void Delete(IdType publicationTrackingId);
 
 
+	/// <summary>
+	/// Returns a list of objects which match the values for the fields specified.
+	/// </summary>
+	/// <param name="publicationTypeId">A field value to be matched.</param>
+	/// <returns>The list of PublicationTrackingDAO objects found.</returns>
+	[Generate]
+	PublicationTrackingList FindByPublicationTypeId(IdType publicationTypeId);
+
 	//}
     }
 }

@@ -48,5 +48,12 @@
 	    <property name="LastModifiedUserId" type="IdType" column="*" writable="False" />
 	    <property name="LastModifiedDate" type="DateTimeType" column="*" writable="False" />
 	</properties>
+	<finders>
+		<finder name="FindByPublicationTypeId" unique="False">
+			<properties>
+				<property name="PublicationTypeId"/>
+			</properties>
+		</finder>
+	</finders>
     </entity>
 </entities>
