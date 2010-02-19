@@ -37,7 +37,7 @@ namespace Spring2.Core.Publication.PublicationService {
 	    foreach (PublicationType publication in publications) {
 		try {
 		    IPublisher provider = GetProvider(publication.ProviderName);
-		    provider.Process();
+		    provider.Process(publication);
 		    publication.Update(new PublicationTypeData() { LastSentDate = DateTimeType.Now });
 
 		    log.Info(string.Format("PublicationType, {0}, successfully processed.", publication.Name.Display()));
