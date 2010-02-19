@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
-using log4net;
-using Spring2.Core.Types;
-using Spring2.Core.Publication.DataObject;
-using Spring2.Core.Publication.BusinessLogic;
-using Spring2.Core.Security;
-using System.Threading;
 using System.Security.Principal;
+using System.Threading;
+using log4net;
+using Spring2.Core.Publication.BusinessLogic;
+using Spring2.Core.Publication.DataObject;
+using Spring2.Core.Security;
+using Spring2.Core.Types;
 
 namespace Spring2.Core.Publication.PublicationService {
 
@@ -38,7 +36,6 @@ namespace Spring2.Core.Publication.PublicationService {
 		try {
 		    IPublisher provider = GetProvider(publication.ProviderName);
 		    provider.Process(publication);
-		    publication.Update(new PublicationTypeData() { LastSentDate = DateTimeType.Now });
 
 		    log.Info(string.Format("PublicationType, {0}, successfully processed.", publication.Name.Display()));
 		} catch (Exception ex) {
