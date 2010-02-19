@@ -6,12 +6,30 @@ using log4net;
 using Spring2.Core.Types;
 using Spring2.Core.Publication.DataObject;
 using Spring2.Core.Publication.BusinessLogic;
+using Spring2.Core.Security;
+using System.Threading;
+using System.Security.Principal;
 
 namespace Spring2.Core.Publication.PublicationService {
+
     public class PublicationService {
 	private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
 	static void Main(string[] args) {
+	    if (args.Length < 1) 
+		throw new ArgumentException("Need a user ID passed in.");
+
+	    AppDomain myDomain = Thread.GetDomain();
+	    myDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
+
+	    IdType userId = IdType.Parse(args[0]);
+	    IUserPrincipal principal = new UserPrincipal(userId);
+	    Thread.CurrentPrincipal = principal;
+
+	    DoWork();
+	}
+
+	public static void DoWork() {
 	    MDC.Set("hostname", Environment.MachineName);
 
 	    log.Info("starting");
