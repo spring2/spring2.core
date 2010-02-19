@@ -20,13 +20,13 @@ namespace Spring2.Core.Publication.DataObject {
 	
 	public static readonly ColumnMetaData PUBLICATIONTYPEID = new ColumnMetaData("PublicationTypeId", "PublicationTypeId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
 	public static readonly ColumnMetaData NAME = new ColumnMetaData("Name", "Name", DbType.AnsiString, SqlDbType.VarChar, 50, 0, 0);
-	public static readonly ColumnMetaData EMAILSUBJECT = new ColumnMetaData("EmailSubject", "EmailSubject", DbType.AnsiString, SqlDbType.VarChar, 100, 0, 0);
+	public static readonly ColumnMetaData EMAILSUBJECT = new ColumnMetaData("EmailSubject", "EmailSubject", DbType.AnsiString, SqlDbType.VarChar, 500, 0, 0);
 	public static readonly ColumnMetaData EMAILBODY = new ColumnMetaData("EmailBody", "EmailBody", DbType.AnsiString, SqlDbType.Text, 0, 0, 0);
 	public static readonly ColumnMetaData EMAILBODYTYPE = new ColumnMetaData("EmailBodyType", "EmailBodyType", DbType.AnsiString, SqlDbType.VarChar, 100, 0, 0);
 	public static readonly ColumnMetaData MAILMESSAGETYPE = new ColumnMetaData("MailMessageType", "MailMessageType", DbType.AnsiString, SqlDbType.VarChar, 100, 0, 0);
 	public static readonly ColumnMetaData LASTSENTDATE = new ColumnMetaData("LastSentDate", "LastSentDate", DbType.DateTime, SqlDbType.DateTime, 0, 0, 0);
 	public static readonly ColumnMetaData FREQUENCYINMINUTES = new ColumnMetaData("FrequencyInMinutes", "FrequencyInMinutes", DbType.Int32, SqlDbType.Int, 0, 10, 0);
-	public static readonly ColumnMetaData PROVIDERNAME = new ColumnMetaData("ProviderName", "ProviderName", DbType.AnsiString, SqlDbType.VarChar, 100, 0, 0);
+	public static readonly ColumnMetaData PROVIDERNAME = new ColumnMetaData("ProviderName", "ProviderName", DbType.AnsiString, SqlDbType.VarChar, 250, 0, 0);
 	public static readonly ColumnMetaData ALLOWSUBSCRIPTION = new ColumnMetaData("AllowSubscription", "AllowSubscription", DbType.Boolean, SqlDbType.Bit, 0, 0, 0);
 	public static readonly ColumnMetaData AUTOSUBSCRIBE = new ColumnMetaData("AutoSubscribe", "AutoSubscribe", DbType.Boolean, SqlDbType.Bit, 0, 0, 0);
 	public static readonly ColumnMetaData EFFECTIVEDATE = new ColumnMetaData("EffectiveDate", "EffectiveDate", DbType.DateTime, SqlDbType.DateTime, 0, 0, 0);

@@ -24,13 +24,13 @@ if not exists (select * from dbo.sysobjects where id = object_id(N'[PublicationT
 CREATE TABLE dbo.PublicationType (
 	PublicationTypeId Int IDENTITY(1,1) NOT NULL,
 	Name VarChar(50) NOT NULL,
-	EmailSubject VarChar(100) NULL,
+	EmailSubject VarChar(500) NULL,
 	EmailBody Text NULL,
 	EmailBodyType VarChar(100) NULL,
 	MailMessageType VarChar(100) NULL,
 	LastSentDate DateTime NOT NULL CONSTRAINT [DF_PublicationType_LastSentDate] DEFAULT (getdate()),
 	FrequencyInMinutes Int NOT NULL,
-	ProviderName VarChar(100) NOT NULL,
+	ProviderName VarChar(250) NOT NULL,
 	AllowSubscription Bit NOT NULL,
 	AutoSubscribe Bit NOT NULL,
 	EffectiveDate DateTime NOT NULL CONSTRAINT [DF_PublicationType_EffectiveDate] DEFAULT (getdate()),
@@ -71,13 +71,13 @@ GO
 if not exists(select * from syscolumns where id=object_id('PublicationType') and name = 'EmailSubject')
   BEGIN
 	ALTER TABLE PublicationType ADD
-	    EmailSubject VarChar(100) NULL
+	    EmailSubject VarChar(500) NULL
   END
 GO
 
 if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'EmailSubject')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'EmailSubject', 'VarChar(100)', 0
+	exec #spAlterColumn 'PublicationType', 'EmailSubject', 'VarChar(500)', 0
   END
 GO
 
@@ -163,13 +163,13 @@ GO
 if not exists(select * from syscolumns where id=object_id('PublicationType') and name = 'ProviderName')
   BEGIN
 	ALTER TABLE PublicationType ADD
-	    ProviderName VarChar(100) NOT NULL
+	    ProviderName VarChar(250) NOT NULL
   END
 GO
 
 if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'ProviderName')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'ProviderName', 'VarChar(100)', 1
+	exec #spAlterColumn 'PublicationType', 'ProviderName', 'VarChar(250)', 1
   END
 GO
 

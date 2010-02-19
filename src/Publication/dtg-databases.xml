@@ -10,13 +10,13 @@
 		<columns>
 		    <column name="PublicationTypeId" sqltype="Int" identity="True" required="True" />
 		    <column name="Name" sqltype="VarChar" length="50" required="True" />
-		    <column name="EmailSubject" sqltype="VarChar" length="100" />
+		    <column name="EmailSubject" sqltype="VarChar" length="500" />
 		    <column name="EmailBody" sqltype="Text" />
 		    <column name="EmailBodyType" sqltype="VarChar" length="100" />
 		    <column name="MailMessageType" sqltype="VarChar" length="100" />
 		    <column name="LastSentDate" sqltype="DateTime" required="True" default="getdate()" />
 		    <column name="FrequencyInMinutes" sqltype="Int" required="True" />
-		    <column name="ProviderName" sqltype="VarChar" length="100" required="True" />
+		    <column name="ProviderName" sqltype="VarChar" length="250" required="True" />
 		    <column name="AllowSubscription" sqltype="Bit" required="True" />
 		    <column name="AutoSubscribe" sqltype="Bit" required="True" />
 		    <column name="EffectiveDate" sqltype="DateTime" required="True" default="getdate()"  />
