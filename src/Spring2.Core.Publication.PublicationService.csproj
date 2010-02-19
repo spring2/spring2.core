@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyVersionInfo.cs" />
+    <Compile Include="Publication\AssemblyInfo.cs" />
     <Compile Include="Publication\PublicationService\PublicationService.cs" />
   </ItemGroup>
   <ItemGroup>

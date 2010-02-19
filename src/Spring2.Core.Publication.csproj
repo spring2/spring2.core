@@ -49,6 +49,10 @@
     <DocumentationFile>Spring2.Core.Publication.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=b32731d11ce58905">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Spring2.DataTierGenerator.Attribute, Version=1.0.0.0, Culture=neutral, PublicKeyToken=687bce93d7ce902c">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Spring2.DataTierGenerator.Attribute.dll</HintPath>
