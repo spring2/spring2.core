@@ -42,7 +42,7 @@ namespace Spring2.Core.Publication {
 	    Velocity.Evaluate(context, writer, publicationType.MailMessageType.ToString(), publicationType.EmailSubject.ToString());
 	    StringType subject = writer.ToString();
 
-	    MailBodyFormatEnum bodyFormat = MailBodyFormatEnum.GetInstance(publicationType.EmailBodyType);
+	    MailBodyFormatEnum bodyFormat = MailBodyFormatEnum.GetInstance(publicationType.EmailBodyType.Display());
 	    MailMessage.Create(publicationType.MailMessageType, emailAddress, subject, body, bodyFormat);
 	}
     }
