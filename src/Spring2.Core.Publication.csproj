@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2DD981E6-ECCB-4D2E-BCF9-9A0D194BDE8E}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -53,6 +53,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="NVelocity, Version=0.4.2.8580, Culture=neutral, PublicKeyToken=44382d1b57473eda">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\NVelocity.dll</HintPath>
+    </Reference>
     <Reference Include="Spring2.DataTierGenerator.Attribute, Version=1.0.0.0, Culture=neutral, PublicKeyToken=687bce93d7ce902c">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Spring2.DataTierGenerator.Attribute.dll</HintPath>
@@ -91,6 +95,10 @@
     <ProjectReference Include="Spring2.Core.csproj">
       <Project>{80B94045-4DE6-4BB0-BE22-C5CC0E772695}</Project>
       <Name>Spring2.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="Spring2.Core.Mail.csproj">
+      <Project>{BFE71D4B-66E4-467F-9649-FA699B96AC7A}</Project>
+      <Name>Spring2.Core.Mail</Name>
     </ProjectReference>
     <ProjectReference Include="Spring2.Core.Security.csproj">
       <Project>{AE5DC4B5-476C-441F-88F2-EEB268D90121}</Project>
