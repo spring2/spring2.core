@@ -17,9 +17,7 @@ namespace Spring2.Core.Publication.DataObject {
 	public static readonly PublicationTypeData DEFAULT = new PublicationTypeData();
 
 	private StringType name = StringType.DEFAULT;
-	private StringType emailSubject = StringType.DEFAULT;
-	private StringType emailBody = StringType.DEFAULT;
-	private StringType emailBodyType = StringType.DEFAULT;
+	private StringType description = StringType.DEFAULT;
 	private StringType mailMessageType = StringType.DEFAULT;
 	private DateTimeType lastSentDate = DateTimeType.DEFAULT;
 	private IntegerType frequencyInMinutes = IntegerType.DEFAULT;
@@ -34,19 +32,9 @@ namespace Spring2.Core.Publication.DataObject {
 	    set { this.name = value; }
 	}
 
-	public StringType EmailSubject {
-	    get { return this.emailSubject; }
-	    set { this.emailSubject = value; }
-	}
-
-	public StringType EmailBody {
-	    get { return this.emailBody; }
-	    set { this.emailBody = value; }
-	}
-
-	public StringType EmailBodyType {
-	    get { return this.emailBodyType; }
-	    set { this.emailBodyType = value; }
+	public StringType Description {
+	    get { return this.description; }
+	    set { this.description = value; }
 	}
 
 	public StringType MailMessageType {

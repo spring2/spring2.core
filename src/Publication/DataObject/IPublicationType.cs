@@ -20,9 +20,7 @@ namespace Spring2.Core.Publication.DataObject {
 	
 	public static readonly ColumnMetaData PUBLICATIONTYPEID = new ColumnMetaData("PublicationTypeId", "PublicationTypeId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
 	public static readonly ColumnMetaData NAME = new ColumnMetaData("Name", "Name", DbType.AnsiString, SqlDbType.VarChar, 50, 0, 0);
-	public static readonly ColumnMetaData EMAILSUBJECT = new ColumnMetaData("EmailSubject", "EmailSubject", DbType.AnsiString, SqlDbType.VarChar, 500, 0, 0);
-	public static readonly ColumnMetaData EMAILBODY = new ColumnMetaData("EmailBody", "EmailBody", DbType.AnsiString, SqlDbType.Text, 0, 0, 0);
-	public static readonly ColumnMetaData EMAILBODYTYPE = new ColumnMetaData("EmailBodyType", "EmailBodyType", DbType.AnsiString, SqlDbType.VarChar, 100, 0, 0);
+	public static readonly ColumnMetaData DESCRIPTION = new ColumnMetaData("Description", "Description", DbType.AnsiString, SqlDbType.VarChar, 0, 0, 0);
 	public static readonly ColumnMetaData MAILMESSAGETYPE = new ColumnMetaData("MailMessageType", "MailMessageType", DbType.AnsiString, SqlDbType.VarChar, 100, 0, 0);
 	public static readonly ColumnMetaData LASTSENTDATE = new ColumnMetaData("LastSentDate", "LastSentDate", DbType.DateTime, SqlDbType.DateTime, 0, 0, 0);
 	public static readonly ColumnMetaData FREQUENCYINMINUTES = new ColumnMetaData("FrequencyInMinutes", "FrequencyInMinutes", DbType.Int32, SqlDbType.Int, 0, 10, 0);
@@ -44,13 +42,7 @@ namespace Spring2.Core.Publication.DataObject {
 	StringType Name {
 	    get;
 	}
-	StringType EmailSubject {
-	    get;
-	}
-	StringType EmailBody {
-	    get;
-	}
-	StringType EmailBodyType {
+	StringType Description {
 	    get;
 	}
 	StringType MailMessageType {

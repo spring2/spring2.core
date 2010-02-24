@@ -26,12 +26,6 @@ namespace Spring2.Core.Publication.BusinessLogic {
 	[Generate()]
 	private StringType name = StringType.DEFAULT;
 	[Generate()]
-	private StringType emailSubject = StringType.DEFAULT;
-	[Generate()]
-	private StringType emailBody = StringType.DEFAULT;
-	[Generate()]
-	private StringType emailBodyType = StringType.DEFAULT;
-	[Generate()]
 	private StringType mailMessageType = StringType.DEFAULT;
 	[Generate()]
 	private DateTimeType lastSentDate = DateTimeType.DEFAULT;
@@ -82,9 +76,7 @@ namespace Spring2.Core.Publication.BusinessLogic {
 	[Generate()]
 	public void Update(PublicationTypeData data) {
 	    name = data.Name.IsDefault ? name : data.Name;
-	    emailSubject = data.EmailSubject.IsDefault ? emailSubject : data.EmailSubject;
-	    emailBody = data.EmailBody.IsDefault ? emailBody : data.EmailBody;
-	    emailBodyType = data.EmailBodyType.IsDefault ? emailBodyType : data.EmailBodyType;
+	    description = data.Description.IsDefault ? description : data.Description;
 	    mailMessageType = data.MailMessageType.IsDefault ? mailMessageType : data.MailMessageType;
 	    lastSentDate = data.LastSentDate.IsDefault ? lastSentDate : data.LastSentDate;
 	    frequencyInMinutes = data.FrequencyInMinutes.IsDefault ? frequencyInMinutes : data.FrequencyInMinutes;
@@ -137,6 +129,9 @@ namespace Spring2.Core.Publication.BusinessLogic {
 	    if (Name.IsEmpty) {
 		errors.Add(new MissingRequiredFieldError(PublicationTypeFields.NAME.Name));
 	    }
+	    if (Description.IsEmpty) {
+		errors.Add(new MissingRequiredFieldError(PublicationTypeFields.DESCRIPTION.Name));
+	    }
 	    if (!LastSentDate.IsValid) {
 		errors.Add(new MissingRequiredFieldError(PublicationTypeFields.LASTSENTDATE.Name));
 	    }
@@ -170,24 +165,6 @@ namespace Spring2.Core.Publication.BusinessLogic {
 	public StringType Name {
 	    get { return this.name; }
 	    set { this.name = value; }
-	}
-
-	[Generate()]
-	public StringType EmailSubject {
-	    get { return this.emailSubject; }
-	    set { this.emailSubject = value; }
-	}
-
-	[Generate()]
-	public StringType EmailBody {
-	    get { return this.emailBody; }
-	    set { this.emailBody = value; }
-	}
-
-	[Generate()]
-	public StringType EmailBodyType {
-	    get { return this.emailBodyType; }
-	    set { this.emailBodyType = value; }
 	}
 
 	[Generate()]
@@ -267,6 +244,8 @@ namespace Spring2.Core.Publication.BusinessLogic {
 	    PublicationTypeDAO.DAO.Reload(this);
 	}
 
+
+
 	[Generate()]
 	public override String ToString() {
 	    return GetType().ToString() + "@" + PublicationTypeId.ToString();
@@ -278,6 +257,14 @@ namespace Spring2.Core.Publication.BusinessLogic {
 
 	public static PublicationTypeList GetActiveSubscribablePublications() {
 	    return PublicationTypeDAO.DAO.FindActiveSubscribablePublicationTypeByDate(DateTimeType.Now);
+	}
+	[Generate()]
+	private StringType description = StringType.DEFAULT;
+
+	[Generate()]
+	public StringType Description {
+	    get { return this.description; }
+	    set { this.description = value; }
 	}
     }
 }

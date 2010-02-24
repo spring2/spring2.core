@@ -32,18 +32,17 @@ namespace Spring2.Core.Publication {
 	    }
 	}
 
-	protected void SendPublicationMail(StringType emailAddress, VelocityContext context, IPublicationType publicationType) {
+	protected void SendPublicationMail(StringType emailAddress, VelocityContext context, String emailSubject, String emailBody, String mailMessageType) {
 	    // merge the template and context
 	    StringWriter writer = new StringWriter();
-	    Velocity.Evaluate(context, writer, publicationType.MailMessageType.ToString(), publicationType.EmailBody.ToString());
+	    Velocity.Evaluate(context, writer, mailMessageType, emailBody);
 	    StringType body = writer.ToString();
 
 	    writer = new StringWriter();
-	    Velocity.Evaluate(context, writer, publicationType.MailMessageType.ToString(), publicationType.EmailSubject.ToString());
+	    Velocity.Evaluate(context, writer, mailMessageType, emailSubject);
 	    StringType subject = writer.ToString();
 
-	    MailBodyFormatEnum bodyFormat = MailBodyFormatEnum.GetInstance(publicationType.EmailBodyType.Display());
-	    MailMessage.Create(publicationType.MailMessageType, emailAddress, subject, body, bodyFormat);
+	    MailMessage.Create(mailMessageType, emailAddress, subject, body, MailBodyFormatEnum.HTML);
 	}
     }
 }

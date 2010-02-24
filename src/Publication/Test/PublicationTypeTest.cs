@@ -69,6 +69,7 @@ namespace Spring2.Core.Publication.Test {
 		FrequencyInMinutes = 4,
 		LastSentDate = DateTimeType.Now.AddMinutes(-5),
 		Name = "One",
+		Description = "Desc One",
 		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
 	    };
 
@@ -80,6 +81,7 @@ namespace Spring2.Core.Publication.Test {
 		FrequencyInMinutes = 4,
 		LastSentDate = DateTimeType.Now.AddMinutes(-5),
 		Name = "Two",
+		Description = "Desc TwO",
 		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
 	    };
 
@@ -91,6 +93,7 @@ namespace Spring2.Core.Publication.Test {
 		FrequencyInMinutes = 100,
 		LastSentDate = DateTimeType.Now.AddMinutes(-5),
 		Name = "Three",
+		Description = "Desc Three",
 		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
 	    };
 	    
@@ -103,6 +106,7 @@ namespace Spring2.Core.Publication.Test {
 	    PublicationTypeList publications = PublicationType.GetActivePublicationsForProcessing();
 	    Assert.AreEqual(1, publications.Count);
 	    Assert.AreEqual("One", publications[0].Name.Display());
+	    Assert.AreEqual("Desc One", publications[0].Description.Display());
 	}
 
 	[Test()]
@@ -115,6 +119,7 @@ namespace Spring2.Core.Publication.Test {
 		FrequencyInMinutes = 4,
 		LastSentDate = DateTimeType.Now.AddMinutes(-5),
 		Name = "One",
+		Description = "Desc One",
 		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
 	    };
 
@@ -126,6 +131,7 @@ namespace Spring2.Core.Publication.Test {
 		FrequencyInMinutes = 4,
 		LastSentDate = DateTimeType.Now.AddMinutes(-5),
 		Name = "Two",
+		Description = "Desc Two",
 		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
 	    };
 
@@ -138,6 +144,7 @@ namespace Spring2.Core.Publication.Test {
 		FrequencyInMinutes = 100,
 		LastSentDate = DateTimeType.Now.AddMinutes(-5),
 		Name = "Three",
+		Description = "Desc Three",
 		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
 	    };
 
@@ -150,6 +157,7 @@ namespace Spring2.Core.Publication.Test {
 	    PublicationTypeList publications = PublicationType.GetActiveSubscribablePublications();
 	    Assert.AreEqual(1, publications.Count);
 	    Assert.AreEqual("One", publications[0].Name.Display());
+	    Assert.AreEqual("Desc One", publications[0].Description.Display());
 	}
     }
 }

@@ -41,9 +41,7 @@ namespace Spring2.Core.Publication.Dao {
 	    public String Prefix = String.Empty;
 	    public Int32 PublicationTypeId;
 	    public Int32 Name;
-	    public Int32 EmailSubject;
-	    public Int32 EmailBody;
-	    public Int32 EmailBodyType;
+	    public Int32 Description;
 	    public Int32 MailMessageType;
 	    public Int32 LastSentDate;
 	    public Int32 FrequencyInMinutes;
@@ -60,9 +58,7 @@ namespace Spring2.Core.Publication.Dao {
 	    internal ColumnOrdinals(IDataReader reader) {
 		PublicationTypeId = reader.GetOrdinal("PublicationTypeId");
 		Name = reader.GetOrdinal("Name");
-		EmailSubject = reader.GetOrdinal("EmailSubject");
-		EmailBody = reader.GetOrdinal("EmailBody");
-		EmailBodyType = reader.GetOrdinal("EmailBodyType");
+		Description = reader.GetOrdinal("Description");
 		MailMessageType = reader.GetOrdinal("MailMessageType");
 		LastSentDate = reader.GetOrdinal("LastSentDate");
 		FrequencyInMinutes = reader.GetOrdinal("FrequencyInMinutes");
@@ -81,9 +77,7 @@ namespace Spring2.Core.Publication.Dao {
 		Prefix = prefix;
 		PublicationTypeId = reader.GetOrdinal(prefix + "PublicationTypeId");
 		Name = reader.GetOrdinal(prefix + "Name");
-		EmailSubject = reader.GetOrdinal(prefix + "EmailSubject");
-		EmailBody = reader.GetOrdinal(prefix + "EmailBody");
-		EmailBodyType = reader.GetOrdinal(prefix + "EmailBodyType");
+		Description = reader.GetOrdinal(prefix + "Description");
 		MailMessageType = reader.GetOrdinal(prefix + "MailMessageType");
 		LastSentDate = reader.GetOrdinal(prefix + "LastSentDate");
 		FrequencyInMinutes = reader.GetOrdinal(prefix + "FrequencyInMinutes");
@@ -105,9 +99,7 @@ namespace Spring2.Core.Publication.Dao {
 	static PublicationTypeDAO() {
 	    AddPropertyMapping("PublicationTypeId", @"PublicationTypeId");
 	    AddPropertyMapping("Name", @"Name");
-	    AddPropertyMapping("EmailSubject", @"EmailSubject");
-	    AddPropertyMapping("EmailBody", @"EmailBody");
-	    AddPropertyMapping("EmailBodyType", @"EmailBodyType");
+	    AddPropertyMapping("Description", @"Description");
 	    AddPropertyMapping("MailMessageType", @"MailMessageType");
 	    AddPropertyMapping("LastSentDate", @"LastSentDate");
 	    AddPropertyMapping("FrequencyInMinutes", @"FrequencyInMinutes");
@@ -348,20 +340,10 @@ namespace Spring2.Core.Publication.Dao {
 	    } else {
 		data.Name = StringType.Parse(dataReader.GetString(ordinals.Name));
 	    }
-	    if (dataReader.IsDBNull(ordinals.EmailSubject)) {
-		data.EmailSubject = StringType.UNSET;
+	    if (dataReader.IsDBNull(ordinals.Description)) {
+		data.Description = StringType.UNSET;
 	    } else {
-		data.EmailSubject = StringType.Parse(dataReader.GetString(ordinals.EmailSubject));
-	    }
-	    if (dataReader.IsDBNull(ordinals.EmailBody)) {
-		data.EmailBody = StringType.UNSET;
-	    } else {
-		data.EmailBody = StringType.Parse(dataReader.GetString(ordinals.EmailBody));
-	    }
-	    if (dataReader.IsDBNull(ordinals.EmailBodyType)) {
-		data.EmailBodyType = StringType.UNSET;
-	    } else {
-		data.EmailBodyType = StringType.Parse(dataReader.GetString(ordinals.EmailBodyType));
+		data.Description = StringType.Parse(dataReader.GetString(ordinals.Description));
 	    }
 	    if (dataReader.IsDBNull(ordinals.MailMessageType)) {
 		data.MailMessageType = StringType.UNSET;
@@ -449,9 +431,7 @@ namespace Spring2.Core.Publication.Dao {
 
 	    //Create the parameters and append them to the command object
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.NAME, data.Name.IsValid ? data.Name.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.EMAILSUBJECT, data.EmailSubject.IsValid ? data.EmailSubject.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.EMAILBODY, data.EmailBody.IsValid ? data.EmailBody.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.EMAILBODYTYPE, data.EmailBodyType.IsValid ? data.EmailBodyType.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.DESCRIPTION, data.Description.IsValid ? data.Description.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.MAILMESSAGETYPE, data.MailMessageType.IsValid ? data.MailMessageType.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.LASTSENTDATE, data.LastSentDate.IsValid ? data.LastSentDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.FREQUENCYINMINUTES, data.FrequencyInMinutes.IsValid ? data.FrequencyInMinutes.ToInt32() as Object : DBNull.Value));
@@ -498,9 +478,7 @@ namespace Spring2.Core.Publication.Dao {
 	    //Create the parameters and append them to the command object
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.PUBLICATIONTYPEID, data.PublicationTypeId.IsValid ? data.PublicationTypeId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.NAME, data.Name.IsValid ? data.Name.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.EMAILSUBJECT, data.EmailSubject.IsValid ? data.EmailSubject.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.EMAILBODY, data.EmailBody.IsValid ? data.EmailBody.ToString() as Object : DBNull.Value));
-	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.EMAILBODYTYPE, data.EmailBodyType.IsValid ? data.EmailBodyType.ToString() as Object : DBNull.Value));
+	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.DESCRIPTION, data.Description.IsValid ? data.Description.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.MAILMESSAGETYPE, data.MailMessageType.IsValid ? data.MailMessageType.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.LASTSENTDATE, data.LastSentDate.IsValid ? data.LastSentDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.FREQUENCYINMINUTES, data.FrequencyInMinutes.IsValid ? data.FrequencyInMinutes.ToInt32() as Object : DBNull.Value));

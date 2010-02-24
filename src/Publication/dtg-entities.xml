@@ -5,9 +5,7 @@
 	<properties>
 	    <property name="PublicationTypeId" type="IdType" column="*" writable="False" />
 	    <property name="Name" type="StringType" column="*" />
-	    <property name="EmailSubject" type="StringType" column="*" />
-	    <property name="EmailBody" type="StringType" column="*" />
-	    <property name="EmailBodyType" type="StringType" column="*" />
+	    <property name="Description" type="StringType" column="*" />
 	    <property name="MailMessageType" type="StringType" column="*" />
 	    <property name="LastSentDate" type="DateTimeType" column="*" />
 	    <property name="FrequencyInMinutes" type="IntegerType" column="*" />

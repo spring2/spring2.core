@@ -238,41 +238,15 @@ namespace Spring2.Core.Publication.DataObject {
 	}
 
 	[Generate]
-	public class EmailSubjectSorter : IComparer {
+	public class DescriptionSorter : IComparer {
 	    public Int32 Compare(Object a, Object b) {
 		IPublicationType o1 = (IPublicationType)a;
 		IPublicationType o2 = (IPublicationType)b;
 
-		if (o1 == null || o2 == null || !o1.EmailSubject.IsValid || !o2.EmailSubject.IsValid) {
+		if (o1 == null || o2 == null || !o1.Description.IsValid || !o2.Description.IsValid) {
 		    return 0;
 		}
-		return o1.EmailSubject.CompareTo(o2.EmailSubject);
-	    }
-	}
-
-	[Generate]
-	public class EmailBodySorter : IComparer {
-	    public Int32 Compare(Object a, Object b) {
-		IPublicationType o1 = (IPublicationType)a;
-		IPublicationType o2 = (IPublicationType)b;
-
-		if (o1 == null || o2 == null || !o1.EmailBody.IsValid || !o2.EmailBody.IsValid) {
-		    return 0;
-		}
-		return o1.EmailBody.CompareTo(o2.EmailBody);
-	    }
-	}
-
-	[Generate]
-	public class EmailBodyTypeSorter : IComparer {
-	    public Int32 Compare(Object a, Object b) {
-		IPublicationType o1 = (IPublicationType)a;
-		IPublicationType o2 = (IPublicationType)b;
-
-		if (o1 == null || o2 == null || !o1.EmailBodyType.IsValid || !o2.EmailBodyType.IsValid) {
-		    return 0;
-		}
-		return o1.EmailBodyType.CompareTo(o2.EmailBodyType);
+		return o1.Description.CompareTo(o2.Description);
 	    }
 	}
 

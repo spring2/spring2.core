@@ -13,9 +13,7 @@ AS
 SELECT
     PublicationType.PublicationTypeId,
     PublicationType.Name,
-    PublicationType.EmailSubject,
-    PublicationType.EmailBody,
-    PublicationType.EmailBodyType,
+    PublicationType.Description,
     PublicationType.MailMessageType,
     PublicationType.LastSentDate,
     PublicationType.FrequencyInMinutes,
