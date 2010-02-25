@@ -32,7 +32,7 @@ namespace Spring2.Core.Publication {
 	    }
 	}
 
-	protected void SendPublicationMail(StringType emailAddress, VelocityContext context, String emailSubject, String emailBody, String mailMessageType) {
+	protected void SendPublicationMail(StringType emailAddress, VelocityContext context, String emailSubject, String emailBody, String mailMessageType, MailBodyFormatEnum bodyType) {
 	    // merge the template and context
 	    StringWriter writer = new StringWriter();
 	    Velocity.Evaluate(context, writer, mailMessageType, emailBody);
@@ -42,7 +42,7 @@ namespace Spring2.Core.Publication {
 	    Velocity.Evaluate(context, writer, mailMessageType, emailSubject);
 	    StringType subject = writer.ToString();
 
-	    MailMessage.Create(mailMessageType, emailAddress, subject, body, MailBodyFormatEnum.HTML);
+	    MailMessage.Create(mailMessageType, emailAddress, subject, body, bodyType);
 	}
     }
 }
