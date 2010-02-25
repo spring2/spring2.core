@@ -266,5 +266,9 @@ namespace Spring2.Core.Publication.BusinessLogic {
 	    get { return this.description; }
 	    set { this.description = value; }
 	}
+
+	public static PublicationTypeList GetActiveAutoSubscribablePublications() {
+	    return PublicationTypeDAO.DAO.FindActiveAutoSubscribablePublicationTypeByDate(DateTimeType.Now);
+	}
     }
 }

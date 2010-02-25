@@ -159,5 +159,55 @@ namespace Spring2.Core.Publication.Test {
 	    Assert.AreEqual("One", publications[0].Name.Display());
 	    Assert.AreEqual("Desc One", publications[0].Description.Display());
 	}
+	[Test()]
+	public void ShouldBeAbleToRetreiveTheActiveAutoSubscribablePublicationTypes() {
+	    //effective and subscribable
+	    PublicationTypeData data1 = new PublicationTypeData() {
+		AllowSubscription = true,
+		AutoSubscribe = true,
+		EffectiveDate = DateTimeType.Now.AddMonths(-1),
+		FrequencyInMinutes = 4,
+		LastSentDate = DateTimeType.Now.AddMinutes(-5),
+		Name = "One",
+		Description = "Desc One",
+		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
+	    };
+
+	    //not subscribable
+	    PublicationTypeData data2 = new PublicationTypeData() {
+		AllowSubscription = true,
+		AutoSubscribe = true,
+		EffectiveDate = DateTimeType.Now.AddMonths(1),
+		FrequencyInMinutes = 4,
+		LastSentDate = DateTimeType.Now.AddMinutes(-5),
+		Name = "Two",
+		Description = "Desc Two",
+		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
+	    };
+
+	    //expired
+	    PublicationTypeData data3 = new PublicationTypeData() {
+		AllowSubscription = true,
+		AutoSubscribe = true,
+		EffectiveDate = DateTimeType.Now.AddMonths(-2),
+		ExpirationDate = DateTimeType.Now.AddMonths(-1),
+		FrequencyInMinutes = 100,
+		LastSentDate = DateTimeType.Now.AddMinutes(-5),
+		Name = "Three",
+		Description = "Desc Three",
+		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
+	    };
+
+	    using (repository.Playback()) {
+		type1.Update(data1);
+		type2.Update(data2);
+		type3.Update(data3);
+	    }
+
+	    PublicationTypeList publications = PublicationType.GetActiveAutoSubscribablePublications();
+	    Assert.AreEqual(1, publications.Count);
+	    Assert.AreEqual("One", publications[0].Name.Display());
+	    Assert.AreEqual("Desc One", publications[0].Description.Display());
+	}
     }
 }

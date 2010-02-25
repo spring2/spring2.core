@@ -189,6 +189,14 @@ namespace Spring2.Core.Publication.Dao {
 	PublicationTypeList FindActiveSubscribablePublicationTypeByDate(DateTimeType effectiveDate);
 
 	/// <summary>
+	/// Returns a list of objects which match the values for the fields specified.
+	/// </summary>
+	/// <param name="effectiveDate">A field value to be matched.</param>
+	/// <returns>The list of PublicationTypeDAO objects found.</returns>
+	[Generate]
+	PublicationTypeList FindActiveAutoSubscribablePublicationTypeByDate(DateTimeType effectiveDate);
+
+	/// <summary>
 	/// Returns an object which matches the values for the fields specified.
 	/// </summary>
 	/// <param name="name">A field value to be matched.</param>
