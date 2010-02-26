@@ -88,6 +88,7 @@ namespace Spring2.Core.Test.IoC {
 	    ClassRegistry.Register<DisposableClass>(disposeMe);
 	    Assert.AreSame(disposeMe, ClassRegistry.Resolve<DisposableClass>());
 	    ClassRegistry.Flush();
+	    Assert.IsFalse(ClassRegistry.CanResolve<DisposableClass>());
 	    Assert.IsFalse(disposeMe.Disposed);
 	}
 
@@ -97,6 +98,7 @@ namespace Spring2.Core.Test.IoC {
 	    ClassRegistry.Register<DisposableClass>(disposeMe);
 	    Assert.AreSame(disposeMe, ClassRegistry.Resolve<DisposableClass>());
 	    ClassRegistry.Flush(true);
+	    Assert.IsFalse(ClassRegistry.CanResolve<DisposableClass>());
 	    Assert.IsTrue(disposeMe.Disposed);
 	}
 
