@@ -4,6 +4,8 @@ using System.Text;
 using Spring2.Core.IoC;
 using Spring2.Core.DAO;
 using NUnit.Framework;
+using System.Drawing;
+using System.ComponentModel;
 
 namespace Spring2.Core.Test.IoC {
 
@@ -12,7 +14,7 @@ namespace Spring2.Core.Test.IoC {
 
 	[Test]
 	public void CanResolveRegisteredDelegate() {
-	    ClassRegistry.Register<IConnectionStringStrategy>(new DefaultConnectionStringStrategy());
+	    ClassRegistry.Register<IConnectionStringStrategy>(() => { return new DefaultConnectionStringStrategy(); });
 	    Assert.IsInstanceOfType(typeof(DefaultConnectionStringStrategy), ClassRegistry.Resolve<IConnectionStringStrategy>());
 	}
 
@@ -70,6 +72,38 @@ namespace Spring2.Core.Test.IoC {
 	[Test]
 	public void CanResolveIsFalseForUnregisteredContract() {
 	    Assert.IsFalse(ClassRegistry.CanResolve<IComparable>());
+	}
+
+	[Test]
+	public void CanFlushDependencies() {
+	    ClassRegistry.Register<IConnectionStringStrategy>(new DefaultConnectionStringStrategy());
+	    Assert.IsInstanceOfType(typeof(DefaultConnectionStringStrategy), ClassRegistry.Resolve<IConnectionStringStrategy>());
+	    ClassRegistry.Flush();
+	    Assert.IsFalse(ClassRegistry.CanResolve<IConnectionStringStrategy>());
+	}
+
+	[Test]
+	public void CanFlushDependenciesNoDispose() {
+	    DisposableClass disposeMe = new DisposableClass();
+	    ClassRegistry.Register<DisposableClass>(disposeMe);
+	    Assert.AreSame(disposeMe, ClassRegistry.Resolve<DisposableClass>());
+	    ClassRegistry.Flush();
+	    Assert.IsFalse(disposeMe.Disposed);
+	}
+
+	[Test]
+	public void CanFlushDependenciesDispose() {
+	    DisposableClass disposeMe = new DisposableClass();
+	    ClassRegistry.Register<DisposableClass>(disposeMe);
+	    Assert.AreSame(disposeMe, ClassRegistry.Resolve<DisposableClass>());
+	    ClassRegistry.Flush(true);
+	    Assert.IsTrue(disposeMe.Disposed);
+	}
+
+	private class DisposableClass : IDisposable {
+	    public bool Disposed { private set; get; }
+	    public DisposableClass() { }
+	    public void Dispose() { Disposed = true; }
 	}
     }
 }

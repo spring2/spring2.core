@@ -92,5 +92,19 @@ namespace Spring2.Core.IoC {
 	public static bool CanResolve<TContract>() {
 	    return CanResolve(typeof(TContract));
 	}
+
+	public static void Flush() {
+	    Flush(false);
+	}
+
+	public static void Flush(bool dispose) {
+	    if (dispose) { //loop through and dispose if necessary.
+		foreach (object o in instances.Values) {
+		    if (o is IDisposable) (o as IDisposable).Dispose();
+		}
+	    }
+	    dependencies.Clear();
+	    instances.Clear();
+	}
     }
 }
