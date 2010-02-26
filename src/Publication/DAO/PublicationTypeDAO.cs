@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 
 using Spring2.Core.DAO;
+using Spring2.Core.IoC;
 using Spring2.Core.Types;
 
 using Spring2.Core.Publication.BusinessLogic;
@@ -18,20 +19,14 @@ namespace Spring2.Core.Publication.Dao {
     public class PublicationTypeDAO : Spring2.Core.DAO.SqlEntityDAO, IPublicationTypeDAO {
 	private static IPublicationTypeDAO instance = new PublicationTypeDAO();
 	public static IPublicationTypeDAO DAO{
-	    get{ return instance; }
-	}
-	
-	/// <summary>
-	/// Sets the singleton DAO instance of IPublicationTypeDAO
-	/// </summary>
-	public static void SetInstance(IPublicationTypeDAO dao) {
-	    if(dao != null){
-			instance = dao;
-	    }else{
-			instance = new PublicationTypeDAO();
+	    get{
+			if(!ClassRegistry.CanResolve(typeof(IPublicationTypeDAO))) {
+				ClassRegistry.Register<IPublicationTypeDAO>(instance);
+			}
+			return ClassRegistry.Resolve<IPublicationTypeDAO>();
 	    }
 	}
-	
+
 	private static readonly String VIEW = "vwPublicationType";
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";
 	private static readonly Int32 COMMAND_TIMEOUT = 15;

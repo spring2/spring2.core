@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 
 using Spring2.Core.DAO;
+using Spring2.Core.IoC;
 using Spring2.Core.Types;
 
 using Spring2.Core.Mail.BusinessLogic;
@@ -19,20 +20,14 @@ namespace Spring2.Core.Mail.Dao {
     public class MailMessageDAO : Spring2.Core.DAO.SqlEntityDAO, IMailMessageDAO {
 	private static IMailMessageDAO instance = new MailMessageDAO();
 	public static IMailMessageDAO DAO{
-	    get{ return instance; }
-	}
-	
-	/// <summary>
-	/// Sets the singleton DAO instance of IMailMessageDAO
-	/// </summary>
-	public static void SetInstance(IMailMessageDAO dao) {
-	    if(dao != null){
-			instance = dao;
-	    }else{
-			instance = new MailMessageDAO();
+	    get{
+			if(!ClassRegistry.CanResolve(typeof(IMailMessageDAO))) {
+				ClassRegistry.Register<IMailMessageDAO>(instance);
+			}
+			return ClassRegistry.Resolve<IMailMessageDAO>();
 	    }
 	}
-	
+
 	private static readonly String VIEW = "vwMailMessage";
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";
 	private static readonly Int32 COMMAND_TIMEOUT = 15;

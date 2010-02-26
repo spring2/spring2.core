@@ -13,6 +13,7 @@ using System.Configuration;
 using System.Data;
 
 using Spring2.Core.DAO;
+using Spring2.Core.IoC;
 using Spring2.Core.Types;
 
 using ${options.RootNameSpace}.BusinessLogic;
@@ -27,20 +28,14 @@ namespace $options.GetDAONameSpace($element.Name) {
     public class $options.GetDAOClassName($element.Name) : $options.DaoBaseClass, I$options.GetDAOClassName($element.Name) {
 	private static I${element.Name}DAO instance = new ${element.Name}DAO();
 	public static I${element.Name}DAO DAO{
-	    get{ return instance; }
-	}
-	
-	/// <summary>
-	/// Sets the singleton DAO instance of I${element.Name}DAO
-	/// </summary>
-	public static void SetInstance(I${element.Name}DAO dao) {
-	    if(dao != null){
-			instance = dao;
-	    }else{
-			instance = new ${element.Name}DAO();
+	    get{
+			if(!ClassRegistry.CanResolve(typeof(I${element.Name}DAO))) {
+				ClassRegistry.Register<I${element.Name}DAO>(instance);
+			}
+			return ClassRegistry.Resolve<I${element.Name}DAO>();
 	    }
 	}
-	
+
 #if($element.SqlEntity.UseView)
 	private static readonly String VIEW = "$element.SqlEntity.View";
 #else

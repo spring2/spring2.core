@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 
 using Spring2.Core.DAO;
+using Spring2.Core.IoC;
 using Spring2.Core.Types;
 
 using Spring2.Core.Publication.BusinessLogic;
@@ -18,20 +19,14 @@ namespace Spring2.Core.Publication.Dao {
     public class PublicationTrackingDAO : Spring2.Core.DAO.SqlEntityDAO, IPublicationTrackingDAO {
 	private static IPublicationTrackingDAO instance = new PublicationTrackingDAO();
 	public static IPublicationTrackingDAO DAO{
-	    get{ return instance; }
-	}
-	
-	/// <summary>
-	/// Sets the singleton DAO instance of IPublicationTrackingDAO
-	/// </summary>
-	public static void SetInstance(IPublicationTrackingDAO dao) {
-	    if(dao != null){
-			instance = dao;
-	    }else{
-			instance = new PublicationTrackingDAO();
+	    get{
+			if(!ClassRegistry.CanResolve(typeof(IPublicationTrackingDAO))) {
+				ClassRegistry.Register<IPublicationTrackingDAO>(instance);
+			}
+			return ClassRegistry.Resolve<IPublicationTrackingDAO>();
 	    }
 	}
-	
+
 	private static readonly String VIEW = "vwPublicationTracking";
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";
 	private static readonly Int32 COMMAND_TIMEOUT = 15;

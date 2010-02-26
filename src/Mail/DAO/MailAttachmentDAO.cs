@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 
 using Spring2.Core.DAO;
+using Spring2.Core.IoC;
 using Spring2.Core.Types;
 
 using Spring2.Core.Mail.BusinessLogic;
@@ -19,20 +20,14 @@ namespace Spring2.Core.Mail.Dao {
     public class MailAttachmentDAO : Spring2.Core.DAO.SqlEntityDAO, IMailAttachmentDAO {
 	private static IMailAttachmentDAO instance = new MailAttachmentDAO();
 	public static IMailAttachmentDAO DAO{
-	    get{ return instance; }
-	}
-	
-	/// <summary>
-	/// Sets the singleton DAO instance of IMailAttachmentDAO
-	/// </summary>
-	public static void SetInstance(IMailAttachmentDAO dao) {
-	    if(dao != null){
-			instance = dao;
-	    }else{
-			instance = new MailAttachmentDAO();
+	    get{
+			if(!ClassRegistry.CanResolve(typeof(IMailAttachmentDAO))) {
+				ClassRegistry.Register<IMailAttachmentDAO>(instance);
+			}
+			return ClassRegistry.Resolve<IMailAttachmentDAO>();
 	    }
 	}
-	
+
 	private static readonly String VIEW = "vwMailAttachment";
 	private static readonly String CONNECTION_STRING_KEY = "ConnectionString";
 	private static readonly Int32 COMMAND_TIMEOUT = 15;
