@@ -532,7 +532,7 @@ namespace Spring2.Core.Publication.Dao {
 	/// <returns>The list of PublicationTypeDAO objects found.</returns>
 	public PublicationTypeList FindActivePublicationTypeForProcessingByDate(DateTimeType effectiveDate) {
 	    OrderByClause sort = new OrderByClause("EffectiveDate");
-	    SqlFilter filter = new SqlFilter(new SqlLiteralPredicate("@EffectiveDate >= EffectiveDate and (ExpirationDate is null or @EffectiveDate < ExpirationDate) and dateadd(minute, FrequencyInMinutes, LastSentDate) <= @EffectiveDate"));
+	    SqlFilter filter = new SqlFilter(new SqlLiteralPredicate("@EffectiveDate >= EffectiveDate and (ExpirationDate is null or @EffectiveDate < ExpirationDate)"));
 	    String sql = "SELECT * from " + VIEW + filter.Statement + sort.FormatSql();
 		IDataParameterCollection parameters = new SqlParameterList();
 	    parameters.Add(CreateDataParameter("@EffectiveDate", PublicationTypeFields.EFFECTIVEDATE, effectiveDate.IsValid ? effectiveDate.ToDateTime() as Object : DBNull.Value));

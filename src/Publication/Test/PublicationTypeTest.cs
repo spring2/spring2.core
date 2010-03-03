@@ -84,23 +84,10 @@ namespace Spring2.Core.Publication.Test {
 		Description = "Desc TwO",
 		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
 	    };
-
-	    //Not yet available for processing
-	    PublicationTypeData data3 = new PublicationTypeData() {
-		AllowSubscription = true,
-		AutoSubscribe = false,
-		EffectiveDate = DateTimeType.Now.AddMonths(-1),
-		FrequencyInMinutes = 100,
-		LastSentDate = DateTimeType.Now.AddMinutes(-5),
-		Name = "Three",
-		Description = "Desc Three",
-		ProviderName = "Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication"
-	    };
 	    
 	    using (repository.Playback()) {
 		type1.Update(data1);
 		type2.Update(data2);
-		type3.Update(data3);
 	    }
 
 	    PublicationTypeList publications = PublicationType.GetActivePublicationsForProcessing();

@@ -84,7 +84,6 @@
     <Compile Include="Publication\DataObject\PublicationTypeList.cs" />
     <Compile Include="Publication\IPublisher.cs" />
     <Compile Include="Publication\PublicationTypeException.cs" />
-    <Compile Include="Publication\Publisher.cs" />
     <Compile Include="Publication\Test\TestPublicationServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
