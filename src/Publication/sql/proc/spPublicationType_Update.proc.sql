@@ -10,6 +10,9 @@ CREATE PROCEDURE dbo.spPublicationType_Update
 
 	@PublicationTypeId	Int = null,
 	@Name	VarChar(50) = null,
+	@EmailSubject	VarChar(500) = null,
+	@EmailBody	Text = null,
+	@EmailBodyType	VarChar(100) = null,
 	@Description	VarChar(max) = null,
 	@MailMessageType	VarChar(100) = null,
 	@LastSentDate	DateTime = null,
@@ -33,6 +36,9 @@ UPDATE
 	PublicationType
 SET
 	Name = @Name,
+	EmailSubject = @EmailSubject,
+	EmailBody = @EmailBody,
+	EmailBodyType = @EmailBodyType,
 	Description = @Description,
 	MailMessageType = @MailMessageType,
 	LastSentDate = @LastSentDate,

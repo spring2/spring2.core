@@ -8,6 +8,9 @@ GO
 
 CREATE PROCEDURE dbo.spPublicationType_Insert
 	@Name	VarChar(50) = null,
+	@EmailSubject	VarChar(500) = null,
+	@EmailBody	Text = null,
+	@EmailBodyType	VarChar(100) = null,
 	@Description	VarChar(max) = null,
 	@MailMessageType	VarChar(100) = null,
 	@LastSentDate	DateTime = null,
@@ -29,6 +32,9 @@ if @EffectiveDate is null set @EffectiveDate=getdate()
 
 INSERT INTO PublicationType
 (	Name,
+	EmailSubject,
+	EmailBody,
+	EmailBodyType,
 	Description,
 	MailMessageType,
 	LastSentDate,
@@ -44,6 +50,9 @@ INSERT INTO PublicationType
 	LastModifiedUserId)
 VALUES (
 	@Name,
+	@EmailSubject,
+	@EmailBody,
+	@EmailBodyType,
 	@Description,
 	@MailMessageType,
 	@LastSentDate,

@@ -24,6 +24,9 @@ if not exists (select * from dbo.sysobjects where id = object_id(N'[PublicationT
 CREATE TABLE dbo.PublicationType (
 	PublicationTypeId Int IDENTITY(1,1) NOT NULL,
 	Name VarChar(50) NOT NULL,
+	EmailSubject VarChar(500) NULL,
+	EmailBody Text NULL,
+	EmailBodyType VarChar(100) NULL,
 	Description VarChar(max) NULL,
 	MailMessageType VarChar(100) NULL,
 	LastSentDate DateTime NOT NULL CONSTRAINT [DF_PublicationType_LastSentDate] DEFAULT (getdate()),
@@ -63,6 +66,40 @@ GO
 if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'Name')
   BEGIN
 	exec #spAlterColumn 'PublicationType', 'Name', 'VarChar(50)', 1
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('PublicationType') and name = 'EmailSubject')
+  BEGIN
+	ALTER TABLE PublicationType ADD
+	    EmailSubject VarChar(500) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'EmailSubject')
+  BEGIN
+	exec #spAlterColumn 'PublicationType', 'EmailSubject', 'VarChar(500)', 0
+  END
+GO
+
+if not exists(select * from syscolumns where id=object_id('PublicationType') and name = 'EmailBody')
+  BEGIN
+	ALTER TABLE PublicationType ADD
+	    EmailBody Text NULL
+  END
+GO
+GO
+
+if not exists(select * from syscolumns where id=object_id('PublicationType') and name = 'EmailBodyType')
+  BEGIN
+	ALTER TABLE PublicationType ADD
+	    EmailBodyType VarChar(100) NULL
+  END
+GO
+
+if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'EmailBodyType')
+  BEGIN
+	exec #spAlterColumn 'PublicationType', 'EmailBodyType', 'VarChar(100)', 0
   END
 GO
 

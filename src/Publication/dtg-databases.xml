@@ -10,6 +10,9 @@
 		<columns>
 		    <column name="PublicationTypeId" sqltype="Int" identity="True" required="True" />
 		    <column name="Name" sqltype="VarChar" length="50" required="True" />
+		    <column name="EmailSubject" sqltype="VarChar" length="500" obsolete="True" />
+		    <column name="EmailBody" sqltype="Text" obsolete="True" />
+		    <column name="EmailBodyType" sqltype="VarChar" length="100" obsolete="True" />
 		    <column name="Description" sqltype="VarChar(max)" />
 		    <column name="MailMessageType" sqltype="VarChar" length="100" />
 		    <column name="LastSentDate" sqltype="DateTime" required="True" default="getdate()" />
