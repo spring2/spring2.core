@@ -5,6 +5,7 @@ using NUnit.Framework;
 using Spring2.Core.Publication.BusinessLogic;
 using Spring2.Core.Publication.DataObject;
 using Spring2.Core.Types;
+using Spring2.Core.Message;
 using Spring2.Core.Publication.Dao;
 using Spring2.Core.Security;
 using Rhino.Mocks;
@@ -196,5 +197,32 @@ namespace Spring2.Core.Publication.Test {
 	    Assert.AreEqual("One", publications[0].Name.Display());
 	    Assert.AreEqual("Desc One", publications[0].Description.Display());
 	}
+
+	[Test()]
+	public void ValidationTestForPublicationTypeUpdate() {
+	    PublicationTypeData data = new PublicationTypeData();
+	    MessageList errors = new MessageList();
+
+	    using (repository.Playback()) {
+		try {
+		    type1.Update(data);
+		} catch (MessageListException ex) {
+		    errors = ex.Messages;
+		}
+	    }
+
+	    Assert.AreEqual(7, errors.Count);
+	    for (Int32 i = 0; i < errors.Count; i++) {
+		Assert.IsTrue(errors[i] is MissingRequiredFieldError);
+	    }
+	    Assert.AreEqual("Name is required.", errors[0].Message);
+	    Assert.AreEqual("LastSentDate is required.", errors[1].Message);
+	    Assert.AreEqual("FrequencyInMinutes is required.", errors[2].Message);
+	    Assert.AreEqual("ProviderName is required.", errors[3].Message);
+	    Assert.AreEqual("AllowSubscription is required.", errors[4].Message);
+	    Assert.AreEqual("AutoSubscribe is required.", errors[5].Message);
+	    Assert.AreEqual("EffectiveDate is required.", errors[6].Message);
+	}
+
     }
 }
