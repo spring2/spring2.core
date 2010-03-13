@@ -211,17 +211,19 @@ namespace Spring2.Core.Publication.Test {
 		}
 	    }
 
-	    Assert.AreEqual(7, errors.Count);
+	    Assert.AreEqual(8, errors.Count);
 	    for (Int32 i = 0; i < errors.Count; i++) {
 		Assert.IsTrue(errors[i] is MissingRequiredFieldError);
 	    }
-	    Assert.AreEqual("Name is required.", errors[0].Message);
-	    Assert.AreEqual("LastSentDate is required.", errors[1].Message);
-	    Assert.AreEqual("FrequencyInMinutes is required.", errors[2].Message);
-	    Assert.AreEqual("ProviderName is required.", errors[3].Message);
-	    Assert.AreEqual("AllowSubscription is required.", errors[4].Message);
-	    Assert.AreEqual("AutoSubscribe is required.", errors[5].Message);
-	    Assert.AreEqual("EffectiveDate is required.", errors[6].Message);
+	    Int32 index = 0;
+	    Assert.AreEqual("Name is required.", errors[index++].Message);
+	    Assert.AreEqual("Description is required.", errors[index++].Message);
+	    Assert.AreEqual("LastSentDate is required.", errors[index++].Message);
+	    Assert.AreEqual("FrequencyInMinutes is required.", errors[index++].Message);
+	    Assert.AreEqual("ProviderName is required.", errors[index++].Message);
+	    Assert.AreEqual("AllowSubscription is required.", errors[index++].Message);
+	    Assert.AreEqual("AutoSubscribe is required.", errors[index++].Message);
+	    Assert.AreEqual("EffectiveDate is required.", errors[index++].Message);
 	}
 
     }
