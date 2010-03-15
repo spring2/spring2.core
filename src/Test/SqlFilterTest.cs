@@ -2,6 +2,7 @@ using System;
 using System.Data.SqlClient;
 using NUnit.Framework;
 using Spring2.Core.DAO;
+using System.Data;
 
 namespace Spring2.Core.Test {
 
@@ -694,6 +695,24 @@ namespace Spring2.Core.Test {
 	    Assert.IsTrue(filter.Parameters.Contains("@a_foo"));
 	    Assert.IsTrue(filter.Parameters.Contains("@b_foo"));
 	}
-    	
+
+	[Test]
+	public void ShouldBeAbleToGetParametersFromLiteralPredicate() {
+	    SqlFilter filter = new SqlFilter(new SqlEqualityPredicate("foo", EqualityOperatorEnum.Equal, "bar"));
+	    filter.And(new SqlEqualityPredicate("x", EqualityOperatorEnum.Equal, "y"));
+	    filter.And(new SqlBetweenPredicate("tweener", 1, 100));
+
+	    SqlParameterList parameters = new SqlParameterList();
+	    parameters.Add("@thing", SqlDbType.Int, "thing");
+	    filter.And(new SqlLiteralPredicate("some = @thing", parameters));
+
+	    Assert.AreEqual(" WHERE ((foo = @foo) AND (x = @x) AND (tweener BETWEEN @tweener1 AND @tweener2) AND  some = @thing)", filter.Statement);
+	    Assert.AreEqual(5, filter.Parameters.Count);
+	    Assert.IsTrue(filter.Parameters.Contains("@foo"));
+	    Assert.IsTrue(filter.Parameters.Contains("@x"));
+	    Assert.IsTrue(filter.Parameters.Contains("@tweener1"));
+	    Assert.IsTrue(filter.Parameters.Contains("@tweener2"));
+	    Assert.IsTrue(filter.Parameters.Contains("@thing"));
+	}
     }
 }
