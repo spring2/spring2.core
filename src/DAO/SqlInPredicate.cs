@@ -29,6 +29,21 @@ namespace Spring2.Core.DAO {
 	    dbType = SqlDbType.BigInt;
 	}
 
+	public SqlInPredicate(String columnName, Int32[] values) {
+	    this.columnName = columnName;
+	    this.values = new Object[values.Length];
+	    values.CopyTo(this.values, 0);
+	    dbType = SqlDbType.Int;
+	}
+
+	public SqlInPredicate(String columnName, Int32[] values, Boolean not) {
+	    this.columnName = columnName;
+	    this.values = new Object[values.Length];
+	    values.CopyTo(this.values, 0);
+	    this.not = not;
+	    dbType = SqlDbType.Int;
+	}
+
 	public override String Expression {
 	    get {
 	    	StringBuilder sb = new StringBuilder();
