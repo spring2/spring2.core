@@ -222,15 +222,15 @@
       <Output TaskParameter="Include" ItemName="_ReferencePathAsItem"/>
     </CreateItem>
 
-    <CreateProperty Value="@(_ReferencePathAsItem->'%(Identity)', ',')">
+    <CreateProperty Value="@(_ReferencePathAsItem->'%(FullPath)', ',')">
       <Output TaskParameter="Value" PropertyName="_ReferencePathAsCommaSeparatedList"/>
     </CreateProperty>
 
-    <CreateProperty Value="@(_ResolveAssemblyReferenceResolvedFiles->'%(Identity)', ',')">
+    <CreateProperty Value="@(_ResolveAssemblyReferenceResolvedFiles->'%(FullPath)', ',')">
       <Output TaskParameter="Value" PropertyName="_ResolveAssemblyReferenceResolvedFilesAbsoluteAsCommaSeparatedList" />
     </CreateProperty>
 
-    <CreateProperty Value="@(IntermediateAssembly->'%(Identity)',',')">
+    <CreateProperty Value="@(IntermediateAssembly->'%(FullPath)',',')">
       <Output TaskParameter="Value" PropertyName="_PostSharpOutput"/>
     </CreateProperty>
 
@@ -241,7 +241,7 @@
               ReferenceDirectory=$(MSBuildProjectDirectory);
 							Configuration=$(PostSharpConfiguration);
 							Platform=$(PostSharpPlatform);
-							    SearchPath=$(OutDir),$(IntermediateOutputPath),$(_ReferencePathAsCommaSeparatedList);
+							SearchPath=$(OutDir),$(IntermediateOutputPath),$(_ReferencePathAsCommaSeparatedList);
 							IntermediateDirectory=$(PostSharpIntermediateDirectory);
 							CleanIntermediate=$(PostSharpCleanIntermediate);
 							MSBuildProjectFullPath=$(MSBuildProjectFullPath);
@@ -322,7 +322,7 @@
 
   <!-- If we have code analysis, we have to change the PrepareForRun chain so that
        we copy output files to the backup directory before code analysis runs. -->
-  <PropertyGroup Condition="'$(RunCodeAnalysis)'=='true' or '$(RunCodeAnalysisOnce)'=='true'">
+  <PropertyGroup Condition="'$(RunCodeAnalysis)'=='true' or '$(RunCodeAnalysisOnce)'=='true' AND '$(CodeAnalysisTargets)'!='' AND Exists('$(CodeAnalysisTargets)')">
     <PrepareForRunDependsOn>$(PrepareForRunDependsOn);PostSharp15CopyOutputToCodeAnalysis;RunCodeAnalysis</PrepareForRunDependsOn>
   </PropertyGroup>
 
