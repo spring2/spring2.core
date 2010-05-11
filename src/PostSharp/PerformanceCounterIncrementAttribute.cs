@@ -1,4 +1,5 @@
-﻿using PostSharp.Laos;
+﻿using PostSharp.Aspects;
+using PostSharp.Aspects.Dependencies;
 
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,8 @@ using System.Text;
 
 namespace Spring2.Core.PostSharp {
     [Serializable]
-    public class PerformanceCounterIncrementAttribute : PerformanceCounterAttribute {
+    [AspectTypeDependency(AspectDependencyAction.Commute, typeof(PerformanceCounterIncrementAttribute))]
+    public sealed class PerformanceCounterIncrementAttribute : PerformanceCounterAttribute {
         private PerformanceCounterIncrementAttribute() { }
 
         /// <summary>
@@ -38,7 +40,7 @@ namespace Spring2.Core.PostSharp {
             this.instanceParameterPropertyName = instanceParameterPropertyName;
         }
 
-        public override void OnSuccess(MethodExecutionEventArgs eventArgs) {
+	public override void OnSuccess(MethodExecutionArgs eventArgs) {
             if (this.isDisabled) {
                 return;
             }

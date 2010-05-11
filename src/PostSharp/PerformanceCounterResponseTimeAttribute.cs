@@ -1,4 +1,5 @@
-﻿using PostSharp.Laos;
+﻿using PostSharp.Aspects;
+using PostSharp.Aspects.Dependencies;
 
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,11 @@ using System.Text;
 
 namespace Spring2.Core.PostSharp {
     [Serializable]
-    public class PerformanceCounterResponseTimeAttribute : PerformanceCounterAttribute {
-        protected string baseCounterName = null;
+    [AspectTypeDependency(AspectDependencyAction.Commute, typeof(PerformanceCounterResponseTimeAttribute))]
+    public sealed class PerformanceCounterResponseTimeAttribute : PerformanceCounterAttribute {
+        private string baseCounterName = null;
         [NonSerialized]
-        protected Stopwatch stopWatch = null;
+        private Stopwatch stopWatch = null;
 
         /// <summary>
         /// Attribute to indicate a method invocation is used to modify a performance counter.  This constructor create an instance that will maintain a counter for the average response time of the method decorated.
@@ -53,12 +55,12 @@ namespace Spring2.Core.PostSharp {
             return GetCounter(baseCounterName, instanceName);
         }
 
-        public override void OnEntry(MethodExecutionEventArgs eventArgs) {
+        public override void OnEntry(MethodExecutionArgs eventArgs) {
             stopWatch.Reset();
             stopWatch.Start();
         }
 
-        public override void OnSuccess(MethodExecutionEventArgs eventArgs) {
+        public override void OnSuccess(MethodExecutionArgs eventArgs) {
             stopWatch.Stop();
             if (this.isDisabled) {
                 return;

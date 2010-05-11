@@ -1,4 +1,4 @@
-﻿using PostSharp.Laos;
+﻿using PostSharp.Aspects;
 
 using System;
 using System.Collections.Generic;
@@ -130,7 +130,7 @@ namespace Spring2.Core.PostSharp {
             }
         }
 
-        protected string GetInstanceName(MethodExecutionEventArgs eventArgs) {
+        protected string GetInstanceName(MethodExecutionArgs eventArgs) {
             string localInstanceName = this.instanceName;
             if (localInstanceName == null) {
                 if (instanceType == InstanceType.ConfigurationSetting) {
@@ -140,7 +140,7 @@ namespace Spring2.Core.PostSharp {
                     if (instanceType == InstanceType.Return) {
                         instanceObject = eventArgs.ReturnValue;
                     } else {
-                        object[] arguments = eventArgs.GetReadOnlyArgumentArray();
+			object[] arguments = eventArgs.Arguments.ToArray();  // was .GetReadOnlyArgumentArray()
                         instanceObject = arguments[this.instancePropertyIndex];
                     }
 

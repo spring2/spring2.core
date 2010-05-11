@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using PostSharp.Laos;
+using PostSharp.Aspects;
 using Spring2.Core.DAO;
 
 namespace Spring2.Core.PostSharp {
@@ -28,11 +28,11 @@ namespace Spring2.Core.PostSharp {
 	    set { this.option = value; }
     	}
 
-	public override void OnEntry(MethodExecutionEventArgs eventArgs) {
+	public override void OnEntry(MethodExecutionArgs eventArgs) {
 	    eventArgs.MethodExecutionTag = new DbConnectionScope(option);
 	}
 
-	public override void OnExit(MethodExecutionEventArgs eventArgs) {
+	public override void OnExit(MethodExecutionArgs eventArgs) {
 	    DbConnectionScope scope = eventArgs.MethodExecutionTag as DbConnectionScope;
 	    if (scope != null) {
 		scope.Dispose();

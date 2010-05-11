@@ -4,12 +4,17 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using log4net;
-using PostSharp.Laos;
+using PostSharp.Aspects;
+using PostSharp.Aspects.Dependencies;
+
 using Spring2.Core.Util;
 
 namespace Spring2.Core.PostSharp {
 
     [Serializable]
+    //[AspectTypeDependency( AspectDependencyAction.None, AspectDependencyPosition.Any, typeof(Log4NetTraceAttribute))]
+    //[AspectRoleDependency(AspectDependencyAction.Order, AspectDependencyPosition.Any, "foo")]
+    [WaiveAspectEffect()]
     public sealed class Log4NetTraceAttribute : OnMethodBoundaryAspect {
 
 	private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -162,20 +167,20 @@ namespace Spring2.Core.PostSharp {
 	    this.exceptionLevel = LogLevel.Error;
 	}
 
-	public override void OnEntry(MethodExecutionEventArgs eventArgs) {
+	public override void OnEntry(MethodExecutionArgs eventArgs) {
 	    eventArgs.MethodExecutionTag = new Timer();
 	    String message = String.Format(EntryText, eventArgs.Method.DeclaringType.Name, eventArgs.Method.Name);
 	    Log(EntryLevel, message);
 	}
 
-	public override void OnExit(MethodExecutionEventArgs eventArgs) {
+	public override void OnExit(MethodExecutionArgs eventArgs) {
 	    Timer timer = eventArgs.MethodExecutionTag as Timer;
 	    timer.Stop();
 	    String message = String.Format(ExitText, eventArgs.Method.DeclaringType.Name, eventArgs.Method.Name, timer.TimeSpan.TotalSeconds.ToString());
 	    Log(ExitLevel, message);
 	}
 
-	public override void OnException(MethodExecutionEventArgs eventArgs) {
+	public override void OnException(MethodExecutionArgs eventArgs) {
 	    Timer timer = eventArgs.MethodExecutionTag as Timer;
 	    timer.Stop();
 	    String message = String.Format(ExceptionText, eventArgs.Method.DeclaringType.Name, eventArgs.Method.Name, timer.TimeSpan.TotalSeconds.ToString());
