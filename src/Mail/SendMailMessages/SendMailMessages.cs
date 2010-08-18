@@ -27,7 +27,12 @@ namespace Spring2.Core.Mail.SendMailMessages {
 		//ServiceFacade serviceFacade = new ServiceFacade();
 		//serviceFacade.Login();
 
-		MailMessageList mails = MailMessage.GetMailMessagesToSend();
+		Int32 maxRows = Int32.MaxValue;
+		if (ConfigurationProvider.Instance.Settings["MailMessage.MaxMessagesToSend"] != null) {
+		    maxRows = Int32.Parse(ConfigurationProvider.Instance.Settings["MailMessage.MaxMessagesToSend"]);
+		}
+
+		MailMessageList mails = MailMessage.GetMailMessagesToSend(maxRows);
 		foreach(MailMessage mail in mails) {
 		    try {
 			mail.Send();
