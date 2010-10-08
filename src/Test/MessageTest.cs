@@ -29,5 +29,17 @@ namespace Spring2.Core.Test {
 		Assert.AreEqual("First parameter is Param1. Second parameter is Param2.", formatter.Format(ex.Messages[i]), "Message not properly formatted.");
 	    }
 	}
+
+	[Test]
+	public void TestMessageListExceptionString() {
+	    String boringOldErrorMessage = "Error in the application.";
+	    MessageList messages = new MessageList();
+	    for (Int32 i = 0; i < 3; i++) {
+		messages.Add(new TestMessage("Param1", "Param2"));
+	    }
+	    MessageListException ex = new MessageListException(messages);
+	    String errorMessage = ex.Message;
+	    Assert.AreNotEqual(errorMessage, boringOldErrorMessage); // this is the undescriptive error message if we do not override it
+	}
     }
 }
