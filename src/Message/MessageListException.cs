@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using Spring2.Core.IoC;
 
 namespace Spring2.Core.Message {
 
@@ -21,7 +22,12 @@ namespace Spring2.Core.Message {
 	public override string Message{
 	    get {
 		if (messages.Count > 0) {
-		    SimpleFormatter formatter = new SimpleFormatter();
+		    IMessageFormatter formatter = null;
+		    if (ClassRegistry.CanResolve(typeof(IMessageFormatter))) {
+			formatter = ClassRegistry.Resolve<IMessageFormatter>();
+		    } else {
+			formatter = new SimpleFormatter();
+		    }
 		    StringBuilder sb = new StringBuilder();
 		    foreach (Message m in messages) {
 			sb.Append(formatter.Format(m) + Environment.NewLine);
