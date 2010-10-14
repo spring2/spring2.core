@@ -12,6 +12,11 @@ namespace Spring2.Core.Test.IoC {
     [TestFixture]
     public class ClassRegistryTest {
 
+	[SetUp]
+	public void Setup() {
+	    ClassRegistry.Flush();
+	}
+
 	[Test]
 	public void CanResolveRegisteredDelegate() {
 	    ClassRegistry.Register<IConnectionStringStrategy>(() => { return new DefaultConnectionStringStrategy(); });
