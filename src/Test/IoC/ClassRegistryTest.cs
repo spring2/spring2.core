@@ -20,7 +20,7 @@ namespace Spring2.Core.Test.IoC {
 	[Test]
 	public void CanResolveRegisteredDelegate() {
 	    ClassRegistry.Register<IConnectionStringStrategy>(() => { return new DefaultConnectionStringStrategy(); });
-	    Assert.IsInstanceOfType(typeof(DefaultConnectionStringStrategy), ClassRegistry.Resolve<IConnectionStringStrategy>());
+	    Assert.IsInstanceOf(typeof(DefaultConnectionStringStrategy), ClassRegistry.Resolve<IConnectionStringStrategy>());
 	}
 
 	[Test]
@@ -38,8 +38,8 @@ namespace Spring2.Core.Test.IoC {
 	    DefaultConnectionStringStrategy instance1 = ClassRegistry.Resolve<DefaultConnectionStringStrategy>();
 	    DefaultConnectionStringStrategy instance2 = ClassRegistry.Resolve<DefaultConnectionStringStrategy>();
 
-	    Assert.IsInstanceOfType(typeof(DefaultConnectionStringStrategy), instance1);
-	    Assert.IsInstanceOfType(typeof(DefaultConnectionStringStrategy), instance2);
+	    Assert.IsInstanceOf(typeof(DefaultConnectionStringStrategy), instance1);
+	    Assert.IsInstanceOf(typeof(DefaultConnectionStringStrategy), instance2);
 	    Assert.IsFalse(ReferenceEquals(instance1, instance2));
 	}
 
@@ -50,8 +50,8 @@ namespace Spring2.Core.Test.IoC {
 	    IConnectionStringStrategy instance1 = ClassRegistry.Resolve<DefaultConnectionStringStrategy>();
 	    IConnectionStringStrategy instance2 = ClassRegistry.Resolve<DefaultConnectionStringStrategy>();
 
-	    Assert.IsInstanceOfType(typeof(DefaultConnectionStringStrategy), instance1);
-	    Assert.IsInstanceOfType(typeof(DefaultConnectionStringStrategy), instance2);
+	    Assert.IsInstanceOf(typeof(DefaultConnectionStringStrategy), instance1);
+	    Assert.IsInstanceOf(typeof(DefaultConnectionStringStrategy), instance2);
 	    Assert.IsTrue(ReferenceEquals(instance1, instance2));
 	}
 
@@ -82,7 +82,7 @@ namespace Spring2.Core.Test.IoC {
 	[Test]
 	public void CanFlushDependencies() {
 	    ClassRegistry.Register<IConnectionStringStrategy>(new DefaultConnectionStringStrategy());
-	    Assert.IsInstanceOfType(typeof(DefaultConnectionStringStrategy), ClassRegistry.Resolve<IConnectionStringStrategy>());
+	    Assert.IsInstanceOf(typeof(DefaultConnectionStringStrategy), ClassRegistry.Resolve<IConnectionStringStrategy>());
 	    ClassRegistry.Flush();
 	    Assert.IsFalse(ClassRegistry.CanResolve<IConnectionStringStrategy>());
 	}
