@@ -296,9 +296,18 @@ namespace Spring2.Core.Test {
 	    StringType s3 = StringType.Parse("bar");
 	    StringType s4 = StringType.Parse("");
 
-	    Assert.AreEqual(StringType.UNSET, StringType.UNSET);
-	    Assert.AreEqual(StringType.DEFAULT, StringType.DEFAULT);
-	    Assert.AreEqual(StringType.EMPTY, StringType.EMPTY);
+	    StringType unset1 = StringType.UNSET;
+	    StringType unset2 = StringType.UNSET;
+	    Assert.IsTrue(unset1 == unset2);
+
+	    StringType default1 = StringType.DEFAULT;
+	    StringType default2 = StringType.DEFAULT;
+	    Assert.IsTrue(default1 == default2);
+
+	    StringType empty1 = StringType.EMPTY;
+	    StringType empty2 = StringType.EMPTY;
+	    Assert.IsTrue(empty1 == empty2);
+
 	    Assert.IsTrue(!StringType.UNSET.Equals(StringType.DEFAULT));
 	    Assert.IsTrue(!StringType.DEFAULT.Equals(StringType.UNSET));
 	    Assert.IsTrue(!StringType.EMPTY.Equals(StringType.DEFAULT));
