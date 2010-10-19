@@ -84,6 +84,10 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
 	    return ResourceDAO.DAO.FindListByContextAndField(context, field);
 	}
 
+	public static ResourceList GetListBySearchText(StringType searchText) {
+	    return ResourceDAO.DAO.SearchContext(searchText);
+	}
+
 	public static Resource Create(StringType resourceContext, StringType fieldName, IdType identity) {
 	    Resource resource = new Resource();
 	    resource.context = resourceContext;
@@ -101,7 +105,6 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
 	public static Resource GetInstance(StringType context, StringType field, IdType identity) {
 	    return ResourceDAO.DAO.FindByContextFieldAndIdentity(context, field, identity);
 	}
-
 
 	[Generate()]
 	public void Store() {

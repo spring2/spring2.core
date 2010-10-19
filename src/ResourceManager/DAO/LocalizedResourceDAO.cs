@@ -505,5 +505,23 @@ namespace Spring2.Core.ResourceManager.Dao {
 
 	    return GetList(dataReader);
 	}
+
+	#region Custom Code
+	/// <summary>
+	/// Returns a list which matches the values for the fields specified.
+	/// </summary>
+	/// <param name="searchTerm">A field value to be matched.</param>
+	/// /// <param name="locale">A field value to be matched.</param>
+	/// /// <param name="language">A field value to be matched.</param>
+	/// <returns>The list found.</returns>
+	public LocalizedResourceList SearchContent(StringType searchTerm, ILocale locale, ILanguage language) {
+	    OrderByClause sort = new OrderByClause("Content");
+	    SqlFilter filter = new SqlFilter();
+	    filter.And(new SqlEqualityPredicate("Content", EqualityOperatorEnum.Like, searchTerm.IsEmpty ? DBNull.Value : string.Format("%{0}%", searchTerm.Display()) as Object));
+	    filter.And(new SqlEqualityPredicate("Locale", EqualityOperatorEnum.Equal, locale.Code));
+	    filter.And(new SqlEqualityPredicate("Language", EqualityOperatorEnum.Equal, language.Code));
+	    return GetList(filter, sort);
+	}
+	#endregion
     }
 }

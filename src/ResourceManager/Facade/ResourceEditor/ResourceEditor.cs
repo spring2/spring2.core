@@ -67,6 +67,10 @@ namespace Spring2.Core.ResourceManager.Facade {
 	    return Resource.GetListByContextAndField(context, field);
 	}
 
+	public ResourceList SearchResources(StringType searchText) {
+	    return Resource.GetListBySearchText(searchText);
+	}
+
 #if (NET_1_1)
     public ResourceDictionary GetPossibleLocalizedResources(StringType context, ILocale locale, ILanguage language) {
 #else    	
@@ -127,6 +131,38 @@ namespace Spring2.Core.ResourceManager.Facade {
 	    } catch(FinderException) {
 		list[resource] = null;
 	    }
+	    return list;
+	}
+
+#if (NET_1_1)
+	public ResourceDictionary GetPossibleLocalizedResources(StringType context, StringType field, IdType identity, ILocale locale, ILanguage language) {
+#else 
+	public Dictionary<IResource, ILocalizedResource> SearchPossibleLocalizedResources(StringType searchTerm, ILocale locale, ILanguage language) {
+#endif
+#if (NET_1_1)
+	    ResourceDictionary list = new ResourceDictionary();
+#else
+	    Dictionary<IResource, ILocalizedResource> list = new Dictionary<IResource, ILocalizedResource>();
+#endif
+	    ResourceList resources = SearchResources(searchTerm);
+	    foreach (IResource resource in resources) {
+		try {
+		    list[resource] = LocalizedResource.GetInstance(resource.ResourceId, locale, language);
+		} catch (FinderException) {
+		    list[resource] = null;
+		}
+	    }
+
+	    LocalizedResourceList localizedList = LocalizedResource.SearchContent(searchTerm, locale, language);
+	    foreach (LocalizedResource localized in localizedList) {
+		try {
+		    if (!resources.Contains(localized.ResourceId)) {
+			Resource resource = Resource.GetInstance(localized.ResourceId);
+			list[resource] = localized;
+		    }
+		} catch (Exception) {}
+	    }
+
 	    return list;
 	}
 

@@ -89,6 +89,60 @@ namespace Spring2.Core.ResourceManager.Test {
 	}
 
 	[Test()]
+	public void SearchPossibleLocalizedResourcesWithResourceContext() {
+	    IResource resource = testUtil.CreateTestResource();
+	    ILocalizedResource localizedResource = testUtil.CreateTestLocalizedResource();
+
+	    StringType truncatedSearchText = resource.Context.Substring(1, resource.Context.Length - 2);
+
+#if (NET_1_1)
+    	    ResourceDictionary list = editor.SearchPossibleLocalizedResources(truncatedSearchText, localizedResource.Locale, localizedResource.Language);
+#else
+	    Dictionary<IResource, ILocalizedResource> list = editor.SearchPossibleLocalizedResources(truncatedSearchText, localizedResource.Locale, localizedResource.Language);
+#endif
+
+	    //check that expected resources are in list
+	    foreach (IResource resourceFromKey in list.Keys) {
+		if (!resourceFromKey.ResourceId.Equals(resource.ResourceId) && !resourceFromKey.ResourceId.Equals(localizedResource.ResourceId)) {
+		    Assert.Fail("Did not have expected resource in list");
+		}
+		if (list[resourceFromKey] != null && resourceFromKey.ResourceId.Equals(resource.ResourceId)) {
+		    Assert.Fail("Resouce has localized resource associated that was not expected");
+		}
+		if (list[resourceFromKey] == null && resourceFromKey.ResourceId.Equals(localizedResource.ResourceId)) {
+		    Assert.Fail("Did not have expected localized resource in list");
+		}
+	    }
+	}
+
+	[Test()]
+	public void SearchPossibleLocalizedResourcesWithLocalizedContent() {
+	    IResource resource = testUtil.CreateTestResource();
+	    ILocalizedResource localizedResource = testUtil.CreateTestLocalizedResource();
+
+	    StringType truncatedSearchText = localizedResource.Content.Substring(1, resource.Context.Length - 2);
+
+#if (NET_1_1)
+    	    ResourceDictionary list = editor.SearchPossibleLocalizedResources(truncatedSearchText, localizedResource.Locale, localizedResource.Language);
+#else
+	    Dictionary<IResource, ILocalizedResource> list = editor.SearchPossibleLocalizedResources(truncatedSearchText, localizedResource.Locale, localizedResource.Language);
+#endif
+
+	    //check that expected resources are in list
+	    foreach (IResource resourceFromKey in list.Keys) {
+		if (!resourceFromKey.ResourceId.Equals(resource.ResourceId) && !resourceFromKey.ResourceId.Equals(localizedResource.ResourceId)) {
+		    Assert.Fail("Did not have expected resource in list");
+		}
+		if (list[resourceFromKey] != null && resourceFromKey.ResourceId.Equals(resource.ResourceId)) {
+		    Assert.Fail("Resouce has localized resource associated that was not expected");
+		}
+		if (list[resourceFromKey] == null && resourceFromKey.ResourceId.Equals(localizedResource.ResourceId)) {
+		    Assert.Fail("Did not have expected localized resource in list");
+		}
+	    }
+	}
+
+	[Test()]
 	public void GetAllPossibleLocalizedResourcesByContextAndField() {
 	    IResource resource = testUtil.CreateTestResource();
 	    ILocalizedResource localizedResource = testUtil.CreateTestLocalizedResource();

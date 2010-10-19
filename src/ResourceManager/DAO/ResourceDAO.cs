@@ -409,7 +409,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    filter.And(new SqlEqualityPredicate("Context", EqualityOperatorEnum.Equal, context.IsValid ? context.ToString() as Object : DBNull.Value));
 	    filter.And(new SqlEqualityPredicate("Field", EqualityOperatorEnum.Equal, field.IsValid ? field.ToString() as Object : DBNull.Value));
 	    filter.And(new SqlEqualityPredicate("ContextIdentity", EqualityOperatorEnum.Equal, identity.IsValid ? identity.ToInt32() as Object : DBNull.Value));
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);
 
 	    return GetDataObject(dataReader);
 	}
@@ -445,6 +445,18 @@ namespace Spring2.Core.ResourceManager.Dao {
 	}
 
 	#region Custom Code
+	/// <summary>
+	/// Returns a list which matches the values for the fields specified.
+	/// </summary>
+	/// <param name="searchTerm">A field value to be matched.</param>
+	/// <returns>The list found.</returns>
+	public ResourceList SearchContext(StringType searchTerm) {
+	    OrderByClause sort = new OrderByClause("Context, Field");
+	    SqlFilter filter = new SqlFilter();
+	    filter.And(new SqlEqualityPredicate("Context", EqualityOperatorEnum.Like, searchTerm.IsEmpty ? DBNull.Value : string.Format("%{0}%", searchTerm.Display()) as Object));
+	    return GetList(filter, sort);
+	}
+
 	/// <summary>
 	/// Returns an object which matches the values for the fields specified.
 	/// </summary>

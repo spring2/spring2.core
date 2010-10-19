@@ -142,5 +142,9 @@ namespace Spring2.Core.ResourceManager.BusinessLogic {
 	public static LocalizedResource GetInstance(IdType localizedResourceId) {
 	    return LocalizedResourceDAO.DAO.Load(localizedResourceId);
 	}
+
+	public static LocalizedResourceList SearchContent(StringType searchTerm, ILocale locale, ILanguage language) {
+	    return LocalizedResourceDAO.DAO.SearchContent(searchTerm, locale, language);
+	}
     }
 }
