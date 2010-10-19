@@ -16,7 +16,7 @@ namespace Spring2.Core.Publication.Test {
 	public void ShouldBeAbleToGetProvider() {
 	    StringType clazz = new StringType("Spring2.Core.Publication.TestPublicationServiceProvider,Spring2.Core.Publication");
 	    IPublisher provider = PublicationService.PublicationService.GetProvider(clazz);
-	    Assert.IsInstanceOfType(typeof(TestPublicationServiceProvider), provider);
+	    Assert.IsInstanceOf<TestPublicationServiceProvider>(provider);
 	}
 
 	[Test()]
