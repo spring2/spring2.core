@@ -96,13 +96,15 @@ package_sql: scriptorder combine_sql_scripts
 
 .PHONY: scriptorder
 scriptorder:
-	$(RM) ScriptOrder.txt
+	$(RM) ScriptOrder.txt combined_sql_scripts.sql
+	$(RM) s.txt script.txt o.txt order.txt so.txt so1.txt svnlog.xml svnlog.csv
 	svn log -r ${RELEASE_REVISION}:BASE --verbose --xml --stop-on-copy sql > svnlog.xml
 	../../bin/xml2csv.exe svnlog.xml svnlog.csv ",path" -N -S
 	gawk -F"," "{print $2}" svnlog.csv | sed -e "s/,\/$(BRANCH_TAG)\/Core\/src\/Geocode\///" | grep -v path > script.txt
 	#ANY
 	make -nB build_db > o.txt
 	gawk '/sqlcmd/ {print $$14}' o.txt > order.txt
+	dos2unix order.txt
 	-- for line in $$(cat order.txt); do grep $$line script.txt >> so.txt; done
 	# strip out the blank lines 
 	grep -v "^$$" so.txt > so1.txt
