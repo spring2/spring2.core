@@ -228,6 +228,10 @@ namespace Spring2.Core.ResourceManager.Facade {
 	    return Localize(context, field, IdType.UNSET, locale, language);
 	}
 
+	public StringType Localize(StringType context, StringType field, ILocale locale, ILanguage language, ILocale defaultLocale, ILanguage defaultLanguage) {
+	    return Localize(context, field, IdType.UNSET, locale, language, defaultLocale, defaultLanguage);
+	}
+
 	private class ResourceKey : IEquatable<ResourceKey>, IEqualityComparer<ResourceKey> {
 	    private readonly StringType context;
 	    private readonly StringType field;
