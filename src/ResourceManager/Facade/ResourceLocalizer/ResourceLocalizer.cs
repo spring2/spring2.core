@@ -74,6 +74,35 @@ namespace Spring2.Core.ResourceManager.Facade {
 	    }
 	}
 
+	private Resource GetResource(StringType context, StringType field, IdType identity) {
+	    ResourceKey rkey = new ResourceKey(context, field, identity);
+	    Resource resource;
+	    if (resources.ContainsKey(rkey)) {
+		resource = resources[rkey];
+	    } else {
+		//Console.Out.WriteLine("resource lookup for " + rkey.Key);
+		if (identity.IsValid) {
+		    resource = ResourceDAO.DAO.FindByContextFieldAndIdentity(context, field, identity);
+		} else {
+		    resource = ResourceDAO.DAO.FindByContextFieldAndIdentity(context, field, IdType.UNSET);
+		}
+	    }
+	    return resource;
+	}
+
+	private LocalizedResource GetLocalizedResource(IdType resourceId, ILocale locale, ILanguage language) {
+	    // take the resourceId to the localized resource table
+	    LocalizedResourceKey lkey = new LocalizedResourceKey(resourceId, locale, language);
+	    LocalizedResource localizedResource = null;
+	    if (localizedResources.ContainsKey(lkey)) {
+		localizedResource = localizedResources[lkey];
+	    } else {
+		//Console.Out.WriteLine("localized resource lookup for " + rkey.Key);
+		localizedResource = LocalizedResourceDAO.DAO.FindByResourceIdLocaleAndLanguage(resourceId, locale, language);
+	    }
+	    return localizedResource;
+	}
+
 	/// <summary>
 	/// Looks up the localized resource using the locale and language of the user on the thread
 	/// </summary>
@@ -87,52 +116,36 @@ namespace Spring2.Core.ResourceManager.Facade {
 	    RefreshCache();
 
 	    //First, look up the resource id using the context, key, and identity.
-	    Resource resource = null;
-	    Boolean resourceFound = false; // used when handling a FinderException to help determine which values are valid
 	    try {
-		ResourceKey rkey = new ResourceKey(context, field, identity);
-		if (resources.ContainsKey(rkey)) {
-		    resource = resources[rkey];
-		} else {
-	    	    //Console.Out.WriteLine("resource lookup for " + rkey.Key);
-		    if (identity.IsValid) {
-			resource = ResourceDAO.DAO.FindByContextFieldAndIdentity(context, field, identity);
-		    } else {
-			resource = ResourceDAO.DAO.FindByContextFieldAndIdentity(context, field, IdType.UNSET);
-		    }
-		}
-		resourceFound = true;
+		Resource resource = GetResource(context, field, identity);
 
-		//now take that resource to the localized resource table
-		LocalizedResourceKey lkey = new LocalizedResourceKey(resource.ResourceId, locale, language);
-	    	LocalizedResource localizedResource;
-		if (localizedResources.ContainsKey(lkey)) {
-		    localizedResource = localizedResources[lkey];
-		} else {
-		    //Console.Out.WriteLine("localized resource lookup for " + rkey.Key);
-		    localizedResource = LocalizedResourceDAO.DAO.FindByResourceIdLocaleAndLanguage(resource.ResourceId, locale, language);
-		}
+		LocalizedResource localizedResource = GetLocalizedResource(resource.ResourceId, locale, language);
 		return localizedResource.Content;
 
-	    } catch (FinderException firstFinderException) {
-		try {
-		    // try to find the value from a default locale and language (en-us)
-		    if (resourceFound) {
-			LocalizedResource localizedResource = LocalizedResourceDAO.DAO.FindByResourceIdLocaleAndLanguage(resource.ResourceId, LocaleEnum.UNITED_STATES, LanguageEnum.ENGLISH);
-			return localizedResource.Content;
-		    } else {
-			throw firstFinderException;
-		    }
-		} catch (FinderException) {
-		    // total, epic FAIL to lookup the resource
-		    String unknownResouce = context.ToString();
-		    if (identity.IsValid) {
-			unknownResouce += "(" + identity.ToInt32().ToString() + ")";
-		    }
-		    unknownResouce += "." + field.ToString();
-		    return StringType.Parse(unknownResouce);
+	    } catch (FinderException) {
+		String unknownResouce = context.ToString();
+		if (identity.IsValid) {
+		    unknownResouce += "(" + identity.ToInt32().ToString() + ")";
+		}
+		unknownResouce += "." + field.ToString();
+		return StringType.Parse(unknownResouce);
+	    }
+	}
+
+	public StringType Localize(StringType context, StringType field, IdType identity, ILocale locale, ILanguage language, ILocale defaultLocale, ILanguage defaultLanguage) {
+	    LocalizedResource localizedResource = null;
+	    Resource resource = null;
+	    try {
+		resource = GetResource(context, field, identity);
+		localizedResource = GetLocalizedResource(resource.ResourceId, locale, language);
+	    } catch (FinderException finderException) {
+		if (resource != null) {
+		    localizedResource = GetLocalizedResource(resource.ResourceId, defaultLocale, defaultLanguage);
+		} else {
+		    throw finderException;
 		}
 	    }
+	    return localizedResource.Content;
 	}
 
 

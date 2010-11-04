@@ -179,7 +179,7 @@ namespace Spring2.Core.ResourceManager.Test {
 		// if there is ever a legitimate reason for someone to be writing localization software to the Afrikaan-speaking population of Kazakhstan, I will eat my hat.  Or not.  But maybe.  And pigs may fly (without the aid of aircraft).
 		ILocale testLocale = LocaleEnum.KAZAKHSTAN;
 		ILanguage testLanguage = LanguageEnum.AFRIKAANS;
-		localText = localizer.Localize(localizedResource.Resource.Context, localizedResource.Resource.Field, localizedResource.Resource.Identity, testLocale, testLanguage);
+		localText = localizer.Localize(localizedResource.Resource.Context, localizedResource.Resource.Field, localizedResource.Resource.Identity, testLocale, testLanguage, localizedResource.Locale, localizedResource.Language);
 	    } catch {
 		Assert.Fail("Should have been able to localize");
 	    }
