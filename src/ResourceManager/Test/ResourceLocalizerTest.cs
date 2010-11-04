@@ -47,6 +47,8 @@ namespace Spring2.Core.ResourceManager.Test {
 
 	[Test]
 	public void ShouldNotCacheValues() {
+	    ResourceLocalizer.ResetCache();
+
 	    IConfigurationProvider provider = new SimpleConfigurationProvider();
 	    provider.Settings.Add(ConfigurationProvider.Instance.Settings);
 	    provider.Settings[ResourceLocalizer.KEY_CACHETIMEOUT] = "0";
@@ -81,6 +83,8 @@ namespace Spring2.Core.ResourceManager.Test {
 
 	[Test]
 	public void ShouldHaveCachedValue() {
+	    ResourceLocalizer.ResetCache();
+
 	    IConfigurationProvider provider = new SimpleConfigurationProvider();
 	    provider.Settings.Add(ConfigurationProvider.Instance.Settings);
 	    provider.Settings[ResourceLocalizer.KEY_CACHETIMEOUT] = "5";
@@ -156,6 +160,31 @@ namespace Spring2.Core.ResourceManager.Test {
 	    Assert.AreEqual("foo", localText);
 	    Assert.AreEqual(2, localizer.Refreshes);
 
+	}
+
+	[Test()]
+	public void TestGettingEnUSWhenSpecificLocalizationDoesNotExist() {
+	    IConfigurationProvider provider = new SimpleConfigurationProvider();
+	    provider.Settings.Add(ConfigurationProvider.Instance.Settings);
+	    provider.Settings[ResourceLocalizer.KEY_CACHETIMEOUT] = "0";
+	    ConfigurationProvider.SetProvider(provider);
+
+	    ResourceLocalizer localizer = new ResourceLocalizer(new LocaleFactory(), new LanguageFactory());
+
+	    ILocalizedResource localizedResource = testUtil.CreateTestLocalizedResource();
+	    String localText = String.Empty;
+	    String usEnText = String.Empty;
+	    try {
+		usEnText = localizer.Localize(localizedResource.Resource.Context, localizedResource.Resource.Field, localizedResource.Resource.Identity, localizedResource.Locale, localizedResource.Language);
+		// if there is ever a legitimate reason for someone to be writing localization software to the Afrikaan-speaking population of Kazakhstan, I will eat my hat.  Or not.  But maybe.  And pigs may fly (without the aid of aircraft).
+		ILocale testLocale = LocaleEnum.KAZAKHSTAN;
+		ILanguage testLanguage = LanguageEnum.AFRIKAANS;
+		localText = localizer.Localize(localizedResource.Resource.Context, localizedResource.Resource.Field, localizedResource.Resource.Identity, testLocale, testLanguage);
+	    } catch {
+		Assert.Fail("Should have been able to localize");
+	    }
+
+	    Assert.AreEqual(usEnText, localText);
 	}
 
     }

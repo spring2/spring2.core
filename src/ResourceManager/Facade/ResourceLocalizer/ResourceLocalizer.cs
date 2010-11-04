@@ -87,9 +87,10 @@ namespace Spring2.Core.ResourceManager.Facade {
 	    RefreshCache();
 
 	    //First, look up the resource id using the context, key, and identity.
+	    Resource resource = null;
+	    Boolean resourceFound = false; // used when handling a FinderException to help determine which values are valid
 	    try {
 		ResourceKey rkey = new ResourceKey(context, field, identity);
-	    	Resource resource;
 		if (resources.ContainsKey(rkey)) {
 		    resource = resources[rkey];
 		} else {
@@ -100,6 +101,7 @@ namespace Spring2.Core.ResourceManager.Facade {
 			resource = ResourceDAO.DAO.FindByContextFieldAndIdentity(context, field, IdType.UNSET);
 		    }
 		}
+		resourceFound = true;
 
 		//now take that resource to the localized resource table
 		LocalizedResourceKey lkey = new LocalizedResourceKey(resource.ResourceId, locale, language);
@@ -112,13 +114,24 @@ namespace Spring2.Core.ResourceManager.Facade {
 		}
 		return localizedResource.Content;
 
-	    } catch (FinderException) {
-		String unknownResouce = context.ToString();
-		if (identity.IsValid) {
-		    unknownResouce += "(" + identity.ToInt32().ToString() + ")";
+	    } catch (FinderException firstFinderException) {
+		try {
+		    // try to find the value from a default locale and language (en-us)
+		    if (resourceFound) {
+			LocalizedResource localizedResource = LocalizedResourceDAO.DAO.FindByResourceIdLocaleAndLanguage(resource.ResourceId, LocaleEnum.UNITED_STATES, LanguageEnum.ENGLISH);
+			return localizedResource.Content;
+		    } else {
+			throw firstFinderException;
+		    }
+		} catch (FinderException) {
+		    // total, epic FAIL to lookup the resource
+		    String unknownResouce = context.ToString();
+		    if (identity.IsValid) {
+			unknownResouce += "(" + identity.ToInt32().ToString() + ")";
+		    }
+		    unknownResouce += "." + field.ToString();
+		    return StringType.Parse(unknownResouce);
 		}
-		unknownResouce += "." + field.ToString();
-		return StringType.Parse(unknownResouce);
 	    }
 	}
 
