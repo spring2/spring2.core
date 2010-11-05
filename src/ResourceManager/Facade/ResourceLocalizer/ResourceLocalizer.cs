@@ -133,19 +133,17 @@ namespace Spring2.Core.ResourceManager.Facade {
 	}
 
 	public StringType Localize(StringType context, StringType field, IdType identity, ILocale locale, ILanguage language, ILocale defaultLocale, ILanguage defaultLanguage) {
+	    StringType localizedText = StringType.DEFAULT;
 	    LocalizedResource localizedResource = null;
 	    Resource resource = null;
 	    try {
 		resource = GetResource(context, field, identity);
 		localizedResource = GetLocalizedResource(resource.ResourceId, locale, language);
-	    } catch (FinderException finderException) {
-		if (resource != null) {
-		    localizedResource = GetLocalizedResource(resource.ResourceId, defaultLocale, defaultLanguage);
-		} else {
-		    throw finderException;
-		}
+		localizedText = localizedResource.Content;
+	    } catch (FinderException) {
+		localizedText = Localize(context, field, identity, locale, language); // call the version without default locale/language
 	    }
-	    return localizedResource.Content;
+	    return localizedText;
 	}
 
 
