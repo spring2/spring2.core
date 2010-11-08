@@ -21,6 +21,7 @@ using System.Data;
 using System.Data.SqlClient;
 using log4net.Appender;
 using log4net.Core;
+using System.Transactions;
 
 namespace Spring2.Core.Log4Net.Appender {
     /// <summary>
@@ -67,34 +68,53 @@ namespace Spring2.Core.Log4Net.Appender {
 	}
 
 	public virtual void DoAppend(LoggingEvent loggingEvent) {
-	    using(IDbConnection connection = GetConnection()) {
-		// Open the connection for each event, this takes advantage
-		// of the builtin connection pooling
-		connection.Open();
+#if (!NET_1_1)
+	    using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Suppress)) {
+#endif
 
-		using(IDbCommand command = connection.CreateCommand()) {
-		    InitializeCommand(command);
+		using (IDbConnection connection = GetConnection()) {
+		    // Open the connection for each event, this takes advantage
+		    // of the builtin connection pooling
+		    connection.Open();
 
-		    SetCommandValues(command, loggingEvent);
-		    command.ExecuteNonQuery();
-		}
-	    }
-	}
+		    using (IDbCommand command = connection.CreateCommand()) {
+			InitializeCommand(command);
 
-	public virtual void DoAppend(LoggingEvent[] loggingEvents) {
-	    using(IDbConnection connection = GetConnection()) {
-		// Open the connection for each event, this takes advantage
-		// of the builtin connection pooling
-		connection.Open();
-
-		using(IDbCommand command = connection.CreateCommand()) {
-		    InitializeCommand(command);
-
-		    foreach(LoggingEvent loggingEvent in loggingEvents) {
 			SetCommandValues(command, loggingEvent);
 			command.ExecuteNonQuery();
 		    }
 		}
+#if (!NET_1_1)
+		scope.Complete();
+	    }
+#endif
+
+	}
+
+	public virtual void DoAppend(LoggingEvent[] loggingEvents) {
+#if (!NET_1_1)
+	    using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Suppress)) {
+#endif
+
+		using (IDbConnection connection = GetConnection()) {
+		    // Open the connection for each event, this takes advantage
+		    // of the builtin connection pooling
+		    connection.Open();
+
+		    using (IDbCommand command = connection.CreateCommand()) {
+			InitializeCommand(command);
+
+			foreach (LoggingEvent loggingEvent in loggingEvents) {
+			    SetCommandValues(command, loggingEvent);
+			    command.ExecuteNonQuery();
+			}
+		    }
+
+#if (!NET_1_1)
+		    scope.Complete();
+		}
+#endif
+
 	    }
 	}
 
