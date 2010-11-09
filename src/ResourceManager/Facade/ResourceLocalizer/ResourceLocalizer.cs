@@ -141,7 +141,7 @@ namespace Spring2.Core.ResourceManager.Facade {
 		localizedResource = GetLocalizedResource(resource.ResourceId, locale, language);
 		localizedText = localizedResource.Content;
 	    } catch (FinderException) {
-		localizedText = Localize(context, field, identity, locale, language); // call the version without default locale/language
+		localizedText = Localize(context, field, identity, defaultLocale, defaultLanguage); // use the backup locale/language
 	    }
 	    return localizedText;
 	}
