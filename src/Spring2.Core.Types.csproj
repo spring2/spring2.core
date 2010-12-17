@@ -177,6 +177,9 @@
     <Compile Include="ValueTypes\DateTypeList.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ValueTypes\DateTimeTypeList.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ValueTypes\DecimalType.cs">
       <SubType>Code</SubType>
     </Compile>
