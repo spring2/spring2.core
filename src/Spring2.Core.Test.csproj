@@ -1,4 +1,4 @@
-﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>9.0.30729</ProductVersion>
@@ -386,6 +386,42 @@
     <None Include="Test\App.config" />
     <None Include="Test\test.pdf" />
     <Content Include="Test\test.jpg" />
+    <Compile Include="Test\Serialization\BooleanTypeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\Serialization\CurrencyTypeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\Serialization\DateTimeTypeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\Serialization\DateTypeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\Serialization\DecimalTypeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\Serialization\IdTypeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\Serialization\IntegerTypeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\Serialization\LongTypeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\Serialization\QuantityTypeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\Serialization\ShortTypeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\Serialization\StringTypeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\Serialization\TimeTypeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
