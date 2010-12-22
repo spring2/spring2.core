@@ -205,27 +205,27 @@ namespace Spring2.Core.Types {
 
     
     [Serializable]
-    public class BooleanType_DEFAULT : IObjectReference {
+    public struct BooleanType_DEFAULT : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return BooleanType.DEFAULT;
         }
     }
 
     [Serializable]
-    public class BooleanType_UNSET : IObjectReference {
+    public struct BooleanType_UNSET : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return BooleanType.UNSET;
         }
     }
 
     [Serializable]
-    public class BooleanType_TRUE : IObjectReference {
+    public struct BooleanType_TRUE : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return BooleanType.TRUE;
         }
     }
     [Serializable]
-    public class BooleanType_FALSE : IObjectReference {
+    public struct BooleanType_FALSE : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return BooleanType.FALSE;
         }

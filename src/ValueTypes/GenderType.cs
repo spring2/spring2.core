@@ -269,27 +269,27 @@ namespace Spring2.Core.Types {
 
     
     [Serializable]
-    public class GenderType_DEFAULT : IObjectReference {
+    public struct GenderType_DEFAULT : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return GenderType.DEFAULT;
         }
     }
 
     [Serializable]
-    public class GenderType_UNSET : IObjectReference {
+    public struct GenderType_UNSET : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return GenderType.UNSET;
         }
     }
 
     [Serializable]
-    public class GenderType_MALE : IObjectReference {
+    public struct GenderType_MALE : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return GenderType.MALE;
         }
     }
     [Serializable]
-    public class GenderType_FEMALE : IObjectReference {
+    public struct GenderType_FEMALE : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return GenderType.FEMALE;
         }

@@ -1027,14 +1027,14 @@ namespace Spring2.Core.Types {
     }
 
     [Serializable]
-    public class StringType_DEFAULT : IObjectReference {
+    public struct StringType_DEFAULT : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return StringType.DEFAULT;
         }
     }
 
     [Serializable]
-    public class StringType_UNSET : IObjectReference {
+    public struct StringType_UNSET : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return StringType.UNSET;
         }

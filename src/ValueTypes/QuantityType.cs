@@ -163,14 +163,14 @@ namespace Spring2.Core.Types {
     }
 
     [Serializable]
-    public class QuantityType_DEFAULT : IObjectReference {
+    public struct QuantityType_DEFAULT : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return QuantityType.DEFAULT;
         }
     }
 
     [Serializable]
-    public class QuantityType_UNSET : IObjectReference {
+    public struct QuantityType_UNSET : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return QuantityType.UNSET;
         }

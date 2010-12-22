@@ -868,14 +868,14 @@ namespace Spring2.Core.Types {
     }
 
     [Serializable]
-    public class CurrencyType_DEFAULT : IObjectReference {
+    public struct CurrencyType_DEFAULT : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return CurrencyType.DEFAULT;
         }
     }
 
     [Serializable]
-    public class CurrencyType_UNSET : IObjectReference {
+    public struct CurrencyType_UNSET : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return CurrencyType.UNSET;
         }

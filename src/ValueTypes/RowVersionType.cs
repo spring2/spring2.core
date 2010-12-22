@@ -93,14 +93,14 @@ namespace Spring2.Core.Types {
     }
 
     [Serializable]
-    public class RowVersionType_DEFAULT : IObjectReference {
+    public struct RowVersionType_DEFAULT : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return RowVersionType.DEFAULT;
         }
     }
 
     [Serializable]
-    public class RowVersionType_UNSET : IObjectReference {
+    public struct RowVersionType_UNSET : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return RowVersionType.UNSET;
         }

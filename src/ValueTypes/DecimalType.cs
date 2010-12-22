@@ -836,14 +836,14 @@ namespace Spring2.Core.Types {
     }
 
     [Serializable]
-    public class DecimalType_DEFAULT : IObjectReference {
+    public struct DecimalType_DEFAULT : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return DecimalType.DEFAULT;
         }
     }
 
     [Serializable]
-    public class DecimalType_UNSET : IObjectReference {
+    public struct DecimalType_UNSET : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return DecimalType.UNSET;
         }

@@ -788,14 +788,14 @@ namespace Spring2.Core.Types {
     }
 
     [Serializable]
-    public class LongType_DEFAULT : IObjectReference {
+    public struct LongType_DEFAULT : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return LongType.DEFAULT;
         }
     }
 
     [Serializable]
-    public class LongType_UNSET : IObjectReference {
+    public struct LongType_UNSET : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return LongType.UNSET;
         }

@@ -719,14 +719,14 @@ namespace Spring2.Core.Types {
     }
 
     [Serializable]
-    public class IntegerType_DEFAULT : IObjectReference {
+    public struct IntegerType_DEFAULT : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return IntegerType.DEFAULT;
         }
     }
 
     [Serializable]
-    public class IntegerType_UNSET : IObjectReference {
+    public struct IntegerType_UNSET : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return IntegerType.UNSET;
         }

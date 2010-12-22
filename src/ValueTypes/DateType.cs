@@ -767,14 +767,14 @@ namespace Spring2.Core.Types {
     }
 
     [Serializable]
-    public class DateType_DEFAULT : IObjectReference {
+    public struct DateType_DEFAULT : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return DateType.DEFAULT;
         }
     }
 
     [Serializable]
-    public class DateType_UNSET : IObjectReference {
+    public struct DateType_UNSET : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return DateType.UNSET;
         }

@@ -161,16 +161,20 @@ namespace Spring2.Core.Types {
 		}
 	    }
 
-	    if (rightHand.myState == TypeState.DEFAULT) {
-		if (leftHand.myState == TypeState.DEFAULT) {
+	    if (leftHand.myState == TypeState.DEFAULT) {
+		if (rightHand.myState == TypeState.DEFAULT) {
 		    return 0;
 		}
 
-		if (leftHand.myState == TypeState.UNSET) {
+		if (rightHand.myState == TypeState.UNSET) {
 		    return 1;
 		}
 
 		return -1;
+	    }
+
+	    if (leftHand.myState == TypeState.VALID) {
+		return 1;
 	    }
 
 	    //should this throw an exception?
@@ -407,14 +411,14 @@ namespace Spring2.Core.Types {
     }
 
     [Serializable]
-    public class TimeType_DEFAULT : IObjectReference {
+    public struct TimeType_DEFAULT : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return TimeType.DEFAULT;
         }
     }
 
     [Serializable]
-    public class TimeType_UNSET : IObjectReference {
+    public struct TimeType_UNSET : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return TimeType.UNSET;
         }

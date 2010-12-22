@@ -339,16 +339,20 @@ namespace Spring2.Core.Types {
 		}
 	    }
 
-	    if (rightHand.myState == TypeState.DEFAULT) {
-		if (leftHand.myState == TypeState.DEFAULT) {
+	    if (leftHand.myState == TypeState.DEFAULT) {
+		if (rightHand.myState == TypeState.DEFAULT) {
 		    return 0;
 		}
 
-		if (leftHand.myState == TypeState.UNSET) {
+		if (rightHand.myState == TypeState.UNSET) {
 		    return 1;
 		}
 
 		return -1;
+	    }
+
+	    if (leftHand.myState == TypeState.VALID) {
+		return 1;
 	    }
 
 	    //should this throw an exception?
@@ -678,14 +682,14 @@ namespace Spring2.Core.Types {
     }
 
     [Serializable]
-    public class ShortType_DEFAULT : IObjectReference {
+    public struct ShortType_DEFAULT : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return ShortType.DEFAULT;
         }
     }
 
     [Serializable]
-    public class ShortType_UNSET : IObjectReference {
+    public struct ShortType_UNSET : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return ShortType.UNSET;
         }

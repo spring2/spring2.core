@@ -218,14 +218,14 @@ namespace Spring2.Core.Types {
     }
 
     [Serializable]
-    public class IdType_DEFAULT : IObjectReference {
+    public struct IdType_DEFAULT : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return IdType.DEFAULT;
         }
     }
 
     [Serializable]
-    public class IdType_UNSET : IObjectReference {
+    public struct IdType_UNSET : IObjectReference {
         public object GetRealObject(StreamingContext context) {
             return IdType.UNSET;
         }
