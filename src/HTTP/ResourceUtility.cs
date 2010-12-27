@@ -34,7 +34,7 @@ namespace Spring2.Core.HTTP {
 	public static MemoryStream GetResourceStream(HttpContext context, string resource, ImageFormat desiredFormat) {
 	    MemoryStream stream = null;
 
-	    String value = ConfigurationSettings.AppSettings[APPSETTING_RESOURCETYPE] ?? String.Empty;
+	    String value = ConfigurationManager.AppSettings[APPSETTING_RESOURCETYPE] ?? String.Empty;
 	    switch (value.ToUpper()) {
 		case "FILESYSTEM":
 		    stream = ProcessResourceFromFile(context, resource, desiredFormat);
@@ -55,7 +55,7 @@ namespace Spring2.Core.HTTP {
 	private static MemoryStream ProcessResourceFromFile(HttpContext context, String resource, ImageFormat desiredFormat) {
 	    String resourceObject = resource.Substring(0, resource.IndexOf("."));
 	    String resourceProperty = resource.Substring(resourceObject.Length + 1);
-	    String fileName = ConfigurationSettings.AppSettings[resourceObject] + @"\" + resourceProperty;
+	    String fileName = ConfigurationManager.AppSettings[resourceObject] + @"\" + resourceProperty;
 
 	    MemoryStream ms = new MemoryStream(File.ReadAllBytes(fileName));
 	    return ms;
@@ -65,7 +65,7 @@ namespace Spring2.Core.HTTP {
 	    String resourceObject = resource.Substring(0, resource.IndexOf("."));
 	    String resourceProperty = resource.Substring(resourceObject.Length + 1).Replace(".", "_").Replace("/", @"\");
 
-	    Assembly asm = Assembly.Load(ConfigurationSettings.AppSettings[APPSETTING_RESOURCEDLL]);
+	    Assembly asm = Assembly.Load(ConfigurationManager.AppSettings[APPSETTING_RESOURCEDLL]);
 	    ResourceManager rm = new ResourceManager(resourceObject, asm);
 
 	    return GetMemoryStreamFromObject(rm.GetObject(resourceProperty), desiredFormat);

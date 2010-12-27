@@ -24,8 +24,8 @@ namespace Spring2.Core.Configuration {
 
 	public SqlConfigurationProvider() {
 	    // get the timeout for the cache, if specified
-	    if (ConfigurationSettings.AppSettings["SqlConfigurationProvider.CacheTimeout"] != null && ConfigurationSettings.AppSettings["SqlConfigurationProvider.CacheTimeout"] != String.Empty) {
-		cacheTimeout = Int32.Parse(ConfigurationSettings.AppSettings["SqlConfigurationProvider.CacheTimeout"]);
+	    if (ConfigurationManager.AppSettings["SqlConfigurationProvider.CacheTimeout"] != null && ConfigurationManager.AppSettings["SqlConfigurationProvider.CacheTimeout"] != String.Empty) {
+		cacheTimeout = Int32.Parse(ConfigurationManager.AppSettings["SqlConfigurationProvider.CacheTimeout"]);
 	    }
 	    PrepopulateCache();
 	}

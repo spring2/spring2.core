@@ -20,8 +20,8 @@ namespace Spring2.Core.Configuration {
 	    get {
 		if (instance==null) {
 		    String providerClass = DEFAULT_PROVIDER;
-		    if (ConfigurationSettings.AppSettings["ConfigurationProvider"] != null && ConfigurationSettings.AppSettings["ConfigurationProvider"] != String.Empty) {
-			providerClass = ConfigurationSettings.AppSettings["ConfigurationProvider"];
+		    if (ConfigurationManager.AppSettings["ConfigurationProvider"] != null && ConfigurationManager.AppSettings["ConfigurationProvider"] != String.Empty) {
+			providerClass = ConfigurationManager.AppSettings["ConfigurationProvider"];
 		    }
 	    
 		    Type clazz = Type.GetType(providerClass);

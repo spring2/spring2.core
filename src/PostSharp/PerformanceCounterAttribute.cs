@@ -134,7 +134,7 @@ namespace Spring2.Core.PostSharp {
             string localInstanceName = this.instanceName;
             if (localInstanceName == null) {
                 if (instanceType == InstanceType.ConfigurationSetting) {
-                    localInstanceName = (string)ConfigurationSettings.AppSettings[instanceParameterPropertyName];
+		    localInstanceName = (string)ConfigurationManager.AppSettings[instanceParameterPropertyName];
                 } else {
                     object instanceObject = null;
                     if (instanceType == InstanceType.Return) {

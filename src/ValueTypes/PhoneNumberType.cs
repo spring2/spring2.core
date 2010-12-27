@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 using System.Text;
-using config = System.Configuration.ConfigurationSettings;
+using System.Configuration;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 
@@ -229,13 +229,13 @@ namespace Spring2.Core.Types {
 	public override String ToString() {
 	    String phoneNumberFormat;
 	    String extensionFormat;
-	    if (config.AppSettings[PHONE_NUMBER_FORMAT_OVERRIDE_KEY] != null){
-		phoneNumberFormat = config.AppSettings[PHONE_NUMBER_FORMAT_OVERRIDE_KEY];
+	    if (ConfigurationManager.AppSettings[PHONE_NUMBER_FORMAT_OVERRIDE_KEY] != null) {
+		phoneNumberFormat = ConfigurationManager.AppSettings[PHONE_NUMBER_FORMAT_OVERRIDE_KEY];
 	    }else{
 		phoneNumberFormat = DEFAULT_PHONE_NUMBER_FORMAT;
 	    }
-	    if (config.AppSettings[EXTENSION_FORMAT_OVERRIDE_KEY] != null){
-		extensionFormat = config.AppSettings[EXTENSION_FORMAT_OVERRIDE_KEY];
+	    if (ConfigurationManager.AppSettings[EXTENSION_FORMAT_OVERRIDE_KEY] != null) {
+		extensionFormat = ConfigurationManager.AppSettings[EXTENSION_FORMAT_OVERRIDE_KEY];
 	    }else{
 		extensionFormat = DEFAULT_EXTENSION_FORMAT;
 	    }
@@ -257,8 +257,8 @@ namespace Spring2.Core.Types {
 	/// <returns>Formatted Phone Number string </returns>
 	public override String ToString(String phoneNumberFormat) {
 	    String extensionFormat;
-	    if (config.AppSettings[EXTENSION_FORMAT_OVERRIDE_KEY] != null){
-		extensionFormat = config.AppSettings[EXTENSION_FORMAT_OVERRIDE_KEY];
+	    if (ConfigurationManager.AppSettings[EXTENSION_FORMAT_OVERRIDE_KEY] != null) {
+		extensionFormat = ConfigurationManager.AppSettings[EXTENSION_FORMAT_OVERRIDE_KEY];
 	    }else{
 		extensionFormat = DEFAULT_EXTENSION_FORMAT;
 	    }

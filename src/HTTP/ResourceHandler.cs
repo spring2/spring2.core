@@ -18,7 +18,7 @@ namespace Spring2.Core.HTTP {
 	public void ProcessRequest(HttpContext context) {
 	    Int32 days = 0;
 	    try {
-		days = Int32.Parse(ConfigurationSettings.AppSettings[APPSETTING_CACHELENGTH] ?? "0");
+		days = Int32.Parse(ConfigurationManager.AppSettings[APPSETTING_CACHELENGTH] ?? "0");
 	    } catch(Exception) { }
 	    context.Response.Cache.SetCacheability(HttpCacheability.Public);
 	    context.Response.Cache.SetExpires(DateTime.Now.AddDays(days));

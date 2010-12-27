@@ -111,7 +111,7 @@ namespace Spring2.Core.SeleniumLoadTester {
                         exception = ex.ToString();
                     }
 
-                    if (ConfigurationSettings.AppSettings["ConnectionString"] != null) {
+		    if (ConfigurationManager.AppSettings["ConnectionString"] != null) {
                         try {
                             LoadTestLog.Create(this, startTime, endTime, (int)(stopWatch.ElapsedMilliseconds), success, exception);
                         } catch (Exception ex) {

@@ -18,7 +18,7 @@ namespace Spring2.Core.Test {
     public class PerformanceMonitorTest {
         [TearDown]
         public void TearDown() {
-            String connectionString = ConfigurationSettings.AppSettings["ConnectionString"];
+	    String connectionString = ConfigurationManager.AppSettings["ConnectionString"];
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             try {

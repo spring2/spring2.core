@@ -34,7 +34,7 @@ namespace Spring2.Core.DAO {
 		    }
 		    connectionString = rkey.GetValue(value).ToString();
 		} else {
-		    connectionString = ConfigurationSettings.AppSettings[key];
+		    connectionString = ConfigurationManager.AppSettings[key];
 		}
 
 		// Cache the connection string by key for fast lookup later.
