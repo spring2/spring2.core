@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.WithTypes", "Spring2.Core.WithTypes.csproj", "{C44F21C0-6817-4C95-BBFF-58661814D2B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.WithTypesTest", "Spring2.Core.WithTypesTest.csproj", "{51EA5868-FD70-4349-A7F3-0520E2891A85}"
