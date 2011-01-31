@@ -326,6 +326,7 @@
     <Compile Include="Util\MissingRequiredFieldError.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Util\Options.cs" />
     <Compile Include="Util\PagedList.cs">
       <SubType>Code</SubType>
     </Compile>
