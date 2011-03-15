@@ -45,7 +45,7 @@ namespace Spring2.Core.Test {
 	    HttpContext context = new HttpContext(wr);
 	    Assert.AreEqual(1, context.Request.QueryString.Count);
     	    
-	    Assert.AreEqual(rawUrl, context.Request.RawUrl);
+	    Assert.AreEqual(rawUrl.Replace("http://localhost", string.Empty), context.Request.RawUrl);
 	}
 
 	[Test]

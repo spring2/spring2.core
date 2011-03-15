@@ -17,7 +17,7 @@ namespace Spring2.Core.Maverick {
 	private NameValueCollection form = new NameValueCollection();
 	private String queryString = String.Empty;
 	private NameValueCollection cookies = new NameValueCollection();
-    	private String rawUrl = "http://localhost/index.html";
+    	private String absoluteUrl = "http://localhost/index.html";
 	private StringDictionary headerValues = new StringDictionary();
 	private String localAddress = String.Empty;
 	private String uriPath = String.Empty;
@@ -26,8 +26,8 @@ namespace Spring2.Core.Maverick {
 	    Initialize();
 	}
 
-	public MockHttpWorkerRequest(String rawUrl) {
-	    this.rawUrl = rawUrl;
+	public MockHttpWorkerRequest(String absoluteUrl) {
+	    this.absoluteUrl = absoluteUrl;
 	    Initialize();
 	}
 	
@@ -36,8 +36,8 @@ namespace Spring2.Core.Maverick {
 	    Initialize();
 	}
 
-	public MockHttpWorkerRequest(String rawUrl, NameValueCollection form) {
-	    this.rawUrl = rawUrl;
+	public MockHttpWorkerRequest(String absoluteUrl, NameValueCollection form) {
+	    this.absoluteUrl = absoluteUrl;
 	    this.form = form;
 	    Initialize();
 	}
@@ -49,14 +49,14 @@ namespace Spring2.Core.Maverick {
 	    headerValues.Add(HttpWorkerRequest.HeaderContentLength.ToString(), (Content.Length - 2).ToString());
 	    headerValues.Add(HttpWorkerRequest.HeaderContentType.ToString(), "application/x-www-form-urlencoded");
 	    headerValues.Add(HttpWorkerRequest.HeaderAcceptLanguage.ToString(), "en-US");
-	    if(this.rawUrl.IndexOf("?") > 0) {
-		queryString = rawUrl.Substring(rawUrl.IndexOf("?") + 1);
+	    if(this.absoluteUrl.IndexOf("?") > 0) {
+		queryString = absoluteUrl.Substring(absoluteUrl.IndexOf("?") + 1);
 	    }
-	    localAddress = rawUrl.Substring(rawUrl.IndexOf("//")+2);
+	    localAddress = absoluteUrl.Substring(absoluteUrl.IndexOf("//")+2);
 	    if(localAddress.IndexOf("/") > 0) {
 		localAddress = localAddress.Substring(0, localAddress.IndexOf("/"));
 	    }
-	    uriPath = rawUrl.Substring(7 + localAddress.Length);
+	    uriPath = absoluteUrl.Substring(7 + localAddress.Length);
 	    if(uriPath.IndexOf("?") > 0) {
 		uriPath = uriPath.Remove(uriPath.IndexOf("?"), queryString.Length + 1);
 	    }
@@ -75,7 +75,7 @@ namespace Spring2.Core.Maverick {
 	}
 
 	public override string GetRawUrl() {
-	    return rawUrl;
+	    return uriPath + (queryString.Length > 0 ? "?" + queryString : string.Empty);
 	}
 
 	public override string GetHttpVerbName() {
@@ -87,7 +87,7 @@ namespace Spring2.Core.Maverick {
 	}
 
 	public override string GetRemoteAddress() {
-	    return "remoteaddress";
+	    return "127.0.0.1";
 	}
 
 	public override int GetRemotePort() {

@@ -98,6 +98,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.Publication.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.PostSharp.Test", "Spring2.Core.PostSharp.Test.csproj", "{6A818A71-7B55-49E7-B9C1-437F36074D39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.RhinoMocks", "Spring2.Core.RhinoMocks.csproj", "{FB00CA93-E01C-45CA-9F4D-901B372971C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -679,6 +681,18 @@ Global
 		{6A818A71-7B55-49E7-B9C1-437F36074D39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A818A71-7B55-49E7-B9C1-437F36074D39}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6A818A71-7B55-49E7-B9C1-437F36074D39}.Release|x86.ActiveCfg = Release|Any CPU
+		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.NET_1_1|Any CPU.ActiveCfg = Release|Any CPU
+		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.NET_1_1|Any CPU.Build.0 = Release|Any CPU
+		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.NET_1_1|x86.ActiveCfg = Release|Any CPU
+		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.NET_2_0|Any CPU.ActiveCfg = Release|Any CPU
+		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.NET_2_0|Any CPU.Build.0 = Release|Any CPU
+		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.NET_2_0|x86.ActiveCfg = Release|Any CPU
+		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
