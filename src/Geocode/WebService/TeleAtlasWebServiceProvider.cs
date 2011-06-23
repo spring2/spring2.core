@@ -30,8 +30,8 @@ namespace Spring2.Core.Geocode.WebService {
 	    return wrapper.DoGeocode(street, city, state, postalCode, plus4, ccode);
 	}
 
-	public IntegerType GetAvailableGeocodeCount() {
-	    return new IntegerType(0);
+	public Int32 GetAvailableGeocodeCount() {
+	    return 0;
 	}
     }
 }

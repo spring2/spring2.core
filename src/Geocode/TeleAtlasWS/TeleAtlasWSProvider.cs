@@ -30,7 +30,7 @@ namespace Spring2.Core.Geocode.TeleAtlasWS {
 	    return wrapper.DoGeocode(street, city, state, postalCode, plus4, ccode);
 	}
 
-	public IntegerType GetAvailableGeocodeCount() {
+	public Int32 GetAvailableGeocodeCount() {
 	    throw new NotSupportedException();
 	}
     }

@@ -128,7 +128,7 @@
     <DebugSymbols>true</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <NoStdLib>false</NoStdLib>
-    <NoWarn>1699,1717,1591,1572,1573</NoWarn>
+    <NoWarn>1699,1717,1591,1572,1573,1658,1584</NoWarn>
     <Optimize>false</Optimize>
     <RegisterForComInterop>false</RegisterForComInterop>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
@@ -143,6 +143,9 @@
       <Name>log4net</Name>
       <HintPath>..\lib\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json.Net20">
+      <HintPath>..\lib\net-2.0\Newtonsoft.Json.Net20.dll</HintPath>
+    </Reference>
     <Reference Include="Spring2.DataTierGenerator.Attribute">
       <Name>Spring2.DataTierGenerator.Attribute</Name>
       <HintPath>..\lib\Spring2.DataTierGenerator.Attribute.dll</HintPath>
@@ -154,6 +157,7 @@
       <Name>System.Data</Name>
     </Reference>
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Services">
       <Name>System.Web.Services</Name>
     </Reference>
@@ -199,7 +203,21 @@
     <Compile Include="Geocode\DataObject\IAddressCache.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Geocode\GecodeTestProvider.cs">
+    <Compile Include="Geocode\Google\AddressComponent.cs" />
+    <Compile Include="Geocode\Google\AddressType.cs" />
+    <Compile Include="Geocode\Google\Extensions.cs" />
+    <Compile Include="Geocode\Google\GeocodingRequest.cs" />
+    <Compile Include="Geocode\Google\GeocodingResponse.cs" />
+    <Compile Include="Geocode\Google\GeocodingResult.cs" />
+    <Compile Include="Geocode\Google\GeocodingService.cs" />
+    <Compile Include="Geocode\Google\GeographicPosition.cs" />
+    <Compile Include="Geocode\Google\Geometry.cs" />
+    <Compile Include="Geocode\Google\Http.cs" />
+    <Compile Include="Geocode\Google\JsonEnumTypeConverter.cs" />
+    <Compile Include="Geocode\Google\LocationType.cs" />
+    <Compile Include="Geocode\Google\ServiceResponseStatus.cs" />
+    <Compile Include="Geocode\Google\Viewport.cs" />
+    <Compile Include="Geocode\Test\GecodeTestProvider.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Geocode\GeocodeData.cs">
@@ -211,6 +229,7 @@
     <Compile Include="Geocode\GeocodeProvider.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Geocode\Google\GeocodeV3.cs" />
     <Compile Include="Geocode\IGeocodeProvider.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -316,6 +335,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

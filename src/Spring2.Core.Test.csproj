@@ -332,7 +332,9 @@
     <Compile Include="Test\DecimalTypeTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Test\GeocodeTest.cs">
+    <Compile Include="Test\Generic\DataTypeTest.cs" />
+    <Compile Include="Test\Geocode\GeocodeV3Test.cs" />
+    <Compile Include="Test\Geocode\GeocodeTest.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Test\IdTypeTest.cs">

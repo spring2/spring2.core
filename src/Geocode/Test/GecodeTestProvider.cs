@@ -12,7 +12,7 @@ namespace Spring2.Core.Geocode {
 	public GecodeTestProvider() {
 	}
 
-	public IntegerType GetAvailableGeocodeCount() {
+	public Int32 GetAvailableGeocodeCount() {
 	    return IntegerType.MaxValue;
 	}
 

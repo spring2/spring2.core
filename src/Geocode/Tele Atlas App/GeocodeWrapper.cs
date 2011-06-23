@@ -52,7 +52,7 @@ namespace Spring2.Core.Geocode {
 	    return DoGeocode(StringType.EMPTY,StringType.EMPTY, StringType.EMPTY, postalCode,StringType.DEFAULT, CountryCodeEnum.UNSET);
 	}
 
-	public IntegerType GetGeocodeCount() {
+	public Int32 GetGeocodeCount() {
 	    this.password = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodePassword"]);
 	    this.userName = StringType.Parse(ConfigurationProvider.Instance.Settings["GeocodeUserName"]);
 

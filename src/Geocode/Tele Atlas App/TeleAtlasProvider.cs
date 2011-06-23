@@ -11,7 +11,7 @@ namespace Spring2.Core.Geocode {
 	public TeleAtlasProvider() {
 	}
 
-	public IntegerType GetAvailableGeocodeCount() {
+	public Int32 GetAvailableGeocodeCount() {
 	    GeocodeWrapper wrapper = new GeocodeWrapper();
 	    return wrapper.GetGeocodeCount();
 	}

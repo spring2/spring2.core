@@ -10,6 +10,6 @@ namespace Spring2.Core.Geocode {
     public interface IGeocodeProvider {
 	GeocodeData GetCityAndStateOfZipCode(StringType postalCode);
 	GeocodeData DoGeocode(StringType street, StringType city, StringType state, StringType postalCode, StringType path, CountryCodeEnum ccode);
-	IntegerType GetAvailableGeocodeCount();
+	Int32 GetAvailableGeocodeCount();
     }
 }
