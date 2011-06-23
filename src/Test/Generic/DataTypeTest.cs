@@ -170,9 +170,9 @@ namespace Spring2.Core.Test.Generic {
 	    Assert.AreEqual(2, _unset.GetValueOrDefault(2));
 
 
-	    Assert.IsTrue(_default == _default);
-	    Assert.IsTrue(_unset == _unset);
-	    Assert.IsTrue(t1 == t1);
+	    //Assert.IsTrue(_default == _default);
+	    //Assert.IsTrue(_unset == _unset);
+	    //Assert.IsTrue(t1 == t1);
 
 	    Object o = t1;
 	    Assert.IsTrue(t1.Equals((DataType<Int32>)o));

@@ -175,6 +175,7 @@
     <Compile Include="ValueTypes\DataType.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ValueTypes\Generic\DataType.cs" />
     <Compile Include="ValueTypes\DateTimeType.cs">
       <SubType>Code</SubType>
     </Compile>
