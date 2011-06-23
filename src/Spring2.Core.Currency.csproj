@@ -60,6 +60,8 @@
     <DefineConstants>TRACE;DEBUG;NET_2_0</DefineConstants>
     <DocumentationFile>Spring2.Core.Currency.XML</DocumentationFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>1591,1572,1573</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'NET_1_1|AnyCPU' ">
     <OutputPath>..\build\Currency\</OutputPath>
