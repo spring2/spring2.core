@@ -36,6 +36,8 @@ namespace Google.Api.Maps.Service {
     }
 }
 
+#if (NET_1_1 || NET_2_0)
 namespace System.Runtime.CompilerServices {
     public class ExtensionAttribute : Attribute { }
 }
+#endif
