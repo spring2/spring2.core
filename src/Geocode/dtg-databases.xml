@@ -15,7 +15,7 @@
 		    <column name="PostalCode" sqltype="VarChar" length="10" />
 		    <column name="Latitude" sqltype="Decimal" precision="18" scale="8" />
 		    <column name="Longitude" sqltype="Decimal" precision="18" scale="8" />
-		    <column name="Result" sqltype="VarChar" length="1000" />
+		    <column name="Result" sqltype="VarChar" length="8000" />
 		    <column name="Status" sqltype="VarChar" length="20" />
 		    <column name="StdAddress1" sqltype="VarChar" length="80" />
 		    <column name="StdCity" sqltype="VarChar" length="40" />

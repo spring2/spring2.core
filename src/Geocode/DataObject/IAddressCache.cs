@@ -25,7 +25,7 @@ namespace Spring2.Core.Geocode.DataObject {
 	public static readonly ColumnMetaData POSTALCODE = new ColumnMetaData("PostalCode", "PostalCode", DbType.AnsiString, SqlDbType.VarChar, 10, 0, 0);
 	public static readonly ColumnMetaData LATITUDE = new ColumnMetaData("Latitude", "Latitude", DbType.Decimal, SqlDbType.Decimal, 0, 18, 8);
 	public static readonly ColumnMetaData LONGITUDE = new ColumnMetaData("Longitude", "Longitude", DbType.Decimal, SqlDbType.Decimal, 0, 18, 8);
-	public static readonly ColumnMetaData RESULT = new ColumnMetaData("Result", "Result", DbType.AnsiString, SqlDbType.VarChar, 1000, 0, 0);
+	public static readonly ColumnMetaData RESULT = new ColumnMetaData("Result", "Result", DbType.AnsiString, SqlDbType.VarChar, 8000, 0, 0);
 	public static readonly ColumnMetaData STATUS = new ColumnMetaData("Status", "Status", DbType.AnsiString, SqlDbType.VarChar, 20, 0, 0);
 	public static readonly ColumnMetaData STDADDRESS1 = new ColumnMetaData("StdAddress1", "StdAddress1", DbType.AnsiString, SqlDbType.VarChar, 80, 0, 0);
 	public static readonly ColumnMetaData STDCITY = new ColumnMetaData("StdCity", "StdCity", DbType.AnsiString, SqlDbType.VarChar, 40, 0, 0);

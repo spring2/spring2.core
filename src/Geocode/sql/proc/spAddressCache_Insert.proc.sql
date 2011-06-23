@@ -13,7 +13,7 @@ CREATE PROCEDURE dbo.spAddressCache_Insert
 	@PostalCode	VarChar(10) = null,
 	@Latitude	Decimal(18, 8) = null,
 	@Longitude	Decimal(18, 8) = null,
-	@Result	VarChar(1000) = null,
+	@Result	VarChar(8000) = null,
 	@Status	VarChar(20) = null,
 	@StdAddress1	VarChar(80) = null,
 	@StdCity	VarChar(40) = null,

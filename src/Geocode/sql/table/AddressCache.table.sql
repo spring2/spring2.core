@@ -29,7 +29,7 @@ CREATE TABLE dbo.AddressCache (
 	PostalCode VarChar(10) NULL,
 	Latitude Decimal(18, 8) NULL,
 	Longitude Decimal(18, 8) NULL,
-	Result VarChar(1000) NULL,
+	Result VarChar(8000) NULL,
 	Status VarChar(20) NULL,
 	StdAddress1 VarChar(80) NULL,
 	StdCity VarChar(40) NULL,
@@ -138,13 +138,13 @@ GO
 if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'Result')
   BEGIN
 	ALTER TABLE AddressCache ADD
-	    Result VarChar(1000) NULL
+	    Result VarChar(8000) NULL
   END
 GO
 
 if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'Result')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'Result', 'VarChar(1000)', 0
+	exec #spAlterColumn 'AddressCache', 'Result', 'VarChar(8000)', 0
   END
 GO
 
