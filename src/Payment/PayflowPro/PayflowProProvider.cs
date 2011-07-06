@@ -13,7 +13,11 @@ namespace Spring2.Core.Payment.PayflowPro {
 	private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
     	
 	public PaymentResult Authorize(Spring2.Core.Types.StringType referenceNumber, Spring2.Core.Types.CurrencyType amount, Spring2.Core.Types.StringType accountNumber, Spring2.Core.Types.StringType expirationYear, Spring2.Core.Types.StringType expirationMonth, Spring2.Core.Types.StringType cvv, Spring2.Core.Types.StringType name, Spring2.Core.Types.StringType address, Spring2.Core.Types.StringType postalCode, Spring2.Core.Types.StringType comment) {
-	    throw new System.NotImplementedException();
+	    AuthorizationCommand command = new AuthorizationCommand(accountNumber, amount, cvv, referenceNumber, expirationMonth + "/" + expirationYear, name, address,
+				postalCode, comment, StringType.EMPTY, referenceNumber);
+	    PaymentResult result = command.Execute();
+	    return result;
+
 	}
 
 	public PaymentResult Charge(Spring2.Core.Types.StringType referenceNumber, Spring2.Core.Types.CurrencyType amount, Spring2.Core.Types.StringType accountNumber, Spring2.Core.Types.StringType expirationYear, Spring2.Core.Types.StringType expirationMonth, Spring2.Core.Types.StringType cvv, Spring2.Core.Types.StringType name, Spring2.Core.Types.StringType address, Spring2.Core.Types.StringType postalCode, Spring2.Core.Types.StringType comment) {
@@ -37,7 +41,9 @@ namespace Spring2.Core.Payment.PayflowPro {
 	}
 
 	public PaymentResult Settle(StringType referenceNumber, CurrencyType amount, StringType originalTransactionId, CurrencyType originalTransactionAmount) {
-	    throw new System.NotImplementedException();
+	    CaptureCommand command = new CaptureCommand(originalTransactionId, amount);
+	    PaymentResult result = command.Execute();
+	    return result;
 	}
 
     	public PaymentResult Void(StringType referenceNumber, StringType transactionId) {

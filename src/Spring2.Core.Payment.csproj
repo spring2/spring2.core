@@ -245,6 +245,8 @@
     <Compile Include="Payment\NullSplitPaymentProvider.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Payment\PayflowPro\AuthorizationCommand.cs" />
+    <Compile Include="Payment\PayflowPro\CaptureCommand.cs" />
     <Compile Include="Payment\PayflowPro\CreditCommand.cs">
       <SubType>Code</SubType>
     </Compile>

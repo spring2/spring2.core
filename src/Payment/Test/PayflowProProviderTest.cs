@@ -20,52 +20,76 @@ namespace Spring2.Core.Test {
 	private const string accountMasterCard = "5555555555554444";
 	private const string accountVisa = "4111111111111111";
 
+	private const string expirationMonth = "11";
+	private const string expirationYear = "15";
+
 	private Random random = null;
+	private IConfigurationProvider originalProvider;
 
 	public PayflowProProviderTest(){
 	    random = new Random();
+	}
+
+	[SetUp]
+	public void Setup() {
+	    originalProvider = ConfigurationProvider.Instance;
+
+	    IConfigurationProvider provider = new SimpleConfigurationProvider();
+	    provider.Settings.Add(ConfigurationProvider.Instance.Settings);
+	    provider.Settings[PayflowProProviderConfiguration.CONNECTIONSTRING_KEY] = "user=GCUser;vendor=Spring2;partner=VeriSign;pwd=test123;verbosity=LOW";
+	    provider.Settings[PayflowProProviderConfiguration.REMOSTHOST_KEY] = "pilot-payflowpro.paypal.com:443";
+	    provider.Settings[PayflowProProviderConfiguration.TIMEOUT_KEY] = "30";
+	    provider.Settings[PayflowProProviderConfiguration.ALLOWPOSTALCODEMISMATCH_KEY] = "0";
+	    provider.Settings[PayflowProProviderConfiguration.ALLOWADDRESSMISMATCH_KEY] = "0";
+	    provider.Settings[PayflowProProviderConfiguration.ALLOWCVVMISMATCH_KEY] = "0";
+	    ConfigurationProvider.SetProvider(provider);
+	}
+
+	[TearDown]
+	public void TearDown() {
+	    ConfigurationProvider.SetProvider(originalProvider);
 	}
         
 	#region Success charge scenario for all card types
 	[Test()]
 	public void AmericanExpressPayment() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountAmericanExpress), "09", "11", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountAmericanExpress), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    Assert.AreEqual("0", result.ResultCode, string.Format("Unexpected result of {0}:{1}", result.ResultCode, result.ResultMessage));
 	}
 
 	[Test()]
 	public void DinersClubPayment() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountDinersClub), "09", "11", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountDinersClub), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    Assert.AreEqual("0", result.ResultCode, string.Format("Unexpected result of {0}:{1}", result.ResultCode, result.ResultMessage));
 	}
 
 	[Test()]
 	public void DiscoverPayment() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountDiscover), "09", "11", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountDiscover), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    Assert.AreEqual("0", result.ResultCode, string.Format("Unexpected result of {0}:{1}", result.ResultCode, result.ResultMessage));
 	}
 
 	[Test()]
 	public void JcbPayment() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountJcb), "09", "11", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountJcb), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    Assert.AreEqual("0", result.ResultCode, string.Format("Unexpected result of {0}:{1}", result.ResultCode, result.ResultMessage));
 	}
 
 	[Test()]
 	public void MasterCardPayment() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountMasterCard), "09", "11", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountMasterCard), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    Assert.AreEqual("0", result.ResultCode, string.Format("Unexpected result of {0}:{1}", result.ResultCode, result.ResultMessage));
 	}
 
 	[Test()]
 	public void VisaPayment() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), "09", "11", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    Assert.AreEqual("0", result.ResultCode, string.Format("Unexpected result of {0}:{1}", result.ResultCode, result.ResultMessage));
 	}
 	#endregion
@@ -75,7 +99,7 @@ namespace Spring2.Core.Test {
 	[Ignore("fails because of test payflow pro account.")]
 	public void OverLimitPayment() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(2001, 3000)), new StringType(accountMasterCard), "09", "11", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.EMPTY);
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(2001, 3000)), new StringType(accountMasterCard), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.EMPTY);
 	    Assert.AreEqual("12", result, string.Format("Unexpected result of {0}:{1}", result.ResultCode, result.ResultMessage));
 	}
     	
@@ -83,7 +107,7 @@ namespace Spring2.Core.Test {
 	public void InvalidCreditCardNumber() {
 	    PayflowProProvider provider = new PayflowProProvider();
 	    try {
-		PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa + "1"), "11", "09", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+		PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa + "1"), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 		Assert.Fail();
 	    } catch (PaymentFailureException ex) {
 		Assert.AreEqual("23", ex.Result.ResultCode);
@@ -102,7 +126,7 @@ namespace Spring2.Core.Test {
 		ConfigurationProvider.SetProvider(config);
 
 		PayflowProProvider provider = new PayflowProProvider();
-		PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), "09", "11", StringType.UNSET, "Elmer Fudd", StringType.UNSET, StringType.UNSET, StringType.UNSET);
+		PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, "Elmer Fudd", StringType.UNSET, StringType.UNSET, StringType.UNSET);
 		Assert.Fail();
 	    } catch (PaymentConnectionException) {
 		// this is expected
@@ -116,7 +140,7 @@ namespace Spring2.Core.Test {
 	[Test()]
 	public void ValidAvsVerification() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountMasterCard), "09", "11", StringType.UNSET, StringType.UNSET, new StringType("24285 Elm"), new StringType("00382"), StringType.UNSET);
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountMasterCard), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, new StringType("24285 Elm"), new StringType("00382"), StringType.UNSET);
 	    Assert.AreEqual("Y", result.AVSResponseCode, "Address should be valid.");
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidAddress);
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidPostalCode);
@@ -128,7 +152,7 @@ namespace Spring2.Core.Test {
 	    PayflowProProvider provider = new PayflowProProvider();
 	    StringType referenceNumber = Guid.NewGuid().ToString();
 	    try {
-		PaymentResult result = provider.Charge(referenceNumber, random.Next(999), new StringType(accountMasterCard), "09", "11", StringType.UNSET, StringType.UNSET, new StringType("49354 Main"), new StringType("00382"), StringType.UNSET);
+		PaymentResult result = provider.Charge(referenceNumber, random.Next(999), new StringType(accountMasterCard), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, new StringType("49354 Main"), new StringType("00382"), StringType.UNSET);
 	    	Assert.Fail();
 	    } catch (AvsValidationException ex) {
 	    	Assert.AreEqual("NY", ex.Result.AVSResponseCode, "Address should be invalid.");
@@ -148,7 +172,7 @@ namespace Spring2.Core.Test {
 	public void InvalidPostalCodeVerification() {
 	    PayflowProProvider provider = new PayflowProProvider();
 	    try {
-		PaymentResult result = provider.Charge(StringType.EMPTY, random.Next(999), new StringType(accountMasterCard), "09", "11", StringType.UNSET, StringType.UNSET, "24285 Elm", new StringType("94303"), StringType.UNSET);
+		PaymentResult result = provider.Charge(StringType.EMPTY, random.Next(999), new StringType(accountMasterCard), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, "24285 Elm", new StringType("94303"), StringType.UNSET);
 		Assert.Fail();
 	    } catch (AvsValidationException ex) {
 		Assert.AreEqual("YN", ex.Result.AVSResponseCode, "Address should be invalid.");
@@ -162,7 +186,7 @@ namespace Spring2.Core.Test {
     	[Test()]
 	public void UnknownAvsVerification() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountMasterCard), "09", "11", StringType.UNSET, StringType.UNSET, "79232 Maple", "20304", StringType.UNSET);
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountMasterCard), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, "79232 Maple", "20304", StringType.UNSET);
 	    Assert.AreEqual("X", result.AVSResponseCode, "Address should be unvalidated.");
 	    Assert.AreEqual("0", result.ResultCode);
 	    Assert.AreEqual(BooleanType.DEFAULT, result.ValidAddress);
@@ -174,7 +198,7 @@ namespace Spring2.Core.Test {
 	[Test()]
 	public void ValidCvv2Verification() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountMasterCard), "09", "11", new StringType("100"), StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountMasterCard), expirationYear, expirationMonth, new StringType("100"), StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    Assert.AreEqual("Y", result.CVVResponseCode, "CVV2 should be valid.");
 	    Assert.AreEqual("0", result.ResultCode);
 	    Assert.AreEqual(BooleanType.TRUE, result.ValidCvv);
@@ -184,7 +208,7 @@ namespace Spring2.Core.Test {
 	public void InvalidCvv2Verification() {
 	    PayflowProProvider provider = new PayflowProProvider();
 	    try {
-		PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountMasterCard), "09", "11", new StringType("400"), StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+		PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountMasterCard), expirationYear, expirationMonth, new StringType("400"), StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    	Assert.Fail();
 	    } catch (PaymentFailureException ex) {
 	    	Assert.AreEqual("N", ex.Result.CVVResponseCode, "CVV2 should be invalid.");
@@ -198,7 +222,7 @@ namespace Spring2.Core.Test {
 	[Test()]
 	public void UnknownCvv2Verification() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountMasterCard), "09", "11", new StringType("700"), StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountMasterCard), expirationYear, expirationMonth, new StringType("700"), StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    Assert.AreEqual("X", result.CVVResponseCode, "CVV2 should be unvalidated.");
 	    Assert.AreEqual("0", result.ResultCode);
 	    Assert.AreEqual(BooleanType.DEFAULT, result.ValidCvv);
@@ -209,13 +233,16 @@ namespace Spring2.Core.Test {
 	[Test]
     	public void Charge() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), "11", "09", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    Assert.AreEqual("0", result.ResultCode);
 	}
     
 	[Test]
 	public void Authorize() {
-	    		
+	    PayflowProProvider provider = new PayflowProProvider();
+	    PaymentResult result = provider.Authorize(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreEqual(12, result.TransactionId.Length);
 	}
 		
 	[Test]
@@ -226,19 +253,26 @@ namespace Spring2.Core.Test {
 	[Test]
 	public void Credit() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Credit(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), "11", "09", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, "ignored original transactionId");
+	    PaymentResult result = provider.Credit(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, "ignored original transactionId");
 	    Assert.AreEqual("0", result.ResultCode);
 	}
 	
 	[Test]
 	public void Settle() {
-		
+	    PayflowProProvider provider = new PayflowProProvider();
+	    PaymentResult result = provider.Authorize(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreEqual(12, result.TransactionId.Length);
+
+	    PaymentResult result2 = provider.Settle(StringType.EMPTY, new CurrencyType(random.Next(999)), result.TransactionId, result.TransactionAmount);
+	    Assert.AreEqual("0", result2.ResultCode);
+	    Assert.AreEqual(12, result2.TransactionId.Length);
+	    Assert.AreNotEqual(result.TransactionId, result2.TransactionId);
 	}
 
 	[Test()]
 	public void ShouldEscapeValuesWhenGettingCommandText() {
 	    SaleCommand command = new SaleCommand("Elmer & Fudd", new CurrencyType(random.Next(999)), "El&F", "Elmer&Fudd", "Elmer & Fudd", "Elmer & Fudd", "Elmer & Fudd", "Elm & Fud", "Elmer & Fudd", "Elmer & Fudd", "Elmer & Fudd");
-	    Console.Write(command.CommandText);
 	    Assert.IsTrue(command.CommandText.Length > 0);
 
 	    String commandText = command.CommandText;
@@ -271,7 +305,7 @@ namespace Spring2.Core.Test {
 	[Test()]
 	public void ShouldHandleAmpersandInName() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), "11", "09", StringType.UNSET, "Elmer & Fudd", StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, "Elmer & Fudd", StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    Assert.AreEqual("0", result.ResultCode);
 	}
 	#endregion
@@ -289,7 +323,7 @@ namespace Spring2.Core.Test {
 	    	
 		PayflowProProvider provider = new PayflowProProvider();
 		try {
-		    provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountAmericanExpress), "09", "11", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+		    provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountAmericanExpress), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 		    Assert.Fail("Should throw PaymentConnectionException");
 		} catch (Exception ex) {
 		    Assert.IsTrue(ex is PaymentException);
@@ -313,7 +347,7 @@ namespace Spring2.Core.Test {
 	    	
 		PayflowProProvider provider = new PayflowProProvider();
 		try {
-		    provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountAmericanExpress), "09", "11", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+		    provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountAmericanExpress), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 		    Assert.Fail("Should throw PaymentConnectionException");
 		} catch (Exception ex) {
 		    Assert.IsTrue(ex is PaymentException);
@@ -337,7 +371,7 @@ namespace Spring2.Core.Test {
 	    	
 		PayflowProProvider provider = new PayflowProProvider();
 		try {
-		    provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountAmericanExpress), "09", "11", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+		    provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountAmericanExpress), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 		    Assert.Fail("Should throw PaymentConnectionException");
 		} catch (Exception ex) {
 		    Assert.IsTrue(ex is PaymentException);
@@ -450,7 +484,7 @@ namespace Spring2.Core.Test {
 	    	
 		PayflowProProvider provider = new PayflowProProvider();
 		try {
-		    provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountAmericanExpress), "09", "11", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+		    provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountAmericanExpress), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 		    Assert.Fail("Should throw PaymentConnectionException");
 		} catch (Exception ex) {
 		    Assert.IsTrue(ex is PaymentException);
@@ -474,7 +508,7 @@ namespace Spring2.Core.Test {
 	    	
 		PayflowProProvider provider = new PayflowProProvider();
 		try {
-		    provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountAmericanExpress), "09", "11", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+		    provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountAmericanExpress), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 		    Assert.Fail("Should throw PaymentConnectionException");
 		} catch (Exception ex) {
 		    Assert.IsTrue(ex is PaymentException);
@@ -497,7 +531,7 @@ namespace Spring2.Core.Test {
 	    	ConfigurationProvider.SetProvider(config);
 
 	    	PayflowProProvider provider = new PayflowProProvider();
-	    	PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), "09", "11", StringType.UNSET, "Elmer Fudd", StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    	PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, "Elmer Fudd", StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    	Assert.Fail();
 	    } catch (PaymentConnectionException) {
 	    	// this is expected
