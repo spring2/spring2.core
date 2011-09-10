@@ -308,6 +308,141 @@ namespace Spring2.Core.Test {
 	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, "Elmer & Fudd", StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    Assert.AreEqual("0", result.ResultCode);
 	}
+
+	[Test]
+	public void ShouldHandleSimultaneousReferenceTransaction() {
+	    PayflowProProvider provider = new PayflowProProvider();
+
+	    CurrencyType authAmount = new CurrencyType(random.Next(999));
+	    PaymentResult result = provider.Authorize(StringType.EMPTY, authAmount, new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreEqual(12, result.TransactionId.Length);
+	    string transactionId = result.TransactionId;
+
+	    CurrencyType authAmount2 = new CurrencyType(random.Next(999));
+	    result = provider.Authorize(StringType.EMPTY, authAmount, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, transactionId);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreNotEqual(transactionId, result.TransactionId.Length);
+	    string transactionId2 = result.TransactionId;
+
+	    CurrencyType authAmount3 = new CurrencyType(random.Next(999));
+	    result = provider.Authorize(StringType.EMPTY, authAmount, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, transactionId2);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreNotEqual(transactionId, result.TransactionId.Length);
+	    string transactionId3 = result.TransactionId;
+
+	    PaymentResult settleResult = provider.Settle(StringType.EMPTY, authAmount3 + 10, transactionId3, result.TransactionAmount);
+	    Assert.AreEqual("0", settleResult.ResultCode);
+	    Assert.AreEqual(12, settleResult.TransactionId.Length);
+	    Assert.AreNotEqual(transactionId2, settleResult.TransactionId);
+
+	    settleResult = provider.Settle(StringType.EMPTY, authAmount2 + 10, transactionId2, result.TransactionAmount);
+	    Assert.AreEqual("0", settleResult.ResultCode);
+	    Assert.AreEqual(12, settleResult.TransactionId.Length);
+	    Assert.AreNotEqual(transactionId2, settleResult.TransactionId);
+
+	    settleResult = provider.Settle(StringType.EMPTY, authAmount + 10, transactionId, result.TransactionAmount);
+	    Assert.AreEqual("0", settleResult.ResultCode);
+	    Assert.AreEqual(12, settleResult.TransactionId.Length);
+	    Assert.AreNotEqual(transactionId, settleResult.TransactionId);
+	}
+
+	[Test]
+	public void ContinuousAuthorizations() {
+	    PayflowProProvider provider = new PayflowProProvider();
+
+	    CurrencyType authAmount = new CurrencyType(random.Next(999));
+	    PaymentResult result = provider.Authorize(StringType.EMPTY, authAmount, new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreEqual(12, result.TransactionId.Length);
+	    string transactionId = result.TransactionId;
+
+	    PaymentResult settleResult = provider.Settle(StringType.EMPTY, authAmount + 10, transactionId, result.TransactionAmount);
+	    Assert.AreEqual("0", settleResult.ResultCode);
+	    Assert.AreEqual(12, settleResult.TransactionId.Length);
+	    Assert.AreNotEqual(transactionId, settleResult.TransactionId);
+
+	    CurrencyType authAmount2 = new CurrencyType(random.Next(999));
+	    result = provider.Authorize(StringType.EMPTY, authAmount, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, transactionId);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreNotEqual(transactionId, result.TransactionId.Length);
+	    string transactionId2 = result.TransactionId;
+
+	    settleResult = provider.Settle(StringType.EMPTY, authAmount2 + 10, transactionId2, result.TransactionAmount);
+	    Assert.AreEqual("0", settleResult.ResultCode);
+	    Assert.AreEqual(12, settleResult.TransactionId.Length);
+	    Assert.AreNotEqual(transactionId2, settleResult.TransactionId);
+
+	    CurrencyType authAmount3 = new CurrencyType(random.Next(999));
+	    result = provider.Authorize(StringType.EMPTY, authAmount, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, transactionId2);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreNotEqual(transactionId, result.TransactionId.Length);
+	    string transactionId3 = result.TransactionId;
+
+	    settleResult = provider.Settle(StringType.EMPTY, authAmount3 + 10, transactionId3, result.TransactionAmount);
+	    Assert.AreEqual("0", settleResult.ResultCode);
+	    Assert.AreEqual(12, settleResult.TransactionId.Length);
+	    Assert.AreNotEqual(transactionId3, settleResult.TransactionId);
+	}
+
+	[Test]
+	public void ContinuousAuthorizationsWithInvalidCardData() {
+	    PayflowProProvider provider = new PayflowProProvider();
+
+	    CurrencyType authAmount = new CurrencyType(random.Next(999));
+	    PaymentResult result = provider.Authorize(StringType.EMPTY, authAmount, new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreEqual(12, result.TransactionId.Length);
+	    string transactionId = result.TransactionId;
+
+	    PaymentResult settleResult = provider.Settle(StringType.EMPTY, authAmount + 10, transactionId, result.TransactionAmount);
+	    Assert.AreEqual("0", settleResult.ResultCode);
+	    Assert.AreEqual(12, settleResult.TransactionId.Length);
+	    Assert.AreNotEqual(transactionId, settleResult.TransactionId);
+
+	    CurrencyType authAmount2 = new CurrencyType(random.Next(999));
+	    result = provider.Authorize(StringType.EMPTY, authAmount, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, transactionId);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreNotEqual(transactionId, result.TransactionId.Length);
+	    string transactionId2 = result.TransactionId;
+
+	    settleResult = provider.Settle(StringType.EMPTY, authAmount2 + 10, transactionId2, result.TransactionAmount);
+	    Assert.AreEqual("0", settleResult.ResultCode);
+	    Assert.AreEqual(12, settleResult.TransactionId.Length);
+	    Assert.AreNotEqual(transactionId2, settleResult.TransactionId);
+
+	    CurrencyType authAmount3 = new CurrencyType(random.Next(999));
+	    result = provider.Authorize(StringType.EMPTY, authAmount, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, transactionId2);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreNotEqual(transactionId, result.TransactionId.Length);
+	    string transactionId3 = result.TransactionId;
+
+	    settleResult = provider.Settle(StringType.EMPTY, authAmount3 + 10, transactionId3, result.TransactionAmount);
+	    Assert.AreEqual("0", settleResult.ResultCode);
+	    Assert.AreEqual(12, settleResult.TransactionId.Length);
+	    Assert.AreNotEqual(transactionId3, settleResult.TransactionId);
+	} 
+
+	[Test]
+	public void VerifyAndAuth() {
+	    PayflowProProvider provider = new PayflowProProvider();
+	    CurrencyType authAmount = 0;
+	    PaymentResult result = provider.Authorize(StringType.EMPTY, authAmount, new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreEqual(12, result.TransactionId.Length);
+	    string transactionId = result.TransactionId;
+
+	    CurrencyType authAmount2 = new CurrencyType(random.Next(999));
+	    result = provider.Authorize(StringType.EMPTY, authAmount2, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, transactionId);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreNotEqual(transactionId, result.TransactionId);
+	    string transactionId2 = result.TransactionId;
+
+	    PaymentResult settleResult = provider.Settle(StringType.EMPTY, authAmount2 + 10, transactionId2, result.TransactionAmount);
+	    Assert.AreEqual("0", settleResult.ResultCode);
+	    Assert.AreEqual(12, settleResult.TransactionId.Length);
+	    Assert.AreNotEqual(transactionId2, settleResult.TransactionId);
+	}
 	#endregion
     	    	
 	#region Invalid configuration

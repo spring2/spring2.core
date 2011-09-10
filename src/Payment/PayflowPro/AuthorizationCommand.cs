@@ -20,6 +20,7 @@ namespace Spring2.Core.Payment.PayflowPro {
 	private StringType comment1;
 	private StringType comment2;
 	private StringType poNum;
+	private StringType originalTransactionId;
 		
 		
 	public override PaymentResult Execute() {
@@ -30,7 +31,7 @@ namespace Spring2.Core.Payment.PayflowPro {
 	}
 
 	public AuthorizationCommand(StringType accountNumber, CurrencyType amount, StringType cvv2, StringType referenceCode, StringType expirationDate, StringType name, StringType address,
-	    StringType postalCode, StringType comment1, StringType comment2, StringType poNum) {
+	    StringType postalCode, StringType comment1, StringType comment2, StringType poNum, StringType originalTransactionId) {
     		
 	    this.accountNumber = accountNumber;
 	    this.amount = amount;
@@ -43,8 +44,8 @@ namespace Spring2.Core.Payment.PayflowPro {
 	    this.comment1 = comment1;
 	    this.comment2 = comment2;
 	    this.poNum = poNum;
+	    this.originalTransactionId = originalTransactionId;
 	}
-
 		
 	public override string CommandText {
 	    get {
@@ -61,7 +62,8 @@ namespace Spring2.Core.Payment.PayflowPro {
 		AppendCommand(command, "TRXTYPE", "A", 1);
 		AppendCommand(command, "COMMENT1", comment1, 128);
 		AppendCommand(command, "COMMENT2", comment2, 128);
-		AppendCommand(command, "PONUM", poNum, 17);    		
+		AppendCommand(command, "PONUM", poNum, 17);
+		AppendCommand(command, "ORIGID", originalTransactionId, 12);
 		return command.ToString();
 	    }
 	}

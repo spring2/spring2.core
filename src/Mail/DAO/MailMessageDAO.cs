@@ -19,12 +19,12 @@ namespace Spring2.Core.Mail.Dao {
     /// </summary>
     public class MailMessageDAO : Spring2.Core.DAO.SqlEntityDAO, IMailMessageDAO {
 	private static IMailMessageDAO instance = new MailMessageDAO();
-	public static IMailMessageDAO DAO{
-	    get{
-			if(!ClassRegistry.CanResolve(typeof(IMailMessageDAO))) {
-				ClassRegistry.Register<IMailMessageDAO>(instance);
-			}
-			return ClassRegistry.Resolve<IMailMessageDAO>();
+	public static IMailMessageDAO DAO {
+	    get {
+		if (!ClassRegistry.CanResolve(typeof(IMailMessageDAO))) {
+		    ClassRegistry.Register<IMailMessageDAO>(instance);
+		}
+		return ClassRegistry.Resolve<IMailMessageDAO>();
 	    }
 	}
 
@@ -258,7 +258,7 @@ namespace Spring2.Core.Mail.Dao {
 	public MailMessage Load(IdType mailMessageId) {
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(CreateEqualityPredicate(MailMessageFields.MAILMESSAGEID, EqualityOperatorEnum.Equal, mailMessageId.IsValid ? mailMessageId.ToInt32() as Object : DBNull.Value));
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);
 	    return GetDataObject(dataReader);
 	}
 
@@ -268,7 +268,7 @@ namespace Spring2.Core.Mail.Dao {
 	public void Reload(MailMessage instance) {
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(CreateEqualityPredicate(MailMessageFields.MAILMESSAGEID, EqualityOperatorEnum.Equal, instance.MailMessageId.IsValid ? instance.MailMessageId.ToInt32() as Object : DBNull.Value));
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);
 
 	    if (!dataReader.Read()) {
 		dataReader.Close();
@@ -623,7 +623,7 @@ namespace Spring2.Core.Mail.Dao {
 	    OrderByClause sort = new OrderByClause("MailMessageStatus");
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(CreateEqualityPredicate(MailMessageFields.MAILMESSAGESTATUS, EqualityOperatorEnum.Equal, mailMessageStatus.DBValue));
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);
 
 	    return GetList(dataReader);
 	}
@@ -638,7 +638,7 @@ namespace Spring2.Core.Mail.Dao {
 	    OrderByClause sort = new OrderByClause("UniqueKey");
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(CreateEqualityPredicate(MailMessageFields.UNIQUEKEY, EqualityOperatorEnum.Equal, uniqueKey.IsValid ? uniqueKey.ToString() as Object : DBNull.Value));
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);
 
 	    return GetDataObject(dataReader);
 	}

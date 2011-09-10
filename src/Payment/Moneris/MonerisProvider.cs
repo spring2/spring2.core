@@ -23,6 +23,13 @@ namespace Spring2.Core.Payment.Moneris {
 	    throw new NotImplementedException();
 	}
 
+	public PaymentResult Authorize(StringType referenceNumber, CurrencyType amount, StringType accountNumber, 
+	    StringType expirationYear, StringType expirationMonth, StringType cvv, StringType name, 
+	    StringType address, StringType postalCode, StringType comment, StringType originalTransactionId) {
+	    throw new NotImplementedException();
+	}
+
+
 	public PaymentResult Charge(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear,
 	    StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode,
 	    StringType comment) {
@@ -232,5 +239,6 @@ namespace Spring2.Core.Payment.Moneris {
 	    PaymentResult result = GetResultFromReceipt(config, receipt, "", "", "");
 	    return result;
 	}
+
     }
 }

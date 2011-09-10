@@ -12,6 +12,10 @@ namespace Spring2.Core.Payment.Test {
 	    return GetResult();
 	}
 
+	public PaymentResult Authorize(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear, StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode, StringType comment, StringType originalTransactionId) {
+	    return GetResult();
+	}
+
 	public PaymentResult Charge(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear, StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode, StringType comment) {
 	    return GetResult();
 	}
@@ -38,6 +42,5 @@ namespace Spring2.Core.Payment.Test {
     	    result.ResultMessage = "Success";
     	    return result;
     	}
-    	
     }
 }

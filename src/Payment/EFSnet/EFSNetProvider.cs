@@ -22,6 +22,10 @@ namespace Spring2.Core.Payment.EFSNet {
 	    set { timeout = value; }
 	}
 
+	public PaymentResult Authorize(Spring2.Core.Types.StringType referenceNumber, Spring2.Core.Types.CurrencyType amount, Spring2.Core.Types.StringType accountNumber, Spring2.Core.Types.StringType expirationYear, Spring2.Core.Types.StringType expirationMonth, Spring2.Core.Types.StringType cvv, Spring2.Core.Types.StringType name, Spring2.Core.Types.StringType address, Spring2.Core.Types.StringType postalCode, Spring2.Core.Types.StringType comment, StringType originalTransactionId) {
+	    return Authorize(referenceNumber, amount, accountNumber, expirationYear, expirationMonth, cvv, name, address, postalCode, comment);
+	}
+
 	public PaymentResult Authorize(Spring2.Core.Types.StringType referenceNumber, Spring2.Core.Types.CurrencyType amount, Spring2.Core.Types.StringType accountNumber, Spring2.Core.Types.StringType expirationYear, Spring2.Core.Types.StringType expirationMonth, Spring2.Core.Types.StringType cvv, Spring2.Core.Types.StringType name, Spring2.Core.Types.StringType address, Spring2.Core.Types.StringType postalCode, Spring2.Core.Types.StringType comment) {
 	    string applicationId;
 	    string storeID;
@@ -67,6 +71,7 @@ namespace Spring2.Core.Payment.EFSNet {
 	    result.ReferenceNumber = referenceNumber;
 	    return result;
 	}
+
 
 	public PaymentResult Charge(Spring2.Core.Types.StringType referenceNumber, Spring2.Core.Types.CurrencyType amount, Spring2.Core.Types.StringType accountNumber, Spring2.Core.Types.StringType expirationYear, Spring2.Core.Types.StringType expirationMonth, Spring2.Core.Types.StringType cvv, Spring2.Core.Types.StringType name, Spring2.Core.Types.StringType address, Spring2.Core.Types.StringType postalCode, Spring2.Core.Types.StringType comment) {
 	    string applicationId;

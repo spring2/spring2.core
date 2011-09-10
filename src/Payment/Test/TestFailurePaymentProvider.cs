@@ -13,6 +13,10 @@ namespace Spring2.Core.Payment.Test {
 	    throw new PaymentFailureException(GetResult());
 	}
 
+	public PaymentResult Authorize(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear, StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode, StringType comment, StringType originalTransactionId) {
+	    throw new PaymentFailureException(GetResult());
+	}
+
 	public PaymentResult Charge(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear, StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode, StringType comment) {
 	    throw new PaymentFailureException(GetResult());
 	}
@@ -39,6 +43,5 @@ namespace Spring2.Core.Payment.Test {
     	    result.ResultMessage = "Decline";
     	    return result;
     	}
-    	
     }
 }
