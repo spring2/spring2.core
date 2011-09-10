@@ -148,8 +148,8 @@
       <HintPath>..\lib\net-1.1\Interop.PFPro.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
-      <Name>log4net</Name>
-      <HintPath>..\lib\net-1.1\log4net.dll</HintPath>
+      <HintPath>..\lib\log4net.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Payflow_dotNET, Version=4.3.1.0, Culture=neutral, PublicKeyToken=14aa1e8d77f2a97c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
