@@ -109,7 +109,7 @@ scriptorder:
 	# strip out the blank lines 
 	grep -v "^$$" so.txt > so1.txt
 	# make sure the file has dos line endings,
-	unix2dos -D so1.txt
+	unix2dos so1.txt
 	# strip off the last end of line
 	awk 'NR > 1 { print h } { h = $$0 } END { ORS = ""; print h }' so1.txt > ScriptOrder.txt
 	dos2unix ScriptOrder.txt
