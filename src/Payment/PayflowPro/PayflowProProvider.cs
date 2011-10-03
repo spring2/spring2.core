@@ -30,6 +30,14 @@ namespace Spring2.Core.Payment.PayflowPro {
 	    return result;
 	}
 
+	public PaymentResult Charge(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear, StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode, StringType comment, StringType transactionId) {
+	    SaleCommand command =
+		new SaleCommand(accountNumber, amount, cvv, referenceNumber, expirationMonth + "/" + expirationYear, name, address,
+				postalCode, comment, StringType.EMPTY, referenceNumber, transactionId);
+	    PaymentResult result = command.Execute();
+	    return result;
+	}
+
 	public PaymentResult Credit(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear, StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode, StringType comment, StringType originalTransactionId) {
 	    CreditCommand command =
 		new CreditCommand(accountNumber, amount, cvv, referenceNumber, expirationMonth + "/" + expirationYear, name, address,

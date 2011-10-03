@@ -236,6 +236,19 @@ namespace Spring2.Core.Test {
 	    PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
 	    Assert.AreEqual("0", result.ResultCode);
 	}
+
+	[Test]
+	public void ChargeTransactionId() {
+	    PayflowProProvider provider = new PayflowProProvider();
+	    PaymentResult result = provider.Authorize(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    Assert.AreEqual("0", result.ResultCode);
+	    Assert.AreEqual(12, result.TransactionId.Length);
+
+	    PaymentResult result2 = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), "", expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, result.TransactionId);
+	    Assert.AreEqual("0", result2.ResultCode);
+	    Assert.AreNotEqual(result.TransactionId, result2.TransactionId);
+	    Assert.AreEqual(12, result2.TransactionId.Length);
+	}
     
 	[Test]
 	public void Authorize() {
