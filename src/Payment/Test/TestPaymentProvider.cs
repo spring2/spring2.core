@@ -40,6 +40,9 @@ namespace Spring2.Core.Payment.Test {
     	    PaymentResult result = new PaymentResult();
     	    result.ResultCode = "0";
     	    result.ResultMessage = "Success";
+	    Random r = new Random(DateTime.Now.Millisecond);
+	    int tid = r.Next(1000);
+	    result.TransactionId = tid.ToString();
     	    return result;
     	}
     }
