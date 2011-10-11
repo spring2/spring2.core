@@ -21,6 +21,10 @@ namespace Spring2.Core.Payment.Test {
 	    throw new PaymentConnectionException("connection failure");
 	}
 
+	public PaymentResult Charge(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear, StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode, StringType comment, StringType originalTransactionId) {
+	    throw new PaymentConnectionException("connection failure");
+	}
+
 	public PaymentResult Credit(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear, StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode, StringType comment, StringType originalTransactionId) {
 	    throw new PaymentConnectionException("connection failure");
 	}

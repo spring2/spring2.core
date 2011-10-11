@@ -29,6 +29,11 @@ namespace Spring2.Core.Payment.Moneris {
 	    throw new NotImplementedException();
 	}
 
+	public PaymentResult Charge(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear,
+	    StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode,
+	    StringType comment, StringType originalTransactionId) {
+		return Charge(referenceNumber, amount, accountNumber, expirationYear, expirationMonth, cvv, name, address, postalCode, comment);
+	}
 
 	public PaymentResult Charge(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear,
 	    StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode,
