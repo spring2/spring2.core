@@ -41,7 +41,7 @@ namespace Spring2.Core.Payment.PayflowPro {
 	public PaymentResult Credit(StringType referenceNumber, CurrencyType amount, StringType accountNumber, StringType expirationYear, StringType expirationMonth, StringType cvv, StringType name, StringType address, StringType postalCode, StringType comment, StringType originalTransactionId) {
 	    CreditCommand command =
 		new CreditCommand(accountNumber, amount, cvv, referenceNumber, expirationMonth + "/" + expirationYear, name, address,
-		postalCode, comment, StringType.EMPTY, referenceNumber);
+		postalCode, comment, StringType.EMPTY, originalTransactionId);
 	    PaymentResult result = command.Execute();
 	    return result;
 	}

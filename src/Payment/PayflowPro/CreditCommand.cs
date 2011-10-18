@@ -19,7 +19,7 @@ namespace Spring2.Core.Payment.PayflowPro {
 	private StringType postalCode;
 	private StringType comment1;
 	private StringType comment2;
-	private StringType poNum;
+	private StringType origTransactionId;
 		
 		
 	public override PaymentResult Execute() {
@@ -31,7 +31,7 @@ namespace Spring2.Core.Payment.PayflowPro {
 
     	
 	public CreditCommand(StringType accountNumber, CurrencyType amount, StringType cvv2, StringType referenceCode, StringType expirationDate, StringType name, StringType address,
-	    StringType postalCode, StringType comment1, StringType comment2, StringType poNum) {
+	    StringType postalCode, StringType comment1, StringType comment2, StringType origTransactionId) {
     		
 	    this.accountNumber = accountNumber;
 	    this.amount = amount;
@@ -43,7 +43,7 @@ namespace Spring2.Core.Payment.PayflowPro {
 	    this.postalCode = postalCode;
 	    this.comment1 = comment1;
 	    this.comment2 = comment2;
-	    this.poNum = poNum;
+	    this.origTransactionId = origTransactionId;
 	}
 
 		
@@ -51,18 +51,24 @@ namespace Spring2.Core.Payment.PayflowPro {
 	    get {
 		StringBuilder command = new StringBuilder();
 		AppendCommand(command, "TENDER", "C", 1);
-		AppendCommand(command, "ACCT", accountNumber, 19);
+		if (origTransactionId.IsEmpty) {
+		    AppendCommand(command, "ACCT", accountNumber, 19);
+		}
 		AppendCommand(command, "AMT", amount.ToString("######0.00"), 10);
-		AppendCommand(command, "CVV2", cvv2, 4);
-		AppendCommand(command, "CUSTREF", referenceCode, 12);
-		AppendCommand(command, "EXPDATE", expirationDate.IsValid ? expirationDate.Replace("/", string.Empty) : expirationDate, 19);
-		AppendCommand(command, "NAME", name, 30);
-		AppendCommand(command, "STREET", address, 30);
-		AppendCommand(command, "ZIP", postalCode, 9);
+		if (origTransactionId.IsEmpty) {
+		    AppendCommand(command, "CVV2", cvv2, 4);
+		    AppendCommand(command, "CUSTREF", referenceCode, 12);
+		    AppendCommand(command, "EXPDATE", expirationDate.IsValid ? expirationDate.Replace("/", string.Empty) : expirationDate, 19);
+		    AppendCommand(command, "NAME", name, 30);
+		    AppendCommand(command, "STREET", address, 30);
+		    AppendCommand(command, "ZIP", postalCode, 9);
+		}
 		AppendCommand(command, "TRXTYPE", "C", 1);
 		AppendCommand(command, "COMMENT1", comment1, 128);
 		AppendCommand(command, "COMMENT2", comment2, 128);
-		AppendCommand(command, "PONUM", poNum, 17);    		
+		if (!origTransactionId.IsEmpty) {
+		    AppendCommand(command, "ORIGID", origTransactionId, 17);
+		}
 		return command.ToString();
 	    }
 	}

@@ -134,6 +134,28 @@ namespace Spring2.Core.Test {
 		ConfigurationProvider.SetProvider(currentConfig);
 	    }	
 	}
+
+	[Test]
+	public void CreditNonReferencedBadAcct() {
+	    PayflowProProvider provider = new PayflowProProvider();
+	    try {
+		PaymentResult result = provider.Credit(StringType.EMPTY, new CurrencyType(random.Next(999)), "1111111111111111", expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, "");
+		Assert.Fail("bad account number succeeded");
+	    } catch (PaymentFailureException ex) {
+		Assert.AreEqual("23", ex.Result.ResultCode);
+	    }
+	}
+
+	[Test]
+	public void CreditReferencedBadTid() {
+	    PayflowProProvider provider = new PayflowProProvider();
+	    try {
+		PaymentResult result = provider.Credit(StringType.EMPTY, new CurrencyType(random.Next(999)), "", "", "", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, "XXX");
+		Assert.Fail("bad account number succeeded");
+	    } catch (PaymentFailureException ex) {
+		Assert.AreEqual("23", ex.Result.ResultCode);
+	    }
+	}
 	#endregion
     	
 	#region AVS
@@ -264,12 +286,42 @@ namespace Spring2.Core.Test {
 	}
 		
 	[Test]
-	public void Credit() {
+	public void CreditNonReferenced() {
 	    PayflowProProvider provider = new PayflowProProvider();
-	    PaymentResult result = provider.Credit(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, "ignored original transactionId");
+	    PaymentResult result = provider.Credit(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, "");
 	    Assert.AreEqual("0", result.ResultCode);
 	}
-	
+
+	[Test]
+	public void CreditReferenced() {
+	    PayflowProProvider provider = new PayflowProProvider();
+
+	    CurrencyType amt = random.Next(999);
+
+	    PaymentResult result = provider.Charge(StringType.EMPTY, amt, new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    Assert.AreEqual("0", result.ResultCode);
+
+	    result = provider.Credit(StringType.EMPTY, amt, "", "", "", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, result.TransactionId);
+	    Assert.AreEqual("0", result.ResultCode);
+	}
+
+	[Test]
+	public void CreditReferencedFromReferenced() {
+	    PayflowProProvider provider = new PayflowProProvider();
+	    PaymentResult result = provider.Authorize(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    PaymentResult result2 = provider.Charge(StringType.EMPTY, 100, "", expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, result.TransactionId);
+	    PaymentResult result3 = provider.Credit(StringType.EMPTY, 100, "", "", "", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, result2.TransactionId);
+	    Assert.AreEqual("0", result3.ResultCode);
+	}
+
+	[Test]
+	public void CreditNonReferencedBadAcctWithTid() {
+	    PayflowProProvider provider = new PayflowProProvider();
+	    PaymentResult result0 = provider.Charge(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    PaymentResult result = provider.Credit(StringType.EMPTY, new CurrencyType(random.Next(999)), "4111XXXXXXXXX1111", expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, result0.TransactionId);
+	    Assert.AreEqual("0", result.ResultCode);
+	}
+
 	[Test]
 	public void Settle() {
 	    PayflowProProvider provider = new PayflowProProvider();
