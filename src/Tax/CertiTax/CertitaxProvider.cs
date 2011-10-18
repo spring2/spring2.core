@@ -158,6 +158,11 @@ namespace Spring2.Core.Tax.CertiTax {
 	}
 
 	public TaxResult Calculate(StringType taxTransactionId, StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
+	    StringType location = StringType.DEFAULT;
+	    return Calculate(taxTransactionId, street, city, county, region, postalCode, country, date, order, location);
+	}
+
+	public TaxResult Calculate(StringType taxTransactionId, StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order, StringType location) {
 	    //Create Order object and populate it.
 	    Order certiTaxOrder = new Order();
 
@@ -166,15 +171,20 @@ namespace Spring2.Core.Tax.CertiTax {
 	    certiTaxOrder.Nexus = Nexus;
 	    certiTaxOrder.MerchantTransactionId = MerchantId;
 	    certiTaxOrder.CalculateTax = true;
-	    if (street.IsValid || city.IsValid || county.IsValid || region.IsValid) {
+	    if(street.IsValid || city.IsValid || county.IsValid || region.IsValid) {
 		certiTaxOrder.ConfirmAddress = true;
 	    }
-	    if (taxTransactionId != null && taxTransactionId.IsValid) {
+	    if(taxTransactionId != null && taxTransactionId.IsValid) {
 		certiTaxOrder.CertiTAXTransactionId = taxTransactionId;
 	    }
 
-	    // TODO: hack to make the tax rates within Utah correct
-	    if (region.Equals("UT") || (region.IsDefault && postalCode.StartsWith("8"))) {
+	    // If a location is supplied, use it.
+	    if(!location.IsDefault) {
+		certiTaxOrder.Location = location;
+	    } else if(region.Equals("UT") || 
+		(region.IsDefault && postalCode.StartsWith("8"))) {
+
+		// TODO: hack to make the tax rates within Utah correct
 		certiTaxOrder.Location = "TX";
 	    }
 
