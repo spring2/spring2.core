@@ -102,7 +102,7 @@ namespace Spring2.Core.Tax {
 	/// <param name="order"></param>
 	/// <returns></returns>
 	TaxResult Calculate(StringType transactionId, StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order);
-    	
-    	
+
+	TaxResult Calculate(StringType taxTransactionId, StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order, StringType location);    	
     }
 }

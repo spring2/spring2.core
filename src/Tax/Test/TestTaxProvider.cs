@@ -129,6 +129,11 @@ namespace Spring2.Core.Tax.Test {
 	}
 
 	public TaxResult Calculate(StringType transactionId, StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
+	    StringType location = StringType.DEFAULT;
+	    return Calculate(transactionId, street, city, county, region, postalCode, country, date, order, location);
+	}
+
+	public TaxResult Calculate(StringType transactionId, StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order, StringType location) {
 	    CurrencyType total = CurrencyType.ZERO;
 	    foreach (TaxOrderLine line in order.Lines) {
 		total += line.Price * line.Quantity.ToInt32() - line.DiscountAmount;
@@ -145,7 +150,7 @@ namespace Spring2.Core.Tax.Test {
 	    result.TotalTaxRate = 6.6M;
 	    result.TotalTax = CurrencyType.Round(total * 0.066M, 2);
 	    result.AddressValidated = BooleanType.TRUE;
-
+	    
 	    result.TaxJurisdictions.AddRange(GetTestTaxJurisdictions(city, county, region, total));
 
 	    return result;
