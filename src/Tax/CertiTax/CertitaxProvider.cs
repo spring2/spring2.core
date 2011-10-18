@@ -157,6 +157,11 @@ namespace Spring2.Core.Tax.CertiTax {
 	    return Calculate(taxTransactionId, street, city, county, region, postalCode, country, date, order);
 	}
 
+	public TaxResult Calculate(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order, StringType location) {
+	    StringType taxTransactionId = TransactionId;
+	    return Calculate(taxTransactionId, street, city, county, region, postalCode, country, date, order, location);
+	}
+
 	public TaxResult Calculate(StringType taxTransactionId, StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
 	    StringType location = StringType.DEFAULT;
 	    return Calculate(taxTransactionId, street, city, county, region, postalCode, country, date, order, location);

@@ -88,6 +88,8 @@ namespace Spring2.Core.Tax {
     	/// <returns></returns>
 	TaxResult Calculate(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order);
 
+	TaxResult Calculate(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order, StringType location);
+
 	/// <summary>
 	/// Gets a tax estimate based on an order, for use durring the ordering process.  This is not persisted as a sale in the tax provider, but will update a persisted transaction.
 	/// </summary>

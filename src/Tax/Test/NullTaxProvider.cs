@@ -47,6 +47,11 @@ namespace Spring2.Core.Tax.Test {
 	    return null;
 	}
 
+	public TaxResult Calculate(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order, StringType location) {
+	    // TODO:  Add NullTaxProvider.LookupTaxArea implementation
+	    return null;
+	}
+
 	public TaxResult Calculate(StringType transactionId, StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
 	    StringType location = StringType.DEFAULT;
 	    return Calculate(transactionId, street, city, county, region, postalCode, country, date, order, location);

@@ -39,6 +39,10 @@ namespace Spring2.Core.Tax.Test {
 	    throw new NotImplementedException();
 	}
 
+	public TaxResult Calculate(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order, StringType location) {
+	    throw new NotImplementedException();
+	}
+
 	public TaxResult Calculate(StringType transactionId, StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
 	    throw new NotImplementedException();
 	}
