@@ -9,6 +9,12 @@ namespace Spring2.Core.Tax {
     	private TaxResultLineList lines = new TaxResultLineList();
 	private TaxJurisdictionList taxJurisdictions = new TaxJurisdictionList();
 	private BooleanType addressValidated = BooleanType.FALSE;
+	private StringType location = StringType.DEFAULT;
+
+	public StringType Location {
+	    get { return location; }
+	    set { location = value; }
+	}
 
 	public StringType TaxTransactionId {
 	    get { return taxTransactionId; }

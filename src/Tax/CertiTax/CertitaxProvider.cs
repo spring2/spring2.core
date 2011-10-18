@@ -283,6 +283,8 @@ namespace Spring2.Core.Tax.CertiTax {
 	    	AddTaxJurisidctionsToResult(taxTrans, certiTaxOrder, result);
 		UpdateTaxJurisdictionAmounts(taxTrans, result);
 
+		result.Location = location;
+
 		return result;
 	    } catch (SoapException ex) {
 		MessageList errors = new MessageList();

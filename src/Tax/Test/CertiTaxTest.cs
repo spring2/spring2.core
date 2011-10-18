@@ -259,6 +259,27 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test()]
+	public void CalculateWithLocation() {
+	    TaxOrder order = new TaxOrder();
+
+	    StringType location = "test location";
+
+	    TaxOrderLine taxOrderLine;
+
+	    taxOrderLine = new TaxOrderLine();
+	    taxOrderLine.OrderLineId = 1;
+	    taxOrderLine.Quantity = 1;
+	    taxOrderLine.Price = 13.65M;
+	    taxOrderLine.ItemNumber = "001";
+	    order.Lines.Add(taxOrderLine);
+
+	    CertiTaxProvider CertiTaxProvider = new CertiTaxProvider("United States");
+	    TaxResult result = CertiTaxProvider.Calculate("10150 South Centennial Parkway", "Sandy", "", "UT", "84070", "USA", DateType.Now, order, location);
+
+	    Assert.AreEqual(location, result.Location);
+	}
+
+	[Test()]
 	public void CalculateTaxRateWithDiscount() {
 	    TaxOrder order = new TaxOrder();
 		
