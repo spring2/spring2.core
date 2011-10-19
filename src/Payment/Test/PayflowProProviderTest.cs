@@ -323,6 +323,22 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test]
+	public void CreditAndThenChargeReferenced() {
+	    PayflowProProvider provider = new PayflowProProvider();
+
+	    CurrencyType amt = random.Next(999);
+
+	    PaymentResult result0 = provider.Charge(StringType.EMPTY, amt, new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
+	    Assert.AreEqual("0", result0.ResultCode);
+
+	    PaymentResult result1 = provider.Credit(StringType.EMPTY, amt, "", "", "", StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, result0.TransactionId);
+	    Assert.AreEqual("0", result1.ResultCode);
+
+	    PaymentResult result2 = provider.Charge("", amt, "", expirationYear, expirationMonth, "", "", "", "", "", result1.TransactionId);
+	    Assert.AreEqual("0", result2.ResultCode);
+	}
+
+	[Test]
 	public void Settle() {
 	    PayflowProProvider provider = new PayflowProProvider();
 	    PaymentResult result = provider.Authorize(StringType.EMPTY, new CurrencyType(random.Next(999)), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET, StringType.UNSET);
