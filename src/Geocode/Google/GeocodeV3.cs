@@ -79,8 +79,6 @@ namespace Spring2.Core.Geocode {
 	private static Boolean ConvertGoogleResponse(GeocodeData geocodeData, GeocodingResponse response, Boolean isValid) {
 	    isValid = response.Status == ServiceResponseStatus.Ok;
 
-	    geocodeData.MatchLatitude = response.Results[0].Geometry.Location.Latitude;
-	    geocodeData.MatchLongitude = response.Results[0].Geometry.Location.Longitude;
 
 	    geocodeData.StdAddress = StringType.EMPTY;
 	    geocodeData.StdCity = StringType.EMPTY;
@@ -94,26 +92,30 @@ namespace Spring2.Core.Geocode {
 	    geocodeData.MatchState = StringType.EMPTY;
 	    geocodeData.MatchZipCode = StringType.EMPTY;
 
-	    foreach (var c in response.Results[0].Components) {
-		if (c.Types.Contains(AddressType.StreetNumber)) {
-		    geocodeData.MatchAddress = c.LongName;
-		    geocodeData.StdAddress = geocodeData.MatchAddress;
-		}
-		if (c.Types.Contains(AddressType.Route)) {
-		    geocodeData.MatchAddress += " " + c.LongName;
-		    geocodeData.StdAddress = geocodeData.MatchAddress;
-		}
-		if (c.Types.Contains(AddressType.Locality)) {
-		    geocodeData.MatchCity = c.LongName;
-		    geocodeData.StdCity = geocodeData.MatchCity;
-		}
-		if (c.Types.Contains(AddressType.AdministrativeAreaLevel1)) {
-		    geocodeData.MatchState = c.ShortName;
-		    geocodeData.StdState = geocodeData.MatchState;
-		}
-		if (c.Types.Contains(AddressType.PostalCode)) {
-		    geocodeData.MatchZipCode = c.LongName;
-		    geocodeData.StdZipCode = geocodeData.MatchZipCode;
+	    if (isValid) {
+		geocodeData.MatchLatitude = response.Results[0].Geometry.Location.Latitude;
+		geocodeData.MatchLongitude = response.Results[0].Geometry.Location.Longitude;
+		foreach (var c in response.Results[0].Components) {
+		    if (c.Types.Contains(AddressType.StreetNumber)) {
+			geocodeData.MatchAddress = c.LongName;
+			geocodeData.StdAddress = geocodeData.MatchAddress;
+		    }
+		    if (c.Types.Contains(AddressType.Route)) {
+			geocodeData.MatchAddress += " " + c.LongName;
+			geocodeData.StdAddress = geocodeData.MatchAddress;
+		    }
+		    if (c.Types.Contains(AddressType.Locality)) {
+			geocodeData.MatchCity = c.LongName;
+			geocodeData.StdCity = geocodeData.MatchCity;
+		    }
+		    if (c.Types.Contains(AddressType.AdministrativeAreaLevel1)) {
+			geocodeData.MatchState = c.ShortName;
+			geocodeData.StdState = geocodeData.MatchState;
+		    }
+		    if (c.Types.Contains(AddressType.PostalCode)) {
+			geocodeData.MatchZipCode = c.LongName;
+			geocodeData.StdZipCode = geocodeData.MatchZipCode;
+		    }
 		}
 	    }
 

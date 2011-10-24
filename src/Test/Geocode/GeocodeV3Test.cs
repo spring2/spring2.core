@@ -46,6 +46,18 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test]
+	public void ShouldHandleBadGeoCodeData() {
+	    StringType street = "bad address";
+	    StringType city = "";
+	    StringType zip = "not zip";
+	    StringType state = "";
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode(street, city, state, zip, StringType.UNSET, CountryCodeEnum.UNITED_STATES);
+	    Assert.IsNotNull(geocode);
+	    Assert.AreEqual(string.Empty, geocode.MatchAddress.ToString());
+	    Assert.AreEqual(string.Empty, geocode.MatchZipCode.ToString());
+	}
+
+	[Test]
 	public void GetGeocodeForZipCode() {
 	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode(StringType.EMPTY, StringType.EMPTY, StringType.EMPTY, StringType.Parse("84070"), StringType.EMPTY, CountryCodeEnum.UNITED_STATES);
 	    Assert.AreEqual(new DecimalType(40.57491020), geocode.MatchLatitude);
