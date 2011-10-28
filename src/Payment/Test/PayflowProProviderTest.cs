@@ -38,7 +38,7 @@ namespace Spring2.Core.Test {
 	    provider.Settings.Add(ConfigurationProvider.Instance.Settings);
 	    provider.Settings[PayflowProProviderConfiguration.CONNECTIONSTRING_KEY] = "user=GCUser;vendor=Spring2;partner=VeriSign;pwd=test123;verbosity=LOW";
 	    provider.Settings[PayflowProProviderConfiguration.REMOSTHOST_KEY] = "pilot-payflowpro.paypal.com:443";
-	    provider.Settings[PayflowProProviderConfiguration.TIMEOUT_KEY] = "30";
+	    provider.Settings[PayflowProProviderConfiguration.TIMEOUT_KEY] = "10";
 	    provider.Settings[PayflowProProviderConfiguration.ALLOWPOSTALCODEMISMATCH_KEY] = "0";
 	    provider.Settings[PayflowProProviderConfiguration.ALLOWADDRESSMISMATCH_KEY] = "0";
 	    provider.Settings[PayflowProProviderConfiguration.ALLOWCVVMISMATCH_KEY] = "0";
@@ -116,7 +116,7 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test]
-	public void Timeout() {
+	public void TimeoutTooSmall() {
 	    IConfigurationProvider currentConfig = ConfigurationProvider.Instance;
 	    try {
 		// change the provider to cause connection failure
@@ -133,6 +133,19 @@ namespace Spring2.Core.Test {
 	    } finally {
 		ConfigurationProvider.SetProvider(currentConfig);
 	    }	
+	}
+
+	[Test]
+	public void Timeout() {
+	    try {
+		PayflowProProvider provider = new PayflowProProvider();
+		// Amount of 1104 will return the 104 timeout error.
+		PaymentResult result = provider.Charge(StringType.EMPTY, new CurrencyType(1104), new StringType(accountVisa), expirationYear, expirationMonth, StringType.UNSET, "Elmer Fudd", StringType.UNSET, StringType.UNSET, StringType.UNSET);
+		Assert.Fail();
+	    } catch (PaymentConnectionException) {
+		// this is expected
+	    } finally {
+	    }
 	}
 
 	[Test]

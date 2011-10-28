@@ -37,7 +37,7 @@ namespace Spring2.Core.Payment.PayflowPro {
 
 		// 109 = timeout
 		// 101 = timeout value too small -- interpreted as timeout for purposes of tests
-		if (result.ResultCode == "109" || result.ResultCode == "101") {
+		if (result.ResultCode == "104" || result.ResultCode == "101") {
 		    throw new PaymentConnectionException("Timeout while connecting to the payment processing subsystem (" + result.ResultCode + ")");
 		}
 
