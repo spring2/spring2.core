@@ -104,7 +104,14 @@ namespace Spring2.Core.Geocode {
 			geocodeData.MatchAddress += " " + c.LongName;
 			geocodeData.StdAddress = geocodeData.MatchAddress;
 		    }
+		    //google returns the components from smallest to largest, so locality would override sub and neighborhood, and sub would override neighborhood.
 		    if (c.Types.Contains(AddressType.Locality)) {
+			geocodeData.MatchCity = c.LongName;
+			geocodeData.StdCity = geocodeData.MatchCity;
+		    } else if (c.Types.Contains(AddressType.Sublocality)) {
+			geocodeData.MatchCity = c.LongName;
+			geocodeData.StdCity = geocodeData.MatchCity;
+		    } else if (c.Types.Contains(AddressType.Neighborhood)) {
 			geocodeData.MatchCity = c.LongName;
 			geocodeData.StdCity = geocodeData.MatchCity;
 		    }

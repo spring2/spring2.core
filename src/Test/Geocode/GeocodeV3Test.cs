@@ -46,6 +46,19 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test]
+	public void ShouldFallThroughToSubLocality() {
+	    StringType street = "109 Front St";
+	    StringType zip = "11201";
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode(street, StringType.UNSET, StringType.UNSET, zip, StringType.UNSET, CountryCodeEnum.UNITED_STATES);
+	    Assert.AreEqual(new DecimalType(40.70252210), geocode.MatchLatitude);
+	    Assert.AreEqual(new DecimalType(-73.98929950), geocode.MatchLongitude);
+	    Assert.AreEqual("109 FRONT ST", geocode.StdAddress.ToString().Trim().ToUpper());
+	    Assert.AreEqual("BROOKLYN", geocode.StdCity.ToString().Trim().ToUpper());
+	    Assert.AreEqual("11201", geocode.StdZipCode.ToString().Trim().ToUpper());
+	    Assert.AreEqual("NY", geocode.StdState.ToString().Trim().ToUpper());
+	}
+
+	[Test]
 	public void ShouldHandleBadGeoCodeData() {
 	    StringType street = "bad address";
 	    StringType city = "";
