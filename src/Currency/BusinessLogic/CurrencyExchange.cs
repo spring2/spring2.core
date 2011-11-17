@@ -7,7 +7,6 @@ using Spring2.DataTierGenerator.Attribute;
 
 using Spring2.Core.Currency.Dao;
 using Spring2.Core.Currency.DataObject;
-using Spring2.Core.Currency.Types;
 
 namespace Spring2.Core.Currency.BusinessLogic {
 
