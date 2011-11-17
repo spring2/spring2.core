@@ -9,6 +9,7 @@ using Spring2.Core.Types;
 
 using Spring2.Core.Currency.BusinessLogic;
 using Spring2.Core.Currency.DataObject;
+using Spring2.Core.Currency.Types;
 
 namespace Spring2.Core.Currency.Dao {
 

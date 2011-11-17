@@ -333,13 +333,15 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.Parameters.Add(CreateDataParameter(MailAttachmentFields.FILENAME, data.Filename.IsValid ? data.Filename.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(MailAttachmentFields.BUFFER, data.Buffer));
 
-	    // Execute the query
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 
 	    // Set the output paramter value(s)
 	    return new IdType((Int32)idParam.Value);
@@ -369,13 +371,16 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.Parameters.Add(CreateDataParameter(MailAttachmentFields.FILENAME, data.Filename.IsValid ? data.Filename.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(MailAttachmentFields.BUFFER, data.Buffer));
 
-	    // Execute the query
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try{
+			// Execute the query
+			cmd.ExecuteNonQuery();
+		}
+		finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 	}
 
 
@@ -398,13 +403,15 @@ namespace Spring2.Core.Mail.Dao {
 
 	    // Create and append the parameters
 	    cmd.Parameters.Add(CreateDataParameter(MailAttachmentFields.MAILATTACHMENTID, mailAttachmentId.IsValid ? mailAttachmentId.ToInt32() as Object : DBNull.Value));
-	    // Execute the query and return the result
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query and return the result
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 	}
 
 	/// <summary>

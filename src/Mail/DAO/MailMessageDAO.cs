@@ -19,12 +19,12 @@ namespace Spring2.Core.Mail.Dao {
     /// </summary>
     public class MailMessageDAO : Spring2.Core.DAO.SqlEntityDAO, IMailMessageDAO {
 	private static IMailMessageDAO instance = new MailMessageDAO();
-	public static IMailMessageDAO DAO {
-	    get {
-		if (!ClassRegistry.CanResolve(typeof(IMailMessageDAO))) {
-		    ClassRegistry.Register<IMailMessageDAO>(instance);
-		}
-		return ClassRegistry.Resolve<IMailMessageDAO>();
+	public static IMailMessageDAO DAO{
+	    get{
+			if(!ClassRegistry.CanResolve(typeof(IMailMessageDAO))) {
+				ClassRegistry.Register<IMailMessageDAO>(instance);
+			}
+			return ClassRegistry.Resolve<IMailMessageDAO>();
 	    }
 	}
 
@@ -258,7 +258,7 @@ namespace Spring2.Core.Mail.Dao {
 	public MailMessage Load(IdType mailMessageId) {
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(CreateEqualityPredicate(MailMessageFields.MAILMESSAGEID, EqualityOperatorEnum.Equal, mailMessageId.IsValid ? mailMessageId.ToInt32() as Object : DBNull.Value));
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 	    return GetDataObject(dataReader);
 	}
 
@@ -268,7 +268,7 @@ namespace Spring2.Core.Mail.Dao {
 	public void Reload(MailMessage instance) {
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(CreateEqualityPredicate(MailMessageFields.MAILMESSAGEID, EqualityOperatorEnum.Equal, instance.MailMessageId.IsValid ? instance.MailMessageId.ToInt32() as Object : DBNull.Value));
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, null);	
 
 	    if (!dataReader.Read()) {
 		dataReader.Close();
@@ -521,13 +521,15 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.LASTOPENDATE, data.LastOpenDate.IsValid ? data.LastOpenDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.SMTPSERVER, data.SmtpServer.IsValid ? data.SmtpServer.ToString() as Object : DBNull.Value));
 
-	    // Execute the query
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 
 	    // Set the output paramter value(s)
 	    return new IdType((Int32)idParam.Value);
@@ -576,13 +578,16 @@ namespace Spring2.Core.Mail.Dao {
 	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.LASTOPENDATE, data.LastOpenDate.IsValid ? data.LastOpenDate.ToDateTime() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.SMTPSERVER, data.SmtpServer.IsValid ? data.SmtpServer.ToString() as Object : DBNull.Value));
 
-	    // Execute the query
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try{
+			// Execute the query
+			cmd.ExecuteNonQuery();
+		}
+		finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 	}
 
 
@@ -605,13 +610,15 @@ namespace Spring2.Core.Mail.Dao {
 
 	    // Create and append the parameters
 	    cmd.Parameters.Add(CreateDataParameter(MailMessageFields.MAILMESSAGEID, mailMessageId.IsValid ? mailMessageId.ToInt32() as Object : DBNull.Value));
-	    // Execute the query and return the result
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query and return the result
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 	}
 
 	/// <summary>
@@ -623,7 +630,7 @@ namespace Spring2.Core.Mail.Dao {
 	    OrderByClause sort = new OrderByClause("MailMessageStatus");
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(CreateEqualityPredicate(MailMessageFields.MAILMESSAGESTATUS, EqualityOperatorEnum.Equal, mailMessageStatus.DBValue));
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
 
 	    return GetList(dataReader);
 	}
@@ -638,7 +645,7 @@ namespace Spring2.Core.Mail.Dao {
 	    OrderByClause sort = new OrderByClause("UniqueKey");
 	    SqlFilter filter = new SqlFilter();
 	    filter.And(CreateEqualityPredicate(MailMessageFields.UNIQUEKEY, EqualityOperatorEnum.Equal, uniqueKey.IsValid ? uniqueKey.ToString() as Object : DBNull.Value));
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
 
 	    return GetDataObject(dataReader);
 	}

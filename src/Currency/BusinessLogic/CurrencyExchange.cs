@@ -7,6 +7,7 @@ using Spring2.DataTierGenerator.Attribute;
 
 using Spring2.Core.Currency.Dao;
 using Spring2.Core.Currency.DataObject;
+using Spring2.Core.Currency.Types;
 
 namespace Spring2.Core.Currency.BusinessLogic {
 
@@ -112,7 +113,7 @@ namespace Spring2.Core.Currency.BusinessLogic {
 	    return CurrencyExchangeDAO.DAO.Load(currencyExchangeId);
 	}
 
-	private static readonly string defaultCurrency = "USD";
+	private static readonly String defaultCurrency = "USD";
 
 	public static ICurrencyExchange GetCurrentRate(StringType currencyCode) {
 	    ICurrencyExchange line = null;
@@ -124,29 +125,30 @@ namespace Spring2.Core.Currency.BusinessLogic {
 	    return line;
 	}
 
-	public static double GetRate(string toCurrency) {
+	public static Double GetRate(String toCurrency) {
 	    return GetRate(defaultCurrency, toCurrency);
 	}
 
-	public static double GetRate(string fromCurrency, string toCurrency) {
+	public static Double GetRate(String fromCurrency, String toCurrency) {
 	    return CurrencyProvider.Instance.GetConversionRate(fromCurrency, toCurrency);
 	}
 
 	public static ICurrencyExchange CheckForNewRate(StringType currencyCode) {
 	    ICurrencyExchange line = GetCurrentRate(currencyCode);
-	    double rate = 0;
+	    Double rate = 0;
 
 	    // if it doesn't exist or it's a different date create one
 	    if ((line.IsNew) || (line.EffectiveDate.ToDate().CompareTo(DateType.Now.ToDate()) != 0)) {
 		CurrencyExchangeData data = new CurrencyExchangeData();
 		data.CurrencyCode = currencyCode;
-		rate = GetRate(currencyCode); // calls the provider
+		rate = GetRate(currencyCode);
+		// calls the provider
 		data.Rate = new DecimalType(rate);
 		data.EffectiveDate = DateTimeType.Now;
-		
+
 		CurrencyExchange line2 = CurrencyExchange.NewInstance();
 		line2.Update(data);
-		
+
 		return line2;
 	    }
 

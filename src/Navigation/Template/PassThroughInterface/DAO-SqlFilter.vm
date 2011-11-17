@@ -399,13 +399,15 @@ namespace $options.GetDAONameSpace($element.Name) {
 #end
 #end
 
-	    // Execute the query
-	    cmd.ExecuteNonQuery();
-
-	    // Do not close the connection if it is part of a transaction.
-	    if (transaction == null && DbConnectionScope.Current == null) {
- 		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query
+			cmd.ExecuteNonQuery();
+		} finally {
+			// Do not close the connection if it is part of a transaction.
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 
 #if($element.GetIdentityField())
 	    // Set the output paramter value(s)
@@ -430,13 +432,15 @@ namespace $options.GetDAONameSpace($element.Name) {
 #end
 #end
 
-	    // Execute the query
-	    cmd.ExecuteNonQuery();
-
-	    // Do not close the connection if it is part of a transaction.
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query
+			cmd.ExecuteNonQuery();
+		} finally {
+			// Do not close the connection if it is part of a transaction.
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 
 #if($element.GetIdentityField())
 	    return data.$element.GetIdentityField().Name;
@@ -473,13 +477,15 @@ namespace $options.GetDAONameSpace($element.Name) {
 #end
 #end
 
-	    // Execute the query
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 
 #if($element.GetIdentityField())
 	    // Set the output paramter value(s)
@@ -508,11 +514,13 @@ namespace $options.GetDAONameSpace($element.Name) {
 #if(!$field.Column.ViewColumn && $field.GetSqlAlias().Length>0)	    cmd.Parameters.Add(CreateDataParameter("@$field.GetSqlAlias()", DbType.$field.Column.SqlType.DbType, ParameterDirection.Input, $options.GetSqlConversion($field, "data.$field.GetMethodFormat()")));
 #end
 #end
-	    cmd.ExecuteNonQuery();
-
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			cmd.ExecuteNonQuery();
+		} finally {
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 
 	    cmd = GetDbCommand(CONNECTION_STRING_KEY, "$options.GetProcName($element.SqlEntity.Name, $t)", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 	    cmd.Parameters.Add(CreateDataParameter("@$element.GetIdentityField().GetSqlAlias()", DbType.$element.GetIdentityField().Column.SqlType.DbType, ParameterDirection.Input, $options.GetSqlConversion($element.GetIdentityField(), "data.$element.GetIdentityField().GetMethodFormat()")));
@@ -520,11 +528,13 @@ namespace $options.GetDAONameSpace($element.Name) {
 #if(!$field.Column.ViewColumn && $field.GetSqlAlias().Length>0)	    cmd.Parameters.Add(CreateDataParameter("@$field.GetSqlAlias()", DbType.$field.Column.SqlType.DbType, ParameterDirection.Input, $options.GetSqlConversion($field, "data.$field.GetMethodFormat()")));
 #end
 #end
-	    cmd.ExecuteNonQuery();
-
-	     if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			cmd.ExecuteNonQuery();
+		} finally {
+			 if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 	}
 #else
 	/// <summary>
@@ -551,13 +561,15 @@ namespace $options.GetDAONameSpace($element.Name) {
 #end
 #end
 
-	    // Execute the query
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 	}
 #end
 #end
@@ -588,21 +600,23 @@ namespace $options.GetDAONameSpace($element.Name) {
 	    cmd.Parameters.Add(CreateDataParameter("@$field.GetSqlAlias()", DbType.$field.Column.SqlType.DbType, ParameterDirection.Input, $options.GetSqlConversion($field)));
 #end
 
-	    // Execute the query and return the result
-	    cmd.ExecuteNonQuery();
+		try {
+			// Execute the query and return the result
+			cmd.ExecuteNonQuery();
 
-	    cmd = GetDbCommand(CONNECTION_STRING_KEY, "$options.GetProcName($element.BaseEntity.SqlEntity.Name, "Delete")", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
+			cmd = GetDbCommand(CONNECTION_STRING_KEY, "$options.GetProcName($element.BaseEntity.SqlEntity.Name, "Delete")", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 #foreach( $field in $element.GetPrimaryKeyFields() )
-	    cmd.Parameters.Add(CreateDataParameter("@$field.GetSqlAlias()", DbType.$field.Column.SqlType.DbType, ParameterDirection.Input, $options.GetSqlConversion($field)));
+			cmd.Parameters.Add(CreateDataParameter("@$field.GetSqlAlias()", DbType.$field.Column.SqlType.DbType, ParameterDirection.Input, $options.GetSqlConversion($field)));
 #end
 
-	    cmd.ExecuteNonQuery();
-
-	    // Do not close the connection if it is part of a transaction.
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+			cmd.ExecuteNonQuery();
+		} finally {
+			// Do not close the connection if it is part of a transaction.
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 	}
 #else
 	/// <summary>
@@ -620,13 +634,15 @@ namespace $options.GetDAONameSpace($element.Name) {
 #if($element.GetPrimaryKeyFields().Count == 1 && $element.GetPrimaryKeyFields().get_Item(0).Column.Identity)
 
 #end
-	    // Execute the query and return the result
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query and return the result
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 	}
 #end
 #end

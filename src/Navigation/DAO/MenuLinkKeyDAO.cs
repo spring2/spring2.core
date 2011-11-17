@@ -302,13 +302,15 @@ namespace Spring2.Core.Navigation.Dao {
 	    cmd.Parameters.Add(CreateDataParameter("@MenuLinkId", DbType.Int32, ParameterDirection.Input, data.MenuLinkId.IsValid ? data.MenuLinkId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@Key", DbType.AnsiString, ParameterDirection.Input, data.Key.IsValid ? data.Key.ToString() as Object : DBNull.Value));
 
-	    // Execute the query
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 
 	}
 
@@ -334,13 +336,15 @@ namespace Spring2.Core.Navigation.Dao {
 	    IDbCommand cmd = GetDbCommand(CONNECTION_STRING_KEY, "spMenuLinkKey_Delete", CommandType.StoredProcedure, COMMAND_TIMEOUT, transaction);
 
 	    // Create and append the parameters
-	    cmd.Parameters.Add(CreateDataParameter("@MenuLinkId", DbType.Int32, ParameterDirection.Input, menuLinkId.IsValid ? menuLinkId.ToInt32() as Object : DBNull.Value));	    cmd.Parameters.Add(CreateDataParameter("@Key", DbType.AnsiString, ParameterDirection.Input, key.IsValid ? key.ToString() as Object : DBNull.Value));	    // Execute the query and return the result
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+	    cmd.Parameters.Add(CreateDataParameter("@MenuLinkId", DbType.Int32, ParameterDirection.Input, menuLinkId.IsValid ? menuLinkId.ToInt32() as Object : DBNull.Value));	    cmd.Parameters.Add(CreateDataParameter("@Key", DbType.AnsiString, ParameterDirection.Input, key.IsValid ? key.ToString() as Object : DBNull.Value));		try {
+			// Execute the query and return the result
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 	}
 
 	/// <summary>

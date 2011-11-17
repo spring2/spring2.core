@@ -9,6 +9,7 @@ using Spring2.Core.DAO;
 using Spring2.Core.Types;
 
 
+using Spring2.Core.Currency.Types;
 using Spring2.Core.Currency.BusinessLogic;
 using Spring2.Core.BusinessEntity;
 
@@ -185,6 +186,8 @@ namespace Spring2.Core.Currency.Dao {
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
 	[Generate]
 	CurrencyExchange FindEffectiveRateByCode(StringType currencyCode);
+
+	//}
 
 	#region
 	/// <summary>

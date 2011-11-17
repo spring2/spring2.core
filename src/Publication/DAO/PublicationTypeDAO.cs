@@ -440,13 +440,15 @@ namespace Spring2.Core.Publication.Dao {
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.LASTMODIFIEDUSERID, data.LastModifiedUserId.IsValid ? data.LastModifiedUserId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.LASTMODIFIEDDATE, data.LastModifiedDate.IsValid ? data.LastModifiedDate.ToDateTime() as Object : DBNull.Value));
 
-	    // Execute the query
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 
 	    // Set the output paramter value(s)
 	    return new IdType((Int32)idParam.Value);
@@ -487,13 +489,15 @@ namespace Spring2.Core.Publication.Dao {
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.LASTMODIFIEDUSERID, data.LastModifiedUserId.IsValid ? data.LastModifiedUserId.ToInt32() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.LASTMODIFIEDDATE, data.LastModifiedDate.IsValid ? data.LastModifiedDate.ToDateTime() as Object : DBNull.Value));
 
-	    // Execute the query
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 	}
 
 
@@ -516,13 +520,15 @@ namespace Spring2.Core.Publication.Dao {
 
 	    // Create and append the parameters
 	    cmd.Parameters.Add(CreateDataParameter(PublicationTypeFields.PUBLICATIONTYPEID, publicationTypeId.IsValid ? publicationTypeId.ToInt32() as Object : DBNull.Value));
-	    // Execute the query and return the result
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query and return the result
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 	}
 
 	/// <summary>

@@ -321,13 +321,15 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    cmd.Parameters.Add(CreateDataParameter("@Field", DbType.AnsiString, ParameterDirection.Input, data.Field.IsValid ? data.Field.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@ContextIdentity", DbType.Int32, ParameterDirection.Input, data.Identity.IsValid ? data.Identity.ToInt32() as Object : DBNull.Value));
 
-	    // Execute the query
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 
 	    // Set the output paramter value(s)
 	    return new IdType((Int32)idParam.Value);
@@ -357,13 +359,15 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    cmd.Parameters.Add(CreateDataParameter("@Field", DbType.AnsiString, ParameterDirection.Input, data.Field.IsValid ? data.Field.ToString() as Object : DBNull.Value));
 	    cmd.Parameters.Add(CreateDataParameter("@ContextIdentity", DbType.Int32, ParameterDirection.Input, data.Identity.IsValid ? data.Identity.ToInt32() as Object : DBNull.Value));
 
-	    // Execute the query
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 	}
 
 
@@ -386,13 +390,15 @@ namespace Spring2.Core.ResourceManager.Dao {
 
 	    // Create and append the parameters
 	    cmd.Parameters.Add(CreateDataParameter("@ResourceId", DbType.Int32, ParameterDirection.Input, resourceId.IsValid ? resourceId.ToInt32() as Object : DBNull.Value));
-	    // Execute the query and return the result
-	    cmd.ExecuteNonQuery();
-
-	    // do not close the connection if it is part of a transaction
-	    if (transaction == null && DbConnectionScope.Current == null) {
-		cmd.Connection.Close();
-	    }
+		try {
+			// Execute the query and return the result
+			cmd.ExecuteNonQuery();
+		} finally {
+			// do not close the connection if it is part of a transaction
+			if (transaction == null && DbConnectionScope.Current == null) {
+				cmd.Connection.Close();
+			}
+		}
 	}
 
 	/// <summary>
@@ -409,7 +415,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	    filter.And(new SqlEqualityPredicate("Context", EqualityOperatorEnum.Equal, context.IsValid ? context.ToString() as Object : DBNull.Value));
 	    filter.And(new SqlEqualityPredicate("Field", EqualityOperatorEnum.Equal, field.IsValid ? field.ToString() as Object : DBNull.Value));
 	    filter.And(new SqlEqualityPredicate("ContextIdentity", EqualityOperatorEnum.Equal, identity.IsValid ? identity.ToInt32() as Object : DBNull.Value));
-	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);
+	    IDataReader dataReader = GetListReader(CONNECTION_STRING_KEY, VIEW, filter, sort);	
 
 	    return GetDataObject(dataReader);
 	}
