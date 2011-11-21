@@ -33,6 +33,8 @@ namespace Spring2.Core.DAO {
 			throw new Exception("Specified subkey was not found.  Subkey: " + subkey);
 		    }
 		    connectionString = rkey.GetValue(value).ToString();
+		} else if (ConfigurationManager.ConnectionStrings[key] != null) {
+		    connectionString = ConfigurationManager.ConnectionStrings[key].ConnectionString;
 		} else {
 		    connectionString = ConfigurationManager.AppSettings[key];
 		}
