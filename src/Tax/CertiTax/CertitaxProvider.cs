@@ -91,6 +91,11 @@ namespace Spring2.Core.Tax.CertiTax {
 
 	//street address, county, & company name need to be passed too. The interface needs to be modified.
 	public TaxAreaData GetTaxAreaForAddress(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, BooleanType limits) {
+	    StringType location = StringType.DEFAULT;
+	    return GetTaxAreaForAddress(street, city, county, region, postalCode, country, limits, location);
+	}
+
+	public TaxAreaData GetTaxAreaForAddress(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, BooleanType limits, StringType location) {
 	    TaxOrder order = GetDummyOrder();
 	    TaxResult result = Calculate(street, city, county, region, postalCode, country, DateType.Now, order);
 	    CurrencyType productTaxAmount = result.TotalTax;
@@ -112,7 +117,7 @@ namespace Spring2.Core.Tax.CertiTax {
 	    area.TaxJurisdictions = result.TaxJurisdictions;
 
 	    order.Lines.Add(GetDummyShippingLine());
-	    result = Calculate(street, city, county, region, postalCode, country, DateType.Now, order);
+	    result = Calculate(street, city, county, region, postalCode, country, DateType.Now, order, location);
 
 	    if (result.TotalTax - productTaxAmount > 0) {
 	    	area.IsShippingTaxable = BooleanType.TRUE;
@@ -124,9 +129,14 @@ namespace Spring2.Core.Tax.CertiTax {
 	}
 
 	public TaxAreaList LookupTaxArea(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, BooleanType booleanType) {
+	    StringType location = StringType.DEFAULT;
+	    return LookupTaxArea(street, city, county, region, postalCode, country, date, booleanType, location);
+	}
+
+	public TaxAreaList LookupTaxArea(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, BooleanType booleanType, StringType location) {
 	    try {
 		TaxAreaList taxAreaList = new TaxAreaList();
-		taxAreaList.Add(GetTaxAreaForAddress(street, city, county, region, postalCode, country, BooleanType.FALSE));
+		taxAreaList.Add(GetTaxAreaForAddress(street, city, county, region, postalCode, country, BooleanType.FALSE, location));
 
 		return taxAreaList;
 	    } catch (SoapException ex) {

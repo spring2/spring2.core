@@ -23,7 +23,15 @@ namespace Spring2.Core.Tax.Test {
 	    throw new NotImplementedException();
 	}
 
+	public TaxAreaData GetTaxAreaForAddress(Spring2.Core.Types.StringType street, Spring2.Core.Types.StringType city, Spring2.Core.Types.StringType county, Spring2.Core.Types.StringType state, Spring2.Core.Types.StringType postalCode, Spring2.Core.Types.StringType country, Spring2.Core.Types.BooleanType limits, StringType location) {
+	    throw new NotImplementedException();
+	}
+
 	public TaxAreaData GetTaxAreaForAddress(Spring2.Core.Types.StringType street, Spring2.Core.Types.StringType city, Spring2.Core.Types.StringType county, Spring2.Core.Types.StringType state, Spring2.Core.Types.StringType postalCode, Spring2.Core.Types.StringType country, Spring2.Core.Types.BooleanType limits) {
+	    throw new NotImplementedException();
+	}
+
+	public TaxAreaList LookupTaxArea(Spring2.Core.Types.StringType street, Spring2.Core.Types.StringType city, Spring2.Core.Types.StringType county, Spring2.Core.Types.StringType state, Spring2.Core.Types.StringType postalCode, Spring2.Core.Types.StringType country, Spring2.Core.Types.DateType date, Spring2.Core.Types.BooleanType booleanType, StringType location) {
 	    throw new NotImplementedException();
 	}
 

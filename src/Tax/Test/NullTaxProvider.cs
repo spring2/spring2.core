@@ -27,6 +27,16 @@ namespace Spring2.Core.Tax.Test {
 	    return new TaxResult ();
 	}
 
+	public TaxAreaData GetTaxAreaForAddress(Spring2.Core.Types.StringType street, Spring2.Core.Types.StringType city, Spring2.Core.Types.StringType county, Spring2.Core.Types.StringType state, Spring2.Core.Types.StringType postalCode, Spring2.Core.Types.StringType country, Spring2.Core.Types.BooleanType limits, StringType location) {
+	    // TODO:  Add NullTaxProvider.GetTaxAreaForAddress implementation
+	    return null;
+	}
+
+	public TaxAreaList LookupTaxArea(Spring2.Core.Types.StringType street, Spring2.Core.Types.StringType city, Spring2.Core.Types.StringType county, Spring2.Core.Types.StringType state, Spring2.Core.Types.StringType postalCode, Spring2.Core.Types.StringType country, Spring2.Core.Types.DateType date, Spring2.Core.Types.BooleanType booleanType, StringType location) {
+	    // TODO:  Add NullTaxProvider.LookupTaxArea implementation
+	    return null;
+	}
+
 	public TaxAreaData GetTaxAreaForAddress(Spring2.Core.Types.StringType street, Spring2.Core.Types.StringType city, Spring2.Core.Types.StringType county, Spring2.Core.Types.StringType state, Spring2.Core.Types.StringType postalCode, Spring2.Core.Types.StringType country, Spring2.Core.Types.BooleanType limits) {
 	    // TODO:  Add NullTaxProvider.GetTaxAreaForAddress implementation
 	    return null;

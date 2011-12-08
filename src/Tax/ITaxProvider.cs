@@ -45,6 +45,7 @@ namespace Spring2.Core.Tax {
     	/// <param name="limits"></param>
     	/// <returns></returns>
 	TaxAreaData GetTaxAreaForAddress(StringType street, StringType city, StringType county, StringType state, StringType postalCode, StringType country, BooleanType limits);
+	TaxAreaData GetTaxAreaForAddress(StringType street, StringType city, StringType county, StringType state, StringType postalCode, StringType country, BooleanType limits, StringType location);
 	
     	/// <summary>
     	/// Resolves possible tax areas for a given address
@@ -59,6 +60,7 @@ namespace Spring2.Core.Tax {
     	/// <param name="booleanType"></param>
     	/// <returns></returns>
 	TaxAreaList LookupTaxArea(StringType street, StringType city, StringType county, StringType state, StringType postalCode, StringType country,  DateType date, BooleanType booleanType);
+	TaxAreaList LookupTaxArea(StringType street, StringType city, StringType county, StringType state, StringType postalCode, StringType country, DateType date, BooleanType booleanType, StringType location);
 
     	/// <summary>
     	/// Commits and records a sale in the tax provider.

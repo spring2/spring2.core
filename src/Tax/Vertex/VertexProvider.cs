@@ -374,6 +374,12 @@ namespace Spring2.Core.Tax.Vertex {
 	    }
 	}
 
+	public TaxAreaList LookupTaxArea(StringType street, StringType city, StringType county, StringType region, StringType postalCode,
+	     StringType country, DateType date, BooleanType replaceHTMLEntities) {
+		 StringType location = StringType.DEFAULT;
+		 return LookupTaxArea(street, city, county, region, postalCode, country, date, replaceHTMLEntities, location);
+	}
+
 	/// <summary>
 	/// Look up tax area using the passed-in parameters.
 	/// </summary>
@@ -386,7 +392,7 @@ namespace Spring2.Core.Tax.Vertex {
 	/// <param name="replaceHTMLEntities">should HTML entities be replaced with literals?</param>
 	/// <returns>list of matching tax areas for the passed-in parameters</returns>
 	public TaxAreaList LookupTaxArea(StringType street, StringType city, StringType county, StringType region, StringType postalCode, 
-	     StringType country, DateType date, BooleanType replaceHTMLEntities) {
+	     StringType country, DateType date, BooleanType replaceHTMLEntities, StringType location) {
 	    if (regionHash == null) {
 		PopulateRegionHash();
 	    }
@@ -653,6 +659,11 @@ namespace Spring2.Core.Tax.Vertex {
 	}
 
 	public TaxAreaData GetTaxAreaForAddress(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, BooleanType outsideCityLimits) {
+	    StringType location = StringType.DEFAULT;
+	    return GetTaxAreaForAddress(street, city, county, region, postalCode, country, outsideCityLimits, location);
+	}
+
+	public TaxAreaData GetTaxAreaForAddress(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, BooleanType outsideCityLimits, StringType location) {
 	    //need to figure out why country is sometimes invalid
 	    if (!country.IsValid) {
 		country = "United States";

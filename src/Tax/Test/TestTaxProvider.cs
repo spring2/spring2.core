@@ -59,6 +59,11 @@ namespace Spring2.Core.Tax.Test {
 	}
 
 	public TaxAreaData GetTaxAreaForAddress(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, BooleanType limits) {
+	    StringType location = StringType.DEFAULT;
+	    return GetTaxAreaForAddress(street, city, country, region, postalCode, country, limits, location);
+	}
+
+	public TaxAreaData GetTaxAreaForAddress(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, BooleanType limits, StringType location) {
 	    TaxAreaData taxArea = new TaxAreaData();
 	    taxArea.City = city;
 	    taxArea.CityTaxRate = 0;
@@ -78,8 +83,13 @@ namespace Spring2.Core.Tax.Test {
 	}
 
 	public TaxAreaList LookupTaxArea(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, BooleanType replaceHTMLEntities) {
+	    StringType location = StringType.DEFAULT;
+	    return LookupTaxArea(street, city, county, region, postalCode, country, date, replaceHTMLEntities, location);
+	}
+
+	public TaxAreaList LookupTaxArea(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, BooleanType replaceHTMLEntities, StringType location) {
 	    TaxAreaList list = new TaxAreaList();
-	    list.Add(GetTaxAreaForAddress(street, city, county, region, postalCode, country, BooleanType.FALSE));
+	    list.Add(GetTaxAreaForAddress(street, city, county, region, postalCode, country, BooleanType.FALSE, location));
 	    return list;
 	}
 
