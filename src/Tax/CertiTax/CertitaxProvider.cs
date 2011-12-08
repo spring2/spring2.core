@@ -147,8 +147,13 @@ namespace Spring2.Core.Tax.CertiTax {
 	}
 
 	public TaxResult Commit(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
+	    StringType location = StringType.DEFAULT;
+	    return Commit(street, city, county, region, postalCode, country, date, order, location);
+	}
+
+	public TaxResult Commit(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order, StringType location) {
 	    try {
-		TaxResult result = Calculate(null, street, city, county, region, postalCode, country, date, order);
+		TaxResult result = Calculate(null, street, city, county, region, postalCode, country, date, order, location);
 
 		CertiCalc ws = new CertiCalc();
 		log.Info("Committing tax transaction: " + result.TaxTransactionId);

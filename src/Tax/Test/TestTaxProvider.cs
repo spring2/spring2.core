@@ -94,6 +94,11 @@ namespace Spring2.Core.Tax.Test {
 	}
 
 	public TaxResult Commit(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
+	    StringType location = StringType.DEFAULT;
+	    return Commit(street, city, county, region, postalCode, country, date, order, location);
+	}
+
+	public TaxResult Commit(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order, StringType location) {
 	    CurrencyType total = CurrencyType.ZERO;
 	    foreach (TaxOrderLine line in order.Lines) {
 		total += line.ExtendedPrice;
@@ -109,6 +114,7 @@ namespace Spring2.Core.Tax.Test {
 	    result.TaxAreaID = new IdType(1);
 	    result.TotalTaxRate = 6.6M;
 	    result.TotalTax = CurrencyType.Round(total * 0.066M, 2);
+	    result.Location = location;
 
 	    result.TaxJurisdictions.AddRange(GetTestTaxJurisdictions(city, county, region, total));
 

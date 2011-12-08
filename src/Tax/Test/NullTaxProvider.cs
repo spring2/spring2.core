@@ -47,6 +47,11 @@ namespace Spring2.Core.Tax.Test {
 	    return null;
 	}
 
+	public TaxResult Commit(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order, StringType location) {
+	    // TODO:  Add NullTaxProvider.LookupTaxArea implementation
+	    return null;
+	}
+
 	public TaxResult Commit(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
 	    // TODO:  Add NullTaxProvider.LookupTaxArea implementation
 	    return null;
