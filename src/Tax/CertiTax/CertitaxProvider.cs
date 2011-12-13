@@ -97,7 +97,7 @@ namespace Spring2.Core.Tax.CertiTax {
 
 	public TaxAreaData GetTaxAreaForAddress(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, BooleanType limits, StringType location) {
 	    TaxOrder order = GetDummyOrder();
-	    TaxResult result = Calculate(street, city, county, region, postalCode, country, DateType.Now, order);
+	    TaxResult result = Calculate(street, city, county, region, postalCode, country, DateType.Now, order, location);
 	    CurrencyType productTaxAmount = result.TotalTax;
 
 	    TaxAreaData area = new TaxAreaData();
