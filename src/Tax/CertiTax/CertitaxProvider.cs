@@ -248,10 +248,10 @@ namespace Spring2.Core.Tax.CertiTax {
 //	    result.CountryTaxRate = (DecimalType) ((taxTrans.NationalTax/certiTaxOrder.Total)*100);
 	    result.TotalTaxRate = (DecimalType) ((taxTrans.TotalTax/certiTaxOrder.Total)*100);	    
 
-	    result.Street = taxTrans.CorrectedAddress.Street1;
-	    result.City = taxTrans.CorrectedAddress.City;
-	    result.Region = taxTrans.CorrectedAddress.State;
-	    result.PostalCode = taxTrans.CorrectedAddress.PostalCode;
+	    result.Street = !string.IsNullOrEmpty(taxTrans.CorrectedAddress.Street1) ? taxTrans.CorrectedAddress.Street1 : street.ToString();
+	    result.City = !string.IsNullOrEmpty(taxTrans.CorrectedAddress.City) ? taxTrans.CorrectedAddress.City : city.ToString();
+	    result.Region = !string.IsNullOrEmpty(taxTrans.CorrectedAddress.State) ? taxTrans.CorrectedAddress.State : region.ToString();
+	    result.PostalCode = !string.IsNullOrEmpty(taxTrans.CorrectedAddress.PostalCode) ? taxTrans.CorrectedAddress.PostalCode : postalCode.ToString();
 
 	    String pc = taxTrans.CorrectedAddress.PostalCode.Replace("-", "").Replace(" ", "");
 	    Int32 pci;
