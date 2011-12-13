@@ -227,7 +227,8 @@ namespace Spring2.Core.Tax.CertiTax {
 	    try {
 		taxTrans = ws.Calculate(certiTaxOrder);
 		addressValidated = true;
-	    } catch (SoapException) {
+	    } catch (SoapException ex) {
+		log.Error(ex.Message);
 		//address could not be validated, get tax based on the valid data
 		certiTaxOrder.ConfirmAddress = false;
 		taxTrans = ws.Calculate(certiTaxOrder);
