@@ -75,16 +75,22 @@ namespace Google.Api.Maps.Service.Geocoding {
 	public string Sensor { get; set; }
 
 	internal Uri ToUri() {
-	    var url = "json?"
-		    .Append("address=", Address)
-		    .Append("latlng=", LatitudeLongitude)
-		    .Append("bounds=", Bounds)
-		    .Append("region=", Region)
-		    .Append("language=", Language)
-		    .Append("sensor=", Sensor)
-		    .TrimEnd('&');
+	    var builder = new System.Text.StringBuilder("json?");
+	    AppendValue(builder, "address=", Address);
+	    AppendValue(builder, "latlng=", LatitudeLongitude);
+	    AppendValue(builder, "bounds=", Bounds);
+	    AppendValue(builder, "region=", Region);
+	    AppendValue(builder, "language=", Language);
+	    AppendValue(builder, "sensor=", Sensor);
 
-	    return new Uri(url, UriKind.Relative);
+	    var url = builder.ToString().Trim('&');
+	    return new Uri(url.ToString(), UriKind.Relative);
+	}
+
+	private void AppendValue(System.Text.StringBuilder builder, string key, string value) {
+	    if (!string.IsNullOrEmpty(value)) {
+		builder.AppendFormat("{0}{1}&", key, value);
+	    }
 	}
     }
 }

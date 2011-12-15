@@ -96,30 +96,30 @@ namespace Spring2.Core.Geocode {
 		geocodeData.MatchLatitude = response.Results[0].Geometry.Location.Latitude;
 		geocodeData.MatchLongitude = response.Results[0].Geometry.Location.Longitude;
 		foreach (var c in response.Results[0].Components) {
-		    if (c.Types.Contains(AddressType.StreetNumber)) {
+		    if (ContainsAddressType(c.Types, AddressType.StreetNumber)) {
 			geocodeData.MatchAddress = c.LongName;
 			geocodeData.StdAddress = geocodeData.MatchAddress;
 		    }
-		    if (c.Types.Contains(AddressType.Route)) {
+		    if (ContainsAddressType(c.Types, AddressType.Route)) {
 			geocodeData.MatchAddress += " " + c.LongName;
 			geocodeData.StdAddress = geocodeData.MatchAddress;
 		    }
 		    //google returns the components from smallest to largest, so locality would override sub and neighborhood, and sub would override neighborhood.
-		    if (c.Types.Contains(AddressType.Locality)) {
+		    if (ContainsAddressType(c.Types, AddressType.Locality)) {
 			geocodeData.MatchCity = c.LongName;
 			geocodeData.StdCity = geocodeData.MatchCity;
-		    } else if (c.Types.Contains(AddressType.Sublocality)) {
+		    } else if (ContainsAddressType(c.Types, AddressType.Sublocality)) {
 			geocodeData.MatchCity = c.LongName;
 			geocodeData.StdCity = geocodeData.MatchCity;
-		    } else if (c.Types.Contains(AddressType.Neighborhood)) {
+		    } else if (ContainsAddressType(c.Types, AddressType.Neighborhood)) {
 			geocodeData.MatchCity = c.LongName;
 			geocodeData.StdCity = geocodeData.MatchCity;
 		    }
-		    if (c.Types.Contains(AddressType.AdministrativeAreaLevel1)) {
+		    if (ContainsAddressType(c.Types, AddressType.AdministrativeAreaLevel1)) {
 			geocodeData.MatchState = c.ShortName;
 			geocodeData.StdState = geocodeData.MatchState;
 		    }
-		    if (c.Types.Contains(AddressType.PostalCode)) {
+		    if (ContainsAddressType(c.Types, AddressType.PostalCode)) {
 			geocodeData.MatchZipCode = c.LongName;
 			geocodeData.StdZipCode = geocodeData.MatchZipCode;
 		    }
@@ -127,6 +127,15 @@ namespace Spring2.Core.Geocode {
 	    }
 
 	    return isValid;
+	}
+
+	private static Boolean ContainsAddressType(AddressType[] types, AddressType type) {
+	    foreach(var t in types) {
+		if (t == type) {
+		    return true;
+		}
+	    }
+	    return false;
 	}
 
 	private static void StoreResult(StringType street, StringType city, StringType state, StringType postalCode, GeocodeData geocodeData, Boolean isValid) {

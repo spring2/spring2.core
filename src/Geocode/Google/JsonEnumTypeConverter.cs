@@ -20,10 +20,42 @@ using Google.Api.Maps.Service.Geocoding;
 using Newtonsoft.Json;
 
 namespace Google.Api.Maps.Service {
-    #region Private extensions
+    public class JsonEnumTypeConverter : JsonConverter {
+	public override bool CanConvert(Type objectType) {
+	    return
+		    objectType == typeof(ServiceResponseStatus)
+		    || objectType == typeof(AddressType)
+		    || objectType == typeof(LocationType);
+	}
 
-    internal static class JsonEnumTypeConverterExtensions {
-	public static ServiceResponseStatus AsResponseStatus(this string s) {
+	public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
+	    object result = null;
+
+	    if (objectType == typeof(ServiceResponseStatus))
+		result = AsResponseStatus(reader.Value.ToString());
+
+	    if (objectType == typeof(AddressType))
+		result = AsAddressType(reader.Value.ToString());
+
+	    if (objectType == typeof(LocationType))
+		result = AsLocationType(reader.Value.ToString());
+
+	    return result;
+	}
+
+
+	public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
+	    if (value == typeof(ServiceResponseStatus))
+		writer.WriteValue("\"" + FromResponseStatus((ServiceResponseStatus)value) + "\"");
+
+	    if (value == typeof(AddressType))
+		writer.WriteValue("\"" + FromAddressType((AddressType)value) + "\"");
+
+	    if (value == typeof(LocationType))
+		writer.WriteValue("\"" + FromLocationType((LocationType)value) + "\"");
+	}
+
+	private ServiceResponseStatus AsResponseStatus(string s) {
 	    var result = ServiceResponseStatus.Unknown;
 
 	    switch (s) {
@@ -47,7 +79,7 @@ namespace Google.Api.Maps.Service {
 	    return result;
 	}
 
-	public static AddressType AsAddressType(this string s) {
+	private AddressType AsAddressType(string s) {
 	    var result = AddressType.Unknown;
 
 	    switch (s) {
@@ -125,7 +157,7 @@ namespace Google.Api.Maps.Service {
 	    return result;
 	}
 
-	public static LocationType AsLocationType(this string s) {
+	private LocationType AsLocationType(string s) {
 	    var result = LocationType.Unknown;
 
 	    switch (s) {
@@ -146,8 +178,7 @@ namespace Google.Api.Maps.Service {
 	    return result;
 	}
 
-
-	public static String FromResponseStatus(this ServiceResponseStatus s) {
+	private String FromResponseStatus(ServiceResponseStatus s) {
 	    var result = String.Empty;
 
 	    switch (s) {
@@ -171,7 +202,7 @@ namespace Google.Api.Maps.Service {
 	    return result;
 	}
 
-	public static String FromLocationType(this LocationType s) {
+	private String FromLocationType(LocationType s) {
 	    var result = String.Empty;
 
 	    switch (s) {
@@ -192,8 +223,7 @@ namespace Google.Api.Maps.Service {
 	    return result;
 	}
 
-
-	public static String FromAddressType(this AddressType s) {
+	private String FromAddressType(AddressType s) {
 	    var result = String.Empty;
 
 	    switch (s) {
@@ -269,46 +299,6 @@ namespace Google.Api.Maps.Service {
 	    }
 
 	    return result;
-	}
-
-    }
-
-    #endregion
-
-    public class JsonEnumTypeConverter : JsonConverter {
-	public override bool CanConvert(Type objectType) {
-	    return
-		    objectType == typeof(ServiceResponseStatus)
-		    || objectType == typeof(AddressType)
-		    || objectType == typeof(LocationType);
-	}
-
-	public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
-	    object result = null;
-
-	    if (objectType == typeof(ServiceResponseStatus))
-		result = reader.Value.ToString().AsResponseStatus();
-
-	    if (objectType == typeof(AddressType))
-		result = reader.Value.ToString().AsAddressType();
-
-	    if (objectType == typeof(LocationType))
-		result = reader.Value.ToString().AsLocationType();
-
-	    return result;
-	}
-
-
-	public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
-	    if (value == typeof(ServiceResponseStatus))
-		writer.WriteValue("\"" + ((ServiceResponseStatus)value).FromResponseStatus() + "\"");
-
-	    if (value == typeof(AddressType))
-		writer.WriteValue("\"" + ((AddressType)value).FromAddressType() + "\"");
-
-	    if (value == typeof(LocationType))
-		writer.WriteValue("\"" + ((LocationType)value).FromLocationType() + "\"");
-
 	}
     }
 }

@@ -205,7 +205,6 @@
     </Compile>
     <Compile Include="Geocode\Google\AddressComponent.cs" />
     <Compile Include="Geocode\Google\AddressType.cs" />
-    <Compile Include="Geocode\Google\Extensions.cs" />
     <Compile Include="Geocode\Google\GeocodingRequest.cs" />
     <Compile Include="Geocode\Google\GeocodingResponse.cs" />
     <Compile Include="Geocode\Google\GeocodingResult.cs" />
