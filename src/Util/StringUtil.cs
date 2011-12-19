@@ -47,7 +47,7 @@ namespace Spring2.Core.Util {
 	/// </summary>
 	/// <param name="file">path to file.</param>
 	/// <returns>String contents of the file.</returns>
-	public static System.String fileContentsToString(System.String file) {
+	public static String fileContentsToString(System.String file) {
 	    System.String contents = "";
 			
 	    System.IO.FileInfo f = new System.IO.FileInfo(file);

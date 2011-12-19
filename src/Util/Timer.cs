@@ -43,6 +43,17 @@ namespace Spring2.Core.Util {
 	    start = -1;
 	    stop = -1;
 	}
+
+	public String GetElapsedTimeString() {
+	    return Timer.GetElapsedTimeString(this.TimeSpan);
+	}
+
+	public static String GetElapsedTimeString(TimeSpan ts) {
+	    if (ts == null)
+		return null;
+
+	    return String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+	}
     }
 }
 
