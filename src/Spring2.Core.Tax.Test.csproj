@@ -179,6 +179,7 @@
     <Compile Include="Tax\Test\CertiTaxTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tax\Test\AvalaraProviderTest.cs" />
     <Compile Include="Tax\Test\NullTaxProvider.cs">
       <SubType>Code</SubType>
     </Compile>

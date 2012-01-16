@@ -142,6 +142,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Avalara.AvaTax.Adapter">
+      <HintPath>..\lib\net-2.0\Avalara.AvaTax.Adapter.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <Name>log4net</Name>
       <HintPath>..\lib\net-1.1\log4net.dll</HintPath>
@@ -191,9 +194,10 @@
     <Compile Include="AssemblyVersionInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tax\AssemblyInfo.cs">
+    <Compile Include="Tax\Vertex\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tax\Avalara\AvalaraProvider.cs" />
     <Compile Include="Tax\CertiTax\CertitaxProvider.cs">
       <SubType>Code</SubType>
     </Compile>
