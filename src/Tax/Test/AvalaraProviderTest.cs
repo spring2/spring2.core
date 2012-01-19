@@ -405,18 +405,38 @@ namespace Spring2.Core.Test {
 	public void GetTaxJurisidictionsWithTaxResult() {
 	    TaxOrder order = NewTaxOrder();
 	    order.TaxAreaId = IdType.Parse("84070");
-		     		
+	    order.OrderId = 69;		     		
 	    TaxOrderLine taxOrderLine;
 		     		
 	    taxOrderLine = new TaxOrderLine();
 	    taxOrderLine.Quantity = 1;
-	    taxOrderLine.Price = 500;
+	    taxOrderLine.Price = 250;
 	    taxOrderLine.ItemNumber = "001";
 	    order.Lines.Add(taxOrderLine);
-		     
+
+	    taxOrderLine = new TaxOrderLine();
+	    taxOrderLine.Quantity = 1;
+	    taxOrderLine.Price = 250;
+	    taxOrderLine.ItemNumber = "002";
+	    order.Lines.Add(taxOrderLine);
+
+	    taxOrderLine = new TaxOrderLine();
+	    taxOrderLine.Quantity = 0;
+	    taxOrderLine.Price = 100;
+	    taxOrderLine.ItemNumber = "003";
+	    order.Lines.Add(taxOrderLine);
+
+	    taxOrderLine = new TaxOrderLine();
+	    taxOrderLine.Quantity = 1;
+	    taxOrderLine.Price = 9.95;
+	    taxOrderLine.ItemNumber = "SHIPPING";
+	    order.Lines.Add(taxOrderLine);
+
+
 	    AvalaraProvider AvalaraProvider = new AvalaraProvider("United States");
 	    TaxResult result = AvalaraProvider.Calculate("10150 South Centennial Parkway","Sandy", "", "UT", "84070", "USA", DateType.Now, order);
-		     
+
+	    Assert.AreEqual(34.26m, result.TotalTax.ToDecimal());
 	    Assert.AreEqual(3, result.TaxJurisdictions.Count);
 		     	    
 	    TaxJurisdiction jurisidiction = result.TaxJurisdictions[TaxJurisdictionTypeEnum.STATE];
@@ -429,14 +449,13 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual(TaxJurisdictionTypeEnum.COUNTY, jurisidiction.JurisdictionType);
 	    Assert.AreEqual("SALT LAKE", jurisidiction.Description.ToString());
 	    Assert.AreEqual(1.3500m, jurisidiction.Rate.ToDecimal());
-	    Assert.AreEqual(6.750m, jurisidiction.Amount.ToDecimal());
+	    Assert.AreEqual(6.760m, jurisidiction.Amount.ToDecimal());
 
 	    jurisidiction = result.TaxJurisdictions[TaxJurisdictionTypeEnum.OTHER];
 	    Assert.AreEqual(TaxJurisdictionTypeEnum.OTHER, jurisidiction.JurisdictionType);
 	    Assert.AreEqual("SALT LAKE CO TR", jurisidiction.Description.ToString());
 	    Assert.AreEqual(0.800m, jurisidiction.Rate.ToDecimal());
 	    Assert.AreEqual(4.000m, jurisidiction.Amount.ToDecimal());
-
 	}
 
 	[Test()]

@@ -341,16 +341,16 @@ namespace Spring2.Core.Tax.AvalaraTax {
 			    jurisdictions.Add(key, jurisdiction);
 			} else {
 			    TaxJurisdiction jurisdiction = jurisdictions[key];
-			    jurisdiction.Rate += taxdetail.Rate;
+			    //jurisdiction.Rate += taxdetail.Rate;
 			    jurisdiction.Amount += taxdetail.Tax;
 			}
 		    }
 
-		    foreach (TaxJurisdiction jurisdiction in jurisdictions.Values) {
-			result.TaxJurisdictions.Add(jurisdiction);
-		    }
 		}
 
+		foreach (TaxJurisdiction jurisdiction in jurisdictions.Values) {
+		    result.TaxJurisdictions.Add(jurisdiction);
+		}
 	    }
 
 	    return result;

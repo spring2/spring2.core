@@ -3,7 +3,7 @@ using Spring2.Core.Types;
 
 namespace Spring2.Core.Tax {
 	/// <summary>
-	/// Summary description for VertexOrderData.
+	/// Summary description for TaxOrderData.
 	/// </summary>
 	public class TaxOrder {
 		public static readonly TaxOrder DEFAULT = new TaxOrder();
