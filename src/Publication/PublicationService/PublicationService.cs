@@ -14,15 +14,22 @@ namespace Spring2.Core.Publication.PublicationService {
 	private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
 	static void Main(string[] args) {
+	    log.Info("Checking arguments");
 	    if (args.Length < 1) 
-		throw new ArgumentException("Need a user ID passed in.");
+		throw new ArgumentException("Need user ID to be passed in.");
 
-	    AppDomain myDomain = Thread.GetDomain();
-	    myDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
+	    try {
+		log.Info("Setting principal policy");
+		AppDomain myDomain = Thread.GetDomain();
+		myDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
 
-	    IdType userId = IdType.Parse(args[0]);
-	    IUserPrincipal principal = new UserPrincipal(userId);
-	    Thread.CurrentPrincipal = principal;
+		IdType userId = IdType.Parse(args[0]);
+		IUserPrincipal principal = new UserPrincipal(userId);
+		log.Info("Setting user principal");
+		Thread.CurrentPrincipal = principal;
+	    } catch (Exception ex) {
+		log.Error("Error setting the thread's principal", ex);
+	    }
 
 	    DoWork();
 	}

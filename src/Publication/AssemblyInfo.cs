@@ -43,4 +43,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyDelaySign(false)]
 
 [assembly: AssemblyKeyName("")]
-[assembly: log4net.Config.XmlConfigurator(Watch = false)]
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
