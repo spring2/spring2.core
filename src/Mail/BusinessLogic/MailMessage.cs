@@ -12,6 +12,7 @@ using System.Data;
 using System.IO;
 using System.Net.Mail;
 using System.Text;
+using System.Net;
 
 
 namespace Spring2.Core.Mail.BusinessLogic {
@@ -609,7 +610,15 @@ namespace Spring2.Core.Mail.BusinessLogic {
 		IncreaseAttempts();
 		this.ProcessedTime = DateTimeType.Now;
 		String host = SmtpServer.IsValid ? SmtpServer.ToString() : ConfigurationProvider.Instance.Settings["SMTPServer"];
-		SmtpClient smtpClient = new SmtpClient(host);
+		int port;
+		SmtpClient smtpClient;
+		if (int.TryParse(ConfigurationProvider.Instance.Settings["SMTPPort"], out port)) {
+		    smtpClient = new SmtpClient(host, port);
+		} else {
+		    smtpClient = new SmtpClient(host);
+		}
+
+		SetSMTPSecurity(smtpClient);
 		smtpClient.Send(message);
 		MarkSent();
 	    } catch (Exception ex) {
@@ -635,6 +644,27 @@ namespace Spring2.Core.Mail.BusinessLogic {
 		if (Directory.Exists(messageAttachmentPath)) {
 		    Directory.Delete(messageAttachmentPath);
 		}
+	    }
+	}
+
+	private void SetSMTPSecurity(SmtpClient smtpClient) {
+	    if (ConfigurationProvider.Instance.Settings["SMTPUsername"] != null && ConfigurationProvider.Instance.Settings["SMTPPassword"] != null) {
+		if (ConfigurationProvider.Instance.Settings["SMTPEnableSSL"] == "1") {
+		    smtpClient.EnableSsl = true;
+		}
+		if (ConfigurationProvider.Instance.Settings["SMTPProtocolType"] != null) {
+		    switch (ConfigurationProvider.Instance.Settings["SMTPProtocolType"].ToUpper()) {
+			case "SSL3":
+			    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+			    break;
+			case "TLS":
+			    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+			    break;
+		    }
+		}
+		smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+		smtpClient.UseDefaultCredentials = false;
+		smtpClient.Credentials = new NetworkCredential(ConfigurationProvider.Instance.Settings["SMTPUsername"], ConfigurationProvider.Instance.Settings["SMTPPassword"]);
 	    }
 	}
 

@@ -199,7 +199,9 @@
     <Compile Include="Mail\SendMailMessages\SendMailMessages.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Content Include="Mail\SendMailMessages\App.config" />
+    <Content Include="Mail\SendMailMessages\App.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
