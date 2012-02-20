@@ -93,15 +93,18 @@ namespace Spring2.Core.Tax {
 		}
 
 		public CurrencyType MerchandiseTotal {
-			get {
-				CurrencyType total = CurrencyType.ZERO;
+		    get {
+			CurrencyType total = CurrencyType.ZERO;
 
-				foreach (TaxOrderLine line in Lines) {
-					total += line.ExtendedPrice;
-				}
-
-				return total;
+			foreach (TaxOrderLine line in Lines) {
+			    if (!line.ExtendedPrice.IsValid) {
+				line.ExtendedPrice = line.Quantity * line.Price.ToDecimal();
+			    }
+			    total += line.ExtendedPrice;
 			}
+
+			return total;
+		    }
 		}
 	}
 }

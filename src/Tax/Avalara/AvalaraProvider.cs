@@ -12,6 +12,7 @@ using Spring2.Core.Tax.Vertex;
 using Avalara.AvaTax.Adapter.TaxService;
 using Avalara.AvaTax.Adapter.AddressService;
 using Avalara.AvaTax.Adapter;
+using Spring2.Core.Util;
 
 using Address = Avalara.AvaTax.Adapter.AddressService.Address;
 using System.Collections.Generic;
@@ -152,13 +153,81 @@ namespace Spring2.Core.Tax.AvalaraTax {
 	    }
 	}
 
+	public TaxAreaData Validate(StringType street, StringType city, StringType region, StringType postalCode, StringType country) {
+	    AddressSvc addressSvc = GetAddressSvc();
+
+	    ValidateRequest req = new ValidateRequest();
+	    Address a = new Address();
+	    a.Line1 = street;
+	    a.City = city;
+	    a.Region = region;
+	    a.PostalCode = postalCode;
+	    a.Country = country;
+	    req.Address = a;
+	    req.Taxability = true;	    
+
+	    ValidateResult result;
+	    try {
+		result = addressSvc.Validate(req);
+	    } catch (SoapException ex) {
+		MessageList errors = new MessageList();
+		errors.Add(new TaxSoapException(ex.Message.ToString()));
+		throw new MessageListException(errors);
+	    }
+
+	    TaxAreaData data = new TaxAreaData();
+
+	    if (result.Messages.Count > 0) {
+		data.AddressValidated = false;
+	    } else {
+		data.AddressValidated = true;
+	    }
+
+	    if (result.Addresses.Count > 0) {
+		data.Street = result.Addresses[0].Line1;
+		data.City = result.Addresses[0].City;
+		data.Region = result.Addresses[0].Region;
+		data.PostalCode = result.Addresses[0].PostalCode;
+		data.Country = result.Addresses[0].Country;
+		data.TaxAreaID = result.Addresses[0].TaxRegionId;
+	    }
+
+	    return data;
+	}
+
+
+
+	public void Cancel(TaxOrder order) {
+	    TaxSvc taxSvc = GetTaxSvc();
+
+	    CancelTaxRequest req = new CancelTaxRequest();
+	    req.CompanyCode = CompanyCode;
+	    req.DocType = DocumentType.SalesInvoice;
+	    req.DocCode = GetDocCode(order.OrderId);
+	    req.CancelCode = CancelCode.DocDeleted;
+
+	    CancelTaxResult result;
+	    try {
+		result = taxSvc.CancelTax(req);
+	    } catch (SoapException ex) {
+		MessageList errors = new MessageList();
+		errors.Add(new TaxSoapException(ex.Message.ToString()));
+		throw new MessageListException(errors);
+	    }
+
+	    if (result.Messages.Count > 0) {
+		throw new Exception("cancel result has exceptions");
+	    }
+
+	}
+
 	public TaxResult Commit(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order, StringType location) {
 	    return Commit(street, city, county, region, postalCode, country, date, order);
 	}
 
 	public TaxResult Commit(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
 	    try {
-		TaxResult result = Calculate(null, street, city, county, region, postalCode, country, date, order);
+		TaxResult result = Calculate(null, street, city, county, region, postalCode, country, date, order, DocumentType.SalesInvoice);
 
 		//##############################################################################
 		//### 1st WE CREATE THE REQUEST OBJECT FOR DOCUMENT THAT SHOULD BE COMMITTED ###
@@ -170,19 +239,34 @@ namespace Spring2.Core.Tax.AvalaraTax {
 		//###########################################################
 		commitTaxRequest.CompanyCode = CompanyCode;
 		commitTaxRequest.DocType = DocumentType.SalesInvoice;
-		commitTaxRequest.DocCode = order.OrderId.ToString();
-		//commitTaxRequest.NewDocCode = textNewDocCode.Text;
+		commitTaxRequest.DocCode = GetDocCode(order.OrderId);
 
 		//##############################################################################################
 		//### 3rd WE INVOKE THE COMMITTAX() METHOD OF THE TAXSVC OBJECT AND GET BACK A RESULT OBJECT ###
-		TaxSvc taxSvc = new TaxSvc();
-		taxSvc.Configuration.Url = Url;
-		taxSvc.Configuration.Security.Account = Account;
-		taxSvc.Configuration.Security.License = License;
+		TaxSvc taxSvc = GetTaxSvc();
+
+		PostTaxRequest postTaxRequest = new PostTaxRequest();
+		postTaxRequest.CompanyCode = CompanyCode;
+		postTaxRequest.DocType = DocumentType.SalesInvoice;
+		postTaxRequest.DocCode = GetDocCode(order.OrderId);
+		postTaxRequest.Commit = false;
+		postTaxRequest.DocDate = DateTime.Now;
+		postTaxRequest.TotalAmount = order.MerchandiseTotal.ToDecimal();
+		postTaxRequest.TotalTax = result.TotalTax.ToDecimal();
+
+		PostTaxResult postTaxResult = taxSvc.PostTax(postTaxRequest);
+
+		if (postTaxResult.Messages.Count > 0) {
+		    throw new Exception("post result has exceptions");
+		}
 
 		CommitTaxResult commitTaxResult = taxSvc.CommitTax(commitTaxRequest);
+		
+		result.TaxTransactionId = commitTaxResult.TransactionId;
 
-//		lblResultCode.Text = _commitTaxResult.ResultCode.ToString();
+		if (commitTaxResult.Messages.Count > 0) {
+		    throw new Exception("commit result has exceptions");
+		}
 
 		commitTaxRequest = null;
 		taxSvc = null;				
@@ -194,6 +278,23 @@ namespace Spring2.Core.Tax.AvalaraTax {
 		throw new MessageListException(errors);
 	    }
 	}
+
+	private TaxSvc GetTaxSvc() {
+	    TaxSvc taxSvc = new TaxSvc();
+	    taxSvc.Configuration.Url = Url;
+	    taxSvc.Configuration.Security.Account = Account;
+	    taxSvc.Configuration.Security.License = License;
+	    return taxSvc;
+	}
+
+	private AddressSvc GetAddressSvc() {
+	    AddressSvc taxSvc = new AddressSvc();
+	    taxSvc.Configuration.Url = Url;
+	    taxSvc.Configuration.Security.Account = Account;
+	    taxSvc.Configuration.Security.License = License;
+	    return taxSvc;
+	}
+
 
 	public TaxResult Calculate(StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
 	    StringType taxTransactionId = "";
@@ -212,7 +313,11 @@ namespace Spring2.Core.Tax.AvalaraTax {
 	}
 
 	public TaxResult Calculate(StringType taxTransactionId, StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order) {
-	    TaxSvc taxSvc = new TaxSvc();
+	    return Calculate(taxTransactionId, street, city, county, region, postalCode, country, date, order, DocumentType.SalesOrder);
+	}
+
+	public TaxResult Calculate(StringType taxTransactionId, StringType street, StringType city, StringType county, StringType region, StringType postalCode, StringType country, DateType date, TaxOrder order, DocumentType documentType) {
+	    TaxSvc taxSvc = GetTaxSvc();
 	    GetTaxRequest gTaxReq = new GetTaxRequest();
 	    GetTaxResult gTaxRes;
 	    Address documentOrigAddress = new Address();
@@ -221,9 +326,14 @@ namespace Spring2.Core.Tax.AvalaraTax {
 
 	    TaxResult result = new TaxResult();
 
-	    taxSvc.Configuration.Url = Url;
-	    taxSvc.Configuration.Security.Account = Account;
-	    taxSvc.Configuration.Security.License = License;
+	    TaxAreaData data = Validate(street, city, region, postalCode, country);
+	    result.AddressValidated = data.AddressValidated;
+	    result.TaxAreaID = data.TaxAreaID;
+	    result.Street = data.Street;
+	    result.City = data.City;
+	    result.Region = data.Region;
+	    result.PostalCode = data.PostalCode;
+	    result.Country = data.Country;
 
 	    gTaxReq.CompanyCode = CompanyCode;
 
@@ -263,12 +373,10 @@ namespace Spring2.Core.Tax.AvalaraTax {
 
 	    // Salesorder is for quotes (no record saved to dashboard)
 	    // SalesInvoice is for invoices (invoice is saved to dashboard to be posted later)
-	    gTaxReq.DocType = DocumentType.SalesInvoice;
+	    gTaxReq.DocType = documentType;
 	    gTaxReq.DocDate = DateTime.Now;
 
-	    // invoice number - uses guid to guarantee unique #
-	    gTaxReq.DocCode = "O"+order.OrderId.ToString();
-
+	    gTaxReq.DocCode = GetDocCode(order.OrderId);
 
 	    for (Int32 i = 0; i < order.Lines.Count; i++) {
 		TaxOrderLine line = order.Lines[i];
@@ -470,6 +578,18 @@ namespace Spring2.Core.Tax.AvalaraTax {
 	    taxOrderLine.ItemNumber = "SHIPPING";
 
 	    return taxOrderLine;
+	}
+
+	private String GetDocCode(IdType orderId) {
+	    String s;
+	    if (orderId.IsValid) {
+		s = orderId.ToString();
+	    } else {
+		s = DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + Guid.NewGuid().ToString().Right(12);
+	    }
+
+	    Console.Out.WriteLine("DocCode: " + s);
+	    return s;
 	}
 
     }

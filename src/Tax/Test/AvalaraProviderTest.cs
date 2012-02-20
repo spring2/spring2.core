@@ -29,27 +29,25 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test()]
-	[Ignore("not address correction")]
 	public void GetTaxAreaForAddress() {
 	    AvalaraProvider AvalaraProvider = new AvalaraProvider("United States");
 	    TaxAreaData taxArea = AvalaraProvider.GetTaxAreaForAddress("10150 S. Centennial Parkway", "Sandy", "Salt Lake", "UT", "84070", "USA", BooleanType.FALSE);
 
-	    Assert.AreEqual(StringType.Parse("10150 Centennial Pkwy"), taxArea.Street);
+	    Assert.AreEqual(StringType.Parse("10150 S. Centennial Parkway"), taxArea.Street);
 	    Assert.AreEqual(StringType.Parse("Sandy"), taxArea.City);
 	    Assert.AreEqual(StringType.Parse("UT"), taxArea.Region);
-	    Assert.AreEqual(IdType.Parse("840704103"), taxArea.TaxAreaID);
+	    Assert.AreEqual(IdType.Parse("1050700"), taxArea.TaxAreaID);
 	}
 
 	[Test()]
-	[Ignore("not address correction")]
 	public void GetTaxAreaForAddress1() {
 	    AvalaraProvider AvalaraProvider = new AvalaraProvider("United States");
 	    TaxAreaData taxArea = AvalaraProvider.GetTaxAreaForAddress("200 W. State St.", "Irene", "", "SD", "57037", "USA", BooleanType.FALSE);
 
-	    Assert.AreEqual(StringType.Parse("200 W State St"), taxArea.Street);
+	    Assert.AreEqual(StringType.Parse("200 W. State St."), taxArea.Street);
 	    Assert.AreEqual(StringType.Parse("Irene"), taxArea.City);
 	    Assert.AreEqual(StringType.Parse("SD"), taxArea.Region);
-	    Assert.AreEqual(IdType.Parse("570372122"), taxArea.TaxAreaID);
+	    Assert.AreEqual(IdType.Parse("1050302"), taxArea.TaxAreaID);
 	}
 
 	[Test()]
@@ -62,12 +60,14 @@ namespace Spring2.Core.Test {
 	    taxOrderLine = new TaxOrderLine();
 	    taxOrderLine.Quantity = 1;
 	    taxOrderLine.Price = 500;
+	    taxOrderLine.ExtendedPrice = 500;
 	    taxOrderLine.ItemNumber = "001";
 	    order.Lines.Add(taxOrderLine);
                 
 	    taxOrderLine = new TaxOrderLine();
 	    taxOrderLine.Quantity = 1;
 	    taxOrderLine.Price = 500;
+	    taxOrderLine.ExtendedPrice = 500;
 	    taxOrderLine.ItemNumber = "002";
 	    order.Lines.Add(taxOrderLine);
 
@@ -176,6 +176,39 @@ namespace Spring2.Core.Test {
 	}
 
 	[Test()]
+	public void CommitWithShippingNotTaxable() {
+	    TaxOrder order = NewTaxOrder();
+	    order.TaxAreaId = IdType.Parse("84070");
+
+	    TaxOrderLine taxOrderLine;
+
+	    taxOrderLine = new TaxOrderLine();
+	    taxOrderLine.Quantity = 1;
+	    taxOrderLine.Price = 500;
+	    taxOrderLine.ItemNumber = "001";
+	    order.Lines.Add(taxOrderLine);
+
+	    taxOrderLine = new TaxOrderLine();
+	    taxOrderLine.Quantity = 1;
+	    taxOrderLine.Price = 500;
+	    taxOrderLine.ItemNumber = "002";
+	    order.Lines.Add(taxOrderLine);
+
+	    taxOrderLine = new TaxOrderLine();
+	    taxOrderLine.Quantity = 1;
+	    taxOrderLine.Price = 120;
+	    taxOrderLine.ItemNumber = "SHIPPING";
+	    order.Lines.Add(taxOrderLine);
+
+	    AvalaraProvider AvalaraProvider = new AvalaraProvider("United States");
+	    TaxResult result = AvalaraProvider.Commit("10150 Centennial Parkway", "Sandy", "", "UT", "84070", "USA", DateType.Now, order);
+
+	    Assert.AreEqual(new DecimalType(6.85), result.TotalTaxRate);
+	    Assert.AreEqual(new CurrencyType(68.5), result.TotalTax);
+	}
+
+
+	[Test()]
 	public void GetQuoteTaxTotal() {
 	    TaxOrder order = NewTaxOrder();
 	    order.TaxAreaId = IdType.Parse("84070");
@@ -230,19 +263,18 @@ namespace Spring2.Core.Test {
 	    TaxResult result = AvalaraProvider.Calculate("32025 Monterey Ave", "Thousand Palms", "", "CA", "92276", "USA", DateType.Now, order);
 
 	    Assert.AreEqual(new DecimalType(7.25), result.TotalTaxRate);
-	    Assert.AreEqual(new CurrencyType(81.20), result.TotalTax);
+	    Assert.AreEqual(new CurrencyType(72.50), result.TotalTax);
 	}
 
 	[Test()]
-	[Ignore("not address correction")]
 	public void LookUpTaxArea() {
 	    AvalaraProvider AvalaraProvider = new AvalaraProvider("United States");			
 	    TaxAreaList taxAreaList = AvalaraProvider.LookupTaxArea("1412 W. 1800 N.", "Bountiful", "Salt Lake", "UT", "84664", "USA", DateType.Now, BooleanType.FALSE);
-	    Assert.AreEqual(IdType.Parse("840101644"), taxAreaList[0].TaxAreaID);
+	    Assert.AreEqual(IdType.Parse("102409"), taxAreaList[0].TaxAreaID);
 	}
 
 	[Test()]
-	[Ignore("not address correction")]
+	[Ignore("not sure why only the state is validating")]
 	public void LookUpTaxArea2() {
 	    AvalaraProvider AvalaraProvider = new AvalaraProvider("United States");			
 	    TaxAreaList taxAreaList = AvalaraProvider.LookupTaxArea("6862 S Algonguian Ct", "Aurora", "", "CO", "80016", "USA", DateType.Now, BooleanType.FALSE);
@@ -390,15 +422,14 @@ namespace Spring2.Core.Test {
 	}
 	
 	[Test()]
-	[Ignore("not address correction")]
 	public void GetTaxAreaForAddress2() {
 	    AvalaraProvider AvalaraProvider = new AvalaraProvider("United States");
 	    TaxAreaData taxArea = AvalaraProvider.GetTaxAreaForAddress("6578 Lynx Cove", "Littleton", "", "CO", "80124", "USA", BooleanType.FALSE);
 
-	    Assert.AreEqual(StringType.Parse("6578 Lynx Cv"), taxArea.Street);
+	    Assert.AreEqual(StringType.Parse("6578 Lynx Cove"), taxArea.Street);
 	    Assert.AreEqual(StringType.Parse("Littleton"), taxArea.City);
 	    Assert.AreEqual(StringType.Parse("CO"), taxArea.Region);
-	    Assert.AreEqual(IdType.Parse("801249535"), taxArea.TaxAreaID);
+	    Assert.AreEqual(IdType.Parse("2114742"), taxArea.TaxAreaID);
 	}
 
 	[Test()]
@@ -437,6 +468,7 @@ namespace Spring2.Core.Test {
 	    TaxResult result = AvalaraProvider.Calculate("10150 South Centennial Parkway","Sandy", "", "UT", "84070", "USA", DateType.Now, order);
 
 	    Assert.AreEqual(34.26m, result.TotalTax.ToDecimal());
+	    Assert.AreEqual(6.85m, result.TotalTaxRate.ToDecimal());
 	    Assert.AreEqual(3, result.TaxJurisdictions.Count);
 		     	    
 	    TaxJurisdiction jurisidiction = result.TaxJurisdictions[TaxJurisdictionTypeEnum.STATE];
@@ -484,6 +516,49 @@ namespace Spring2.Core.Test {
 	    Assert.AreEqual(8.000m, jurisidiction.Amount.ToDecimal());
 	}
 
+
+	[Test()]
+	public void Cancel() {
+	    TaxOrder order = NewTaxOrder();
+	    order.TaxAreaId = IdType.Parse("84070");
+
+	    TaxOrderLine taxOrderLine;
+
+	    taxOrderLine = new TaxOrderLine();
+	    taxOrderLine.Quantity = 1;
+	    taxOrderLine.Price = 500;
+	    taxOrderLine.ExtendedPrice = 500;
+	    taxOrderLine.ItemNumber = "001";
+	    order.Lines.Add(taxOrderLine);
+
+	    taxOrderLine = new TaxOrderLine();
+	    taxOrderLine.Quantity = 1;
+	    taxOrderLine.Price = 500;
+	    taxOrderLine.ExtendedPrice = 500;
+	    taxOrderLine.ItemNumber = "002";
+	    order.Lines.Add(taxOrderLine);
+
+	    AvalaraProvider AvalaraProvider = new AvalaraProvider("United States");
+	    TaxResult result = AvalaraProvider.Commit("10150 South Centennial Parkway", "Sandy", "", "UT", "84070", "USA", DateType.Now, order);
+
+	    Assert.AreEqual(new CurrencyType(68.50), result.TotalTax);
+
+	    AvalaraProvider.Cancel(order);
+	}
+
+	[Test]
+	public void ValidateValidAddress() {
+	    AvalaraProvider AvalaraProvider = new AvalaraProvider("United States");
+	    TaxAreaData result = AvalaraProvider.Validate("10150 South Centennial Parkway", "Sandy", "UT", "84070", "USA");
+	    Assert.IsTrue(result.AddressValidated.ToBoolean());
+	}
+
+	[Test]
+	public void ValidateInvalidAddress() {
+	    AvalaraProvider AvalaraProvider = new AvalaraProvider("United States");
+	    TaxAreaData result = AvalaraProvider.Validate("123 Main", "Sandy", "TX", "", "");
+	    Assert.IsFalse(result.AddressValidated.ToBoolean());
+	}
 
 	public void GilbertShouldHaveJurisdictions() {
 	    AvalaraProvider provider = new AvalaraProvider("United States");
