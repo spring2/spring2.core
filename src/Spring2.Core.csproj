@@ -317,6 +317,7 @@
     <Compile Include="Util\ExceptionError.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Util\ExtensionAttribute.cs" />
     <Compile Include="Util\FTPClient.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -336,6 +337,7 @@
     <Compile Include="Util\Range.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Util\StringExtensions.cs" />
     <Compile Include="Util\StringUtil.cs">
       <SubType>Code</SubType>
     </Compile>
