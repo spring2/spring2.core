@@ -194,6 +194,8 @@
     <Compile Include="AssemblyVersionInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tax\ICancelableTaxProvider.cs" />
+    <Compile Include="Tax\Test\TestCancelableTaxProvider.cs" />
     <Compile Include="Tax\Vertex\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

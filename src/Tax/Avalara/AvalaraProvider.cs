@@ -22,7 +22,7 @@ namespace Spring2.Core.Tax.AvalaraTax {
     /// Tax provider using AvalaraTax Web Service.
     /// This class is must be stateless in order to be thread safe.
     /// </summary>
-    public class AvalaraProvider : ITaxProvider {
+    public class AvalaraProvider : ITaxProvider, ICancelableTaxProvider {
 	private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 	private static readonly string urlKey = "Avalara.Url";
 	private static readonly string accountKey = "Avalara.Account";
@@ -591,6 +591,5 @@ namespace Spring2.Core.Tax.AvalaraTax {
 	    Console.Out.WriteLine("DocCode: " + s);
 	    return s;
 	}
-
     }
 }
