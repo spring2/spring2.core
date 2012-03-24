@@ -100,6 +100,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.PostSharp.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.RhinoMocks", "Spring2.Core.RhinoMocks.csproj", "{FB00CA93-E01C-45CA-9F4D-901B372971C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.PostageService", "Spring2.Core.PostageService.csproj", "{5F9F1076-DB81-47DC-B520-D375CC31F87A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.PostageService.Test", "Spring2.Core.PostageService.Test.csproj", "{B2247326-7279-415A-B624-6F054A50B420}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -693,6 +697,30 @@ Global
 		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FB00CA93-E01C-45CA-9F4D-901B372971C0}.Release|x86.ActiveCfg = Release|Any CPU
+		{5F9F1076-DB81-47DC-B520-D375CC31F87A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F9F1076-DB81-47DC-B520-D375CC31F87A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F9F1076-DB81-47DC-B520-D375CC31F87A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5F9F1076-DB81-47DC-B520-D375CC31F87A}.NET_1_1|Any CPU.ActiveCfg = Release|Any CPU
+		{5F9F1076-DB81-47DC-B520-D375CC31F87A}.NET_1_1|Any CPU.Build.0 = Release|Any CPU
+		{5F9F1076-DB81-47DC-B520-D375CC31F87A}.NET_1_1|x86.ActiveCfg = Release|Any CPU
+		{5F9F1076-DB81-47DC-B520-D375CC31F87A}.NET_2_0|Any CPU.ActiveCfg = Release|Any CPU
+		{5F9F1076-DB81-47DC-B520-D375CC31F87A}.NET_2_0|Any CPU.Build.0 = Release|Any CPU
+		{5F9F1076-DB81-47DC-B520-D375CC31F87A}.NET_2_0|x86.ActiveCfg = Release|Any CPU
+		{5F9F1076-DB81-47DC-B520-D375CC31F87A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F9F1076-DB81-47DC-B520-D375CC31F87A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F9F1076-DB81-47DC-B520-D375CC31F87A}.Release|x86.ActiveCfg = Release|Any CPU
+		{B2247326-7279-415A-B624-6F054A50B420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2247326-7279-415A-B624-6F054A50B420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2247326-7279-415A-B624-6F054A50B420}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B2247326-7279-415A-B624-6F054A50B420}.NET_1_1|Any CPU.ActiveCfg = Release|Any CPU
+		{B2247326-7279-415A-B624-6F054A50B420}.NET_1_1|Any CPU.Build.0 = Release|Any CPU
+		{B2247326-7279-415A-B624-6F054A50B420}.NET_1_1|x86.ActiveCfg = Release|Any CPU
+		{B2247326-7279-415A-B624-6F054A50B420}.NET_2_0|Any CPU.ActiveCfg = Release|Any CPU
+		{B2247326-7279-415A-B624-6F054A50B420}.NET_2_0|Any CPU.Build.0 = Release|Any CPU
+		{B2247326-7279-415A-B624-6F054A50B420}.NET_2_0|x86.ActiveCfg = Release|Any CPU
+		{B2247326-7279-415A-B624-6F054A50B420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2247326-7279-415A-B624-6F054A50B420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2247326-7279-415A-B624-6F054A50B420}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
