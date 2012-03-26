@@ -53,7 +53,7 @@ namespace Spring2.Core.PostageService.Test {
 
 	    Assert.IsNotNull(data);
 	    Console.WriteLine(data.ErrorMessage);
-	    Assert.IsTrue(string.IsNullOrWhiteSpace(data.ErrorMessage));
+	    Assert.IsTrue(string.IsNullOrEmpty(data.ErrorMessage));
 	}
 
 	[Test]
@@ -77,7 +77,7 @@ namespace Spring2.Core.PostageService.Test {
 
 	    Assert.IsNotNull(data);
 	    Console.WriteLine(data.ErrorMessage);
-	    Assert.IsTrue(string.IsNullOrWhiteSpace(data.ErrorMessage));
+	    Assert.IsTrue(string.IsNullOrEmpty(data.ErrorMessage));
 	}
 
 	[Test]
@@ -112,8 +112,8 @@ namespace Spring2.Core.PostageService.Test {
 	    PostageLabelData data = postage.GetPostageLabel(input);
 	    Assert.IsNotNull(data);
 	    Console.WriteLine(data.ErrorMessage);
-	    Assert.IsTrue(string.IsNullOrWhiteSpace(data.ErrorMessage));
-	    Assert.IsTrue(!string.IsNullOrWhiteSpace(data.Base64LabelImage));
+	    Assert.IsTrue(string.IsNullOrEmpty(data.ErrorMessage));
+	    Assert.IsTrue(!string.IsNullOrEmpty(data.Base64LabelImage));
 	}
 
 	[Test]

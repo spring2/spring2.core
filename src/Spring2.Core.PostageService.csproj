@@ -28,7 +28,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\build\net-2.0\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -44,11 +44,11 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyVersionInfo.cs" />
     <Compile Include="PostageService\AccountStatus.cs" />
     <Compile Include="PostageService\CommonLabelRequest.cs" />
     <Compile Include="PostageService\Credentials.cs" />
@@ -111,9 +111,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\EwsLabelService\EwsLabelService.wsdl" />
     <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.AccountStatusResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

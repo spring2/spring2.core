@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
-using Spring2.Core.EwsLabelService;
+﻿using System;
 using System.ServiceModel;
-using Spring2.Core.Configuration;
-using System;
-using System.Text;
 using System.ServiceModel.Security;
-using S2 = Spring2.Core.PostageService;
+using System.Text;
+using AutoMapper;
+using Spring2.Core.Configuration;
+using Spring2.Core.EwsLabelService;
 using EW = Spring2.Core.EwsLabelService;
+using S2 = Spring2.Core.PostageService;
 
 namespace Spring2.Core.PostageService.Endicia {
     public class EndiciaProvider : IPostageServiceProvider {
