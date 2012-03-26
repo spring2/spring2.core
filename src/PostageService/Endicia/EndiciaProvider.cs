@@ -53,7 +53,7 @@ namespace Spring2.Core.PostageService.Endicia {
 	    Mapper.AssertConfigurationIsValid();
 	}
 	private void InitializeWSClient() {
-	    string uri = ConfigurationProvider.Instance.Settings["PostageService.Endicia"] ??
+	    string uri = ConfigurationProvider.Instance.Settings["PostageService.Endicia.PostageServerUrl"] ??
 		"https://www.envmgr.com/LabelService/EwsLabelService.asmx"; //This is their test server.
 	    BasicHttpBinding binding = new BasicHttpBinding();
 	    binding.Name = "EndiciaBinding";
