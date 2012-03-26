@@ -33,6 +33,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>spring2.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper">
       <HintPath>..\lib\AutoMapper\AutoMapper.dll</HintPath>
@@ -148,6 +154,7 @@
     <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.StampsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="spring2.snk" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\EwsLabelService\" />

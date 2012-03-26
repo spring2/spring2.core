@@ -31,7 +31,7 @@ namespace Spring2.Core.PostageService.Test {
 	    provider.Settings["PostageServiceProvider.Class"] = "Spring2.Core.PostageService.Test.TestPostageServiceProvider,Spring2.Core.PostageService";
 	    PostageServiceManager.Reset();
 
-	    Assert.IsInstanceOf<TestPostageServiceProvider>(PostageServiceManager.Instance);
+	    Assert.IsTrue(PostageServiceManager.Instance is TestPostageServiceProvider);
 	}
     }
 }
