@@ -23,9 +23,10 @@ namespace Spring2.Core.PostageService.Endicia {
 
 	#region initializations
 	private void MapObjects() {
-	    Mapper.CreateMap<PostageRateInputData, PostageRateRequest>();
+            Mapper.CreateMap<PostageRateInputData, PostageRateRequest>();
 	    Mapper.CreateMap<PostageRateResponse, PostageRateData>();
-	    Mapper.CreateMap<PostageRateInputData, PostageRatesRequest>();
+	    Mapper.CreateMap<PostageRateInputData, PostageRatesRequest>()
+                .ForMember(x=>x.InsuredValue, o=>o.MapFrom(src=>Convert.ToDouble(src.InsuredValue)));
 	    Mapper.CreateMap<PostageRatesResponse, PostageRatesData>();
 	    Mapper.CreateMap<PostagePurchaseInputData, RecreditRequest>();
 	    Mapper.CreateMap<RecreditRequestResponse, PurchasedPostageData>();
