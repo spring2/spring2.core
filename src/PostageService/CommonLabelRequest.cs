@@ -6,19 +6,21 @@ using Spring2.Core.PostageService.Enums;
 
 namespace Spring2.Core.PostageService {
     public abstract class CommonLabelRequest {
+	public CommonLabelRequest() {}
+
 	public MailpieceShapeEnum MailpieceShape { set; get; }
 
-	public MailClassEnum? MailClass { set; get; }
+	public MailClassEnum MailClass { set; get; }
 
 	public double WeightOz { set; get; }
 
-	public PackageTypeIndicatorEnum? PackageTypeIndicator { set; get; }
+	public PackageTypeIndicatorEnum PackageTypeIndicator { set; get; }
 
 	public PackageDimensions MailpieceDimensions { set; get; }
 
 	public int DateAdvance { set; get; }
 
-	public PricingEnum? Pricing { set; get; }
+	public PricingEnum Pricing { set; get; }
 
 	public SundayHolidayDeliveryEnum SundayHolidayDelivery { set; get; }
 

@@ -7,6 +7,8 @@ using Spring2.Core.PostageService.Enums;
 namespace Spring2.Core.PostageService {
     //PostageRateRequest
     public class PostageRateInputData : CommonLabelRequest {
+	public PostageRateInputData() : base() { }
+
 	public string RequesterID { set; get; }
 
 	public Credentials CertifiedIntermediary { set; get; }
@@ -25,7 +27,7 @@ namespace Spring2.Core.PostageService {
 
 	public double CODAmount { set; get; }
 
-	public string InsuredValue { set; get; }
+	public double InsuredValue { set; get; }
 
 	public double RegisteredMailValue { set; get; }
 

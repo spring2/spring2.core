@@ -38,8 +38,8 @@ namespace Spring2.Core.PostageService.Test {
 
 	    PostageRateInputData input = new PostageRateInputData() {
 		RequesterID = "partnerId",
-		MailClass = MailClassEnum.Express,
-		MailpieceShape = MailpieceShapeEnum.Parcel,
+		MailClass = MailClassEnum.EXPRESS,
+		MailpieceShape = MailpieceShapeEnum.PARCEL,
 		WeightOz = 16,
 		MailpieceDimensions = new PackageDimensions { Height = 10, Width = 5, Length = 15 },
 		Value = 100,
@@ -62,8 +62,8 @@ namespace Spring2.Core.PostageService.Test {
 
 	    PostageRateInputData input = new PostageRateInputData() {
 		RequesterID = "partnerId",
-		MailpieceShape = MailpieceShapeEnum.Parcel,
-		MailClass = MailClassEnum.Domestic,
+		MailpieceShape = MailpieceShapeEnum.PARCEL,
+		MailClass = MailClassEnum.DOMESTIC,
 		WeightOz = 16,
 		MailpieceDimensions = new PackageDimensions { Height = 10, Width = 5, Length = 15 },
 		Value = 100,
@@ -86,9 +86,9 @@ namespace Spring2.Core.PostageService.Test {
 
 	    PostageLabelInputData input = new PostageLabelInputData() {
 		Test = "Yes",
-		MailClass = MailClassEnum.Express,
+		MailClass = MailClassEnum.EXPRESS,
 		WeightOz = 50,
-		MailpieceShape = MailpieceShapeEnum.Parcel,
+		MailpieceShape = MailpieceShapeEnum.PARCEL,
 		ReferenceID = "abc", // This should be the orderId
 		FromCompany = "Spring2",
 		ReturnAddress1 = "10150 S. Centennial Parkway",

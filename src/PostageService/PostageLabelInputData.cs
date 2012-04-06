@@ -7,6 +7,8 @@ namespace Spring2.Core.PostageService {
     //LabelRequest
     public class PostageLabelInputData : CommonLabelRequest {
 
+	public PostageLabelInputData() : base() { }
+
 	public string RequesterID { set; get; }
 
 	public string AccountID { set; get; }

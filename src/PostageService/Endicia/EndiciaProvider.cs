@@ -7,6 +7,8 @@ using Spring2.Core.Configuration;
 using Spring2.Core.EwsLabelService;
 using EW = Spring2.Core.EwsLabelService;
 using S2 = Spring2.Core.PostageService;
+using Spring2.Core.Types;
+using Spring2.Core.PostageService.Enums;
 
 namespace Spring2.Core.PostageService.Endicia {
     public class EndiciaProvider : IPostageServiceProvider {
@@ -25,8 +27,7 @@ namespace Spring2.Core.PostageService.Endicia {
 	private void MapObjects() {
             Mapper.CreateMap<PostageRateInputData, PostageRateRequest>();
 	    Mapper.CreateMap<PostageRateResponse, PostageRateData>();
-	    Mapper.CreateMap<PostageRateInputData, PostageRatesRequest>()
-                .ForMember(x=>x.InsuredValue, o=>o.MapFrom(src=>Convert.ToDouble(src.InsuredValue)));
+	    Mapper.CreateMap<PostageRateInputData, PostageRatesRequest>();
 	    Mapper.CreateMap<PostageRatesResponse, PostageRatesData>();
 	    Mapper.CreateMap<PostagePurchaseInputData, RecreditRequest>();
 	    Mapper.CreateMap<RecreditRequestResponse, PurchasedPostageData>();
@@ -51,8 +52,41 @@ namespace Spring2.Core.PostageService.Endicia {
 	    Mapper.CreateMap<EW.ImageSet, S2.ImageSet>();
 	    Mapper.CreateMap<EW.ImageData, S2.ImageData>();
 
+	    MapEnums();
+
 	    Mapper.AssertConfigurationIsValid();
 	}
+
+	private void MapEnums() {
+	    Mapper.CreateMap<ContentTypeEnum, string>().ConvertUsing(x => (x == null) ? null : x.Code);
+	    Mapper.CreateMap<EntryFacilityEnum, string>().ConvertUsing(x => (x == null) ? null : x.Code);
+	    Mapper.CreateMap<InsuredMailEnum, string>().ConvertUsing(x => (x == null) ? null : x.Code);
+	    Mapper.CreateMap<IntegratedFormTypeEnum, string>().ConvertUsing(x => (x == null) ? null : x.Code);
+	    Mapper.CreateMap<MailClassEnum, string>().ConvertUsing(x => (x == null) ? null : x.Code);
+	    Mapper.CreateMap<MailpieceShapeEnum, string>().ConvertUsing(x => (x == null) ? null : x.Code);
+	    Mapper.CreateMap<NonDeliveryOptionEnum, string>().ConvertUsing(x => (x == null) ? null : x.Code);
+	    Mapper.CreateMap<OnOffEnum, string>().ConvertUsing(x => (x == null) ? null : x.Code);
+	    Mapper.CreateMap<PackageTypeIndicatorEnum, string>().ConvertUsing(x => (x == null) ? null : x.Code);
+	    Mapper.CreateMap<PricingEnum, string>().ConvertUsing(x => (x == null) ? null : x.Code);
+	    Mapper.CreateMap<RestrictionTypeEnum, string>().ConvertUsing(x => (x == null) ? null : x.Code);
+	    Mapper.CreateMap<SortTypeEnum, string>().ConvertUsing(x => (x == null) ? null : x.Code);
+	    Mapper.CreateMap<SundayHolidayDeliveryEnum, string>().ConvertUsing(x => (x == null) ? null : x.Code);
+
+	    Mapper.CreateMap<string, ContentTypeEnum>().ConvertUsing(x => ContentTypeEnum.GetInstance(x));
+	    Mapper.CreateMap<string, EntryFacilityEnum>().ConvertUsing(x => EntryFacilityEnum.GetInstance(x));
+	    Mapper.CreateMap<string, InsuredMailEnum>().ConvertUsing(x => InsuredMailEnum.GetInstance(x));
+	    Mapper.CreateMap<string, IntegratedFormTypeEnum>().ConvertUsing(x => IntegratedFormTypeEnum.GetInstance(x));
+	    Mapper.CreateMap<string, MailClassEnum>().ConvertUsing(x => MailClassEnum.GetInstance(x));
+	    Mapper.CreateMap<string, MailpieceShapeEnum>().ConvertUsing(x => MailpieceShapeEnum.GetInstance(x));
+	    Mapper.CreateMap<string, NonDeliveryOptionEnum>().ConvertUsing(x => NonDeliveryOptionEnum.GetInstance(x));
+	    Mapper.CreateMap<string, OnOffEnum>().ConvertUsing(x => OnOffEnum.GetInstance(x));
+	    Mapper.CreateMap<string, PackageTypeIndicatorEnum>().ConvertUsing(x => PackageTypeIndicatorEnum.GetInstance(x));
+	    Mapper.CreateMap<string, PricingEnum>().ConvertUsing(x => PricingEnum.GetInstance(x));
+	    Mapper.CreateMap<string, RestrictionTypeEnum>().ConvertUsing(x => RestrictionTypeEnum.GetInstance(x));
+	    Mapper.CreateMap<string, SortTypeEnum>().ConvertUsing(x => SortTypeEnum.GetInstance(x));
+	    Mapper.CreateMap<string, SundayHolidayDeliveryEnum>().ConvertUsing(x => SundayHolidayDeliveryEnum.GetInstance(x));
+	}
+
 	private void InitializeWSClient() {
 	    string uri = ConfigurationProvider.Instance.Settings["PostageService.Endicia.PostageServerUrl"] ??
 		"https://www.envmgr.com/LabelService/EwsLabelService.asmx"; //This is their test server.

@@ -57,6 +57,10 @@
       <Project>{5F9F1076-DB81-47DC-B520-D375CC31F87A}</Project>
       <Name>Spring2.Core.PostageService</Name>
     </ProjectReference>
+    <ProjectReference Include="Spring2.Core.Types.csproj">
+      <Project>{FB2D9DAA-2340-468C-8018-138748DA2EAE}</Project>
+      <Name>Spring2.Core.Types</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
