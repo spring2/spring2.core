@@ -175,7 +175,6 @@ namespace Spring2.Core.PostageService.Endicia {
 
 	public PostageLabelData GetPostageLabel(PostageLabelInputData data) {
 	    LabelRequest request = Mapper.Map<PostageLabelInputData, LabelRequest>(data);
-	    request.Test = ConfigurationProvider.Instance.Settings["PostageService.Endicia.Test"];
 	    LabelRequestResponse response = client.GetPostageLabel(request);
 	    return Mapper.Map<LabelRequestResponse, PostageLabelData>(response);
 	}
