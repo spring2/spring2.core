@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyVersionInfo.cs" />
+    <Compile Include="ChangePasswordInputData.cs" />
     <Compile Include="PostageService\AccountStatus.cs" />
     <Compile Include="PostageService\CommonLabelRequest.cs" />
     <Compile Include="PostageService\Credentials.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="PostageService\ImageData.cs" />
     <Compile Include="PostageService\ImageSet.cs" />
     <Compile Include="PostageService\PackageDimensions.cs" />
+    <Compile Include="PostageService\PasswordChangedData.cs" />
     <Compile Include="PostageService\Postage.cs" />
     <Compile Include="PostageService\PostageRate.cs" />
     <Compile Include="PostageService\PostageRatePrice.cs" />

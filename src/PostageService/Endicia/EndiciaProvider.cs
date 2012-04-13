@@ -13,26 +13,43 @@ using Spring2.Core.PostageService.Enums;
 namespace Spring2.Core.PostageService.Endicia {
     public class EndiciaProvider : IPostageServiceProvider {
 	EwsLabelServiceSoapClient client;
+	CertifiedIntermediary credentials;
 	string accountId; //accountId
 	string password;
 	string partnerId;
 
 	public EndiciaProvider() {
 	    InitializeWSClient();
-	    MapObjects();
 	    SetCredentials();
+	    MapObjects();
 	}
+
+
 
 	#region initializations
 	private void MapObjects() {
-            Mapper.CreateMap<PostageRateInputData, PostageRateRequest>();
+            Mapper.CreateMap<PostageRateInputData, PostageRateRequest>()
+		.ForMember(x => x.RequesterID, o => o.UseValue(partnerId))
+		.ForMember(x => x.CertifiedIntermediary, o => o.UseValue(credentials));
 	    Mapper.CreateMap<PostageRateResponse, PostageRateData>();
-	    Mapper.CreateMap<PostageRateInputData, PostageRatesRequest>();
+	    Mapper.CreateMap<PostageRateInputData, PostageRatesRequest>()
+		.ForMember(x => x.RequesterID, o => o.UseValue(partnerId))
+		.ForMember(x => x.CertifiedIntermediary, o => o.UseValue(credentials));
 	    Mapper.CreateMap<PostageRatesResponse, PostageRatesData>();
-	    Mapper.CreateMap<PostagePurchaseInputData, RecreditRequest>();
+	    Mapper.CreateMap<PostagePurchaseInputData, RecreditRequest>()
+		.ForMember(x => x.RequesterID, o => o.UseValue(partnerId))
+		.ForMember(x => x.CertifiedIntermediary, o => o.UseValue(credentials));
 	    Mapper.CreateMap<RecreditRequestResponse, PurchasedPostageData>();
-	    Mapper.CreateMap<PostageLabelInputData, LabelRequest>();
+	    Mapper.CreateMap<PostageLabelInputData, LabelRequest>()
+		.ForMember(x => x.RequesterID, o => o.UseValue(partnerId))
+		.ForMember(x => x.AccountID, o => o.UseValue(accountId))
+		.ForMember(x => x.PassPhrase, o => o.UseValue(password));
 	    Mapper.CreateMap<LabelRequestResponse, PostageLabelData>();
+	    Mapper.CreateMap<ChangePasswordInputData, ChangePassPhraseRequest>()
+		.ForMember(x => x.NewPassPhrase, o => o.MapFrom(src => src.NewPassword))
+		.ForMember(x=>x.RequesterID, o => o.UseValue(partnerId))
+		.ForMember(x => x.CertifiedIntermediary, o => o.UseValue(credentials));
+	    Mapper.CreateMap<ChangePassPhraseRequestResponse, PasswordChangedData>();
 	    Mapper.CreateMap<Credentials, CertifiedIntermediary>()
 		.ForMember(x => x.PassPhrase, o => o.MapFrom(src => src.Password))
 		.ForMember(x => x.AccountID, o => o.MapFrom(src => src.Username));
@@ -86,7 +103,6 @@ namespace Spring2.Core.PostageService.Endicia {
 	    Mapper.CreateMap<string, SortTypeEnum>().ConvertUsing(x => SortTypeEnum.GetInstance(x));
 	    Mapper.CreateMap<string, SundayHolidayDeliveryEnum>().ConvertUsing(x => SundayHolidayDeliveryEnum.GetInstance(x));
 	}
-
 	private void InitializeWSClient() {
 	    string uri = ConfigurationProvider.Instance.Settings["PostageService.Endicia.PostageServerUrl"] ??
 		"https://www.envmgr.com/LabelService/EwsLabelService.asmx"; //This is their test server.
@@ -127,44 +143,39 @@ namespace Spring2.Core.PostageService.Endicia {
 	    accountId = ConfigurationProvider.Instance.Settings["PostageService.Endicia.AccountId"];
 	    password = ConfigurationProvider.Instance.Settings["PostageService.Endicia.Password"];
 	    partnerId = ConfigurationProvider.Instance.Settings["PostageService.Endicia.PartnerId"];
+	    credentials = new CertifiedIntermediary {
+		AccountID = accountId, PassPhrase = password
+	    };
 	}
 	#endregion
 
+	public PasswordChangedData ChangePassword(ChangePasswordInputData data) {
+	    ChangePassPhraseRequest request = Mapper.Map<ChangePasswordInputData, ChangePassPhraseRequest>(data);
+	    ChangePassPhraseRequestResponse response = client.ChangePassPhrase(request);
+	    return Mapper.Map<ChangePassPhraseRequestResponse, PasswordChangedData>(response);
+	}
+
 	public PostageRateData GetPostageRate(PostageRateInputData data) {
 	    PostageRateRequest request = Mapper.Map<PostageRateInputData, PostageRateRequest>(data);
-	    request.CertifiedIntermediary = new CertifiedIntermediary {
-		AccountID = accountId,
-		PassPhrase = password
-	    };
 	    PostageRateResponse response = client.CalculatePostageRate(request);
 	    return Mapper.Map<PostageRateResponse, PostageRateData>(response);
 	}
 
 	public PostageRatesData GetPostageRates(PostageRateInputData data) {
 	    PostageRatesRequest request = Mapper.Map<PostageRateInputData, PostageRatesRequest>(data);
-	    request.CertifiedIntermediary = new CertifiedIntermediary {
-		AccountID = accountId,
-		PassPhrase = password
-	    };
 	    PostageRatesResponse response = client.CalculatePostageRates(request);
 	    return Mapper.Map<PostageRatesResponse, PostageRatesData>(response);
 	}
 
 	public PurchasedPostageData BuyPostage(PostagePurchaseInputData data) {
 	    RecreditRequest request = Mapper.Map<PostagePurchaseInputData, RecreditRequest>(data);
-	    request.CertifiedIntermediary = new CertifiedIntermediary {
-		AccountID = accountId,
-		PassPhrase = password
-	    };
 	    RecreditRequestResponse response = client.BuyPostage(request);
 	    return Mapper.Map<RecreditRequestResponse, PurchasedPostageData>(response);
 	}
 
 	public PostageLabelData GetPostageLabel(PostageLabelInputData data) {
 	    LabelRequest request = Mapper.Map<PostageLabelInputData, LabelRequest>(data);
-	    request.AccountID = accountId;
-	    request.PassPhrase = password;
-	    request.RequesterID = partnerId;
+	    request.Test = ConfigurationProvider.Instance.Settings["PostageService.Endicia.Test"];
 	    LabelRequestResponse response = client.GetPostageLabel(request);
 	    return Mapper.Map<LabelRequestResponse, PostageLabelData>(response);
 	}

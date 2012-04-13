@@ -20,5 +20,9 @@ namespace Spring2.Core.PostageService {
 	public PostageLabelData GetPostageLabel(PostageLabelInputData data) {
 	    throw new PostageServiceException("NullPostageServiceProvider is not a valid provider.");
 	}
+
+	public PasswordChangedData ChangePassword(ChangePasswordInputData data) {
+	    throw new PostageServiceException("NullPostageServiceProvider is not a valid provider.");
+	}
     }
 }

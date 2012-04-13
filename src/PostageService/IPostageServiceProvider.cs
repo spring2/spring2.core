@@ -10,5 +10,6 @@ namespace Spring2.Core.PostageService {
 	PostageRatesData GetPostageRates(PostageRateInputData data);
 	PurchasedPostageData BuyPostage(PostagePurchaseInputData data);
 	PostageLabelData GetPostageLabel(PostageLabelInputData data);
+	PasswordChangedData ChangePassword(ChangePasswordInputData data);
     }
 }

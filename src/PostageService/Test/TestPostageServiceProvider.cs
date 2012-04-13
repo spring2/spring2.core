@@ -20,5 +20,9 @@ namespace Spring2.Core.PostageService.Test {
 	public PostageLabelData GetPostageLabel(PostageLabelInputData data) {
 	    return new PostageLabelData();
 	}
+
+	public PasswordChangedData ChangePassword(ChangePasswordInputData data) {
+	    return new PasswordChangedData();
+	}
     }
 }

@@ -21,6 +21,7 @@ namespace Spring2.Core.PostageService.Test {
 	    provider.Settings["PostageService.Endicia.AccountId"] = "123123";
 	    provider.Settings["PostageService.Endicia.Password"] = "password";
 	    provider.Settings["PostageService.Endicia.PartnerId"] = "123123";
+	    provider.Settings["PostageService.Endicia.Test"] = "Yes";
 
 	    provider.Settings.Add(currentProvider.Settings);
 	    ConfigurationProvider.SetProvider(provider);
@@ -37,7 +38,6 @@ namespace Spring2.Core.PostageService.Test {
 	    IPostageServiceProvider postage = new EndiciaProvider();
 
 	    PostageRateInputData input = new PostageRateInputData() {
-		RequesterID = "partnerId",
 		MailClass = MailClassEnum.EXPRESS,
 		MailpieceShape = MailpieceShapeEnum.PARCEL,
 		WeightOz = 16,
@@ -61,7 +61,6 @@ namespace Spring2.Core.PostageService.Test {
 	    IPostageServiceProvider postage = new EndiciaProvider();
 
 	    PostageRateInputData input = new PostageRateInputData() {
-		RequesterID = "partnerId",
 		MailpieceShape = MailpieceShapeEnum.PARCEL,
 		MailClass = MailClassEnum.DOMESTIC,
 		WeightOz = 16,
@@ -85,7 +84,6 @@ namespace Spring2.Core.PostageService.Test {
 	    IPostageServiceProvider postage = new EndiciaProvider();
 
 	    PostageLabelInputData input = new PostageLabelInputData() {
-		Test = "Yes",
 		MailClass = MailClassEnum.EXPRESS,
 		WeightOz = 50,
 		MailpieceShape = MailpieceShapeEnum.PARCEL,
@@ -131,5 +129,21 @@ namespace Spring2.Core.PostageService.Test {
 	    Console.WriteLine(data.ErrorMessage);
 	    Assert.IsTrue(data.ErrorMessage.Contains("The data for RecreditRequest XML (BuyPostage) has been validated"));
 	}
+
+	[Test]
+	public void ResetPassword() {
+	    EndiciaProvider postage = new EndiciaProvider();
+	    ChangePasswordInputData input = new ChangePasswordInputData {
+		NewPassword = "abc123",
+		RequestId = Guid.NewGuid().ToString()
+	    };
+
+	    PasswordChangedData data = postage.ChangePassword(input);
+	    Assert.IsNotNull(data);
+	    Console.WriteLine(data.ErrorMessage);
+	    Assert.IsTrue(data.ErrorMessage.Contains("The data for ChangePassPhraseRequest XML (ChangePassPhrase) has been validated."));
+
+	}
+
     }
 }

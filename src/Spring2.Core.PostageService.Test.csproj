@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="PostageService\Test\EndiciaProviderTest.cs" />
     <Compile Include="PostageService\Test\PostageServiceManagerTest.cs" />
-    <Compile Include="PostageService\Test\TestPostageServiceProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
