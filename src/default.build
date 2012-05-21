@@ -1,15 +1,14 @@
 <?xml version="1.0" ?>
 <project name="Spring2.Core" default="build" xmlnds="http://tempuri.org/nant-vs.xsd">
-    <property name="build.dir" value="..\build" />
     <property name="build.configuration" value="debug" />
     <!--<property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\MSBuild.exe" />-->
     <property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild.exe" />
 
     <property name="debug" value="true" />
-    <property name="build.root" value="..\" />
-    <property name="build.dir" value="..\build" />
-    <property name="release.dir" value="..\release" />
-    <property name="src.dir" value="..\src" />
+    <property name="build.root" value="../" />
+    <property name="build.dir" value="../build" />
+    <property name="release.dir" value="../release" />
+    <property name="src.dir" value="../src" />
     <property name="build.major" value="x" />
     <property name="build.minor" value="x" />
     <property name="build.build" value="x" />
