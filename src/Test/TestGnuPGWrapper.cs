@@ -12,13 +12,9 @@ namespace Spring2.Core.Test {
     [TestFixture]
     public class TestGnuPGWrapper {
 	
-#if (NET_1_1 || NET_2_0)
 	private DirectoryInfo gpgDirectory = new DirectoryInfo(@"..\\..\\src\\Test\\GnuPG");
 	private DirectoryInfo testDirectory = new DirectoryInfo(@"..\\..\\src\\Test");
-#else
-	private DirectoryInfo gpgDirectory = new DirectoryInfo(@"..\\..\\src\\Test\\GnuPG");
-	private DirectoryInfo testDirectory = new DirectoryInfo(@"..\\..\\src\\Test");
-#endif
+
 	private static readonly string TEST_STRING = "This is a test of the GnuPG wrapper.";
 
 	/// <summary>

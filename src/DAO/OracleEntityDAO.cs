@@ -3,7 +3,8 @@ using System.Data;
 using System.Data.OracleClient;
 
 namespace Spring2.Core.DAO {
- 
+//System.Data.OracleClient is obsolete
+#pragma warning disable 0618
     public abstract class OracleEntityDAO : BaseEntityDAO { 
 
 	protected override IDbCommand GetDbCommand(String key, IDbTransaction transaction) {
@@ -42,4 +43,5 @@ namespace Spring2.Core.DAO {
 	    return connection;
 	}
     }
+#pragma warning restore 0618
 }

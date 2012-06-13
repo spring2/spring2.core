@@ -1,9 +1,5 @@
 using System;
-#if (NET_1_1)
-using Spring2.Core.ResourceManager.Facade;
-#else
 using System.Collections.Generic;
-#endif
 using NUnit.Framework;
 using Spring2.Core.Types;
 
@@ -68,11 +64,7 @@ namespace Spring2.Core.ResourceManager.Test {
 	    IResource resource = testUtil.CreateTestResource();
 	    ILocalizedResource localizedResource = testUtil.CreateTestLocalizedResource();
 
-#if (NET_1_1)
-    	    ResourceDictionary list = editor.GetPossibleLocalizedResources(resource.Context, localizedResource.Locale, localizedResource.Language);
-#else    	
 	    Dictionary<IResource, ILocalizedResource> list = editor.GetPossibleLocalizedResources(resource.Context, localizedResource.Locale, localizedResource.Language);
-#endif
 
 	    //check that expected resources are in list
 	    foreach(IResource resourceFromKey in list.Keys) {
@@ -94,12 +86,7 @@ namespace Spring2.Core.ResourceManager.Test {
 	    ILocalizedResource localizedResource = testUtil.CreateTestLocalizedResource();
 
 	    StringType truncatedSearchText = resource.Context.Substring(1, resource.Context.Length - 2);
-
-#if (NET_1_1)
-    	    ResourceDictionary list = editor.SearchPossibleLocalizedResources(truncatedSearchText, localizedResource.Locale, localizedResource.Language);
-#else
 	    Dictionary<IResource, ILocalizedResource> list = editor.SearchPossibleLocalizedResources(truncatedSearchText, localizedResource.Locale, localizedResource.Language);
-#endif
 
 	    //check that expected resources are in list
 	    foreach (IResource resourceFromKey in list.Keys) {
@@ -121,12 +108,7 @@ namespace Spring2.Core.ResourceManager.Test {
 	    ILocalizedResource localizedResource = testUtil.CreateTestLocalizedResource();
 
 	    StringType truncatedSearchText = localizedResource.Content.Substring(1, resource.Context.Length - 2);
-
-#if (NET_1_1)
-    	    ResourceDictionary list = editor.SearchPossibleLocalizedResources(truncatedSearchText, localizedResource.Locale, localizedResource.Language);
-#else
 	    Dictionary<IResource, ILocalizedResource> list = editor.SearchPossibleLocalizedResources(truncatedSearchText, localizedResource.Locale, localizedResource.Language);
-#endif
 
 	    //check that expected resources are in list
 	    foreach (IResource resourceFromKey in list.Keys) {
@@ -146,12 +128,7 @@ namespace Spring2.Core.ResourceManager.Test {
 	public void GetAllPossibleLocalizedResourcesByContextAndField() {
 	    IResource resource = testUtil.CreateTestResource();
 	    ILocalizedResource localizedResource = testUtil.CreateTestLocalizedResource();
-
-#if (NET_1_1)
-	    ResourceDictionary list = editor.GetPossibleLocalizedResources(resource.Context, resource.Field, localizedResource.Locale, localizedResource.Language);
-#else    	
 	    Dictionary<IResource, ILocalizedResource> list = editor.GetPossibleLocalizedResources(resource.Context, resource.Field, localizedResource.Locale, localizedResource.Language);
-#endif
 
 	    //check that expected resources are in list
 	    foreach(IResource resourceFromKey in list.Keys) {
@@ -170,11 +147,7 @@ namespace Spring2.Core.ResourceManager.Test {
 	[Test()]
 	public void GetLocalizedResourceByContextFieldAndIdentity() {
 	    ILocalizedResource localizedResource = testUtil.CreateTestLocalizedResource();
-#if (NET_1_1)
-	    ResourceDictionary list = editor.GetPossibleLocalizedResources(localizedResource.Resource.Context, localizedResource.Resource.Field, localizedResource.Resource.Identity, localizedResource.Locale, localizedResource.Language);
-#else    	
 	    Dictionary<IResource, ILocalizedResource> list = editor.GetPossibleLocalizedResources(localizedResource.Resource.Context, localizedResource.Resource.Field, localizedResource.Resource.Identity, localizedResource.Locale, localizedResource.Language);
-#endif
     
 	    Assert.IsTrue(list.Count == 1, "Should have found the one localized resource");
 	}

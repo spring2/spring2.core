@@ -45,13 +45,13 @@ namespace Google.Api.Maps.Service {
 
 
 	public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
-	    if (value == typeof(ServiceResponseStatus))
+	    if (value.GetType() == typeof(ServiceResponseStatus))
 		writer.WriteValue("\"" + FromResponseStatus((ServiceResponseStatus)value) + "\"");
 
-	    if (value == typeof(AddressType))
+	    if (value.GetType() == typeof(AddressType))
 		writer.WriteValue("\"" + FromAddressType((AddressType)value) + "\"");
 
-	    if (value == typeof(LocationType))
+	    if (value.GetType() == typeof(LocationType))
 		writer.WriteValue("\"" + FromLocationType((LocationType)value) + "\"");
 	}
 

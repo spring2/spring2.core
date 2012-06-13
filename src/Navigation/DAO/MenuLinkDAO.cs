@@ -536,13 +536,9 @@ namespace Spring2.Core.Navigation.Dao {
 			IDataReader reader = cmd.ExecuteReader();
 
 			result = reader.Read() ? GetDataObjectFromReader(reader) : null;
-#if (NET_1_1)
-			cmd.Connection.Close();
-#else
 			if (DbConnectionScope.Current == null) {
 				cmd.Connection.Close();
 			}
-#endif
 		}
 
 		return result;
@@ -576,13 +572,9 @@ namespace Spring2.Core.Navigation.Dao {
 			IDataReader reader = cmd.ExecuteReader();
 
 			result = reader.Read() ? GetDataObjectFromReader(reader) : null;
-#if (NET_1_1)
-			cmd.Connection.Close();
-#else
 			if (DbConnectionScope.Current == null) {
 				cmd.Connection.Close();
 			}
-#endif
 		}
 
 		return result;
@@ -610,13 +602,9 @@ namespace Spring2.Core.Navigation.Dao {
 
 			result = (reader.Read() && !reader.IsDBNull(ordinal)) ? new IdType(reader.GetInt32(ordinal)) : 1;
 
-#if (NET_1_1)
-			cmd.Connection.Close();
-#else
 			if (DbConnectionScope.Current == null) {
 				cmd.Connection.Close();
 			}
-#endif
 		}
 
 		return result;
@@ -644,13 +632,9 @@ namespace Spring2.Core.Navigation.Dao {
 
 			result = (reader.Read() && !reader.IsDBNull(ordinal)) ? new IdType(reader.GetInt32(ordinal)) : 1;
 
-#if (NET_1_1)
-			cmd.Connection.Close();
-#else
 			if (DbConnectionScope.Current == null) {
 				cmd.Connection.Close();
 			}
-#endif
 		}
 
 		return result;

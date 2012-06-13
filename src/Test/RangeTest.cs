@@ -1,5 +1,3 @@
-#if (NET_1_1)
-#else
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -58,4 +56,3 @@ namespace Spring2.Core.Test
 		}
 	}
 }
-#endif

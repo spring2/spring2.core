@@ -107,10 +107,6 @@ namespace Spring2.Core.DAO {
 
 	protected override IDbConnection CreateConnection(String connectionString) {
 	    IDbConnection connection = null;
-#if (NET_1_1)
-	    connection = new SqlConnection(connectionString);
-	    connection.Open();
-#else
 	    // check to see if there is a current connection scope and pull connection from that, otherwise create and open a new one
 	    if (DbConnectionScope.Current != null) {
 		connection = DbConnectionScope.Current.GetOpenConnection(SqlClientFactory.Instance, connectionString, false);
@@ -118,7 +114,6 @@ namespace Spring2.Core.DAO {
 		connection = new SqlConnection(connectionString);
 		connection.Open();
 	    }
-#endif
 	    InitConnection(connection);
 	    return connection;
 	}

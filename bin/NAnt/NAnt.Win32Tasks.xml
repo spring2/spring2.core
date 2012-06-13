@@ -155,7 +155,14 @@
         <member name="P:NAnt.Win32.Tasks.AxImpTask.RcwFile">
             <summary>
             Assembly to use for Runtime Callable Wrapper rather than generating 
-            new one. Only supported on .NET 1.1 or higher.
+            new one [.NET 1.1 or higher].
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.AxImpTask.SupportsRcw">
+            <summary>
+            Indicates whether <c>aximp</c> supports using an existing Runtime
+            Callable Wrapper for a given target framework. The default is 
+            <see langword="true" />.
             </summary>
         </member>
         <member name="P:NAnt.Win32.Tasks.AxImpTask.ProgramArguments">
@@ -165,6 +172,116 @@
             <value>
             The command-line arguments for the external program.
             </value>
+        </member>
+        <member name="T:NAnt.Win32.Tasks.LocateSdkTask">
+            <summary>
+            Reads the most recent Windows SDK InstallationFolder key into a NAnt property
+            </summary>
+            <example>
+              <code>
+                <![CDATA[
+            <locatesdk property="dotNetFX" minsdk="v6.0" />
+                ]]>
+              </code>
+            </example>
+        </member>
+        <member name="M:NAnt.Win32.Tasks.LocateSdkTask.ExecuteTask">
+            <summary>
+            locate the most recent WinSDK installed
+            </summary>
+        </member>
+        <member name="M:NAnt.Win32.Tasks.LocateSdkTask.StringToVersion(System.String)">
+            <summary>
+            Converts a version expressed as a string into a Version object 
+            </summary>
+            <param name="sdkVersion">
+            A <see cref="T:System.String"/> containing the version to convert.
+            </param>
+            <returns>
+            A <see cref="T:System.Version"/> object representing the version string.
+            </returns>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.LocateSdkTask.PropertyName">
+            <summary>
+                <para>
+                The property to set to the value stored in the InstalledFolder key of the located WinSDK version.
+                </para>
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.LocateSdkTask.MinWinSdkVersion">
+            <summary>
+                <para>
+                The minimum acceptable Windows SDK version.
+                </para>
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.LocateSdkTask.MaxWinSdkVersion">
+            <summary>
+                <para>
+                The maximum acceptable Windows SDK version.
+                </para>
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.LocateSdkTask.MinNetFxVersion">
+            <summary>
+                <para>
+                The minimum acceptable .NET sdk version.
+                </para>
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.LocateSdkTask.MaxNetFxVersion">
+            <summary>
+                <para>
+                The maximum acceptable .NET sdk version.
+                </para>
+            </summary>
+        </member>
+        <member name="T:NAnt.Win32.Tasks.MonoRegistryTask">
+            <summary>
+            Reads the mono registry path into a NAnt property.
+            </summary>
+            <remarks>
+            The mono registry keyes can exist in one of two places depending on the platform. This
+            task will check to see which registry path that Mono is using.
+            </remarks>
+            <example>
+              <code>
+                <![CDATA[
+            <monoregistry property="mono.reg" />
+                ]]>
+              </code>
+            </example>
+        </member>
+        <member name="F:NAnt.Win32.Tasks.MonoRegistryTask._defaultRegKey">
+            <summary>
+            The Mono reg key to default to if none of the keys in _regKeys are found
+            in the running machine.
+            </summary>
+        </member>
+        <member name="F:NAnt.Win32.Tasks.MonoRegistryTask._propName">
+            <summary>
+            Private property name to assign the Mono registry path to.
+            </summary>
+        </member>
+        <member name="F:NAnt.Win32.Tasks.MonoRegistryTask._regKeys">
+            <summary>
+            Private array of Mono registry paths to test in order.
+            </summary>
+            <remarks>
+            If new registry paths are used by the Mono team, add them to this array.
+            </remarks>
+        </member>
+        <member name="M:NAnt.Win32.Tasks.MonoRegistryTask.ExecuteTask">
+            <summary>
+            Locates the appropriate Mono registry path to use.
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.MonoRegistryTask.PropertyName">
+            <summary>
+            <para>
+            The property to set to the Mono registry path.
+            </para>
+            </summary>
         </member>
         <member name="T:NAnt.Win32.Tasks.ReadRegistryTask">
             <summary>
@@ -241,6 +358,139 @@
             </summary>
             <remarks>
             <seealso cref="T:Microsoft.Win32.RegistryHive"/>
+            </remarks>
+        </member>
+        <member name="T:NAnt.Win32.Tasks.RegAsmTask">
+            <summary>
+            Registers an assembly, or set of assemblies for use from COM clients.
+            </summary>
+            <remarks>
+              <para>
+              Refer to the <see href="ms-help://MS.VSCC/MS.MSDNVS/cptools/html/cpgrfassemblyregistrationtoolregasmexe.htm">Regasm</see> 
+              documentation for more information on the regasm tool.
+              </para>
+            </remarks>
+            <example>
+              <para>
+              Register types in a single assembly.
+              </para>
+              <code>
+                <![CDATA[
+            <regasm assembly="myAssembly.dll" />
+                ]]>
+              </code>
+            </example>
+            <example>
+              <para>
+              Register types of an assembly and generate a type library containing
+              definitions of accessible types defined within the assembly.
+              </para>
+              <code>
+                <![CDATA[
+            <regasm assembly="myAssembly.dll" typelib="myAssembly.tlb" />
+                ]]>
+              </code>
+            </example>
+            <example>
+              <para>
+              Register types of set of assemblies at once, while specifying a set
+              of reference assemblies.
+              </para>
+              <code>
+                <![CDATA[
+            <regasm codebase="true">
+                <assemblies>
+                    <include name="OutlookAddin.dll" />
+                    <include name="OfficeCoreAddin.dll" />
+                </assemblies>
+                <references>
+                    <include name="CommonTypes.dll" />
+                </references>
+            </regasm>
+                ]]>
+              </code>
+            </example>
+        </member>
+        <member name="M:NAnt.Win32.Tasks.RegAsmTask.PrepareProcess(System.Diagnostics.Process)">
+            <summary>
+            Updates the <see cref="T:System.Diagnostics.ProcessStartInfo"/> of the specified 
+            <see cref="T:System.Diagnostics.Process"/>.
+            </summary>
+            <param name="process">The <see cref="T:System.Diagnostics.Process"/> of which the <see cref="T:System.Diagnostics.ProcessStartInfo"/> should be updated.</param>
+        </member>
+        <member name="M:NAnt.Win32.Tasks.RegAsmTask.ExecuteTask">
+            <summary>
+            Registers or unregisters a single assembly, or a group of assemblies.
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.RegAsmTask.AssemblyFile">
+            <summary>
+            The name of the file to register. This is provided as an alternate 
+            to using the task's <see cref="P:NAnt.Win32.Tasks.RegAsmTask.Assemblies"/>.
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.RegAsmTask.RegistryFile">
+            <summary>
+            Registry file to export to instead of entering the types directly 
+            into the registry.
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.RegAsmTask.CodeBase">
+            <summary>
+            Set the code base registry setting.
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.RegAsmTask.Registered">
+            <summary>
+            Only refer to already registered type libraries.
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.RegAsmTask.TypeLib">
+            <summary>
+            Export the assemblies to the specified type library and register it.
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.RegAsmTask.Unregister">
+            <summary>
+            Unregister the assembly. The default is <see langword="false" />.
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.RegAsmTask.Assemblies">
+            <summary>
+            The set of assemblies to register, or unregister.
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.RegAsmTask.References">
+            <summary>
+            The set of assembly references.
+            </summary>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.RegAsmTask.BaseDirectory">
+            <summary>
+            Gets the working directory for the application.
+            </summary>
+            <value>
+            The working directory for the application.
+            </value>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.RegAsmTask.ProgramArguments">
+            <summary>
+            Gets the command line arguments for the external program.
+            </summary>
+            <value>
+            The command line arguments for the external program.
+            </value>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.RegAsmTask.ProgramFileName">
+            <summary>
+            Gets the filename of the external program to start.
+            </summary>
+            <value>
+            The filename of the external program.
+            </value>
+            <remarks>
+            Override in derived classes to explicitly set the location of the 
+            external tool.
             </remarks>
         </member>
         <member name="T:NAnt.Win32.Tasks.TlbExpTask">
@@ -331,6 +581,23 @@
               <code>
                 <![CDATA[
             <tlbimp typelib="LegacyCOM.dll" output="DotNetAssembly.dll" />
+                ]]>
+              </code>
+            </example>
+            <example>
+              <para>
+              Generate an assembly named &quot;Interop.MSVidCtlLib.dll&quot; for the
+              MS Video Control 1.0 Type Library, transforming any [out, retval]
+              parameters of methods on dispinterfaces in the type library into 
+              return values in the managed library.
+              </para>
+              <code>
+                <![CDATA[
+            <tlbimp typelib="msvidctl.dll" output="Interop.MSVidCtlLib.dll" transform="dispret">
+                <references basedir="Interop">
+                    <include name="Interop.TunerLib.dll" />
+                </references>
+            </tlbimp>
                 ]]>
               </code>
             </example>
@@ -479,14 +746,19 @@
         <member name="P:NAnt.Win32.Tasks.TlbImpTask.SysArray">
             <summary>
             Specifies whether to import a COM style SafeArray as a managed 
-            <see cref="T:System.Array"/> class type. The default is <see langword="false"/>.
+            <see cref="T:System.Array" /> class type. The default is <see langword="false" />.
             </summary>
             <value>
-            <see langword="true"/> if a COM style SafeArray should be imported 
-            as a managed <see cref="T:System.Array"/> class type; otherwise, 
-            <see langword="false"/>.
+            <see langword="true" /> if a COM style SafeArray should be imported 
+            as a managed <see cref="T:System.Array" /> class type; otherwise, 
+            <see langword="false" />.
             </value>
             <remarks><a href="ms-help://MS.NETFrameworkSDK/cptools/html/cpgrftypelibraryimportertlbimpexe.htm">See the Microsoft.NET Framework SDK documentation for details.</a></remarks>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.TlbImpTask.Transform">
+            <summary>
+            Specifies how to transform the metadata [.NET 1.1 or higher].
+            </summary>
         </member>
         <member name="P:NAnt.Win32.Tasks.TlbImpTask.TypeLib">
             <summary>
@@ -509,6 +781,12 @@
             checks should be produced; otherwise, <see langword="false" />.
             </value>
             <remarks><a href="ms-help://MS.NETFrameworkSDK/cptools/html/cpgrftypelibraryimportertlbimpexe.htm">See the Microsoft.NET Framework SDK documentation for details.</a></remarks>
+        </member>
+        <member name="P:NAnt.Win32.Tasks.TlbImpTask.SupportsTransform">
+            <summary>
+            Indicates whether <c>tlbimp</c> supports transforming metadata for
+            a given target framework. The default is <see langword="true" />.
+            </summary>
         </member>
         <member name="P:NAnt.Win32.Tasks.TlbImpTask.ProgramArguments">
             <summary>

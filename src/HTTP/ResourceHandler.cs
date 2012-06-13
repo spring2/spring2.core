@@ -77,7 +77,7 @@ namespace Spring2.Core.HTTP {
 	    switch(GetExtension(resource)) {
 		case "JPG":
 		case "JPEG":
-		    contentType = "image/jpg";
+		    contentType = "image/jpeg";
 		    imageFormat = ImageFormat.Jpeg;
 		    break;
 		case "PNG":

@@ -1,5 +1,3 @@
-#if (NET_1_1)
-#else
 using System;
 
 using NUnit.Framework;
@@ -176,4 +174,3 @@ namespace Spring2.Core.Test {
 
 
 }
-#endif

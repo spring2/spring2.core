@@ -161,9 +161,6 @@ namespace Spring2.Core.DAO {
 	    }
 			 
 	    try { 
-#if (NET_1_1)
-		IDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-#else
 		// if there is a current connection scope, don't close the connection when the reader is closed
 		IDataReader reader;
 		if (DbConnectionScope.Current != null) {
@@ -171,7 +168,6 @@ namespace Spring2.Core.DAO {
 		} else {
 		    reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 		}
-#endif
 		return reader;
 	    } catch (Exception ex) { 
 		throw new DaoException(ex.Message + " [running statement: " + sql + "]", ex);
@@ -191,9 +187,6 @@ namespace Spring2.Core.DAO {
 	    }
 			 
 	    try {
-#if (NET_1_1)
-		IDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-#else
 		// if there is a current connection scope, don't close the connection when the reader is closed
 		IDataReader reader;
 		if (DbConnectionScope.Current != null) {
@@ -201,7 +194,6 @@ namespace Spring2.Core.DAO {
 		} else {
 		    reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 		}
-#endif
 		return reader;
 	    } catch (Exception ex) { 
 		throw new DaoException(ex.Message + " [running statement: " + sql + "]", ex);

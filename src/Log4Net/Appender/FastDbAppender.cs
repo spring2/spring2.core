@@ -68,10 +68,7 @@ namespace Spring2.Core.Log4Net.Appender {
 	}
 
 	public virtual void DoAppend(LoggingEvent loggingEvent) {
-#if (!NET_1_1)
 	    using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Suppress)) {
-#endif
-
 		using (IDbConnection connection = GetConnection()) {
 		    // Open the connection for each event, this takes advantage
 		    // of the builtin connection pooling
@@ -84,18 +81,13 @@ namespace Spring2.Core.Log4Net.Appender {
 			command.ExecuteNonQuery();
 		    }
 		}
-#if (!NET_1_1)
 		scope.Complete();
 	    }
-#endif
 
 	}
 
 	public virtual void DoAppend(LoggingEvent[] loggingEvents) {
-#if (!NET_1_1)
 	    using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Suppress)) {
-#endif
-
 		using (IDbConnection connection = GetConnection()) {
 		    // Open the connection for each event, this takes advantage
 		    // of the builtin connection pooling
@@ -109,12 +101,8 @@ namespace Spring2.Core.Log4Net.Appender {
 			    command.ExecuteNonQuery();
 			}
 		    }
-
-#if (!NET_1_1)
 		    scope.Complete();
 		}
-#endif
-
 	    }
 	}
 

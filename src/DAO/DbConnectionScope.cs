@@ -1,5 +1,3 @@
-#if (NET_1_1)
-#else
 // Copyright (c) 2006, Microsoft Corporation
 //
 //  Author: Alazel Acheson
@@ -412,4 +410,3 @@ namespace Spring2.Core.DAO {
        #endregion
     }
 }
-#endif

@@ -1,9 +1,5 @@
 using System;
-#if (NET_1_1)
-#else
 using System.Collections.Generic;
-#endif
-
 using Spring2.Core.Types;
 using Spring2.Core.DAO;
 
@@ -71,17 +67,9 @@ namespace Spring2.Core.ResourceManager.Facade {
 	    return Resource.GetListBySearchText(searchText);
 	}
 
-#if (NET_1_1)
-    public ResourceDictionary GetPossibleLocalizedResources(StringType context, ILocale locale, ILanguage language) {
-#else    	
 	public Dictionary<IResource, ILocalizedResource> GetPossibleLocalizedResources(StringType context, ILocale locale, ILanguage language) {
-#endif
 	    ResourceList resources = this.GetResources(context);
-#if (NET_1_1)
-    	    ResourceDictionary list = new ResourceDictionary();
-#else    	
 	    Dictionary<IResource, ILocalizedResource> list = new Dictionary<IResource, ILocalizedResource>();
-#endif
 	    foreach(IResource resource in resources) {
 		try {
 		    list[resource] = LocalizedResource.GetInstance(resource.ResourceId, locale, language);
@@ -92,18 +80,9 @@ namespace Spring2.Core.ResourceManager.Facade {
 	    return list;
 	}
 
-#if (NET_1_1)
-	public ResourceDictionary GetPossibleLocalizedResources(StringType context, StringType field, ILocale locale, ILanguage language) {
-#else    	
 	public Dictionary<IResource, ILocalizedResource> GetPossibleLocalizedResources(StringType context, StringType field, ILocale locale, ILanguage language) {
-#endif
 	    ResourceList resources = this.GetResources(context, field);
-#if (NET_1_1)
-	    ResourceDictionary list = new ResourceDictionary();
-#else    	
 	    Dictionary<IResource, ILocalizedResource> list = new Dictionary<IResource, ILocalizedResource>();
-#endif
-
 	    foreach(IResource resource in resources) {
 		try {
 		    list[resource] = LocalizedResource.GetInstance(resource.ResourceId, locale, language);
@@ -114,17 +93,9 @@ namespace Spring2.Core.ResourceManager.Facade {
 	    return list;
 	}
 
-#if (NET_1_1)
-	public ResourceDictionary GetPossibleLocalizedResources(StringType context, StringType field, IdType identity, ILocale locale, ILanguage language) {
-#else    	
 	public Dictionary<IResource, ILocalizedResource> GetPossibleLocalizedResources(StringType context, StringType field, IdType identity, ILocale locale, ILanguage language) {
-#endif
 	    Resource resource = Resource.GetInstance(context, field, identity);
-#if (NET_1_1)
-	    ResourceDictionary list = new ResourceDictionary();
-#else    	
 	    Dictionary<IResource, ILocalizedResource> list = new Dictionary<IResource, ILocalizedResource>();
-#endif
 
 	    try {
 		list[resource] = LocalizedResource.GetInstance(resource.ResourceId, locale, language);
@@ -134,16 +105,8 @@ namespace Spring2.Core.ResourceManager.Facade {
 	    return list;
 	}
 
-#if (NET_1_1)
-	public ResourceDictionary GetPossibleLocalizedResources(StringType context, StringType field, IdType identity, ILocale locale, ILanguage language) {
-#else 
 	public Dictionary<IResource, ILocalizedResource> SearchPossibleLocalizedResources(StringType searchTerm, ILocale locale, ILanguage language) {
-#endif
-#if (NET_1_1)
-	    ResourceDictionary list = new ResourceDictionary();
-#else
 	    Dictionary<IResource, ILocalizedResource> list = new Dictionary<IResource, ILocalizedResource>();
-#endif
 	    ResourceList resources = SearchResources(searchTerm);
 	    foreach (IResource resource in resources) {
 		try {

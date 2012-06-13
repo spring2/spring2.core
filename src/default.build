@@ -2,7 +2,7 @@
 <project name="Spring2.Core" default="build" xmlnds="http://tempuri.org/nant-vs.xsd">
     <property name="build.configuration" value="debug" />
     <!--<property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\MSBuild.exe" />-->
-    <property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild.exe" />
+    <property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe" />
 
     <property name="debug" value="true" />
     <property name="build.root" value="..\" />
@@ -16,53 +16,52 @@
     <property name="svn.executable" value="svn" />
 
     <target name="ccnet-build">
-	<ifnot test="${property::exists('CCNetLabel')}"> 
+	<ifnot test="${property::exists('CCNetLabel')}">
 	    <fail message="CCNetLabel property not set, so can't create labelled distribution files" />
 	</ifnot>
 	<call target="CreateAssemblyVersionInfo" />
 	<call target="getSubversionRevision" />
 	<exec program="make" commandline="clean clean_db clean_release cleanlogs" />
-	<exec program="make" commandline="build build_db packageonly package_cl package_sql docs ncover" />
+	<exec program="make" commandline="build build_db packageonly package_sql docs ncover" />
     </target>
 
-	<target name="ccnet-publish">
-		<if test="${not property::exists('CCNetLabel')}"> 
-			<fail message="CCNetLabel property not set, so can't create labelled distribution files" />
-		</if>
-		<property name="publish.dir" value="${CCNetArtifactDirectory}\${CCNetLabel}" />
+    <target name="ccnet-publish">
+	<if test="${not property::exists('CCNetLabel')}">
+	    <fail message="CCNetLabel property not set, so can't create labelled distribution files" />
+	</if>
+	<property name="publish.dir" value="${CCNetArtifactDirectory}\${CCNetLabel}" />
 
-		<mkdir dir="${publish.dir}" />
-		<copy todir="${publish.dir}">
-			<fileset basedir="..\release">
-			<include name="*"/>
-			</fileset>
-		</copy>			
+	<mkdir dir="${publish.dir}" />
+	<copy todir="${publish.dir}">
+	    <fileset basedir="..\release">
+		<include name="*"/>
+	    </fileset>
+	</copy>
     </target>
 
     <target name="build">
-	<!--<call target="build-net-1.1" />-->
-	<call target="build-net-2.0" />
+	<call target="build-net-4.0" />
     </target>
-	
-    <target name="getSubversionRevision">
-		<!-- Retrieve subversion revision number -->
-		<echo message="Retrieving Subversion revision number"/>
-		<property name="svn.revision" value="0"/>
-		<exec
-			program="svn"
-			commandline='log "${src.dir}" --xml --limit 1'
-			output="${src.dir}\_revision.xml"
-			failonerror="false"/>
-		<xmlpeek
-			file="${src.dir}\_revision.xml"
-			xpath="/log/logentry/@revision"
-			property="svn.revision"
-			failonerror="false"/>
-		<echo message="Using Subversion revision number: ${svn.revision}"/>
-	</target>
 
-     <target name="CreateAssemblyVersionInfo" description="Create an assembly info file with the current build number" >
-	<if test="${not property::exists('CCNetLabel')}"> 
+    <target name="getSubversionRevision">
+	<!-- Retrieve subversion revision number -->
+	<echo message="Retrieving Subversion revision number"/>
+	<property name="svn.revision" value="0"/>
+	<exec
+		program="svn"
+		commandline='log "${src.dir}" --xml --limit 1'
+		output="${src.dir}\_revision.xml"
+		failonerror="false"/>
+	<xmlpeek
+		file="${src.dir}\_revision.xml"
+		xpath="/log/logentry/@revision"
+		property="svn.revision"
+		failonerror="false"/>
+	<echo message="Using Subversion revision number: ${svn.revision}"/>
+    </target>
+
+    <target name="CreateAssemblyVersionInfo" description="Create an assembly info file with the current build number" >
+	<if test="${not property::exists('CCNetLabel')}">
 	    <fail message="CCNetLabel property not set, so can't create labelled distribution files" />
 	</if>
 	<asminfo output="AssemblyVersionInfo.cs" language="CSharp">
@@ -79,22 +78,10 @@
 	    </attributes>
 	</asminfo>
     </target>
-	
 
-    <target name="build-net-1.1">
-	<property name="nant.settings.currentframework" value="net-1.1" />
-    	<property name="build.configuration" value="NET_1_1" />
-	<call target="internal-build" />
-	<copy todir="..\build\">
-	    <fileset basedir="..\build\net-1.1\">
-	        <include name="*" />
-	    </fileset>
-	</copy>
-    </target>
-
-    <target name="build-net-2.0">
-	<property name="nant.settings.currentframework" value="net-2.0" />
-	<property name="build.configuration" value="NET_2_0" />
+    <target name="build-net-4.0">
+	<property name="nant.settings.currentframework" value="net-4.0" />
+	<property name="build.configuration" value="NET_4_0" />
 	<!--<call target="internal-build" />-->
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
@@ -103,14 +90,14 @@
 	    <!--<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />-->
 	    <arg value="/target:Build" />
 	</exec>
-	
+
 	<copy todir="..\build\${nant.settings.currentframework}\">
 	    <fileset basedir="..\build\">
-	        <include name="SendMailMessages\*" />
-	        <include name="UpdateCurrencyExchange\*" />
-			<include name="PerformanceMonitorWindowsService\*" />
-			<include name="SeleniumLoadTester\*" />
-			<include name="PublicationService\*" />
+		<include name="SendMailMessages\*" />
+		<include name="UpdateCurrencyExchange\*" />
+		<include name="PerformanceMonitorWindowsService\*" />
+		<include name="SeleniumLoadTester\*" />
+		<include name="PublicationService\*" />
 	    </fileset>
 	</copy>
 	<delete dir="..\build\UpdateCurrencyExchange" if="${directory::exists('..\build\UpdateCurrencyExchange')}" failonerror="false" />
@@ -133,7 +120,6 @@
 	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
 	    <arg value="/target:Build" />
 	</exec>
-
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
 	<exec program="${msbuild}">
@@ -149,90 +135,90 @@
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
     </target>
-    
+
     <target name="internal-build">
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
 	<solution configuration="${build.configuration}" outputdir="..\build\${nant.settings.currentframework}">
 	    <assemblyfolders>
-		  <include name="..\lib\${nant.settings.currentframework}" />
+		<include name="..\lib\${nant.settings.currentframework}" />
 	    </assemblyfolders>
 	    <projects>
-	        <include name="Spring2.Core.csproj" />
-	        <include name="Spring2.Core.Types.csproj" />
-	        <include name="Spring2.Core.Test.csproj" />
-	        <include name="Spring2.Core.WebControl.csproj" />
-	        <include name="Spring2.Core.Configuration.csproj" />
-	        <include name="Spring2.Core.Cryptography.csproj" />
-	        <include name="Spring2.Core.Geocode.csproj" />
-			<include name="Spring2.Core.Geocode.TeleAtlasExe.csproj" />
-			<include name="Spring2.Core.Geocode.TeleAtlasWS.csproj" />
-	        <include name="Spring2.Core.Mail.csproj" />
-	        <include name="Spring2.Core.Mail.SendMailMessages.csproj" />
-	        <include name="Spring2.Core.Currency.csproj" />
-	        <include name="Spring2.Core.Currency.UpdateCurrencyExchange.csproj" />
-	        <include name="Spring2.Core.Log4Net.csproj" />
-	        <include name="Spring2.Core.PropertyPopulator.csproj" />
-	        <include name="Spring2.Core.Maverick.csproj" />
-	        <include name="Spring2.Core.Security.csproj" />
-	        <include name="Spring2.Core.PropertyPopulator.csproj" />
-	        <include name="Spring2.Core.Reporting.csproj" />
-	        <include name="Spring2.Core.ResourceManager.AcceptanceTest.csproj" />
-	        <include name="Spring2.Core.ResourceManager.BusinessLogic.csproj" />
-	        <include name="Spring2.Core.ResourceManager.DataObject.csproj" />
-	        <include name="Spring2.Core.ResourceManager.ResourceEditor.csproj" />
-	        <include name="Spring2.Core.ResourceManager.ResourceLocalizer.csproj" />
-	        <include name="Spring2.Core.ResourceManager.TestUtility.csproj" />
-	        <include name="Spring2.Core.AddressValidation.csproj" />
-	        <include name="Spring2.Core.AddressValidation.Test.csproj" />
-	        <include name="Spring2.Core.Payment.csproj" />
-	        <include name="Spring2.Core.Payment.Test.csproj" />
-	        <include name="Spring2.Core.Soap.csproj" />
-	        <include name="Spring2.Core.Tax.csproj" />
-	        <include name="Spring2.Core.Tax.Test.csproj" />
-	        <include name="Spring2.Core.Navigation.csproj" />
+		<include name="Spring2.Core.csproj" />
+		<include name="Spring2.Core.Types.csproj" />
+		<include name="Spring2.Core.Test.csproj" />
+		<include name="Spring2.Core.WebControl.csproj" />
+		<include name="Spring2.Core.Configuration.csproj" />
+		<include name="Spring2.Core.Cryptography.csproj" />
+		<include name="Spring2.Core.Geocode.csproj" />
+		<include name="Spring2.Core.Geocode.TeleAtlasExe.csproj" />
+		<include name="Spring2.Core.Geocode.TeleAtlasWS.csproj" />
+		<include name="Spring2.Core.Mail.csproj" />
+		<include name="Spring2.Core.Mail.SendMailMessages.csproj" />
+		<include name="Spring2.Core.Currency.csproj" />
+		<include name="Spring2.Core.Currency.UpdateCurrencyExchange.csproj" />
+		<include name="Spring2.Core.Log4Net.csproj" />
+		<include name="Spring2.Core.PropertyPopulator.csproj" />
+		<include name="Spring2.Core.Maverick.csproj" />
+		<include name="Spring2.Core.Security.csproj" />
+		<include name="Spring2.Core.PropertyPopulator.csproj" />
+		<include name="Spring2.Core.Reporting.csproj" />
+		<include name="Spring2.Core.ResourceManager.AcceptanceTest.csproj" />
+		<include name="Spring2.Core.ResourceManager.BusinessLogic.csproj" />
+		<include name="Spring2.Core.ResourceManager.DataObject.csproj" />
+		<include name="Spring2.Core.ResourceManager.ResourceEditor.csproj" />
+		<include name="Spring2.Core.ResourceManager.ResourceLocalizer.csproj" />
+		<include name="Spring2.Core.ResourceManager.TestUtility.csproj" />
+		<include name="Spring2.Core.AddressValidation.csproj" />
+		<include name="Spring2.Core.AddressValidation.Test.csproj" />
+		<include name="Spring2.Core.Payment.csproj" />
+		<include name="Spring2.Core.Payment.Test.csproj" />
+		<include name="Spring2.Core.Soap.csproj" />
+		<include name="Spring2.Core.Tax.csproj" />
+		<include name="Spring2.Core.Tax.Test.csproj" />
+		<include name="Spring2.Core.Navigation.csproj" />
 	    </projects>
-	</solution>	
+	</solution>
 
 	<solution configuration="${build.configuration}" outputdir="..\build\${nant.settings.currentframework}">
 	    <assemblyfolders>
-		  <include name="..\lib\${nant.settings.currentframework}" />
+		<include name="..\lib\${nant.settings.currentframework}" />
 	    </assemblyfolders>
 	    <projects>
-	        <include name="Spring2.Core.Configuration.csproj" />
-	        <include name="Spring2.Core.Geocode.csproj" />
-			<include name="Spring2.Core.Geocode.TeleAtlasExe.csproj" />
-	        <include name="Spring2.Core.csproj" />
-	        <include name="Spring2.Core.Types.csproj" />
+		<include name="Spring2.Core.Configuration.csproj" />
+		<include name="Spring2.Core.Geocode.csproj" />
+		<include name="Spring2.Core.Geocode.TeleAtlasExe.csproj" />
+		<include name="Spring2.Core.csproj" />
+		<include name="Spring2.Core.Types.csproj" />
 	    </projects>
-	</solution>	
+	</solution>
 
-	
+
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
 	<solution configuration="${build.configuration}" outputdir="..\build\${nant.settings.currentframework}\WithTypes">
 	    <projects>
-	        <include name="Spring2.Core.WithTypes.csproj" />
-	        <include name="Spring2.Core.WithTypesTest.csproj" />
+		<include name="Spring2.Core.WithTypes.csproj" />
+		<include name="Spring2.Core.WithTypesTest.csproj" />
 	    </projects>
-	</solution>	
+	</solution>
 
 	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
 	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
     </target>
 
-	<target name="foo">
-		<echo message="${nant.settings.currentframework}"/>
-	</target>
+    <target name="foo">
+	<echo message="${nant.settings.currentframework}"/>
+    </target>
 
     <target name="package_src">
-        <mkdir dir="${release.dir}" />
-	<ifnot test="${property::exists('version')}"> 
+	<mkdir dir="${release.dir}" />
+	<ifnot test="${property::exists('version')}">
 	    <fail message="version property not set, so can't create versioned package" />
 	</ifnot>
-	<zip zipfile="${release.dir}/Spring2.Core-${version}-src.zip" ziplevel="9"> 
+	<zip zipfile="${release.dir}/Spring2.Core-${version}-src.zip" ziplevel="9">
 	    <fileset basedir="..">
-	        <include name="**/*" />
+		<include name="**/*" />
 		<exclude name="**/CVS/*" />
 		<exclude name="**/_ReSharper.Spring2.Dss/**" />
 		<exclude name="release/**" />
