@@ -121,7 +121,7 @@
             <property name="DocumentedAttributes" value="" />
             <property name="GetExternalSummaries" value="True" />
         </documenter>
-        <documenter name="MSDN-CHM">
+        <documenter name="MSDN">
             <property name="OutputDirectory" value="..\docs\api\" />
             <property name="HtmlHelpName" value="Spring2.Core" />
             <property name="IncludeFavorites" value="False" />
