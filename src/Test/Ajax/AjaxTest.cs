@@ -43,7 +43,7 @@ namespace Spring2.Core.Test.Ajax {
 	    //get instance of SampleAjaxCommand
 	    UnhandledMessageListExceptionAjaxCommand command = new UnhandledMessageListExceptionAjaxCommand(0, collection, new SimpleFormatter(), new MessageList(), new HttpCookieCollection());
 
-	    ErrorResponse response = JavaScriptConvert.DeserializeObject(command.RunCommand(), typeof(ErrorResponse)) as ErrorResponse;
+	    ErrorResponse response = JsonConvert.DeserializeObject(command.RunCommand(), typeof(ErrorResponse)) as ErrorResponse;
 
 	    Assert.AreEqual(true, response.unhandledException);
 	    Assert.AreEqual("TE'ST%0aTE'ST'2%0a", response.message);
@@ -57,7 +57,7 @@ namespace Spring2.Core.Test.Ajax {
 	    //get instance of UnhandledSystemExceptionAjaxCommand
 	    UnhandledSystemExceptionAjaxCommand command = new UnhandledSystemExceptionAjaxCommand(0, collection, new SimpleFormatter(), new MessageList(), new HttpCookieCollection());
 
-	    ErrorResponse response = JavaScriptConvert.DeserializeObject(command.RunCommand(), typeof(ErrorResponse)) as ErrorResponse;
+	    ErrorResponse response = JsonConvert.DeserializeObject(command.RunCommand(), typeof(ErrorResponse)) as ErrorResponse;
 
 	    Assert.AreEqual(true, response.unhandledException);
 	    Assert.IsTrue(response.message.StartsWith("There+was+a+problem.%0aInform+supp"));
@@ -95,7 +95,7 @@ namespace Spring2.Core.Test.Ajax {
 	public void ShouldGetInvalidStateExceptionWhenRunningCommandConstructedWithNoArguments() {
 	    SampleAjaxCommand command = SampleAjaxCommand.Instance;
 
-	    ErrorResponse response = JavaScriptConvert.DeserializeObject(command.RunCommand(), typeof(ErrorResponse)) as ErrorResponse;
+	    ErrorResponse response = JsonConvert.DeserializeObject(command.RunCommand(), typeof(ErrorResponse)) as ErrorResponse;
 
 	    Assert.AreEqual(true, response.unhandledException);
 	    Assert.IsTrue(response.message.StartsWith("There+was+a+problem.%0aInform+supp"));

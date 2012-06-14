@@ -83,11 +83,11 @@ changelog:
 	@cp ../ChangeLog.txt $(BUILDDIR)
 
 docs:
-	@chmod a+x ../bin/NDoc2/*
+	#@chmod a+x ../bin/NDoc3/*
 	@rm -rf ../docs/api
-	../bin/NDoc2/NDocConsole.exe -documenter=MSDN-CHM -project=Spring2.Core.ndoc -HtmlHelpName=Spring2.Core-$(shell $(GETVERSION)) -Version=$(shell $(GETVERSION))
+	# can't get the documenter working for the 4.0 runtime. Yet.
+	#../bin/NDoc3/NDoc3Console.exe -documenter=MSDN -project=Spring2.Core.ndoc -HtmlHelpName=Spring2.Core-$(shell $(GETVERSION)) -Version=$(shell $(GETVERSION))
 	
-
 package: clean build regress changelog docs packageonly
 
 packageonly:

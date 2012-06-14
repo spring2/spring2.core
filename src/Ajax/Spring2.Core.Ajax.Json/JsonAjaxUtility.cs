@@ -45,7 +45,7 @@ namespace Spring2.Core.Ajax.Json {
 
         public JsonAjaxUtility(String jsonText) {
             try {
-		commands = (Commands)JavaScriptConvert.DeserializeObject(jsonText, typeof(Commands));
+		commands = (Commands)JsonConvert.DeserializeObject(jsonText, typeof(Commands));
             } catch (Exception ex) {
                 throw ex; 
             }
@@ -72,7 +72,7 @@ namespace Spring2.Core.Ajax.Json {
             Response r = new Response();
             r.responseHandlerId = responseHandlerId;
             r.response = values;
-            return JavaScriptConvert.SerializeObject(r);
+	    return JsonConvert.SerializeObject(r);
 	}
 
 	public String SerializeUnhandledExceptionResponse(Int32 responseHandlerId, String message) {
@@ -80,11 +80,11 @@ namespace Spring2.Core.Ajax.Json {
 	    r.responseHandlerId = responseHandlerId;
 	    r.unhandledException = true;
 	    r.message = message;
-	    return JavaScriptConvert.SerializeObject(r);
+	    return JsonConvert.SerializeObject(r);
 	}
 
 	public Response DeserializeResponse(String jSON) {
-	    return JavaScriptConvert.DeserializeObject(jSON, typeof(Response)) as Response;
+	    return JsonConvert.DeserializeObject(jSON, typeof(Response)) as Response;
 	}
     }
 }

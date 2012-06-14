@@ -52,7 +52,7 @@ namespace Spring2.Core.Ajax.SampleController.SampleCommand {
 
 	public MessageList Populate(Object target, NameValueCollection data) {
 	    String tempJson = data["rows"];
-	    List<Dictionary<String, String>> tempObj = (List<Dictionary<String, String>>)JavaScriptConvert.DeserializeObject(tempJson, typeof(List<Dictionary<String, String>>));
+	    List<Dictionary<String, String>> tempObj = (List<Dictionary<String, String>>)JsonConvert.DeserializeObject(tempJson, typeof(List<Dictionary<String, String>>));
 	    MessageList errors = new MessageList();
 	    foreach(Dictionary<String, String> dict in tempObj) {
 		NameValueCollection nvData = new NameValueCollection();
