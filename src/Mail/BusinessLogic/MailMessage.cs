@@ -13,6 +13,7 @@ using System.IO;
 using System.Net.Mail;
 using System.Text;
 using System.Net;
+using System.Linq;
 
 
 namespace Spring2.Core.Mail.BusinessLogic {
@@ -558,12 +559,18 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
 
 	    message.From = new MailAddress(this.From.ToString());
-	    message.To.Add(this.to.Replace(';', ',').ToString());
+	    foreach(string address in this.to.Split(',', ';').Where(x => !string.IsNullOrWhiteSpace(x))) {
+		message.To.Add(address);
+	    }
 	    if (!this.Cc.IsEmpty) {
-		message.CC.Add(new MailAddress(this.Cc.Replace(';', ',').ToString()));
+		foreach (string address in this.cc.Split(',', ';').Where(x => !string.IsNullOrWhiteSpace(x))) {
+		    message.CC.Add(address);
+		}
 	    }
 	    if (!this.Bcc.IsEmpty) {
-		message.Bcc.Add(this.Bcc.Replace(';', ',').ToString());
+		foreach (string address in this.bcc.Split(',', ';').Where(x => !string.IsNullOrWhiteSpace(x))) {
+		    message.Bcc.Add(address);
+		}
 	    }
 	    message.Subject = this.Subject.IsValid ? this.Subject.ToString() : String.Empty;
 
