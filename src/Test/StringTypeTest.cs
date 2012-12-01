@@ -14,6 +14,14 @@ namespace Spring2.Core.Test {
 	private StringType propertyValue = StringType.DEFAULT;
 
 	[Test]
+	public void ComparisonAgainstNullValue() {
+	    string temp = null; 
+	    StringType a = new StringType(temp);
+	    StringType b = StringType.UNSET;
+	    bool equals = StringType.Equals(a, b);
+	}
+
+	[Test]
 	public void AssignmentFromString() {
 	    String foo = "foo";
 	    StringType s2 = StringType.Parse(foo);

@@ -168,7 +168,7 @@ namespace Spring2.Core.Types {
 		return false;
 	    }
     
-	    return leftHand.myValue.Equals(rightHand.myValue) && leftHand.myState.Equals(rightHand.myState);
+	    return leftHand.myValue == rightHand.myValue && leftHand.myState.Equals(rightHand.myState);
 	}
 
 	public static bool operator == (StringType leftHand, StringType rightHand) {
