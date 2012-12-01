@@ -13,6 +13,17 @@ namespace Spring2.Core.Test {
     /// </summary>
     [TestFixture]
     public class GeocodeTest {
+
+	[Test]
+	[Ignore("Requires a tele atlas login to run.")]
+	public void ShouldGeocodeInvalidAddressWithoutError() {
+	    StringType street = "21856 Agate Rd Frederic";
+	    StringType city = "Frederic";
+	    StringType zip = "54837";
+	    StringType state = "WI";
+	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode(street, city, state, zip, StringType.UNSET, CountryCodeEnum.UNITED_STATES);
+	}
+
 	[Test]
 	[Ignore("Requires a tele atlas login to run.")]
 	public void GetGeocodeForStandardAddress() {

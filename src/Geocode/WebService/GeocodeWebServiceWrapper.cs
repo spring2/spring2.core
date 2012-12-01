@@ -169,7 +169,8 @@ namespace Spring2.Core.Geocode.WebService {
 	    }
 
 	    // Match Codes 10-17 and -1, -10 are Non Match/Errors codes
-	    switch (teleAtlasgeocodeData.MatchType) {
+	    int matchTypeCode = teleAtlasgeocodeData.MatchType.IsValid ? teleAtlasgeocodeData.MatchType.ToInt32() : Int32.MinValue;
+	    switch (matchTypeCode) {
 		case 1:
 		case 2:
 		case 3:

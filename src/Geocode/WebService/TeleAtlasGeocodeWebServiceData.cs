@@ -49,6 +49,7 @@ namespace Spring2.Core.Geocode.WebService {
 	    get {return matchType;}
 	}
 
+	// Should use StringType
 	public string StdAddress {
 	    get {return stdAddress.Display();}
 	}
