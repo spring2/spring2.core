@@ -10,7 +10,7 @@ BRANCH_TAG 		:= trunk
 include sql/*.mk
 
 package_sql: scriptorder combine_sql_scripts
-	$(7ZIP) a  $(RELEASEDIR)/Spring2.Core.Configuration.sql.zip ScriptOrder.txt combined_sql_scripts.sql @ScriptOrder.txt
+	$(7ZIP) a  $(RELEASEDIR)/Spring2.Core.Configuration.sql.7z ScriptOrder.txt combined_sql_scripts.sql @ScriptOrder.txt
 	$(RM) ScriptOrder.txt combined_sql_scripts.sql
 
 .PHONY: scriptorder

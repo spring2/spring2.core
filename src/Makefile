@@ -92,12 +92,12 @@ package: clean build regress changelog docs packageonly
 
 packageonly:
 	rm -rf ${BUILDDIR}/Core
-	$(7ZIP) a $(RELEASEDIR)/Spring2.Core.$(shell $(GETVERSION))-net-4.0.zip -C $(BUILDDIR)/net-4.0 .
+	$(7ZIP) a $(RELEASEDIR)/Spring2.Core.$(shell $(GETVERSION))-net-4.0.7z -C $(BUILDDIR)/net-4.0 .
 	${NANT} -D:version=$(shell ./getversion.sh) package_src
 
 release: package
 	cvs tag RELEASE_$(subst .,_,$(shell $(GETVERSION)))
-	../bin/cvsadd.sh $(RELEASEDIR) Spring2.Core.$(shell $(GETVERSION))-net-4.0.zip "new release version"
+	../bin/cvsadd.sh $(RELEASEDIR) Spring2.Core.$(shell $(GETVERSION))-net-4.0.7z "new release version"
 	../bin/cvsadd.sh $(RELEASEDIR) Spring2.Core-$(shell $(GETVERSION)).chm "new release version"
 	../bin/cvsadd.sh $(RELEASEDIR) ChangeLog-$(shell $(GETVERSION)).txt "new release version"
 	$(BINDIR)/UpdateVersion -b Increment -i AssemblyVersionInfo.cs -o AssemblyVersionInfo.cs
@@ -106,23 +106,23 @@ release: package
 package_sql:
 	@chmod a+x ../bin/*.exe
 	cd Configuration; make package_sql
-	mv $(RELEASEDIR)/Spring2.Core.Configuration.sql.zip $(RELEASEDIR)/Spring2.Core.Configuration.sql-$(shell $(GETVERSION)).zip
+	mv $(RELEASEDIR)/Spring2.Core.Configuration.sql.7z $(RELEASEDIR)/Spring2.Core.Configuration.sql-$(shell $(GETVERSION)).7z
 	cd Geocode; make package_sql
-	mv $(RELEASEDIR)/Spring2.Core.Geocode.sql.zip $(RELEASEDIR)/Spring2.Core.Geocode.sql-$(shell $(GETVERSION)).zip
+	mv $(RELEASEDIR)/Spring2.Core.Geocode.sql.7z $(RELEASEDIR)/Spring2.Core.Geocode.sql-$(shell $(GETVERSION)).7z
 	cd Currency; make package_sql
-	mv $(RELEASEDIR)/Spring2.Core.Currency.sql.zip $(RELEASEDIR)/Spring2.Core.Currency.sql-$(shell $(GETVERSION)).zip
+	mv $(RELEASEDIR)/Spring2.Core.Currency.sql.7z $(RELEASEDIR)/Spring2.Core.Currency.sql-$(shell $(GETVERSION)).7z
 	cd Mail; make package_sql
-	mv $(RELEASEDIR)/Spring2.Core.Mail.sql.zip $(RELEASEDIR)/Spring2.Core.Mail.sql-$(shell $(GETVERSION)).zip
+	mv $(RELEASEDIR)/Spring2.Core.Mail.sql.7z $(RELEASEDIR)/Spring2.Core.Mail.sql-$(shell $(GETVERSION)).7z
 	cd Navigation; make package_sql
-	mv $(RELEASEDIR)/Spring2.Core.Navigation.sql.zip $(RELEASEDIR)/Spring2.Core.Navigation.sql-$(shell $(GETVERSION)).zip
+	mv $(RELEASEDIR)/Spring2.Core.Navigation.sql.7z $(RELEASEDIR)/Spring2.Core.Navigation.sql-$(shell $(GETVERSION)).7z
 	cd PerformanceMonitor; make package_sql
-	mv $(RELEASEDIR)/Spring2.Core.PerformanceMonitor.sql.zip $(RELEASEDIR)/Spring2.Core.PerformanceMonitor.sql-$(shell $(GETVERSION)).zip
+	mv $(RELEASEDIR)/Spring2.Core.PerformanceMonitor.sql.7z $(RELEASEDIR)/Spring2.Core.PerformanceMonitor.sql-$(shell $(GETVERSION)).7z
 	cd ResourceManager; make package_sql
-	mv $(RELEASEDIR)/Spring2.Core.ResourceManager.sql.zip $(RELEASEDIR)/Spring2.Core.ResourceManager.sql-$(shell $(GETVERSION)).zip
+	mv $(RELEASEDIR)/Spring2.Core.ResourceManager.sql.7z $(RELEASEDIR)/Spring2.Core.ResourceManager.sql-$(shell $(GETVERSION)).7z
 	cd SeleniumLoadTester; make package_sql
-	mv $(RELEASEDIR)/Spring2.Core.SeleniumLoadTester.sql.zip $(RELEASEDIR)/Spring2.Core.SeleniumLoadTester.sql-$(shell $(GETVERSION)).zip
+	mv $(RELEASEDIR)/Spring2.Core.SeleniumLoadTester.sql.7z $(RELEASEDIR)/Spring2.Core.SeleniumLoadTester.sql-$(shell $(GETVERSION)).7z
 	cd Publication; make package_sql
-	mv $(RELEASEDIR)/Spring2.Core.Publication.sql.zip $(RELEASEDIR)/Spring2.Core.Publication.sql-$(shell $(GETVERSION)).zip
+	mv $(RELEASEDIR)/Spring2.Core.Publication.sql.7z $(RELEASEDIR)/Spring2.Core.Publication.sql-$(shell $(GETVERSION)).7z
 
 	
 .PHONY: ncover
