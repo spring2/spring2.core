@@ -40,7 +40,7 @@ VALUES (
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN
-        RAISERROR  20000 'spLoadTestLog_Insert: Unable to insert new row into LoadTestLog table '
+        RAISERROR  ('spLoadTestLog_Insert: Unable to insert new row into LoadTestLog table ', 16, 1, @@rowcount)
         RETURN(-1)
     END
 

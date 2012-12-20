@@ -14,6 +14,7 @@ DTGDIR		:= $(BINDIR)/DTG
 
 NANT		:= $(BINDIR)/NAnt/nant
 NUNIT		:= $(BINDIR)/NUnit/nunit-console
+7ZIP		:= $(BINDIR)/7za.exe
 
 all:
 
@@ -91,7 +92,7 @@ RELEASE_REVISION	:= 1
 BRANCH_TAG 		:= trunk
 
 package_sql: scriptorder combine_sql_scripts
-	$(JAR) -cMvf $(RELEASEDIR)/Spring2.Core.Navigation.sql.zip ScriptOrder.txt combined_sql_scripts.sql @ScriptOrder.txt
+	$(7ZIP) a  $(RELEASEDIR)/Spring2.Core.Navigation.sql.zip ScriptOrder.txt combined_sql_scripts.sql @ScriptOrder.txt
 	$(RM) ScriptOrder.txt combined_sql_scripts.sql
 
 .PHONY: scriptorder

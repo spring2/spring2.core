@@ -5,11 +5,12 @@ RELEASEDIR	:= ../../release
 JAR		?= $(BINDIR)/jar.exe
 RELEASE_REVISION	:= 1
 BRANCH_TAG 		:= trunk
+7ZIP		:= $(BINDIR)/7za.exe
 
 include sql/*.mk
 
 package_sql: scriptorder combine_sql_scripts
-	$(JAR) -cMvf $(RELEASEDIR)/Spring2.Core.Configuration.sql.zip ScriptOrder.txt combined_sql_scripts.sql @ScriptOrder.txt
+	$(7ZIP) a  $(RELEASEDIR)/Spring2.Core.Configuration.sql.zip ScriptOrder.txt combined_sql_scripts.sql @ScriptOrder.txt
 	$(RM) ScriptOrder.txt combined_sql_scripts.sql
 
 .PHONY: scriptorder

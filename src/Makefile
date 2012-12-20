@@ -15,6 +15,7 @@ NANT		:= ../bin/NAnt/nant.exe
 
 RELEASE_REVISION:= 1
 GETVERSION	:= $(BINDIR)/getversion.sh
+7ZIP		:= $(BINDIR)/7za.exe
 
 all: build
 
@@ -91,7 +92,7 @@ package: clean build regress changelog docs packageonly
 
 packageonly:
 	rm -rf ${BUILDDIR}/Core
-	jar -cMvf $(RELEASEDIR)/Spring2.Core.$(shell $(GETVERSION))-net-4.0.zip -C $(BUILDDIR)/net-4.0 .
+	$(7ZIP) a $(RELEASEDIR)/Spring2.Core.$(shell $(GETVERSION))-net-4.0.zip -C $(BUILDDIR)/net-4.0 .
 	${NANT} -D:version=$(shell ./getversion.sh) package_src
 
 release: package

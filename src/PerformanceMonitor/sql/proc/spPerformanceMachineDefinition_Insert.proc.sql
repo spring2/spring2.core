@@ -25,7 +25,7 @@ VALUES (
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN
-        RAISERROR  20000 'spPerformanceMachineDefinition_Insert: Unable to insert new row into PerformanceMachineDefinition table '
+        RAISERROR ('spPerformanceMachineDefinition_Insert: Unable to insert new row into PerformanceMachineDefinition table ', 16, 1, @@rowcount)
         RETURN(-1)
     END
 

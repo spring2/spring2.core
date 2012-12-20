@@ -43,7 +43,7 @@ VALUES (
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN
-        RAISERROR  20000 'spPerformanceData_Insert: Unable to insert new row into PerformanceData table '
+        RAISERROR  ('spPerformanceData_Insert: Unable to insert new row into PerformanceData table ', 16, 1, @@rowcount)
         RETURN(-1)
     END
 
