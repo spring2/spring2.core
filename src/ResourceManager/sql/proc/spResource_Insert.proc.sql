@@ -25,7 +25,7 @@ VALUES (
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN
-        RAISERROR  20000 'spResource_Insert: Unable to insert new row into Resource table '
+        RAISERROR ('spResource_Insert: Unable to insert new row into Resource table ', 16, 1, @@ROWCOUNT)
         RETURN(-1)
     END
 

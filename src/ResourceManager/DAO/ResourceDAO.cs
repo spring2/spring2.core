@@ -406,7 +406,7 @@ namespace Spring2.Core.ResourceManager.Dao {
 	/// </summary>
 	/// <param name="context">A field value to be matched.</param>
 	/// <param name="field">A field value to be matched.</param>
-	/// <param name="contextIdentity">A field value to be matched.</param>
+	/// <param name="identity">A field value to be matched.</param>
 	/// <returns>The object found.</returns>
 	/// <exception cref="Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
 	public Resource FindByContextFieldAndIdentity(StringType context, StringType field, IdType identity) {

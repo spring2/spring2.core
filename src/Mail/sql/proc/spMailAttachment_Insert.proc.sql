@@ -25,7 +25,7 @@ VALUES (
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN
-        RAISERROR  20000 'spMailAttachment_Insert: Unable to insert new row into MailAttachment table '
+        RAISERROR ('spMailAttachment_Insert: Unable to insert new row into MailAttachment table ', 16, 1, @@ROWCOUNT)
         RETURN(-1)
     END
 

@@ -41,7 +41,7 @@ gen:
 	@chmod a+x $(DTGDIR)/*.dll
 	@chmod a+x $(BINDIR)/NAnt/*.exe
 	@chmod a+x $(BINDIR)/NAnt/*.dll
-	$(DTGDIR)/DataTierGenerator.exe DataTierGenerator.config.xml
+	$(DTGDIR)/DataTierGenerator.exe --file=DataTierGenerator.config.xml
 
 .PHONY: regress
 regress: build_db build

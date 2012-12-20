@@ -306,7 +306,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	}
 
 	private void IncreaseAttempts() {
-	    int attempts = 0;
+	    Int32 attempts = 0;
 	    if (this.NumberOfAttempts.IsValid) {
 		attempts = this.NumberOfAttempts.ToInt32() + 1;
 	    } else {
@@ -335,7 +335,7 @@ namespace Spring2.Core.Mail.BusinessLogic {
 
 	private static StringType GetRoutingAddresses(StringType mailMessage, RoutingTypeEnum routingType, StringType initialAddress) {
 	    MailMessageRouteList routes = new MailMessageRouteList();
-	    SqlFilter filter = new SqlFilter( new SqlEqualityPredicate("MailMessage", EqualityOperatorEnum.Equal, mailMessage));
+	    SqlFilter filter = new SqlFilter(new SqlEqualityPredicate("MailMessage", EqualityOperatorEnum.Equal, mailMessage));
 	    filter.And(new SqlEqualityPredicate("Status", EqualityOperatorEnum.Equal, ActiveStatusEnum.ACTIVE.Code));
 	    filter.And(new SqlEqualityPredicate("RoutingType", EqualityOperatorEnum.Equal, routingType.Code));
 	    routes.AddRange(MailMessageRouteDAO.DAO.GetList(filter));
@@ -360,7 +360,10 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    if (!message.MailMessageType.IsEmpty) {
 		messageType = message.MailMessageType;
 	    }
-	    return Create(messageType, message.From, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[] {  }, message.UniqueKey);
+	    return Create(messageType, message.From, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[] {
+
+	    },
+	    message.UniqueKey);
 	}
 
 	/// <summary>
@@ -371,7 +374,10 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    if (@from.IsEmpty) {
 		@from = GetFromAddress(messageType);
 	    }
-	    return Create(messageType, @from, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[] {  }, message.UniqueKey);
+	    return Create(messageType, @from, message.To, message.Cc, message.Bcc, message.Subject, message.Body, message.BodyFormat, message.ScheduleTime, new String[] {
+
+	    },
+	    message.UniqueKey);
 	}
 
 	/// <summary>
@@ -379,7 +385,10 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	/// </summary>
 	public static MailMessage Create(StringType messageType, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
 	    StringType @from = GetFromAddress(messageType);
-	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[] {  }, StringType.DEFAULT);
+	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[] {
+
+	    },
+	    StringType.DEFAULT);
 	}
 
 	/// <summary>
@@ -400,28 +409,36 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	/// Creates and persists a new MailMessage
 	/// </summary>
 	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat) {
-	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, DateTimeType.DEFAULT, new String[] {  }, StringType.DEFAULT );
+	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, DateTimeType.DEFAULT, new String[] {
+
+	    },
+	    StringType.DEFAULT);
 	}
 
 	/// <summary>
 	/// Creates and persists a new MailMessage
 	/// </summary>
 	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, String[] attachmentFilenames) {
-	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, DateTimeType.DEFAULT, attachmentFilenames, StringType.DEFAULT);
+	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, DateTimeType.DEFAULT, attachmentFilenames,
+	    StringType.DEFAULT);
 	}
 
 	/// <summary>
 	/// Creates and persists a new MailMessage
 	/// </summary>
 	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime) {
-	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[] { }, StringType.DEFAULT);
+	    return Create(messageType, @from, to, StringType.DEFAULT, StringType.DEFAULT, subject, body, bodyFormat, scheduleTime, new String[] {
+
+	    },
+	    StringType.DEFAULT);
 	}
 
 	/// <summary>
 	/// Creates and persists a new MailMessage
 	/// This is THE method that really does the work
 	/// </summary>
-	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType cc, StringType bcc, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime, String[] attachmentFilenames, StringType uniqueKeyAsStringType) {
+	public static MailMessage Create(StringType messageType, StringType @from, StringType to, StringType cc, StringType bcc, StringType subject, StringType body, MailBodyFormatEnum bodyFormat, DateTimeType scheduleTime, String[] attachmentFilenames,
+	StringType uniqueKeyAsStringType) {
 	    MailMessageData mailMessageData = new MailMessageData();
 	    MailMessage mailMessage = new MailMessage();
 	    mailMessage.SetInitialState();
@@ -559,16 +576,16 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
 
 	    message.From = new MailAddress(this.From.ToString());
-	    foreach(string address in this.to.Split(',', ';').Where(x => !string.IsNullOrWhiteSpace(x))) {
+	    foreach (String address in this.to.Split(',', ';').Where(x => !String.IsNullOrWhiteSpace(x))) {
 		message.To.Add(address);
 	    }
 	    if (!this.Cc.IsEmpty) {
-		foreach (string address in this.cc.Split(',', ';').Where(x => !string.IsNullOrWhiteSpace(x))) {
+		foreach (String address in this.cc.Split(',', ';').Where(x => !String.IsNullOrWhiteSpace(x))) {
 		    message.CC.Add(address);
 		}
 	    }
 	    if (!this.Bcc.IsEmpty) {
-		foreach (string address in this.bcc.Split(',', ';').Where(x => !string.IsNullOrWhiteSpace(x))) {
+		foreach (String address in this.bcc.Split(',', ';').Where(x => !String.IsNullOrWhiteSpace(x))) {
 		    message.Bcc.Add(address);
 		}
 	    }
@@ -617,9 +634,9 @@ namespace Spring2.Core.Mail.BusinessLogic {
 		IncreaseAttempts();
 		this.ProcessedTime = DateTimeType.Now;
 		String host = SmtpServer.IsValid ? SmtpServer.ToString() : ConfigurationProvider.Instance.Settings["SMTPServer"];
-		int port;
+		Int32 port;
 		SmtpClient smtpClient;
-		if (int.TryParse(ConfigurationProvider.Instance.Settings["SMTPPort"], out port)) {
+		if (Int32.TryParse(ConfigurationProvider.Instance.Settings["SMTPPort"], out port)) {
 		    smtpClient = new SmtpClient(host, port);
 		} else {
 		    smtpClient = new SmtpClient(host);

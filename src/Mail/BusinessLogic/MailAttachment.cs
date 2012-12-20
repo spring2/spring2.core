@@ -154,16 +154,16 @@ namespace Spring2.Core.Mail.BusinessLogic {
 	    }
 
 	    Byte[] buffer = new Byte[initialLength];
-	    int read = 0;
+	    Int32 read = 0;
 
-	    int chunk;
+	    Int32 chunk;
 	    while ((chunk = stream.Read(buffer, read, buffer.Length - read)) > 0) {
 		read += chunk;
 
 		// If we've reached the end of our buffer, check to see if there's
 		// any more information
 		if (read == buffer.Length) {
-		    int nextByte = stream.ReadByte();
+		    Int32 nextByte = stream.ReadByte();
 
 		    // End of stream? If so, we're done
 		    if (nextByte == -1) {

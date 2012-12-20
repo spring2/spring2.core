@@ -16,4 +16,4 @@ DTGDIR		:= $(BINDIR)/DTG
 gen:
 	@chmod a+x $(DTGDIR)/*.exe
 	@chmod a+x $(DTGDIR)/*.dll
-	$(DTGDIR)/DataTierGenerator.exe DataTierGenerator.config.xml
+	$(DTGDIR)/DataTierGenerator.exe --file=DataTierGenerator.config.xml

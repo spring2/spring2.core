@@ -70,7 +70,7 @@ VALUES (
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN
-        RAISERROR  20000 'spAddressCache_Insert: Unable to insert new row into AddressCache table '
+        RAISERROR ('spAddressCache_Insert: Unable to insert new row into AddressCache table ', 16, 1, @@ROWCOUNT)
         RETURN(-1)
     END
 

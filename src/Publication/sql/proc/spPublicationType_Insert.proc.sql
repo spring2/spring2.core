@@ -69,7 +69,7 @@ VALUES (
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN
-        RAISERROR  20000 'spPublicationType_Insert: Unable to insert new row into PublicationType table '
+        RAISERROR ('spPublicationType_Insert: Unable to insert new row into PublicationType table ', 16, 1, @@ROWCOUNT)
         RETURN(-1)
     END
 

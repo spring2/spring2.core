@@ -26,7 +26,7 @@ VALUES (
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN
-        RAISERROR  20000 'spCurrencyExchange_Insert: Unable to insert new row into CurrencyExchange table '
+        RAISERROR ('spCurrencyExchange_Insert: Unable to insert new row into CurrencyExchange table ', 16, 1, @@ROWCOUNT)
         RETURN(-1)
     END
 

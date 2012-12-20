@@ -28,12 +28,12 @@ clean:
 	$(RM) bin
 
 gen:
-	cd Mail; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
-	cd Geocode; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
-	cd Currency; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
-	cd Navigation; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
-	cd ResourceManager; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
-	cd Publication; ../$(BINDIR)/DTG/DataTierGenerator.exe DataTierGenerator.config.xml
+	cd Mail; ../$(BINDIR)/DTG/DataTierGenerator.exe --file=DataTierGenerator.config.xml
+	cd Geocode; ../$(BINDIR)/DTG/DataTierGenerator.exe --file=DataTierGenerator.config.xml
+	cd Currency; ../$(BINDIR)/DTG/DataTierGenerator.exe --file=DataTierGenerator.config.xml
+	cd Navigation; ../$(BINDIR)/DTG/DataTierGenerator.exe --file=DataTierGenerator.config.xml
+	cd ResourceManager; ../$(BINDIR)/DTG/DataTierGenerator.exe --file=DataTierGenerator.config.xml
+	cd Publication; ../$(BINDIR)/DTG/DataTierGenerator.exe --file=DataTierGenerator.config.xml
 
 .PHONY: build_db
 build_db:
