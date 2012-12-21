@@ -38,7 +38,7 @@ namespace Spring2.Core.Test {
 	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode(street, city, state, zip, StringType.UNSET, CountryCodeEnum.UNITED_STATES);
 	    Assert.AreEqual(new DecimalType(40.5671180), geocode.MatchLatitude);
 	    Assert.AreEqual(new DecimalType(-111.8957300), geocode.MatchLongitude);
-	    Assert.AreEqual("10150 CENTENNIAL PKWY", geocode.StdAddress.ToString().Trim().ToUpper());
+            Assert.AreEqual("10150 CENTENNIAL PARKWAY", geocode.StdAddress.ToString().Trim().ToUpper());
 	    Assert.AreEqual("SANDY", geocode.StdCity.ToString().Trim().ToUpper());
 	    Assert.AreEqual("84070", geocode.StdZipCode.ToString().Trim().ToUpper());
 	    Assert.AreEqual("UT", geocode.StdState.ToString().Trim().ToUpper());
@@ -50,10 +50,10 @@ namespace Spring2.Core.Test {
 	    StringType street = "109 Front St";
 	    StringType zip = "11201";
 	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode(street, StringType.UNSET, StringType.UNSET, zip, StringType.UNSET, CountryCodeEnum.UNITED_STATES);
-	    Assert.AreEqual(new DecimalType(40.70252210), geocode.MatchLatitude);
-	    Assert.AreEqual(new DecimalType(-73.98929950), geocode.MatchLongitude);
-	    Assert.AreEqual("109 FRONT ST", geocode.StdAddress.ToString().Trim().ToUpper());
-	    Assert.AreEqual("BROOKLYN", geocode.StdCity.ToString().Trim().ToUpper());
+            Assert.AreEqual(new DecimalType(40.70257350), geocode.MatchLatitude);
+            Assert.AreEqual(new DecimalType(-73.98909340), geocode.MatchLongitude);
+	    Assert.AreEqual("109 FRONT STREET", geocode.StdAddress.ToString().Trim().ToUpper());
+	    Assert.AreEqual("NEW YORK", geocode.StdCity.ToString().Trim().ToUpper());
 	    Assert.AreEqual("11201", geocode.StdZipCode.ToString().Trim().ToUpper());
 	    Assert.AreEqual("NY", geocode.StdState.ToString().Trim().ToUpper());
 	}
@@ -100,7 +100,7 @@ namespace Spring2.Core.Test {
 	[Test]
 	public void GetGeocodeFromWebServiceByFullAddress() {
 	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("5892 South Acheron Avenue","Boise","ID","", "", CountryCodeEnum.UNITED_STATES);
-	    Assert.AreEqual("5892 S ACHERON AVE", geocode.StdAddress.ToString().ToUpper());
+            Assert.AreEqual("5892 SOUTH ACHERON AVENUE", geocode.StdAddress.ToString().ToUpper());
 	    Assert.AreEqual("BOISE", geocode.StdCity.ToString().ToUpper());
 	    Assert.AreEqual("ID", geocode.StdState.ToString().ToUpper());
 	    Assert.AreEqual("83709", geocode.StdZipCode.ToString().ToUpper());
@@ -183,10 +183,10 @@ namespace Spring2.Core.Test {
 	[Test]
 	public void ShouldBeAbleToGeocodeCanadianAddress() {
 	    GeocodeData geocode = GeocodeProvider.Instance.DoGeocode("5400 Robinson St", "Niagara Falls", "ON", "L2G 2A6", "", CountryCodeEnum.CANADA);
-	    Assert.AreEqual("5400 ROBINSON ST", geocode.MatchAddress.ToString().ToUpper());
+	    Assert.AreEqual("5400 ROBINSON STREET", geocode.MatchAddress.ToString().ToUpper());
 	    Assert.AreEqual("NIAGARA FALLS", geocode.MatchCity.ToString().ToUpper());
 	    Assert.AreEqual("ON", geocode.MatchState.ToString().ToUpper());
-	    Assert.AreEqual("L2G 7T8", geocode.MatchZipCode.ToString().ToUpper());
+	    Assert.AreEqual("L2G", geocode.MatchZipCode.ToString().ToUpper());
 	}
     }
 }
