@@ -104,7 +104,7 @@ scriptorder:
 	# make sure the file has dos line endings,
 	unix2dos so1.txt
 	# strip off the last end of line
-	awk 'NR > 1 { print h } { h = $$0 } END { ORS = ""; print h }' so1.txt > ScriptOrder.txt
+	awk 'NR > 1 { print h } { h = $$0 } END { ORS = ""; print h }' so1.txt | uniq > ScriptOrder.txt
 	dos2unix ScriptOrder.txt
 	$(RM) s.txt script.txt o.txt order.txt so.txt so1.txt svnlog.xml svnlog.csv
 
