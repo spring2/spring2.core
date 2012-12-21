@@ -92,7 +92,7 @@ package: clean build regress changelog docs packageonly
 
 packageonly:
 	rm -rf ${BUILDDIR}/Core
-	$(7ZIP) a $(RELEASEDIR)/Spring2.Core.$(shell $(GETVERSION))-net-4.0.7z $(BUILDDIR)/net-4.0 .
+	$(7ZIP) a $(RELEASEDIR)/Spring2.Core.$(shell $(GETVERSION))-net-4.0.7z $(BUILDDIR)/net-4.0/*
 	${NANT} -D:version=$(shell ./getversion.sh) package_src
 
 release: package
