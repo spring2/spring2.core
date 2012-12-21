@@ -216,7 +216,7 @@
 	<ifnot test="${property::exists('version')}">
 	    <fail message="version property not set, so can't create versioned package" />
 	</ifnot>
-	<zip zipfile="${release.dir}/Spring2.Core-${version}-src.zip" ziplevel="9">
+	<zip zipfile="${release.dir}/Spring2.Core-${version}-src.7z" ziplevel="9">
 	    <fileset basedir="..">
 		<include name="**/*" />
 		<exclude name="**/CVS/*" />

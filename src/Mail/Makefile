@@ -93,7 +93,7 @@ RELEASE_REVISION	:= 1
 BRANCH_TAG 		:= trunk
 	
 package_sql: scriptorder combine_sql_scripts
-	$(7ZIP) a  $(RELEASEDIR)/Spring2.Core.Mail.sql.7z ScriptOrder.txt combined_sql_scripts.sql @ScriptOrder.txt
+	$(7ZIP) a $(RELEASEDIR)/Spring2.Core.Mail.sql.7z ScriptOrder.txt combined_sql_scripts.sql @ScriptOrder.txt
 	$(RM) ScriptOrder.txt combined_sql_scripts.sql
 
 .PHONY: scriptorder
