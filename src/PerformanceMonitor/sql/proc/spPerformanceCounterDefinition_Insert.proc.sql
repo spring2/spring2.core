@@ -34,7 +34,7 @@ VALUES (
 
 if @@rowcount <> 1 or @@error!=0
     BEGIN
-        RAISERROR  20000 'spPerformanceCounterDefinition_Insert: Unable to insert new row into PerformanceCounterDefinition table '
+        RAISERROR  ('spPerformanceCounterDefinition_Insert: Unable to insert new row into PerformanceCounterDefinition table ', 16, 1, @@ROWCOUNT)
         RETURN(-1)
     END
 
