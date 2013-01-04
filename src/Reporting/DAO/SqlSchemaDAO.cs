@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-
 using Spring2.Core.DAO;
 using Spring2.Core.Types;
 
@@ -68,10 +68,10 @@ namespace Spring2.Core.Reporting {
 	    return list;
 	}
 
-	public static IList GetSqlColumns(IWhere whereClause, IOrderBy orderByClause) {
+	public static IList<SqlColumnData> GetSqlColumns(IWhere whereClause, IOrderBy orderByClause) {
 	    SqlDataReader dataReader = (SqlDataReader)(new SqlSchemaDAO().GetListReader(CONNECTION_STRING_KEY, "vwSqlColumn", whereClause, orderByClause));
 
-	    ArrayList list = new ArrayList();
+	    IList<SqlColumnData> list = new List<SqlColumnData>();
 	    while (dataReader.Read()) {
 		list.Add(GetSqlColumnDataFromReader(dataReader));
 	    }
