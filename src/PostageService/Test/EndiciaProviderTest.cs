@@ -56,6 +56,75 @@ namespace Spring2.Core.PostageService.Test {
 	}
 
 	[Test]
+	public void CalculatePostageRateRequest_FIRSTCLASSPACKAGEINTERNATIONSERVICE() {
+	    IPostageServiceProvider postage = new EndiciaProvider();
+
+	    PostageRateInputData input = new PostageRateInputData() {
+		MailClass = MailClassEnum.FIRSTCLASSMAILINTERNATIONAL,
+		MailpieceShape = MailpieceShapeEnum.PARCEL,
+		WeightOz = 16,
+		MailpieceDimensions = new PackageDimensions { Height = 10, Width = 5, Length = 15 },
+		Value = 100,
+		FromPostalCode = "84070",
+		ToPostalCode = "11375",
+		ShipDate = DateTime.Now.ToString("MM/dd/yyyy"),
+		ShipTime = DateTime.Now.ToString("hh:mm tt")
+	    };
+
+	    PostageRateData data = postage.GetPostageRate(input);
+
+	    Assert.IsNotNull(data);
+	    Console.WriteLine(data.ErrorMessage);
+	    Assert.IsTrue(string.IsNullOrEmpty(data.ErrorMessage));
+	}
+
+	[Test]
+	public void CalculatePostageRateRequest_PARCELPOST() {
+	    IPostageServiceProvider postage = new EndiciaProvider();
+
+	    PostageRateInputData input = new PostageRateInputData() {
+		MailClass = MailClassEnum.STANDARDPOST,
+		MailpieceShape = MailpieceShapeEnum.PARCEL,
+		WeightOz = 16,
+		MailpieceDimensions = new PackageDimensions { Height = 10, Width = 5, Length = 15 },
+		Value = 100,
+		FromPostalCode = "84070",
+		ToPostalCode = "11375",
+		ShipDate = DateTime.Now.ToString("MM/dd/yyyy"),
+		ShipTime = DateTime.Now.ToString("hh:mm tt")
+	    };
+
+	    PostageRateData data = postage.GetPostageRate(input);
+
+	    Assert.IsNotNull(data);
+	    Console.WriteLine(data.ErrorMessage);
+	    Assert.IsTrue(string.IsNullOrEmpty(data.ErrorMessage));
+	}
+
+	[Test]
+	public void CalculatePostageRateRequest_FIRSTCLASSPACKAGEINTERNATIONALSERVICE() {
+	    IPostageServiceProvider postage = new EndiciaProvider();
+
+	    PostageRateInputData input = new PostageRateInputData() {
+		MailClass = MailClassEnum.STANDARDPOST,
+		MailpieceShape = MailpieceShapeEnum.PARCEL,
+		WeightOz = 16,
+		MailpieceDimensions = new PackageDimensions { Height = 10, Width = 5, Length = 15 },
+		Value = 100,
+		FromPostalCode = "84070",
+		ToPostalCode = "11375",
+		ShipDate = DateTime.Now.ToString("MM/dd/yyyy"),
+		ShipTime = DateTime.Now.ToString("hh:mm tt")
+	    };
+
+	    PostageRateData data = postage.GetPostageRate(input);
+
+	    Assert.IsNotNull(data);
+	    Console.WriteLine(data.ErrorMessage);
+	    Assert.IsTrue(string.IsNullOrEmpty(data.ErrorMessage));
+	}
+
+	[Test]
 	public void CalculatePostageRatesRequest() {
 	    IPostageServiceProvider postage = new EndiciaProvider();
 
