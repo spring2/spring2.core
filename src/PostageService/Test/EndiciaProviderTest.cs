@@ -66,7 +66,8 @@ namespace Spring2.Core.PostageService.Test {
 		MailpieceDimensions = new PackageDimensions { Height = 10, Width = 5, Length = 15 },
 		Value = 100,
 		FromPostalCode = "84070",
-		ToPostalCode = "11375",
+		ToPostalCode = "M5G 1R3",
+		ToCountry = "Canada",
 		ShipDate = DateTime.Now.ToString("MM/dd/yyyy"),
 		ShipTime = DateTime.Now.ToString("hh:mm tt")
 	    };
