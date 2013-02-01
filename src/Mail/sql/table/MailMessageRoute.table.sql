@@ -2,11 +2,11 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
-drop procedure #spAlterColumn
+if exists (select * from tempdb..sysobjects where name like '#spAlterColumn_MailMessageRoute%' and xtype='P')
+drop procedure #spAlterColumn_MailMessageRoute
 GO
 
-CREATE PROCEDURE #spAlterColumn
+CREATE PROCEDURE #spAlterColumn_MailMessageRoute
     @table varchar(100),
     @column varchar(100),
     @type varchar(50),
@@ -37,9 +37,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessageRoute') an
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessageRoute') and name = 'MailMessageRouteId')
+
+if exists(select * from information_schema.columns where table_name='MailMessageRoute' and column_name='MailMessageRouteId') and not exists(select * from information_schema.columns where table_name='MailMessageRoute' and column_name='MailMessageRouteId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MailMessageRoute', 'MailMessageRouteId', 'Int', 1
+	exec #spAlterColumn_MailMessageRoute 'MailMessageRoute', 'MailMessageRouteId', 'Int', 1
   END
 GO
 
@@ -50,9 +51,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessageRoute') an
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessageRoute') and name = 'MailMessage')
+
+if exists(select * from information_schema.columns where table_name='MailMessageRoute' and column_name='MailMessage') and not exists(select * from information_schema.columns where table_name='MailMessageRoute' and column_name='MailMessage' and character_maximum_length=50 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MailMessageRoute', 'MailMessage', 'VarChar(50)', 1
+	exec #spAlterColumn_MailMessageRoute 'MailMessageRoute', 'MailMessage', 'VarChar(50)', 1
   END
 GO
 
@@ -63,9 +65,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessageRoute') an
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessageRoute') and name = 'RoutingType')
+
+if exists(select * from information_schema.columns where table_name='MailMessageRoute' and column_name='RoutingType') and not exists(select * from information_schema.columns where table_name='MailMessageRoute' and column_name='RoutingType' and character_maximum_length=10 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MailMessageRoute', 'RoutingType', 'VarChar(10)', 1
+	exec #spAlterColumn_MailMessageRoute 'MailMessageRoute', 'RoutingType', 'VarChar(10)', 1
   END
 GO
 
@@ -78,7 +81,8 @@ if not exists(select * from syscolumns where id=object_id('MailMessageRoute') an
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessageRoute') and name = 'Status')
+
+if exists(select * from information_schema.columns where table_name='MailMessageRoute' and column_name='Status') and not exists(select * from information_schema.columns where table_name='MailMessageRoute' and column_name='Status' and character_maximum_length=1 and is_nullable='NO')
   BEGIN
 	declare @cdefault varchar(1000)
 	select @cdefault = '[' + object_name(cdefault) + ']' from syscolumns where id=object_id('MailMessageRoute') and name = 'Status'
@@ -94,7 +98,7 @@ if exists(select * from syscolumns where id=object_id('MailMessageRoute') and na
           end
 	
 	update MailMessageRoute set Status = 'Y' where Status IS NULL
-	exec #spAlterColumn 'MailMessageRoute', 'Status', 'VarChar(1)', 1
+	exec #spAlterColumn_MailMessageRoute 'MailMessageRoute', 'Status', 'VarChar(1)', 1
 	if not exists(select * from sysobjects where name = 'DF_MailMessageRoute_Status' and xtype='D')
 		alter table MailMessageRoute
 			ADD CONSTRAINT [DF_MailMessageRoute_Status] DEFAULT 'Y' FOR Status WITH VALUES
@@ -108,9 +112,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessageRoute') an
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessageRoute') and name = 'EmailAddress')
+
+if exists(select * from information_schema.columns where table_name='MailMessageRoute' and column_name='EmailAddress') and not exists(select * from information_schema.columns where table_name='MailMessageRoute' and column_name='EmailAddress' and character_maximum_length=200 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MailMessageRoute', 'EmailAddress', 'VarChar(200)', 1
+	exec #spAlterColumn_MailMessageRoute 'MailMessageRoute', 'EmailAddress', 'VarChar(200)', 1
   END
 GO
 
@@ -134,3 +139,6 @@ ALTER TABLE MailMessageRoute ADD
 	)
 GO
 
+
+drop procedure #spAlterColumn_MailMessageRoute
+GO

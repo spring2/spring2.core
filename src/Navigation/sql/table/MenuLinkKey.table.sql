@@ -2,11 +2,11 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
-drop procedure #spAlterColumn
+if exists (select * from tempdb..sysobjects where name like '#spAlterColumn_MenuLinkKey%' and xtype='P')
+drop procedure #spAlterColumn_MenuLinkKey
 GO
 
-CREATE PROCEDURE #spAlterColumn
+CREATE PROCEDURE #spAlterColumn_MenuLinkKey
     @table varchar(100),
     @column varchar(100),
     @type varchar(50),
@@ -34,9 +34,10 @@ if not exists(select * from syscolumns where id=object_id('MenuLinkKey') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLinkKey') and name = 'MenuLinkId')
+
+if exists(select * from information_schema.columns where table_name='MenuLinkKey' and column_name='MenuLinkId') and not exists(select * from information_schema.columns where table_name='MenuLinkKey' and column_name='MenuLinkId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MenuLinkKey', 'MenuLinkId', 'Int', 1
+	exec #spAlterColumn_MenuLinkKey 'MenuLinkKey', 'MenuLinkId', 'Int', 1
   END
 GO
 
@@ -47,9 +48,10 @@ if not exists(select * from syscolumns where id=object_id('MenuLinkKey') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLinkKey') and name = 'Key')
+
+if exists(select * from information_schema.columns where table_name='MenuLinkKey' and column_name='Key') and not exists(select * from information_schema.columns where table_name='MenuLinkKey' and column_name='Key' and character_maximum_length=100 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MenuLinkKey', 'Key', 'VarChar(100)', 1
+	exec #spAlterColumn_MenuLinkKey 'MenuLinkKey', 'Key', 'VarChar(100)', 1
   END
 GO
 
@@ -75,3 +77,6 @@ ALTER TABLE MenuLinkKey ADD
 	)
 GO
 
+
+drop procedure #spAlterColumn_MenuLinkKey
+GO

@@ -2,11 +2,11 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
-drop procedure #spAlterColumn
+if exists (select * from tempdb..sysobjects where name like '#spAlterColumn_PublicationType%' and xtype='P')
+drop procedure #spAlterColumn_PublicationType
 GO
 
-CREATE PROCEDURE #spAlterColumn
+CREATE PROCEDURE #spAlterColumn_PublicationType
     @table varchar(100),
     @column varchar(100),
     @type varchar(50),
@@ -50,9 +50,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'PublicationTypeId')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='PublicationTypeId') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='PublicationTypeId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'PublicationTypeId', 'Int', 1
+	exec #spAlterColumn_PublicationType 'PublicationType', 'PublicationTypeId', 'Int', 1
   END
 GO
 
@@ -63,9 +64,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'Name')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='Name') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='Name' and character_maximum_length=50 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'Name', 'VarChar(50)', 1
+	exec #spAlterColumn_PublicationType 'PublicationType', 'Name', 'VarChar(50)', 1
   END
 GO
 
@@ -76,9 +78,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'EmailSubject')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='EmailSubject') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='EmailSubject' and character_maximum_length=500 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'EmailSubject', 'VarChar(500)', 0
+	exec #spAlterColumn_PublicationType 'PublicationType', 'EmailSubject', 'VarChar(500)', 0
   END
 GO
 
@@ -97,9 +100,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'EmailBodyType')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='EmailBodyType') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='EmailBodyType' and character_maximum_length=100 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'EmailBodyType', 'VarChar(100)', 0
+	exec #spAlterColumn_PublicationType 'PublicationType', 'EmailBodyType', 'VarChar(100)', 0
   END
 GO
 
@@ -110,9 +114,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'Description')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='Description') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='Description' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'Description', 'VarChar(max)', 0
+	exec #spAlterColumn_PublicationType 'PublicationType', 'Description', 'VarChar(max)', 0
   END
 GO
 
@@ -123,9 +128,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'MailMessageType')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='MailMessageType') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='MailMessageType' and character_maximum_length=100 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'MailMessageType', 'VarChar(100)', 0
+	exec #spAlterColumn_PublicationType 'PublicationType', 'MailMessageType', 'VarChar(100)', 0
   END
 GO
 
@@ -138,7 +144,8 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'LastSentDate')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='LastSentDate') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='LastSentDate' and is_nullable='NO')
   BEGIN
 	declare @cdefault varchar(1000)
 	select @cdefault = '[' + object_name(cdefault) + ']' from syscolumns where id=object_id('PublicationType') and name = 'LastSentDate'
@@ -154,7 +161,7 @@ if exists(select * from syscolumns where id=object_id('PublicationType') and nam
           end
 	
 	update PublicationType set LastSentDate = getdate() where LastSentDate IS NULL
-	exec #spAlterColumn 'PublicationType', 'LastSentDate', 'DateTime', 1
+	exec #spAlterColumn_PublicationType 'PublicationType', 'LastSentDate', 'DateTime', 1
 	if not exists(select * from sysobjects where name = 'DF_PublicationType_LastSentDate' and xtype='D')
 		alter table PublicationType
 			ADD CONSTRAINT [DF_PublicationType_LastSentDate] DEFAULT getdate() FOR LastSentDate WITH VALUES
@@ -168,9 +175,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'FrequencyInMinutes')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='FrequencyInMinutes') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='FrequencyInMinutes' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'FrequencyInMinutes', 'Int', 1
+	exec #spAlterColumn_PublicationType 'PublicationType', 'FrequencyInMinutes', 'Int', 1
   END
 GO
 
@@ -181,9 +189,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'ProviderName')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='ProviderName') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='ProviderName' and character_maximum_length=250 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'ProviderName', 'VarChar(250)', 1
+	exec #spAlterColumn_PublicationType 'PublicationType', 'ProviderName', 'VarChar(250)', 1
   END
 GO
 
@@ -194,9 +203,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'AllowSubscription')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='AllowSubscription') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='AllowSubscription' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'AllowSubscription', 'Bit', 1
+	exec #spAlterColumn_PublicationType 'PublicationType', 'AllowSubscription', 'Bit', 1
   END
 GO
 
@@ -207,9 +217,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'AutoSubscribe')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='AutoSubscribe') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='AutoSubscribe' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'AutoSubscribe', 'Bit', 1
+	exec #spAlterColumn_PublicationType 'PublicationType', 'AutoSubscribe', 'Bit', 1
   END
 GO
 
@@ -222,7 +233,8 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'EffectiveDate')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='EffectiveDate') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='EffectiveDate' and is_nullable='NO')
   BEGIN
 	declare @cdefault varchar(1000)
 	select @cdefault = '[' + object_name(cdefault) + ']' from syscolumns where id=object_id('PublicationType') and name = 'EffectiveDate'
@@ -238,7 +250,7 @@ if exists(select * from syscolumns where id=object_id('PublicationType') and nam
           end
 	
 	update PublicationType set EffectiveDate = getdate() where EffectiveDate IS NULL
-	exec #spAlterColumn 'PublicationType', 'EffectiveDate', 'DateTime', 1
+	exec #spAlterColumn_PublicationType 'PublicationType', 'EffectiveDate', 'DateTime', 1
 	if not exists(select * from sysobjects where name = 'DF_PublicationType_EffectiveDate' and xtype='D')
 		alter table PublicationType
 			ADD CONSTRAINT [DF_PublicationType_EffectiveDate] DEFAULT getdate() FOR EffectiveDate WITH VALUES
@@ -252,9 +264,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'ExpirationDate')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='ExpirationDate') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='ExpirationDate' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'ExpirationDate', 'DateTime', 0
+	exec #spAlterColumn_PublicationType 'PublicationType', 'ExpirationDate', 'DateTime', 0
   END
 GO
 
@@ -265,9 +278,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'CreateDate')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='CreateDate') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='CreateDate' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'CreateDate', 'DateTime', 1
+	exec #spAlterColumn_PublicationType 'PublicationType', 'CreateDate', 'DateTime', 1
   END
 GO
 
@@ -278,9 +292,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'CreateUserId')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='CreateUserId') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='CreateUserId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'CreateUserId', 'Int', 1
+	exec #spAlterColumn_PublicationType 'PublicationType', 'CreateUserId', 'Int', 1
   END
 GO
 
@@ -291,9 +306,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'LastModifiedDate')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='LastModifiedDate') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='LastModifiedDate' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'LastModifiedDate', 'DateTime', 1
+	exec #spAlterColumn_PublicationType 'PublicationType', 'LastModifiedDate', 'DateTime', 1
   END
 GO
 
@@ -304,9 +320,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationType') and
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationType') and name = 'LastModifiedUserId')
+
+if exists(select * from information_schema.columns where table_name='PublicationType' and column_name='LastModifiedUserId') and not exists(select * from information_schema.columns where table_name='PublicationType' and column_name='LastModifiedUserId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationType', 'LastModifiedUserId', 'Int', 1
+	exec #spAlterColumn_PublicationType 'PublicationType', 'LastModifiedUserId', 'Int', 1
   END
 GO
 
@@ -326,3 +343,6 @@ ALTER TABLE PublicationType ADD
 	)
 GO
 
+
+drop procedure #spAlterColumn_PublicationType
+GO

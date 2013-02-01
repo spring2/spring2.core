@@ -2,11 +2,11 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
-drop procedure #spAlterColumn
+if exists (select * from tempdb..sysobjects where name like '#spAlterColumn_MenuLink%' and xtype='P')
+drop procedure #spAlterColumn_MenuLink
 GO
 
-CREATE PROCEDURE #spAlterColumn
+CREATE PROCEDURE #spAlterColumn_MenuLink
     @table varchar(100),
     @column varchar(100),
     @type varchar(50),
@@ -42,9 +42,10 @@ if not exists(select * from syscolumns where id=object_id('MenuLink') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'MenuLinkId')
+
+if exists(select * from information_schema.columns where table_name='MenuLink' and column_name='MenuLinkId') and not exists(select * from information_schema.columns where table_name='MenuLink' and column_name='MenuLinkId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MenuLink', 'MenuLinkId', 'Int', 1
+	exec #spAlterColumn_MenuLink 'MenuLink', 'MenuLinkId', 'Int', 1
   END
 GO
 
@@ -55,9 +56,10 @@ if not exists(select * from syscolumns where id=object_id('MenuLink') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'Name')
+
+if exists(select * from information_schema.columns where table_name='MenuLink' and column_name='Name') and not exists(select * from information_schema.columns where table_name='MenuLink' and column_name='Name' and character_maximum_length=75 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MenuLink', 'Name', 'VarChar(75)', 1
+	exec #spAlterColumn_MenuLink 'MenuLink', 'Name', 'VarChar(75)', 1
   END
 GO
 
@@ -68,9 +70,10 @@ if not exists(select * from syscolumns where id=object_id('MenuLink') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'Target')
+
+if exists(select * from information_schema.columns where table_name='MenuLink' and column_name='Target') and not exists(select * from information_schema.columns where table_name='MenuLink' and column_name='Target' and character_maximum_length=150 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MenuLink', 'Target', 'VarChar(150)', 1
+	exec #spAlterColumn_MenuLink 'MenuLink', 'Target', 'VarChar(150)', 1
   END
 GO
 
@@ -81,9 +84,10 @@ if not exists(select * from syscolumns where id=object_id('MenuLink') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'Active')
+
+if exists(select * from information_schema.columns where table_name='MenuLink' and column_name='Active') and not exists(select * from information_schema.columns where table_name='MenuLink' and column_name='Active' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MenuLink', 'Active', 'Bit', 1
+	exec #spAlterColumn_MenuLink 'MenuLink', 'Active', 'Bit', 1
   END
 GO
 
@@ -94,9 +98,10 @@ if not exists(select * from syscolumns where id=object_id('MenuLink') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'MenuLinkGroupId')
+
+if exists(select * from information_schema.columns where table_name='MenuLink' and column_name='MenuLinkGroupId') and not exists(select * from information_schema.columns where table_name='MenuLink' and column_name='MenuLinkGroupId' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MenuLink', 'MenuLinkGroupId', 'Int', 0
+	exec #spAlterColumn_MenuLink 'MenuLink', 'MenuLinkGroupId', 'Int', 0
   END
 GO
 
@@ -107,9 +112,10 @@ if not exists(select * from syscolumns where id=object_id('MenuLink') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'ParentMenuLinkId')
+
+if exists(select * from information_schema.columns where table_name='MenuLink' and column_name='ParentMenuLinkId') and not exists(select * from information_schema.columns where table_name='MenuLink' and column_name='ParentMenuLinkId' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MenuLink', 'ParentMenuLinkId', 'Int', 0
+	exec #spAlterColumn_MenuLink 'MenuLink', 'ParentMenuLinkId', 'Int', 0
   END
 GO
 
@@ -120,9 +126,10 @@ if not exists(select * from syscolumns where id=object_id('MenuLink') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'EffectiveDate')
+
+if exists(select * from information_schema.columns where table_name='MenuLink' and column_name='EffectiveDate') and not exists(select * from information_schema.columns where table_name='MenuLink' and column_name='EffectiveDate' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MenuLink', 'EffectiveDate', 'DateTime', 0
+	exec #spAlterColumn_MenuLink 'MenuLink', 'EffectiveDate', 'DateTime', 0
   END
 GO
 
@@ -133,9 +140,10 @@ if not exists(select * from syscolumns where id=object_id('MenuLink') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'ExpirationDate')
+
+if exists(select * from information_schema.columns where table_name='MenuLink' and column_name='ExpirationDate') and not exists(select * from information_schema.columns where table_name='MenuLink' and column_name='ExpirationDate' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MenuLink', 'ExpirationDate', 'DateTime', 0
+	exec #spAlterColumn_MenuLink 'MenuLink', 'ExpirationDate', 'DateTime', 0
   END
 GO
 
@@ -146,9 +154,10 @@ if not exists(select * from syscolumns where id=object_id('MenuLink') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'Sequence')
+
+if exists(select * from information_schema.columns where table_name='MenuLink' and column_name='Sequence') and not exists(select * from information_schema.columns where table_name='MenuLink' and column_name='Sequence' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MenuLink', 'Sequence', 'Int', 0
+	exec #spAlterColumn_MenuLink 'MenuLink', 'Sequence', 'Int', 0
   END
 GO
 
@@ -161,7 +170,8 @@ if not exists(select * from syscolumns where id=object_id('MenuLink') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'TargetWindow')
+
+if exists(select * from information_schema.columns where table_name='MenuLink' and column_name='TargetWindow') and not exists(select * from information_schema.columns where table_name='MenuLink' and column_name='TargetWindow' and character_maximum_length=50 and is_nullable='YES')
   BEGIN
 	declare @cdefault varchar(1000)
 	select @cdefault = '[' + object_name(cdefault) + ']' from syscolumns where id=object_id('MenuLink') and name = 'TargetWindow'
@@ -176,7 +186,7 @@ if exists(select * from syscolumns where id=object_id('MenuLink') and name = 'Ta
             exec('alter table ' + @table + ' DROP CONSTRAINT [DF_MenuLink_TargetWindow]')
           end
 	
-	exec #spAlterColumn 'MenuLink', 'TargetWindow', 'VarChar(50)', 0
+	exec #spAlterColumn_MenuLink 'MenuLink', 'TargetWindow', 'VarChar(50)', 0
 	if not exists(select * from sysobjects where name = 'DF_MenuLink_TargetWindow' and xtype='D')
 		alter table MenuLink
 			ADD CONSTRAINT [DF_MenuLink_TargetWindow] DEFAULT '_self' FOR TargetWindow WITH VALUES
@@ -215,3 +225,6 @@ ALTER TABLE MenuLink ADD
 	)
 GO
 
+
+drop procedure #spAlterColumn_MenuLink
+GO

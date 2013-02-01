@@ -2,11 +2,11 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
-drop procedure #spAlterColumn
+if exists (select * from tempdb..sysobjects where name like '#spAlterColumn_AddressCache%' and xtype='P')
+drop procedure #spAlterColumn_AddressCache
 GO
 
-CREATE PROCEDURE #spAlterColumn
+CREATE PROCEDURE #spAlterColumn_AddressCache
     @table varchar(100),
     @column varchar(100),
     @type varchar(50),
@@ -51,9 +51,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'AddressId')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='AddressId') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='AddressId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'AddressId', 'Int', 1
+	exec #spAlterColumn_AddressCache 'AddressCache', 'AddressId', 'Int', 1
   END
 GO
 
@@ -64,9 +65,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'Address1')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='Address1') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='Address1' and character_maximum_length=80 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'Address1', 'VarChar(80)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'Address1', 'VarChar(80)', 0
   END
 GO
 
@@ -77,9 +79,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'City')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='City') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='City' and character_maximum_length=40 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'City', 'VarChar(40)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'City', 'VarChar(40)', 0
   END
 GO
 
@@ -90,9 +93,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'Region')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='Region') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='Region' and character_maximum_length=2 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'Region', 'Char(2)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'Region', 'Char(2)', 0
   END
 GO
 
@@ -103,9 +107,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'PostalCode')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='PostalCode') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='PostalCode' and character_maximum_length=10 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'PostalCode', 'VarChar(10)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'PostalCode', 'VarChar(10)', 0
   END
 GO
 
@@ -116,9 +121,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'Latitude')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='Latitude') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='Latitude' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'Latitude', 'Decimal(18, 8)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'Latitude', 'Decimal(18, 8)', 0
   END
 GO
 
@@ -129,9 +135,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'Longitude')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='Longitude') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='Longitude' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'Longitude', 'Decimal(18, 8)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'Longitude', 'Decimal(18, 8)', 0
   END
 GO
 
@@ -142,9 +149,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'Result')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='Result') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='Result' and character_maximum_length=8000 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'Result', 'VarChar(8000)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'Result', 'VarChar(8000)', 0
   END
 GO
 
@@ -155,9 +163,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'Status')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='Status') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='Status' and character_maximum_length=20 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'Status', 'VarChar(20)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'Status', 'VarChar(20)', 0
   END
 GO
 
@@ -168,9 +177,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdAddress1')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='StdAddress1') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='StdAddress1' and character_maximum_length=80 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'StdAddress1', 'VarChar(80)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'StdAddress1', 'VarChar(80)', 0
   END
 GO
 
@@ -181,9 +191,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdCity')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='StdCity') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='StdCity' and character_maximum_length=40 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'StdCity', 'VarChar(40)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'StdCity', 'VarChar(40)', 0
   END
 GO
 
@@ -194,9 +205,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdRegion')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='StdRegion') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='StdRegion' and character_maximum_length=2 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'StdRegion', 'Char(2)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'StdRegion', 'Char(2)', 0
   END
 GO
 
@@ -207,9 +219,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdPostalCode')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='StdPostalCode') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='StdPostalCode' and character_maximum_length=10 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'StdPostalCode', 'VarChar(10)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'StdPostalCode', 'VarChar(10)', 0
   END
 GO
 
@@ -220,9 +233,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdPlus4')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='StdPlus4') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='StdPlus4' and character_maximum_length=4 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'StdPlus4', 'Char(4)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'StdPlus4', 'Char(4)', 0
   END
 GO
 
@@ -233,9 +247,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatAddress1')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='MatAddress1') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='MatAddress1' and character_maximum_length=80 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'MatAddress1', 'VarChar(80)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'MatAddress1', 'VarChar(80)', 0
   END
 GO
 
@@ -246,9 +261,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatCity')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='MatCity') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='MatCity' and character_maximum_length=40 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'MatCity', 'VarChar(40)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'MatCity', 'VarChar(40)', 0
   END
 GO
 
@@ -259,9 +275,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatRegion')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='MatRegion') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='MatRegion' and character_maximum_length=2 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'MatRegion', 'Char(2)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'MatRegion', 'Char(2)', 0
   END
 GO
 
@@ -272,9 +289,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatPostalCode')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='MatPostalCode') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='MatPostalCode' and character_maximum_length=10 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'MatPostalCode', 'VarChar(10)', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'MatPostalCode', 'VarChar(10)', 0
   END
 GO
 
@@ -285,9 +303,10 @@ if not exists(select * from syscolumns where id=object_id('AddressCache') and na
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatchType')
+
+if exists(select * from information_schema.columns where table_name='AddressCache' and column_name='MatchType') and not exists(select * from information_schema.columns where table_name='AddressCache' and column_name='MatchType' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'MatchType', 'Int', 0
+	exec #spAlterColumn_AddressCache 'AddressCache', 'MatchType', 'Int', 0
   END
 GO
 
@@ -299,3 +318,6 @@ ALTER TABLE AddressCache WITH NOCHECK ADD
 	)
 GO
 
+
+drop procedure #spAlterColumn_AddressCache
+GO

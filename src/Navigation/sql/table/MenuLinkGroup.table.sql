@@ -2,11 +2,11 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
-drop procedure #spAlterColumn
+if exists (select * from tempdb..sysobjects where name like '#spAlterColumn_MenuLinkGroup%' and xtype='P')
+drop procedure #spAlterColumn_MenuLinkGroup
 GO
 
-CREATE PROCEDURE #spAlterColumn
+CREATE PROCEDURE #spAlterColumn_MenuLinkGroup
     @table varchar(100),
     @column varchar(100),
     @type varchar(50),
@@ -34,9 +34,10 @@ if not exists(select * from syscolumns where id=object_id('MenuLinkGroup') and n
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLinkGroup') and name = 'MenuLinkGroupId')
+
+if exists(select * from information_schema.columns where table_name='MenuLinkGroup' and column_name='MenuLinkGroupId') and not exists(select * from information_schema.columns where table_name='MenuLinkGroup' and column_name='MenuLinkGroupId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MenuLinkGroup', 'MenuLinkGroupId', 'Int', 1
+	exec #spAlterColumn_MenuLinkGroup 'MenuLinkGroup', 'MenuLinkGroupId', 'Int', 1
   END
 GO
 
@@ -47,9 +48,10 @@ if not exists(select * from syscolumns where id=object_id('MenuLinkGroup') and n
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MenuLinkGroup') and name = 'Name')
+
+if exists(select * from information_schema.columns where table_name='MenuLinkGroup' and column_name='Name') and not exists(select * from information_schema.columns where table_name='MenuLinkGroup' and column_name='Name' and character_maximum_length=80 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MenuLinkGroup', 'Name', 'VarChar(80)', 0
+	exec #spAlterColumn_MenuLinkGroup 'MenuLinkGroup', 'Name', 'VarChar(80)', 0
   END
 GO
 
@@ -61,9 +63,12 @@ ALTER TABLE MenuLinkGroup WITH NOCHECK ADD
 	)
 GO
 
-if not exists (select * from sysindexes where name='IxMenuLinkGroup_Name' and id=object_id(N'[MenuLinkGroup]'))
+if not exists (select * from sys.indexes where name='IxMenuLinkGroup_Name' and object_id=object_id(N'[MenuLinkGroup]'))
 	CREATE INDEX IxMenuLinkGroup_Name ON MenuLinkGroup
 	(
         	Name
 	)
+GO
+
+drop procedure #spAlterColumn_MenuLinkGroup
 GO

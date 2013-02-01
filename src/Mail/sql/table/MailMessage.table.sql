@@ -2,11 +2,11 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
-drop procedure #spAlterColumn
+if exists (select * from tempdb..sysobjects where name like '#spAlterColumn_MailMessage%' and xtype='P')
+drop procedure #spAlterColumn_MailMessage
 GO
 
-CREATE PROCEDURE #spAlterColumn
+CREATE PROCEDURE #spAlterColumn_MailMessage
     @table varchar(100),
     @column varchar(100),
     @type varchar(50),
@@ -55,9 +55,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'MailMessageId')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='MailMessageId') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='MailMessageId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'MailMessageId', 'Int', 1
+	exec #spAlterColumn_MailMessage 'MailMessage', 'MailMessageId', 'Int', 1
   END
 GO
 
@@ -68,9 +69,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'ScheduleTime')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='ScheduleTime') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='ScheduleTime' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'ScheduleTime', 'DateTime', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'ScheduleTime', 'DateTime', 0
   END
 GO
 
@@ -81,9 +83,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'ProcessedTime')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='ProcessedTime') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='ProcessedTime' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'ProcessedTime', 'DateTime', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'ProcessedTime', 'DateTime', 0
   END
 GO
 
@@ -94,9 +97,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'Priority')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='Priority') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='Priority' and character_maximum_length=10 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'Priority', 'VarChar(10)', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'Priority', 'VarChar(10)', 0
   END
 GO
 
@@ -107,9 +111,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'From')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='From') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='From' and character_maximum_length=250 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'From', 'VarChar(250)', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'From', 'VarChar(250)', 0
   END
 GO
 
@@ -120,9 +125,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'To')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='To') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='To' and character_maximum_length=6000 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'To', 'VarChar(6000)', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'To', 'VarChar(6000)', 0
   END
 GO
 
@@ -133,9 +139,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'Cc')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='Cc') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='Cc' and character_maximum_length=250 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'Cc', 'VarChar(250)', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'Cc', 'VarChar(250)', 0
   END
 GO
 
@@ -146,9 +153,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'Bcc')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='Bcc') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='Bcc' and character_maximum_length=250 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'Bcc', 'VarChar(250)', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'Bcc', 'VarChar(250)', 0
   END
 GO
 
@@ -159,9 +167,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'Subject')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='Subject') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='Subject' and character_maximum_length=80 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'Subject', 'VarChar(80)', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'Subject', 'VarChar(80)', 0
   END
 GO
 
@@ -172,9 +181,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'BodyFormat')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='BodyFormat') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='BodyFormat' and character_maximum_length=10 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'BodyFormat', 'VarChar(10)', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'BodyFormat', 'VarChar(10)', 0
   END
 GO
 
@@ -193,9 +203,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'MailMessageStatus')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='MailMessageStatus') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='MailMessageStatus' and character_maximum_length=30 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'MailMessageStatus', 'VarChar(30)', 1
+	exec #spAlterColumn_MailMessage 'MailMessage', 'MailMessageStatus', 'VarChar(30)', 1
   END
 GO
 
@@ -206,9 +217,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'ReleasedByUserId')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='ReleasedByUserId') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='ReleasedByUserId' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'ReleasedByUserId', 'Int', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'ReleasedByUserId', 'Int', 0
   END
 GO
 
@@ -221,7 +233,8 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'MailMessageType')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='MailMessageType') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='MailMessageType' and character_maximum_length=80 and is_nullable='NO')
   BEGIN
 	declare @cdefault varchar(1000)
 	select @cdefault = '[' + object_name(cdefault) + ']' from syscolumns where id=object_id('MailMessage') and name = 'MailMessageType'
@@ -237,7 +250,7 @@ if exists(select * from syscolumns where id=object_id('MailMessage') and name = 
           end
 	
 	update MailMessage set MailMessageType = '' where MailMessageType IS NULL
-	exec #spAlterColumn 'MailMessage', 'MailMessageType', 'VarChar(80)', 1
+	exec #spAlterColumn_MailMessage 'MailMessage', 'MailMessageType', 'VarChar(80)', 1
 	if not exists(select * from sysobjects where name = 'DF_MailMessage_MailMessageType' and xtype='D')
 		alter table MailMessage
 			ADD CONSTRAINT [DF_MailMessage_MailMessageType] DEFAULT '' FOR MailMessageType WITH VALUES
@@ -251,9 +264,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'NumberOfAttempts')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='NumberOfAttempts') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='NumberOfAttempts' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'NumberOfAttempts', 'Int', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'NumberOfAttempts', 'Int', 0
   END
 GO
 
@@ -264,9 +278,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'MessageQueueDate')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='MessageQueueDate') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='MessageQueueDate' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'MessageQueueDate', 'DateTime', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'MessageQueueDate', 'DateTime', 0
   END
 GO
 
@@ -277,9 +292,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'ReferenceKey')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='ReferenceKey') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='ReferenceKey' and character_maximum_length=50 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'ReferenceKey', 'VarChar(50)', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'ReferenceKey', 'VarChar(50)', 0
   END
 GO
 
@@ -290,9 +306,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'UniqueKey')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='UniqueKey') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='UniqueKey' and character_maximum_length=50 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'UniqueKey', 'VarChar(50)', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'UniqueKey', 'VarChar(50)', 0
   END
 GO
 
@@ -303,9 +320,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'Checksum')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='Checksum') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='Checksum' and character_maximum_length=50 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'Checksum', 'VarChar(50)', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'Checksum', 'VarChar(50)', 0
   END
 GO
 
@@ -318,7 +336,8 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'OpenCount')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='OpenCount') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='OpenCount' and is_nullable='YES')
   BEGIN
 	declare @cdefault varchar(1000)
 	select @cdefault = '[' + object_name(cdefault) + ']' from syscolumns where id=object_id('MailMessage') and name = 'OpenCount'
@@ -333,7 +352,7 @@ if exists(select * from syscolumns where id=object_id('MailMessage') and name = 
             exec('alter table ' + @table + ' DROP CONSTRAINT [DF_MailMessage_OpenCount]')
           end
 	
-	exec #spAlterColumn 'MailMessage', 'OpenCount', 'Int', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'OpenCount', 'Int', 0
 	if not exists(select * from sysobjects where name = 'DF_MailMessage_OpenCount' and xtype='D')
 		alter table MailMessage
 			ADD CONSTRAINT [DF_MailMessage_OpenCount] DEFAULT 0 FOR OpenCount WITH VALUES
@@ -349,7 +368,8 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'Bounces')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='Bounces') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='Bounces' and is_nullable='YES')
   BEGIN
 	declare @cdefault varchar(1000)
 	select @cdefault = '[' + object_name(cdefault) + ']' from syscolumns where id=object_id('MailMessage') and name = 'Bounces'
@@ -364,7 +384,7 @@ if exists(select * from syscolumns where id=object_id('MailMessage') and name = 
             exec('alter table ' + @table + ' DROP CONSTRAINT [DF_MailMessage_Bounces]')
           end
 	
-	exec #spAlterColumn 'MailMessage', 'Bounces', 'Int', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'Bounces', 'Int', 0
 	if not exists(select * from sysobjects where name = 'DF_MailMessage_Bounces' and xtype='D')
 		alter table MailMessage
 			ADD CONSTRAINT [DF_MailMessage_Bounces] DEFAULT 0 FOR Bounces WITH VALUES
@@ -378,9 +398,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'LastOpenDate')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='LastOpenDate') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='LastOpenDate' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'LastOpenDate', 'DateTime', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'LastOpenDate', 'DateTime', 0
   END
 GO
 
@@ -391,9 +412,10 @@ if not exists(select * from syscolumns where id=object_id('MailMessage') and nam
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailMessage') and name = 'SmtpServer')
+
+if exists(select * from information_schema.columns where table_name='MailMessage' and column_name='SmtpServer') and not exists(select * from information_schema.columns where table_name='MailMessage' and column_name='SmtpServer' and character_maximum_length=50 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailMessage', 'SmtpServer', 'VarChar(50)', 0
+	exec #spAlterColumn_MailMessage 'MailMessage', 'SmtpServer', 'VarChar(50)', 0
   END
 GO
 
@@ -405,33 +427,36 @@ ALTER TABLE MailMessage WITH NOCHECK ADD
 	)
 GO
 
-if not exists (select * from sysindexes where name='IxMailMessage_MailMessageStatus' and id=object_id(N'[MailMessage]'))
+if not exists (select * from sys.indexes where name='IxMailMessage_MailMessageStatus' and object_id=object_id(N'[MailMessage]'))
 	CREATE INDEX IxMailMessage_MailMessageStatus ON MailMessage
 	(
         	MailMessageStatus
 	)
 GO
-if not exists (select * from sysindexes where name='IxMailMessage_ScheduleTime' and id=object_id(N'[MailMessage]'))
+if not exists (select * from sys.indexes where name='IxMailMessage_ScheduleTime' and object_id=object_id(N'[MailMessage]'))
 	CREATE INDEX IxMailMessage_ScheduleTime ON MailMessage
 	(
         	ScheduleTime
 	)
 GO
-if not exists (select * from sysindexes where name='IxMailMessage_ProcessedTime' and id=object_id(N'[MailMessage]'))
+if not exists (select * from sys.indexes where name='IxMailMessage_ProcessedTime' and object_id=object_id(N'[MailMessage]'))
 	CREATE INDEX IxMailMessage_ProcessedTime ON MailMessage
 	(
         	ProcessedTime
 	)
 GO
-if not exists (select * from sysindexes where name='IxMailMessage_Subject' and id=object_id(N'[MailMessage]'))
+if not exists (select * from sys.indexes where name='IxMailMessage_Subject' and object_id=object_id(N'[MailMessage]'))
 	CREATE INDEX IxMailMessage_Subject ON MailMessage
 	(
         	Subject
 	)
 GO
-if not exists (select * from sysindexes where name='IxMailMessage_UniqueKey' and id=object_id(N'[MailMessage]'))
+if not exists (select * from sys.indexes where name='IxMailMessage_UniqueKey' and object_id=object_id(N'[MailMessage]'))
 	CREATE INDEX IxMailMessage_UniqueKey ON MailMessage
 	(
         	UniqueKey
 	)
+GO
+
+drop procedure #spAlterColumn_MailMessage
 GO

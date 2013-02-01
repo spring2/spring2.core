@@ -2,11 +2,11 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
-drop procedure #spAlterColumn
+if exists (select * from tempdb..sysobjects where name like '#spAlterColumn_CurrencyExchange%' and xtype='P')
+drop procedure #spAlterColumn_CurrencyExchange
 GO
 
-CREATE PROCEDURE #spAlterColumn
+CREATE PROCEDURE #spAlterColumn_CurrencyExchange
     @table varchar(100),
     @column varchar(100),
     @type varchar(50),
@@ -36,9 +36,10 @@ if not exists(select * from syscolumns where id=object_id('CurrencyExchange') an
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('CurrencyExchange') and name = 'CurrencyExchangeId')
+
+if exists(select * from information_schema.columns where table_name='CurrencyExchange' and column_name='CurrencyExchangeId') and not exists(select * from information_schema.columns where table_name='CurrencyExchange' and column_name='CurrencyExchangeId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'CurrencyExchange', 'CurrencyExchangeId', 'Int', 1
+	exec #spAlterColumn_CurrencyExchange 'CurrencyExchange', 'CurrencyExchangeId', 'Int', 1
   END
 GO
 
@@ -49,9 +50,10 @@ if not exists(select * from syscolumns where id=object_id('CurrencyExchange') an
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('CurrencyExchange') and name = 'CurrencyCode')
+
+if exists(select * from information_schema.columns where table_name='CurrencyExchange' and column_name='CurrencyCode') and not exists(select * from information_schema.columns where table_name='CurrencyExchange' and column_name='CurrencyCode' and character_maximum_length=3 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'CurrencyExchange', 'CurrencyCode', 'VarChar(3)', 1
+	exec #spAlterColumn_CurrencyExchange 'CurrencyExchange', 'CurrencyCode', 'VarChar(3)', 1
   END
 GO
 
@@ -64,7 +66,8 @@ if not exists(select * from syscolumns where id=object_id('CurrencyExchange') an
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('CurrencyExchange') and name = 'EffectiveDate')
+
+if exists(select * from information_schema.columns where table_name='CurrencyExchange' and column_name='EffectiveDate') and not exists(select * from information_schema.columns where table_name='CurrencyExchange' and column_name='EffectiveDate' and character_maximum_length=40 and is_nullable='NO')
   BEGIN
 	declare @cdefault varchar(1000)
 	select @cdefault = '[' + object_name(cdefault) + ']' from syscolumns where id=object_id('CurrencyExchange') and name = 'EffectiveDate'
@@ -80,7 +83,7 @@ if exists(select * from syscolumns where id=object_id('CurrencyExchange') and na
           end
 	
 	update CurrencyExchange set EffectiveDate = getdate() where EffectiveDate IS NULL
-	exec #spAlterColumn 'CurrencyExchange', 'EffectiveDate', 'DateTime', 1
+	exec #spAlterColumn_CurrencyExchange 'CurrencyExchange', 'EffectiveDate', 'DateTime', 1
 	if not exists(select * from sysobjects where name = 'DF_CurrencyExchange_EffectiveDate' and xtype='D')
 		alter table CurrencyExchange
 			ADD CONSTRAINT [DF_CurrencyExchange_EffectiveDate] DEFAULT getdate() FOR EffectiveDate WITH VALUES
@@ -94,9 +97,10 @@ if not exists(select * from syscolumns where id=object_id('CurrencyExchange') an
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('CurrencyExchange') and name = 'Rate')
+
+if exists(select * from information_schema.columns where table_name='CurrencyExchange' and column_name='Rate') and not exists(select * from information_schema.columns where table_name='CurrencyExchange' and column_name='Rate' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'CurrencyExchange', 'Rate', 'Decimal(9, 5)', 1
+	exec #spAlterColumn_CurrencyExchange 'CurrencyExchange', 'Rate', 'Decimal(9, 5)', 1
   END
 GO
 
@@ -108,3 +112,6 @@ ALTER TABLE CurrencyExchange WITH NOCHECK ADD
 	)
 GO
 
+
+drop procedure #spAlterColumn_CurrencyExchange
+GO

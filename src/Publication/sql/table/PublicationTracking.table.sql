@@ -2,11 +2,11 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
-drop procedure #spAlterColumn
+if exists (select * from tempdb..sysobjects where name like '#spAlterColumn_PublicationTracking%' and xtype='P')
+drop procedure #spAlterColumn_PublicationTracking
 GO
 
-CREATE PROCEDURE #spAlterColumn
+CREATE PROCEDURE #spAlterColumn_PublicationTracking
     @table varchar(100),
     @column varchar(100),
     @type varchar(50),
@@ -39,9 +39,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationTracking')
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationTracking') and name = 'PublicationTrackingId')
+
+if exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='PublicationTrackingId') and not exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='PublicationTrackingId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationTracking', 'PublicationTrackingId', 'Int', 1
+	exec #spAlterColumn_PublicationTracking 'PublicationTracking', 'PublicationTrackingId', 'Int', 1
   END
 GO
 
@@ -52,9 +53,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationTracking')
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationTracking') and name = 'PublicationPrimaryKeyId')
+
+if exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='PublicationPrimaryKeyId') and not exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='PublicationPrimaryKeyId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationTracking', 'PublicationPrimaryKeyId', 'Int', 1
+	exec #spAlterColumn_PublicationTracking 'PublicationTracking', 'PublicationPrimaryKeyId', 'Int', 1
   END
 GO
 
@@ -65,9 +67,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationTracking')
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationTracking') and name = 'PublicationTypeId')
+
+if exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='PublicationTypeId') and not exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='PublicationTypeId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationTracking', 'PublicationTypeId', 'Int', 1
+	exec #spAlterColumn_PublicationTracking 'PublicationTracking', 'PublicationTypeId', 'Int', 1
   END
 GO
 
@@ -78,9 +81,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationTracking')
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationTracking') and name = 'CreateDate')
+
+if exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='CreateDate') and not exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='CreateDate' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationTracking', 'CreateDate', 'DateTime', 1
+	exec #spAlterColumn_PublicationTracking 'PublicationTracking', 'CreateDate', 'DateTime', 1
   END
 GO
 
@@ -91,9 +95,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationTracking')
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationTracking') and name = 'CreateUserId')
+
+if exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='CreateUserId') and not exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='CreateUserId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationTracking', 'CreateUserId', 'Int', 1
+	exec #spAlterColumn_PublicationTracking 'PublicationTracking', 'CreateUserId', 'Int', 1
   END
 GO
 
@@ -104,9 +109,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationTracking')
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationTracking') and name = 'LastModifiedDate')
+
+if exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='LastModifiedDate') and not exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='LastModifiedDate' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationTracking', 'LastModifiedDate', 'DateTime', 1
+	exec #spAlterColumn_PublicationTracking 'PublicationTracking', 'LastModifiedDate', 'DateTime', 1
   END
 GO
 
@@ -117,9 +123,10 @@ if not exists(select * from syscolumns where id=object_id('PublicationTracking')
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('PublicationTracking') and name = 'LastModifiedUserId')
+
+if exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='LastModifiedUserId') and not exists(select * from information_schema.columns where table_name='PublicationTracking' and column_name='LastModifiedUserId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'PublicationTracking', 'LastModifiedUserId', 'Int', 1
+	exec #spAlterColumn_PublicationTracking 'PublicationTracking', 'LastModifiedUserId', 'Int', 1
   END
 GO
 
@@ -153,3 +160,6 @@ ALTER TABLE PublicationTracking ADD
 	)
 GO
 
+
+drop procedure #spAlterColumn_PublicationTracking
+GO

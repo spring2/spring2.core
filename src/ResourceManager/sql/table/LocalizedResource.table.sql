@@ -2,11 +2,11 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
-drop procedure #spAlterColumn
+if exists (select * from tempdb..sysobjects where name like '#spAlterColumn_LocalizedResource%' and xtype='P')
+drop procedure #spAlterColumn_LocalizedResource
 GO
 
-CREATE PROCEDURE #spAlterColumn
+CREATE PROCEDURE #spAlterColumn_LocalizedResource
     @table varchar(100),
     @column varchar(100),
     @type varchar(50),
@@ -37,9 +37,10 @@ if not exists(select * from syscolumns where id=object_id('LocalizedResource') a
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('LocalizedResource') and name = 'LocalizedResourceId')
+
+if exists(select * from information_schema.columns where table_name='LocalizedResource' and column_name='LocalizedResourceId') and not exists(select * from information_schema.columns where table_name='LocalizedResource' and column_name='LocalizedResourceId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'LocalizedResource', 'LocalizedResourceId', 'Int', 1
+	exec #spAlterColumn_LocalizedResource 'LocalizedResource', 'LocalizedResourceId', 'Int', 1
   END
 GO
 
@@ -50,9 +51,10 @@ if not exists(select * from syscolumns where id=object_id('LocalizedResource') a
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('LocalizedResource') and name = 'ResourceId')
+
+if exists(select * from information_schema.columns where table_name='LocalizedResource' and column_name='ResourceId') and not exists(select * from information_schema.columns where table_name='LocalizedResource' and column_name='ResourceId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'LocalizedResource', 'ResourceId', 'Int', 1
+	exec #spAlterColumn_LocalizedResource 'LocalizedResource', 'ResourceId', 'Int', 1
   END
 GO
 
@@ -63,9 +65,10 @@ if not exists(select * from syscolumns where id=object_id('LocalizedResource') a
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('LocalizedResource') and name = 'Locale')
+
+if exists(select * from information_schema.columns where table_name='LocalizedResource' and column_name='Locale') and not exists(select * from information_schema.columns where table_name='LocalizedResource' and column_name='Locale' and character_maximum_length=100 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'LocalizedResource', 'Locale', 'VarChar(100)', 1
+	exec #spAlterColumn_LocalizedResource 'LocalizedResource', 'Locale', 'VarChar(100)', 1
   END
 GO
 
@@ -76,9 +79,10 @@ if not exists(select * from syscolumns where id=object_id('LocalizedResource') a
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('LocalizedResource') and name = 'Language')
+
+if exists(select * from information_schema.columns where table_name='LocalizedResource' and column_name='Language') and not exists(select * from information_schema.columns where table_name='LocalizedResource' and column_name='Language' and character_maximum_length=100 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'LocalizedResource', 'Language', 'VarChar(100)', 1
+	exec #spAlterColumn_LocalizedResource 'LocalizedResource', 'Language', 'VarChar(100)', 1
   END
 GO
 
@@ -89,9 +93,10 @@ if not exists(select * from syscolumns where id=object_id('LocalizedResource') a
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('LocalizedResource') and name = 'Content')
+
+if exists(select * from information_schema.columns where table_name='LocalizedResource' and column_name='Content') and not exists(select * from information_schema.columns where table_name='LocalizedResource' and column_name='Content' and character_maximum_length=4000 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'LocalizedResource', 'Content', 'VarChar(4000)', 1
+	exec #spAlterColumn_LocalizedResource 'LocalizedResource', 'Content', 'VarChar(4000)', 1
   END
 GO
 
@@ -127,3 +132,6 @@ ALTER TABLE LocalizedResource ADD
 	)
 GO
 
+
+drop procedure #spAlterColumn_LocalizedResource
+GO

@@ -2,11 +2,11 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
-drop procedure #spAlterColumn
+if exists (select * from tempdb..sysobjects where name like '#spAlterColumn_MailAttachment%' and xtype='P')
+drop procedure #spAlterColumn_MailAttachment
 GO
 
-CREATE PROCEDURE #spAlterColumn
+CREATE PROCEDURE #spAlterColumn_MailAttachment
     @table varchar(100),
     @column varchar(100),
     @type varchar(50),
@@ -36,9 +36,10 @@ if not exists(select * from syscolumns where id=object_id('MailAttachment') and 
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailAttachment') and name = 'MailAttachmentId')
+
+if exists(select * from information_schema.columns where table_name='MailAttachment' and column_name='MailAttachmentId') and not exists(select * from information_schema.columns where table_name='MailAttachment' and column_name='MailAttachmentId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MailAttachment', 'MailAttachmentId', 'Int', 1
+	exec #spAlterColumn_MailAttachment 'MailAttachment', 'MailAttachmentId', 'Int', 1
   END
 GO
 
@@ -49,9 +50,10 @@ if not exists(select * from syscolumns where id=object_id('MailAttachment') and 
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailAttachment') and name = 'MailMessageId')
+
+if exists(select * from information_schema.columns where table_name='MailAttachment' and column_name='MailMessageId') and not exists(select * from information_schema.columns where table_name='MailAttachment' and column_name='MailMessageId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'MailAttachment', 'MailMessageId', 'Int', 1
+	exec #spAlterColumn_MailAttachment 'MailAttachment', 'MailMessageId', 'Int', 1
   END
 GO
 
@@ -62,9 +64,10 @@ if not exists(select * from syscolumns where id=object_id('MailAttachment') and 
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailAttachment') and name = 'Filename')
+
+if exists(select * from information_schema.columns where table_name='MailAttachment' and column_name='Filename') and not exists(select * from information_schema.columns where table_name='MailAttachment' and column_name='Filename' and character_maximum_length=50 and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailAttachment', 'Filename', 'VarChar(50)', 0
+	exec #spAlterColumn_MailAttachment 'MailAttachment', 'Filename', 'VarChar(50)', 0
   END
 GO
 
@@ -75,9 +78,10 @@ if not exists(select * from syscolumns where id=object_id('MailAttachment') and 
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('MailAttachment') and name = 'Text')
+
+if exists(select * from information_schema.columns where table_name='MailAttachment' and column_name='Text') and not exists(select * from information_schema.columns where table_name='MailAttachment' and column_name='Text' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'MailAttachment', 'Text', 'Image', 0
+	exec #spAlterColumn_MailAttachment 'MailAttachment', 'Text', 'Image', 0
   END
 GO
 
@@ -101,3 +105,6 @@ ALTER TABLE MailAttachment ADD
 	)
 GO
 
+
+drop procedure #spAlterColumn_MailAttachment
+GO

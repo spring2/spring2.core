@@ -2,11 +2,11 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
-drop procedure #spAlterColumn
+if exists (select * from tempdb..sysobjects where name like '#spAlterColumn_Resource%' and xtype='P')
+drop procedure #spAlterColumn_Resource
 GO
 
-CREATE PROCEDURE #spAlterColumn
+CREATE PROCEDURE #spAlterColumn_Resource
     @table varchar(100),
     @column varchar(100),
     @type varchar(50),
@@ -36,9 +36,10 @@ if not exists(select * from syscolumns where id=object_id('Resource') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('Resource') and name = 'ResourceId')
+
+if exists(select * from information_schema.columns where table_name='Resource' and column_name='ResourceId') and not exists(select * from information_schema.columns where table_name='Resource' and column_name='ResourceId' and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'Resource', 'ResourceId', 'Int', 1
+	exec #spAlterColumn_Resource 'Resource', 'ResourceId', 'Int', 1
   END
 GO
 
@@ -49,9 +50,10 @@ if not exists(select * from syscolumns where id=object_id('Resource') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('Resource') and name = 'Context')
+
+if exists(select * from information_schema.columns where table_name='Resource' and column_name='Context') and not exists(select * from information_schema.columns where table_name='Resource' and column_name='Context' and character_maximum_length=100 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'Resource', 'Context', 'VarChar(100)', 1
+	exec #spAlterColumn_Resource 'Resource', 'Context', 'VarChar(100)', 1
   END
 GO
 
@@ -62,9 +64,10 @@ if not exists(select * from syscolumns where id=object_id('Resource') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('Resource') and name = 'Field')
+
+if exists(select * from information_schema.columns where table_name='Resource' and column_name='Field') and not exists(select * from information_schema.columns where table_name='Resource' and column_name='Field' and character_maximum_length=100 and is_nullable='NO')
   BEGIN
-	exec #spAlterColumn 'Resource', 'Field', 'VarChar(100)', 1
+	exec #spAlterColumn_Resource 'Resource', 'Field', 'VarChar(100)', 1
   END
 GO
 
@@ -75,9 +78,10 @@ if not exists(select * from syscolumns where id=object_id('Resource') and name =
   END
 GO
 
-if exists(select * from syscolumns where id=object_id('Resource') and name = 'ContextIdentity')
+
+if exists(select * from information_schema.columns where table_name='Resource' and column_name='ContextIdentity') and not exists(select * from information_schema.columns where table_name='Resource' and column_name='ContextIdentity' and is_nullable='YES')
   BEGIN
-	exec #spAlterColumn 'Resource', 'ContextIdentity', 'Int', 0
+	exec #spAlterColumn_Resource 'Resource', 'ContextIdentity', 'Int', 0
   END
 GO
 
@@ -101,3 +105,6 @@ ALTER TABLE Resource ADD
 	)
 GO
 
+
+drop procedure #spAlterColumn_Resource
+GO

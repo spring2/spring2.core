@@ -2,11 +2,11 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
-if exists (select * from tempdb..sysobjects where name like '#spAlterColumn%' and xtype='P')
-drop procedure #spAlterColumn
+if exists (select * from tempdb..sysobjects where name like '#spAlterColumn_ConfigurationSetting' and xtype='P')
+drop procedure #spAlterColumn_ConfigurationSetting
 GO
 
-CREATE PROCEDURE #spAlterColumn
+CREATE PROCEDURE #spAlterColumn_ConfigurationSetting
     @table varchar(100),
     @column varchar(100),
     @type varchar(50),
@@ -40,7 +40,7 @@ GO
 
 if exists(select * from syscolumns where id=object_id('ConfigurationSetting') and name = 'ConfigurationSettingId')
   BEGIN
-	exec #spAlterColumn 'ConfigurationSetting', 'ConfigurationSettingId', 'Int', 1
+	exec #spAlterColumn_ConfigurationSetting 'ConfigurationSetting', 'ConfigurationSettingId', 'Int', 1
   END
 GO
 
@@ -53,7 +53,7 @@ GO
 
 if exists(select * from syscolumns where id=object_id('ConfigurationSetting') and name = 'Key')
   BEGIN
-	exec #spAlterColumn 'ConfigurationSetting', 'Key', 'VarChar(100)', 1
+	exec #spAlterColumn_ConfigurationSetting 'ConfigurationSetting', 'Key', 'VarChar(100)', 1
   END
 GO
 
@@ -66,7 +66,7 @@ GO
 
 if exists(select * from syscolumns where id=object_id('ConfigurationSetting') and name = 'Value')
   BEGIN
-	exec #spAlterColumn 'ConfigurationSetting', 'Value', 'VarChar(1024)', 1
+	exec #spAlterColumn_ConfigurationSetting 'ConfigurationSetting', 'Value', 'VarChar(1024)', 1
   END
 GO
 
@@ -79,7 +79,7 @@ GO
 
 if exists(select * from syscolumns where id=object_id('ConfigurationSetting') and name = 'LastModifiedDate')
   BEGIN
-	exec #spAlterColumn 'ConfigurationSetting', 'LastModifiedDate', 'DateTime', 1
+	exec #spAlterColumn_ConfigurationSetting 'ConfigurationSetting', 'LastModifiedDate', 'DateTime', 1
   END
 GO
 
@@ -92,7 +92,7 @@ GO
 
 if exists(select * from syscolumns where id=object_id('ConfigurationSetting') and name = 'LastModifiedUserId')
   BEGIN
-	exec #spAlterColumn 'ConfigurationSetting', 'LastModifiedUserId', 'Int', 1
+	exec #spAlterColumn_ConfigurationSetting 'ConfigurationSetting', 'LastModifiedUserId', 'Int', 1
   END
 GO
 
@@ -121,7 +121,7 @@ if exists(select * from syscolumns where id=object_id('Category') and name = 'Ef
           end
 	
 	update ConfigurationSetting set EffectiveDate = getdate() where EffectiveDate IS NULL
-	exec #spAlterColumn 'ConfigurationSetting', 'EffectiveDate', 'DateTime', 1
+	exec spAlterColumn_ConfigurationSetting 'ConfigurationSetting', 'EffectiveDate', 'DateTime', 1
 	if not exists(select * from sysobjects where name = 'DF_ConfigurationSetting_EffectiveDate' and xtype='D')
 		alter table ConfigurationSetting
 			ADD CONSTRAINT [DF_ConfigurationSetting_EffectiveDate] DEFAULT getdate() FOR EffectiveDate WITH VALUES
