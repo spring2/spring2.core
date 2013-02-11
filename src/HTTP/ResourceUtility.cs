@@ -62,12 +62,14 @@ namespace Spring2.Core.HTTP {
 	}
 
 	private static MemoryStream ProcessResourceFromAssembly(HttpContext context, String resource, ImageFormat desiredFormat) {
-	    String resourceObject = resource.Substring(0, resource.IndexOf("."));
-	    String resourceProperty = resource.Substring(resourceObject.Length + 1).Replace(".", "_").Replace("/", @"\");
-
 	    Assembly asm = Assembly.Load(ConfigurationManager.AppSettings[APPSETTING_RESOURCEDLL]);
-	    ResourceManager rm = new ResourceManager(resourceObject, asm);
 
+	    //load assem and try to pull resource files from dll
+	    string resourceBase = resource.Substring(0, resource.IndexOf("."));
+	    string resourceObject = string.Format("{0}.Resources.{1}", asm.ManifestModule.Name.Replace(".dll", string.Empty), resourceBase);
+	    string resourceProperty = resource.Remove(0, resourceBase.Length + 1).Replace(".", "_").Replace("/", @"\");
+
+	    ResourceManager rm = new ResourceManager(resourceObject, asm);
 	    return GetMemoryStreamFromObject(rm.GetObject(resourceProperty), desiredFormat);
 	}
 
