@@ -153,6 +153,7 @@
     <Compile Include="Reporting\DataObject\SqlObjectData.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Reporting\DataObject\SqlReportData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="spring2.snk" />

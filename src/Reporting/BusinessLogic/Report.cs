@@ -29,6 +29,10 @@ namespace Spring2.Core.Reporting {
 	    return SqlSchemaDAO.GetSqlColumns(new WhereClause("SqlObject", sqlObject.ToString()), new OrderByClause("OrdinalPosition"));
 	}
 
+	public static IList<SqlReportData> GetISqlReportArgumentListWithExtensionData(StringType sqlObject) {
+	    return SqlSchemaDAO.GetSqlReportData(new WhereClause("ReportName", sqlObject.ToString()), null);
+	}
+
 	public static SqlDataReader ExecuteISqlReport(StringType sqlObject, Dictionary<string, object> args) {
 	    string sql = BuildExecuteSqlStatement(sqlObject, args);
 	    return SqlSchemaDAO.ExecuteReader(sql);
