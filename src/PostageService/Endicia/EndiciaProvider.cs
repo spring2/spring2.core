@@ -47,7 +47,7 @@ namespace Spring2.Core.PostageService.Endicia {
 	    Mapper.CreateMap<LabelRequestResponse, PostageLabelData>();
 	    Mapper.CreateMap<ChangePasswordInputData, ChangePassPhraseRequest>()
 		.ForMember(x => x.NewPassPhrase, o => o.MapFrom(src => src.NewPassword))
-		.ForMember(x=>x.RequesterID, o => o.UseValue(partnerId))
+		.ForMember(x => x.RequesterID, o => o.UseValue(partnerId))
 		.ForMember(x => x.CertifiedIntermediary, o => o.UseValue(credentials));
 	    Mapper.CreateMap<ChangePassPhraseRequestResponse, PasswordChangedData>();
 	    Mapper.CreateMap<Credentials, CertifiedIntermediary>()
@@ -70,8 +70,6 @@ namespace Spring2.Core.PostageService.Endicia {
 	    Mapper.CreateMap<EW.ImageData, S2.ImageData>();
 
 	    MapEnums();
-
-	    Mapper.AssertConfigurationIsValid();
 	}
 
 	private void MapEnums() {
