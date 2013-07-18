@@ -10,12 +10,14 @@ namespace Spring2.Core.Reporting {
 	private StringType type = StringType.DEFAULT;
 	private StringType query = StringType.DEFAULT;
 	private IList<KeyValuePair<IntegerType, StringType>> extensionData = new List<KeyValuePair<IntegerType, StringType>>();
+	private IntegerType sequence = IntegerType.DEFAULT;
 
 	public static readonly String REPORTNAME = "ReportName";
 	public static readonly String DISPLAYNAME = "DisplayName";
 	public static readonly String PARAMETERNAME = "ParameterName";
 	public static readonly String TYPE = "Type";
 	public static readonly String QUERY = "Query";
+	public static readonly String SEQUENCE = "Sequence";
 
 	public StringType ReportName {
 	    get { return this.reportName; }
@@ -44,7 +46,12 @@ namespace Spring2.Core.Reporting {
 
 	public IList<KeyValuePair<IntegerType, StringType>> ExtensionData {
 	    get { return this.extensionData; }
-	    set { extensionData = value; }
+	    set { this.extensionData = value; }
+	}
+
+	public IntegerType Sequence {
+	    get { return this.sequence; }
+	    set { this.sequence = value; }
 	}
     }
 }

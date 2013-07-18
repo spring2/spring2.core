@@ -89,6 +89,11 @@ namespace Spring2.Core.Reporting {
 		    }
 		}
 	    }
+	    if (dataReader.IsDBNull(dataReader.GetOrdinal("Sequence"))) {
+		data.Sequence = IntegerType.DEFAULT;
+	    } else {
+		data.Sequence = new IntegerType(dataReader.GetInt32(dataReader.GetOrdinal("Sequence")));
+	    }
 	    return data;
 	}
 
