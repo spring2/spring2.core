@@ -17,14 +17,16 @@ namespace Spring2.Core.PostageService.Endicia {
 	string accountId; //accountId
 	string password;
 	string partnerId;
+	string url;
+	string testUrl = "https://www.envmgr.com/LabelService/EwsLabelService.asmx"; //This is their test server.
 
 	public EndiciaProvider() {
-	    InitializeWSClient();
 	    SetCredentials();
-	    MapObjects();
 	}
 
-
+	public EndiciaProvider(string accountId, string password, string partnerId, string postageServerUrl) {
+	    SetCredentials(accountId, password, partnerId, postageServerUrl);
+	}
 
 	#region initializations
 	private void MapObjects() {
@@ -102,8 +104,6 @@ namespace Spring2.Core.PostageService.Endicia {
 	    Mapper.CreateMap<string, SundayHolidayDeliveryEnum>().ConvertUsing(x => SundayHolidayDeliveryEnum.GetInstance(x));
 	}
 	private void InitializeWSClient() {
-	    string uri = ConfigurationProvider.Instance.Settings["PostageService.Endicia.PostageServerUrl"] ??
-		"https://www.envmgr.com/LabelService/EwsLabelService.asmx"; //This is their test server.
 	    BasicHttpBinding binding = new BasicHttpBinding();
 	    binding.Name = "EndiciaBinding";
 	    binding.CloseTimeout = new TimeSpan(0, 1, 0);
@@ -134,18 +134,27 @@ namespace Spring2.Core.PostageService.Endicia {
 	    binding.Security.Message.ClientCredentialType = BasicHttpMessageCredentialType.UserName;
 	    binding.Security.Message.AlgorithmSuite = SecurityAlgorithmSuite.Default;
 
-	    EndpointAddress endpointAddress = new EndpointAddress(uri);
+	    EndpointAddress endpointAddress = new EndpointAddress(url);
 	    client = new EwsLabelServiceSoapClient(binding, endpointAddress);
 	}
 	private void SetCredentials() {
-	    accountId = ConfigurationProvider.Instance.Settings["PostageService.Endicia.AccountId"];
-	    password = ConfigurationProvider.Instance.Settings["PostageService.Endicia.Password"];
-	    partnerId = ConfigurationProvider.Instance.Settings["PostageService.Endicia.PartnerId"];
-	    credentials = new CertifiedIntermediary {
-		AccountID = accountId, PassPhrase = password
-	    };
+	    SetCredentials(ConfigurationProvider.Instance.Settings["PostageService.Endicia.AccountId"],
+		ConfigurationProvider.Instance.Settings["PostageService.Endicia.Password"],
+		ConfigurationProvider.Instance.Settings["PostageService.Endicia.PartnerId"],
+		ConfigurationProvider.Instance.Settings["PostageService.Endicia.PostageServerUrl"]);
 	}
 	#endregion
+	public void SetCredentials(string accountId, string password, string partnerId, string postageServerUrl) {
+	    this.url = string.IsNullOrEmpty(postageServerUrl) ? testUrl : postageServerUrl;
+	    this.accountId = accountId;
+	    this.password = password;
+	    this.partnerId = partnerId;
+	    this.credentials = new CertifiedIntermediary {
+		AccountID = accountId, PassPhrase = password
+	    };
+	    MapObjects();
+	    InitializeWSClient();
+	}
 
 	public PasswordChangedData ChangePassword(ChangePasswordInputData data) {
 	    ChangePassPhraseRequest request = Mapper.Map<ChangePasswordInputData, ChangePassPhraseRequest>(data);
