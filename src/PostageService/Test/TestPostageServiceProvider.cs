@@ -24,5 +24,9 @@ namespace Spring2.Core.PostageService.Test {
 	public PasswordChangedData ChangePassword(ChangePasswordInputData data) {
 	    return new PasswordChangedData();
 	}
+
+	public RefundRequestData RefundRequest(String trackingNumber) {
+	    throw new NotImplementedException();
+	}
     }
 }

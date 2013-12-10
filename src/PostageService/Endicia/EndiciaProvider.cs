@@ -9,6 +9,9 @@ using EW = Spring2.Core.EwsLabelService;
 using S2 = Spring2.Core.PostageService;
 using Spring2.Core.Types;
 using Spring2.Core.PostageService.Enums;
+using Spring2.Core.ELSServicesService;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Spring2.Core.PostageService.Endicia {
     public class EndiciaProvider : IPostageServiceProvider {
@@ -19,13 +22,14 @@ namespace Spring2.Core.PostageService.Endicia {
 	string partnerId;
 	string url;
 	string testUrl = "https://www.envmgr.com/LabelService/EwsLabelService.asmx"; //This is their test server.
+	bool refundTest = false;
 
 	public EndiciaProvider() {
 	    SetCredentials();
 	}
 
-	public EndiciaProvider(string accountId, string password, string partnerId, string postageServerUrl) {
-	    SetCredentials(accountId, password, partnerId, postageServerUrl);
+	public EndiciaProvider(string accountId, string password, string partnerId, string postageServerUrl, bool testMode = false) {
+	    SetCredentials(accountId, password, partnerId, postageServerUrl, testMode);
 	}
 
 	#region initializations
@@ -141,10 +145,10 @@ namespace Spring2.Core.PostageService.Endicia {
 	    SetCredentials(ConfigurationProvider.Instance.Settings["PostageService.Endicia.AccountId"],
 		ConfigurationProvider.Instance.Settings["PostageService.Endicia.Password"],
 		ConfigurationProvider.Instance.Settings["PostageService.Endicia.PartnerId"],
-		ConfigurationProvider.Instance.Settings["PostageService.Endicia.PostageServerUrl"]);
+		ConfigurationProvider.Instance.Settings["PostageService.Endicia.PostageServerUrl"], false);
 	}
 	#endregion
-	public void SetCredentials(string accountId, string password, string partnerId, string postageServerUrl) {
+	public void SetCredentials(string accountId, string password, string partnerId, string postageServerUrl, bool testMode) {
 	    this.url = string.IsNullOrEmpty(postageServerUrl) ? testUrl : postageServerUrl;
 	    this.accountId = accountId;
 	    this.password = password;
@@ -152,6 +156,7 @@ namespace Spring2.Core.PostageService.Endicia {
 	    this.credentials = new CertifiedIntermediary {
 		AccountID = accountId, PassPhrase = password
 	    };
+	    this.refundTest = testMode;
 	    MapObjects();
 	    InitializeWSClient();
 	}
@@ -184,6 +189,67 @@ namespace Spring2.Core.PostageService.Endicia {
 	    LabelRequest request = Mapper.Map<PostageLabelInputData, LabelRequest>(data);
 	    LabelRequestResponse response = client.GetPostageLabel(request);
 	    return Mapper.Map<LabelRequestResponse, PostageLabelData>(response);
+	}
+
+	public RefundRequestData RefundRequest(String trackingNumber) {
+	    refundTest = true;
+	    ELSServicesService.ELSServicesService elsClient = new ELSServicesService.ELSServicesService();
+	    XmlNode[] response = (XmlNode[])elsClient.RefundRequest(BuildXmlRefundRequest(trackingNumber));
+
+	    XDocument document = null;
+	    foreach (XmlNode node in response) {
+		if (node.NodeType == XmlNodeType.Element) {
+		    document = XDocument.Parse(node.OuterXml);
+		}
+	    }
+
+	    XElement root = document.Root;
+	    XElement requestErrorMsg = root.Element("ErrorMsg");
+	    if (!String.IsNullOrEmpty(requestErrorMsg.Value)) {
+		throw new NotSupportedException(requestErrorMsg.Value);
+	    }
+
+	    XElement formNumber = root.Element("FormNumber");
+	    XElement picNumber = root.Element("RefundList").Element("PICNumber");
+
+	    RefundRequestData result = new RefundRequestData();
+	    result.FormNumber = formNumber.Value;
+	    result.IsApproved = picNumber.Element("IsApproved").Value == "YES";
+	    result.ErrorMsg = picNumber.Element("ErrorMsg").Value;
+	    picNumber.Element("IsApproved").Remove();
+	    picNumber.Element("ErrorMsg").Remove();
+	    result.PICNumber = picNumber.Value.TrimEnd();
+
+	    return result;
+	}
+
+	private String BuildXmlRefundRequest(String trackingNumber) {
+	    StringBuilder xmlBuilder = new StringBuilder();
+	    // Settings
+	    XmlWriterSettings settings = new XmlWriterSettings();
+	    settings.ConformanceLevel = ConformanceLevel.Fragment;
+	    settings.OmitXmlDeclaration = false;
+	    using (XmlWriter writer = XmlWriter.Create(xmlBuilder, settings)) {
+		// START - RefundRequest
+		writer.WriteStartElement("RefundRequest");
+
+		writer.WriteElementString("AccountID", accountId);
+		writer.WriteElementString("PassPhrase", password);
+
+		// Test
+		if (refundTest) {
+		    writer.WriteElementString("Test", "Y"); 
+		}
+
+		writer.WriteStartElement("RefundList");
+		writer.WriteElementString("PICNumber", trackingNumber);
+		writer.WriteEndElement();
+
+		// END - RefundRequest
+		writer.WriteEndElement();
+	    }
+
+	    return xmlBuilder.ToString();
 	}
     }
 }

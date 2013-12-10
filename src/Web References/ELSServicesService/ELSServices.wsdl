@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:intf="http://els" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://rpc.xml.coldfusion" xmlns:impl="http://els" targetNamespace="http://els" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://rpc.xml.coldfusion">
+      <xsd:import namespace="http://els" />
+      <xsd:import namespace="http://xml.apache.org/xml-soap" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="CFCInvocationException">
+        <xsd:sequence />
+      </xsd:complexType>
+      <xsd:complexType name="QueryBean">
+        <xsd:sequence>
+          <xsd:element name="columnList" nillable="true" type="impl:ArrayOf_xsd_string" />
+          <xsd:element name="data" nillable="true" type="impl:ArrayOfArrayOf_xsd_anyType" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://els">
+      <xsd:import namespace="http://xml.apache.org/xml-soap" />
+      <xsd:import namespace="http://rpc.xml.coldfusion" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="ArrayOf_xsd_string">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfArrayOf_xsd_anyType">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:anyType[][]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xml.apache.org/xml-soap">
+      <xsd:import namespace="http://els" />
+      <xsd:import namespace="http://rpc.xml.coldfusion" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="mapItem">
+        <xsd:sequence>
+          <xsd:element name="key" nillable="true" type="xsd:anyType" />
+          <xsd:element name="value" nillable="true" type="xsd:anyType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Map">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="apachesoap:mapItem" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CarrierPickupAvailabilityRequest">
+    <wsdl:part name="XMLInput" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="MultiLocationCarrierPickupResponse">
+    <wsdl:part name="MultiLocationCarrierPickupReturn" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="UserSignupResponse">
+    <wsdl:part name="UserSignupReturn" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="MultiLocationCarrierPickupRequest">
+    <wsdl:part name="XMLInput" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="GetResellerTransactionsListingResponse">
+    <wsdl:part name="GetResellerTransactionsListingReturn" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="CarrierPickupChangeResponse">
+    <wsdl:part name="CarrierPickupChangeReturn" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="CarrierPickupRequestRequest">
+    <wsdl:part name="XMLInput" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionsListingRequest">
+    <wsdl:part name="XMLInput" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="GetRetailAccountsRequest">
+    <wsdl:part name="XMLInput" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="GetRetailAccountsResponse">
+    <wsdl:part name="GetRetailAccountsReturn" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="CarrierPickupRequestResponse">
+    <wsdl:part name="CarrierPickupRequestReturn" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="RefundRequestResponse">
+    <wsdl:part name="RefundRequestReturn" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="CFCInvocationException">
+    <wsdl:part name="fault" type="tns1:CFCInvocationException" />
+  </wsdl:message>
+  <wsdl:message name="CarrierPickupAvailabilityResponse">
+    <wsdl:part name="CarrierPickupAvailabilityReturn" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="CarrierPickupCancelRequest">
+    <wsdl:part name="XMLInput" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="GetResellerTransactionsListingRequest">
+    <wsdl:part name="XMLInput" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="StatusRequestRequest">
+    <wsdl:part name="XMLInput" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="CarrierPickupChangeRequest">
+    <wsdl:part name="XMLInput" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="SCANRequestRequest">
+    <wsdl:part name="XMLInput" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="RefundRequestRequest">
+    <wsdl:part name="XMLInput" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="UserSignupRequest">
+    <wsdl:part name="XMLInput" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="SCANRequestResponse">
+    <wsdl:part name="SCANRequestReturn" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionsListingResponse">
+    <wsdl:part name="GetTransactionsListingReturn" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="StatusRequestResponse">
+    <wsdl:part name="StatusRequestReturn" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="CarrierPickupCancelResponse">
+    <wsdl:part name="CarrierPickupCancelReturn" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:portType name="ELSServices">
+    <wsdl:operation name="MultiLocationCarrierPickup" parameterOrder="XMLInput">
+      <wsdl:input name="MultiLocationCarrierPickupRequest" message="impl:MultiLocationCarrierPickupRequest" />
+      <wsdl:output name="MultiLocationCarrierPickupResponse" message="impl:MultiLocationCarrierPickupResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="CarrierPickupChange" parameterOrder="XMLInput">
+      <wsdl:input name="CarrierPickupChangeRequest" message="impl:CarrierPickupChangeRequest" />
+      <wsdl:output name="CarrierPickupChangeResponse" message="impl:CarrierPickupChangeResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="CarrierPickupAvailability" parameterOrder="XMLInput">
+      <wsdl:input name="CarrierPickupAvailabilityRequest" message="impl:CarrierPickupAvailabilityRequest" />
+      <wsdl:output name="CarrierPickupAvailabilityResponse" message="impl:CarrierPickupAvailabilityResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="RefundRequest" parameterOrder="XMLInput">
+      <wsdl:input name="RefundRequestRequest" message="impl:RefundRequestRequest" />
+      <wsdl:output name="RefundRequestResponse" message="impl:RefundRequestResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="CarrierPickupCancel" parameterOrder="XMLInput">
+      <wsdl:input name="CarrierPickupCancelRequest" message="impl:CarrierPickupCancelRequest" />
+      <wsdl:output name="CarrierPickupCancelResponse" message="impl:CarrierPickupCancelResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRetailAccounts" parameterOrder="XMLInput">
+      <wsdl:input name="GetRetailAccountsRequest" message="impl:GetRetailAccountsRequest" />
+      <wsdl:output name="GetRetailAccountsResponse" message="impl:GetRetailAccountsResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="StatusRequest" parameterOrder="XMLInput">
+      <wsdl:input name="StatusRequestRequest" message="impl:StatusRequestRequest" />
+      <wsdl:output name="StatusRequestResponse" message="impl:StatusRequestResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="UserSignup" parameterOrder="XMLInput">
+      <wsdl:input name="UserSignupRequest" message="impl:UserSignupRequest" />
+      <wsdl:output name="UserSignupResponse" message="impl:UserSignupResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResellerTransactionsListing" parameterOrder="XMLInput">
+      <wsdl:input name="GetResellerTransactionsListingRequest" message="impl:GetResellerTransactionsListingRequest" />
+      <wsdl:output name="GetResellerTransactionsListingResponse" message="impl:GetResellerTransactionsListingResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="SCANRequest" parameterOrder="XMLInput">
+      <wsdl:input name="SCANRequestRequest" message="impl:SCANRequestRequest" />
+      <wsdl:output name="SCANRequestResponse" message="impl:SCANRequestResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="CarrierPickupRequest" parameterOrder="XMLInput">
+      <wsdl:input name="CarrierPickupRequestRequest" message="impl:CarrierPickupRequestRequest" />
+      <wsdl:output name="CarrierPickupRequestResponse" message="impl:CarrierPickupRequestResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionsListing" parameterOrder="XMLInput">
+      <wsdl:input name="GetTransactionsListingRequest" message="impl:GetTransactionsListingRequest" />
+      <wsdl:output name="GetTransactionsListingResponse" message="impl:GetTransactionsListingResponse" />
+      <wsdl:fault name="CFCInvocationException" message="impl:CFCInvocationException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ELSServices.cfcSoapBinding" type="impl:ELSServices">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="MultiLocationCarrierPickup">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="MultiLocationCarrierPickupRequest">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="MultiLocationCarrierPickupResponse">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CarrierPickupChange">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="CarrierPickupChangeRequest">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="CarrierPickupChangeResponse">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CarrierPickupAvailability">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="CarrierPickupAvailabilityRequest">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="CarrierPickupAvailabilityResponse">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RefundRequest">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="RefundRequestRequest">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="RefundRequestResponse">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CarrierPickupCancel">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="CarrierPickupCancelRequest">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="CarrierPickupCancelResponse">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetRetailAccounts">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetRetailAccountsRequest">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="GetRetailAccountsResponse">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="StatusRequest">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="StatusRequestRequest">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="StatusRequestResponse">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UserSignup">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="UserSignupRequest">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="UserSignupResponse">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetResellerTransactionsListing">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetResellerTransactionsListingRequest">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="GetResellerTransactionsListingResponse">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SCANRequest">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="SCANRequestRequest">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="SCANRequestResponse">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CarrierPickupRequest">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="CarrierPickupRequestRequest">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="CarrierPickupRequestResponse">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionsListing">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetTransactionsListingRequest">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="GetTransactionsListingResponse">
+        <wsdlsoap:body use="encoded" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://els" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ELSServicesService">
+    <wsdl:port name="ELSServices.cfc" binding="impl:ELSServices.cfcSoapBinding">
+      <wsdlsoap:address location="http://www.endicia.com/ELS/ELSServices.cfc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

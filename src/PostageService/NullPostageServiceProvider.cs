@@ -24,5 +24,9 @@ namespace Spring2.Core.PostageService {
 	public PasswordChangedData ChangePassword(ChangePasswordInputData data) {
 	    throw new PostageServiceException("NullPostageServiceProvider is not a valid provider.");
 	}
+
+	public RefundRequestData RefundRequest(String trackingNumber) {
+	    throw new PostageServiceException("NullPostageServiceProvider is not a valid provider.");
+	}
     }
 }
