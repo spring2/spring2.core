@@ -21,7 +21,7 @@ namespace Spring2.Core.Geocode.DataObject {
 	public static readonly ColumnMetaData ADDRESSID = new ColumnMetaData("AddressId", "AddressId", DbType.Int32, SqlDbType.Int, 0, 10, 0);
 	public static readonly ColumnMetaData ADDRESS1 = new ColumnMetaData("Address1", "Address1", DbType.AnsiString, SqlDbType.VarChar, 80, 0, 0);
 	public static readonly ColumnMetaData CITY = new ColumnMetaData("City", "City", DbType.AnsiString, SqlDbType.VarChar, 50, 0, 0);
-	public static readonly ColumnMetaData REGION = new ColumnMetaData("Region", "Region", DbType.AnsiStringFixedLength, SqlDbType.Char, 50, 0, 0);
+	public static readonly ColumnMetaData REGION = new ColumnMetaData("Region", "Region", DbType.AnsiString, SqlDbType.VarChar, 50, 0, 0);
 	public static readonly ColumnMetaData POSTALCODE = new ColumnMetaData("PostalCode", "PostalCode", DbType.AnsiString, SqlDbType.VarChar, 10, 0, 0);
 	public static readonly ColumnMetaData LATITUDE = new ColumnMetaData("Latitude", "Latitude", DbType.Decimal, SqlDbType.Decimal, 0, 18, 8);
 	public static readonly ColumnMetaData LONGITUDE = new ColumnMetaData("Longitude", "Longitude", DbType.Decimal, SqlDbType.Decimal, 0, 18, 8);
@@ -29,12 +29,12 @@ namespace Spring2.Core.Geocode.DataObject {
 	public static readonly ColumnMetaData STATUS = new ColumnMetaData("Status", "Status", DbType.AnsiString, SqlDbType.VarChar, 20, 0, 0);
 	public static readonly ColumnMetaData STDADDRESS1 = new ColumnMetaData("StdAddress1", "StdAddress1", DbType.AnsiString, SqlDbType.VarChar, 80, 0, 0);
 	public static readonly ColumnMetaData STDCITY = new ColumnMetaData("StdCity", "StdCity", DbType.AnsiString, SqlDbType.VarChar, 50, 0, 0);
-	public static readonly ColumnMetaData STDREGION = new ColumnMetaData("StdRegion", "StdRegion", DbType.AnsiStringFixedLength, SqlDbType.Char, 50, 0, 0);
+	public static readonly ColumnMetaData STDREGION = new ColumnMetaData("StdRegion", "StdRegion", DbType.AnsiString, SqlDbType.VarChar, 50, 0, 0);
 	public static readonly ColumnMetaData STDPOSTALCODE = new ColumnMetaData("StdPostalCode", "StdPostalCode", DbType.AnsiString, SqlDbType.VarChar, 10, 0, 0);
-	public static readonly ColumnMetaData STDPLUS4 = new ColumnMetaData("StdPlus4", "StdPlus4", DbType.AnsiStringFixedLength, SqlDbType.Char, 4, 0, 0);
+	public static readonly ColumnMetaData STDPLUS4 = new ColumnMetaData("StdPlus4", "StdPlus4", DbType.AnsiString, SqlDbType.VarChar, 4, 0, 0);
 	public static readonly ColumnMetaData MATADDRESS1 = new ColumnMetaData("MatAddress1", "MatAddress1", DbType.AnsiString, SqlDbType.VarChar, 80, 0, 0);
 	public static readonly ColumnMetaData MATCITY = new ColumnMetaData("MatCity", "MatCity", DbType.AnsiString, SqlDbType.VarChar, 50, 0, 0);
-	public static readonly ColumnMetaData MATREGION = new ColumnMetaData("MatRegion", "MatRegion", DbType.AnsiStringFixedLength, SqlDbType.Char, 50, 0, 0);
+	public static readonly ColumnMetaData MATREGION = new ColumnMetaData("MatRegion", "MatRegion", DbType.AnsiString, SqlDbType.VarChar, 50, 0, 0);
 	public static readonly ColumnMetaData MATPOSTALCODE = new ColumnMetaData("MatPostalCode", "MatPostalCode", DbType.AnsiString, SqlDbType.VarChar, 10, 0, 0);
 	public static readonly ColumnMetaData MATCHTYPE = new ColumnMetaData("MatchType", "MatchType", DbType.Int32, SqlDbType.Int, 0, 10, 0);
     }

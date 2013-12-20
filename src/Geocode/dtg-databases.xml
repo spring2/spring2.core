@@ -11,7 +11,7 @@
 		    <column name="AddressId" sqltype="Int" identity="True" required="True" />
 		    <column name="Address1" sqltype="VarChar" length="80" />
 		    <column name="City" sqltype="VarChar" length="50" />
-		    <column name="Region" sqltype="Char" length="50" />
+		    <column name="Region" sqltype="VarChar" length="50" />
 		    <column name="PostalCode" sqltype="VarChar" length="10" />
 		    <column name="Latitude" sqltype="Decimal" precision="18" scale="8" />
 		    <column name="Longitude" sqltype="Decimal" precision="18" scale="8" />
@@ -19,12 +19,12 @@
 		    <column name="Status" sqltype="VarChar" length="20" />
 		    <column name="StdAddress1" sqltype="VarChar" length="80" />
 		    <column name="StdCity" sqltype="VarChar" length="50" />
-		    <column name="StdRegion" sqltype="Char" length="50" />
+		    <column name="StdRegion" sqltype="VarChar" length="50" />
 		    <column name="StdPostalCode" sqltype="VarChar" length="10" />
-		    <column name="StdPlus4" sqltype="Char" length="4" />
+		    <column name="StdPlus4" sqltype="VarChar" length="4" />
 		    <column name="MatAddress1" sqltype="VarChar" length="80" />
 		    <column name="MatCity" sqltype="VarChar" length="50" />
-		    <column name="MatRegion" sqltype="Char" length="50" />
+		    <column name="MatRegion" sqltype="VarChar" length="50" />
 		    <column name="MatPostalCode" sqltype="VarChar" length="10" />
 		    <column name="MatchType" sqltype="Int" />
 		</columns>

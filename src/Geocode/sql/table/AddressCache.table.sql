@@ -25,7 +25,7 @@ CREATE TABLE dbo.AddressCache (
 	AddressId Int IDENTITY(1,1) NOT NULL,
 	Address1 VarChar(80) NULL,
 	City VarChar(50) NULL,
-	Region Char(50) NULL,
+	Region VarChar(50) NULL,
 	PostalCode VarChar(10) NULL,
 	Latitude Decimal(18, 8) NULL,
 	Longitude Decimal(18, 8) NULL,
@@ -33,12 +33,12 @@ CREATE TABLE dbo.AddressCache (
 	Status VarChar(20) NULL,
 	StdAddress1 VarChar(80) NULL,
 	StdCity VarChar(50) NULL,
-	StdRegion Char(50) NULL,
+	StdRegion VarChar(50) NULL,
 	StdPostalCode VarChar(10) NULL,
-	StdPlus4 Char(4) NULL,
+	StdPlus4 VarChar(4) NULL,
 	MatAddress1 VarChar(80) NULL,
 	MatCity VarChar(50) NULL,
-	MatRegion Char(50) NULL,
+	MatRegion VarChar(50) NULL,
 	MatPostalCode VarChar(10) NULL,
 	MatchType Int NULL
 )
@@ -86,13 +86,13 @@ GO
 if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'Region')
   BEGIN
 	ALTER TABLE AddressCache ADD
-	    Region Char(50) NULL
+	    Region VarChar(50) NULL
   END
 GO
 
 if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'Region')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'Region', 'Char(50)', 0
+	exec #spAlterColumn 'AddressCache', 'Region', 'VarChar(50)', 0
   END
 GO
 
@@ -190,13 +190,13 @@ GO
 if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdRegion')
   BEGIN
 	ALTER TABLE AddressCache ADD
-	    StdRegion Char(50) NULL
+	    StdRegion VarChar(50) NULL
   END
 GO
 
 if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdRegion')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'StdRegion', 'Char(50)', 0
+	exec #spAlterColumn 'AddressCache', 'StdRegion', 'VarChar(50)', 0
   END
 GO
 
@@ -216,13 +216,13 @@ GO
 if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdPlus4')
   BEGIN
 	ALTER TABLE AddressCache ADD
-	    StdPlus4 Char(4) NULL
+	    StdPlus4 VarChar(4) NULL
   END
 GO
 
 if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'StdPlus4')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'StdPlus4', 'Char(4)', 0
+	exec #spAlterColumn 'AddressCache', 'StdPlus4', 'VarChar(4)', 0
   END
 GO
 
@@ -255,13 +255,13 @@ GO
 if not exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatRegion')
   BEGIN
 	ALTER TABLE AddressCache ADD
-	    MatRegion Char(50) NULL
+	    MatRegion VarChar(50) NULL
   END
 GO
 
 if exists(select * from syscolumns where id=object_id('AddressCache') and name = 'MatRegion')
   BEGIN
-	exec #spAlterColumn 'AddressCache', 'MatRegion', 'Char(50)', 0
+	exec #spAlterColumn 'AddressCache', 'MatRegion', 'VarChar(50)', 0
   END
 GO
 

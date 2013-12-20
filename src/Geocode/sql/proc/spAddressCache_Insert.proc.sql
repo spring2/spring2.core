@@ -9,7 +9,7 @@ GO
 CREATE PROCEDURE dbo.spAddressCache_Insert
 	@Address1	VarChar(80) = null,
 	@City	VarChar(50) = null,
-	@Region	Char(50) = null,
+	@Region	VarChar(50) = null,
 	@PostalCode	VarChar(10) = null,
 	@Latitude	Decimal(18, 8) = null,
 	@Longitude	Decimal(18, 8) = null,
@@ -17,12 +17,12 @@ CREATE PROCEDURE dbo.spAddressCache_Insert
 	@Status	VarChar(20) = null,
 	@StdAddress1	VarChar(80) = null,
 	@StdCity	VarChar(50) = null,
-	@StdRegion	Char(50) = null,
+	@StdRegion	VarChar(50) = null,
 	@StdPostalCode	VarChar(10) = null,
-	@StdPlus4	Char(4) = null,
+	@StdPlus4	VarChar(4) = null,
 	@MatAddress1	VarChar(80) = null,
 	@MatCity	VarChar(50) = null,
-	@MatRegion	Char(50) = null,
+	@MatRegion	VarChar(50) = null,
 	@MatPostalCode	VarChar(10) = null,
 	@MatchType	Int = null
 
