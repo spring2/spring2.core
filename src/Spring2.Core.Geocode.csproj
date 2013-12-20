@@ -220,6 +220,9 @@
     <Compile Include="Geocode\Tele Atlas App\TeleAtlasProvider.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Geocode\TomTom\Address.cs" />
+    <Compile Include="Geocode\TomTom\TomTomProvider.cs" />
+    <Compile Include="Geocode\TomTom\TomTomClient.cs" />
     <Compile Include="Geocode\Types\GeocodeStatusEnum.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -313,7 +316,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Geocode\TomTom\Properties\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

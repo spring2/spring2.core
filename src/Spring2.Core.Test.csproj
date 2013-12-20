@@ -300,6 +300,7 @@
     <Compile Include="Test\Geocode\GeocodeTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Test\Geocode\TomTomProviderTest.cs" />
     <Compile Include="Test\IdTypeTest.cs">
       <SubType>Code</SubType>
     </Compile>
