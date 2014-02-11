@@ -192,7 +192,7 @@ namespace Spring2.Core.PostageService.Endicia {
 	}
 
 	public RefundRequestData RefundRequest(String trackingNumber) {
-	    refundTest = true;
+	    
 	    ELSServicesService.ELSServicesService elsClient = new ELSServicesService.ELSServicesService();
 	    XmlNode[] response = (XmlNode[])elsClient.RefundRequest(BuildXmlRefundRequest(trackingNumber));
 
