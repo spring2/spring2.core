@@ -17,6 +17,7 @@ namespace Spring2.Core.PostageService.Enums {
 	public static readonly MailClassEnum MEDIAMAIL = new MailClassEnum("MediaMail", "Media Mail");
 	public static readonly MailClassEnum STANDARDPOST = new MailClassEnum("StandardPost", "Standard Post");
 	public static readonly MailClassEnum PARCELSELECT = new MailClassEnum("ParcelSelect", "Parcel Select");
+	public static readonly MailClassEnum PARCELPOST = new MailClassEnum("ParcelPost", "Parcel Post");
 	public static readonly MailClassEnum PRIORITY = new MailClassEnum("Priority", "Priority");
 	public static readonly MailClassEnum CRITICALMAIL = new MailClassEnum("CriticalMail", "Critical Mail");
 	public static readonly MailClassEnum STANDARDMAIL = new MailClassEnum("StandardMail", "Standard Mail");
