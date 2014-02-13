@@ -45,8 +45,6 @@ namespace Spring2.Core.PostageService {
 
 	public double CODAmount { set; get; }
 
-	public string InsuredValue { set; get; }
-
 	public double RegisteredMailValue { set; get; }
 
 	public string Description { set; get; }
@@ -68,6 +66,12 @@ namespace Spring2.Core.PostageService {
 	public string NonDeliveryOption { set; get; }
 
 	public string ReferenceID { set; get; }
+
+	public string ReferenceID2 { set; get; }
+
+	public string ReferenceID3 { set; get; }
+
+	public string ReferenceID4 { set; get; }
 
 	public string PartnerCustomerID { set; get; }
 
@@ -121,7 +125,29 @@ namespace Spring2.Core.PostageService {
 
 	public string OpenAndDistributeMailClassOther { set; get; }
 
+	public string GXGFedexTrackingNumber { set; get; }
+
+	public string GXGUSPSTrackingNumber{ set; get; }
+
+	public string PrintConsolidatorLabel { set; get; }
+
 	public ReturnOptions ResponseOptions { set; get; }
+
+	public string Token { set; get; }
+
+	public string CustomsSendersCopy { set; get; }
+
+	public string NoDate { set; get; }
+
+	public string MerchantID { set; get; }
+
+	public string PrintScanBasedPaymentLabel { set; get; }
+
+	public string SpecialContents { set; get; }
+
+	public string EmailMiscNotes { set; get; }
+
+	public string InsuredValue { set; get; }
 
 	public string FromName { set; get; }
 
@@ -185,9 +211,15 @@ namespace Spring2.Core.PostageService {
 
 	public uint CustomsQuantity1 { set; get; }
 
+	public bool CustomsQuantity1Specified { set; get; }
+
 	public float CustomsValue1 { set; get; }
 
+	public bool CustomsValue1Specified { set; get; }
+
 	public uint CustomsWeight1 { set; get; }
+
+	public bool CustomsWeight1Specified { set; get; }
 
 	public string CustomsCountry2 { set; get; }
 
@@ -195,9 +227,15 @@ namespace Spring2.Core.PostageService {
 
 	public uint CustomsQuantity2 { set; get; }
 
+	public bool CustomsQuantity2Specified { set; get; }
+
 	public float CustomsValue2 { set; get; }
 
+	public bool CustomsValue2Specified { set; get; }
+
 	public uint CustomsWeight2 { set; get; }
+
+	public bool CustomsWeight2Specified { set; get; }
 
 	public string CustomsCountry3 { set; get; }
 
@@ -205,9 +243,15 @@ namespace Spring2.Core.PostageService {
 
 	public uint CustomsQuantity3 { set; get; }
 
+	public bool CustomsQuantity3Specified { set; get; }
+
 	public float CustomsValue3 { set; get; }
 
+	public bool CustomsValue3Specified { set; get; }
+
 	public uint CustomsWeight3 { set; get; }
+
+	public bool CustomsWeight3Specified { set; get; }
 
 	public string CustomsCountry4 { set; get; }
 
@@ -215,9 +259,15 @@ namespace Spring2.Core.PostageService {
 
 	public uint CustomsQuantity4 { set; get; }
 
+	public bool CustomsQuantity4Specified { set; get; }
+
 	public float CustomsValue4 { set; get; }
 
+	public bool CustomsValue4Specified { set; get; }
+
 	public uint CustomsWeight4 { set; get; }
+
+	public bool CustomsWeight4Specified { set; get; }
 
 	public string CustomsCountry5 { set; get; }
 
@@ -225,9 +275,15 @@ namespace Spring2.Core.PostageService {
 
 	public uint CustomsQuantity5 { set; get; }
 
+	public bool CustomsQuantity5Specified { set; get; }
+
 	public float CustomsValue5 { set; get; }
 
+	public bool CustomsValue5Specified { set; get; }
+
 	public uint CustomsWeight5 { set; get; }
+
+	public bool CustomsWeight5Specified { set; get; }
 
 	public string EelPfc { set; get; }
 
@@ -242,6 +298,10 @@ namespace Spring2.Core.PostageService {
 	public string HfpFacilityPostalCode { set; get; }
 
 	public string HfpFacilityZIP4 { set; get; }
+
+	public string CostCenterAlphaNumeric { set; get; }
+
+	public string ToCarrierRoute { set; get; }
 
 	public string Test { set; get; }
 

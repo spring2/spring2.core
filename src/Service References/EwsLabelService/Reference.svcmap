@@ -23,8 +23,8 @@
     <MetadataSource Address="https://www.envmgr.com/LabelService/EwsLabelService.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="EwsLabelService.disco" MetadataType="Disco" ID="9ccbb593-3ee7-46b8-a224-a22833be15db" SourceId="1" SourceUrl="https://www.envmgr.com/LabelService/EwsLabelService.asmx?disco" />
     <MetadataFile FileName="EwsLabelService.wsdl" MetadataType="Wsdl" ID="fbd658ce-5728-42e6-9152-486c5b5e42f8" SourceId="1" SourceUrl="https://www.envmgr.com/LabelService/EwsLabelService.asmx?wsdl" />
+    <MetadataFile FileName="EwsLabelService.disco" MetadataType="Disco" ID="9ccbb593-3ee7-46b8-a224-a22833be15db" SourceId="1" SourceUrl="https://www.envmgr.com/LabelService/EwsLabelService.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

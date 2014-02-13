@@ -27,6 +27,23 @@ namespace Spring2.Core.PostageService.Enums {
 	public static readonly MailClassEnum DOMESTIC = new MailClassEnum("Domestic", "Domestic");
 	public static readonly MailClassEnum INTERNATIONAL = new MailClassEnum("International", "International");
 
+	public static readonly MailClassEnum DHLGMSMPARCELPLUSEXPEDITED = new MailClassEnum("DHLGMSMParcelPlusExpedited", "DHLGMSM Parcel Plus Expedited");
+	public static readonly MailClassEnum DHLGMSMPARCELPLUSSTANDARD = new MailClassEnum("DHLGMSMParcelPlusStandard", "DHLGMSM Parcel Plus Standard");
+	public static readonly MailClassEnum DHLGMSMBPMEXPEDITED = new MailClassEnum("DHLGMSMBPMExpedited", "DHLGMSM BPM Expedited");
+	public static readonly MailClassEnum DHLGMSMBPMGROUND = new MailClassEnum("DHLGMSMBPMGround", "DHLGMSM BPM Ground");
+	public static readonly MailClassEnum DHLGMSMCATALOGBPMEXPEDITED = new MailClassEnum("DHLGMSMCatalogBPMExpedited", "DHLGMSM Catalog BPM Expedited");
+	public static readonly MailClassEnum DHLGMSMCATALOGBPMGROUND = new MailClassEnum("DHLGMSMCatalogBPMGround", "DHLGMSM Catalog BPM Ground");
+	public static readonly MailClassEnum DHLGMSMMEDIAMAILGROUND = new MailClassEnum("DHLGMSMMediaMailGround", "DHLGMSM Media Mail Ground");
+	public static readonly MailClassEnum DHLGMSMPARCELSEXPEDITED = new MailClassEnum("DHLGMSMParcelsExpedited", "DHLGMSM Parcels Expedited");
+	public static readonly MailClassEnum DHLGMSMPARCELSGROUND = new MailClassEnum("DHLGMSMParcelsGround", "DHLGMSM Parcels Ground");
+	public static readonly MailClassEnum DHLGMSMPRIORITYMAIL = new MailClassEnum("DHLGMSMPriorityMail", "DHLGMSM Priority Mail");
+	public static readonly MailClassEnum DHLGMSMFIRSTCLASSPRODUCT = new MailClassEnum("DHLGMSMFirstClassProduct", "DHLGMSM First Class Product");
+	public static readonly MailClassEnum DHLGMSMFIRSTCLASSPARCELS = new MailClassEnum("DHLGMSMFirstClassParcels", "DHLGMSM First Class Parcels");
+
+	public static readonly MailClassEnum IPA = new MailClassEnum("IPA", "International");
+	public static readonly MailClassEnum ISAL = new MailClassEnum("ISAL", "International");
+
+
 	public static MailClassEnum GetInstance(Object value) {
 	    if (value is String) {
 		foreach (MailClassEnum t in OPTIONS) {

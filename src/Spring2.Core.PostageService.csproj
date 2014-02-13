@@ -183,22 +183,43 @@
     <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.LabelRequestResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.MultiLocationPackagePickupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.PackagePickupAvailabilityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.PackagePickupCancelResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.PackagePickupChangeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.PackagePickupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.PostageRateResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.PostageRatesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.PostageRateTableResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.RecreditRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.RefundResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.ResetSuspendedAccountRequestResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.StampsRateResponse.datasource">
+    <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.SCANResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.StampsResponse.datasource">
+    <None Include="Service References\EwsLabelService\Spring2.Core.EwsLabelService.TransactionsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="spring2.snk" />
