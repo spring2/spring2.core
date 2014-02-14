@@ -11,7 +11,9 @@ namespace Spring2.Core.PostageService.Enums {
 	new public static readonly MailClassEnum DEFAULT = new MailClassEnum();
 	new public static readonly MailClassEnum UNSET = new MailClassEnum();
 
+	[Obsolete("USPS name change to 'PriorityExpress' Jan 2015")]
 	public static readonly MailClassEnum EXPRESS = new MailClassEnum("Express", "Express");
+	public static readonly MailClassEnum PRIORITYEXPRESS = new MailClassEnum("PriorityExpress", "Priority Express");
 	public static readonly MailClassEnum FIRST = new MailClassEnum("First", "First");
 	public static readonly MailClassEnum LIBRARYMAIL = new MailClassEnum("LibraryMail", "Library Mail");
 	public static readonly MailClassEnum MEDIAMAIL = new MailClassEnum("MediaMail", "Media Mail");
@@ -21,7 +23,9 @@ namespace Spring2.Core.PostageService.Enums {
 	public static readonly MailClassEnum PRIORITY = new MailClassEnum("Priority", "Priority");
 	public static readonly MailClassEnum CRITICALMAIL = new MailClassEnum("CriticalMail", "Critical Mail");
 	public static readonly MailClassEnum STANDARDMAIL = new MailClassEnum("StandardMail", "Standard Mail");
+	[Obsolete("USPS name change to 'PriorityMailExpressInternational' Jan 2015")]
 	public static readonly MailClassEnum EXPRESSMAILINTERNATIONAL = new MailClassEnum("ExpressMailInternational", "Express Mail International");
+	public static readonly MailClassEnum PRIORITYMAILEXPRESSINTERNATIONAL = new MailClassEnum("PriorityMailExpressInternational", "Priority Mail Express International");
 	public static readonly MailClassEnum FIRSTCLASSMAILINTERNATIONAL = new MailClassEnum("FirstClassMailInternational", "First Class Mail International");
 	public static readonly MailClassEnum PRIORITYMAILINTERNATIONAL = new MailClassEnum("PriorityMailInternational", "Priority Mail International");
 	public static readonly MailClassEnum DOMESTIC = new MailClassEnum("Domestic", "Domestic");
