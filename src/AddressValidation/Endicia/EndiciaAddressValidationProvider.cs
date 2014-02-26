@@ -108,7 +108,7 @@ namespace Spring2.Core.AddressValidation.Endicia {
 		Street3 = response.AddrLine3,
 		City = response.City,
 		State = response.State,
-		PostalCode = string.Format("{0}{1}", response.ZIP5, (string.IsNullOrEmpty(response.Plus4) ? "" : string.Format("-{0}", response.Plus4)))
+		PostalCode = response.ZIP5
 	    });
 	    result.Addresses = addressList;
 	    return result;
