@@ -80,7 +80,7 @@ namespace Spring2.Core.AddressValidation.Endicia {
 	    request.ADDRESS3 = string.Format("{0}, {1} {2}", this.city, this.region, this.postalCode);
 
 	    string xml = SerializeToString<DialAZipRequest>(request);
-	    HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(string.Format(dialAZipUrlBaseFormat, xml));
+	    HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(string.Format(dialAZipUrlBaseFormat, Encode(xml)));
 	    webRequest.Method = "GET";
 
 	    HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
@@ -137,6 +137,10 @@ namespace Spring2.Core.AddressValidation.Endicia {
 	    using (StringReader reader = new StringReader(s)) {
 		return (T)serializer.Deserialize(reader);
 	    }
+	}
+
+	private string Encode(string source) {
+	    return System.Web.HttpUtility.UrlEncode(source);
 	}
     }
 }
