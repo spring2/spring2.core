@@ -6,6 +6,7 @@ namespace Spring2.Core.AddressValidation {
 	private ResponseTypeEnum responseType = ResponseTypeEnum.DEFAULT;
 	private AddressList addresses = AddressList.DEFAULT;
 	private StringType responseXml = StringType.EMPTY;
+	private StringType status = StringType.EMPTY;
 	
 	public ResponseTypeEnum ResponseType {
 	    get { return responseType; }
@@ -20,6 +21,11 @@ namespace Spring2.Core.AddressValidation {
 	public StringType ResponseXml {
 	    get { return responseXml; }
 	    set { responseXml = value; }
+	}
+
+	public StringType Status {
+	    get { return status; }
+	    set { status = value; }
 	}
     }
 }

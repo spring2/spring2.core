@@ -10,7 +10,7 @@ namespace Spring2.Core.AddressValidation.Endicia {
     public class DialAZipResponse {
 	public string User { get; set; }
 	public string Command { get; set; }
-	public string ReturnCode { get; set; }
+	public int ReturnCode { get; set; }
 	public string ZIP5 { get; set; }
 	public string Plus4 { get; set; }
 	public string Crt { get; set; }

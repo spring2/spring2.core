@@ -25,6 +25,19 @@ namespace Spring2.Core.AddressValidation.Endicia {
 	protected string postalCode = null;
 	protected string country = null;
 
+	private Dictionary<int, string> returnCodes = new Dictionary<int, string> {
+	    { 10, "Invalid Dual Address - May indicate that more than one delivery address is detected" },
+	    { 11, "Invalid City/State/ZIP Code - ZIP Code could not be found because neither a valid City, State, nor valid 5-digit ZIP Code was present" },
+	    { 12, "Invalid State - The State code in the address is invalid. Note that only US State and U.S. Territories and possession abbreviations are valid" },
+	    { 13, "Invalid City – The City in the address submitted is invalid. Remember, city names cannot begin with numbers" },
+	    { 21, "Address Not Found – The address as submitted could not be found. Check for excessive abbreviations in the street address line or in the City name" },
+	    { 22, "Multiple Responses – More than one ZIP+4 was found. Check for missing address elements, or run ZIPM request for a list of possible valid addresses" },
+	    { 25, "Invalid Street - City, State and ZIP Code are valid, but street address is not a match" },
+	    { 31, "Exact Match – No corrective action required" },
+	    { 32, "Default Match – More information, such as an apartment or suite number, may give a more specific address" }
+	};
+	private int[] validReturnCodes = new int[] { 31, 32 };
+
 	public AddressValidationResult Validate(StringType street, StringType city, StringType state, StringType postalCode, StringType countryCode) {
 	    this.address1 = street;
 	    this.city = city;
@@ -96,7 +109,7 @@ namespace Spring2.Core.AddressValidation.Endicia {
 
 	    AddressValidationResult result = new AddressValidationResult();
 	    result.ResponseXml = stringResponse;
-	    if (response.AddrExists == "TRUE") {
+	    if (validReturnCodes.Contains(response.ReturnCode)) {
 		result.ResponseType = ResponseTypeEnum.VALID;
 	    } else {
 		result.ResponseType = ResponseTypeEnum.INVALID;
@@ -111,6 +124,7 @@ namespace Spring2.Core.AddressValidation.Endicia {
 		PostalCode = response.ZIP5
 	    });
 	    result.Addresses = addressList;
+	    result.Status = returnCodes[response.ReturnCode];
 	    return result;
 	}
 
