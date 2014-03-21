@@ -191,10 +191,10 @@ namespace Spring2.Core.PostageService.Endicia {
 	    return Mapper.Map<LabelRequestResponse, PostageLabelData>(response);
 	}
 
-	public RefundRequestData RefundRequest(String trackingNumber) {
+	public RefundRequestData RefundRequest(String trackingNumber, bool isInternational) {
 	    
 	    ELSServicesService.ELSServicesService elsClient = new ELSServicesService.ELSServicesService();
-	    XmlNode[] response = (XmlNode[])elsClient.RefundRequest(BuildXmlRefundRequest(trackingNumber));
+	    XmlNode[] response = (XmlNode[])elsClient.RefundRequest(BuildXmlRefundRequest(trackingNumber, isInternational));
 
 	    XDocument document = null;
 	    foreach (XmlNode node in response) {
@@ -210,20 +210,25 @@ namespace Spring2.Core.PostageService.Endicia {
 	    }
 
 	    XElement formNumber = root.Element("FormNumber");
-	    XElement picNumber = root.Element("RefundList").Element("PICNumber");
 
 	    RefundRequestData result = new RefundRequestData();
 	    result.FormNumber = formNumber.Value;
-	    result.IsApproved = picNumber.Element("IsApproved").Value == "YES";
-	    result.ErrorMsg = picNumber.Element("ErrorMsg").Value;
-	    picNumber.Element("IsApproved").Remove();
-	    picNumber.Element("ErrorMsg").Remove();
-	    result.PICNumber = picNumber.Value.TrimEnd();
+
+	    if (!isInternational) {
+		XElement resultNumber = root.Element("RefundList").Element("PICNumber");
+		result.IsApproved = resultNumber.Element("IsApproved").Value == "YES";
+		result.ErrorMsg = resultNumber.Element("ErrorMsg").Value;
+		resultNumber.Element("IsApproved").Remove();
+		resultNumber.Element("ErrorMsg").Remove();
+		result.PICNumber = resultNumber.Value.TrimEnd();
+	    } else {
+		result.IsApproved = true;
+	    }
 
 	    return result;
 	}
 
-	private String BuildXmlRefundRequest(String trackingNumber) {
+	private String BuildXmlRefundRequest(String trackingNumber, bool isInternational) {
 	    StringBuilder xmlBuilder = new StringBuilder();
 	    // Settings
 	    XmlWriterSettings settings = new XmlWriterSettings();
@@ -242,7 +247,11 @@ namespace Spring2.Core.PostageService.Endicia {
 		}
 
 		writer.WriteStartElement("RefundList");
-		writer.WriteElementString("PICNumber", trackingNumber);
+		if (isInternational) {
+		    writer.WriteElementString("CustomsID", trackingNumber);
+		} else {
+		    writer.WriteElementString("PICNumber", trackingNumber);
+		}
 		writer.WriteEndElement();
 
 		// END - RefundRequest

@@ -25,7 +25,7 @@ namespace Spring2.Core.PostageService.Test {
 	    return new PasswordChangedData();
 	}
 
-	public RefundRequestData RefundRequest(String trackingNumber) {
+	public RefundRequestData RefundRequest(String trackingNumber, Boolean isInternational) {
 	    throw new NotImplementedException();
 	}
     }

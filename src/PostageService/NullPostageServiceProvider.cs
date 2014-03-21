@@ -25,7 +25,7 @@ namespace Spring2.Core.PostageService {
 	    throw new PostageServiceException("NullPostageServiceProvider is not a valid provider.");
 	}
 
-	public RefundRequestData RefundRequest(String trackingNumber) {
+	public RefundRequestData RefundRequest(String trackingNumber, Boolean isInternational) {
 	    throw new PostageServiceException("NullPostageServiceProvider is not a valid provider.");
 	}
     }
