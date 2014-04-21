@@ -37,6 +37,7 @@ namespace Spring2.Core.AddressValidation.Endicia {
 	    { 32, "Default Match – More information, such as an apartment or suite number, may give a more specific address" }
 	};
 	private int[] validReturnCodes = new int[] { 31, 32 };
+	private int[] valid_CityStateZipReturnCodes = new int[] { 25 };
 
 	public AddressValidationResult Validate(StringType street, StringType city, StringType state, StringType postalCode, StringType countryCode) {
 	    this.address1 = street;
@@ -111,6 +112,8 @@ namespace Spring2.Core.AddressValidation.Endicia {
 	    result.ResponseXml = stringResponse;
 	    if (validReturnCodes.Contains(response.ReturnCode)) {
 		result.ResponseType = ResponseTypeEnum.VALID;
+	    } else if (valid_CityStateZipReturnCodes.Contains(response.ReturnCode)) {
+		result.ResponseType = ResponseTypeEnum.VALID_CITYSTATEZIP;
 	    } else {
 		result.ResponseType = ResponseTypeEnum.INVALID;
 	    }

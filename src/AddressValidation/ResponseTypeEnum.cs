@@ -11,6 +11,7 @@ namespace Spring2.Core.AddressValidation {
 	public static readonly ResponseTypeEnum VALID = new ResponseTypeEnum("Valid", "Valid");
 	public static readonly ResponseTypeEnum INVALID = new ResponseTypeEnum("Invalid", "Invalid");
 	public static readonly ResponseTypeEnum AMBIGUOUS = new ResponseTypeEnum("Ambiguous", "Ambiguous");
+	public static readonly ResponseTypeEnum VALID_CITYSTATEZIP = new ResponseTypeEnum("Valid_CityStateZip", "Valid_CityStateZip");
 
 	public static ResponseTypeEnum GetInstance(Object value) {
 	    if (value is String) {
