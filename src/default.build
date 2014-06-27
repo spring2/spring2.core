@@ -1,7 +1,5 @@
 <?xml version="1.0" ?>
 <project name="Spring2.Core" default="build" xmlnds="http://tempuri.org/nant-vs.xsd">
-    <property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe" />
-
     <property name="debug" value="true" />
     <property name="build.root" value="..\" />
     <property name="build.dir" value="..\build" />
@@ -23,7 +21,7 @@
 		</if>
 		<call target="CreateAssemblyVersionInfo" />
 		<exec program="make" commandline="clean clean_db clean_release" />
-		<exec program="make" commandline="build_db packageonly package_sql docs ncover" />
+		<exec program="make" commandline="precommit packageonly" />
     </target>
 
     <target name="ccnet-publish">
@@ -38,14 +36,60 @@
 			<include name="*"/>
 			</fileset>
 		</copy>
-		<exec program="make" commandline="tagbuild" />
     </target>
 
-    <target name="build">
-		<call target="build-net-4.0" />
-    </target>
-
-    <target name="getSubversionRevision">
+	<!-- Populates variables (build.major, build.minor, build.build, and build.revision) with values
+	        from AssemblyInfo.cs.  If property assemblyinfo.location is undefined, it will attempt to 
+	        read AssemblyInfo.cs from the current directory. -->
+	<target name="GetAssemblyVersion" description="Populates variables with the current version." >
+	    <script language="C#">
+	        <code><![CDATA[
+	        public static void ScriptMain(Project project) {
+	            if (project.Properties["assemblyinfo.location"] == null)
+	                project.Properties["assemblyinfo.location"] = "AssemblyVersionInfo.cs";
+	            string assemblyInfoFilename = project.Properties["assemblyinfo.location"];
+	
+	            using (StreamReader reader = File.OpenText(assemblyInfoFilename))
+	            {
+	                Regex expression = new Regex(
+	                   @"^\[assembly: System.Reflection.AssemblyVersion\(\""([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)");
+	                string line = reader.ReadLine();
+	                while (line != null) {
+	                    Match match = expression.Match(line);
+	                    if (match.Success) {
+	                        project.Properties["build.major"] = match.Result("$1");
+	                        project.Properties["build.minor"] = match.Result("$2");
+	                        project.Properties["build.build"] = match.Result("$3");
+	                        project.Properties["build.revision"] = match.Result("$4");
+	                        break;
+	                    }
+	                    line = reader.ReadLine();
+	                }
+	            } 
+	        }
+	    ]]></code>
+	    </script>
+	    <echo message="version='${build.major}.${build.minor}.${build.build}.${build.revision}'"/> 
+	</target>
+	
+    <target name="CreateAssemblyVersionInfo" description="Create an assembly info file with the current build number" >
+		<if test="${not property::exists('CCNetLabel')}">
+			<fail message="CCNetLabel property not set, so can't create labelled distribution files" />
+		</if>
+		<asminfo output="AssemblyVersionInfo.cs" language="CSharp">
+			<imports>
+				<import namespace="System.Reflection" />
+			</imports>
+			<attributes>
+				<attribute type="System.Reflection.AssemblyVersionAttribute" value="${CCNetLabel}" />
+				<!--<attribute type="AssemblyCopyrightAttribute" value="Copyright 2014 Spring2 Technologies" />
+				<attribute type="AssemblyCompanyAttribute" value="Spring2 Technologies" />
+				<attribute type="AssemblyProductAttribute" value="Spring2.Core" />-->
+			</attributes>
+		</asminfo>
+	</target>
+	
+	<target name="getSubversionRevision">
 	<!-- Retrieve subversion revision number -->
 	<echo message="Retrieving Subversion revision number"/>
 	<property name="svn.revision" value="0"/>
@@ -62,170 +106,11 @@
 	<echo message="Using Subversion revision number: ${svn.revision}"/>
     </target>
 
-    <target name="CreateAssemblyVersionInfo" description="Create an assembly info file with the current build number" >
-	<if test="${not property::exists('CCNetLabel')}">
-	    <fail message="CCNetLabel property not set, so can't create labelled distribution files" />
-	</if>
-	<asminfo output="AssemblyVersionInfo.cs" language="CSharp">
-	    <imports>
-		<import namespace="System.Reflection" />
-	    </imports>
-	    <attributes>
-		<attribute type="System.Reflection.AssemblyVersionAttribute" value="${CCNetLabel}" />
-		<!--
-		<attribute type="AssemblyCopyrightAttribute" value="Copyright 2008 Spring2 Technologies" />
-		<attribute type="AssemblyCompanyAttribute" value="Spring2 Technologies" />
-		<attribute type="AssemblyProductAttribute" value="Spring2 Dss" /> 
-		-->
-	    </attributes>
-	</asminfo>
-    </target>
-
-    <target name="build-net-4.0">
-		<property name="nant.settings.currentframework" value="net-4.0" />
-		<property name="build.configuration" value="NET_4_0" />
-		<!--<call target="internal-build" />-->
-		<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
-		<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
-		<exec program="${msbuild}"  >
-			<arg value="Spring2.Core.sln" />
-			<!--<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />-->
-			<arg value="/target:Build" />
-		</exec>
-
-		<copy todir="..\build\${nant.settings.currentframework}\">
-			<fileset basedir="..\build\">
-			<include name="SendMailMessages\*" />
-			<include name="UpdateCurrencyExchange\*" />
-			<include name="PerformanceMonitorWindowsService\*" />
-			<include name="SeleniumLoadTester\*" />
-			<include name="PublicationService\*" />
-			</fileset>
-		</copy>
-		<delete dir="..\build\UpdateCurrencyExchange" if="${directory::exists('..\build\UpdateCurrencyExchange')}" failonerror="false" />
-		<delete dir="..\build\PerformanceMonitorWindowsService" if="${directory::exists('..\build\PerformanceMonitorWindowsService')}" failonerror="false" />
-		<delete dir="..\build\SeleniumLoadTester" if="${directory::exists('..\build\SeleniumLoadTester')}" failonerror="false" />
-		<delete dir="..\build\PublicationService" if="${directory::exists('..\build\PublicationService')}" failonerror="false" />
-
-		<exec program="${msbuild}"  >
-			<arg value="Spring2.Core.Ajax.Json.csproj" />
-			<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
-			<arg value="/target:Build" />
-		</exec>
-		<exec program="${msbuild}"  >
-			<arg value="Spring2.Core.Ajax.csproj" />
-			<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
-			<arg value="/target:Build" />
-		</exec>
-		<exec program="${msbuild}"  >
-			<arg value="Spring2.Core.Test.Ajax.csproj" />
-			<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
-			<arg value="/target:Build" />
-		</exec>
-		<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
-		<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
-		<exec program="${msbuild}">
-			<arg value="Spring2.Core.WithTypes.csproj" />
-			<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}\WithTypes" />
-			<arg value="/target:Build" />
-		</exec>
-		<exec program="${msbuild}">
-			<arg value="Spring2.Core.WithTypesTest.csproj" />
-			<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}\WithTypes" />
-			<arg value="/target:Build" />
-		</exec>
-		<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
-		<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
-    </target>
-
-    <target name="internal-build">
-	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
-	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
-	<solution configuration="${build.configuration}" outputdir="..\build\${nant.settings.currentframework}">
-	    <assemblyfolders>
-		<include name="..\lib\${nant.settings.currentframework}" />
-	    </assemblyfolders>
-	    <projects>
-		<include name="Spring2.Core.csproj" />
-		<include name="Spring2.Core.Types.csproj" />
-		<include name="Spring2.Core.Test.csproj" />
-		<include name="Spring2.Core.WebControl.csproj" />
-		<include name="Spring2.Core.Configuration.csproj" />
-		<include name="Spring2.Core.Cryptography.csproj" />
-		<include name="Spring2.Core.Geocode.csproj" />
-		<include name="Spring2.Core.Geocode.TeleAtlasExe.csproj" />
-		<include name="Spring2.Core.Geocode.TeleAtlasWS.csproj" />
-		<include name="Spring2.Core.Mail.csproj" />
-		<include name="Spring2.Core.Mail.SendMailMessages.csproj" />
-		<include name="Spring2.Core.Currency.csproj" />
-		<include name="Spring2.Core.Currency.UpdateCurrencyExchange.csproj" />
-		<include name="Spring2.Core.Log4Net.csproj" />
-		<include name="Spring2.Core.PropertyPopulator.csproj" />
-		<include name="Spring2.Core.Maverick.csproj" />
-		<include name="Spring2.Core.Security.csproj" />
-		<include name="Spring2.Core.PropertyPopulator.csproj" />
-		<include name="Spring2.Core.Reporting.csproj" />
-		<include name="Spring2.Core.ResourceManager.AcceptanceTest.csproj" />
-		<include name="Spring2.Core.ResourceManager.BusinessLogic.csproj" />
-		<include name="Spring2.Core.ResourceManager.DataObject.csproj" />
-		<include name="Spring2.Core.ResourceManager.ResourceEditor.csproj" />
-		<include name="Spring2.Core.ResourceManager.ResourceLocalizer.csproj" />
-		<include name="Spring2.Core.ResourceManager.TestUtility.csproj" />
-		<include name="Spring2.Core.AddressValidation.csproj" />
-		<include name="Spring2.Core.AddressValidation.Test.csproj" />
-		<include name="Spring2.Core.Payment.csproj" />
-		<include name="Spring2.Core.Payment.Test.csproj" />
-		<include name="Spring2.Core.Soap.csproj" />
-		<include name="Spring2.Core.Tax.csproj" />
-		<include name="Spring2.Core.Tax.Test.csproj" />
-		<include name="Spring2.Core.Navigation.csproj" />
-	    </projects>
-	</solution>
-
-	<solution configuration="${build.configuration}" outputdir="..\build\${nant.settings.currentframework}">
-	    <assemblyfolders>
-		<include name="..\lib\${nant.settings.currentframework}" />
-	    </assemblyfolders>
-	    <projects>
-		<include name="Spring2.Core.Configuration.csproj" />
-		<include name="Spring2.Core.Geocode.csproj" />
-		<include name="Spring2.Core.Geocode.TeleAtlasExe.csproj" />
-		<include name="Spring2.Core.csproj" />
-		<include name="Spring2.Core.Types.csproj" />
-	    </projects>
-	</solution>
-
-
-	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
-	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
-	<solution configuration="${build.configuration}" outputdir="..\build\${nant.settings.currentframework}\WithTypes">
-	    <projects>
-		<include name="Spring2.Core.WithTypes.csproj" />
-		<include name="Spring2.Core.WithTypesTest.csproj" />
-	    </projects>
-	</solution>
-
-	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
-	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
-    </target>
-
-    <target name="foo">
-	<echo message="${nant.settings.currentframework}"/>
-    </target>
-
-    <target name="package_src">
-	<mkdir dir="${release.dir}" />
-	<ifnot test="${property::exists('version')}">
-	    <fail message="version property not set, so can't create versioned package" />
-	</ifnot>
-	<zip zipfile="${release.dir}/Spring2.Core-${version}-src.7z" ziplevel="9">
-	    <fileset basedir="..">
-		<include name="**/*" />
-		<exclude name="**/CVS/*" />
-		<exclude name="**/_ReSharper.Spring2.Dss/**" />
-		<exclude name="release/**" />
-	    </fileset>
-	</zip>
-    </target>
+    <target name="version" description="outputs version number to VersionInfo.cs">
+	  <echo file="${projectdir}/Properties/VersionInfo.cs">
+	    [assembly: System.Reflection.AssemblyVersion("$(CCNetLabel)")]
+	    [assembly: System.Reflection.AssemblyFileVersion("$(CCNetLabel)")]
+	  </echo>
+	</target>
 
 </project>

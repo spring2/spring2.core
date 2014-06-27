@@ -1,7 +1,8 @@
 #
 # Makefile for Spring2.Core
 #
-RM		:= rm -rf
+RM			:= rm -rf
+CP			:= cp
 MKDIR		:= mkdir -p
 NUNIT		:= ../bin/NUnit/nunit-console.exe
 
@@ -13,20 +14,36 @@ RELEASEDIR	:= ../release
 BUILDDIR	:= ../build
 NANT		:= ../bin/NAnt/nant.exe
 
+DOTNETFRAMEWORK	:= c:/WINDOWS/Microsoft.NET/Framework/v4.0.30319
+MSBUILD			:= $(DOTNETFRAMEWORK)/MSBuild.exe
+
 RELEASE_REVISION:= 1
 GETVERSION	:= $(BINDIR)/getversion.sh
 7ZIP		:= $(BINDIR)/7za.exe
 
-all: build
+PROJECTNAME := Spring2.Core
 
 .DELETE_ON_ERROR:
 
+all: build_db build
+
+.PHONY: build
+build: msbuild
+	
+msbuild:
+	$(MSBUILD) $(PROJECTNAME).sln /target:Build
+	
 .PHONY: clean
 clean:
 	$(RM) $(BUILDDIR)/*
 	$(RM) $(DOCDIR)/NCover
 	$(RM) obj
 	$(RM) bin
+
+.PHONY: precommit
+precommit: build build_db 
+
+#regress_UnitTests unitTestsCoverage unitTestsCoverageReports
 
 gen:
 	cd Mail; ../$(BINDIR)/DTG/DataTierGenerator.exe --file=DataTierGenerator.config.xml
@@ -60,10 +77,6 @@ clean_db:
 	cd SeleniumLoadTester; make clean_db
 	cd Publication; make clean_db
 
-.PHONY: build
-build:
-	${NANT} build
-
 clean_release:
 	$(RM) ../release/*	
 
@@ -93,7 +106,7 @@ package: clean build regress changelog docs packageonly
 packageonly:
 	rm -rf ${BUILDDIR}/Core
 	$(7ZIP) a $(RELEASEDIR)/Spring2.Core.$(shell $(GETVERSION))-net-4.0.7z $(BUILDDIR)/net-4.0/*
-	${NANT} -D:version=$(shell ./getversion.sh) package_src
+	#${NANT} -D:version=$(shell ./getversion.sh) package_src
 
 release: package
 	cvs tag RELEASE_$(subst .,_,$(shell $(GETVERSION)))
