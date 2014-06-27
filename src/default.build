@@ -1,7 +1,5 @@
 <?xml version="1.0" ?>
 <project name="Spring2.Core" default="build" xmlnds="http://tempuri.org/nant-vs.xsd">
-    <property name="build.configuration" value="debug" />
-    <!--<property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\MSBuild.exe" />-->
     <property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe" />
 
     <property name="debug" value="true" />
@@ -15,32 +13,36 @@
     <property name="build.revision" value="x" />
     <property name="svn.executable" value="svn" />
 
+	<target name="clean">
+		<exec program="make" commandline="clean" />
+    </target>
+	
     <target name="ccnet-build">
-	<ifnot test="${property::exists('CCNetLabel')}">
-	    <fail message="CCNetLabel property not set, so can't create labelled distribution files" />
-	</ifnot>
-	<call target="CreateAssemblyVersionInfo" />
-	<call target="getSubversionRevision" />
-	<exec program="make" commandline="clean clean_db clean_release cleanlogs" />
-	<exec program="make" commandline="build build_db packageonly package_sql docs ncover" />
+		<if test="${not property::exists('CCNetLabel')}"> 
+			<fail message="CCNetLabel property not set, so can't create labelled distribution files" />
+		</if>
+		<call target="CreateAssemblyVersionInfo" />
+		<exec program="make" commandline="clean clean_db clean_release" />
+		<exec program="make" commandline="build_db packageonly package_sql docs ncover" />
     </target>
 
     <target name="ccnet-publish">
-	<if test="${not property::exists('CCNetLabel')}">
-	    <fail message="CCNetLabel property not set, so can't create labelled distribution files" />
-	</if>
-	<property name="publish.dir" value="${CCNetArtifactDirectory}\${CCNetLabel}" />
+		<if test="${not property::exists('CCNetLabel')}">
+			<fail message="CCNetLabel property not set, so can't create labelled distribution files" />
+		</if>
+		<property name="publish.dir" value="${CCNetArtifactDirectory}\${CCNetLabel}" />
 
-	<mkdir dir="${publish.dir}" />
-	<copy todir="${publish.dir}">
-	    <fileset basedir="..\release">
-		<include name="*"/>
-	    </fileset>
-	</copy>
+		<mkdir dir="${publish.dir}" />
+		<copy todir="${publish.dir}">
+			<fileset basedir="..\release">
+			<include name="*"/>
+			</fileset>
+		</copy>
+		<exec program="make" commandline="tagbuild" />
     </target>
 
     <target name="build">
-	<call target="build-net-4.0" />
+		<call target="build-net-4.0" />
     </target>
 
     <target name="getSubversionRevision">
@@ -80,60 +82,60 @@
     </target>
 
     <target name="build-net-4.0">
-	<property name="nant.settings.currentframework" value="net-4.0" />
-	<property name="build.configuration" value="NET_4_0" />
-	<!--<call target="internal-build" />-->
-	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
-	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
-	<exec program="${msbuild}"  >
-	    <arg value="Spring2.Core.sln" />
-	    <!--<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />-->
-	    <arg value="/target:Build" />
-	</exec>
+		<property name="nant.settings.currentframework" value="net-4.0" />
+		<property name="build.configuration" value="NET_4_0" />
+		<!--<call target="internal-build" />-->
+		<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
+		<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
+		<exec program="${msbuild}"  >
+			<arg value="Spring2.Core.sln" />
+			<!--<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />-->
+			<arg value="/target:Build" />
+		</exec>
 
-	<copy todir="..\build\${nant.settings.currentframework}\">
-	    <fileset basedir="..\build\">
-		<include name="SendMailMessages\*" />
-		<include name="UpdateCurrencyExchange\*" />
-		<include name="PerformanceMonitorWindowsService\*" />
-		<include name="SeleniumLoadTester\*" />
-		<include name="PublicationService\*" />
-	    </fileset>
-	</copy>
-	<delete dir="..\build\UpdateCurrencyExchange" if="${directory::exists('..\build\UpdateCurrencyExchange')}" failonerror="false" />
-	<delete dir="..\build\PerformanceMonitorWindowsService" if="${directory::exists('..\build\PerformanceMonitorWindowsService')}" failonerror="false" />
-	<delete dir="..\build\SeleniumLoadTester" if="${directory::exists('..\build\SeleniumLoadTester')}" failonerror="false" />
-	<delete dir="..\build\PublicationService" if="${directory::exists('..\build\PublicationService')}" failonerror="false" />
+		<copy todir="..\build\${nant.settings.currentframework}\">
+			<fileset basedir="..\build\">
+			<include name="SendMailMessages\*" />
+			<include name="UpdateCurrencyExchange\*" />
+			<include name="PerformanceMonitorWindowsService\*" />
+			<include name="SeleniumLoadTester\*" />
+			<include name="PublicationService\*" />
+			</fileset>
+		</copy>
+		<delete dir="..\build\UpdateCurrencyExchange" if="${directory::exists('..\build\UpdateCurrencyExchange')}" failonerror="false" />
+		<delete dir="..\build\PerformanceMonitorWindowsService" if="${directory::exists('..\build\PerformanceMonitorWindowsService')}" failonerror="false" />
+		<delete dir="..\build\SeleniumLoadTester" if="${directory::exists('..\build\SeleniumLoadTester')}" failonerror="false" />
+		<delete dir="..\build\PublicationService" if="${directory::exists('..\build\PublicationService')}" failonerror="false" />
 
-	<exec program="${msbuild}"  >
-	    <arg value="Spring2.Core.Ajax.Json.csproj" />
-	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
-	    <arg value="/target:Build" />
-	</exec>
-	<exec program="${msbuild}"  >
-	    <arg value="Spring2.Core.Ajax.csproj" />
-	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
-	    <arg value="/target:Build" />
-	</exec>
-	<exec program="${msbuild}"  >
-	    <arg value="Spring2.Core.Test.Ajax.csproj" />
-	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
-	    <arg value="/target:Build" />
-	</exec>
-	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
-	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
-	<exec program="${msbuild}">
-	    <arg value="Spring2.Core.WithTypes.csproj" />
-	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}\WithTypes" />
-	    <arg value="/target:Build" />
-	</exec>
-	<exec program="${msbuild}">
-	    <arg value="Spring2.Core.WithTypesTest.csproj" />
-	    <arg value="/p:OutputPath=..\build\${nant.settings.currentframework}\WithTypes" />
-	    <arg value="/target:Build" />
-	</exec>
-	<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
-	<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
+		<exec program="${msbuild}"  >
+			<arg value="Spring2.Core.Ajax.Json.csproj" />
+			<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
+			<arg value="/target:Build" />
+		</exec>
+		<exec program="${msbuild}"  >
+			<arg value="Spring2.Core.Ajax.csproj" />
+			<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
+			<arg value="/target:Build" />
+		</exec>
+		<exec program="${msbuild}"  >
+			<arg value="Spring2.Core.Test.Ajax.csproj" />
+			<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}" />
+			<arg value="/target:Build" />
+		</exec>
+		<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
+		<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
+		<exec program="${msbuild}">
+			<arg value="Spring2.Core.WithTypes.csproj" />
+			<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}\WithTypes" />
+			<arg value="/target:Build" />
+		</exec>
+		<exec program="${msbuild}">
+			<arg value="Spring2.Core.WithTypesTest.csproj" />
+			<arg value="/p:OutputPath=..\build\${nant.settings.currentframework}\WithTypes" />
+			<arg value="/target:Build" />
+		</exec>
+		<delete dir="obj" if="${directory::exists('obj')}" failonerror="false" />
+		<delete dir="bin" if="${directory::exists('bin')}" failonerror="false" />
     </target>
 
     <target name="internal-build">
