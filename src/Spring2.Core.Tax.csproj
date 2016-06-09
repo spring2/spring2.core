@@ -252,9 +252,7 @@
     <Compile Include="Tax\Vertex\CalculateTaxWSService.cs">
       <SubType>code</SubType>
     </Compile>
-    <Compile Include="Tax\Vertex\LookupTaxAreasWSService.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Tax\Vertex\LookupTaxAreasWSService.cs" />
     <Compile Include="Tax\Vertex\VertexProvider.cs">
       <SubType>Code</SubType>
     </Compile>

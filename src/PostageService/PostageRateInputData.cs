@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,5 +46,7 @@ namespace Spring2.Core.PostageService {
 	public string ShipTime { set; get; }
 
 	public ReturnOptions ResponseOptions { set; get; }
+
+	public string ServiceType { get; set; }
     }
 }

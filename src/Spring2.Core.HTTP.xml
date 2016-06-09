@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spring2.Core.HTTP</name>
+    </assembly>
+    <members>
+        <member name="M:Spring2.Core.HTTP.ResourceUtility.GetResourceStream(System.Web.HttpContext,System.String)">
+            <summary>
+            Gets the resource stream. Assumes that this resource is a text based resource file.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="resource">The resource.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.HTTP.ResourceUtility.GetResourceStream(System.Web.HttpContext,System.String,System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            Gets the resource stream. If desiredFormat is null, it is assumed that the resouce is text. Otherwise, it is an image.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="resource">The resource.</param>
+            <param name="desiredFormat">The desired format.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
