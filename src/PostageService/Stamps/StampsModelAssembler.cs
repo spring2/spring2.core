@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Spring2.Core.PostageService.Enums;
+using System.Text.RegularExpressions;
 
 namespace Spring2.Core.PostageService.Stamps {
     internal class StampsModelAssembler {
@@ -75,6 +76,7 @@ namespace Spring2.Core.PostageService.Stamps {
 	    
 	    AutoMapper.Mapper.CreateMap<SWSIMV52.CancelIndiciumResponse, RefundRequestData>();
 	    AutoMapper.Mapper.CreateMap<SWSIMV52.CreateIndiciumResponse, PostageLabelData>()
+		.ForMember(x => x.PostageBalance, o => o.Ignore())
 		.ForMember(x => x.Base64LabelImage, o => o.MapFrom(src => src.ImageData.ToString()))
 		.ForMember(x => x.PostagePrice, o => o.MapFrom(src => new PostageRatePrice() {
 		    TotalAmount = src.Rate.Amount,
@@ -116,6 +118,7 @@ namespace Spring2.Core.PostageService.Stamps {
 	    request.IntegratorTxID = credentials.IntegrationID.ToString();
 	    request.Item = credentials;
 	    request.Rate.ServiceType = ToServiceType(data.MailClass);
+	    request.Rate.PackageType = ToPackageType(data.MailpieceShape);
 	    return request;
 	}
 
@@ -141,7 +144,7 @@ namespace Spring2.Core.PostageService.Stamps {
 
 	public SWSIMV52.PackageTypeV6 ToPackageType(MailpieceShapeEnum packageType) {
 	    foreach(SWSIMV52.PackageTypeV6 swsPackageType in Enum.GetValues(typeof(SWSIMV52.PackageTypeV6))) {
-		if (packageType.ToString().ToUpper().Equals(swsPackageType.ToString().ToUpper())) {
+		if (Regex.Replace(packageType.ToString().ToUpper(), @"\s+", "").Equals(Regex.Replace(swsPackageType.ToString().ToUpper(), @"\s+", ""))) {
 		    return swsPackageType;
 		}
 	    }
@@ -150,7 +153,7 @@ namespace Spring2.Core.PostageService.Stamps {
 
 	public SWSIMV52.ServiceType ToServiceType(MailClassEnum mailClass) {
 	    try {
-		string mailClassString = mailClassToServiceType[mailClass.ToString()];
+		string mailClassString = mailClassToServiceType[Regex.Replace(mailClass.ToString(), @"\s+", "")];
 		foreach(SWSIMV52.ServiceType swsServiceType in Enum.GetValues(typeof(SWSIMV52.ServiceType))) {
 		    if (mailClassString.Equals(swsServiceType.ToString())) {
 			return swsServiceType;
@@ -164,24 +167,24 @@ namespace Spring2.Core.PostageService.Stamps {
 	}
 
 	private static readonly Dictionary<string, string> mailClassToServiceType = new Dictionary<string, string>() {
-	    { "First", "US-FC"},
-	    { "Priority", "US-PM" },
-	    { "Express", "US-XM" },
-	    { "MediaMail", "US-MM" },
-	    { "LibraryMail", "US-LM" },
-	    { "ExpressMailInternational", "US-EMI" },
-	    { "PriorityMailInternational", "US-PMI" },
-	    { "FirstClassMailInternational", "US-FCI" },
-	    { "CriticalMail", "US-CM" },
-	    { "ParcelSelect", "US-PS" },
-	    { "PriorityExpress", "US-PE" },
-	    { "DHLGMSMParcelsExpedited", "DHL-PE" },
-	    { "DHLGMSMParcelsGround", "DHL-PG" },
-	    { "DHLGMSMParcelPlusExpedited", "DHL-PPE" },
-	    { "DHLGMSMBPMExpedited", "DHL-BPME" },
-	    { "DHLGMSMBPMGround", "DHL-BPMG" },
-	    { "IPA", "AS-IPA" },
-	    { "ISAL", "AS-ISAL" }
+	    { "First", "USFC"},
+	    { "Priority", "USPM" },
+	    { "Express", "USXM" },
+	    { "MediaMail", "USMM" },
+	    { "LibraryMail", "USLM" },
+	    { "ExpressMailInternational", "USEMI" },
+	    { "PriorityMailInternational", "USPMI" },
+	    { "FirstClassMailInternational", "USFCI" },
+	    { "CriticalMail", "USCM" },
+	    { "ParcelSelect", "USPS" },
+	    { "PriorityExpress", "USXM" },
+	    { "DHLGMSMParcelsExpedited", "DHLPE" },
+	    { "DHLGMSMParcelsGround", "DHLPG" },
+	    { "DHLGMSMParcelPlusExpedited", "DHLPPE" },
+	    { "DHLGMSMBPMExpedited", "DHLBPME" },
+	    { "DHLGMSMBPMGround", "DHLBPMG" },
+	    { "IPA", "ASIPA" },
+	    { "ISAL", "ASISAL" }
 	};
     }
 }

@@ -36,7 +36,7 @@ namespace Spring2.Core.PostageService.Test {
 
 	    PostageRateInputData input = new PostageRateInputData() {
 		MailClass = MailClassEnum.PRIORITYEXPRESS,
-		MailpieceShape = MailpieceShapeEnum.PARCEL,
+		MailpieceShape = MailpieceShapeEnum.LETTER,
 		WeightOz = 16,
 		MailpieceDimensions = new PackageDimensions { Height = 10, Width = 5, Length = 15 },
 		Value = 100,
@@ -59,7 +59,7 @@ namespace Spring2.Core.PostageService.Test {
 
 	    PostageRateInputData input = new PostageRateInputData() {
 		MailClass = MailClassEnum.FIRSTCLASSMAILINTERNATIONAL,
-		MailpieceShape = MailpieceShapeEnum.PARCEL,
+		MailpieceShape = MailpieceShapeEnum.LETTER,
 		WeightOz = 16,
 		MailpieceDimensions = new PackageDimensions { Height = 10, Width = 5, Length = 15 },
 		Value = 100,
@@ -83,7 +83,7 @@ namespace Spring2.Core.PostageService.Test {
 
 	    PostageRateInputData input = new PostageRateInputData() {
 		MailClass = MailClassEnum.STANDARDPOST,
-		MailpieceShape = MailpieceShapeEnum.PARCEL,
+		MailpieceShape = MailpieceShapeEnum.LARGEFLATRATEBOX,
 		WeightOz = 16,
 		MailpieceDimensions = new PackageDimensions { Height = 10, Width = 5, Length = 15 },
 		Value = 100,
@@ -106,7 +106,7 @@ namespace Spring2.Core.PostageService.Test {
 
 	    PostageRateInputData input = new PostageRateInputData() {
 		MailClass = MailClassEnum.STANDARDPOST,
-		MailpieceShape = MailpieceShapeEnum.PARCEL,
+		MailpieceShape = MailpieceShapeEnum.LARGEFLATRATEBOX,
 		WeightOz = 16,
 		MailpieceDimensions = new PackageDimensions { Height = 10, Width = 5, Length = 15 },
 		Value = 100,
@@ -128,7 +128,7 @@ namespace Spring2.Core.PostageService.Test {
 	    IPostageServiceProvider postage = new StampsProvider();
 
 	    PostageRateInputData input = new PostageRateInputData() {
-		MailpieceShape = MailpieceShapeEnum.PARCEL,
+		MailpieceShape = MailpieceShapeEnum.LARGEFLATRATEBOX,
 		MailClass = MailClassEnum.DOMESTIC,
 		WeightOz = 16,
 		MailpieceDimensions = new PackageDimensions { Height = 10, Width = 5, Length = 15 },
@@ -153,7 +153,7 @@ namespace Spring2.Core.PostageService.Test {
 	    PostageLabelInputData input = new PostageLabelInputData() {
 		MailClass = MailClassEnum.PRIORITYEXPRESS,
 		WeightOz = 50,
-		MailpieceShape = MailpieceShapeEnum.PARCEL,
+		MailpieceShape = MailpieceShapeEnum.LETTER,
 		FromCompany = "Spring2",
 		ReturnAddress1 = "10150 S. Centennial Parkway",
 		ReturnAddress2 = "Suite 210",
@@ -175,7 +175,6 @@ namespace Spring2.Core.PostageService.Test {
 	    Assert.IsNotNull(data);
 	    Console.WriteLine(data.ErrorMessage);
 	    Assert.IsTrue(string.IsNullOrEmpty(data.ErrorMessage));
-	    Assert.IsTrue(!string.IsNullOrEmpty(data.Base64LabelImage));
 	}
 
 	[Test]
