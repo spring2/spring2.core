@@ -1,7 +1,5 @@
 using System;
 using System.Text;
-using Spring2.Core.Types;
-
 using Spring2.Core.ResourceManager.DataObject;
 using Spring2.Core.ResourceManager.Test;
 

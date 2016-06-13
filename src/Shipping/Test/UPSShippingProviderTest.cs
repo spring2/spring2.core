@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 
 using NUnit.Framework;
-using Spring2.Core.Configuration;
 using Spring2.Core.Shipping;
 using Spring2.Core.Types;
 

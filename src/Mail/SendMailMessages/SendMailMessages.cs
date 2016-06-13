@@ -1,7 +1,6 @@
 using System;
 using System.Configuration;
 using Spring2.Core.Configuration;
-using Spring2.Core.Types;
 using Spring2.Core.Mail.BusinessLogic;
 using Spring2.Core.Mail.DataObject;
 using Spring2.Core.Mail.Types;
