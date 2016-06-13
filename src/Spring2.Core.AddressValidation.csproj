@@ -176,6 +176,9 @@
     <Compile Include="AddressValidation\ResponseTypeEnum.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AddressValidation\Stamps\DialAZipRequest.cs" />
+    <Compile Include="AddressValidation\Stamps\DialAZipResponse.cs" />
+    <Compile Include="AddressValidation\Stamps\StampsAddressValidationProvider.cs" />
     <Compile Include="AddressValidation\Test\TestAddressValidationProvider.cs">
       <SubType>Code</SubType>
     </Compile>

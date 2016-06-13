@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ServiceModel;
 using System.ServiceModel.Security;
 using System.Text;
@@ -7,9 +7,7 @@ using Spring2.Core.Configuration;
 using Spring2.Core.EwsLabelService;
 using EW = Spring2.Core.EwsLabelService;
 using S2 = Spring2.Core.PostageService;
-using Spring2.Core.Types;
 using Spring2.Core.PostageService.Enums;
-using Spring2.Core.ELSServicesService;
 using System.Xml;
 using System.Xml.Linq;
 
