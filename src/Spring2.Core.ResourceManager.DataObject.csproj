@@ -125,9 +125,6 @@
     <Reference Include="System.Data">
       <Name>System.Data</Name>
     </Reference>
-    <Reference Include="System.Xml">
-      <Name>System.XML</Name>
-    </Reference>
     <ProjectReference Include="Spring2.Core.csproj">
       <Project>{80B94045-4DE6-4BB0-BE22-C5CC0E772695}</Project>
       <Name>Spring2.Core</Name>

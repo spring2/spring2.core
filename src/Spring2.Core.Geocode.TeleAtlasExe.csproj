@@ -122,12 +122,6 @@
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
-    <Reference Include="System.Data">
-      <Name>System.Data</Name>
-    </Reference>
-    <Reference Include="System.Xml">
-      <Name>System.XML</Name>
-    </Reference>
     <ProjectReference Include="Spring2.Core.Geocode.csproj">
       <Name>Spring2.Core.Geocode</Name>
       <Project>{71F4E2DB-E4C3-4C06-AD03-E9F3463D0EC8}</Project>

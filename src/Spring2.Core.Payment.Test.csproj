@@ -124,23 +124,8 @@
     <Reference Include="nunit.framework">
       <HintPath>..\lib\net-4.0\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Spring2.DataTierGenerator.Attribute">
-      <HintPath>..\lib\Spring2.DataTierGenerator.Attribute.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
-    </Reference>
-    <Reference Include="System.Data">
-      <Name>System.Data</Name>
-    </Reference>
-    <Reference Include="System.EnterpriseServices">
-      <Name>System.EnterpriseServices</Name>
-    </Reference>
-    <Reference Include="System.Web.Services">
-      <Name>System.Web.Services</Name>
-    </Reference>
-    <Reference Include="System.Xml">
-      <Name>System.XML</Name>
     </Reference>
     <ProjectReference Include="Spring2.Core.Configuration.csproj">
       <Name>Spring2.Core.Configuration</Name>
