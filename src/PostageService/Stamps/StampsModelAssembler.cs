@@ -77,7 +77,7 @@ namespace Spring2.Core.PostageService.Stamps {
 	    AutoMapper.Mapper.CreateMap<SWSIMV52.CancelIndiciumResponse, RefundRequestData>();
 	    AutoMapper.Mapper.CreateMap<SWSIMV52.CreateIndiciumResponse, PostageLabelData>()
 		.ForMember(x => x.PostageBalance, o => o.Ignore())
-		.ForMember(x => x.Base64LabelImage, o => o.MapFrom(src => src.ImageData.ToString()))
+		.ForMember(x => x.Base64LabelImage, o => o.MapFrom(src => Convert.ToBase64String(src.ImageData[0])))
 		.ForMember(x => x.PostagePrice, o => o.MapFrom(src => new PostageRatePrice() {
 		    TotalAmount = src.Rate.Amount,
 		    MailClass = src.Rate.ServiceType.ToString()
