@@ -4,7 +4,6 @@ using Spring2.Core.PerformanceMonitor.DAO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.ServiceProcess;
 using System.Text;

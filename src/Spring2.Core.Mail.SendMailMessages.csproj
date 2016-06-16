@@ -122,24 +122,8 @@
       <Name>log4net</Name>
       <HintPath>..\lib\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Spring2.DataTierGenerator.Attribute">
-      <Name>Spring2.DataTierGenerator.Attribute</Name>
-      <HintPath>..\lib\Spring2.DataTierGenerator.Attribute.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
-    </Reference>
-    <Reference Include="System.Data">
-      <Name>System.Data</Name>
-    </Reference>
-    <Reference Include="System.EnterpriseServices">
-      <Name>System.EnterpriseServices</Name>
-    </Reference>
-    <Reference Include="System.Web">
-      <Name>System.Web</Name>
-    </Reference>
-    <Reference Include="System.Xml">
-      <Name>System.XML</Name>
     </Reference>
     <ProjectReference Include="Spring2.Core.Configuration.csproj">
       <Name>Spring2.Core.Configuration</Name>

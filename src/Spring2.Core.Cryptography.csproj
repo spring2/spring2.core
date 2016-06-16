@@ -118,12 +118,6 @@
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
-    <Reference Include="System.Data">
-      <Name>System.Data</Name>
-    </Reference>
-    <Reference Include="System.Xml">
-      <Name>System.XML</Name>
-    </Reference>
     <ProjectReference Include="Spring2.Core.Configuration.csproj">
       <Name>Spring2.Core.Configuration</Name>
       <Project>{1A8B880B-0EB3-4841-ADA7-D0D3E9B1E71C}</Project>

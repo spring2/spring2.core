@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
-using Spring2.Core.Configuration;
 using Spring2.Core.Types;
 
 using Spring2.Core.Currency.BusinessLogic;

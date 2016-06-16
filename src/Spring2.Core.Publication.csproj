@@ -69,19 +69,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="NVelocity, Version=0.4.2.8580, Culture=neutral, PublicKeyToken=44382d1b57473eda">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\NVelocity.dll</HintPath>
-    </Reference>
     <Reference Include="Spring2.DataTierGenerator.Attribute, Version=1.0.0.0, Culture=neutral, PublicKeyToken=687bce93d7ce902c">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Spring2.DataTierGenerator.Attribute.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web.Services" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyVersionInfo.cs" />

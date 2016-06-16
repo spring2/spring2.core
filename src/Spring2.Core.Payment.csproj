@@ -118,10 +118,6 @@
     <Reference Include="eSELECTplus_dotNet_API">
       <HintPath>..\lib\net-4.0\eSELECTplus_dotNet_API.dll</HintPath>
     </Reference>
-    <Reference Include="Interop.PFPro">
-      <HintPath>..\lib\net-4.0\Interop.PFPro.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\lib\log4net.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -129,18 +125,8 @@
     <Reference Include="Payflow_dotNET">
       <HintPath>..\lib\net-4.0\Payflow_dotNET.dll</HintPath>
     </Reference>
-    <Reference Include="Spring2.DataTierGenerator.Attribute">
-      <HintPath>..\lib\net-4.0\Spring2.DataTierGenerator.Attribute.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
-    </Reference>
-    <Reference Include="System.Data">
-      <Name>System.Data</Name>
-    </Reference>
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web">
-      <Name>System.Web</Name>
     </Reference>
     <Reference Include="System.Web.Services">
       <Name>System.Web.Services</Name>
