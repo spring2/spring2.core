@@ -1,11 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Spring2.Core.IoC;
 using Spring2.Core.DAO;
 using NUnit.Framework;
-using System.Drawing;
-using System.ComponentModel;
 
 namespace Spring2.Core.Test.IoC {
 

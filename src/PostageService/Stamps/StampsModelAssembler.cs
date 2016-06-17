@@ -32,7 +32,6 @@ namespace Spring2.Core.PostageService.Stamps {
 		    City = src.ToCity,
 		    Country = src.ToCountry,
 		    ZIPCode = src.ToPostalCode,
-		    PostalCode = src.ToPostalCode,
 		    State = src.ToState,
 		    Company = src.ToCompany,
 		    FullName = src.ToName,
@@ -45,23 +44,28 @@ namespace Spring2.Core.PostageService.Stamps {
 		    City = src.FromCity,
 		    Country = src.FromCountry,
 		    ZIPCode = src.FromPostalCode,
-		    PostalCode = src.FromPostalCode,
 		    State = src.FromState,
 		    Company = src.FromCompany,
 		    FullName = src.FromName,
 		    PhoneNumber = src.FromPhone
 		}))
 		.ForMember(x => x.Customs, o => o.MapFrom(src => new SWSIMV52.CustomsV4() {
-		    ContentType = String.IsNullOrWhiteSpace(src.CustomsInfo.ContentsType) ?  SWSIMV52.ContentTypeV2.Other : AutoMapper.Mapper.Map<string, SWSIMV52.ContentTypeV2>(src.CustomsInfo.ContentsType),
+		    ContentType = String.IsNullOrWhiteSpace(src.CustomsInfo.ContentsType) ? SWSIMV52.ContentTypeV2.Other : AutoMapper.Mapper.Map<string, SWSIMV52.ContentTypeV2>(src.CustomsInfo.ContentsType),
 		    Comments = src.CustomsInfo.RestrictionComments,
 		    LicenseNumber = src.CustomsInfo.LicenseNumber,
 		    CertificateNumber = src.CustomsInfo.CertificateNumber,
 		    InvoiceNumber = src.CustomsInfo.InvoiceNumber,
 		    CustomsSigner = src.CustomsSigner
 		}))
-		.ForMember(x => x.ImageType, o => o.MapFrom(src => String.IsNullOrWhiteSpace(src.ImageFormat) ? SWSIMV52.ImageType.Auto : AutoMapper.Mapper.Map<string, SWSIMV52.ImageType>(src.ImageFormat)))
+		.ForMember(x => x.ImageType, o => o.UseValue(SWSIMV52.ImageType.Png))
 		.ForMember(x => x.rotationDegrees, o => o.MapFrom(src => String.IsNullOrWhiteSpace(src.ImageRotation) ? 0 : int.Parse(src.ImageRotation)))
-		.ForMember(x => x.nonDeliveryOption, o => o.MapFrom(src => String.IsNullOrWhiteSpace(src.NonDeliveryOption) ? SWSIMV52.NonDeliveryOption.Undefined : AutoMapper.Mapper.Map<string, SWSIMV52.NonDeliveryOption>(src.NonDeliveryOption)));
+		.ForMember(x => x.nonDeliveryOption, o => o.MapFrom(src => String.IsNullOrWhiteSpace(src.NonDeliveryOption) ? SWSIMV52.NonDeliveryOption.Undefined : AutoMapper.Mapper.Map<string, SWSIMV52.NonDeliveryOption>(src.NonDeliveryOption)))
+		.ForMember(x => x.TrackingNumber, o => o.UseValue(String.Empty))
+		.ForMember(x => x.ReturnImageData, o => o.UseValue(true))
+		.ForMember(x => x.PaperSize, o => o.UseValue(SWSIMV52.PaperSizeV1.LabelSize))
+		.ForMember(x => x.InternalTransactionNumber, o => o.MapFrom(src => src.ReferenceID))
+		.ForMember(x => x.EltronPrinterDPIType, o => o.UseValue(SWSIMV52.EltronPrinterDPIType.High))
+		.ForMember(x => x.ImageDpi, o => o.UseValue(SWSIMV52.ImageDpi.ImageDpi300));
 
 	    AutoMapper.Mapper.CreateMap<PostageLabelInputData, SWSIMV52.RateV19>()
 		.ForMember(x => x.FromZIPCode, o => o.MapFrom(src => src.FromPostalCode))
@@ -72,7 +76,8 @@ namespace Spring2.Core.PostageService.Stamps {
 		.ForMember(x => x.ShipDate, o => o.MapFrom(src => (src.ShipDate == null) ? DateTime.Parse("0001-01-01") : DateTime.Parse(src.ShipDate)))
 		.ForMember(x => x.RegisteredValue, o => o.MapFrom(src => src.RegisteredMailValue))
 		.ForMember(x => x.CODValue, o => o.MapFrom(src => src.CODAmount))
-		.ForMember(x => x.NonMachinable, o => o.MapFrom(src => String.IsNullOrWhiteSpace(src.Machinable) ? false : !Convert.ToBoolean(src.Machinable)));
+		.ForMember(x => x.NonMachinable, o => o.MapFrom(src => String.IsNullOrWhiteSpace(src.Machinable) ? false : !Convert.ToBoolean(src.Machinable)))
+		.ForMember(x => x.PrintLayout, o => o.UseValue("Normal"));
 	    
 	    AutoMapper.Mapper.CreateMap<SWSIMV52.CancelIndiciumResponse, RefundRequestData>();
 	    AutoMapper.Mapper.CreateMap<SWSIMV52.CreateIndiciumResponse, PostageLabelData>()
@@ -115,7 +120,7 @@ namespace Spring2.Core.PostageService.Stamps {
 
 	public SWSIMV52.CreateIndiciumRequest ToCreateIndiciumRequest(PostageLabelInputData data, SWSIMV52.Credentials credentials) {
 	    SWSIMV52.CreateIndiciumRequest request = AutoMapper.Mapper.Map<PostageLabelInputData, SWSIMV52.CreateIndiciumRequest>(data);
-	    request.IntegratorTxID = credentials.IntegrationID.ToString();
+	    request.IntegratorTxID = new Guid().ToString();
 	    request.Item = credentials;
 	    request.Rate.ServiceType = ToServiceType(data.MailClass);
 	    request.Rate.PackageType = ToPackageType(data.MailpieceShape);

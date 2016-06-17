@@ -58,7 +58,7 @@ namespace Spring2.Core.PostageService.Stamps {
 	public PostageLabelData GetPostageLabel(PostageLabelInputData data) {
 	    SWSIMV52.CreateIndiciumRequest request = assembler.ToCreateIndiciumRequest(data, credentials);
 	    SWSIMV52.CreateIndiciumResponse response = new SWSIMV52.CreateIndiciumResponse();
-	    client.CreateIndicium(request.Item, ref request.IntegratorTxID, ref request.TrackingNumber, ref request.Rate, request.From, request.To, 
+	    client.CreateIndicium(request.Item, ref request.IntegratorTxID, ref response.TrackingNumber, ref request.Rate, request.From, request.To, 
 				    request.CustomerID, request.Customs, request.SampleOnly, request.PostageMode, request.ImageType, request.EltronPrinterDPIType, 
 				    request.memo, request.cost_code_id, request.deliveryNotification, request.ShipmentNotification, request.rotationDegrees,
 				    request.horizontalOffset, request.verticalOffset, request.printDensity, request.printMemo, request.printInstructions,

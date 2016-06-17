@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +33,7 @@ namespace Spring2.Core.PostageService.Enums {
 	public static readonly MailpieceShapeEnum REGIONALRATEBOXA = new MailpieceShapeEnum("RegionalRateBoxA", "Regional Rate Box A");
 	public static readonly MailpieceShapeEnum REGIONALRATEBOXB = new MailpieceShapeEnum("RegionalRateBoxB", "Regional Rate Box B");
 	public static readonly MailpieceShapeEnum REGIONALRATEBOXC = new MailpieceShapeEnum("RegionalRateBoxC", "Regional Rate Box C");
+	public static readonly MailpieceShapeEnum THICKENVELOPE = new MailpieceShapeEnum("ThickEnvelope", "Thick Envelope");
 
 
 	public static MailpieceShapeEnum GetInstance(Object value) {

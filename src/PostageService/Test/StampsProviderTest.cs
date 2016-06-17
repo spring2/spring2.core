@@ -151,9 +151,9 @@ namespace Spring2.Core.PostageService.Test {
 	    IPostageServiceProvider postage = new StampsProvider();
 
 	    PostageLabelInputData input = new PostageLabelInputData() {
-		MailClass = MailClassEnum.PRIORITYEXPRESS,
-		WeightOz = 50,
-		MailpieceShape = MailpieceShapeEnum.LETTER,
+		MailClass = MailClassEnum.FIRST,
+		WeightOz = 5,		
+		MailpieceShape = MailpieceShapeEnum.THICKENVELOPE,
 		FromCompany = "Spring2",
 		ReturnAddress1 = "10150 S. Centennial Parkway",
 		ReturnAddress2 = "Suite 210",
@@ -168,13 +168,15 @@ namespace Spring2.Core.PostageService.Test {
 		ToState = "UT",
 		ToPostalCode = "84070",
 		ShipDate = DateTime.Now.ToString("MM/dd/yyyy"),
-		ShipTime = DateTime.Now.ToString("hh:mm tt")
+		ShipTime = DateTime.Now.ToString("hh:mm tt"),
+		ReferenceID = "123456"
 	    };
 
 	    PostageLabelData data = postage.GetPostageLabel(input);
 	    Assert.IsNotNull(data);
 	    Console.WriteLine(data.ErrorMessage);
 	    Assert.IsTrue(string.IsNullOrEmpty(data.ErrorMessage));
+	    Assert.IsTrue(!string.IsNullOrEmpty(data.Base64LabelImage));
 	}
 
 	[Test]
