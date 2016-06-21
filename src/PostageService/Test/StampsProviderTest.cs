@@ -169,7 +169,7 @@ namespace Spring2.Core.PostageService.Test {
 		ToPostalCode = "84070",
 		ShipDate = DateTime.Now.ToString("MM/dd/yyyy"),
 		ShipTime = DateTime.Now.ToString("hh:mm tt"),
-		ReferenceID = "123456"
+		ReferenceID = "123457"
 	    };
 
 	    PostageLabelData data = postage.GetPostageLabel(input);

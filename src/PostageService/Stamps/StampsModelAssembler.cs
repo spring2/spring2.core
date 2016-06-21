@@ -120,7 +120,7 @@ namespace Spring2.Core.PostageService.Stamps {
 
 	public SWSIMV52.CreateIndiciumRequest ToCreateIndiciumRequest(PostageLabelInputData data, SWSIMV52.Credentials credentials) {
 	    SWSIMV52.CreateIndiciumRequest request = AutoMapper.Mapper.Map<PostageLabelInputData, SWSIMV52.CreateIndiciumRequest>(data);
-	    request.IntegratorTxID = new Guid().ToString();
+	    request.IntegratorTxID = Guid.NewGuid().ToString();
 	    request.Item = credentials;
 	    request.Rate.ServiceType = ToServiceType(data.MailClass);
 	    request.Rate.PackageType = ToPackageType(data.MailpieceShape);
