@@ -9,47 +9,6 @@
             Class for handling monitoring performance of a specific performance counter
             </summary>
         </member>
-        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.GetInstance(System.Int32)">
-            <summary>
-            Returns an instance based on the generated id.
-            </summary>
-            <param name="performanceCounterDefinitionId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.Create(System.Nullable{System.Int32},Spring2.Core.PerformanceMonitor.Types.PerformanceCounterCalculationTypeEnum,System.String,System.String,System.String)">
-            <summary>
-            Creates a new definition for getting snapshots of a counter.
-            </summary>
-            <param name="performanceMachineDefinitionId"></param>
-            <param name="calculationType"></param>
-            <param name="categoryName"></param>
-            <param name="counterName"></param>
-            <param name="instanceName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.Create(System.Nullable{System.Int32},Spring2.Core.PerformanceMonitor.Types.PerformanceCounterCalculationTypeEnum,System.String,System.String,System.String,System.String)">
-            <summary>
-            Creates a new definition for getting snapshots of a counter.
-            </summary>
-            <param name="performanceMachineDefinitionId"></param>
-            <param name="calculationType"></param>
-            <param name="categoryName"></param>
-            <param name="counterName"></param>
-            <param name="instanceName"></param>
-            <param name="instanceMatchName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.Validate">
-            <summary>
-            Validates the object is correct before persistance.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.Reload">
-            <summary>
-            Reloads the object from the database.
-            </summary>
-        </member>
         <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.PerformanceCounterDefinitionId">
             <summary>
             Generated Id
@@ -96,36 +55,50 @@
             Indicates if we are monitoring a snapshot of the counter or an average over the interval.
             </summary>
         </member>
-        <member name="T:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceData">
-            <summary>
-            Class for a sample when monitoring performance
-            </summary>
-        </member>
-        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceData.GetInstance(System.Int32)">
+        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.GetInstance(System.Int32)">
             <summary>
             Returns an instance based on the generated id.
             </summary>
-            <param name="performanceDataId"></param>
+            <param name="performanceCounterDefinitionId"></param>
             <returns></returns>
         </member>
-        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceData.Create(Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition,Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition,System.Single)">
+        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.Create(System.Nullable{System.Int32},Spring2.Core.PerformanceMonitor.Types.PerformanceCounterCalculationTypeEnum,System.String,System.String,System.String)">
             <summary>
             Creates a new definition for getting snapshots of a counter.
             </summary>
-            <param name="machine"></param>
-            <param name="counter"></param>
-            <param name="sampleValue"></param>
+            <param name="performanceMachineDefinitionId"></param>
+            <param name="calculationType"></param>
+            <param name="categoryName"></param>
+            <param name="counterName"></param>
+            <param name="instanceName"></param>
             <returns></returns>
         </member>
-        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceData.Validate">
+        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.Create(System.Nullable{System.Int32},Spring2.Core.PerformanceMonitor.Types.PerformanceCounterCalculationTypeEnum,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new definition for getting snapshots of a counter.
+            </summary>
+            <param name="performanceMachineDefinitionId"></param>
+            <param name="calculationType"></param>
+            <param name="categoryName"></param>
+            <param name="counterName"></param>
+            <param name="instanceName"></param>
+            <param name="instanceMatchName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.Validate">
             <summary>
             Validates the object is correct before persistance.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceData.Reload">
+        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition.Reload">
             <summary>
             Reloads the object from the database.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceData">
+            <summary>
+            Class for a sample when monitoring performance
             </summary>
         </member>
         <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceData.PerformanceDataId">
@@ -178,9 +151,66 @@
             Value for the sample.
             </summary>
         </member>
+        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceData.GetInstance(System.Int32)">
+            <summary>
+            Returns an instance based on the generated id.
+            </summary>
+            <param name="performanceDataId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceData.Create(Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition,Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceCounterDefinition,System.Single)">
+            <summary>
+            Creates a new definition for getting snapshots of a counter.
+            </summary>
+            <param name="machine"></param>
+            <param name="counter"></param>
+            <param name="sampleValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceData.Validate">
+            <summary>
+            Validates the object is correct before persistance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceData.Reload">
+            <summary>
+            Reloads the object from the database.
+            </summary>
+        </member>
         <member name="T:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition">
             <summary>
             Class for handling monitoring performance for a machine
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.CurrentMachineName">
+            <summary>
+            Returns the machine name of the machine we are running on.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.StopNow">
+            <summary>
+            Setting this to true will cause monitor to stop.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.PerformanceMachineDefinitionId">
+            <summary>
+            Generated Id
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.MachineName">
+            <summary>
+            Id of machine to be monitored.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.IntervalInSeconds">
+            <summary>
+            Number of seconds between measurements and persistence of the counter.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.NumberOfSamples">
+            <summary>
+            Only used if CalculationType is average.  Number of samples to take during the interval for the average.
             </summary>
         </member>
         <member name="M:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.GetInstance(System.Int32)">
@@ -220,36 +250,6 @@
             Monitors defined couters for indicated number of interations
             </summary>
             <param name="numberOfIterations">Number of iterations to go. If less than 1 then go forever.</param>
-        </member>
-        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.CurrentMachineName">
-            <summary>
-            Returns the machine name of the machine we are running on.
-            </summary>
-        </member>
-        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.StopNow">
-            <summary>
-            Setting this to true will cause monitor to stop.
-            </summary>
-        </member>
-        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.PerformanceMachineDefinitionId">
-            <summary>
-            Generated Id
-            </summary>
-        </member>
-        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.MachineName">
-            <summary>
-            Id of machine to be monitored.
-            </summary>
-        </member>
-        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.IntervalInSeconds">
-            <summary>
-            Number of seconds between measurements and persistence of the counter.
-            </summary>
-        </member>
-        <member name="P:Spring2.Core.PerformanceMonitor.BusinessLogic.PerformanceMachineDefinition.NumberOfSamples">
-            <summary>
-            Only used if CalculationType is average.  Number of samples to take during the interval for the average.
-            </summary>
         </member>
         <member name="M:Spring2.Core.PerformanceMonitor.DAO.PerformanceCounterDefinitionDAO.#cctor">
             <summary>

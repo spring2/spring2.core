@@ -63,7 +63,6 @@ namespace Spring2.Core.PostageService.Stamps {
 		.ForMember(x => x.TrackingNumber, o => o.UseValue(String.Empty))
 		.ForMember(x => x.ReturnImageData, o => o.UseValue(true))
 		.ForMember(x => x.PaperSize, o => o.UseValue(SWSIMV52.PaperSizeV1.LabelSize))
-		.ForMember(x => x.InternalTransactionNumber, o => o.MapFrom(src => src.ReferenceID))
 		.ForMember(x => x.EltronPrinterDPIType, o => o.UseValue(SWSIMV52.EltronPrinterDPIType.High))
 		.ForMember(x => x.ImageDpi, o => o.UseValue(SWSIMV52.ImageDpi.ImageDpi300));
 
@@ -86,8 +85,16 @@ namespace Spring2.Core.PostageService.Stamps {
 		.ForMember(x => x.PostagePrice, o => o.MapFrom(src => new PostageRatePrice() {
 		    TotalAmount = src.Rate.Amount,
 		    MailClass = src.Rate.ServiceType.ToString()
+		}))
+		.ForMember(x => x.ReferenceID, o => o.MapFrom(src => src.StampsTxID.ToString()));
+	    AutoMapper.Mapper.CreateMap<SWSIMV52.PurchasePostageResponse, PurchasedPostageData>()
+		.ForMember(x => x.ErrorMessage, o => o.MapFrom(src => src.RejectionReason))
+		.ForMember(x => x.RequestID, o => o.MapFrom(src => src.TransactionID.ToString()))
+		.ForMember(x => x.Status, o => o.MapFrom(src => (int)src.PurchaseStatus))
+		.ForMember(x => x.CertifiedIntermediary, o => o.MapFrom(src => new AccountInfo() {
+		    PostageBalance = src.PostageBalance.AvailablePostage,
+		    AscendingBalance = src.PostageBalance.ControlTotal
 		}));
-	    AutoMapper.Mapper.CreateMap<SWSIMV52.PurchasePostageResponse, PurchasedPostageData>();
 	    AutoMapper.Mapper.CreateMap<SWSIMV52.ChangePasswordResponse, PasswordChangedData>();
 
 	    // Enums
@@ -120,10 +127,10 @@ namespace Spring2.Core.PostageService.Stamps {
 
 	public SWSIMV52.CreateIndiciumRequest ToCreateIndiciumRequest(PostageLabelInputData data, SWSIMV52.Credentials credentials) {
 	    SWSIMV52.CreateIndiciumRequest request = AutoMapper.Mapper.Map<PostageLabelInputData, SWSIMV52.CreateIndiciumRequest>(data);
-	    request.IntegratorTxID = Guid.NewGuid().ToString();
 	    request.Item = credentials;
 	    request.Rate.ServiceType = ToServiceType(data.MailClass);
 	    request.Rate.PackageType = ToPackageType(data.MailpieceShape);
+	    request.IntegratorTxID = Guid.NewGuid().ToString();
 	    return request;
 	}
 

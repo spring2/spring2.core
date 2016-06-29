@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Spring2.Core.AddressValidation;
 using Spring2.Core.Types;
 using System.Xml.Serialization;
 using System.IO;

@@ -1,5 +1,7 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core", "Spring2.Core.csproj", "{80B94045-4DE6-4BB0-BE22-C5CC0E772695}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.WebControl", "Spring2.Core.WebControl.csproj", "{848F75F0-EEBA-4C76-BF81-A41CF6B5EF98}"
@@ -103,6 +105,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.PostageService", "Spring2.Core.PostageService.csproj", "{5F9F1076-DB81-47DC-B520-D375CC31F87A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.PostageService.Test", "Spring2.Core.PostageService.Test.csproj", "{B2247326-7279-415A-B624-6F054A50B420}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring2.Core.PostageService.StampsDemo", "SWS_Test\Spring2.Core.PostageService.StampsDemo.csproj", "{4C64A30C-7926-4C9C-B876-0F4F90AE88EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -569,6 +573,18 @@ Global
 		{B2247326-7279-415A-B624-6F054A50B420}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2247326-7279-415A-B624-6F054A50B420}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B2247326-7279-415A-B624-6F054A50B420}.Release|x86.ActiveCfg = Release|Any CPU
+		{4C64A30C-7926-4C9C-B876-0F4F90AE88EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C64A30C-7926-4C9C-B876-0F4F90AE88EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C64A30C-7926-4C9C-B876-0F4F90AE88EA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4C64A30C-7926-4C9C-B876-0F4F90AE88EA}.Debug|x86.Build.0 = Debug|Any CPU
+		{4C64A30C-7926-4C9C-B876-0F4F90AE88EA}.NET_4_0|Any CPU.ActiveCfg = Release|Any CPU
+		{4C64A30C-7926-4C9C-B876-0F4F90AE88EA}.NET_4_0|Any CPU.Build.0 = Release|Any CPU
+		{4C64A30C-7926-4C9C-B876-0F4F90AE88EA}.NET_4_0|x86.ActiveCfg = Release|Any CPU
+		{4C64A30C-7926-4C9C-B876-0F4F90AE88EA}.NET_4_0|x86.Build.0 = Release|Any CPU
+		{4C64A30C-7926-4C9C-B876-0F4F90AE88EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C64A30C-7926-4C9C-B876-0F4F90AE88EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C64A30C-7926-4C9C-B876-0F4F90AE88EA}.Release|x86.ActiveCfg = Release|Any CPU
+		{4C64A30C-7926-4C9C-B876-0F4F90AE88EA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

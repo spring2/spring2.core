@@ -143,6 +143,7 @@
     <Compile Include="AddressValidation\Test\AddressValidationManagerTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AddressValidation\Test\StampsAddressValidationTest.cs" />
     <Compile Include="AddressValidation\Test\UPSAddressValidationTest.cs">
       <SubType>Code</SubType>
     </Compile>

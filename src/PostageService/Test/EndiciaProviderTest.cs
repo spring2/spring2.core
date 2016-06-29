@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
@@ -36,7 +36,7 @@ namespace Spring2.Core.PostageService.Test {
 	    IPostageServiceProvider postage = new EndiciaProvider();
 
 	    PostageRateInputData input = new PostageRateInputData() {
-		MailClass = MailClassEnum.EXPRESS,
+		MailClass = MailClassEnum.PRIORITYEXPRESS,
 		MailpieceShape = MailpieceShapeEnum.PARCEL,
 		WeightOz = 16,
 		MailpieceDimensions = new PackageDimensions { Height = 10, Width = 5, Length = 15 },
@@ -153,7 +153,7 @@ namespace Spring2.Core.PostageService.Test {
 
 	    PostageLabelInputData input = new PostageLabelInputData() {
 		Test = "Yes",
-		MailClass = MailClassEnum.EXPRESS,
+		MailClass = MailClassEnum.PRIORITYEXPRESS,
 		WeightOz = 50,
 		MailpieceShape = MailpieceShapeEnum.PARCEL,
 		ReferenceID = "abc", // This should be the orderId

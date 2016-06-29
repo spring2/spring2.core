@@ -22,6 +22,36 @@ namespace Spring2.Core.PostageService.Stamps {
 	bool passwordExpired;
 	bool codewordsSet;
 
+	public DateTime LastLoginTime {
+	    get {
+		return lastLoginTime;
+	    }
+	}
+
+	public bool ClearCredential {
+	    get {
+		return clearCredential;
+	    }
+	}
+
+	public string LoginBannerText {
+	    get {
+		return loginBannerText;
+	    }
+	}
+
+	public bool PasswordExpired {
+	    get {
+		return passwordExpired;
+	    }
+	}
+
+	public bool CodewordsSet {
+	    get {
+		return codewordsSet;
+	    }
+	}
+
 	public StampsProvider() {
 	    SetCredentials();
 	    InitializeSWSClient();
@@ -36,6 +66,23 @@ namespace Spring2.Core.PostageService.Stamps {
 	    AuthenticateUser();
 	    SetAccountInfo();
 	    assembler = new StampsModelAssembler();
+	}
+
+	public SWSIMV52.GetAccountInfoResponse GetAccountInfo() {
+	    SWSIMV52.GetAccountInfoResponse response = new SWSIMV52.GetAccountInfoResponse();
+	    client.GetAccountInfo(credentials, out response.AccountInfo, out response.Address, out response.CustomerEmail);
+	    accountInfo = response.AccountInfo;
+	    address = response.Address;
+	    email = response.CustomerEmail;
+	    return response;
+	}
+
+	public SWSIMV52.CleanseAddressResponse CleanseAddress(SWSIMV52.Address address, string fromZipCode) {
+	    SWSIMV52.CleanseAddressRequest request = new SWSIMV52.CleanseAddressRequest(credentials, address, fromZipCode);
+	    SWSIMV52.CleanseAddressResponse response = new SWSIMV52.CleanseAddressResponse();
+	    client.CleanseAddress(credentials, ref request.Address, request.FromZIPCode, out response.AddressMatch, out response.CityStateZipOK, out response.ResidentialDeliveryIndicator,
+				    out response.IsPOBox, out response.CandidateAddresses, out response.StatusCodes, out response.Rates);
+	    return response;
 	}
 	public RefundRequestData RefundRequest(String trackingNumber, bool isInternational) {
 	    SWSIMV52.CancelIndiciumRequest request = new SWSIMV52.CancelIndiciumRequest(credentials, trackingNumber);
@@ -73,6 +120,17 @@ namespace Spring2.Core.PostageService.Stamps {
 	    SWSIMV52.ChangePasswordRequest request = assembler.ToChangePasswordRequest(data, credentials);
 	    SWSIMV52.ChangePasswordResponse response = new SWSIMV52.ChangePasswordResponse(client.ChangePassword(request.Item, request.OldPassword, request.NewPassword));
 	    return AutoMapper.Mapper.Map<SWSIMV52.ChangePasswordResponse, PasswordChangedData>(response);
+	}
+
+	public SWSIMV52.CreateScanFormResponse GetScanForm(string[] integratorTxIDs, SWSIMV52.Address address) {
+	    Guid[] integratorTxIDGuids = new Guid[integratorTxIDs.Length];
+	    for (int i = 0; i < integratorTxIDs.Length; i++) {
+		integratorTxIDGuids[i] = new Guid(integratorTxIDs[i]);
+	    }
+	    SWSIMV52.CreateScanFormRequest request = new SWSIMV52.CreateScanFormRequest(credentials, integratorTxIDGuids, address, SWSIMV52.ImageType.Pdf, true, SWSIMV52.Carrier.Usps, null);
+	    SWSIMV52.CreateScanFormResponse response = new SWSIMV52.CreateScanFormResponse();
+	    client.CreateScanForm(request.Item, request.StampsTxIDs, request.FromAddress, request.ImageType, request.PrintInstructions, request.Carrier, request.ShipDate, out response.ScanFormId, out response.Url);
+	    return response;
 	}
 
 	public PurchasedPostageData BuyPostage(PostagePurchaseInputData data) {
