@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Spring2.Core.PostageService.Stamps;
 using Spring2.Core.PostageService.Enums;
+using System.Threading;
 
 namespace Spring2.Core.PostageService.StampsDemo {
 
@@ -12,7 +13,7 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	private StampsProvider provider;
 	private string trackingNumber;
 	private List<string> integrationTxIDs;
-	private int purchasePostageTransactionId;
+	private SWSIMV52.PurchasePostageResponse purchasePostageResponse;
 
         public Form1() {
             InitializeComponent();
@@ -115,7 +116,7 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	}
 
 	private void button9_Click(Object sender, EventArgs e) {
-	    GetShippingLabel(false, false);
+	    GetShippingLabel(false, true);
 	}
 
 	private void GetShippingLabel(bool insured, bool sample = false) {
@@ -212,7 +213,12 @@ namespace Spring2.Core.PostageService.StampsDemo {
 		};
 		provider.GetAccountInfo();
 		PurchasedPostageData responseData = provider.BuyPostage(input);
-		purchasePostageTransactionId = Int32.Parse(responseData.RequestID);
+		purchasePostageResponse = new SWSIMV52.PurchasePostageResponse(null, (SWSIMV52.PurchaseStatus)Enum.Parse(typeof(SWSIMV52.PurchaseStatus), responseData.Status, true),
+										Int32.Parse(responseData.RequestID), new SWSIMV52.PostageBalance() {
+										    AvailablePostage = (int)responseData.CertifiedIntermediary.PostageBalance,
+										    ControlTotal = responseData.CertifiedIntermediary.AscendingBalance
+										}, responseData.ErrorMessage, false) {
+		};
 		tbxOut.Text += $"status: { responseData.Status }" + Environment.NewLine;
 		tbxOut.Text += $"rejectionReason: {responseData.ErrorMessage}" + Environment.NewLine;
 		tbxOut.Text += $"transactionId: {responseData.RequestID}" + Environment.NewLine;
@@ -222,7 +228,6 @@ namespace Spring2.Core.PostageService.StampsDemo {
 		tbxOut.Text += @"Error: " + exception.Message.ToString() + Environment.NewLine;
 	    }
 	}
-
 	private void button5_Click(Object sender, EventArgs e) {
 	    tbxOut.Clear();
 	    try {
@@ -264,22 +269,39 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	private void button8_Click(Object sender, EventArgs e) {
 	    tbxOut.Clear();
 	    try {
-		SWSIMV52.GetPurchaseStatusResponse response = provider.GetPurchaseStatus(purchasePostageTransactionId);
-		int retryTime = 1000;
-		int attempts = 1;
-		while ((response.PurchaseStatus == SWSIMV52.PurchaseStatus.Pending || response.PurchaseStatus == SWSIMV52.PurchaseStatus.Processing) && retryTime < 15000) {
-		    response = provider.GetPurchaseStatus(purchasePostageTransactionId);
-		    retryTime = retryTime * (int)Math.Pow(2, (double)attempts);
-		    attempts++;
+		if (purchasePostageResponse == null) {
+		    tbxOut.Text += $"You must first attempt to purchase postage" + Environment.NewLine;
+		} else {
+		    if (purchasePostageResponse.PurchaseStatus == SWSIMV52.PurchaseStatus.Pending || purchasePostageResponse.PurchaseStatus == SWSIMV52.PurchaseStatus.Processing) {
+			getPostageStatus();
+		    }
+		    tbxOut.Text += $"Postage purchase status: {purchasePostageResponse.PurchaseStatus}" + Environment.NewLine;
+		    tbxOut.Text += $"rejectionReason: { purchasePostageResponse.RejectionReason}" + Environment.NewLine;
+		    tbxOut.Text += $"Available Postage: {purchasePostageResponse.PostageBalance.AvailablePostage}" + Environment.NewLine;
 		}
-		if (response.PurchaseStatus == SWSIMV52.PurchaseStatus.Pending || response.PurchaseStatus == SWSIMV52.PurchaseStatus.Processing) {
-		    tbxOut.Text += $"Timed out after 15 seconds of attempts" + Environment.NewLine + Environment.NewLine;
-		}
-		tbxOut.Text += $"Postage purchase status: {response.PurchaseStatus}" + Environment.NewLine;
-		tbxOut.Text += $"rejectionReason: { response.RejectionReason}" + Environment.NewLine;
-		tbxOut.Text += $"Available Postage: {response.PostageBalance}" + Environment.NewLine;
 	    } catch (Exception exception) {
 		tbxOut.Text += @"Error: " + exception.Message.ToString() + Environment.NewLine;
+	    }
+	}
+
+	private void getPostageStatus() {
+	    SWSIMV52.GetPurchaseStatusResponse response = provider.GetPurchaseStatus(purchasePostageResponse.TransactionID);
+	    int retryTime = 1000;
+	    int attempts = 1;
+	    int totalRetryTime = 0;
+	    while ((response.PurchaseStatus == SWSIMV52.PurchaseStatus.Pending || response.PurchaseStatus == SWSIMV52.PurchaseStatus.Processing) && retryTime < 15000) {
+		Thread.Sleep(retryTime);
+		totalRetryTime += retryTime;
+		response = provider.GetPurchaseStatus(purchasePostageResponse.TransactionID);
+		retryTime = retryTime * (int)Math.Pow(2, (double)attempts);
+		attempts++;
+	    }
+	    purchasePostageResponse.PurchaseStatus = response.PurchaseStatus;
+	    purchasePostageResponse.PostageBalance = response.PostageBalance;
+	    purchasePostageResponse.RejectionReason = response.RejectionReason;
+	    if (purchasePostageResponse.PurchaseStatus == SWSIMV52.PurchaseStatus.Pending || purchasePostageResponse.PurchaseStatus == SWSIMV52.PurchaseStatus.Processing) {
+		tbxOut.Text += $"Status still {purchasePostageResponse.PurchaseStatus.ToString()} after {totalRetryTime / 1000} seconds and {attempts} get status attempts" + Environment.NewLine;
+		tbxOut.Text += $"It is unusual for get status to take this long, please try again" + Environment.NewLine + Environment.NewLine;
 	    }
 	}
 
