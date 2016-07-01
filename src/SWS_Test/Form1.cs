@@ -12,6 +12,7 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	private StampsProvider provider;
 	private string trackingNumber;
 	private List<string> integrationTxIDs;
+	private int purchasePostageTransactionId;
 
         public Form1() {
             InitializeComponent();
@@ -22,9 +23,10 @@ namespace Spring2.Core.PostageService.StampsDemo {
         private void button1_Click(object sender, EventArgs e) {
             tbxOut.Clear();
             try {
-		provider.AuthenticateUser();
                 try {
-                    tbxOut.Text += @"Authenticator:" + Environment.NewLine + provider.LastLoginTime 
+		    provider.AuthenticateUser();
+                    tbxOut.Text += @"Authenticator:" + Environment.NewLine + provider.Authenticator
+			+ Environment.NewLine + provider.LastLoginTime 
 			+ Environment.NewLine + provider.ClearCredential
 			+ Environment.NewLine + provider.LoginBannerText
 			+ Environment.NewLine + provider.LoginBannerText
@@ -44,19 +46,14 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	    try {
 		SWSIMV52.GetAccountInfoResponse accountInfo = provider.GetAccountInfo();
 		tbxOut.Text += "Account Info" + Environment.NewLine;
-		foreach (var property in accountInfo.AccountInfo.GetType().GetProperties()) {
-		    var name = property.Name.ToString();
-		    var value = property.GetValue(accountInfo.AccountInfo, null);
-		    tbxOut.Text += name + ": " + value + Environment.NewLine;
-		}
+		tbxOut.Text += $"Postage Balance: {accountInfo.AccountInfo.PostageBalance.AvailablePostage}" + Environment.NewLine;
+		tbxOut.Text += $"Control Total: {accountInfo.AccountInfo.PostageBalance.ControlTotal}" + Environment.NewLine;
 		tbxOut.Text += Environment.NewLine + "Address" + Environment.NewLine;
 		foreach (var property in accountInfo.Address.GetType().GetProperties()) {
 		    var name = property.Name.ToString();
 		    var value = property.GetValue(accountInfo.Address, null);
 		    tbxOut.Text += name + ": " + value + Environment.NewLine;
-		}
-
-		tbxOut.Text += $"Available Postage: {accountInfo.AccountInfo.PostageBalance.AvailablePostage}" + Environment.NewLine;
+		}		
 		tbxOut.Text += Environment.NewLine + @"Email: " + accountInfo.CustomerEmail + Environment.NewLine;
 	    } catch (Exception exception) {
 		tbxOut.Text += @"Error: " + exception.Message.ToString() + Environment.NewLine;
@@ -110,7 +107,22 @@ namespace Spring2.Core.PostageService.StampsDemo {
         }
 
 	private void button2_Click(Object sender, EventArgs e) {
-	    tbxOut.Clear();
+	    GetShippingLabel(false);
+	}
+
+	private void button7_Click(Object sender, EventArgs e) {
+	    GetShippingLabel(true);
+	}
+
+	private void button9_Click(Object sender, EventArgs e) {
+	    GetShippingLabel(false, false);
+	}
+
+	private void GetShippingLabel(bool insured, bool sample = false) {
+	    tbxOut.Text = "";
+	    if (pictureBox1.Image != null) {
+		pictureBox1.Image = null;
+	    }
 	    try {
 		PostageLabelInputData input = new PostageLabelInputData() {
 		    MailClass = MailClassEnum.FIRST,
@@ -130,7 +142,12 @@ namespace Spring2.Core.PostageService.StampsDemo {
 		    ToState = "UT",
 		    ToPostalCode = "84070",
 		    ShipDate = DateTime.Now.ToString("MM/dd/yyyy"),
-		    ShipTime = DateTime.Now.ToString("hh:mm tt")
+		    ShipTime = DateTime.Now.ToString("hh:mm tt"),
+		    Value = 10,
+		    Services = insured ? new Services() {
+			InsuredMail = InsuredMailEnum.STAMPS.ToString()
+		    } : null,
+		    Test = sample
 		};
 
 		PostageLabelData response = provider.GetPostageLabel(input);
@@ -152,20 +169,26 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	    tbxOut.Clear();
 
 	    try {
-		PostageRateInputData input = new PostageRateInputData() {
-		    MailClass = MailClassEnum.FIRST,
-		    MailpieceShape = MailpieceShapeEnum.THICKENVELOPE,
-		    FromPostalCode = "84070",
-		    ToPostalCode = "84095",
-		    ShipDate = DateTime.Today.ToString()
+		SWSIMV52.RateV19 input = new SWSIMV52.RateV19() {
+		    FromZIPCode = "84070",
+		    ToZIPCode = "84095",
+		    ShipDate = DateTime.Today,
+		    ServiceType = SWSIMV52.ServiceType.USFC,
+		    DeclaredValue = 10
 		};
-		PostageRatesData responseData = provider.GetPostageRates(input);
+		SWSIMV52.RateV19[] response = provider.GetPostageRates(input);
 
 
-		tbxOut.Text += $"Rates: {responseData.PostagePrice.Count}" + Environment.NewLine;
-		foreach (var r in responseData.PostagePrice) {
-		    tbxOut.Text += $"rate amount: {r.TotalAmount}" + Environment.NewLine;
-		    tbxOut.Text += $"rate service type: {r.MailClass}" + Environment.NewLine;
+		tbxOut.Text += $"Rates: {response.Length}";
+		foreach (var r in response) {
+		    tbxOut.Text += $"rate amount: {r.Amount}" + Environment.NewLine;
+		    tbxOut.Text += $"rate service type: {r.ServiceType}" + Environment.NewLine;
+		    tbxOut.Text += $"rate package type: {r.PackageType}" + Environment.NewLine;
+		    tbxOut.Text += $"rate zone: {r.Zone}" + Environment.NewLine;
+		    tbxOut.Text += $"rate max amount: {r.MaxAmount}" + Environment.NewLine;
+		    tbxOut.Text += $"rate delivery days: {r.DeliverDays}" + Environment.NewLine;
+		    tbxOut.Text += $"rate delivery date: {r.DeliveryDate}" + Environment.NewLine;
+		    tbxOut.Text += Environment.NewLine + Environment.NewLine;
 		}
 	    } catch (Exception exception) {
 		tbxOut.Text += @"Error: " + exception.Message.ToString() + Environment.NewLine;
@@ -189,7 +212,8 @@ namespace Spring2.Core.PostageService.StampsDemo {
 		};
 		provider.GetAccountInfo();
 		PurchasedPostageData responseData = provider.BuyPostage(input);
-		
+		purchasePostageTransactionId = Int32.Parse(responseData.RequestID);
+		tbxOut.Text += $"status: { responseData.Status }" + Environment.NewLine;
 		tbxOut.Text += $"rejectionReason: {responseData.ErrorMessage}" + Environment.NewLine;
 		tbxOut.Text += $"transactionId: {responseData.RequestID}" + Environment.NewLine;
 		tbxOut.Text += $"Available Postage: {responseData.CertifiedIntermediary.PostageBalance}" + Environment.NewLine;
@@ -237,7 +261,37 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	    }
 	}
 
+	private void button8_Click(Object sender, EventArgs e) {
+	    tbxOut.Clear();
+	    try {
+		SWSIMV52.GetPurchaseStatusResponse response = provider.GetPurchaseStatus(purchasePostageTransactionId);
+		int retryTime = 1000;
+		int attempts = 1;
+		while ((response.PurchaseStatus == SWSIMV52.PurchaseStatus.Pending || response.PurchaseStatus == SWSIMV52.PurchaseStatus.Processing) && retryTime < 15000) {
+		    response = provider.GetPurchaseStatus(purchasePostageTransactionId);
+		    retryTime = retryTime * (int)Math.Pow(2, (double)attempts);
+		    attempts++;
+		}
+		if (response.PurchaseStatus == SWSIMV52.PurchaseStatus.Pending || response.PurchaseStatus == SWSIMV52.PurchaseStatus.Processing) {
+		    tbxOut.Text += $"Timed out after 15 seconds of attempts" + Environment.NewLine + Environment.NewLine;
+		}
+		tbxOut.Text += $"Postage purchase status: {response.PurchaseStatus}" + Environment.NewLine;
+		tbxOut.Text += $"rejectionReason: { response.RejectionReason}" + Environment.NewLine;
+		tbxOut.Text += $"Available Postage: {response.PostageBalance}" + Environment.NewLine;
+	    } catch (Exception exception) {
+		tbxOut.Text += @"Error: " + exception.Message.ToString() + Environment.NewLine;
+	    }
+	}
+
 	private void txbPassword_TextChanged(Object sender, EventArgs e) {
+
+	}
+
+	private void lblUsername_Click(Object sender, EventArgs e) {
+
+	}
+
+	private void lblPassword_Click(Object sender, EventArgs e) {
 
 	}
     }

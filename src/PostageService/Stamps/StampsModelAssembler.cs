@@ -64,7 +64,8 @@ namespace Spring2.Core.PostageService.Stamps {
 		.ForMember(x => x.ReturnImageData, o => o.UseValue(true))
 		.ForMember(x => x.PaperSize, o => o.UseValue(SWSIMV52.PaperSizeV1.LabelSize))
 		.ForMember(x => x.EltronPrinterDPIType, o => o.UseValue(SWSIMV52.EltronPrinterDPIType.High))
-		.ForMember(x => x.ImageDpi, o => o.UseValue(SWSIMV52.ImageDpi.ImageDpi300));
+		.ForMember(x => x.ImageDpi, o => o.UseValue(SWSIMV52.ImageDpi.ImageDpi300))
+		.ForMember(x => x.SampleOnly, o => o.MapFrom(src => src.Test));
 
 	    AutoMapper.Mapper.CreateMap<PostageLabelInputData, SWSIMV52.RateV19>()
 		.ForMember(x => x.FromZIPCode, o => o.MapFrom(src => src.FromPostalCode))
@@ -76,7 +77,9 @@ namespace Spring2.Core.PostageService.Stamps {
 		.ForMember(x => x.RegisteredValue, o => o.MapFrom(src => src.RegisteredMailValue))
 		.ForMember(x => x.CODValue, o => o.MapFrom(src => src.CODAmount))
 		.ForMember(x => x.NonMachinable, o => o.MapFrom(src => String.IsNullOrWhiteSpace(src.Machinable) ? false : !Convert.ToBoolean(src.Machinable)))
-		.ForMember(x => x.PrintLayout, o => o.UseValue("Normal"));
+		.ForMember(x => x.PrintLayout, o => o.UseValue("Normal"))
+		.ForMember(x => x.DeclaredValue, o => o.MapFrom(src => (decimal)src.Value))
+		.ForMember(x => x.InsuredValue, o => o.MapFrom(src => (decimal)src.Value));
 	    
 	    AutoMapper.Mapper.CreateMap<SWSIMV52.CancelIndiciumResponse, RefundRequestData>();
 	    AutoMapper.Mapper.CreateMap<SWSIMV52.CreateIndiciumResponse, PostageLabelData>()
@@ -90,7 +93,7 @@ namespace Spring2.Core.PostageService.Stamps {
 	    AutoMapper.Mapper.CreateMap<SWSIMV52.PurchasePostageResponse, PurchasedPostageData>()
 		.ForMember(x => x.ErrorMessage, o => o.MapFrom(src => src.RejectionReason))
 		.ForMember(x => x.RequestID, o => o.MapFrom(src => src.TransactionID.ToString()))
-		.ForMember(x => x.Status, o => o.MapFrom(src => (int)src.PurchaseStatus))
+		.ForMember(x => x.Status, o => o.MapFrom(src => src.PurchaseStatus.ToString()))
 		.ForMember(x => x.CertifiedIntermediary, o => o.MapFrom(src => new AccountInfo() {
 		    PostageBalance = src.PostageBalance.AvailablePostage,
 		    AscendingBalance = src.PostageBalance.ControlTotal
@@ -111,23 +114,23 @@ namespace Spring2.Core.PostageService.Stamps {
 	    return rate;
 	}
 
-	public SWSIMV52.PurchasePostageRequest ToPurchasePostageRequest(PostagePurchaseInputData data, SWSIMV52.Credentials credentials, SWSIMV52.AccountInfo accountInfo) {
+	public SWSIMV52.PurchasePostageRequest ToPurchasePostageRequest(PostagePurchaseInputData data, string authenticator, SWSIMV52.AccountInfo accountInfo) {
 	    SWSIMV52.PurchasePostageRequest request = AutoMapper.Mapper.Map<PostagePurchaseInputData, SWSIMV52.PurchasePostageRequest>(data);
-	    request.Item = credentials;
+	    request.Item = authenticator;
 	    request.ControlTotal = accountInfo.PostageBalance.ControlTotal;
+	    request.IntegratorTxID = Guid.NewGuid().ToString();
 	    return request;
 	}
 
-	public SWSIMV52.ChangePasswordRequest ToChangePasswordRequest(ChangePasswordInputData data, SWSIMV52.Credentials credentials) {
+	public SWSIMV52.ChangePasswordRequest ToChangePasswordRequest(ChangePasswordInputData data, string authenticator, string oldPassword) {
 	    SWSIMV52.ChangePasswordRequest request = AutoMapper.Mapper.Map<ChangePasswordInputData, SWSIMV52.ChangePasswordRequest>(data);
-	    request.Item = credentials;
-	    request.OldPassword = credentials.Password;
+	    request.Item = authenticator;
+	    request.OldPassword = oldPassword;
 	    return request;
 	}
 
-	public SWSIMV52.CreateIndiciumRequest ToCreateIndiciumRequest(PostageLabelInputData data, SWSIMV52.Credentials credentials) {
+	public SWSIMV52.CreateIndiciumRequest ToCreateIndiciumRequest(PostageLabelInputData data) {
 	    SWSIMV52.CreateIndiciumRequest request = AutoMapper.Mapper.Map<PostageLabelInputData, SWSIMV52.CreateIndiciumRequest>(data);
-	    request.Item = credentials;
 	    request.Rate.ServiceType = ToServiceType(data.MailClass);
 	    request.Rate.PackageType = ToPackageType(data.MailpieceShape);
 	    request.IntegratorTxID = Guid.NewGuid().ToString();
@@ -175,6 +178,28 @@ namespace Spring2.Core.PostageService.Stamps {
 		    }
 	    catch {
 		return SWSIMV52.ServiceType.Unknown;
+	    }
+	}
+
+	public SWSIMV52.AddOnV7[] ToRateAddons(SWSIMV52.AddOnV7[] availableAddons, SWSIMV52.AddOnTypeV7[][] requiredAddons, string insured) {
+	    bool isInsured = !String.IsNullOrWhiteSpace(insured);
+	    if ((requiredAddons == null && !isInsured) || availableAddons == null) {
+		return null;
+	    } else {
+		List<SWSIMV52.AddOnV7> rateAddons = new List<SWSIMV52.AddOnV7>();
+		for (int i = 0; i < availableAddons.Length; i++) {
+		    if (availableAddons[i].AddOnType == SWSIMV52.AddOnTypeV7.SCAINS && isInsured && InsuredMailEnum.GetInstance(insured) == InsuredMailEnum.STAMPS) {
+			rateAddons.Add(availableAddons[i]);
+		    } else if (availableAddons[i].AddOnType == SWSIMV52.AddOnTypeV7.USAINS && isInsured && InsuredMailEnum.GetInstance(insured) == InsuredMailEnum.USPSONLINE) {
+			rateAddons.Add(availableAddons[i]);
+		    } else if (requiredAddons != null) {
+			int requiresPosition = Array.IndexOf(requiredAddons, availableAddons[i].AddOnType);
+			if (requiresPosition > -1) {
+			    rateAddons.Add(availableAddons[i]);
+			}
+		    }
+		}
+		return rateAddons.ToArray();
 	    }
 	}
 

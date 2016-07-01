@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System;
 using Spring2.Core.Types;
 
 namespace Spring2.Core.PostageService.Enums {
@@ -14,6 +11,7 @@ namespace Spring2.Core.PostageService.Enums {
 	public static readonly InsuredMailEnum OFF = new InsuredMailEnum("OFF", "Off");
 	public static readonly InsuredMailEnum USPSONLINE = new InsuredMailEnum("UspsOnline", "USPS Online");
 	public static readonly InsuredMailEnum ENDICIA = new InsuredMailEnum("Endicia", "Endicia");
+	public static readonly InsuredMailEnum STAMPS = new InsuredMailEnum("Stamps", "Stamps");
 
 	public static InsuredMailEnum GetInstance(Object value) {
 	    if (value is String) {

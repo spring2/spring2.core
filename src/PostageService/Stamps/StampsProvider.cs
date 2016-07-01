@@ -3,6 +3,7 @@ using Spring2.Core.Configuration;
 using System.ServiceModel;
 using System.ServiceModel.Security;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Spring2.Core.PostageService.Stamps {
     public class StampsProvider : IPostageServiceProvider {
@@ -16,11 +17,18 @@ namespace Spring2.Core.PostageService.Stamps {
 	SWSIMV52.Address address;
 	string email;
 	StampsModelAssembler assembler;
+	string authenticator;
 	DateTime lastLoginTime;
 	bool clearCredential;
 	string loginBannerText;
 	bool passwordExpired;
 	bool codewordsSet;
+
+	public string Authenticator {
+	    get {
+		return authenticator;
+	    }
+	}
 
 	public DateTime LastLoginTime {
 	    get {
@@ -69,8 +77,9 @@ namespace Spring2.Core.PostageService.Stamps {
 	}
 
 	public SWSIMV52.GetAccountInfoResponse GetAccountInfo() {
+	    SWSIMV52.GetAccountInfoRequest request = new SWSIMV52.GetAccountInfoRequest(Authenticator);
 	    SWSIMV52.GetAccountInfoResponse response = new SWSIMV52.GetAccountInfoResponse();
-	    client.GetAccountInfo(credentials, out response.AccountInfo, out response.Address, out response.CustomerEmail);
+	    authenticator = client.GetAccountInfo(request.Item, out response.AccountInfo, out response.Address, out response.CustomerEmail);
 	    accountInfo = response.AccountInfo;
 	    address = response.Address;
 	    email = response.CustomerEmail;
@@ -78,15 +87,16 @@ namespace Spring2.Core.PostageService.Stamps {
 	}
 
 	public SWSIMV52.CleanseAddressResponse CleanseAddress(SWSIMV52.Address address, string fromZipCode) {
-	    SWSIMV52.CleanseAddressRequest request = new SWSIMV52.CleanseAddressRequest(credentials, address, fromZipCode);
+	    SWSIMV52.CleanseAddressRequest request = new SWSIMV52.CleanseAddressRequest(Authenticator, address, fromZipCode);
 	    SWSIMV52.CleanseAddressResponse response = new SWSIMV52.CleanseAddressResponse();
-	    client.CleanseAddress(credentials, ref request.Address, request.FromZIPCode, out response.AddressMatch, out response.CityStateZipOK, out response.ResidentialDeliveryIndicator,
+	    authenticator = client.CleanseAddress(request.Item, ref request.Address, request.FromZIPCode, out response.AddressMatch, out response.CityStateZipOK, out response.ResidentialDeliveryIndicator,
 				    out response.IsPOBox, out response.CandidateAddresses, out response.StatusCodes, out response.Rates);
 	    return response;
 	}
 	public RefundRequestData RefundRequest(String trackingNumber, bool isInternational) {
-	    SWSIMV52.CancelIndiciumRequest request = new SWSIMV52.CancelIndiciumRequest(credentials, trackingNumber);
-	    SWSIMV52.CancelIndiciumResponse response = new SWSIMV52.CancelIndiciumResponse(client.CancelIndicium(request.Item, request.Item1));
+	    SWSIMV52.CancelIndiciumRequest request = new SWSIMV52.CancelIndiciumRequest(Authenticator, trackingNumber);
+	    authenticator = client.CancelIndicium(request.Item, request.Item1);
+	    SWSIMV52.CancelIndiciumResponse response = new SWSIMV52.CancelIndiciumResponse(Authenticator);
 	    return AutoMapper.Mapper.Map<SWSIMV52.CancelIndiciumResponse, RefundRequestData>(response);
 	}
 
@@ -95,17 +105,33 @@ namespace Spring2.Core.PostageService.Stamps {
 	    throw new NotImplementedException();
 	}
 
+	public SWSIMV52.RateV19 GetPostageRate(SWSIMV52.RateV19 rate, string insured) {
+	    SWSIMV52.GetRatesResponse response = new SWSIMV52.GetRatesResponse();
+	    authenticator = client.GetRates(Authenticator, rate, out response.Rates);
+	    SWSIMV52.RateV19 returnRate = response.Rates[0];
+	    returnRate.AddOns = assembler.ToRateAddons(returnRate.AddOns, returnRate.RequiresAllOf, insured);
+	    return returnRate;
+	}
+
 	public PostageRatesData GetPostageRates(PostageRateInputData data) {
 	    SWSIMV52.RateV19 rate = assembler.ToRate(data);
 	    SWSIMV52.GetRatesResponse response = new SWSIMV52.GetRatesResponse();
-	    client.GetRates(credentials, rate, out response.Rates);
+	    authenticator = client.GetRates(Authenticator, rate, out response.Rates);
 	    return assembler.ToPostageRatesData(response);
 	}
 
+	public SWSIMV52.RateV19[] GetPostageRates(SWSIMV52.RateV19 rate) {
+	    SWSIMV52.GetRatesResponse response = new SWSIMV52.GetRatesResponse();
+	    authenticator = client.GetRates(Authenticator, rate, out response.Rates);
+	    return response.Rates;
+	}
+
 	public PostageLabelData GetPostageLabel(PostageLabelInputData data) {
-	    SWSIMV52.CreateIndiciumRequest request = assembler.ToCreateIndiciumRequest(data, credentials);
+	    SWSIMV52.CreateIndiciumRequest request = assembler.ToCreateIndiciumRequest(data);
+	    request.Rate = GetPostageRate(request.Rate, data.Services == null ? null : data.Services.InsuredMail);
+	    request.Item = Authenticator;
 	    SWSIMV52.CreateIndiciumResponse response = new SWSIMV52.CreateIndiciumResponse();
-	    client.CreateIndicium(request.Item, ref request.IntegratorTxID, ref response.TrackingNumber, ref request.Rate, request.From, request.To, 
+	    authenticator = client.CreateIndicium(request.Item, ref request.IntegratorTxID, ref response.TrackingNumber, ref request.Rate, request.From, request.To, 
 				    request.CustomerID, request.Customs, request.SampleOnly, request.PostageMode, request.ImageType, request.EltronPrinterDPIType, 
 				    request.memo, request.cost_code_id, request.deliveryNotification, request.ShipmentNotification, request.rotationDegrees,
 				    request.horizontalOffset, request.verticalOffset, request.printDensity, request.printMemo, request.printInstructions,
@@ -117,8 +143,9 @@ namespace Spring2.Core.PostageService.Stamps {
 	}
 
 	public PasswordChangedData ChangePassword(ChangePasswordInputData data) {
-	    SWSIMV52.ChangePasswordRequest request = assembler.ToChangePasswordRequest(data, credentials);
-	    SWSIMV52.ChangePasswordResponse response = new SWSIMV52.ChangePasswordResponse(client.ChangePassword(request.Item, request.OldPassword, request.NewPassword));
+	    SWSIMV52.ChangePasswordRequest request = assembler.ToChangePasswordRequest(data, Authenticator, credentials.Password);
+	    authenticator = client.ChangePassword(request.Item, request.OldPassword, request.NewPassword);
+	    SWSIMV52.ChangePasswordResponse response = new SWSIMV52.ChangePasswordResponse(Authenticator);
 	    return AutoMapper.Mapper.Map<SWSIMV52.ChangePasswordResponse, PasswordChangedData>(response);
 	}
 
@@ -127,19 +154,25 @@ namespace Spring2.Core.PostageService.Stamps {
 	    for (int i = 0; i < integratorTxIDs.Length; i++) {
 		integratorTxIDGuids[i] = new Guid(integratorTxIDs[i]);
 	    }
-	    SWSIMV52.CreateScanFormRequest request = new SWSIMV52.CreateScanFormRequest(credentials, integratorTxIDGuids, address, SWSIMV52.ImageType.Pdf, true, SWSIMV52.Carrier.Usps, null);
+	    SWSIMV52.CreateScanFormRequest request = new SWSIMV52.CreateScanFormRequest(Authenticator, integratorTxIDGuids, address, SWSIMV52.ImageType.Pdf, true, SWSIMV52.Carrier.Usps, null);
 	    SWSIMV52.CreateScanFormResponse response = new SWSIMV52.CreateScanFormResponse();
-	    client.CreateScanForm(request.Item, request.StampsTxIDs, request.FromAddress, request.ImageType, request.PrintInstructions, request.Carrier, request.ShipDate, out response.ScanFormId, out response.Url);
+	    authenticator = client.CreateScanForm(request.Item, request.StampsTxIDs, request.FromAddress, request.ImageType, request.PrintInstructions, request.Carrier, request.ShipDate, out response.ScanFormId, out response.Url);
 	    return response;
 	}
 
 	public PurchasedPostageData BuyPostage(PostagePurchaseInputData data) {
-	    SWSIMV52.PurchasePostageRequest request = assembler.ToPurchasePostageRequest(data, credentials, accountInfo);
+	    SWSIMV52.PurchasePostageRequest request = assembler.ToPurchasePostageRequest(data, Authenticator, accountInfo);
 	    SWSIMV52.PurchasePostageResponse response = new SWSIMV52.PurchasePostageResponse();
-	    client.PurchasePostage(request.Item, request.PurchaseAmount, request.ControlTotal, request.MI, request.IntegratorTxID, 
+	    authenticator = client.PurchasePostage(request.Item, request.PurchaseAmount, request.ControlTotal, request.MI, request.IntegratorTxID, 
 				    out response.PurchaseStatus, out response.TransactionID, out response.PostageBalance,
 				    out response.RejectionReason, out response.MIRequired);
 	    return AutoMapper.Mapper.Map<SWSIMV52.PurchasePostageResponse, PurchasedPostageData>(response);
+	}
+
+	public SWSIMV52.GetPurchaseStatusResponse GetPurchaseStatus(int transactionId) {
+	    SWSIMV52.GetPurchaseStatusResponse response  = new SWSIMV52.GetPurchaseStatusResponse();
+	    authenticator = client.GetPurchaseStatus(authenticator, transactionId, out response.PurchaseStatus, out response.PostageBalance, out response.RejectionReason, out response.MIRequired);
+	    return response;
 	}
 
 	private void SetCredentials() {
@@ -197,12 +230,12 @@ namespace Spring2.Core.PostageService.Stamps {
 	}
 
 	public void AuthenticateUser() {
-	    client.AuthenticateUser(credentials, out lastLoginTime, out clearCredential, out loginBannerText, out passwordExpired, out codewordsSet);
+	    authenticator = client.AuthenticateUser(credentials, out lastLoginTime, out clearCredential, out loginBannerText, out passwordExpired, out codewordsSet);
 	}
 
 	private void SetAccountInfo() {
-	    SWSIMV52.GetAccountInfoRequest request = new SWSIMV52.GetAccountInfoRequest();
-	    client.GetAccountInfo(credentials, out accountInfo, out address, out email);
+	    SWSIMV52.GetAccountInfoRequest request = new SWSIMV52.GetAccountInfoRequest() { Item = Authenticator };
+	    authenticator = client.GetAccountInfo(request.Item, out accountInfo, out address, out email);
 	}
     }
 }

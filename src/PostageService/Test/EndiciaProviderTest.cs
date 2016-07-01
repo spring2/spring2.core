@@ -152,7 +152,7 @@ namespace Spring2.Core.PostageService.Test {
 	    IPostageServiceProvider postage = new EndiciaProvider();
 
 	    PostageLabelInputData input = new PostageLabelInputData() {
-		Test = "Yes",
+		Test = true,
 		MailClass = MailClassEnum.PRIORITYEXPRESS,
 		WeightOz = 50,
 		MailpieceShape = MailpieceShapeEnum.PARCEL,

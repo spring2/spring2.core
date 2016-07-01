@@ -41,54 +41,59 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	    this.button4 = new System.Windows.Forms.Button();
 	    this.button5 = new System.Windows.Forms.Button();
 	    this.button6 = new System.Windows.Forms.Button();
+	    this.button7 = new System.Windows.Forms.Button();
+	    this.button8 = new System.Windows.Forms.Button();
+	    this.button9 = new System.Windows.Forms.Button();
 	    ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 	    this.SuspendLayout();
 	    // 
 	    // lblUsername
 	    // 
 	    this.lblUsername.AutoSize = true;
-	    this.lblUsername.Location = new System.Drawing.Point(35, 72);
-	    this.lblUsername.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+	    this.lblUsername.Location = new System.Drawing.Point(39, 25);
+	    this.lblUsername.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
 	    this.lblUsername.Name = "lblUsername";
-	    this.lblUsername.Size = new System.Drawing.Size(108, 25);
+	    this.lblUsername.Size = new System.Drawing.Size(116, 25);
 	    this.lblUsername.TabIndex = 0;
 	    this.lblUsername.Text = "Username:";
+	    this.lblUsername.Click += new System.EventHandler(this.lblUsername_Click);
 	    // 
 	    // lblPassword
 	    // 
 	    this.lblPassword.AutoSize = true;
-	    this.lblPassword.Location = new System.Drawing.Point(35, 120);
-	    this.lblPassword.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+	    this.lblPassword.Location = new System.Drawing.Point(43, 77);
+	    this.lblPassword.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
 	    this.lblPassword.Name = "lblPassword";
-	    this.lblPassword.Size = new System.Drawing.Size(104, 25);
+	    this.lblPassword.Size = new System.Drawing.Size(112, 25);
 	    this.lblPassword.TabIndex = 1;
 	    this.lblPassword.Text = "Password:";
+	    this.lblPassword.Click += new System.EventHandler(this.lblPassword_Click);
 	    // 
 	    // txbUsername
 	    // 
-	    this.txbUsername.Location = new System.Drawing.Point(209, 66);
-	    this.txbUsername.Margin = new System.Windows.Forms.Padding(6);
+	    this.txbUsername.Location = new System.Drawing.Point(237, 19);
+	    this.txbUsername.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
 	    this.txbUsername.Name = "txbUsername";
-	    this.txbUsername.Size = new System.Drawing.Size(600, 29);
+	    this.txbUsername.Size = new System.Drawing.Size(654, 31);
 	    this.txbUsername.TabIndex = 2;
 	    this.txbUsername.Text = "Spring2-01";
 	    // 
 	    // txbPassword
 	    // 
-	    this.txbPassword.Location = new System.Drawing.Point(209, 114);
-	    this.txbPassword.Margin = new System.Windows.Forms.Padding(6);
+	    this.txbPassword.Location = new System.Drawing.Point(237, 71);
+	    this.txbPassword.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
 	    this.txbPassword.Name = "txbPassword";
-	    this.txbPassword.Size = new System.Drawing.Size(600, 29);
+	    this.txbPassword.Size = new System.Drawing.Size(654, 31);
 	    this.txbPassword.TabIndex = 3;
 	    this.txbPassword.Text = "postage12";
 	    this.txbPassword.TextChanged += new System.EventHandler(this.txbPassword_TextChanged);
 	    // 
 	    // btnAuth
 	    // 
-	    this.btnAuth.Location = new System.Drawing.Point(830, 18);
-	    this.btnAuth.Margin = new System.Windows.Forms.Padding(6);
+	    this.btnAuth.Location = new System.Drawing.Point(905, 19);
+	    this.btnAuth.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
 	    this.btnAuth.Name = "btnAuth";
-	    this.btnAuth.Size = new System.Drawing.Size(91, 132);
+	    this.btnAuth.Size = new System.Drawing.Size(99, 137);
 	    this.btnAuth.TabIndex = 4;
 	    this.btnAuth.Text = "AuthenticateUser";
 	    this.btnAuth.UseVisualStyleBackColor = true;
@@ -96,21 +101,21 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	    // 
 	    // tbxOut
 	    // 
-	    this.tbxOut.Location = new System.Drawing.Point(40, 192);
-	    this.tbxOut.Margin = new System.Windows.Forms.Padding(6);
+	    this.tbxOut.Location = new System.Drawing.Point(44, 200);
+	    this.tbxOut.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
 	    this.tbxOut.Multiline = true;
 	    this.tbxOut.Name = "tbxOut";
 	    this.tbxOut.ReadOnly = true;
 	    this.tbxOut.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-	    this.tbxOut.Size = new System.Drawing.Size(1368, 306);
+	    this.tbxOut.Size = new System.Drawing.Size(1972, 319);
 	    this.tbxOut.TabIndex = 5;
 	    // 
 	    // btnGAI
 	    // 
-	    this.btnGAI.Location = new System.Drawing.Point(931, 18);
-	    this.btnGAI.Margin = new System.Windows.Forms.Padding(6);
+	    this.btnGAI.Location = new System.Drawing.Point(1016, 19);
+	    this.btnGAI.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
 	    this.btnGAI.Name = "btnGAI";
-	    this.btnGAI.Size = new System.Drawing.Size(81, 132);
+	    this.btnGAI.Size = new System.Drawing.Size(88, 137);
 	    this.btnGAI.TabIndex = 6;
 	    this.btnGAI.Text = "GetAccountInfo";
 	    this.btnGAI.UseVisualStyleBackColor = true;
@@ -118,10 +123,10 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	    // 
 	    // button1
 	    // 
-	    this.button1.Location = new System.Drawing.Point(1023, 18);
-	    this.button1.Margin = new System.Windows.Forms.Padding(6);
+	    this.button1.Location = new System.Drawing.Point(1116, 19);
+	    this.button1.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
 	    this.button1.Name = "button1";
-	    this.button1.Size = new System.Drawing.Size(81, 132);
+	    this.button1.Size = new System.Drawing.Size(88, 137);
 	    this.button1.TabIndex = 9;
 	    this.button1.Text = "Verify Address";
 	    this.button1.UseVisualStyleBackColor = true;
@@ -129,10 +134,10 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	    // 
 	    // button2
 	    // 
-	    this.button2.Location = new System.Drawing.Point(1206, 18);
-	    this.button2.Margin = new System.Windows.Forms.Padding(6);
+	    this.button2.Location = new System.Drawing.Point(1316, 19);
+	    this.button2.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
 	    this.button2.Name = "button2";
-	    this.button2.Size = new System.Drawing.Size(81, 132);
+	    this.button2.Size = new System.Drawing.Size(88, 137);
 	    this.button2.TabIndex = 10;
 	    this.button2.Text = "FirstClass";
 	    this.button2.UseVisualStyleBackColor = true;
@@ -140,10 +145,10 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	    // 
 	    // button3
 	    // 
-	    this.button3.Location = new System.Drawing.Point(1115, 17);
-	    this.button3.Margin = new System.Windows.Forms.Padding(6);
+	    this.button3.Location = new System.Drawing.Point(1216, 18);
+	    this.button3.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
 	    this.button3.Name = "button3";
-	    this.button3.Size = new System.Drawing.Size(81, 132);
+	    this.button3.Size = new System.Drawing.Size(88, 137);
 	    this.button3.TabIndex = 11;
 	    this.button3.Text = "GetRates";
 	    this.button3.UseVisualStyleBackColor = true;
@@ -151,19 +156,19 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	    // 
 	    // pictureBox1
 	    // 
-	    this.pictureBox1.Location = new System.Drawing.Point(39, 541);
+	    this.pictureBox1.Location = new System.Drawing.Point(43, 564);
 	    this.pictureBox1.Name = "pictureBox1";
-	    this.pictureBox1.Size = new System.Drawing.Size(1369, 616);
+	    this.pictureBox1.Size = new System.Drawing.Size(1973, 859);
 	    this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 	    this.pictureBox1.TabIndex = 12;
 	    this.pictureBox1.TabStop = false;
 	    // 
 	    // button4
 	    // 
-	    this.button4.Location = new System.Drawing.Point(1298, 17);
-	    this.button4.Margin = new System.Windows.Forms.Padding(6);
+	    this.button4.Location = new System.Drawing.Point(1622, 21);
+	    this.button4.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
 	    this.button4.Name = "button4";
-	    this.button4.Size = new System.Drawing.Size(81, 132);
+	    this.button4.Size = new System.Drawing.Size(88, 137);
 	    this.button4.TabIndex = 13;
 	    this.button4.Text = "Buy Postage";
 	    this.button4.UseVisualStyleBackColor = true;
@@ -171,10 +176,10 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	    // 
 	    // button5
 	    // 
-	    this.button5.Location = new System.Drawing.Point(1391, 18);
-	    this.button5.Margin = new System.Windows.Forms.Padding(6);
+	    this.button5.Location = new System.Drawing.Point(1826, 21);
+	    this.button5.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
 	    this.button5.Name = "button5";
-	    this.button5.Size = new System.Drawing.Size(81, 132);
+	    this.button5.Size = new System.Drawing.Size(88, 137);
 	    this.button5.TabIndex = 14;
 	    this.button5.Text = "Cancel Label";
 	    this.button5.UseVisualStyleBackColor = true;
@@ -182,20 +187,57 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	    // 
 	    // button6
 	    // 
-	    this.button6.Location = new System.Drawing.Point(1484, 18);
-	    this.button6.Margin = new System.Windows.Forms.Padding(6);
+	    this.button6.Location = new System.Drawing.Point(1928, 21);
+	    this.button6.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
 	    this.button6.Name = "button6";
-	    this.button6.Size = new System.Drawing.Size(81, 132);
+	    this.button6.Size = new System.Drawing.Size(88, 137);
 	    this.button6.TabIndex = 15;
 	    this.button6.Text = "SCAN Form";
 	    this.button6.UseVisualStyleBackColor = true;
 	    this.button6.Click += new System.EventHandler(this.button6_Click);
 	    // 
+	    // button7
+	    // 
+	    this.button7.Location = new System.Drawing.Point(1418, 19);
+	    this.button7.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+	    this.button7.Name = "button7";
+	    this.button7.Size = new System.Drawing.Size(88, 137);
+	    this.button7.TabIndex = 16;
+	    this.button7.Text = "FirstClass Insured";
+	    this.button7.UseVisualStyleBackColor = true;
+	    this.button7.Click += new System.EventHandler(this.button7_Click);
+	    // 
+	    // button8
+	    // 
+	    this.button8.Location = new System.Drawing.Point(1724, 21);
+	    this.button8.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+	    this.button8.Name = "button8";
+	    this.button8.Size = new System.Drawing.Size(88, 137);
+	    this.button8.TabIndex = 17;
+	    this.button8.Text = "Postage Status";
+	    this.button8.UseVisualStyleBackColor = true;
+	    this.button8.Click += new System.EventHandler(this.button8_Click);
+	    // 
+	    // button9
+	    // 
+	    this.button9.Location = new System.Drawing.Point(1520, 21);
+	    this.button9.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+	    this.button9.Name = "button9";
+	    this.button9.Size = new System.Drawing.Size(88, 137);
+	    this.button9.TabIndex = 18;
+	    this.button9.Text = "FirstClass Sample";
+	    this.button9.UseVisualStyleBackColor = true;
+	    this.button9.Click += new System.EventHandler(this.button9_Click);
+	    // 
 	    // Form1
 	    // 
-	    this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+	    this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 	    this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-	    this.ClientSize = new System.Drawing.Size(1576, 1195);
+	    this.AutoSize = true;
+	    this.ClientSize = new System.Drawing.Size(2059, 2053);
+	    this.Controls.Add(this.button9);
+	    this.Controls.Add(this.button8);
+	    this.Controls.Add(this.button7);
 	    this.Controls.Add(this.button6);
 	    this.Controls.Add(this.button5);
 	    this.Controls.Add(this.button4);
@@ -211,7 +253,7 @@ namespace Spring2.Core.PostageService.StampsDemo {
 	    this.Controls.Add(this.lblPassword);
 	    this.Controls.Add(this.lblUsername);
 	    this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-	    this.Margin = new System.Windows.Forms.Padding(6);
+	    this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
 	    this.MaximizeBox = false;
 	    this.Name = "Form1";
 	    this.Text = "SWS Tester";
@@ -237,6 +279,9 @@ namespace Spring2.Core.PostageService.StampsDemo {
         private System.Windows.Forms.Button button4;
 	private System.Windows.Forms.Button button5;
 	private System.Windows.Forms.Button button6;
+	private System.Windows.Forms.Button button7;
+	private System.Windows.Forms.Button button8;
+	private System.Windows.Forms.Button button9;
     }
 }
 

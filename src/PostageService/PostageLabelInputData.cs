@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -303,7 +303,7 @@ namespace Spring2.Core.PostageService {
 
 	public string ToCarrierRoute { set; get; }
 
-	public string Test { set; get; }
+	public bool Test { set; get; }
 
 	public string LabelType { set; get; }
 
