@@ -71,7 +71,6 @@ namespace Spring2.Core.AddressValidation.Stamps {
 		City = city,
 		State = state,
 		ZIPCode = postalCode,
-		Country = country,
 		FullName = fullName
 	    };
 	    SWSIMV52.CleanseAddressResponse response = provider.CleanseAddress(address, null);

@@ -91,6 +91,7 @@ namespace Spring2.Core.PostageService.Stamps {
 	    SWSIMV52.CleanseAddressResponse response = new SWSIMV52.CleanseAddressResponse();
 	    authenticator = client.CleanseAddress(request.Item, ref request.Address, request.FromZIPCode, out response.AddressMatch, out response.CityStateZipOK, out response.ResidentialDeliveryIndicator,
 				    out response.IsPOBox, out response.CandidateAddresses, out response.StatusCodes, out response.Rates);
+	    response.Address = request.Address;
 	    return response;
 	}
 	public RefundRequestData RefundRequest(String trackingNumber, bool isInternational) {
