@@ -180,6 +180,49 @@ namespace Spring2.Core.PostageService.Test {
 	}
 
 	[Test]
+	public void InternationalPostageRequest() {
+	    IPostageServiceProvider postage = new StampsProvider();
+
+	    PostageLabelInputData input = new PostageLabelInputData() {
+		Value = 1,
+		MailClass = MailClassEnum.FIRSTCLASSMAILINTERNATIONAL,
+		WeightOz = 5,
+		MailpieceShape = MailpieceShapeEnum.THICKENVELOPE,
+		FromCompany = "Spring2",
+		ReturnAddress1 = "10150 S. Centennial Parkway",
+		ReturnAddress2 = "Suite 210",
+		FromCity = "Sandy",
+		FromState = "UT",
+		FromPostalCode = "84070",
+		FromPhone = "2125551234", //This is required... 
+		ToName = "VICTORIA STEELE",
+		ToAddress1 = "306 84 AVE SE",
+		ToCity = "CALGARY",
+		ToState = "AB",
+		ToPostalCode = "T2H",
+		ToCountry = "CA",
+		ToPhone = "5873511871",
+		ShipDate = DateTime.Now.ToString("MM/dd/yyyy"),
+		ShipTime = DateTime.Now.ToString("hh:mm tt"),
+		ReferenceID = "123457",
+		CustomsCountry1 = "US",
+		CustomsDescription1 = "Item",
+		CustomsQuantity1 = 1,
+		CustomsValue1 = 1,
+		CustomsWeight1 = 1,
+		CustomsInfo = new CustomsInput() {
+		    ContentsType = "Merchandise"
+		}
+	    };
+
+	    PostageLabelData data = postage.GetPostageLabel(input);
+	    Assert.IsNotNull(data);
+	    Console.WriteLine(data.ErrorMessage);
+	    Assert.IsTrue(string.IsNullOrEmpty(data.ErrorMessage));
+	    Assert.IsTrue(!string.IsNullOrEmpty(data.Base64LabelImage));
+	}
+
+	[Test]
 	public void BuyPostageRequest() {
 	    IPostageServiceProvider postage = new StampsProvider();
 

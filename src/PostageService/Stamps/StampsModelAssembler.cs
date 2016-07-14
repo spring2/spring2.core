@@ -134,6 +134,54 @@ namespace Spring2.Core.PostageService.Stamps {
 	    request.Rate.ServiceType = ToServiceType(data.MailClass);
 	    request.Rate.PackageType = ToPackageType(data.MailpieceShape);
 	    request.IntegratorTxID = Guid.NewGuid().ToString();
+	    if (data.CustomsInfo != null && !String.IsNullOrWhiteSpace(data.CustomsInfo.ContentsType)) {
+		List<SWSIMV52.CustomsLine> customsLines = new List<SWSIMV52.CustomsLine>();
+		customsLines.Add(new SWSIMV52.CustomsLine() {
+		    CountryOfOrigin = data.CustomsCountry1,
+		    Description = data.CustomsDescription1,
+		    Quantity = data.CustomsQuantity1,
+		    Value = decimal.Parse(data.CustomsValue1.ToString()),
+		    WeightOz = double.Parse(data.CustomsWeight1.ToString())
+		});
+		if (!String.IsNullOrWhiteSpace(data.CustomsDescription2)) {
+		    customsLines.Add(new SWSIMV52.CustomsLine() {
+			CountryOfOrigin = data.CustomsCountry2,
+			Description = data.CustomsDescription2,
+			Quantity = data.CustomsQuantity2,
+			Value = decimal.Parse(data.CustomsValue2.ToString()),
+			WeightOz = double.Parse(data.CustomsWeight2.ToString())
+		    });
+		}
+		if (!String.IsNullOrWhiteSpace(data.CustomsDescription3)) {
+		    customsLines.Add(new SWSIMV52.CustomsLine() {
+			CountryOfOrigin = data.CustomsCountry3,
+			Description = data.CustomsDescription3,
+			Quantity = data.CustomsQuantity3,
+			Value = decimal.Parse(data.CustomsValue3.ToString()),
+			WeightOz = double.Parse(data.CustomsWeight3.ToString())
+		    });
+		}
+		if (!String.IsNullOrWhiteSpace(data.CustomsDescription4)) {
+		    customsLines.Add(new SWSIMV52.CustomsLine() {
+			CountryOfOrigin = data.CustomsCountry4,
+			Description = data.CustomsDescription4,
+			Quantity = data.CustomsQuantity4,
+			Value = decimal.Parse(data.CustomsValue4.ToString()),
+			WeightOz = double.Parse(data.CustomsWeight4.ToString())
+		    });
+		}
+		if (!String.IsNullOrWhiteSpace(data.CustomsDescription5)) {
+		    customsLines.Add(new SWSIMV52.CustomsLine() {
+			CountryOfOrigin = data.CustomsCountry5,
+			Description = data.CustomsDescription5,
+			Quantity = data.CustomsQuantity5,
+			Value = decimal.Parse(data.CustomsValue5.ToString()),
+			WeightOz = double.Parse(data.CustomsWeight5.ToString())
+		    });
+		}
+		request.Customs.CustomsLines = customsLines.ToArray();
+		request.Customs.ContentType = (SWSIMV52.ContentTypeV2)Enum.Parse(typeof(SWSIMV52.ContentTypeV2), data.CustomsInfo.ContentsType);
+	    }
 	    return request;
 	}
 

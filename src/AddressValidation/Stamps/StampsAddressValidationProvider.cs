@@ -17,39 +17,51 @@ namespace Spring2.Core.AddressValidation.Stamps {
 	protected string address3 = null;
 	protected string city = null;
 	protected string state = null;
+	protected string zipCode = null;
+
+	//International
+	protected string province = null;
 	protected string postalCode = null;
+	protected string fromPhoneNumber = null;
 	protected string country = null;
 
-
-	public AddressValidationResult Validate(StringType street, StringType city, StringType state, StringType postalCode, StringType country) {
+	public AddressValidationResult Validate(StringType street, StringType city, StringType state, StringType zipCode, StringType country) {
 	    this.address1 = street;
 	    this.city = city;
 	    this.state = state;
-	    this.postalCode = postalCode;
-	    this.country = country;
+	    this.zipCode = zipCode;
 
 	    return Execute();
 	}
 
-	public AddressValidationResult Validate(StringType street1, StringType street2, StringType city, StringType state, StringType postalCode, StringType country) {
+	public AddressValidationResult ValidateInternational(StringType street, StringType city, StringType province, StringType postalCode, StringType country, StringType fromPhoneNumber) {
+	    this.address1 = street;
+	    this.city = city;
+	    this.province = province;
+	    this.postalCode = postalCode;
+	    this.country = country;
+	    this.fromPhoneNumber = fromPhoneNumber;
+
+	    return Execute(true);
+	}
+
+	public AddressValidationResult Validate(StringType street1, StringType street2, StringType city, StringType state, StringType zipCode, StringType country) {
 	    this.address1 = street1;
 	    this.address2 = street2;
 	    this.city = city;
 	    this.state = state;
-	    this.postalCode = postalCode;
-	    this.country = country;
+	    this.zipCode = zipCode;
 
 	    return Execute();
 	}
 
-	public AddressValidationResult Validate(StringType street1, StringType street2, StringType street3, StringType city, StringType state, StringType postalCode, StringType country) {
+	public AddressValidationResult Validate(StringType street1, StringType street2, StringType street3, StringType city, StringType state, StringType zipCode, StringType country) {
 	    this.address1 = street1;
 	    this.address2 = street2;
 	    this.address3 = street3;
 	    this.city = city;
 	    this.state = state;
-	    this.postalCode = postalCode;
-	    this.country = country;
+	    this.zipCode = zipCode;
 
 	    return Execute();
 	}
@@ -60,19 +72,39 @@ namespace Spring2.Core.AddressValidation.Stamps {
 	    this.postageServerUrl = postageServerUrl;
 	    this.fullName = fullName;
 	}
+	
+	private SWSIMV52.Address getAddress(bool isInternational) {
+	    SWSIMV52.Address address;
+	    if (isInternational) {
+		address = new SWSIMV52.Address() {
+		    Address1 = address1,
+		    Address2 = address2,
+		    Address3 = address3,
+		    City = city,
+		    Province = province,
+		    PostalCode = postalCode,
+		    Country = country,
+		    FullName = fullName
+		};
+	    } else {
+		address = new SWSIMV52.Address() {
+		    Address1 = address1,
+		    Address2 = address2,
+		    Address3 = address3,
+		    City = city,
+		    State = state,
+		    ZIPCode = zipCode,
+		    FullName = fullName
+		};
+	    }
+	    return address;
+	}
 
-	private AddressValidationResult Execute() {
+
+	private AddressValidationResult Execute(bool isInternational = false) {
 	    AddressValidationResult result = new AddressValidationResult();
 	    StampsProvider provider = new StampsProvider(integrationId, password, username, postageServerUrl);
-	    SWSIMV52.Address address = new SWSIMV52.Address() {
-		Address1 = address1,
-		Address2 = address2,
-		Address3 = address3,
-		City = city,
-		State = state,
-		ZIPCode = postalCode,
-		FullName = fullName
-	    };
+	    SWSIMV52.Address address = getAddress(isInternational);
 	    SWSIMV52.CleanseAddressResponse response = provider.CleanseAddress(address, null);
 	    AddressList addressList = new AddressList();
 	    if (response.Address != null) {
@@ -90,17 +122,30 @@ namespace Spring2.Core.AddressValidation.Stamps {
 	    } else {
 		result.ResponseType = ResponseTypeEnum.INVALID;
 	    }
+	    
+	    result.Status = getStatus(response);
+	    return result;
+	}
+	
+	private string getStatus(SWSIMV52.CleanseAddressResponse response) {
 	    StringBuilder status = new StringBuilder();
 	    status.Append("Return Code: ");
-	    status.Append(returnCodeStatus[response.StatusCodes.ReturnCode]);
-	    if (response.StatusCodes.Footnotes.Length > 0) {
-		foreach(SWSIMV52.Footnote footnote in response.StatusCodes.Footnotes) {
+	    try {
+		status.Append(returnCodeStatus[response.StatusCodes.ReturnCode]);
+	    } catch (System.Collections.Generic.KeyNotFoundException) {
+		// TODO log this
+	    }
+	    if (response.StatusCodes.Footnotes != null && response.StatusCodes.Footnotes.Length > 0) {
+		foreach (SWSIMV52.Footnote footnote in response.StatusCodes.Footnotes) {
 		    status.Append(", Footnote: ");
-		    status.Append(footnoteStatus[footnote.Value]);
+		    try {
+			status.Append(footnoteStatus[footnote.Value]);
+		    } catch (System.Collections.Generic.KeyNotFoundException) {
+			// TODO log this
+		    }
 		}
 	    }
-	    result.Status = status.ToString();
-	    return result;
+	    return status.ToString();
 	}
 
 	private AddressData convertStampsAddress(SWSIMV52.Address stampsAddress) {

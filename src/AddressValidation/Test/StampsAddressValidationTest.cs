@@ -24,7 +24,7 @@ namespace Spring2.Core.AddressValidation.Test {
 	    Assert.IsNotNull(result.Addresses[0]);
 	}
     }
-
+    
     public class StampsAddressValidationProviderTest {
 	string integrationId = "36f039b2-d233-457d-86b9-54f81aafbe21";
 	string password = "postage12";
@@ -38,6 +38,15 @@ namespace Spring2.Core.AddressValidation.Test {
 	    Assert.IsNotNull(result);
 	    Assert.IsTrue(result.ResponseType == ResponseTypeEnum.VALID);
 	    Assert.IsNotNull(result.Addresses[0]);
+	}
+
+	[Test]
+	public void ValidateInternationalAddress() {
+	    StampsAddressValidationProvider addressProvider = new StampsAddressValidationProvider();
+	    addressProvider.SetCredentials(integrationId, password, username, url, "VICTORIA STEELE");
+	    AddressValidationResult result = addressProvider.ValidateInternational("306 84 AVE SE", "CALGARY", "AB", "T2H", "CA", "5873511871");
+	    Assert.IsNotNull(result);
+	    Assert.IsTrue(result.ResponseType == ResponseTypeEnum.VALID);
 	}
     }
 }

@@ -206,7 +206,7 @@ namespace Spring2.Core.PostageService {
 	public string ToEMail { set; get; }
 
 	public string CustomsCountry1 { set; get; }
-
+	//TODO make this an array of customs lines rather than limited to 5 and so as not to have to check all 5
 	public string CustomsDescription1 { set; get; }
 
 	public uint CustomsQuantity1 { set; get; }
@@ -216,7 +216,7 @@ namespace Spring2.Core.PostageService {
 	public float CustomsValue1 { set; get; }
 
 	public bool CustomsValue1Specified { set; get; }
-
+	//TODO add value to specify unit of weight (Oz or lbs)
 	public uint CustomsWeight1 { set; get; }
 
 	public bool CustomsWeight1Specified { set; get; }
