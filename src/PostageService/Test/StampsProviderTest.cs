@@ -199,7 +199,7 @@ namespace Spring2.Core.PostageService.Test {
 		ToAddress1 = "306 84 AVE SE",
 		ToCity = "CALGARY",
 		ToState = "AB",
-		ToPostalCode = "T2H",
+		ToPostalCode = "T2H 1N4",
 		ToCountry = "CA",
 		ToPhone = "5873511871",
 		ShipDate = DateTime.Now.ToString("MM/dd/yyyy"),

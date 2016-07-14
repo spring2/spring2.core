@@ -16,6 +16,8 @@ namespace Spring2.Core.AddressValidation.Stamps {
 	protected string address2 = null;
 	protected string address3 = null;
 	protected string city = null;
+
+	//Domestic
 	protected string state = null;
 	protected string zipCode = null;
 
