@@ -3,7 +3,6 @@ using Spring2.Core.Configuration;
 using System.ServiceModel;
 using System.ServiceModel.Security;
 using System.Text;
-using System.Collections.Generic;
 
 namespace Spring2.Core.PostageService.Stamps {
     public class StampsProvider : IPostageServiceProvider {

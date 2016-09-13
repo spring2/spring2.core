@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="PostageService\Test\EndiciaProviderTest.cs" />
     <Compile Include="PostageService\Test\PostageServiceManagerTest.cs" />
+    <Compile Include="PostageService\Test\UPSProviderTest.cs" />
     <Compile Include="PostageService\Test\StampsProviderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

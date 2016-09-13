@@ -2581,10 +2581,2305 @@
         <member name="P:Spring2.Core.EwsLabelService.LabelRequest.ImageRotation">
             <remarks/>
         </member>
+        <member name="T:Spring2.Core.SWSIMV52.Credentials">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Credentials.IntegrationID">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Credentials.Username">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Credentials.Password">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.TrackingEvent">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.TrackingEvent.Timestamp">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.TrackingEvent.Event">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.TrackingEvent.TrackingEventType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.TrackingEvent.City">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.TrackingEvent.State">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.TrackingEvent.Zip">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.TrackingEvent.Country">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.TrackingEvent.SignedBy">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.TrackingEvent.AuthorizedAgent">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.TrackingEventType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.None">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ManifestAcknowledgement">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ElectronicNotification">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Delivered">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.AttemptedNoticeLeft">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.AcceptOrPickup">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Refused">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Undeliverable">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Forwarded">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ArrivalAtUnit">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Missent">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ReturnToSender">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Enroute">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DeadLetter">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ArrivalAtPickupPoint">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.NoSuchNumber">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.InsufficientAddress">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.MovedNoForwarding">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ForwardingExpired">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.AddresseeUnknown">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Vacant">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Unclaimed">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Deceased">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ReturnedOtherReason">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.PickedUpByShippingPartner">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ArrivedAtShippingPartner">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DepartedFromShippingPartner">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.UnrecognizedEvent">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ArriveSortFacility_A1">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.AcceptedAtDestination">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ArrivedUSPSSortFacility">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Processed_BE">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DepartUSPSSortFacility">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DeliveryStatusNotUpdated">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DispatchedFromSortFacility">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ShippingLabelCreated">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DepartSortFacility_L1">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.PickedUpAndProcessedByAgent">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.OriginAcceptance">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ProcessedAtDestinationFacility">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.OutForDelivery">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Sorting_ProcessingComplete">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DispatchedToSortFacility">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ArriveSortFacility_R1">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Processed_RB">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DepartSortFacility_T1">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ShipmentAcceptance">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.In_processAcceptance">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ArriveSortFacility_U1">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Mis_shipped">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.AvailableForPickup">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.PickedUpByAgent">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ReturnToSender_NotPickedUp">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DeadMail_DisposedByPostOffice">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DeadMail_SentToRecoveryCenter">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Processed_RegisteredMailOnly_35">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Processed_RegisteredMailOnly_36">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Processed_RegisteredMailOnly_38">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Processed_RegisteredMailOnly_39">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.Processed_RegisteredMailOnly_40">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ReceivedAtOpeningUnit">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.USPSHandoffToShippingPartner">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.PickedUp">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.CustomerRecall">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DispatchedToMilitary">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DuplicateLabelID">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.BusinessClosed">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.NoticeLeft">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ReceptacleBlocked">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ReceptacleFull">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.NoSecureLocationAvailable">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.NoAuthorizedRecipientAvailable">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.TenderedToAgentForFinalDelivery">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.TenderedToPostalService">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ArrivedAgentFacility">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DepartedAgentFacility">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.DeliveredByAgentToMerchant">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.FinalDispositionByMerchant">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.TrackingEventType.ErrorDataNotAvailable">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.Terms">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Terms.TermsGP">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Terms.TermsAR">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.Capabilities">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Capabilities.CanPrintShipping">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Capabilities.CanUseCostCodes">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Capabilities.CanUseHiddenPostage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Capabilities.CanPurchaseSDCInsurance">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Capabilities.CanPrintMemoOnShippingLabel">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Capabilities.CanPrintInternational">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Capabilities.CanPurchasePostage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Capabilities.CanEditCostCodes">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Capabilities.MustUseCostCodes">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Capabilities.CanViewOnlineReports">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Capabilities.PerPrintLimit">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CapabilitiesV2">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV2.AllowAllMailClasses">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CapabilitiesV3">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.CanPrintReturnShippingLabel">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.CanManageUsers">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.CanPrintNetStamps">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.CanEmailNotifications">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.CanViewReports">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.CanCreateSCANForm">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.AllowRestrictedSheets">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.HideUnavailableFeatures">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.WebPostage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.CanViewInsuranceHistory">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.CanChangeServicePlan">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.HideEstimatedDeliveryTime">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.CanPurchaseFromStore">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.CanChangePhysicalAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.CanChangePaymentMethod">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.CanChangeContactInfo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV3.CanViewAdvancedReporting">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CapabilitiesV4">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV4.IsIBIPEnabled">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CapabilitiesV5">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV5.CanCreateCriticalMail">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CapabilitiesV6">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV6.CanUseInvoicing">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CapabilitiesV7">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV7.CanUseCertifiedMail">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV7.CanPrintAllIndiciumValues">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CapabilitiesV8">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV8.AllowUspsMPosLabel">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV8.DisableConversationToken">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV8.CanPrintCubic">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CapabilitiesV9">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV9.CanPrintGP">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CapabilitiesV9.GPShipToConsolidator">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.AccountInfo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.CustomerID">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.MeterNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.UserID">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.PostageBalance">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.MaxPostageBalance">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.LPOCity">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.LPOState">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.LPOZip">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.AccountId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.CorpID">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.StoreID">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.CostCodeLimit">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.MonthlyPostagePurchaseLimit">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.MaxUsers">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.Capabilities">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.MeterPhysicalAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.ResubmitStatus">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.ResubmitCookie">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.PlanID">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.PendingPlanId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.PendingPlanIdSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.Username">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.RatesetType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.RatesetTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.USPSRep">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.USPSRepSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.AutoBuySettings">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.RateToken">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.CustomerData">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AccountInfo.Terms">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.PostageBalance">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.PostageBalance.AvailablePostage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.PostageBalance.ControlTotal">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.Address">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.FullName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.NamePrefix">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.FirstName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.MiddleName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.LastName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.NameSuffix">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.Title">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.Department">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.Company">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.Address1">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.Address2">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.Address3">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.City">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.State">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.ZIPCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.ZIPCodeAddOn">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.DPB">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.CheckDigit">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.Province">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.PostalCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.Country">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.Urbanization">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.PhoneNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.Extension">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.CleanseHash">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Address.OverrideHash">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.ResubmissionStatus">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ResubmissionStatus.NOT_IN_RESUBMISSION">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ResubmissionStatus.PAYMENT_RESUBMISSION">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ResubmissionStatus.NON_CORRECTABLE_PAYMENT_RESUBMISSION">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.RatesetType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.RatesetType.Unknown">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.RatesetType.Retail">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.RatesetType.CBP">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.RatesetType.CPP">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.RatesetType.NSA">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.RatesetType.STMP">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.AutoBuySettings">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AutoBuySettings.AutoBuyEnabled">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AutoBuySettings.PurchaseAmount">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AutoBuySettings.TriggerAmount">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.cost_code_info_v1">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.cost_code_info_v1.id">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.cost_code_info_v1.name">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.NetStampsLayout">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.Name">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.Description">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.SerialNumberPattern">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.NumRows">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.NumColumns">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.BackgroundImageURL">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.BackgroundImageWidthPx">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.BackgroundImageHeightPx">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.EmptyNetStampImageURL">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.UsedNetStampImageURL">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.PrintedNetStampImageURL">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.NetStampImageWidthPx">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.NetStampImageHeightPx">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.Row1StartsAtPx">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.Column1StartsAtPx">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.HorizontalSpaceBetweenNetStampsPx">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsLayout.VerticalSpaceBetweenNetStampsPx">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.Plan">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Plan.PlanId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Plan.PlanName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Plan.MonthlyBaseFee">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.NetStampsImage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsImage.ImageName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsImage.ImageID">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsImage.ImageCategory">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsImage.ImageDescription">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsImage.ImageUrl">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsImage.ImageIndex">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsImage.ImageType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsImage.PreviewOnly">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampsImage.PlansUpgradeToPrintImage">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.NetStampsImageType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.NetStampsImageType.Base">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.NetStampsImageType.Special">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.StoreShippingMethodOption">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.StoreShippingMethodOption.StoreShippingMethod">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.StoreShippingMethodOption.StoreDeliveryTimeMinimum">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.StoreShippingMethodOption.StoreDeliveryTimeMaximum">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.StoreShippingMethodOption.Skus">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.StoreShippingMethodOption.StoreProductTotal">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.StoreShippingMethodOption.StoreProductDiscount">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.StoreShippingMethodOption.StoreShippingAmount">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.StoreShippingMethodOption.StoreTaxTotal">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.StoreShippingMethodOption.StoreOrderTotal">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.StoreShippingMethodType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.StoreShippingMethodType.Basic">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.StoreShippingMethodType.Normal">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.StoreShippingMethodType.Expedited">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.StoreShippingMethodType.Rush">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.Sku">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Sku.Id">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Sku.Quantity">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Sku.SkuSubTotal">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CountryInfo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CountryInfo.Name">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CountryInfo.IsoCode">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.DpvFootnote">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.DpvFootnote.Value">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.Footnote">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Footnote.Value">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.StatusCodes">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.StatusCodes.ReturnCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.StatusCodes.Footnotes">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.StatusCodes.DpvFootnotes">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.StatusCodes.SdcFootnotes">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.Codeword">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Codeword.CodewordType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Codeword.Value">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Codeword.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CodewordType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CodewordType.Undefined">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CodewordType.MothersMaidenName">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CodewordType.PetsName">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CodewordType.BirthCity">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CodewordType.HighSchoolMascot">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CodewordType.FathersBirthplace">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CodewordType.StreetName">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CodewordType.FirstSchoolsName">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CodewordType.FirstCarsMakeModel">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CodewordType.Last4SocialSecurityNumber">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CodewordType.Last4DriversLicense">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.AchAccount">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AchAccount.AchAccountType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AchAccount.BankName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AchAccount.AccountNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AchAccount.RouteID">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AchAccount.AccountHolderName">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.AchAccountType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AchAccountType.Checking">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AchAccountType.Savings">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CreditCard">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CreditCard.CreditCardType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CreditCard.AccountNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CreditCard.CVN">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CreditCard.ExpirationDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CreditCard.BillingAddress">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CreditCardType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CreditCardType.Visa">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CreditCardType.MasterCard">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CreditCardType.AmericanExpress">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CreditCardType.Discover">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.FP">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.FP.FP1">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.FP.FP2">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.FP.FP3">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.FP.FP4">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.FP.FP5">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.MachineInfo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.MachineInfo.IPAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.MachineInfo.MacAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.MachineInfo.FP">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.RefundStatusV1">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.PostageRefundId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.ClaimNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.RequestDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.PostageRefundStatus">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.EstimatedPostageRefundCompletionDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.EstimatedPostageRefundCompletionDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.PostageAmountRequested">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.PostageAmountApproved">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.PostageRefundResult">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.InsuranceRefundStatus">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.InsuranceRefundStatusSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.EstimatedInsuranceRefundCompletionDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.EstimatedInsuranceRefundCompletionDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.InsuranceAmountRequested">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.InsuranceAmountRequestedSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.InsuranceAmountApproved">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RefundStatusV1.InsuranceAmountApprovedSpecified">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.PostageRefundStatusV1">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PostageRefundStatusV1.Pending">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PostageRefundStatusV1.Processing">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PostageRefundStatusV1.Complete">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PostageRefundStatusV1.Duplicate">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.ReferencesV2">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ReferencesV2.UserName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ReferencesV2.CostCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ReferencesV2.Memo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ReferencesV2.OrderId">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.PackageInfoV1">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.PackageInfoV1.PackageType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.PackageInfoV1.NumberOfLabels">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.PackageInfoV1.WeightLb">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.PackageInfoV1.WeightOz">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.PackageTypeV6">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.Unknown">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.Postcard">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.Letter">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.LargeEnvelopeorFlat">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.ThickEnvelope">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.Package">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.FlatRateBox">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.SmallFlatRateBox">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.LargeFlatRateBox">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.FlatRateEnvelope">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.FlatRatePaddedEnvelope">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.LargePackage">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.OversizedPackage">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.RegionalRateBoxA">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.RegionalRateBoxB">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.LegalFlatRateEnvelope">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PackageTypeV6.RegionalRateBoxC">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.ServicesV6">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ServicesV6.ServiceType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ServicesV6.Amount">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ServicesV6.CubicPricingTier">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ServicesV6.IsMetroRate">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.ServiceType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.Unknown">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.USFC">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.USPM">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.USXM">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.USMM">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.USBP">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.USLM">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.USEMI">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.USPMI">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.USFCI">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.USCM">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.USPS">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.DHLPE">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.DHLPG">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.DHLPPE">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.DHLPPG">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.DHLBPME">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.DHLBPMG">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.DHLMPE">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.DHLMPG">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.ASIPA">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.ASISAL">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.ASEPKT">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.DHLPIPA">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.DHLPISAL">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.GGIPA">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.GGISAL">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.GGEPKT">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.IBCIPA">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.IBCISAL">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.IBCEPKT">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.RRDIPA">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.RRDISAL">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.RRDEPKT">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.ASGNRC">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.GGGNRC">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.RRDGNRC">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.SCGPE">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ServiceType.SCGPP">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.ShipmentV9">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.StampsTxId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.ShipmentStatus">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.ShipmentStatusSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.PrintDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.PrintDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.MailDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.MailDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.DeliveredDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.DeliveredDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.TrackingNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.ScanFormId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.Service">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.AddOns">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.FromZIPCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.ReturnTo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.ShipTo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.PackageInfo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.References">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.RefundType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.RefundTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.RefundStatus">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.ExpiryDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.ExpiryDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentV9.Reserved">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.ShipmentStatusV1">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ShipmentStatusV1.Printed">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ShipmentStatusV1.InTransit">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ShipmentStatusV1.ReceivedatOpeningUnit">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ShipmentStatusV1.Delivered">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ShipmentStatusV1.PendingRefund">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ShipmentStatusV1.Refunded">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ShipmentStatusV1.Voided">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ShipmentStatusV1.Unprinted">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ShipmentStatusV1.Expired">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.AddOnV7">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AddOnV7.Amount">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AddOnV7.AddOnType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AddOnV7.RequiresAllOf">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AddOnV7.ProhibitedWithAnyOf">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.AddOnV7.MissingData">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.AddOnTypeV7">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USAINS">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USACOD">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USADC">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USASC">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USACOM">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USACM">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USARR">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USARRM">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USAREG">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USARD">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USASH">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.SCAINS">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.SCAINSRM">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.SCAHP">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USASR">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USANDW">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USAESH">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USANND">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USARRE">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USALANS">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USALAWS">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USAHM">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USACR">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USA1030">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USAASR">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USAASRD">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AddOnTypeV7.USAPR">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.RefundTypeV1">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.RefundTypeV1.Erefund">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.RefundTypeV1.Mailin">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.Filters">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Filters.PrintDateMin">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Filters.PrintDateMax">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Filters.PrintDateMaxSpecified">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.Filters.SearchCriteria">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.SearchFor">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.SearchFor.All">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.SearchFor.Refund">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.IndiciumInfoV11">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.IndiciumInfoV11.Rate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.IndiciumInfoV11.To">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.IndiciumInfoV11.CostCodeId">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.RateV19">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.FromZIPCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.ToZIPCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.ToCountry">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.Amount">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.MaxAmount">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.ServiceType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.PrintLayout">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.DeliverDays">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.WeightLb">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.WeightOz">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.PackageType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.RequiresAllOf">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.Length">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.Width">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.Height">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.ShipDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.DeliveryDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.InsuredValue">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.RegisteredValue">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.CODValue">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.DeclaredValue">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.NonMachinable">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.RectangularShaped">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.Prohibitions">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.Restrictions">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.Observations">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.Regulations">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.GEMNotes">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.MaxDimensions">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.DimWeighting">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.AddOns">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.EffectiveWeightInOunces">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.Zone">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.RateCategory">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.ToState">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.RateV19.CubicPricing">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.IndiciumData">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.IndiciumData.IBI">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.IndiciumData.IBILite">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.NetStampV15">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampV15.Row">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampV15.Column">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.NetStampV15.Rate">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.LabelRecipientInfo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.LabelRecipientInfo.EmailAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.LabelRecipientInfo.Name">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.LabelRecipientInfo.Note">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.LabelRecipientInfo.CopyToOriginator">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.ShipmentNotification">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentNotification.Email">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentNotification.CCToAccountHolder">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentNotification.CCToMain">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentNotification.UseCompanyNameInFromLine">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.ShipmentNotification.UseCompanyNameInSubject">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CustomsLine">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsLine.Description">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsLine.Quantity">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsLine.Value">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsLine.WeightLb">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsLine.WeightOz">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsLine.HSTariffNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsLine.CountryOfOrigin">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CustomsV4">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsV4.ContentType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsV4.Comments">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsV4.LicenseNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsV4.CertificateNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsV4.InvoiceNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsV4.OtherDescribe">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsV4.CustomsLines">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.SWSIMV52.CustomsV4.CustomsSigner">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.ContentTypeV2">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ContentTypeV2.CommercialSample">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ContentTypeV2.Gift">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ContentTypeV2.Document">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ContentTypeV2.ReturnedGoods">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ContentTypeV2.Other">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ContentTypeV2.Merchandise">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ContentTypeV2.HumanitarianDonation">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ContentTypeV2.DangerousGoods">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.PostageMode">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PostageMode.Normal">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PostageMode.NoPostage">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.ImageType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageType.Auto">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageType.Png">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageType.Gif">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageType.Pdf">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageType.Epl">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageType.Jpg">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageType.PrintOncePdf">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageType.EncryptedPngUrl">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageType.Zpl">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageType.AZpl">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageType.BZpl">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.EltronPrinterDPIType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.EltronPrinterDPIType.Default">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.EltronPrinterDPIType.High">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.NonDeliveryOption">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.NonDeliveryOption.Undefined">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.NonDeliveryOption.Return">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.NonDeliveryOption.Abandon">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.NonDeliveryOption.Redirect">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.PaperSizeV1">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PaperSizeV1.Default">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PaperSizeV1.Letter85x11">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PaperSizeV1.LabelSize">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.ImageDpi">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageDpi.ImageDpiDefault">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageDpi.ImageDpi200">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageDpi.ImageDpi300">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageDpi.ImageDpi203">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ImageDpi.ImageDpi96">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CreateIndiciumModeV1">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CreateIndiciumModeV1.Normal">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CreateIndiciumModeV1.Sample">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CreateIndiciumModeV1.NoPostage">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CreateIndiciumModeV1.Preview">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.NetstampsStatus">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.NetstampsStatus.Success">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.NetstampsStatus.PartialSuccess">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.NetstampsStatus.Failed">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.UrlType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.HomePage">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.AccountSettingsPage">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.EditCostCodesPage">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.OnlineReportsPage">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.HelpPage">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.OnlineReportingHistory">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.OnlineReportingRefund">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.OnlineReportingPickup">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.OnlineReportingSCAN">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.OnlineReportingClaim">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreChangePlan">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.WebClientHome">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.ReportsBalances">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.ReportsExpenses">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.ReportsPrints">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreBuyPostage">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreMeters">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreUsers">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StorePaymentMethods">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreCorpContactInfo">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreMeterUsers">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreMeterSettings">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreMeterAddress">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreShippingAddresses">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreReferAFriend">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreAccountCredit">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreReorder">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreMyProfile">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StorePassword">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreCommPreferences">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreNetStampsLabels">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreShippingLabels">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreMailingLabels">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreScalesAndPrinters">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreFreeUSPSSupplies">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreBubbleMailers">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreShippingSupplies">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreScales">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreAveryNetStampsLabels">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreAveryMailingLabels">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreMeterContactInfo">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreEditMeterAddress">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreHome">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreAccount">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreCostCode">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreHistory">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreFaq">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreCustomerHome">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreGetAccountInfoJSon">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreSetAccountInfoJSon">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreUserCategories">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreCategory">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreUpdatePaymentMethodResubmit">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreDefaultPaymentMethods">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreSignOut">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.CustomShipNotifyEmail">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.HelpCenterHome">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.MustChangePassword">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.Contacts">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.WebClientPreferences">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.WebClientDefault">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.StoreAutoBuy">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.UrlType.SetTermsGeneral">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.IncludeField">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.StampsTxId">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.ShipmentStatus">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.PrintDate">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.MailDate">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.DeliveredDate">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.TrackingNumber">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.ScanFormId">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.Service">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.AddOns">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.FromZIPCode">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.ReturnTo">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.ShipTo">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.PackageInfo">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.References">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.RefundType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.RefundStatus">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.ExpiryDate">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.IncludeField.Reserved">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.AccountType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AccountType.Individual">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AccountType.HomeOffice">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AccountType.HomeBasedBusiness">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.AccountType.OfficeBasedBusiness">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.RegistrationStatus">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.RegistrationStatus.Success">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.RegistrationStatus.Fail">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.CarrierPickupLocationV1">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CarrierPickupLocationV1.FrontDoor">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CarrierPickupLocationV1.BackDoor">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CarrierPickupLocationV1.SideDoor">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CarrierPickupLocationV1.KnockOnDoorOrRingBell">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CarrierPickupLocationV1.MailRoom">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CarrierPickupLocationV1.Office">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CarrierPickupLocationV1.Reception">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CarrierPickupLocationV1.InOrAtMailbox">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.CarrierPickupLocationV1.Other">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.PurchaseStatus">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PurchaseStatus.Pending">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PurchaseStatus.Processing">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PurchaseStatus.Success">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.PurchaseStatus.Rejected">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.Carrier">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.Carrier.Usps">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.Carrier.Dhl">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.SWSIMV52.ResidentialDeliveryIndicatorType">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ResidentialDeliveryIndicatorType.Yes">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ResidentialDeliveryIndicatorType.No">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ResidentialDeliveryIndicatorType.Unknown">
+            <remarks/>
+        </member>
+        <member name="F:Spring2.Core.SWSIMV52.ResidentialDeliveryIndicatorType.Unsupported">
+            <remarks/>
+        </member>
         <member name="T:Spring2.Core.ELSServicesService.ELSServicesService">
             <remarks/>
         </member>
         <member name="M:Spring2.Core.ELSServicesService.ELSServicesService.#ctor">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.MultiLocationCarrierPickupCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.CarrierPickupChangeCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.CarrierPickupAvailabilityCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.RefundRequestCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.CarrierPickupCancelCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.GetRetailAccountsCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.StatusRequestCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.UserSignupCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.GetResellerTransactionsListingCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.SCANRequestCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.CarrierPickupRequestCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.GetTransactionsListingCompleted">
             <remarks/>
         </member>
         <member name="M:Spring2.Core.ELSServicesService.ELSServicesService.MultiLocationCarrierPickup(System.Object)">
@@ -2696,42 +4991,6 @@
             <remarks/>
         </member>
         <member name="M:Spring2.Core.ELSServicesService.ELSServicesService.CancelAsync(System.Object)">
-            <remarks/>
-        </member>
-        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.MultiLocationCarrierPickupCompleted">
-            <remarks/>
-        </member>
-        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.CarrierPickupChangeCompleted">
-            <remarks/>
-        </member>
-        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.CarrierPickupAvailabilityCompleted">
-            <remarks/>
-        </member>
-        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.RefundRequestCompleted">
-            <remarks/>
-        </member>
-        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.CarrierPickupCancelCompleted">
-            <remarks/>
-        </member>
-        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.GetRetailAccountsCompleted">
-            <remarks/>
-        </member>
-        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.StatusRequestCompleted">
-            <remarks/>
-        </member>
-        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.UserSignupCompleted">
-            <remarks/>
-        </member>
-        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.GetResellerTransactionsListingCompleted">
-            <remarks/>
-        </member>
-        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.SCANRequestCompleted">
-            <remarks/>
-        </member>
-        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.CarrierPickupRequestCompleted">
-            <remarks/>
-        </member>
-        <member name="E:Spring2.Core.ELSServicesService.ELSServicesService.GetTransactionsListingCompleted">
             <remarks/>
         </member>
         <member name="T:Spring2.Core.ELSServicesService.QueryBean">
@@ -2867,6 +5126,1974 @@
             <remarks/>
         </member>
         <member name="P:Spring2.Core.ELSServicesService.GetTransactionsListingCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipService">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.#ctor">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipmentCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipConfirmCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipAcceptCompleted">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipment(Spring2.Core.UPSMI.Ship.ShipmentRequest)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipmentAsync(Spring2.Core.UPSMI.Ship.ShipmentRequest)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipmentAsync(Spring2.Core.UPSMI.Ship.ShipmentRequest,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipConfirm(Spring2.Core.UPSMI.Ship.ShipConfirmRequest)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipConfirmAsync(Spring2.Core.UPSMI.Ship.ShipConfirmRequest)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipConfirmAsync(Spring2.Core.UPSMI.Ship.ShipConfirmRequest,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipAccept(Spring2.Core.UPSMI.Ship.ShipAcceptRequest)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipAcceptAsync(Spring2.Core.UPSMI.Ship.ShipAcceptRequest)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipAcceptAsync(Spring2.Core.UPSMI.Ship.ShipAcceptRequest,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.CancelAsync(System.Object)">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.UPSSecurity">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UPSSecurity.UsernameToken">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UPSSecurity.ServiceAccessToken">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.UPSSecurityUsernameToken">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UPSSecurityUsernameToken.Username">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UPSSecurityUsernameToken.Password">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.HighValueReportType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.HighValueReportType.Image">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ImageType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ImageType.ImageFormat">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ImageType.GraphicImage">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ImageFormatType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ImageFormatType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ImageFormatType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ReceiptType">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.LabelType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelType.InternationalSignatureGraphicImage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelType.HTMLImage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelType.PDF417">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.SCReportType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.SCReportType.Image">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.FormImageType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.FormImageType.ImageFormat">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.FormImageType.GraphicImage">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.FormType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.FormType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.FormType.Description">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.FormType.Image">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.FormType.FormGroupId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.FormType.FormGroupIdName">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.AccessorialType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AccessorialType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AccessorialType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PackageResultsType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.TrackingNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.ServiceOptionsCharges">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.ShippingLabel">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.ShippingReceipt">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.USPSPICNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.CN22Number">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.Accessorial">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.Form">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipChargeType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipChargeType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipChargeType.Description">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipChargeType.CurrencyCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipChargeType.MonetaryValue">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipChargeType.SubType">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.BillingUnitOfMeasurementType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BillingUnitOfMeasurementType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BillingUnitOfMeasurementType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.BillingWeightType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BillingWeightType.UnitOfMeasurement">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BillingWeightType.Weight">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.TransportationChargeType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.TransportationChargeType.GrossCharge">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.TransportationChargeType.DiscountAmount">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.TransportationChargeType.DiscountPercentage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.TransportationChargeType.NetCharge">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.FRSShipmentDataType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.FRSShipmentDataType.TransportationCharges">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.NegotiatedRateChargesType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.NegotiatedRateChargesType.ItemizedCharges">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.NegotiatedRateChargesType.TaxCharges">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.NegotiatedRateChargesType.TotalCharge">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.NegotiatedRateChargesType.TotalChargesWithTaxes">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.TaxChargeType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.TaxChargeType.Type">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.TaxChargeType.MonetaryValue">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentChargesType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.RateChart">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.TransportationCharges">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.ItemizedCharges">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.ServiceOptionsCharges">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.TaxCharges">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.TotalCharges">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.TotalChargesWithTaxes">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.DisclaimerType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DisclaimerType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DisclaimerType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentResultsType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.Disclaimer">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.ShipmentCharges">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.NegotiatedRateCharges">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.FRSShipmentData">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.RatingMethod">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.BillableWeightCalculationMethod">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.BillingWeight">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.ShipmentIdentificationNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.ShipmentDigest">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.PackageResults">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.ControlLogReceipt">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.Form">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.CODTurnInPage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.HighValueReport">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.LabelURL">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.LocalLanguageLabelURL">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.ReceiptURL">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.LocalLanguageReceiptURL">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.CodeDescriptionType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CodeDescriptionType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CodeDescriptionType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ResponseType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ResponseType.ResponseStatus">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ResponseType.Alert">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ResponseType.TransactionReference">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.TransactionReferenceType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.TransactionReferenceType.CustomerContext">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.TransactionReferenceType.TransactionIdentifier">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ReceiptImageFormatType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ReceiptImageFormatType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ReceiptImageFormatType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ReceiptSpecificationType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ReceiptSpecificationType.ImageFormat">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.InstructionCodeDescriptionType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InstructionCodeDescriptionType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InstructionCodeDescriptionType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.LabelStockSizeType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelStockSizeType.Height">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelStockSizeType.Width">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.LabelImageFormatType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelImageFormatType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelImageFormatType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.LabelSpecificationType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelSpecificationType.LabelImageFormat">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelSpecificationType.HTTPUserAgent">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelSpecificationType.LabelStockSize">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelSpecificationType.Instruction">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.NMFCType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.NMFCType.PrimeCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.NMFCType.SubCode">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.CommodityType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CommodityType.FreightClass">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CommodityType.NMFC">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.DryIceWeightType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DryIceWeightType.UnitOfMeasurement">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DryIceWeightType.Weight">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipUnitOfMeasurementType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipUnitOfMeasurementType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipUnitOfMeasurementType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.DryIceType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DryIceType.RegulationSet">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DryIceType.DryIceWeight">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DryIceType.MedicalUseIndicator">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PSONotificationType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PSONotificationType.NotificationCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PSONotificationType.EMail">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.EmailDetailsType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.EMailAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.UndeliverableEMailAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.FromEMailAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.FromName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.Memo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.Subject">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.SubjectCode">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ContactInfoType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ContactInfoType.Name">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ContactInfoType.Phone">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipPhoneType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipPhoneType.Number">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipPhoneType.Extension">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.VerbalConfirmationType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.VerbalConfirmationType.ContactInfo">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PackageServiceOptionsAccessPointCODType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsAccessPointCODType.CurrencyCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsAccessPointCODType.MonetaryValue">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PSOCODType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PSOCODType.CODFundsCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PSOCODType.CODAmount">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.CurrencyMonetaryType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CurrencyMonetaryType.CurrencyCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CurrencyMonetaryType.MonetaryValue">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.DeclaredValueType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DeclaredValueType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DeclaredValueType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PackageDeclaredValueType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageDeclaredValueType.Type">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageDeclaredValueType.CurrencyCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageDeclaredValueType.MonetaryValue">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.DeliveryConfirmation">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.DeclaredValue">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.COD">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.AccessPointCOD">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.VerbalConfirmation">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.ShipperReleaseIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.Notification">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.DryIce">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.UPSPremiumCareIndicator">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.DeliveryConfirmationType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DeliveryConfirmationType.DCISType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DeliveryConfirmationType.DCISNumber">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PackageWeightType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageWeightType.UnitOfMeasurement">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageWeightType.Weight">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.DimensionsType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DimensionsType.UnitOfMeasurement">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DimensionsType.Length">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DimensionsType.Width">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DimensionsType.Height">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PackagingType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackagingType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackagingType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PackageType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.Description">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.Packaging">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.Dimensions">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.PackageWeight">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.LargePackageIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.ReferenceNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.AdditionalHandlingIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.PackageServiceOptions">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.Commodity">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ReferenceNumberType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ReferenceNumberType.BarCodeIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ReferenceNumberType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ReferenceNumberType.Value">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PreAlertTextMessageType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertTextMessageType.PhoneNumber">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PreAlertVoiceMessageType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertVoiceMessageType.PhoneNumber">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PreAlertEMailMessageType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertEMailMessageType.EMailAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertEMailMessageType.UndeliverableEMailAddress">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PreAlertNotificationType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertNotificationType.EMailMessage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertNotificationType.VoiceMessage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertNotificationType.TextMessage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertNotificationType.Locale">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.LocaleType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LocaleType.Language">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LocaleType.Dialect">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.LabelMethodType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelMethodType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelMethodType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.LicenseType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LicenseType.Number">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LicenseType.Date">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LicenseType.ExceptionCode">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.BlanketPeriodType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BlanketPeriodType.BeginDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BlanketPeriodType.EndDate">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.OtherChargesType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.OtherChargesType.MonetaryValue">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.OtherChargesType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.IFChargesType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.IFChargesType.MonetaryValue">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.DDTCInformationType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.ITARExemptionNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.USMLCategoryCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.EligiblePartyIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.RegistrationNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.Quantity">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.UnitOfMeasurement">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.SignificantMilitaryEquipmentIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.ACMNumber">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.UnitOfMeasurementType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UnitOfMeasurementType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UnitOfMeasurementType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.EEILicenseType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EEILicenseType.Number">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EEILicenseType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EEILicenseType.LicenseLineValue">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EEILicenseType.ECCNNumber">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.EEIInformationType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EEIInformationType.ExportInformation">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EEIInformationType.License">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EEIInformationType.DDTCInformation">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PackageAssociatedType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageAssociatedType.PackageNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PackageAssociatedType.ProductAmount">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ScheduleBType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ScheduleBType.Number">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ScheduleBType.Quantity">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ScheduleBType.UnitOfMeasurement">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.NetCostDateType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.NetCostDateType.BeginDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.NetCostDateType.EndDate">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.UnitType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UnitType.Number">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UnitType.UnitOfMeasurement">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UnitType.Value">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ProductType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.Description">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.Unit">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.CommodityCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.PartNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.OriginCountryCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.JointProductionIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.NetCostCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.NetCostDateRange">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.PreferenceCriteria">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.ProducerInfo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.MarksAndNumbers">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.NumberOfPackagesPerCommodity">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.ProductWeight">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.VehicleID">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.ScheduleB">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.ExportType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.SEDTotalValue">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.ExcludeFromForm">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.ProductCurrencyCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.PackingListInfo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.EEIInformation">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ProductWeightType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductWeightType.UnitOfMeasurement">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProductWeightType.Weight">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.SoldToType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.Name">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.AttentionName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.TaxIdentificationNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.Phone">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.Option">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.Address">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.EMailAddress">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PhoneType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PhoneType.Number">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PhoneType.Extension">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.AddressType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AddressType.AddressLine">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AddressType.City">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AddressType.StateProvinceCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AddressType.Town">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AddressType.PostalCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AddressType.CountryCode">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ProducerType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.Option">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.CompanyName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.TaxIdentificationNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.Address">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.AttentionName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.Phone">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.EMailAddress">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.IntermediateConsigneeType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.IntermediateConsigneeType.CompanyName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.IntermediateConsigneeType.Address">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.UltimateConsigneeTypeType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UltimateConsigneeTypeType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UltimateConsigneeTypeType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.UltimateConsigneeType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UltimateConsigneeType.CompanyName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UltimateConsigneeType.Address">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UltimateConsigneeType.UltimateConsigneeType1">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ForwardAgentType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ForwardAgentType.CompanyName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ForwardAgentType.TaxIdentificationNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ForwardAgentType.Address">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ContactType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ContactType.ForwardAgent">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ContactType.UltimateConsignee">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ContactType.IntermediateConsignee">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ContactType.Producer">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ContactType.SoldTo">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipperFiledType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipperFiledType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipperFiledType.Description">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipperFiledType.PreDepartureITNNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipperFiledType.ExemptionLegend">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.POAType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.POAType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.POAType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.UPSFiledType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UPSFiledType.POA">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.EEIFilingOptionType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EEIFilingOptionType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EEIFilingOptionType.EMailAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EEIFilingOptionType.Description">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EEIFilingOptionType.UPSFiled">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.EEIFilingOptionType.ShipperFiled">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.UPSPremiumCareFormType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UPSPremiumCareFormType.ShipmentDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UPSPremiumCareFormType.PageSize">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UPSPremiumCareFormType.PrintType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UPSPremiumCareFormType.NumOfCopies">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UPSPremiumCareFormType.LanguageForUPSPremiumCare">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.CN22ContentType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentQuantity">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentDescription">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentWeight">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentTotalValue">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentCurrencyCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentCountryOfOrigin">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentTariffNumber">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.CN22FormType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.LabelSize">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.PrintsPerPage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.LabelPrintType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.CN22Type">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.CN22OtherDescription">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.FoldHereText">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.CN22Content">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.InternationalFormType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.FormType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.UserCreatedForm">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.CN22Form">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.UPSPremiumCareForm">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.AdditionalDocumentIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.FormGroupIdName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.SEDFilingOption">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.EEIFilingOption">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.Contacts">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.Product">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.InvoiceNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.InvoiceDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.PurchaseOrderNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.TermsOfShipment">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ReasonForExport">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.Comments">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.DeclarationStatement">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.Discount">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.FreightCharges">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.InsuranceCharges">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.OtherCharges">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.CurrencyCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.BlanketPeriod">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ExportDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ExportingCarrier">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.CarrierID">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.InBondCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.EntryNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.PointOfOrigin">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.PointOfOriginType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ModeOfTransport">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.PortOfExport">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.PortOfUnloading">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.LoadingPier">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.PartiesToTransaction">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.RoutedExportTransactionIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ContainerizedIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.License">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ECCNNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.OverridePaperlessIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ShipperMemo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.MultiCurrencyInvoiceLineTotal">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.LabelDeliveryType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelDeliveryType.EMail">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.LabelDeliveryType.LabelLinksIndicator">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsNotificationTextMessageType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsNotificationTextMessageType.PhoneNumber">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsNotificationVoiceMessageType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsNotificationVoiceMessageType.PhoneNumber">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.NotificationType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.NotificationType.NotificationCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.NotificationType.EMail">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.NotificationType.VoiceMessage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.NotificationType.TextMessage">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.NotificationType.Locale">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsAccessPointCODType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsAccessPointCODType.CurrencyCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsAccessPointCODType.MonetaryValue">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.CODType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CODType.CODFundsCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CODType.CODAmount">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.SaturdayDeliveryIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.COD">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.AccessPointCOD">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.DeliverToAddresseeOnlyIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.DirectDeliveryOnlyIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.Notification">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.LabelDelivery">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.InternationalForms">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.DeliveryConfirmation">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.ReturnOfDocumentIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.ImportControlIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.LabelMethod">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.CommercialInvoiceRemovalIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.UPScarbonneutralIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.PreAlertNotification">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.ExchangeForwardIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.HoldForPickupIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.DropoffAtUPSFacilityIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.LiftGateForPickUpIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.LiftGateForDeliveryIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.SDLShipmentIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.EPRAReleaseCode">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.IndicationType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.IndicationType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.IndicationType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ServiceType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ServiceType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ServiceType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.RateInfoType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.RateInfoType.NegotiatedRatesIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.RateInfoType.FRSShipmentIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.RateInfoType.RateChartIndicator">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PaymentType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PaymentType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PaymentType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.FRSPaymentInfoType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.FRSPaymentInfoType.Type">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.FRSPaymentInfoType.AccountNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.FRSPaymentInfoType.Address">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.AccountAddressType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AccountAddressType.PostalCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AccountAddressType.CountryCode">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.BillThirdPartyChargeType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BillThirdPartyChargeType.AccountNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BillThirdPartyChargeType.Address">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.BillReceiverAddressType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BillReceiverAddressType.PostalCode">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.BillReceiverType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BillReceiverType.AccountNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BillReceiverType.Address">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.CreditCardAddressType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardAddressType.AddressLine">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardAddressType.City">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardAddressType.StateProvinceCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardAddressType.PostalCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardAddressType.CountryCode">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.CreditCardType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardType.Type">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardType.Number">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardType.ExpirationDate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardType.SecurityCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardType.Address">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.BillShipperType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BillShipperType.AccountNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BillShipperType.CreditCard">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.BillShipperType.AlternatePaymentMethod">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentChargeType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargeType.Type">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargeType.BillShipper">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargeType.BillReceiver">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargeType.BillThirdParty">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargeType.ConsigneeBilledIndicator">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.PaymentInfoType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PaymentInfoType.ShipmentCharge">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.PaymentInfoType.SplitDutyVATIndicator">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ADLAddressType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.AddressLine">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.City">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.StateProvinceCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.PostalCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.CountryCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.ResidentialAddressIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.POBoxIndicator">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.AlternateDeliveryAddressType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AlternateDeliveryAddressType.Name">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AlternateDeliveryAddressType.AttentionName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AlternateDeliveryAddressType.UPSAccessPointID">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.AlternateDeliveryAddressType.Address">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipAddressType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipAddressType.AddressLine">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipAddressType.City">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipAddressType.StateProvinceCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipAddressType.PostalCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipAddressType.CountryCode">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipToAddressType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipToAddressType.ResidentialAddressIndicator">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.TaxIDCodeDescType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.TaxIDCodeDescType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.TaxIDCodeDescType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.CompanyInfoType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CompanyInfoType.Name">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CompanyInfoType.AttentionName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CompanyInfoType.CompanyDisplayableName">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CompanyInfoType.TaxIdentificationNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CompanyInfoType.TaxIDType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.CompanyInfoType.Phone">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipFromType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipFromType.FaxNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipFromType.Address">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipToType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipToType.FaxNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipToType.EMailAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipToType.Address">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipToType.LocationID">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipperType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipperType.ShipperNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipperType.FaxNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipperType.EMailAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipperType.Address">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ReturnServiceType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ReturnServiceType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ReturnServiceType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.Description">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ReturnService">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.DocumentsOnlyIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.Shipper">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ShipTo">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.AlternateDeliveryAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ShipFrom">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.PaymentInformation">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.FRSPaymentInformation">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.GoodsNotInFreeCirculationIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ShipmentRatingOptions">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.MovementReferenceNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ReferenceNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.Service">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.InvoiceLineTotal">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.NumOfPiecesInShipment">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.USPSEndorsement">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.MILabelCN22Indicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.SubClassification">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.CostCenter">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.PackageID">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.IrregularIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ShipmentIndicationType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.RatingMethodRequestedIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.TaxInformationIndicator">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ShipmentServiceOptions">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.Package">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentTypeShipmentServiceOptions">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.RequestType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.RequestType.RequestOption">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.RequestType.TransactionReference">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.UPSSecurityServiceAccessToken">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.UPSSecurityServiceAccessToken.AccessLicenseNumber">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentRequest">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentRequest.Request">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentRequest.Shipment">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentRequest.LabelSpecification">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentRequest.ReceiptSpecification">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentResponse">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResponse.Response">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResponse.ShipmentResults">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipConfirmRequest">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipConfirmRequest.Request">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipConfirmRequest.Shipment">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipConfirmRequest.LabelSpecification">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipConfirmRequest.ReceiptSpecification">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipConfirmResponse">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipConfirmResponse.Response">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipConfirmResponse.ShipmentResults">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipAcceptRequest">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipAcceptRequest.Request">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipAcceptRequest.ShipmentDigest">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ShipAcceptResponse">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipAcceptResponse.Response">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ShipAcceptResponse.ShipmentResults">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ProcessShipmentCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ProcessShipmentCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProcessShipmentCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ProcessShipConfirmCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ProcessShipConfirmCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProcessShipConfirmCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ProcessShipAcceptCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSMI.Ship.ProcessShipAcceptCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSMI.Ship.ProcessShipAcceptCompletedEventArgs.Result">
             <remarks/>
         </member>
     </members>

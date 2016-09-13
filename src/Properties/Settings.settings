@@ -1,9 +1,12 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Spring2.Core.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="Spring2_Core_PostageService_ELSServicesService_ELSServicesService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://www.endicia.com/ELS/ELSServices.cfc</Value>
+    </Setting>
+    <Setting Name="Spring2_Core_PostageService_UPSMailInnovationsShip_ShipService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://wwwcie.ups.com/webservices/Ship</Value>
     </Setting>
   </Settings>
 </SettingsFile>

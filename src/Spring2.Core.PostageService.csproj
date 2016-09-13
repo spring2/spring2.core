@@ -65,6 +65,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Services" />
@@ -118,6 +120,8 @@
     <Compile Include="PostageService\Stamps\StampsModelAssembler.cs" />
     <Compile Include="PostageService\Stamps\StampsProvider.cs" />
     <Compile Include="PostageService\Test\TestPostageServiceProvider.cs" />
+    <Compile Include="PostageService\UPS\UPSModelAssembler.cs" />
+    <Compile Include="PostageService\UPS\UPSProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -135,6 +139,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Web References\ELSServicesService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\UPSMI.Ship\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -282,6 +291,35 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\UPSMI.Ship\common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\UPSMI.Ship\Error1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\UPSMI.Ship\IFWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\UPSMI.Ship\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\UPSMI.Ship\Ship.wsdl" />
+    <None Include="Web References\UPSMI.Ship\ShipAcceptResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\UPSMI.Ship\ShipConfirmResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\UPSMI.Ship\ShipmentResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\UPSMI.Ship\ShipWebServiceSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\UPSMI.Ship\UPSSecurity.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\EwsLabelService\" />
@@ -306,6 +344,17 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="F:\workspace\spring2\Core\src\Web References\UPSMailInnovations\Ship.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\UPSMI.Ship\</RelPath>
+      <UpdateFromURL>F:\workspace\spring2\Core\src\Web References\UPSMailInnovations\Ship.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Spring2_Core_PostageService_UPSMailInnovationsShip_ShipService</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://www.endicia.com/ELS/ELSServices.cfc%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\ELSServicesService\</RelPath>

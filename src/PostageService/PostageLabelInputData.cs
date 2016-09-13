@@ -305,6 +305,8 @@ namespace Spring2.Core.PostageService {
 
 	public bool Test { set; get; }
 
+	public bool IsInternational { set; get; }
+
 	public string LabelType { set; get; }
 
 	public string LabelSubtype { set; get; }
