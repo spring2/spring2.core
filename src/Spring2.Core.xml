@@ -1,0 +1,1706 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spring2.Core</name>
+    </assembly>
+    <members>
+        <member name="F:Spring2.Core.DAO.BaseEntityDAO.propertyToSqlMap">
+            <summary>
+            Hash table mapping entity property names to sql code.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.BaseEntityDAO.Filter(System.String)">
+            <summary>
+            Creates a where clause object by mapping the given where clause text.  The text may reference
+            entity properties which will be mapped to sql code by enclosing the property names in braces.
+            </summary>
+            <param name="whereText">Text to be mapped</param>
+            <returns>SqlFilter object.</returns>
+            <exception cref="T:System.ApplicationException">When property name found in braces is not found in the entity.</exception>
+        </member>
+        <member name="M:Spring2.Core.DAO.BaseEntityDAO.Filter(System.String,System.String)">
+            <summary>
+            Creates a where clause object that can be used to create sql to find objects whose entity property value
+            matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped
+            to the appropriate sql.
+            </summary>
+            <param name="propertyName">Entity property to be matched.</param>
+            <param name="value">Value to match the property with</param>
+            <returns>A SqlFilter object.</returns>
+            <exception cref="T:System.ApplicationException">When the property name passed is not found in the entity.</exception>
+        </member>
+        <member name="M:Spring2.Core.DAO.BaseEntityDAO.Filter(System.String,System.Int32)">
+            <summary>
+            Creates a where clause object that can be used to create sql to find objects whose entity property value
+            matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped
+            to the appropriate sql.
+            </summary>
+            <param name="propertyName">Entity property to be matched.</param>
+            <param name="value">Value to match the property with</param>
+            <returns>A SqlFilter object.</returns>
+            <exception cref="T:System.ApplicationException">When the property name passed is not found in the entity.</exception>
+        </member>
+        <member name="M:Spring2.Core.DAO.BaseEntityDAO.filter(System.String,System.DateTime)">
+            <summary>
+            Creates a where clause object that can be used to create sql to find objects whose entity property value
+            matches the value passed.  Note that the propertyName passed is an entity property name and will be mapped
+            to the appropriate sql.
+            </summary>
+            <param name="propertyName">Entity property to be matched.</param>
+            <param name="value">Value to match the property with</param>
+            <returns>A SqlFilter object.</returns>
+            <exception cref="T:System.ApplicationException">When the property name passed is not found in the entity.</exception>
+        </member>
+        <member name="T:Spring2.Core.DAO.DaoException">
+            <summary>
+            Base exception for DAO exceptions
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.DaoException.#ctor">
+            <summary>
+            Initializes a new instance of the Exception class.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.DaoException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the Exception class with a specified error message.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Spring2.Core.DAO.DaoException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the Exception class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:Spring2.Core.DAO.DaoException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the Exception class with serialized data.
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Spring2.Core.DAO.DatabaseFilter">
+            <summary>
+            Base class for database filters that offers the ability to create query fragments without having to know the
+            specific database or concatinate strings.
+            
+            Supports parameterized fragments.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.DAO.DatabaseFilter.Expression">
+            <summary>
+            This is the independent fragment based contained expressions.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.DAO.DatabaseFilter.Statement">
+            <summary>
+            This is the complete WHERE fragment based on the contained expressions.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.DAO.DatabaseFilter.Parameters">
+            <summary>
+            Collection of data parameters to be added to the command when executed.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.DatabaseFilter.And(Spring2.Core.DAO.IDatabaseExpression)">
+            <summary>
+            Adds an expression and logically ands this with the existing contained expressions.
+            </summary>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.DatabaseFilter.Or(Spring2.Core.DAO.IDatabaseExpression)">
+            <summary>
+            Adds an expression and logically ors this with the existing contained expressions.
+            </summary>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.DatabaseFilter.Not(Spring2.Core.DAO.IDatabaseExpression)">
+            <summary>
+            Adds an expression and logically ands the notted result with the existing contained expressions.
+            </summary>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Spring2.Core.DAO.DatabaseFilter.IsEmpty">
+            <summary>
+            Returns true if nothing has been added to the clause; otherwise false.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.DAO.DbConnectionScopeOption">
+            <summary>
+            Options for modifying how DbConnectionScope.Current is affected while constructing a new scope.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.DAO.DbConnectionScope">
+            <summary>
+            Class to assist in managing connection lifetimes inside scopes on a particular thread.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.DAO.DbConnectionScope.Current">
+            <summary>
+            Obtain the currently active connection scope
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.DbConnectionScope.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.DbConnectionScope.#ctor(Spring2.Core.DAO.DbConnectionScopeOption)">
+            <summary>
+            Constructor with options
+            </summary>
+            <param name="option">Option for how to modify Current during constructor</param>
+        </member>
+        <member name="M:Spring2.Core.DAO.DbConnectionScope.#ctor(System.Object,System.Data.Common.DbConnection)">
+            <summary>
+            Convenience constructor to add an initial connection
+            </summary>
+            <param name="key">Key to associate with connection</param>
+            <param name="connection">Connection to add</param>
+        </member>
+        <member name="M:Spring2.Core.DAO.DbConnectionScope.AddConnection(System.Object,System.Data.Common.DbConnection)">
+            <summary>
+            Add a connection and associate it with the given key
+            </summary>
+            <param name="key">Key to associate with the connection</param>
+            <param name="connection">Connection to add</param>
+        </member>
+        <member name="M:Spring2.Core.DAO.DbConnectionScope.ContainsKey(System.Object)">
+            <summary>
+            Check to see if there is a connection associated with this key
+            </summary>
+            <param name="key">Key to use for lookup</param>
+            <returns>true if there is a connection, false otherwise</returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.DbConnectionScope.Dispose">
+            <summary>
+            Shut down this instance.  Disposes all connections it holds and restores the prior scope.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.DbConnectionScope.GetConnection(System.Object,System.Boolean)">
+            <summary>
+            Get the connection associated with this key. Throws if there is no entry for the key.
+            </summary>
+            <param name="key">Key to use for lookup</param>
+            <param name="searchPriorScopes">Search for connection throughout the current scope stack?</param>
+            <returns>Associated connection</returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.DbConnectionScope.GetConnection(System.Object)">
+            <summary>
+            Get the connection associated with this key in this scope. Throws if there is no entry for the key.
+            </summary>
+            <param name="key">Key to use for lookup</param>
+            <returns>Associated connection</returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.DbConnectionScope.GetOpenConnection(System.Data.Common.DbProviderFactory,System.String,System.Boolean)">
+            <summary>
+            This method gets the connection using the connection string as a key.  If no connection is
+            associated with the string, the connection factory is used to create the connection.
+            Finally, if the resulting connection is in the closed state, it is opened.
+            </summary>
+            <param name="factory">Factory to use to create connection if it is not already present</param>
+            <param name="connectionString">Connection string to use</param>
+            <param name="searchPriorScopes">Search for connection throughout the current scope stack?</param>
+            <returns>Connection in open state</returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.DbConnectionScope.TryGetConnection(System.Object,System.Boolean,System.Data.Common.DbConnection@)">
+            <summary>
+            Get the connection associated with this key.
+            </summary>
+            <param name="key">Key to use for lookup</param>
+            <param name="searchPriorScopes">Search for connection throughout the current scope stack?</param>
+            <param name="connection">Associated connection</param>
+            <returns>True if connection found, false otherwise</returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.DbConnectionScope.TryGetConnection(System.Object,System.Data.Common.DbConnection@)">
+            <summary>
+            Get the connection associated with this key without searching current scope stack.
+            </summary>
+            <param name="key">Key to use for lookup</param>
+            <param name="connection">Associated connection</param>
+            <returns>True if connection found, false otherwise</returns>
+        </member>
+        <member name="P:Spring2.Core.DAO.DbConnectionScope.IsDisposed">
+            <summary>
+            Was this instance previously disposed?
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.DbConnectionScope.CheckDisposed">
+            <summary>
+            Handle calling API function after instance has been disposed
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.EntityDAO.GetListReader(System.String,System.String,Spring2.Core.DAO.IWhere,Spring2.Core.DAO.IOrderBy)">
+            <summary>
+            Gets a data reader.
+            </summary>
+            <param name="key"></param>
+            <param name="viewName">View name to use.</param>
+            <param name="whereClause">Where clause to use or null.</param>
+            <param name="orderByClause">Order by clause to use or null</param>
+            <returns>DataReader containing selected data</returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.EntityDAO.GetListReader(System.String,System.String,Spring2.Core.DAO.IWhere,Spring2.Core.DAO.IOrderBy,System.Int32)">
+            <summary>
+            Gets a data reader.
+            </summary>
+            <param name="key"></param>
+            <param name="viewName">View name to use.</param>
+            <param name="whereClause">Where clause to use or null.</param>
+            <param name="orderByClause">Order by clause to use or null</param>
+            <param name="maxRows">Maximum number of rows to return or </param>
+            <returns>DataReader containing selected data</returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.EntityDAO.GetListReader(System.String,System.String,Spring2.Core.DAO.IWhere,Spring2.Core.DAO.IOrderBy,System.Int32,System.Int32)">
+            <summary>
+            Gets a data reader.
+            </summary>
+            <param name="key"></param>
+            <param name="viewName">View name to use.</param>
+            <param name="whereClause">Where clause to use or null.</param>
+            <param name="orderByClause">Order by clause to use or null</param>
+            <param name="maxRows">Maximum number of rows to return or lt 1 for unlimitted.</param>
+            <param name="commandTimeout">Number of seconds before command times out or lt 1 for default.</param>
+            <returns>DataReader containing selected data</returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.EntityDAO.GetConnectionString(System.String)">
+            <summary>
+            Determine where the connection string comes from and what it is
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.EntityDAO.GetPropertyMapping(System.Collections.Hashtable,System.String)">
+            <summary>
+            Returns the sql string for a given entity property name.
+            </summary>
+            <param name="propertyToSqlMap">Mapping of property names to sql expressions.</param>
+            <param name="propertyName">Name of property name to map</param>
+            <returns>Sql string used to retrieve the property value.</returns>
+            <exception cref="T:System.ApplicationException">When property passed is not found.</exception>
+        </member>
+        <member name="M:Spring2.Core.DAO.EntityDAO.ProcessExpression(System.Collections.Hashtable,System.String)">
+            <summary>
+            Maps a string with embedded property names to a string using the sql expressions that correspond to the
+            property names.  The embedded property names are entity property names and must be enclosed in braces ({}).
+            </summary>
+            <param name="propertyToSqlMap">Mapping of property names to sql expressions.</param>
+            <param name="expression">expression containing property names to map</param>
+            <returns>String with property names replaced with sql expressions.</returns>
+        </member>
+        <member name="T:Spring2.Core.DAO.EqualityOperatorEnum">
+            <summary>
+            Equality operators for database predicates
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.DAO.FinderException">
+            <summary>
+            Exception created when a finder returns no rows.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.DAO.IDatabaseExpression">
+            <summary>
+            Summary description for IDatabaseExpression.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.DAO.LogicalOperatorEnum">
+            <summary>
+            Logical operators to be pairs with database expressions
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.DAO.SqlBetweenPredicate">
+            <summary>
+            Summary description for SqlBetweenPredicate.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.DAO.SqlEqualityPredicate">
+            <summary>
+            Summary description for SqlEqualityPredicate.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.DAO.SqlFilter">
+            <summary>
+            Summary description for SqlFilter.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.DAO.SqlFilter.Statement">
+            <summary>
+            Returns the entire WHERE clause, including "WHERE", or blank if there are not any contained expressions
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.DAO.SqlFilter.Expression">
+            <summary>
+            This is the independent fragment based contained expressions.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.DAO.SqlFilter.Parameters">
+            <summary>
+            Collection of data parameters to be added to the command when executed.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.DAO.SqlInPredicate">
+            <summary>
+            Summary description for SqlInPredicate.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.DAO.SqlLiteralPredicate">
+            <summary>
+            Summary description for SqlLiteralPredicate.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.DAO.SqlParameterList">
+            <summary>
+            Summary description for SqlParameterCollection.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.DAO.SqlPredicate">
+            <summary>
+            Summary description for SqlPredicate.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.SqlPredicate.Escape(System.String)">
+            <summary>
+            Escape keywords and object names with special characters
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.SqlPredicate.Quote(System.String)">
+            <summary>
+            Handle quoting of strings that may contain quotes
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.SqlPredicate.ReplaceSpecialCharacters(System.String,System.String)">
+            <summary>
+            Returns a new String with all special characters replaced with specified value
+            </summary>
+            <param name="s"></param>
+            <param name="replace"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.SqlPredicate.ReplaceSpecialCharacters(System.String)">
+            <summary>
+            Returns a new String with all special characters replaced with underscores
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Spring2.Core.DAO.SqlUtility">
+            <summary>
+            Utilities for Sql Server related operations
+            </summary>
+        </member>
+        <member name="F:Spring2.Core.DAO.SqlUtility.KEYWORDS">
+            <summary>
+            sql keywords that need escaping.  all values need to be enclosed in a pair of | characters.  values should be lower case.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.SqlUtility.Escape(System.String)">
+            <summary>
+            Escape keywords and object names with special characters
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.SqlUtility.Quote(System.String)">
+            <summary>
+            Handle quoting of strings that may contain quotes
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.SqlUtility.ReplaceSpecialCharacters(System.String,System.String)">
+            <summary>
+            Returns a new String with all special characters replaced with specified value
+            </summary>
+            <param name="s"></param>
+            <param name="replace"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.DAO.SqlUtility.ReplaceSpecialCharacters(System.String)">
+            <summary>
+            Returns a new String with all special characters replaced with underscores
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Spring2.Core.DAO.WhereClause">
+            <summary>
+            Utility class to construct WHERE clause sql fragments
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.#ctor">
+            <summary>
+            New empty clause
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.#ctor(System.String,System.Int32)">
+            <summary>
+            New clause that will check that column equals value
+            </summary>
+            <remarks>
+            field = value
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.#ctor(System.String,System.String)">
+            <summary>
+            New clause that will check that column equals value
+            </summary>
+            <remarks>
+            field = value
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.#ctor(System.String,System.DateTime)">
+            <summary>
+            New clause that will check that column equals value
+            </summary>
+            <remarks>
+            field = value
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.#ctor(System.String,System.Boolean)">
+            <summary>
+            New clause that will check that column equals value
+            </summary>
+            <remarks>
+            field = value
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.#ctor(System.String)">
+            <summary>
+            New clause using raw sql
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.#ctor(Spring2.Core.DAO.WhereClause)">
+            <summary>
+            New clause using WhereClause (for wrapping with enclosing parens)
+            </summary>
+            <remarks>
+            ( clause )
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.AndBetween(System.String,System.Int32,System.Int32)">
+            <summary>
+            And new clause that will check that column is between value1 and value2
+            </summary>
+            <remarks>
+            AND field between value1 AND value2
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.AndBetween(System.String,System.String,System.String)">
+            <summary>
+            And new clause that will check that column is between value1 and value2
+            </summary>
+            <remarks>
+            AND field between value1 AND value2
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.AndBetween(System.String,System.DateTime,System.DateTime)">
+            <summary>
+            And new clause that will check that column is between value1 and value2
+            </summary>
+            <remarks>
+            AND field between value1 AND value2
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.OrBetween(System.String,System.Int32,System.Int32)">
+            <summary>
+            Or new clause that will check that column is between value1 and value2
+            </summary>
+            <remarks>
+            OR field between value1 AND value2
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.OrBetween(System.String,System.String,System.String)">
+            <summary>
+            Or new clause that will check that column is between value1 and value2
+            </summary>
+            <remarks>
+            OR field between value1 AND value2
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.OrBetween(System.String,System.DateTime,System.DateTime)">
+            <summary>
+            Or new clause that will check that column is between value1 and value2
+            </summary>
+            <remarks>
+            OR field between value1 AND value2
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.AndNotBetween(System.String,System.Int32,System.Int32)">
+            <summary>
+            And new clause that will check that column is between value1 and value2
+            </summary>
+            <remarks>
+            AND field between value1 AND value2
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.AndNotBetween(System.String,System.String,System.String)">
+            <summary>
+            And new clause that will check that column is between value1 and value2
+            </summary>
+            <remarks>
+            AND field between value1 AND value2
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.AndNotBetween(System.String,System.DateTime,System.DateTime)">
+            <summary>
+            And new clause that will check that column is between value1 and value2
+            </summary>
+            <remarks>
+            AND field between value1 AND value2
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.OrNotBetween(System.String,System.Int32,System.Int32)">
+            <summary>
+            Or new clause that will check that column is between value1 and value2
+            </summary>
+            <remarks>
+            OR field between value1 AND value2
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.OrNotBetween(System.String,System.String,System.String)">
+            <summary>
+            Or new clause that will check that column is between value1 and value2
+            </summary>
+            <remarks>
+            OR field between value1 AND value2
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.OrNotBetween(System.String,System.DateTime,System.DateTime)">
+            <summary>
+            Or new clause that will check that column is between value1 and value2
+            </summary>
+            <remarks>
+            OR field between value1 AND value2
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.DAO.WhereClause.FormatSql">
+            <summary>
+            Format the clause for inclusion in sql statement    
+            </summary>
+            <remarks>
+            WHERE &lt;sql&gt;
+            </remarks>
+        </member>
+        <member name="P:Spring2.Core.DAO.WhereClause.IsEmpty">
+            <summary>
+            Returns true if nothing has been added to the clause; otherwise false.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Drawing.Graphing.ChartLine">
+            <summary>
+            This class represents each line that is drawn on a LineChart.  The internal points can be passed in, created from a constant
+            y value, or created from a ResultSet.  The legend text passed in will be used when the legend is created.  The color is assigned
+            when it is added to a LineChart.
+            
+            Web page example:
+                &lt;%@ Page Language="C#" %&gt;
+                &lt;%@ Import Namespace="System" %&gt;
+                &lt;%@ Import Namespace="System.Drawing" %&gt;
+                &lt;%@ Import Namespace="Spring2.Core.Drawing.Graphing" %&gt;
+            
+                &lt;script language="C#" runat="server"&gt;
+                void Page_Load(Object sender, EventArgs e) {
+                LineChart c = new LineChart(640, 480);
+                c.Title="Scorecard LineChart Test";
+            	
+                c.Title="";
+                c.XAxisLabel="";
+                c.YAxisLabel="";
+            	
+                c.XOrigin=0; 
+                c.ScaleX=500; 
+                c.XDivs=5;
+            	
+                c.YOrigin=0; 
+                c.ScaleY=1000; 
+                c.YDivs=5;
+            	
+                ChartLine line = new ChartLine();
+                line.LegendText = "line 1";
+                line.AddPoint(50,50);
+                line.AddPoint(100,100);
+                line.AddPoint(200,150);
+                line.AddPoint(450,450);
+                line.Color = Color.Blue;
+            	
+                ChartLine line2 = new ChartLine();
+                line2.LegendText = "line 2";
+                line2.AddPoint(50,150);
+                line2.AddPoint(100,200);
+                line2.AddPoint(200,250);
+                line2.AddPoint(450,550);
+                line2.Color = Color.Red;
+            
+                ChartLine line3 = new ChartLine();
+                line3.LegendText = "this is a really long legend";
+                line3.AddPoint(450,250);
+                line3.AddPoint(200,300);
+                line3.AddPoint(100,350);
+                line3.AddPoint(50,650);
+                line3.Color = Color.Purple;
+            	
+                c.AddLine(line);
+                c.AddLine(line2);
+                c.AddLine(line3);
+                c.Save(Page);
+            }
+                &lt;/script&gt;
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Drawing.Graphing.DateLabelFormat">
+            <summary>
+            Summary description for DateLabelFormat.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Drawing.Graphing.DateLabelFormat.#ctor(System.DateTime)">
+            <summary>
+            Create an instance setting which date represents 0
+            </summary>
+            <param name="zeroDate"></param>
+        </member>
+        <member name="T:Spring2.Core.Drawing.Graphing.LabelFormat">
+            <summary>
+            Summary description for LabelFormat.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Drawing.Graphing.LabelFormat.LabelPoint">
+            <summary>
+            internal structure to keep track of the individual data points
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Drawing.Graphing.LineChart">
+            <summary>
+            Creates a jpeg image with line charted information
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Drawing.Graphing.LineChart.datapoint">
+            <summary>
+            internal structure to keep track of the individual data points
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Drawing.Graphing.LineChart.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a LineChart of x and y size
+            </summary>
+            <param name="myWidth"></param>
+            <param name="myHeight"></param>
+        </member>
+        <member name="P:Spring2.Core.Drawing.Graphing.LineChart.Title">
+            <summary>
+            Graph title
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Drawing.Graphing.LineChart.XAxisLabel">
+            <summary>
+            Label below chart for X axis
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Drawing.Graphing.LineChart.YAxisLabel">
+            <summary>
+            left side label for Y axis
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Drawing.Graphing.LineChart.YOrigin">
+            <summary>
+            Y origin
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Drawing.Graphing.LineChart.XOrigin">
+            <summary>
+            X origin
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Drawing.Graphing.LineChart.ScaleX">
+            <summary>
+            max x
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Drawing.Graphing.LineChart.ScaleY">
+            <summary>
+            max y
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Drawing.Graphing.LineChart.XDivs">
+            <summary>
+            number of x axis divisions for axis labels
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Drawing.Graphing.LineChart.YDivs">
+            <summary>
+            number of y axis divisions for axis labels
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Drawing.Graphing.LineChart.XLabelFormat">
+            <summary>
+            X axis labels
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Drawing.Graphing.LineChart.YLabelFormat">
+            <summary>
+            Y axis labels
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Drawing.Graphing.LineChart.AddLine(Spring2.Core.Drawing.Graphing.ChartLine)">
+            <summary>
+            Add a new ChartLine to the LineChart
+            </summary>
+            <param name="line"></param>
+        </member>
+        <member name="M:Spring2.Core.Drawing.Graphing.LineChart.Save(System.IO.Stream,System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            Save output to a stream
+            </summary>
+            <param name="stream"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Spring2.Core.Drawing.Graphing.LineChart.TextSize(System.String,System.Drawing.Font)">
+            <summary>
+            Utility method to find the drawn size of a text string given an font
+            </summary>
+            <param name="text"></param>
+            <param name="font"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Drawing.Graphing.LineChart.Finalize">
+            <summary>
+            Class finalizer
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Drawing.Graphing.NumberLabelFormat">
+            <summary>
+            Summary description for NumberLabelFormat.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Globalization.DaylightTimeRule">
+            <summary>
+            Represents the rules that are used to determine the actual DaylightTime for a given year
+            </summary>
+        </member>
+        <member name="F:Spring2.Core.Globalization.DaylightTimeRule.UNITED_STATES">
+            <summary>
+            Daylight savings rules for the United States, which changed rules effective 2007
+            </summary>
+        </member>
+        <member name="F:Spring2.Core.Globalization.DaylightTimeRule.NORTH_AMERICA">
+            <summary>
+            Daylight savings rules for North America, but in 2007 the United States and parts of Canada have changed their rules and have been seperated as UNITED_STATES.
+            </summary>
+        </member>
+        <member name="F:Spring2.Core.Globalization.DaylightTimeRule.EUROPE">
+            <summary>
+            Daylight savings rules for Europe
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Globalization.DaylightTimeRule.GetDaylightTime(System.Int32,System.TimeSpan)">
+            <summary>
+            Get the DaylightTime for the year specified, adjusted by UTC offset if required (by a RegionalTimeZone)
+            </summary>
+            <param name="year"></param>
+            <param name="utcOffset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Globalization.IDaylightTimeRule.GetDaylightTime(System.Int32,System.TimeSpan)">
+            <summary>
+            Get the DaylightTime for the year specified, adjusted by UTC offset if required (by a RegionalTimeZone)
+            </summary>
+            <param name="year"></param>
+            <param name="utcOffset"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Spring2.Core.Globalization.RegionalTimeZone">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Globalization.RegionalTimeZone.#ctor(System.String,System.String,Spring2.Core.Globalization.IDaylightTimeRule,System.TimeSpan)">
+            <summary>
+            Constructor to create the limited number of TimeZone instances
+            </summary>
+            <param name="code">shorthand for the database</param>
+            <param name="name">friendly, descriptive name</param>
+            <param name="daylightTimeRule">period of time that is "daylight savings time"</param>
+            <param name="utcOffset">hours offset from UTC</param>
+        </member>
+        <member name="M:Spring2.Core.Globalization.RegionalTimeZone.GetInstance(System.String)">
+            <summary>
+            Returns the intialized instance for the corresponding TimeZone.
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Spring2.Core.Globalization.RegionalTimeZone.Code">
+            <summary>
+            The code used to get a particular TimeZone instance
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Globalization.RegionalTimeZone.Name">
+            <summary>
+            Name of TimeZone
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Globalization.RegionalTimeZone.StandardName">
+            <summary>
+            Standard time name
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Globalization.RegionalTimeZone.DaylightName">
+            <summary>
+            Daylight time name, empty string if daylight time is not observed
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Globalization.RegionalTimeZone.GetUtcOffset(System.DateTime)">
+            <summary>
+            UTC offset for the specified time
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Globalization.RegionalTimeZone.GetDaylightChanges(System.Int32)">
+            <summary>
+            DaylightTime for the specified year
+            </summary>
+            <param name="year"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Globalization.RegionalTimeZone.IsDaylightSavingTime(System.DateTime)">
+            <summary>
+            Is the date specified within the daylight time.  Returns false if daylight time is not observed.
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Globalization.RegionalTimeZone.ToLocalTime(System.DateTime)">
+            <summary>
+            Returns the local time that corresponds to the specified coordinated universal time (UTC)
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Globalization.RegionalTimeZone.ToLocalTime(System.DateTime,System.TimeZone)">
+            <summary>
+            Convert local time of another time zone to local time
+            </summary>
+            <param name="time"></param>
+            <param name="timezone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Globalization.RegionalTimeZone.ToUniversalTime(System.DateTime)">
+            <summary>
+            Returns the coordinated universal time (UTC) that corresponds to the specified local time
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Spring2.Core.Globalization.RegionalTimeZone.Options">
+            <summary>
+            The complete list of possible TimeZone instances
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Globalization.WeekOfMonth">
+            <summary>
+            Specification of an occurance within a month (i.e. last Sunday in October)
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Globalization.XmlDaylightTimeRule">
+            <summary>
+            Represents the rules that are used to determine the actual DaylightTime for a given year
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Globalization.XmlDaylightTimeRule.GetDaylightTime(System.Int32,System.TimeSpan)">
+            <summary>
+            Get the DaylightTime for the year specified, adjusted by UTC offset if required (by a RegionalTimeZone)
+            </summary>
+            <param name="year"></param>
+            <param name="utcOffset"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Spring2.Core.IO.ResourceLocator">
+            <summary>
+            Locates a resource (file) in the file system or as a resource in an assembly.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Message.Message">
+            <summary>
+            Abstract base class for messages.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Message.ResourceKey">
+            <summary>
+            Summary description for ResourceKey.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Message.TestMessage">
+            <summary>
+            Simple message for testing and to show how messages are created.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Util.ApplicationError">
+            <summary>
+            Represents an error caused by user input.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.ApplicationError.#ctor(System.String)">
+            <summary>
+            Creates an application error from the given property name.
+            </summary>
+            <param name="propertyName">the name of the property associated with the error.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.ApplicationError.#ctor(System.String,System.String)">
+            <summary>
+            Creates an application error given a property name and a message.
+            </summary>
+            <param name="propertyName">the name of the property associated with the error.</param>
+            <param name="message">a message describing the error.</param>
+        </member>
+        <member name="P:Spring2.Core.Util.ApplicationError.PropertyName">
+            <summary>
+            Read-only property for accessing the property name of the error.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.ApplicationError.Message">
+            <summary>
+            Property for getting and setting a unique message associated with the error.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Util.ApplicationErrorCollection">
+            <summary>
+            Summary description for ApplicationErrorCollection.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Util.DateUtil">
+            <summary>
+            Summary description for DateUtil.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.DateUtil.ToDateTimeFromCreditCardDate(System.String)">
+            <summary>
+            Return the last day of the year/month represented by the mmyy date string.
+            </summary>
+            <param name="mmyy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Util.DateUtil.ToDateTimeFromCreditCardDate(System.Int32,System.Int32)">
+            <summary>
+            Return the last day of the year/month represented by the mmyy date string.
+            </summary>
+            <param name="mm"></param>
+            <param name="yy"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Spring2.Core.Util.ExceptionError">
+            <summary>
+            Summary description for ParseError.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Util.FTPClient">
+            <summary>
+            This class permits you to perform direct connections to FTP sites
+            The class supports the following FTP commands:
+              - Download a file
+              - Upload a file
+              - Download a file
+              - Create a directory
+              - Remove a directory
+              - Change directory
+              - Remove a file
+              - Rename a file
+              - Set the user name of the remote user
+              - Set the password of the remote user
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.#ctor(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="remoteHost">Host to connect to</param>
+            <param name="remotePath">Path on remote host to start work in.</param>
+            <param name="remoteUser">Username for the remote host.</param>
+            <param name="remotePassword">Password for the remote host.</param>
+            <param name="remotePort">Port to use.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Constructor.  Port defaults to 21.
+            </summary>
+            <param name="remoteHost">Host to connect to</param>
+            <param name="remotePath">Path on remote host to start work in.</param>
+            <param name="remoteUser">Username for the remote host.</param>
+            <param name="remotePassword">Password for the remote host.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor.  Port defaults to 21.
+            </summary>
+            <param name="remoteHost">Host to connect to</param>
+            <param name="remoteUser">Username for the remote host.</param>
+            <param name="remotePassword">Password for the remote host.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.Init(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Used by constructors.
+            </summary>
+            <param name="remoteHost">Host to connect to</param>
+            <param name="remotePath">Path on remote host to start work in.</param>
+            <param name="remoteUser">Username for the remote host.</param>
+            <param name="remotePassword">Password for the remote host.</param>
+            <param name="remotePort">Port to use.</param>
+        </member>
+        <member name="P:Spring2.Core.Util.FTPClient.RemoteHostFTPServer">
+            <summary>
+            Set or Get the name of the FTP server that you want to connect to.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.FTPClient.RemotePort">
+            <summary>
+            Set or Get the FTP port number of the FTP server that you want to connect to.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.FTPClient.RemotePath">
+            <summary>
+            Set or Get the remote path of the FTP server that you want to connect to.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.FTPClient.RemotePassword">
+            <summary>
+            Set the remote password of the FTP server that you want to connect to.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.FTPClient.RemoteUser">
+            <summary>
+            Set or Get the remote user of the FTP server that you want to connect to. 
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.FTPClient.MessageString">
+            <summary>
+            Get or Set the class messagestring.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.FTPClient.ReceiveTimeout">
+            <summary>
+            Get or set the amount of time to wait for an ftp receive (in milliseconds).
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.GetFileList(System.String)">
+            <summary>
+            Get files from file system
+            </summary>
+            <param name="mask">Mask to limit files returned.</param>
+            <returns>Array of file objects.</returns>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.GetFileSize(System.String)">
+            <summary>
+             Get the size of the file on the FTP server.
+            </summary>
+            <param name="filename">Name of file</param>
+            <returns>Size of file.</returns>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.Login">
+            <summary>
+            Log on to the FTP server.
+            </summary>
+            <returns>true if successful, false otherwise.</returns>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.ChangeDirectory(System.String)">
+            <summary>
+            This is a function that is used to change the current working directory on the remote FTP server.
+            </summary>
+            <param name="sDirName">Nameof directory</param>
+            <returns>True on success.</returns>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.CloseConnection">
+            <summary>
+            Close the FTP connection of the remote server.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.SetBinaryMode(System.Boolean)">
+            <summary>
+            Set the binary mode.
+            </summary>
+            <param name="bMode">if the value of mode is true, set binary mode for downloads. Otherwise, set ASCII mode.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.DownloadFile(System.String)">
+            <summary>
+             Download a file to the local directory of the assembly. Keep the same file name.
+            </summary>
+            <param name="fileName">Name of file to download.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.DownloadFile(System.String,System.IO.Stream)">
+            <summary>
+            Download a file.
+            </summary>
+            <param name="fileName">Name of file to download.</param>
+            <param name="output">Stream to write the file to.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.DownloadFile(System.String,System.Boolean)">
+            <summary>
+             Download a remote file to the local directory of the Assembly. Keep the same file name.
+            </summary>
+            <param name="filename">filename to download.</param>
+            <param name="resume">Indicates if we a resuming a previously aborted download</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.DownloadFile(System.String,System.String)">
+            <summary>
+            Download a remote file to a local file name. You must include a path.
+            The local file name will be created or will be overwritten, but the path must exist.
+            </summary>
+            <param name="filename">remote file name</param>
+            <param name="localFileName">local file name</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.DownloadFile(System.String,System.String,System.Boolean)">
+            <summary>
+             Download a remote file to a local file name. You must include a path. Set the 
+            resume flag. The local file name will be created or will be overwritten, but the path must exist.
+            </summary>
+            <param name="filename">remote file name</param>
+            <param name="localFileName">local file name</param>
+            <param name="resume">Indicates if we a resuming a previously aborted download</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.DownloadFile(System.String,System.Boolean,System.IO.Stream)">
+            <summary>
+            Downloads a file to the stream.
+            </summary>
+            <param name="filename">Name of file to download.</param>
+            <param name="resume">Indicates if we a resuming a previously aborted download</param>
+            <param name="output">Stream to write the file to.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.DownloadToString(System.String)">
+            <summary>
+            Downloads a file to a string.
+            </summary>
+            <param name="filename">File to download.</param>
+            <returns>Contents of file downloaded.</returns>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.DownloadToString(System.String,System.Boolean)">
+            <summary>
+            Downloads a file to a string.
+            </summary>
+            <param name="filename">File to download.</param>
+            <param name="resume">Indicates if we a resuming a previously aborted download</param>
+            <returns>Contents of file downloaded.</returns>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.UploadFile(System.String)">
+            <summary>
+            This is a function that is used to upload a file from your local hard disk to your FTP site.
+            </summary>
+            <param name="filename">Name of file to upload.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.UploadFile(System.String,System.String)">
+            <summary>
+            This is a function that is used to upload a file from your local hard disk to your FTP site.
+            </summary>
+            <param name="filename">Name of file to upload.</param>
+            <param name="remoteFileName">Name of file to create on remote system.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.UploadFile(System.IO.Stream,System.String)">
+            <summary>
+            This is a function that is used to upload a stream to your FTP site. 
+            </summary>
+            <param name="input">stream to upload.</param>
+            <param name="remoteFileName">Name of file to create on remote system.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.UploadFile(System.String,System.Boolean)">
+            <summary>
+            This is a function that is used to upload a file from your local hard disk to your FTP site 
+            and then set the resume flag.
+            </summary>
+            <param name="filename">name of file to upload.</param>
+            <param name="resume">Indicates if we a resuming a previously aborted download</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.UploadFile(System.String,System.String,System.Boolean)">
+            <summary>
+            This is a function that is used to upload a file from your local hard disk to your FTP site 
+            and then set the resume flag.
+            </summary>
+            <param name="filename">name of file to upload.</param>
+            <param name="remoteFileName">Name of file to create on remote system.</param>
+            <param name="resume">Indicates if we a resuming a previously aborted download</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.UploadFile(System.IO.Stream,System.String,System.Boolean)">
+            <summary>
+            This is a function that is used to upload a stream to your FTP site 
+            and then set the resume flag.
+            </summary>
+            <param name="input">stream to upload.</param>
+            <param name="remoteFileName">Name of file to create on remote system.</param>
+            <param name="resume">Indicates if we a resuming a previously aborted download</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.UploadFromString(System.String,System.String)">
+            <summary>
+            Uploads a file from a string.
+            </summary>
+            <param name="remoteFilename">Name of file to create on ftp server.</param>
+            <param name="input">String containing contents of file to create.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.UploadFromString(System.String,System.String,System.Boolean)">
+            <summary>
+            Uploads a file from a string.
+            </summary>
+            <param name="remoteFilename">Name of file to create on ftp server.</param>
+            <param name="input">String containing contents of file to create.</param>
+            <param name="resume">Indicates if we a resuming a previously aborted download</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.DeleteFile(System.String)">
+            <summary>
+             Delete a file from the remote FTP server.
+            </summary>
+            <param name="filename">Name of file to delete</param>
+            <returns>result.</returns>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.RenameFile(System.String,System.String)">
+            <summary>
+             Rename a file on the remote FTP server.
+            </summary>
+            <param name="sOldFileName">File name before rename</param>
+            <param name="sNewFileName">File name after successful rename.</param>
+            <returns>True if successful.</returns>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.CreateDirectory(System.String)">
+            <summary>
+            This is a function that is used to create a directory on the remote FTP server.
+            </summary>
+            <param name="sDirName">Name of directory to create</param>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.RemoveDirectory(System.String)">
+            <summary>
+            This is a function that is used to delete a directory on the remote FTP server.
+            </summary>
+            <param name="sDirName">Name of directory to delete</param>
+            <returns>True if successful</returns>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.ReadReply">
+            <summary>
+             Read the reply from the FTP server.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.Cleanup">
+            <summary>
+             Clean up some variables.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.ReadLine">
+            <summary>
+            Reads a line from the FTP server without clearring the message.
+            </summary>
+            <returns>Line read</returns>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.ReadLine(System.Boolean)">
+            <summary>
+             Read a line from the FTP server.
+            </summary>
+            <param name="bClearMes">Indicates if message is to be cleared.</param>
+            <returns>Line reead.</returns>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.SendCommand(System.String)">
+            <summary>
+            This is a function that is used to send a command to the FTP server that you are connected to.
+            </summary>
+            <param name="sCommand">Command to send.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.FTPClient.CreateDataSocket">
+            <summary>
+             Create a data socket.
+            </summary>
+            <returns>Socket created.</returns>
+        </member>
+        <member name="T:Spring2.Core.Util.GnuPGException">
+            <summary>
+            Specific exception thrown whenever a PGP error occurs.
+            
+            <p/>This class is a simple derivation from the Exception class.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.GnuPGException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">error message associated with exception</param>
+        </member>
+        <member name="T:Spring2.Core.Util.Commands">
+            <summary>
+            List (enum) of available commands (sign, encrypt, sign and encrypt, etc...)
+            </summary>
+        </member>
+        <member name="F:Spring2.Core.Util.Commands.Sign">
+            <summary>
+            Make a signature
+            </summary>
+        </member>
+        <member name="F:Spring2.Core.Util.Commands.Encrypt">
+            <summary>
+            Encrypt  data
+            </summary>
+        </member>
+        <member name="F:Spring2.Core.Util.Commands.SignAndEncrypt">
+            <summary>
+            Sign and encrypt data
+            </summary>
+        </member>
+        <member name="F:Spring2.Core.Util.Commands.Decrypt">
+            <summary>
+            Decrypt data
+            </summary>
+        </member>
+        <member name="F:Spring2.Core.Util.Commands.Verify">
+            <summary>
+            Assume that input is a signature and verify it without generating any output
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Util.VerboseLevel">
+            <summary>
+            List (enum) of available verbose levels (NoVerbose, Verbose, VeryVerbose)
+            </summary>
+        </member>
+        <member name="F:Spring2.Core.Util.VerboseLevel.NoVerbose">
+            <summary>
+            Reset verbose level to 0 (no information shown during processing)
+            </summary>
+        </member>
+        <member name="F:Spring2.Core.Util.VerboseLevel.Verbose">
+            <summary>
+            Give more information during processing.
+            </summary>
+        </member>
+        <member name="F:Spring2.Core.Util.VerboseLevel.VeryVerbose">
+            <summary>
+            Give full information during processing (the input data is listed in detail).
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Util.GnuPGWrapper">
+            <summary>
+            This class is a wrapper class for GNU Privacy Guard (GnuPG). It execute the command 
+            line program (gpg.exe) in an different process, redirects standard input (stdin),
+            standard output (stdout) and standard error (stderr) streams, and monitors the 
+            streams to fetch the results of the encryption/signing operation.<p/>
+            
+            Please note that you must have INSTALLED GnuPG AND generated/imported the 
+            appropriate keys before using this class.<p/>
+            
+            GnuPG stands for GNU Privacy Guard and is GNU's tool for secure communication and 
+            data storage. It can be used to encrypt data and to create digital signatures. It 
+            includes an advanced key management facility and is compliant with the proposed 
+            OpenPGP Internet standard as described in RFC 2440. As such, GnuPG is a complete 
+            and free replacement for PGP.<p/>
+            
+            This class has been developed and tested with GnuPG v1.2.0 (MingW32)<p/>
+            
+            For more about GNU, please refer to http://www.gnu.org <br/>
+            For more about GnuPG, please refer to http://www.gnupg.org <br/>
+            For more about OpenPGP (RFC 2440), please refer to http://www.gnupg.org/rfc2440.html <br/>
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.GnuPGWrapper.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.GnuPGWrapper.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="homeDirectory">home directory for GnuPG (where keyrings AND gpg.exe are located)</param>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.command">
+            <summary>
+            Command property: set the type of command to execute (sign, encrypt...)
+            
+            <p/>Defaults to SignAndEncrypt.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.armor">
+            <summary>
+            Boolean flag: if true, GnuPG creates ASCII armored output (text output). 
+            
+            <p/>Defaults to true (ASCII ouput).
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.recipient">
+            <summary>
+            Recipient email address - mandatory when <see cref="P:Spring2.Core.Util.GnuPGWrapper.command">command</see> is Encrypt or SignAndEncrypt
+            
+            <p/>GnuPG uses this parameter to find the associated public key. You must have imported 
+            this public key in your keyring before.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.originator">
+            <summary>
+            Originator email address - recommended when <see cref="P:Spring2.Core.Util.GnuPGWrapper.command">command</see> is Sign or SignAndEncrypt
+            
+            <p/>GnuPG uses this parameter to find the associated secret key. You must have imported 
+            this secret key in your keyring before. Otherwise, GnuPG uses the first secret key 
+            in your keyring to sign messages. This property is mapped to the "--default-key" option.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.yes">
+            <summary>
+            Boolean flag; if true, GnuPG assumes "yes" on most questions.
+            
+            <p/>Defaults to true.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.batch">
+            <summary>
+            Boolean flag; if true, GnuPG uses batch mode (Never ask, do not allow 
+            interactive commands).
+            
+            <p/>Defaults to true.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.passphrase">
+            <summary>
+            Passphrase for using your private key - mandatory when 
+            <see cref="P:Spring2.Core.Util.GnuPGWrapper.command">command</see> is Sign or SignAndEncrypt.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.homedirectory">
+            <summary>
+            name of the home directory (where keyrings AND gpg.exe are located)
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.passphrasefd">
+            <summary>
+            File descriptor for entering passphrase - defaults to 0 (standard input).
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.exitcode">
+            <summary>
+            Exit code from GnuPG process (0 = success; otherwise an error occured)
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.verbose">
+            <summary>
+            Verbose level (NoVerbose, Verbose, VeryVerbose). 
+            
+            <p/>Defaults to NoVerbose.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.alwaystrust">
+            <summary>
+            Indicates you want to trust all keys.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.ProcessTimeOutMilliseconds">
+            <summary>
+            Timeout for GnuPG process, in milliseconds.
+            
+            <p/>If the process doesn't exit before the end of the timeout period, the process is terminated (killed).
+            
+            <p/>Defaults to 10000 (10 seconds).
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.GnuPGWrapper.BuildOptions">
+            <summary>
+            Generate a string of GnuPG command line arguments, based on the properties
+            set in this object (e.g. if the <see cref="P:Spring2.Core.Util.GnuPGWrapper.armor">armor</see> property is true, 
+            this method generates the "--armor" argument).
+            </summary>
+            <returns>GnuPG command line arguments</returns>
+        </member>
+        <member name="M:Spring2.Core.Util.GnuPGWrapper.ExecuteCommand(System.String@)">
+            <summary>
+            Decrypts or encrypts the file specified by the inputfile property.
+            </summary>
+            <param name="outputText">Decrypted or encrypted text.</param>
+        </member>
+        <member name="M:Spring2.Core.Util.GnuPGWrapper.ExecuteCommand(System.String,System.String@)">
+            <summary>
+            Execute the GnuPG command defined by all parameters/options/properties.
+            
+            <p/>Raise a GnuPGException whenever an error occurs.
+            </summary>
+            <param name="inputText"></param>
+            <param name="outputText"></param>
+        </member>
+        <member name="M:Spring2.Core.Util.GnuPGWrapper.StandardOutputReader">
+            <summary>
+            Reader thread for standard output
+            
+            <p/>Updates the private variable _outputString (locks it first)
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.GnuPGWrapper.StandardErrorReader">
+            <summary>
+            Reader thread for standard error
+            
+            <p/>Updates the private variable _errorString (locks it first)
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.inputfile">
+            <summary>
+            name of the file to operate on
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Util.GnuPGWrapper.outputfile">
+            <summary>
+            name of the file to output
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.GnuPGWrapper.ExecuteCommand">
+            <summary>
+            Execute the GnuPG command defined by all parameters/options/properties.
+            
+            <p/>Raise a GnuPGException whenever an error occurs.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Util.MissingRequiredFieldError">
+            <summary>
+            Summary description for MissingRequiredFieldError.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Util.PagedList`1">
+            <summary>
+            Utility open type to help handle paging
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Util.ParseError">
+            <summary>
+            Summary description for ParseError.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Util.Range`1">
+            <summary>
+            Reprsents a range with a specific start and end
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.StringExtensions.Left(System.String,System.Int32)">
+            <summary>
+            Returns the first few characters of the string with a length
+            specified by the given parameter. If the string's length is less than the 
+            given length the complete string is returned. If length is zero or 
+            less an empty string is returned
+            </summary>
+            <param name="s">the string to process</param>
+            <param name="length">Number of characters to return</param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Util.StringExtensions.Right(System.String,System.Int32)">
+            <summary>
+            Returns the last few characters of the string with a length
+            specified by the given parameter. If the string's length is less than the 
+            given length the complete string is returned. If length is zero or 
+            less an empty string is returned
+            </summary>
+            <param name="s">the string to process</param>
+            <param name="length">Number of characters to return</param>
+            <returns></returns>
+        </member>
+        <member name="T:Spring2.Core.Util.StringUtil">
+            <summary>
+            Collection of miscellaneous String functions
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Util.StringUtil.RemoveTrailingNewLine(System.String)">
+            <summary>
+            Remove trailing Environment.NewLine from end of string.  Will remove multiples if they exist.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Util.StringUtil.RemoveTrailingString(System.String,System.String)">
+            <summary>
+            Remove trailing string from end of a string.  Will remove multiples if they exist.
+            </summary>
+            <param name="source"></param>
+            <param name="trailer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Util.StringUtil.RemoveTrailingBlankLines(System.String)">
+            <summary>
+            Remove trailing Environment.NewLine from end of string.  Spaces are trimmed at end and between Environment.NewLine.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Util.StringUtil.fileContentsToString(System.String)">
+            <summary>
+            Read the contents of a file and place them in a string object.
+            </summary>
+            <param name="file">path to file.</param>
+            <returns>String contents of the file.</returns>
+        </member>
+        <member name="T:Spring2.Core.Util.Timer">
+            <summary>
+            Util class to aide in performance timings.  Internally maintains time in ticks.  Start and Stop properties are expressed as ticks.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.DataObject.DataObject">
+            <summary>
+            Abstract base class for data objects.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.DataObject.DataObject.ToString">
+            <summary>
+            Creates a string representation of the DataObject.
+            </summary>
+            <returns>String representing the data object.</returns>
+        </member>
+        <member name="M:Spring2.Core.DataObject.DataObject.ToString(System.Int32,System.Boolean)">
+            <summary>
+            Creates a string representation of the DataObject indented to indentLevel (for nested objects)
+            </summary>
+            <returns>String representing the data object.</returns>
+        </member>
+        <member name="M:Spring2.Core.DataObject.DataObject.Equals(System.Object)">
+            <summary>
+            Does a deep compare of the current object with the passed object.
+            </summary>
+            <param name="obj">Object to compare current object with.</param>
+            <returns>True if objects are equal, false otherwise.</returns>
+        </member>
+        <member name="M:Spring2.Core.DataObject.DataObject.GetHashCode">
+            <summary>
+            Returns a hash code.
+            </summary>
+            <returns>Hash code value</returns>
+        </member>
+        <member name="T:Spring2.Core.Xml.Escape">
+            <summary>
+            This class is for escaping CDATA sections. The code was
+            "borrowed" from NVelocity, which was borrowed from Velocity, 
+            which was borrow from the JDOM code. I also added in escaping
+            of the " -> &amp;quot; character.
+            </summary>
+            <author><a href="mailto:cort@xmission.com">Cort Schaefer</a></author>
+        </member>
+        <member name="M:Spring2.Core.Xml.Escape.#ctor">
+            <summary>
+            Empty constructor
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Xml.Escape.GetText(System.String)">
+            <summary>
+            Do the escaping.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Xml.XIncludeReader">
+            <summary>
+            XmlTextReader that supports syntaxt for XInclude.
+            Must include a namespace in the root element, like:
+            xmlns:xinc="http://www.w3.org/1999/XML/xinclude" 
+            
+            use like:
+            &lt;sqltypes-ref xinc:href="sqltypes.xml.inc" /&gt;
+            
+            Element name can be anything, namespace on href must match namespace included in root element.
+            Included file can have any name and extention.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Xml.XIncludeReader.Read">
+            <summary>
+            custom implementation of Read: if a nested reader exists, delegate
+            otherwise, Read the next node and check for xinc:href
+            if one exists create another nested reader and continue
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spring2.Core.WebControl</name>
+    </assembly>
+    <members>
+        <member name="T:Spring2.Core.WebControl.IMenu">
+            <summary>
+            Summary description for Class1.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.WebControl.Menu">
+            <summary>
+            Summary description for MenuControl.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.WebControl.Menu.Enabled">
+            <summary>
+            Gets or sets the enabled property for the menu.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.WebControl.Menu.Description">
+            <summary>
+            Gets or sets the description to be rendered beneath the menu link.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.WebControl.Menu.DescriptionCssClass">
+            <summary>
+            Gets or sets the css class to be used with the description.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.WebControl.Menu.DisabledMenuNotice">
+            <summary>
+            Gets or sets the css save alert function name.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.WebControl.MenuItem">
+            <summary>
+            Summary description for MenuItem.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.WebControl.MenuItemCollection">
+            <summary>
+            Summary description for MenuItemCollection.
+            </summary>
+        </member>
+    </members>
+</doc>

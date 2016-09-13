@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spring2.Core.AddressValidation</name>
+    </assembly>
+    <members>
+        <member name="T:Spring2.Core.AddressValidation.AddressValidationConfigurationException">
+            <summary>
+            Summary description for AddressValidationConfigurationException.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.AddressValidation.AddressValidationException">
+            <summary>
+            Summary description for AddressValidationException.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.AddressValidation.AddressValidationManager">
+            <summary>
+            Summary description for Class1.
+            </summary>
+        </member>
+    </members>
+</doc>

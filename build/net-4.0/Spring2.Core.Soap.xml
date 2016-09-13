@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spring2.Core.Soap</name>
+    </assembly>
+    <members>
+        <member name="F:Spring2.Core.Soap.ExposedHttpWebResponse._response">
+            stores response, so it can be searchable
+        </member>
+        <member name="M:Spring2.Core.Soap.ExposedHttpWebResponse.GetResponseStream">
+            <summary>
+            get response stream and populate _responseStream var, so we have access to it;
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Soap.ExposedHttpWebResponse.GetContent">
+            <summary>
+            return content of the response;
+            </summary>
+            <remarks>reset position of the stream to the start</remarks>
+        </member>
+        <member name="M:Spring2.Core.Soap.ExposedSoapClientProtocol.GetResponseXML">
+            <summary>
+            return the whole response xml, including soap envelope
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Soap.Log4NetExtension">
+            <summary>
+            Log4Net soap extension for logging request and response xml
+            </summary>
+            <remarks>
+            Extension based on CompressExtension example from Saurabh Nandu.
+            </remarks>
+        </member>
+        <member name="T:Spring2.Core.Soap.Log4NetExtensionAttribute">
+            <summary>
+            Summary description for CompressionExtensionAttribute.
+            </summary>
+        </member>
+    </members>
+</doc>

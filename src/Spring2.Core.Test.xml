@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spring2.Core.Test</name>
+    </assembly>
+    <members>
+        <member name="T:Spring2.Core.Test.BooleanTypeTest">
+            <summary>
+            Tests for BooleanType
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.ConfigurationTest">
+            <summary>
+            Tests for MailMessage
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.EnumDataTypeListTest">
+            <summary>
+            Tests for EnumDataTypeList
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.CurrencyConversionTest">
+            <summary>
+            Summary description for Currency Conversion Test
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.DataTypeSerializationTest">
+            <summary>
+            Tests for BooleanType
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.DataTypeTest">
+            <summary>
+            Summary description for DataTypeTest.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.DaylightTimeRuleTest">
+            <summary>
+            Tests for DaylightTimeRule
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.GeocodeV3Test">
+            <summary>
+            Tests for Google Geocode API V3
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.GeocodeTest">
+            <summary>
+            Summary description for GeocodeTest.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.TomTomProviderTest">
+            <summary>
+            Tests for TomTomProvider
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.MailMessageTest">
+            <summary>
+            Tests for MailMessage
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.MockHttpWorkerRequestTest">
+            <summary>
+            Summary description for MockHttpWorkerRequestTest.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.NavigationTest">
+            <summary>
+            Tests for Navigation
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.PagedListTest">
+            <summary>
+            Summary description for PagedListTest.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.RangeTest">
+            <summary>
+            Summary description for PagedListTest.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.SqlBetweenPredicateTest">
+            <summary>
+            Summary description for SqlBetweenPredicateTest.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.SqlEqualityPredicateTest">
+            <summary>
+            Summary description for SqlBetweenPredicateTest.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.SqlFilterTest">
+            <summary>
+            Tests for IWhere functionality
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.SqlInPredicateTest">
+            <summary>
+            Summary description for SqlBetweenPredicateTest.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.SqlLiteralPredicateTest">
+            <summary>
+            Summary description for SqlLiteralPredicateTest.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.StringTypeTest">
+            <summary>
+            Tests for BooleanType
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Test.StringTypeTest.StringTypeProperty">
+            <summary>
+            Property for AssignementFromDataObject test
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.TestFTPClient">
+            <summary>
+            Tests the FTP Client class
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Test.TestFTPClient.FTPClientTest">
+            <summary>
+            Test the ftp client class.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Test.TestFTPClient.Cleanup">
+            <summary>
+            Cleans up files created during test.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.TestGnuPGWrapper">
+            <summary>
+            Test PGP encryption/decryption
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Test.TestGnuPGWrapper.FilesTest">
+            <summary>
+            Test of files with the wrapper.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Test.TestGnuPGWrapper.StringTest">
+            <summary>
+            Test of strings with wrapper.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Test.TestGnuPGWrapper.FileToStringTest">
+            <summary>
+            Test of file decrypting to string with wrapper.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Test.TestGnuPGWrapper.CleanFiles">
+            <summary>
+            Cleans up files for the file test.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.TestUtilities">
+            <summary>
+            Utilities to help in the testing process.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Test.TestUtilities.#ctor">
+            <summary>
+            All methods are static.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Test.TestUtilities.CompareFiles(System.String,System.String)">
+            <summary>
+            Asserts two files are identical
+            </summary>
+            <param name="filename1">File to compare.</param>
+            <param name="filename2">File to compare.</param>
+        </member>
+        <member name="T:Spring2.Core.Test.TimeZoneTests">
+            <summary>
+            Summary description for TimeZoneTests
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.WhereClauseTest">
+            <summary>
+            Tests for IWhere functionality
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Test.XmlEscapeTest">
+            <summary>
+            Tests for escaping/encoding string for use in Xml
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Test.Serialization.BooleanTypeTest.SerializeDeserialze(System.Object)">
+            <summary>
+            Utility method to serialize to memory and then deserialize an object
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Test.Serialization.CurrencyTypeTest.SerializeDeserialze(System.Object)">
+            <summary>
+            Utility method to serialize to memory and then deserialize an object
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Test.Serialization.DateTimeTypeTest.SerializeDeserialze(System.Object)">
+            <summary>
+            Utility method to serialize to memory and then deserialize an object
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Test.Serialization.DateTypeTest.SerializeDeserialze(System.Object)">
+            <summary>
+            Utility method to serialize to memory and then deserialize an object
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Test.Serialization.DecimalTypeTest.SerializeDeserialze(System.Object)">
+            <summary>
+            Utility method to serialize to memory and then deserialize an object
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Test.Serialization.IdTypeTest.SerializeDeserialze(System.Object)">
+            <summary>
+            Utility method to serialize to memory and then deserialize an object
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Test.Serialization.IntegerTypeTest.SerializeDeserialze(System.Object)">
+            <summary>
+            Utility method to serialize to memory and then deserialize an object
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Test.Serialization.LongTypeTest.SerializeDeserialze(System.Object)">
+            <summary>
+            Utility method to serialize to memory and then deserialize an object
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Test.Serialization.QuantityTypeTest.SerializeDeserialze(System.Object)">
+            <summary>
+            Utility method to serialize to memory and then deserialize an object
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Test.Serialization.ShortTypeTest.SerializeDeserialze(System.Object)">
+            <summary>
+            Utility method to serialize to memory and then deserialize an object
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Test.Serialization.StringTypeTest.SerializeDeserialze(System.Object)">
+            <summary>
+            Utility method to serialize to memory and then deserialize an object
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Test.Serialization.TimeTypeTest.SerializeDeserialze(System.Object)">
+            <summary>
+            Utility method to serialize to memory and then deserialize an object
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CRC32">
+            <summary>
+            Provides a C# implementaiton of the cyclic-redundancy check algorithm in C#.
+            </summary>
+            <remarks>
+            This type is entirely CLS-compliant unless otherwise noted.  It will operate on types 
+            of System.UInt32, System.Int64, and System.Int32.  All data is represented internally 
+            by a UInt32 variable.
+            </remarks>
+        </member>
+        <member name="F:CRC32.TABLE_SIZE">
+            <summary>
+            The size of the CRC table (256).
+            </summary>
+        </member>
+        <member name="F:CRC32.STANDARD_POLYNOMIAL">
+            <summary>
+            The standard CRC32 algorithm's polynomial.
+            </summary>
+        </member>
+        <member name="M:CRC32.#ctor">
+            <summary>
+            Prevent this type from being instantiated.
+            </summary>
+        </member>
+        <member name="M:CRC32.#cctor">
+            <summary>
+            Initializes static variables.
+            </summary>
+        </member>
+        <member name="P:CRC32.Initialized">
+            <summary>
+            Gets whether or not the CRC table has been initialized.
+            </summary>
+        </member>
+        <member name="P:CRC32.Polynomial">
+            <summary>
+            Gets the currently-used polynomial.
+            </summary>
+            <remarks>
+            This property is not CLS-compliant.
+            </remarks>
+        </member>
+        <member name="F:CRC32.table">
+            <summary>
+            Stores the CRC table.
+            </summary>
+        </member>
+        <member name="F:CRC32.polynomial">
+            <summary>
+            Provides internal storage of the CRC polynomial to be used during checking.
+            </summary>
+        </member>
+        <member name="F:CRC32.initialized">
+            <summary>
+            Stores whether or not the initialization routine has been called.
+            </summary>
+        </member>
+        <member name="M:CRC32.Init(System.UInt32)">
+            <summary>
+            Initializes the CRC table with the specified CRC polynomial.
+            </summary>
+            <remarks>
+            One of the Init variants must be called before you are able to call the Crc32 methods.
+            This is to initially populate the tables with a provided polynomial.
+            </remarks>
+            <param name="Polynomial">The polynomial to use for initialization of the
+            table.</param>
+        </member>
+        <member name="M:CRC32.Init(System.Int32)">
+            <summary>
+            Initializes the CRC table with the specified CRC polynomial.
+            </summary>
+            <remarks>
+            One of the Init variants must be called before you are able to call the Crc32 methods.
+            This is to initially populate the tables with a provided polynomial.
+            </remarks>
+            <param name="Polynomial">The polynomial to use for initialization of the
+            table.</param>
+        </member>
+        <member name="M:CRC32.Init(System.Int64)">
+            <summary>
+            Initializes the CRC table with the specified CRC polynomial.
+            </summary>
+            <remarks>
+            One of the Init variants must be called before you are able to call the Crc32 methods.
+            This is to initially populate the tables with a provided polynomial.
+            </remarks>
+            <param name="Polynomial">The polynomial to use for initialization of the
+            table.</param>
+        </member>
+        <member name="M:CRC32.Init">
+            <summary>
+            Initializes the CRC table with the standard polynomial.
+            </summary>
+            <remarks>
+            One of the Init variants must be called before you are able to call the Crc32 methods.
+            This is to initially populate the tables with a provided polynomial.
+            </remarks>
+        </member>
+        <member name="M:CRC32.Crc32(System.Byte[])">
+            <summary>
+            Calculates the cyclic redundancy check on an array of bytes.
+            </summary>
+            <param name="data">The data to check</param>
+            <returns>A 4-byte array in little-endian format containing the CRC of the data.</returns>
+            <remarks>
+            Use the <see cref="T:System.BitConverter">System.BitConverter</see> class to convert
+            this array of bytes back to usable format.
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if the CRC table is not initialized (by calling one of the Init() overloads
+            before calling the Crc32 overloads.
+            </exception>
+        </member>
+        <member name="M:CRC32.Crc32(System.String)">
+            <summary>
+            Calculates the cyclic redundancy check on a string of data, assuming ASCII encoding.
+            </summary>
+            <param name="data">The string to check</param>
+            <returns>A 4-byte array in little-endian format containing the CRC of the data.</returns>
+            <remarks>
+            Use the <see cref="T:System.BitConverter">System.BitConverter</see> class to convert
+            this array of bytes back to usable format.
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if the CRC table is not initialized (by calling one of the Init() overloads
+            before calling the Crc32 overloads.
+            </exception>
+        </member>
+        <member name="M:CRC32.Crc32(System.String,System.Text.Encoding)">
+            <summary>
+            Calculates the cyclic redundancy check on a string of data with the specified 
+            encoding scheme.
+            </summary>
+            <param name="data">The string to check.</param>
+            <param name="encoding">The encoding to use.</param>
+            <returns>A 4-byte array in little-endian format containing the CRC of the data.</returns>
+            <remarks>
+            Use the <see cref="T:System.BitConverter">System.BitConverter</see> class to convert
+            this array of bytes back to usable format.
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if the CRC table is not initialized (by calling one of the Init() overloads
+            before calling the Crc32 overloads.
+            </exception>
+        </member>
+    </members>
+</doc>

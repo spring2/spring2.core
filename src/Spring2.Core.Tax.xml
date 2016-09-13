@@ -1,0 +1,2378 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spring2.Core.Tax</name>
+    </assembly>
+    <members>
+        <member name="T:Spring2.Core.Tax.Test.TestFailureTaxProvider">
+            <summary>
+            Summary description for TestFailTaxProvider.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.Test.TestTaxProvider">
+            <summary>
+            Summary description for TestTaxProvider.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.AvalaraTax.AvalaraProvider">
+            <summary>
+            Tax provider using AvalaraTax Web Service.
+            This class is must be stateless in order to be thread safe.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.CertiTax.CertiTaxProvider">
+            <summary>
+            Tax provider using CertiTax Web Service.
+            This class is must be stateless in order to be thread safe.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.ITaxProvider">
+            <summary>
+            Common interface expected to be implmented by all tax provider that are avaialable through the Tax Manager.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.ITaxProvider.GetTaxRateForArea(Spring2.Core.Types.IdType,Spring2.Core.Types.DateType)">
+            <summary>
+            Get tax rate information for a specific tax area for a specific date using the tax area id from the tax provider.
+            </summary>
+            <remarks>
+            Tax area ids are not valid across tax providers.  i.e. a tax area id from one tax provider cannot be used with another tax provider.
+            </remarks>
+            <param name="id"></param>
+            <param name="dateType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Tax.ITaxProvider.Commit(Spring2.Core.Tax.TaxOrder,Spring2.Core.Types.StringType)">
+            <summary>
+            Commits a sale in the tax provider
+            </summary>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Tax.ITaxProvider.GetQuoteTaxTotal(Spring2.Core.Tax.TaxOrder,Spring2.Core.Types.StringType)">
+            <summary>
+            Gets a tax estimate based on an order, for use durring the ordering process.  This is not persisted as a sale in the tax provider.
+            </summary>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Tax.ITaxProvider.GetTaxAreaForAddress(Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.BooleanType)">
+            <summary>
+            Get tax area information for a specific tax area for a specific date using the tax area id from the tax provider.
+            </summary>
+            <param name="street"></param>
+            <param name="city"></param>
+            <param name="county"></param>
+            <param name="state"></param>
+            <param name="postalCode"></param>
+            <param name="country"></param>
+            <param name="limits"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Tax.ITaxProvider.LookupTaxArea(Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.DateType,Spring2.Core.Types.BooleanType)">
+            <summary>
+            Resolves possible tax areas for a given address
+            </summary>
+            <param name="street"></param>
+            <param name="city"></param>
+            <param name="county"></param>
+            <param name="state"></param>
+            <param name="postalCode"></param>
+            <param name="country"></param>
+            <param name="date"></param>
+            <param name="booleanType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Tax.ITaxProvider.Commit(Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.DateType,Spring2.Core.Tax.TaxOrder)">
+            <summary>
+            Commits and records a sale in the tax provider.
+            </summary>
+            <param name="street"></param>
+            <param name="city"></param>
+            <param name="county"></param>
+            <param name="region"></param>
+            <param name="postalCode"></param>
+            <param name="country"></param>
+            <param name="date"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Tax.ITaxProvider.Calculate(Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.DateType,Spring2.Core.Tax.TaxOrder)">
+            <summary>
+            Gets a tax estimate based on an order, for use durring the ordering process.  This is not persisted as a sale in the tax provider.
+            </summary>
+            <param name="street"></param>
+            <param name="city"></param>
+            <param name="county"></param>
+            <param name="region"></param>
+            <param name="postalCode"></param>
+            <param name="country"></param>
+            <param name="date"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Tax.ITaxProvider.Calculate(Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.DateType,Spring2.Core.Tax.TaxOrder)">
+            <summary>
+            Gets a tax estimate based on an order, for use durring the ordering process.  This is not persisted as a sale in the tax provider, but will update a persisted transaction.
+            </summary>
+            <param name="transactionId"></param>
+            <param name="street"></param>
+            <param name="city"></param>
+            <param name="county"></param>
+            <param name="region"></param>
+            <param name="postalCode"></param>
+            <param name="country"></param>
+            <param name="date"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Spring2.Core.Tax.TaxAreaList">
+            <summary>
+            TaxAreaData generic collection
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxAreaList.Sort(System.Collections.IComparer)">
+            <summary>
+            Sort a list by a column
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxAreaList.Sort(System.String)">
+            <summary>
+            Sort the list given the name of a comparer class.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.TaxConfigurationException">
+            <summary>
+            Summary description for TaxConfigurationException.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.TaxConnectionException">
+            <summary>
+            Summary description for TaxConnectionException.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.TaxException">
+            <summary>
+            Summary description for TaxException.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.TaxHtmlTool">
+            <summary>
+            Html rendering utilities for Vertex tax area results
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.TaxJurisdictionList">
+            <summary>
+            IOrderItemLine generic collection
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxJurisdictionList.Sort(System.Collections.IComparer)">
+            <summary>
+            Sort a list by a column
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxJurisdictionList.Sort(System.String)">
+            <summary>
+            Sort the list given the name of a comparer class.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.TaxManager">
+            <summary>
+            Summary description for TaxManager.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.TaxOrder">
+            <summary>
+            Summary description for TaxOrderData.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.TaxOrderLineList">
+            <summary>
+            IOrderItemLine generic collection
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxOrderLineList.Contains(Spring2.Core.Types.IdType)">
+            <summary>
+            See if the list contains an instance by identity
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Tax.TaxOrderLineList.Item(Spring2.Core.Types.IdType)">
+            <summary>
+            returns the instance by identity or null if it not found
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxOrderLineList.RetainAll(Spring2.Core.Tax.TaxOrderLineList)">
+            <summary>
+            Returns a new list that contains all of the elements that are in both lists
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxOrderLineList.RemoveAll(Spring2.Core.Tax.TaxOrderLineList)">
+            <summary>
+            return a new list that contains only the elements not contained in the argument list
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxOrderLineList.Sort(System.Collections.IComparer)">
+            <summary>
+            Sort a list by a column
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxOrderLineList.Sort(System.String)">
+            <summary>
+            Sort the list given the name of a comparer class.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.TaxRateInfoList">
+            <summary>
+            TaxRateInfoData generic collection
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxRateInfoList.Sort(System.Collections.IComparer)">
+            <summary>
+            Sort a list by a column
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxRateInfoList.Sort(System.String)">
+            <summary>
+            Sort the list given the name of a comparer class.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.TaxResultLineList">
+            <summary>
+            IOrderItemLine generic collection
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxResultLineList.Contains(Spring2.Core.Types.IdType)">
+            <summary>
+            See if the list contains an instance by identity
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Tax.TaxResultLineList.Item(Spring2.Core.Types.IdType)">
+            <summary>
+            returns the instance by identity or null if it not found
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxResultLineList.RetainAll(Spring2.Core.Tax.TaxResultLineList)">
+            <summary>
+            Returns a new list that contains all of the elements that are in both lists
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxResultLineList.RemoveAll(Spring2.Core.Tax.TaxResultLineList)">
+            <summary>
+            return a new list that contains only the elements not contained in the argument list
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxResultLineList.Sort(System.Collections.IComparer)">
+            <summary>
+            Sort a list by a column
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.TaxResultLineList.Sort(System.String)">
+            <summary>
+            Sort the list given the name of a comparer class.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Tax.Vertex.CalculateTaxWSService">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.CalculateTaxWSService.#ctor">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.CalculateTaxWSService.calculateTaxString(System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.CalculateTaxWSService.BegincalculateTaxString(System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.CalculateTaxWSService.EndcalculateTaxString(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.Tax.Vertex.LookupTaxAreasWSService">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.LookupTaxAreasWSService.#ctor">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.LookupTaxAreasWSService.lookupTaxAreasString(System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.LookupTaxAreasWSService.BeginlookupTaxAreasString(System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.LookupTaxAreasWSService.EndlookupTaxAreasString(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.Tax.Vertex.VertexProvider">
+            <summary>
+            Tax provider using Vertex O Series via Web Services.
+            This class is must be stateless in order to be thread safe.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.VertexProvider.LookupTaxArea(Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.DateType,Spring2.Core.Types.BooleanType,Spring2.Core.Types.StringType)">
+            <summary>
+            Look up tax area using the passed-in parameters.
+            </summary>
+            <param name="country">country</param>
+            <param name="postalCode">postal code</param>
+            <param name="city">city</param>
+            <param name="region">state/provice</param>
+            <param name="county">county</param>
+            <param name="date">date to get tax areas as of</param>
+            <param name="replaceHTMLEntities">should HTML entities be replaced with literals?</param>
+            <returns>list of matching tax areas for the passed-in parameters</returns>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.VertexProvider.GetTaxRateForArea(Spring2.Core.Types.IdType,Spring2.Core.Types.DateType)">
+            <summary>
+            Get the tax rates for the passed-in tax area ID and date.
+            </summary>
+            <param name="taxAreaID">tax area ID</param>
+            <param name="date">date</param>
+            <returns>tax rate info</returns>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.VertexProvider.GetTaxAreaByID(Spring2.Core.Types.IdType,Spring2.Core.Types.DateType,Spring2.Core.Types.BooleanType)">
+            <summary>
+            Get a tax area based on the tax area ID previously returned from Vertex.
+            </summary>
+            <param name="taxAreaID">tax area ID from Vertex</param>
+            <param name="date">as of date</param>
+            <param name="replaceHTMLEntities">should HTML entities be replaced with literals?</param>
+            <returns>matching tax area, or null if not found</returns>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.VertexProvider.GetQuoteTaxTotal(Spring2.Core.Tax.TaxOrder,Spring2.Core.Types.StringType)">
+            <summary>
+            Calculate the sales tax for the passed in order.
+            </summary>
+            <param name="order">order to calculate tax for</param>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.VertexProvider.Commit(Spring2.Core.Tax.TaxOrder,Spring2.Core.Types.StringType)">
+            <summary>
+            Calculate the sales tax for the passed in order.
+            </summary>
+            <param name="order">order to calculate tax for</param>
+            <param name="writeToJournal">Should this be an invoice call that writes to the tax journal?</param>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.VertexProvider.ParseTaxAreaResponse(System.String,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.BooleanType)">
+            <summary>
+            
+            </summary>
+            <param name="xml"></param>
+            <param name="country"></param>
+            <param name="county"></param>
+            <param name="city"></param>
+            <param name="replaceHTMLEntities"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.VertexProvider.ParseQuoteResponse(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="xml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.VertexProvider.ParseQuoteTaxTotalResponse(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="xml"></param>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.VertexProvider.GetTaxResultForInvoiceResponse(System.String)">
+            <summary>
+            Parses an InvoiceSaleResponse into a TaxResult object.
+            </summary>
+            <param name="xml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Tax.Vertex.VertexProvider.GetTaxResultForQuoteResponse(System.String)">
+            <summary>
+            Parses a QuotationSaleResponse into a TaxResult object.
+            </summary>
+            <param name="xml"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.CertiCalc">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.#ctor">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.AbandonCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Abandon1Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Abandon2Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.CalculateCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate1Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate2Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate3Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate4Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate5Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate6Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate7Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate8Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate9Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate10Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate11Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate12Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate13Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate14Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate15Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate16Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate17Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.CancelCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Cancel1Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Cancel2Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.CommitCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Commit1Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Commit2Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLossCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss1Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss2Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss3Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss4Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss5Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss6Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss7Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss8Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss9Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturnCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn1Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn2Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn3Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn4Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn5Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn6Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn7Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn8Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn9Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLossCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss1Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss2Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss3Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss4Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss5Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss6Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss7Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss8Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss9Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturnCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn1Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn2Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn3Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn4Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn5Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn6Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn7Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn8Completed">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn9Completed">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Abandon(Spring2.Dss.net.esalestax.webservices1.TaxTransaction)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginAbandon(Spring2.Dss.net.esalestax.webservices1.TaxTransaction,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndAbandon(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.AbandonAsync(Spring2.Dss.net.esalestax.webservices1.TaxTransaction)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.AbandonAsync(Spring2.Dss.net.esalestax.webservices1.TaxTransaction,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Abandon(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginAbandon1(System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndAbandon1(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Abandon1Async(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Abandon1Async(System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Abandon(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginAbandon2(System.String,System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndAbandon2(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Abandon2Async(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Abandon2Async(System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.CalculateAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.CalculateAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate1(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate1(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate1Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate1Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate2(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate2(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate2Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate2Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate3(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate3(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate3Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate3Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate4(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate4(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate4Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate4Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate5(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate5(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate5Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate5Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate6(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate6(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate6Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate6Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate7(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate7(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate7Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate7Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate8(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate8(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate8Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate8Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate9(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate9(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate9Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate9Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate10(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate10(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate10Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate10Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate11(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate11(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate11Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate11Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate12(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate12(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate12Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate12Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate13(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate13(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate13Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate13Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate14(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate14(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate14Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate14Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate15(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate15(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate15Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate15Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,System.Boolean,System.Boolean,System.Int32,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(Spring2.Dss.net.esalestax.webservices1.Order)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate16(Spring2.Dss.net.esalestax.webservices1.Order,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate16(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate16Async(Spring2.Dss.net.esalestax.webservices1.Order)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate16Async(Spring2.Dss.net.esalestax.webservices1.Order,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate(Spring2.Dss.net.esalestax.webservices1.Order,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCalculate17(Spring2.Dss.net.esalestax.webservices1.Order,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCalculate17(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate17Async(Spring2.Dss.net.esalestax.webservices1.Order,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Calculate17Async(Spring2.Dss.net.esalestax.webservices1.Order,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Cancel(Spring2.Dss.net.esalestax.webservices1.TaxTransaction)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCancel(Spring2.Dss.net.esalestax.webservices1.TaxTransaction,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCancel(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.CancelAsync(Spring2.Dss.net.esalestax.webservices1.TaxTransaction)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.CancelAsync(Spring2.Dss.net.esalestax.webservices1.TaxTransaction,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Cancel(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCancel1(System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCancel1(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Cancel1Async(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Cancel1Async(System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Cancel(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCancel2(System.String,System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCancel2(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Cancel2Async(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Cancel2Async(System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Commit(Spring2.Dss.net.esalestax.webservices1.TaxTransaction)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCommit(Spring2.Dss.net.esalestax.webservices1.TaxTransaction,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCommit(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.CommitAsync(Spring2.Dss.net.esalestax.webservices1.TaxTransaction)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.CommitAsync(Spring2.Dss.net.esalestax.webservices1.TaxTransaction,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Commit(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCommit1(System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCommit1(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Commit1Async(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Commit1Async(System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Commit(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginCommit2(System.String,System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndCommit2(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Commit2Async(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.Commit2Async(System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss(Spring2.Dss.net.esalestax.webservices1.TaxTransaction)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedLoss(Spring2.Dss.net.esalestax.webservices1.TaxTransaction,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedLoss(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLossAsync(Spring2.Dss.net.esalestax.webservices1.TaxTransaction)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLossAsync(Spring2.Dss.net.esalestax.webservices1.TaxTransaction,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedLoss1(System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedLoss1(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss1Async(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss1Async(System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss(System.String,System.String,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedLoss2(System.String,System.String,System.Decimal,System.Decimal,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedLoss2(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss2Async(System.String,System.String,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss2Async(System.String,System.String,System.Decimal,System.Decimal,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss(System.String,System.String,System.Decimal,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedLoss3(System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedLoss3(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss3Async(System.String,System.String,System.Decimal,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss3Async(System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss(System.String,System.String,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedLoss4(System.String,System.String,System.Decimal,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedLoss4(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss4Async(System.String,System.String,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss4Async(System.String,System.String,System.Decimal,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedLoss5(System.String,System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedLoss5(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss5Async(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss5Async(System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss(System.String,System.String,System.String,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedLoss6(System.String,System.String,System.String,System.Decimal,System.Decimal,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedLoss6(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss6Async(System.String,System.String,System.String,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss6Async(System.String,System.String,System.String,System.Decimal,System.Decimal,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss(System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedLoss7(System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedLoss7(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss7Async(System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss7Async(System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss(System.String,System.String,System.String,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedLoss8(System.String,System.String,System.String,System.Decimal,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedLoss8(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss8Async(System.String,System.String,System.String,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss8Async(System.String,System.String,System.String,System.Decimal,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss(Spring2.Dss.net.esalestax.webservices1.Order)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedLoss9(Spring2.Dss.net.esalestax.webservices1.Order,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedLoss9(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss9Async(Spring2.Dss.net.esalestax.webservices1.Order)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedLoss9Async(Spring2.Dss.net.esalestax.webservices1.Order,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn(Spring2.Dss.net.esalestax.webservices1.TaxTransaction)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedReturn(Spring2.Dss.net.esalestax.webservices1.TaxTransaction,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedReturn(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturnAsync(Spring2.Dss.net.esalestax.webservices1.TaxTransaction)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturnAsync(Spring2.Dss.net.esalestax.webservices1.TaxTransaction,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedReturn1(System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedReturn1(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn1Async(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn1Async(System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn(System.String,System.String,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedReturn2(System.String,System.String,System.Decimal,System.Decimal,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedReturn2(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn2Async(System.String,System.String,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn2Async(System.String,System.String,System.Decimal,System.Decimal,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn(System.String,System.String,System.Decimal,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedReturn3(System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedReturn3(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn3Async(System.String,System.String,System.Decimal,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn3Async(System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn(System.String,System.String,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedReturn4(System.String,System.String,System.Decimal,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedReturn4(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn4Async(System.String,System.String,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn4Async(System.String,System.String,System.Decimal,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedReturn5(System.String,System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedReturn5(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn5Async(System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn5Async(System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn(System.String,System.String,System.String,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedReturn6(System.String,System.String,System.String,System.Decimal,System.Decimal,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedReturn6(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn6Async(System.String,System.String,System.String,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn6Async(System.String,System.String,System.String,System.Decimal,System.Decimal,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn(System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedReturn7(System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedReturn7(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn7Async(System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn7Async(System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn(System.String,System.String,System.String,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedReturn8(System.String,System.String,System.String,System.Decimal,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedReturn8(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn8Async(System.String,System.String,System.String,System.Decimal)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn8Async(System.String,System.String,System.String,System.Decimal,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn(Spring2.Dss.net.esalestax.webservices1.Order)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessAttributedReturn9(Spring2.Dss.net.esalestax.webservices1.Order,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessAttributedReturn9(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn9Async(Spring2.Dss.net.esalestax.webservices1.Order)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessAttributedReturn9Async(Spring2.Dss.net.esalestax.webservices1.Order,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedLoss(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedLoss(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLossAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLossAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedLoss1(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedLoss1(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss1Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss1Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedLoss2(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedLoss2(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss2Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss2Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedLoss3(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedLoss3(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss3Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss3Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedLoss4(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedLoss4(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss4Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss4Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedLoss5(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedLoss5(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss5Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss5Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedLoss6(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedLoss6(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss6Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss6Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedLoss7(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedLoss7(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss7Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss7Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss(Spring2.Dss.net.esalestax.webservices1.Order)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedLoss8(Spring2.Dss.net.esalestax.webservices1.Order,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedLoss8(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss8Async(Spring2.Dss.net.esalestax.webservices1.Order)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss8Async(Spring2.Dss.net.esalestax.webservices1.Order,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss(Spring2.Dss.net.esalestax.webservices1.Order,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedLoss9(Spring2.Dss.net.esalestax.webservices1.Order,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedLoss9(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss9Async(Spring2.Dss.net.esalestax.webservices1.Order,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedLoss9Async(Spring2.Dss.net.esalestax.webservices1.Order,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedReturn(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedReturn(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturnAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturnAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedReturn1(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedReturn1(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn1Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn1Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedReturn2(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedReturn2(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn2Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn2Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedReturn3(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedReturn3(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn3Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn3Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedReturn4(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedReturn4(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn4Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn4Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedReturn5(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedReturn5(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn5Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn5Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.String,System.String,System.String,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedReturn6(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedReturn6(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn6Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn6Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedReturn7(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedReturn7(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn7Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn7Async(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.Decimal,System.Boolean,System.Int32,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn(Spring2.Dss.net.esalestax.webservices1.Order)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedReturn8(Spring2.Dss.net.esalestax.webservices1.Order,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedReturn8(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn8Async(Spring2.Dss.net.esalestax.webservices1.Order)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn8Async(Spring2.Dss.net.esalestax.webservices1.Order,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn(Spring2.Dss.net.esalestax.webservices1.Order,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.BeginProcessUnattributedReturn9(Spring2.Dss.net.esalestax.webservices1.Order,System.DateTime,System.AsyncCallback,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.EndProcessUnattributedReturn9(System.IAsyncResult)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn9Async(Spring2.Dss.net.esalestax.webservices1.Order,System.DateTime)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.ProcessUnattributedReturn9Async(Spring2.Dss.net.esalestax.webservices1.Order,System.DateTime,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Dss.net.esalestax.webservices1.CertiCalc.CancelAsync1(System.Object)">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.TaxTransaction">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.CorrectedAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.CertiTAXTransactionId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.CityTax">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.CityTaxAuthority">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.CountyTax">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.CountyTaxAuthority">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.LineItems">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.LocalTax">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.LocalTaxAuthority">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.MerchantId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.NationalTax">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.NationalTaxAuthority">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.OtherTax">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.OtherTaxAuthority">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.ReferredId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.SerialNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.Server">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.StateTax">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.StateTaxAuthority">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransaction.TotalTax">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.CorrectedAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.CorrectedAddress.City">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.CorrectedAddress.GeoCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.CorrectedAddress.Name">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.CorrectedAddress.PostalCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.CorrectedAddress.State">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.CorrectedAddress.Street1">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.CorrectedAddress.Street2">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.CorrectedAddress.NationISO2Abbreviation">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.CorrectedAddress.NationISO3Abbreviation">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.CorrectedAddress.NationName">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.MarshalByRefObject">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.OrderLineItem">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.OrderLineItem.ItemId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.OrderLineItem.StockingUnit">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.OrderLineItem.Quantity">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.OrderLineItem.ExtendedPrice">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.OrderLineItem.ProductCode">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Address">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Address.City">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Address.County">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Address.Name">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Address.Nation">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Address.PostalCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Address.State">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Address.Street1">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Address.Street2">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Order">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.Address">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.CalculateTax">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.CertiTAXTransactionId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.ConfirmAddress">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.DefaultProductCode">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.HandlingCharge">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.LineItems">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.Location">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.MerchantTransactionId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.Nexus">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.ReferredId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.SerialNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.ShippingCharge">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.TaxExemptCertificate">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.TaxExemptIssuer">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.TaxExemptReason">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Order.Total">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.TaxTransactionLineItem">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransactionLineItem.ItemId">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransactionLineItem.CityTaxApplied">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransactionLineItem.CountyTaxApplied">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransactionLineItem.LocalTaxApplied">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransactionLineItem.NationalTaxApplied">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransactionLineItem.OtherTaxApplied">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.TaxTransactionLineItem.StateTaxApplied">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.AbandonCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Abandon1CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Abandon2CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.CalculateCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.CalculateCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.CalculateCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate1CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate1CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate1CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate2CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate2CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate2CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate3CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate3CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate3CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate4CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate4CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate4CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate5CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate5CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate5CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate6CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate6CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate6CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate7CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate7CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate7CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate8CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate8CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate8CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate9CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate9CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate9CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate10CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate10CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate10CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate11CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate11CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate11CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate12CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate12CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate12CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate13CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate13CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate13CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate14CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate14CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate14CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate15CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate15CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate15CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate16CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate16CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate16CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate17CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Calculate17CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.Calculate17CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.CancelCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Cancel1CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Cancel2CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.CommitCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Commit1CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.Commit2CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLossCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLossCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLossCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss1CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss1CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss1CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss2CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss2CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss2CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss3CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss3CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss3CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss4CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss4CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss4CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss5CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss5CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss5CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss6CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss6CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss6CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss7CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss7CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss7CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss8CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss8CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss8CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss9CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss9CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedLoss9CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturnCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturnCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturnCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn1CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn1CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn1CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn2CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn2CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn2CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn3CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn3CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn3CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn4CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn4CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn4CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn5CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn5CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn5CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn6CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn6CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn6CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn7CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn7CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn7CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn8CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn8CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn8CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn9CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn9CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessAttributedReturn9CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLossCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLossCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLossCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss1CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss1CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss1CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss2CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss2CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss2CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss3CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss3CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss3CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss4CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss4CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss4CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss5CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss5CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss5CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss6CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss6CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss6CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss7CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss7CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss7CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss8CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss8CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss8CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss9CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss9CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedLoss9CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturnCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturnCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturnCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn1CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn1CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn1CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn2CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn2CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn2CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn3CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn3CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn3CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn4CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn4CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn4CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn5CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn5CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn5CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn6CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn6CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn6CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn7CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn7CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn7CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn8CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn8CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn8CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn9CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn9CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Dss.net.esalestax.webservices1.ProcessUnattributedReturn9CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+    </members>
+</doc>

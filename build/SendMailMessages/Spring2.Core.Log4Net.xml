@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spring2.Core.Log4Net</name>
+    </assembly>
+    <members>
+        <member name="T:Spring2.Core.Log4Net.Appender.FastDbAppender">
+            <summary>
+            Simple database appender
+            </summary>
+            <remarks>
+            <para>
+            This database appender is very simple and does not support a configurable
+            data schema. The schema supported is hardcoded into the appender.
+            Also by not extending the AppenderSkeleton base class this appender
+            avoids the serializable locking that it enforces.
+            </para>
+            <para>
+            This appender can be subclassed to change the database connection
+            type, or the database schema supported.
+            </para>
+            <para>
+            To change the database connection type the <see cref="M:Spring2.Core.Log4Net.Appender.FastDbAppender.GetConnection"/>
+            method must be overridden.
+            </para>
+            <para>
+            To change the database schema supported by the appender the <see cref="M:Spring2.Core.Log4Net.Appender.FastDbAppender.InitializeCommand(System.Data.IDbCommand)"/>
+            and <see cref="M:Spring2.Core.Log4Net.Appender.FastDbAppender.SetCommandValues(System.Data.IDbCommand,log4net.Core.LoggingEvent)"/> methods must be overridden.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.Log4Net.Appender.FastDbAppender.GetConnection">
+            <summary>
+            Create the connection object
+            </summary>
+            <returns>the connection</returns>
+            <remarks>
+            <para>
+            This implementation returns a <see cref="T:System.Data.SqlClient.SqlConnection"/>.
+            To change the connection subclass this appender and
+            return a different connection type.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.Log4Net.Appender.FastDbAppender.InitializeCommand(System.Data.IDbCommand)">
+            <summary>
+            Initialize the command object supplied
+            </summary>
+            <param name="command">the command to initialize</param>
+            <remarks>
+            <para>
+            This method must setup the database command and the
+            parameters.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Spring2.Core.Log4Net.Appender.FastDbAppender.SetCommandValues(System.Data.IDbCommand,log4net.Core.LoggingEvent)">
+            <summary>
+            Set the values for the command parameters
+            </summary>
+            <param name="command">the command to update</param>
+            <param name="loggingEvent">the current logging event to retrieve the values from</param>
+            <remarks>
+            <para>
+            Set the values of the parameters created by the
+            <see cref="M:Spring2.Core.Log4Net.Appender.FastDbAppender.InitializeCommand(System.Data.IDbCommand)"/> method.
+            </para>
+            </remarks>
+        </member>
+    </members>
+</doc>

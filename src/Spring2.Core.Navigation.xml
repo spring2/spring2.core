@@ -1,0 +1,649 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spring2.Core.Navigation</name>
+    </assembly>
+    <members>
+        <member name="M:Spring2.Core.Navigation.BusinessLogic.MenuLinkGroup.GetHighestActiveChild">
+            <summary>
+            Returns the lowest active MenuLink
+            </summary>
+            <returns>The lowest active Menu Link</returns>
+        </member>
+        <member name="T:Spring2.Core.Navigation.Dao.MenuLinkDAO">
+            <summary>
+            Data access class for MenuLink business entity.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.#cctor">
+            <summary>
+            Initializes the static map of property names to sql expressions.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetList">
+            <summary>
+            Returns a list of all MenuLink rows.
+            </summary>
+            <returns>List of MenuLink objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetList(Spring2.Core.DAO.SqlFilter)">
+            <summary>
+            Returns a filtered list of MenuLink rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <returns>List of MenuLink objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetList(Spring2.Core.DAO.IOrderBy)">
+            <summary>
+            Returns an ordered list of MenuLink rows.  All rows in the database are returned
+            </summary>
+            <param name="orderByClause">Ordering criteria.</param>
+            <returns>List of MenuLink objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetList(Spring2.Core.DAO.SqlFilter,Spring2.Core.DAO.IOrderBy)">
+            <summary>
+            Returns an ordered and filtered list of MenuLink rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="orderByClause">Ordering criteria.</param>
+            <returns>List of MenuLink objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetList(System.Int32)">
+            <summary>
+            Returns a list of all MenuLink rows.
+            </summary>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of MenuLink objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetList(Spring2.Core.DAO.SqlFilter,System.Int32)">
+            <summary>
+            Returns a filtered list of MenuLink rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of MenuLink objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetList(Spring2.Core.DAO.IOrderBy,System.Int32)">
+            <summary>
+            Returns an ordered list of MenuLink rows.  All rows in the database are returned
+            </summary>
+            <param name="orderByClause">Ordering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of MenuLink objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetList(Spring2.Core.DAO.SqlFilter,Spring2.Core.DAO.IOrderBy,System.Int32)">
+            <summary>
+            Returns an ordered and filtered list of MenuLink rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="orderByClause">Ordering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of MenuLink objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.Load(Spring2.Core.Types.IdType)">
+            <summary>
+            Finds a MenuLink entity using it's primary key.
+            </summary>
+            <param name="menuLinkId">A key field.</param>
+            <returns>A MenuLink object.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.Reload(Spring2.Core.Navigation.BusinessLogic.MenuLink)">
+            <summary>
+            Repopulates an existing business entity instance
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetList(System.Data.IDataReader)">
+            <summary>
+            Read through the reader and return a data object list
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetDataObject(System.Data.IDataReader)">
+            <summary>
+            Read from reader and return a single data object
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetDataObject(System.Data.IDataReader,Spring2.Core.Navigation.Dao.MenuLinkDAO.ColumnOrdinals)">
+            <summary>
+            Read from reader and return a single data object
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetDataObjectFromReader(Spring2.Core.Navigation.BusinessLogic.MenuLink,System.Data.IDataReader)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="data">Entity to be populated from data reader</param>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetDataObjectFromReader(System.Data.IDataReader)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetDataObjectFromReader(System.Data.IDataReader,Spring2.Core.Navigation.Dao.MenuLinkDAO.ColumnOrdinals)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.GetDataObjectFromReader(Spring2.Core.Navigation.BusinessLogic.MenuLink,System.Data.IDataReader,Spring2.Core.Navigation.Dao.MenuLinkDAO.ColumnOrdinals)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="data">Entity to be populated from data reader</param>
+            <param name="dataReader">Container for database row.</param>
+            <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.Insert(Spring2.Core.Navigation.BusinessLogic.MenuLink)">
+            <summary>
+            Inserts a record into the MenuLink table.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.Insert(Spring2.Core.Navigation.BusinessLogic.MenuLink,System.Data.IDbTransaction)">
+            <summary>
+            Inserts a record into the MenuLink table.
+            </summary>
+            <param name="data"></param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.Update(Spring2.Core.Navigation.BusinessLogic.MenuLink)">
+            <summary>
+            Updates a record in the MenuLink table.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.Update(Spring2.Core.Navigation.BusinessLogic.MenuLink,System.Data.IDbTransaction)">
+            <summary>
+            Updates a record in the MenuLink table.
+            </summary>
+            <param name="data"></param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.Delete(Spring2.Core.Types.IdType)">
+            <summary>
+            Deletes a record from the MenuLink table by MenuLinkId.
+            </summary>
+            <param name="menuLinkId">A key field.</param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.Delete(Spring2.Core.Types.IdType,System.Data.IDbTransaction)">
+            <summary>
+            Deletes a record from the MenuLink table by MenuLinkId.
+            </summary>
+            <param name="menuLinkId">A key field.</param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.FindByMenuLinkGroup(Spring2.Core.Types.IdType)">
+            <summary>
+            Returns a list of objects which match the values for the fields specified.
+            </summary>
+            <param name="menuLinkGroupId">A field value to be matched.</param>
+            <returns>The list of MenuLinkDAO objects found.</returns>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkDAO.FindByParentMenuLink(Spring2.Core.Types.IdType)">
+            <summary>
+            Returns a list of objects which match the values for the fields specified.
+            </summary>
+            <param name="parentMenuLinkId">A field value to be matched.</param>
+            <returns>The list of MenuLinkDAO objects found.</returns>
+        </member>
+        <member name="T:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO">
+            <summary>
+            Data access class for MenuLinkGroup business entity.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.#cctor">
+            <summary>
+            Initializes the static map of property names to sql expressions.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetList">
+            <summary>
+            Returns a list of all MenuLinkGroup rows.
+            </summary>
+            <returns>List of MenuLinkGroup objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetList(Spring2.Core.DAO.SqlFilter)">
+            <summary>
+            Returns a filtered list of MenuLinkGroup rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <returns>List of MenuLinkGroup objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetList(Spring2.Core.DAO.IOrderBy)">
+            <summary>
+            Returns an ordered list of MenuLinkGroup rows.  All rows in the database are returned
+            </summary>
+            <param name="orderByClause">Ordering criteria.</param>
+            <returns>List of MenuLinkGroup objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetList(Spring2.Core.DAO.SqlFilter,Spring2.Core.DAO.IOrderBy)">
+            <summary>
+            Returns an ordered and filtered list of MenuLinkGroup rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="orderByClause">Ordering criteria.</param>
+            <returns>List of MenuLinkGroup objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetList(System.Int32)">
+            <summary>
+            Returns a list of all MenuLinkGroup rows.
+            </summary>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of MenuLinkGroup objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetList(Spring2.Core.DAO.SqlFilter,System.Int32)">
+            <summary>
+            Returns a filtered list of MenuLinkGroup rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of MenuLinkGroup objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetList(Spring2.Core.DAO.IOrderBy,System.Int32)">
+            <summary>
+            Returns an ordered list of MenuLinkGroup rows.  All rows in the database are returned
+            </summary>
+            <param name="orderByClause">Ordering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of MenuLinkGroup objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetList(Spring2.Core.DAO.SqlFilter,Spring2.Core.DAO.IOrderBy,System.Int32)">
+            <summary>
+            Returns an ordered and filtered list of MenuLinkGroup rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="orderByClause">Ordering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of MenuLinkGroup objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.Load(Spring2.Core.Types.IdType)">
+            <summary>
+            Finds a MenuLinkGroup entity using it's primary key.
+            </summary>
+            <param name="menuLinkGroupId">A key field.</param>
+            <returns>A MenuLinkGroup object.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.Reload(Spring2.Core.Navigation.BusinessLogic.MenuLinkGroup)">
+            <summary>
+            Repopulates an existing business entity instance
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetList(System.Data.IDataReader)">
+            <summary>
+            Read through the reader and return a data object list
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetDataObject(System.Data.IDataReader)">
+            <summary>
+            Read from reader and return a single data object
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetDataObject(System.Data.IDataReader,Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.ColumnOrdinals)">
+            <summary>
+            Read from reader and return a single data object
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetDataObjectFromReader(Spring2.Core.Navigation.BusinessLogic.MenuLinkGroup,System.Data.IDataReader)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="data">Entity to be populated from data reader</param>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetDataObjectFromReader(System.Data.IDataReader)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetDataObjectFromReader(System.Data.IDataReader,Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.ColumnOrdinals)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.GetDataObjectFromReader(Spring2.Core.Navigation.BusinessLogic.MenuLinkGroup,System.Data.IDataReader,Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.ColumnOrdinals)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="data">Entity to be populated from data reader</param>
+            <param name="dataReader">Container for database row.</param>
+            <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.Insert(Spring2.Core.Navigation.BusinessLogic.MenuLinkGroup)">
+            <summary>
+            Inserts a record into the MenuLinkGroup table.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.Insert(Spring2.Core.Navigation.BusinessLogic.MenuLinkGroup,System.Data.IDbTransaction)">
+            <summary>
+            Inserts a record into the MenuLinkGroup table.
+            </summary>
+            <param name="data"></param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.Update(Spring2.Core.Navigation.BusinessLogic.MenuLinkGroup)">
+            <summary>
+            Updates a record in the MenuLinkGroup table.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.Update(Spring2.Core.Navigation.BusinessLogic.MenuLinkGroup,System.Data.IDbTransaction)">
+            <summary>
+            Updates a record in the MenuLinkGroup table.
+            </summary>
+            <param name="data"></param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.Delete(Spring2.Core.Types.IdType)">
+            <summary>
+            Deletes a record from the MenuLinkGroup table by MenuLinkGroupId.
+            </summary>
+            <param name="menuLinkGroupId">A key field.</param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.Delete(Spring2.Core.Types.IdType,System.Data.IDbTransaction)">
+            <summary>
+            Deletes a record from the MenuLinkGroup table by MenuLinkGroupId.
+            </summary>
+            <param name="menuLinkGroupId">A key field.</param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkGroupDAO.FindByName(Spring2.Core.Types.StringType)">
+            <summary>
+            Returns an object which matches the values for the fields specified.
+            </summary>
+            <param name="name">A field value to be matched.</param>
+            <returns>The object found.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="T:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO">
+            <summary>
+            Data access class for MenuLinkKey business entity.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.#cctor">
+            <summary>
+            Initializes the static map of property names to sql expressions.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetList">
+            <summary>
+            Returns a list of all MenuLinkKey rows.
+            </summary>
+            <returns>List of MenuLinkKey objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetList(Spring2.Core.DAO.SqlFilter)">
+            <summary>
+            Returns a filtered list of MenuLinkKey rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <returns>List of MenuLinkKey objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetList(Spring2.Core.DAO.IOrderBy)">
+            <summary>
+            Returns an ordered list of MenuLinkKey rows.  All rows in the database are returned
+            </summary>
+            <param name="orderByClause">Ordering criteria.</param>
+            <returns>List of MenuLinkKey objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetList(Spring2.Core.DAO.SqlFilter,Spring2.Core.DAO.IOrderBy)">
+            <summary>
+            Returns an ordered and filtered list of MenuLinkKey rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="orderByClause">Ordering criteria.</param>
+            <returns>List of MenuLinkKey objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetList(System.Int32)">
+            <summary>
+            Returns a list of all MenuLinkKey rows.
+            </summary>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of MenuLinkKey objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetList(Spring2.Core.DAO.SqlFilter,System.Int32)">
+            <summary>
+            Returns a filtered list of MenuLinkKey rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of MenuLinkKey objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetList(Spring2.Core.DAO.IOrderBy,System.Int32)">
+            <summary>
+            Returns an ordered list of MenuLinkKey rows.  All rows in the database are returned
+            </summary>
+            <param name="orderByClause">Ordering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of MenuLinkKey objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetList(Spring2.Core.DAO.SqlFilter,Spring2.Core.DAO.IOrderBy,System.Int32)">
+            <summary>
+            Returns an ordered and filtered list of MenuLinkKey rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="orderByClause">Ordering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of MenuLinkKey objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.Load(Spring2.Core.Types.IdType,Spring2.Core.Types.StringType)">
+            <summary>
+            Finds a MenuLinkKey entity using it's primary key.
+            </summary>
+            <param name="menuLinkId">A key field.</param>
+            <param name="key">A key field.</param>
+            <returns>A MenuLinkKey object.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.Reload(Spring2.Core.Navigation.BusinessLogic.MenuLinkKey)">
+            <summary>
+            Repopulates an existing business entity instance
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetList(System.Data.IDataReader)">
+            <summary>
+            Read through the reader and return a data object list
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetDataObject(System.Data.IDataReader)">
+            <summary>
+            Read from reader and return a single data object
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetDataObject(System.Data.IDataReader,Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.ColumnOrdinals)">
+            <summary>
+            Read from reader and return a single data object
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetDataObjectFromReader(Spring2.Core.Navigation.BusinessLogic.MenuLinkKey,System.Data.IDataReader)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="data">Entity to be populated from data reader</param>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetDataObjectFromReader(System.Data.IDataReader)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetDataObjectFromReader(System.Data.IDataReader,Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.ColumnOrdinals)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.GetDataObjectFromReader(Spring2.Core.Navigation.BusinessLogic.MenuLinkKey,System.Data.IDataReader,Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.ColumnOrdinals)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="data">Entity to be populated from data reader</param>
+            <param name="dataReader">Container for database row.</param>
+            <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.Insert(Spring2.Core.Navigation.BusinessLogic.MenuLinkKey)">
+            <summary>
+            Inserts a record into the MenuLinkKey table.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.Insert(Spring2.Core.Navigation.BusinessLogic.MenuLinkKey,System.Data.IDbTransaction)">
+            <summary>
+            Inserts a record into the MenuLinkKey table.
+            </summary>
+            <param name="data"></param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.Delete(Spring2.Core.Types.IdType,Spring2.Core.Types.StringType)">
+            <summary>
+            Deletes a record from the MenuLinkKey table by a composite primary key.
+            </summary>
+            <param name="menuLinkId">A key field.</param>
+            <param name="key">A key field.</param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.Delete(Spring2.Core.Types.IdType,Spring2.Core.Types.StringType,System.Data.IDbTransaction)">
+            <summary>
+            Deletes a record from the MenuLinkKey table by a composite primary key.
+            </summary>
+            <param name="menuLinkId">A key field.</param>
+            <param name="key">A key field.</param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.Navigation.Dao.MenuLinkKeyDAO.FindByMenuLinkId(Spring2.Core.Types.IdType)">
+            <summary>
+            Returns a list of objects which match the values for the fields specified.
+            </summary>
+            <param name="menuLinkId">A field value to be matched.</param>
+            <returns>The list of MenuLinkKeyDAO objects found.</returns>
+        </member>
+        <member name="T:Spring2.Core.Navigation.DataObject.MenuLinkGroupList">
+            <summary>
+            IMenuLinkGroup generic collection
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.DataObject.MenuLinkGroupList.Contains(Spring2.Core.Types.IdType)">
+            <summary>
+            See if the list contains an instance by identity
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Navigation.DataObject.MenuLinkGroupList.Item(Spring2.Core.Types.IdType)">
+            <summary>
+            returns the instance by identity or null if it not found
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.DataObject.MenuLinkGroupList.RetainAll(Spring2.Core.Navigation.DataObject.MenuLinkGroupList)">
+            <summary>
+            Returns a new list that contains all of the elements that are in both lists
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.DataObject.MenuLinkGroupList.RemoveAll(Spring2.Core.Navigation.DataObject.MenuLinkGroupList)">
+            <summary>
+            return a new list that contains only the elements not contained in the argument list
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.DataObject.MenuLinkGroupList.Sort(System.Collections.IComparer)">
+            <summary>
+            Sort a list by a column
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.DataObject.MenuLinkGroupList.Sort(System.String)">
+            <summary>
+            Sort the list given the name of a comparer class.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Navigation.DataObject.MenuLinkKeyList">
+            <summary>
+            IMenuLinkKey generic collection
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.DataObject.MenuLinkKeyList.Sort(System.Collections.IComparer)">
+            <summary>
+            Sort a list by a column
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.DataObject.MenuLinkKeyList.Sort(System.String)">
+            <summary>
+            Sort the list given the name of a comparer class.
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.Navigation.DataObject.MenuLinkList">
+            <summary>
+            IMenuLink generic collection
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.DataObject.MenuLinkList.Contains(Spring2.Core.Types.IdType)">
+            <summary>
+            See if the list contains an instance by identity
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Navigation.DataObject.MenuLinkList.Item(Spring2.Core.Types.IdType)">
+            <summary>
+            returns the instance by identity or null if it not found
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.DataObject.MenuLinkList.RetainAll(Spring2.Core.Navigation.DataObject.MenuLinkList)">
+            <summary>
+            Returns a new list that contains all of the elements that are in both lists
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.DataObject.MenuLinkList.RemoveAll(Spring2.Core.Navigation.DataObject.MenuLinkList)">
+            <summary>
+            return a new list that contains only the elements not contained in the argument list
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.DataObject.MenuLinkList.Sort(System.Collections.IComparer)">
+            <summary>
+            Sort a list by a column
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Navigation.DataObject.MenuLinkList.Sort(System.String)">
+            <summary>
+            Sort the list given the name of a comparer class.
+            </summary>
+        </member>
+    </members>
+</doc>

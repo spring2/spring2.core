@@ -1,0 +1,488 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spring2.Core.ResourceManager.BusinessLogic</name>
+    </assembly>
+    <members>
+        <member name="T:Spring2.Core.ResourceManager.Test.LocalizedResourceTest">
+            <summary>
+            Summary description for AccountTest.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Test.LocalizedResourceTest.CleanTestResources">
+            <summary>
+            Makes sure all test LocalizedResources and Resources are removed.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Test.LocalizedResourceTest.CreateLocalizedResourceTest">
+            <summary>
+            Tests creation of LocalizedResource
+            </summary>
+        </member>
+        <member name="T:Spring2.Core.ResourceManager.Test.ResourceTest">
+            <summary>
+            Summary description for CompanyTest.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Test.ResourceTest.CleanTestResources">
+            <summary>
+            Makes sure all test resources are removed.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Test.ResourceTest.CreateResourceTest">
+            <summary>
+            Tests creation of resource with Context, Field, and ContextIdentity
+            Not able to create resource without Identity
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Test.ResourceTest.FailCreateWithoutIdentity">
+            <summary>
+            Expect that valid Identity will be passed in.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.#cctor">
+            <summary>
+            Initializes the static map of property names to sql expressions.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetList">
+            <summary>
+            Returns a list of all LocalizedResource rows.
+            </summary>
+            <returns>List of LocalizedResource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetList(Spring2.Core.DAO.SqlFilter)">
+            <summary>
+            Returns a filtered list of LocalizedResource rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <returns>List of LocalizedResource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetList(Spring2.Core.DAO.IOrderBy)">
+            <summary>
+            Returns an ordered list of LocalizedResource rows.  All rows in the database are returned
+            </summary>
+            <param name="orderByClause">Ordering criteria.</param>
+            <returns>List of LocalizedResource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetList(Spring2.Core.DAO.SqlFilter,Spring2.Core.DAO.IOrderBy)">
+            <summary>
+            Returns an ordered and filtered list of LocalizedResource rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="orderByClause">Ordering criteria.</param>
+            <returns>List of LocalizedResource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetList(System.Int32)">
+            <summary>
+            Returns a list of all LocalizedResource rows.
+            </summary>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of LocalizedResource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetList(Spring2.Core.DAO.SqlFilter,System.Int32)">
+            <summary>
+            Returns a filtered list of LocalizedResource rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of LocalizedResource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetList(Spring2.Core.DAO.IOrderBy,System.Int32)">
+            <summary>
+            Returns an ordered list of LocalizedResource rows.  All rows in the database are returned
+            </summary>
+            <param name="orderByClause">Ordering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of LocalizedResource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetList(Spring2.Core.DAO.SqlFilter,Spring2.Core.DAO.IOrderBy,System.Int32)">
+            <summary>
+            Returns an ordered and filtered list of LocalizedResource rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="orderByClause">Ordering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of LocalizedResource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.Load(Spring2.Core.Types.IdType)">
+            <summary>
+            Finds a LocalizedResource entity using it's primary key.
+            </summary>
+            <param name="LocalizedResourceId">A key field.</param>
+            <returns>A LocalizedResource object.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.Reload(Spring2.Core.ResourceManager.BusinessLogic.LocalizedResource)">
+            <summary>
+            Repopulates an existing business entity instance
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetList(System.Data.IDataReader)">
+            <summary>
+            Read through the reader and return a data object list
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetDataObject(System.Data.IDataReader)">
+            <summary>
+            Read from reader and return a single data object
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetDataObject(System.Data.IDataReader,Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.ColumnOrdinals)">
+            <summary>
+            Read from reader and return a single data object
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetDataObjectFromReader(Spring2.Core.ResourceManager.BusinessLogic.LocalizedResource,System.Data.IDataReader,Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.ColumnOrdinals)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetDataObjectFromReader(Spring2.Core.ResourceManager.BusinessLogic.LocalizedResource,System.Data.IDataReader)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetDataObjectFromReader(System.Data.IDataReader,Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.ColumnOrdinals)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetDataObjectFromReader(System.Data.IDataReader)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetDataObjectFromReader(System.Data.IDataReader,System.String,Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.ColumnOrdinals)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.GetDataObjectFromReader(Spring2.Core.ResourceManager.BusinessLogic.LocalizedResource,System.Data.IDataReader,System.String,Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.ColumnOrdinals)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.Insert(Spring2.Core.ResourceManager.BusinessLogic.LocalizedResource)">
+            <summary>
+            Inserts a record into the LocalizedResource table.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.Insert(Spring2.Core.ResourceManager.BusinessLogic.LocalizedResource,System.Data.IDbTransaction)">
+            <summary>
+            Inserts a record into the LocalizedResource table.
+            </summary>
+            <param name="data"></param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.Update(Spring2.Core.ResourceManager.BusinessLogic.LocalizedResource)">
+            <summary>
+            Updates a record in the LocalizedResource table.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.Update(Spring2.Core.ResourceManager.BusinessLogic.LocalizedResource,System.Data.IDbTransaction)">
+            <summary>
+            Updates a record in the LocalizedResource table.
+            </summary>
+            <param name="data"></param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.Delete(Spring2.Core.Types.IdType)">
+            <summary>
+            Deletes a record from the LocalizedResource table by LocalizedResourceId.
+            </summary>
+            <param name="LocalizedResourceId">A key field.</param>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.Delete(Spring2.Core.Types.IdType,System.Data.IDbTransaction)">
+            <summary>
+            Deletes a record from the LocalizedResource table by LocalizedResourceId.
+            </summary>
+            <param name="LocalizedResourceId">A key field.</param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.FindByResourceIdLocaleAndLanguage(Spring2.Core.Types.IdType,Spring2.Core.Types.ILocale,Spring2.Core.Types.ILanguage)">
+            <summary>
+            Returns an object which matches the values for the fields specified.
+            </summary>
+            <param name="ResourceId">A field value to be matched.</param>
+            <param name="Locale">A field value to be matched.</param>
+            <param name="Language">A field value to be matched.</param>
+            <returns>The object found.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.FindByResourceId(Spring2.Core.Types.IdType)">
+            <summary>
+            Returns a list of objects which match the values for the fields specified.
+            </summary>
+            <param name="Context">A field value to be matched.</param>
+            <returns>The list of ResourceDAO objects found.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.LocalizedResourceDAO.SearchContent(Spring2.Core.Types.StringType,Spring2.Core.Types.ILocale,Spring2.Core.Types.ILanguage)">
+            <summary>
+            Returns a list which matches the values for the fields specified.
+            </summary>
+            <param name="searchTerm">A field value to be matched.</param>
+            /// <param name="locale">A field value to be matched.</param>
+            /// <param name="language">A field value to be matched.</param>
+            <returns>The list found.</returns>
+        </member>
+        <member name="T:Spring2.Core.ResourceManager.Dao.ResourceDAO">
+            <summary>
+            Data access class for Resource business entity.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.#cctor">
+            <summary>
+            Initializes the static map of property names to sql expressions.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetList">
+            <summary>
+            Returns a list of all Resource rows.
+            </summary>
+            <returns>List of Resource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetList(Spring2.Core.DAO.SqlFilter)">
+            <summary>
+            Returns a filtered list of Resource rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <returns>List of Resource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetList(Spring2.Core.DAO.IOrderBy)">
+            <summary>
+            Returns an ordered list of Resource rows.  All rows in the database are returned
+            </summary>
+            <param name="orderByClause">Ordering criteria.</param>
+            <returns>List of Resource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetList(Spring2.Core.DAO.SqlFilter,Spring2.Core.DAO.IOrderBy)">
+            <summary>
+            Returns an ordered and filtered list of Resource rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="orderByClause">Ordering criteria.</param>
+            <returns>List of Resource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetList(System.Int32)">
+            <summary>
+            Returns a list of all Resource rows.
+            </summary>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of Resource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetList(Spring2.Core.DAO.SqlFilter,System.Int32)">
+            <summary>
+            Returns a filtered list of Resource rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of Resource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetList(Spring2.Core.DAO.IOrderBy,System.Int32)">
+            <summary>
+            Returns an ordered list of Resource rows.  All rows in the database are returned
+            </summary>
+            <param name="orderByClause">Ordering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of Resource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetList(Spring2.Core.DAO.SqlFilter,Spring2.Core.DAO.IOrderBy,System.Int32)">
+            <summary>
+            Returns an ordered and filtered list of Resource rows.
+            </summary>
+            <param name="filter">Filtering criteria.</param>
+            <param name="orderByClause">Ordering criteria.</param>
+            <param name="maxRows">Uses TOP to limit results to specified number of rows</param>
+            <returns>List of Resource objects.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found matching the where criteria.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.Load(Spring2.Core.Types.IdType)">
+            <summary>
+            Finds a Resource entity using it's primary key.
+            </summary>
+            <param name="resourceId">A key field.</param>
+            <returns>A Resource object.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no entity exists witht he specified primary key..</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.Reload(Spring2.Core.ResourceManager.BusinessLogic.Resource)">
+            <summary>
+            Repopulates an existing business entity instance
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetList(System.Data.IDataReader)">
+            <summary>
+            Read through the reader and return a data object list
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetDataObject(System.Data.IDataReader)">
+            <summary>
+            Read from reader and return a single data object
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetDataObject(System.Data.IDataReader,Spring2.Core.ResourceManager.Dao.ResourceDAO.ColumnOrdinals)">
+            <summary>
+            Read from reader and return a single data object
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetDataObjectFromReader(Spring2.Core.ResourceManager.BusinessLogic.Resource,System.Data.IDataReader)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="data">Entity to be populated from data reader</param>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetDataObjectFromReader(System.Data.IDataReader)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetDataObjectFromReader(System.Data.IDataReader,Spring2.Core.ResourceManager.Dao.ResourceDAO.ColumnOrdinals)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="dataReader">Container for database row.</param>
+            <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.GetDataObjectFromReader(Spring2.Core.ResourceManager.BusinessLogic.Resource,System.Data.IDataReader,Spring2.Core.ResourceManager.Dao.ResourceDAO.ColumnOrdinals)">
+            <summary>
+            Builds a data object from the current row in a data reader..
+            </summary>
+            <param name="data">Entity to be populated from data reader</param>
+            <param name="dataReader">Container for database row.</param>
+            <param name="ordinals">An instance of ColumnOrdinals initialized for this data reader</param>
+            <returns>Data object built from current row.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.Insert(Spring2.Core.ResourceManager.BusinessLogic.Resource)">
+            <summary>
+            Inserts a record into the Resource table.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.Insert(Spring2.Core.ResourceManager.BusinessLogic.Resource,System.Data.IDbTransaction)">
+            <summary>
+            Inserts a record into the Resource table.
+            </summary>
+            <param name="data"></param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.Update(Spring2.Core.ResourceManager.BusinessLogic.Resource)">
+            <summary>
+            Updates a record in the Resource table.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.Update(Spring2.Core.ResourceManager.BusinessLogic.Resource,System.Data.IDbTransaction)">
+            <summary>
+            Updates a record in the Resource table.
+            </summary>
+            <param name="data"></param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.Delete(Spring2.Core.Types.IdType)">
+            <summary>
+            Deletes a record from the Resource table by ResourceId.
+            </summary>
+            <param name="resourceId">A key field.</param>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.Delete(Spring2.Core.Types.IdType,System.Data.IDbTransaction)">
+            <summary>
+            Deletes a record from the Resource table by ResourceId.
+            </summary>
+            <param name="resourceId">A key field.</param>
+            <param name="transaction"></param>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.FindByContextFieldAndIdentity(Spring2.Core.Types.StringType,Spring2.Core.Types.StringType,Spring2.Core.Types.IdType)">
+            <summary>
+            Returns an object which matches the values for the fields specified.
+            </summary>
+            <param name="context">A field value to be matched.</param>
+            <param name="field">A field value to be matched.</param>
+            <param name="identity">A field value to be matched.</param>
+            <returns>The object found.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.FindByContext(Spring2.Core.Types.StringType)">
+            <summary>
+            Returns a list of objects which match the values for the fields specified.
+            </summary>
+            <param name="context">A field value to be matched.</param>
+            <returns>The list of ResourceDAO objects found.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.FindListByContextAndField(Spring2.Core.Types.StringType,Spring2.Core.Types.StringType)">
+            <summary>
+            Returns a list of objects which match the values for the fields specified.
+            </summary>
+            <param name="context">A field value to be matched.</param>
+            <param name="field">A field value to be matched.</param>
+            <returns>The list of ResourceDAO objects found.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.SearchContext(Spring2.Core.Types.StringType)">
+            <summary>
+            Returns a list which matches the values for the fields specified.
+            </summary>
+            <param name="searchTerm">A field value to be matched.</param>
+            <returns>The list found.</returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.FindByContextAndField(Spring2.Core.Types.StringType,Spring2.Core.Types.StringType)">
+            <summary>
+            Returns an object which matches the values for the fields specified.
+            </summary>
+            <param name="Context">A field value to be matched.</param>
+            <param name="Field">A field value to be matched.</param>
+            <returns>The object found.</returns>
+            <exception cref="T:Spring2.Core.DAO.FinderException">Thrown when no rows are found.</exception>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.FindUniqueContexts">
+            <summary>
+            Returns 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.FindUniqueFields(Spring2.Core.Types.StringType)">
+            <summary>
+            Returns 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.ResourceManager.Dao.ResourceDAO.FindUniqueIdentities(Spring2.Core.Types.StringType,Spring2.Core.Types.StringType)">
+            <summary>
+            Returns 
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

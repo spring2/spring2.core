@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spring2.Core.Cryptography</name>
+    </assembly>
+    <members>
+        <member name="T:Spring2.Core.Cryptography.CryptoUtil">
+            <summary>
+            Represents a collection of cryptographics utility methods. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Cryptography.CryptoUtil.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Spring2.Core.Cryptography.CryptoUtil"/> class.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Cryptography.CryptoUtil.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Spring2.Core.Cryptography.CryptoUtil"/> class.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Cryptography.CryptoUtil.#ctor(System.Byte[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Spring2.Core.Cryptography.CryptoUtil"/> class.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Cryptography.CryptoUtil.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Spring2.Core.Cryptography.CryptoUtil"/> class.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Cryptography.CryptoUtil.Key">
+            <summary>
+            Gets the key associated with this instance.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Cryptography.CryptoUtil.Iv">
+            <summary>
+            Gets the initialization vector associated with this instance.
+            </summary>
+        </member>
+        <member name="P:Spring2.Core.Cryptography.CryptoUtil.Secret">
+            <summary>
+            Gets the secret associated with this instance.
+            </summary>
+        </member>
+        <member name="M:Spring2.Core.Cryptography.CryptoUtil.Decrypt(System.String)">
+            <summary>
+            Decrypts a string with a timeout of TimeSpan.MaxValue.
+            </summary>
+            <param name="cipherText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Cryptography.CryptoUtil.DecryptWithTimeout(System.String,System.Int32)">
+            <summary>
+            THIS METHOD EXISTS FOR INTEROPERABILITY ONLY.
+            </summary>
+            <param name="cipherText"></param>
+            <param name="timeout">Number of milliseconds allowed before a timeout occurs.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Cryptography.CryptoUtil.Decrypt(System.String,System.TimeSpan)">
+            <summary>
+            Decrypts a string with a specified timeout.
+            </summary>
+            <param name="cipherText"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spring2.Core.Cryptography.CryptoUtil.ComputeHash(System.String,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Hashes the provided byte array to produce a fingerprint, uses the specified hash algorithm.
+            </summary>
+            <param name="algorithm">The name of the hash algorithm to be used.</param>
+            <param name="input">The bytes to be hashed.</param>
+            <param name="offset">Where in the byte array to begin the hash computation.</param>
+            <param name="count">The number of bytes from the offset to use for the computation.</param>
+            <returns>The computed hash of the input. Note that the length varies by algorithm.</returns>
+        </member>
+        <member name="M:Spring2.Core.Cryptography.CryptoUtil.ComputeHash(System.String,System.Byte[])">
+            <summary>
+            Hashes the provided byte array to produce a fingerprint, uses the specified hash algorithm.
+            </summary>
+            <param name="algorithm">The name of the hash algorithm to be used.</param>
+            <param name="input">The bytes to be hashed.</param>
+            <returns>The computed hash of the input. Note that the length varies by algorithm.</returns>
+        </member>
+        <member name="M:Spring2.Core.Cryptography.CryptoUtil.ComputeHash(System.String,System.String)">
+            <summary>
+            Hashes the provided byte array to produce a fingerprint, uses the specified hash algorithm.
+            </summary>
+            <param name="algorithm">The name of the hash algorithm to be used.</param>
+            <param name="input">The string to be hashed.</param>
+            <returns>The computed hash of the input. Note that the length varies by algorithm.</returns>
+        </member>
+        <member name="M:Spring2.Core.Cryptography.CryptoUtil.ComputeHash(System.String)">
+            <summary>
+            Computes the SHA-1 hash of a given string.
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
