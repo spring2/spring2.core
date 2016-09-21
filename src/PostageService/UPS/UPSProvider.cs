@@ -6,13 +6,14 @@ using System.Text;
 
 namespace Spring2.Core.PostageService.UPS {
     public class UPSProvider : IPostageServiceProvider {
-	UPSMI.Ship.ShipService shipService;
+	UPSWS.Ship.ShipService shipService;
 	UPSModelAssembler assembler;
 
 	string accessLicenseNumber;
 	string username;
 	string password;
 	string shipperNumber;
+	string shipperName;
 	string costCenter;
 
 	public UPSProvider() {
@@ -21,16 +22,44 @@ namespace Spring2.Core.PostageService.UPS {
 	    assembler = new UPSModelAssembler();
 	}
 
-	public UPSProvider(string accessLicenseNumber, string username, string password, string shipperNumber, string costCenter, string postageServerUrl) {
-	    SetCredentials(accessLicenseNumber, username, password, shipperNumber, costCenter);
+	public UPSProvider(string accessLicenseNumber, string username, string password, string shipperNumber, string shipperName, string costCenter, string postageServerUrl) {
+	    SetCredentials(accessLicenseNumber, username, password, shipperNumber, shipperName, costCenter);
 	    InitializeUPSShipService(postageServerUrl);
 	    assembler = new UPSModelAssembler();
 	}
 
 	public PostageLabelData GetPostageLabel(PostageLabelInputData data) {
-	    UPSMI.Ship.ShipmentRequest request = assembler.ToShipmentRequest(data, shipperNumber, costCenter);
-	    UPSMI.Ship.ShipmentResponse response = shipService.ProcessShipment(request);
-	    return assembler.ToPostageLabelData(response);
+	    try {
+		UPSWS.Ship.ShipmentRequest request = assembler.ToShipmentRequest(data, shipperNumber, shipperName, costCenter);
+		UPSWS.Ship.ShipmentResponse response = shipService.ProcessShipment(request);
+		return assembler.ToPostageLabelData(response);
+	    } catch (System.Web.Services.Protocols.SoapException ex) {
+		StringBuilder error = new StringBuilder();
+		error.Append("---------Ship Web Service returns error----------------");
+		error.Append(Environment.NewLine);
+		error.Append("---------\"Hard\" is user error \"Transient\" is system error----------------");
+		error.Append(Environment.NewLine);
+		error.Append("SoapException Message= " + ex.Message);
+		error.Append(Environment.NewLine);
+		error.Append("SoapException Category:Code:Message= " + ex.Detail.LastChild.InnerText);
+		error.Append(Environment.NewLine);
+		error.Append("SoapException XML String for all= " + ex.Detail.LastChild.OuterXml);
+		error.Append(Environment.NewLine);
+		error.Append("SoapException StackTrace= " + ex.StackTrace);
+		return assembler.ToPostageLabelErrorData(error.ToString());
+	    } catch (System.ServiceModel.CommunicationException ex) {
+		StringBuilder error = new StringBuilder();
+		error.Append("CommunicationException= " + ex.Message);
+		error.Append(Environment.NewLine);
+		error.Append("CommunicationException-StackTrace= " + ex.StackTrace);
+		return assembler.ToPostageLabelErrorData(error.ToString());
+	    } catch (Exception ex) {
+		StringBuilder error = new StringBuilder();
+		error.Append(" General Exception= " + ex.Message);
+		error.Append(Environment.NewLine);
+		error.Append(" General Exception-StackTrace= " + ex.StackTrace);
+		return assembler.ToPostageLabelErrorData(error.ToString());
+	    }	    
 	}
 
 	public RefundRequestData RefundRequest(String trackingNumber, bool isInternational) {
@@ -62,14 +91,16 @@ namespace Spring2.Core.PostageService.UPS {
 		ConfigurationProvider.Instance.Settings["PostageService.UPS.Username"],
 		ConfigurationProvider.Instance.Settings["PostageService.UPS.Password"],
 		ConfigurationProvider.Instance.Settings["PostageService.UPS.ShipperNumber"],
+		ConfigurationProvider.Instance.Settings["PostageService.UPS.ShipperName"],
 		ConfigurationProvider.Instance.Settings["PostageService.UPS.costCenter"]);
 	}
 
-	private void SetCredentials(string accessLicenseNumber, string username, string password, string shipperNumber, string costCenter) {
+	private void SetCredentials(string accessLicenseNumber, string username, string password, string shipperNumber, string shipperName, string costCenter) {
 	    this.accessLicenseNumber = accessLicenseNumber;
 	    this.username = username;
 	    this.password = password;
 	    this.shipperNumber = shipperNumber;
+	    this.shipperName = shipperName;
 	    this.costCenter = costCenter;
 	}
 
@@ -78,19 +109,17 @@ namespace Spring2.Core.PostageService.UPS {
 	}
 
 	private void InitializeUPSShipService(string url) {
-	    shipService = new UPSMI.Ship.ShipService() {
-		UPSSecurityValue = new UPSMI.Ship.UPSSecurity() {
-		    ServiceAccessToken = new UPSMI.Ship.UPSSecurityServiceAccessToken() {
-			AccessLicenseNumber = accessLicenseNumber
-		    },
-		    UsernameToken = new UPSMI.Ship.UPSSecurityUsernameToken() {
-			Username = username,
-			Password = password
-		    }
+	    shipService = new UPSWS.Ship.ShipService();
+	    shipService.UPSSecurityValue = new UPSWS.Ship.UPSSecurity() {
+		ServiceAccessToken = new UPSWS.Ship.UPSSecurityServiceAccessToken() {
+		    AccessLicenseNumber = accessLicenseNumber
 		},
-		Url = url
+		UsernameToken = new UPSWS.Ship.UPSSecurityUsernameToken() {
+		    Username = username,
+		    Password = password
+		}
 	    };
-	    System.Net.ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => { return true; };
+	    shipService.Url = url;
 	}
 
 

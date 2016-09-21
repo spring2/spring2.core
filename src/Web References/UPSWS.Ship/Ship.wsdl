@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:upss="http://www.ups.com/XMLSchema/XOLTWS/UPSS/v1.0" xmlns:ship="http://www.ups.com/XMLSchema/XOLTWS/Ship/v1.0" xmlns:tns="http://www.ups.com/WSDL/XOLTWS/Ship/v1.0" xmlns:error="http://www.ups.com/XMLSchema/XOLTWS/Error/v1.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Ship" targetNamespace="http://www.ups.com/WSDL/XOLTWS/Ship/v1.0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:upss="http://www.ups.com/XMLSchema/XOLTWS/UPSS/v1.0" xmlns:ship="http://www.ups.com/XMLSchema/XOLTWS/Ship/v1.0" xmlns:tns="http://www.ups.com/WSDL/XOLTWS/Ship/v1.0" xmlns:error="http://www.ups.com/XMLSchema/XOLTWS/Error/v1.1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Ship" targetNamespace="http://www.ups.com/WSDL/XOLTWS/Ship/v1.0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema>
       <xsd:import schemaLocation="UPSSecurity.xsd" namespace="http://www.ups.com/XMLSchema/XOLTWS/UPSS/v1.0" />

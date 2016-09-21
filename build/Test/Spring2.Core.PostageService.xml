@@ -5128,1972 +5128,2071 @@
         <member name="P:Spring2.Core.ELSServicesService.GetTransactionsListingCompletedEventArgs.Result">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipService">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipService">
             <remarks/>
         </member>
-        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.#ctor">
+        <member name="M:Spring2.Core.UPSWS.Ship.ShipService.#ctor">
             <remarks/>
         </member>
-        <member name="E:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipmentCompleted">
+        <member name="E:Spring2.Core.UPSWS.Ship.ShipService.ProcessShipmentCompleted">
             <remarks/>
         </member>
-        <member name="E:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipConfirmCompleted">
+        <member name="E:Spring2.Core.UPSWS.Ship.ShipService.ProcessShipConfirmCompleted">
             <remarks/>
         </member>
-        <member name="E:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipAcceptCompleted">
+        <member name="E:Spring2.Core.UPSWS.Ship.ShipService.ProcessShipAcceptCompleted">
             <remarks/>
         </member>
-        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipment(Spring2.Core.UPSMI.Ship.ShipmentRequest)">
+        <member name="M:Spring2.Core.UPSWS.Ship.ShipService.ProcessShipment(Spring2.Core.UPSWS.Ship.ShipmentRequest)">
             <remarks/>
         </member>
-        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipmentAsync(Spring2.Core.UPSMI.Ship.ShipmentRequest)">
+        <member name="M:Spring2.Core.UPSWS.Ship.ShipService.ProcessShipmentAsync(Spring2.Core.UPSWS.Ship.ShipmentRequest)">
             <remarks/>
         </member>
-        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipmentAsync(Spring2.Core.UPSMI.Ship.ShipmentRequest,System.Object)">
+        <member name="M:Spring2.Core.UPSWS.Ship.ShipService.ProcessShipmentAsync(Spring2.Core.UPSWS.Ship.ShipmentRequest,System.Object)">
             <remarks/>
         </member>
-        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipConfirm(Spring2.Core.UPSMI.Ship.ShipConfirmRequest)">
+        <member name="M:Spring2.Core.UPSWS.Ship.ShipService.ProcessShipConfirm(Spring2.Core.UPSWS.Ship.ShipConfirmRequest)">
             <remarks/>
         </member>
-        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipConfirmAsync(Spring2.Core.UPSMI.Ship.ShipConfirmRequest)">
+        <member name="M:Spring2.Core.UPSWS.Ship.ShipService.ProcessShipConfirmAsync(Spring2.Core.UPSWS.Ship.ShipConfirmRequest)">
             <remarks/>
         </member>
-        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipConfirmAsync(Spring2.Core.UPSMI.Ship.ShipConfirmRequest,System.Object)">
+        <member name="M:Spring2.Core.UPSWS.Ship.ShipService.ProcessShipConfirmAsync(Spring2.Core.UPSWS.Ship.ShipConfirmRequest,System.Object)">
             <remarks/>
         </member>
-        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipAccept(Spring2.Core.UPSMI.Ship.ShipAcceptRequest)">
+        <member name="M:Spring2.Core.UPSWS.Ship.ShipService.ProcessShipAccept(Spring2.Core.UPSWS.Ship.ShipAcceptRequest)">
             <remarks/>
         </member>
-        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipAcceptAsync(Spring2.Core.UPSMI.Ship.ShipAcceptRequest)">
+        <member name="M:Spring2.Core.UPSWS.Ship.ShipService.ProcessShipAcceptAsync(Spring2.Core.UPSWS.Ship.ShipAcceptRequest)">
             <remarks/>
         </member>
-        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.ProcessShipAcceptAsync(Spring2.Core.UPSMI.Ship.ShipAcceptRequest,System.Object)">
+        <member name="M:Spring2.Core.UPSWS.Ship.ShipService.ProcessShipAcceptAsync(Spring2.Core.UPSWS.Ship.ShipAcceptRequest,System.Object)">
             <remarks/>
         </member>
-        <member name="M:Spring2.Core.UPSMI.Ship.ShipService.CancelAsync(System.Object)">
+        <member name="M:Spring2.Core.UPSWS.Ship.ShipService.CancelAsync(System.Object)">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.UPSSecurity">
+        <member name="T:Spring2.Core.UPSWS.Ship.UPSSecurity">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UPSSecurity.UsernameToken">
+        <member name="P:Spring2.Core.UPSWS.Ship.UPSSecurity.UsernameToken">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UPSSecurity.ServiceAccessToken">
+        <member name="P:Spring2.Core.UPSWS.Ship.UPSSecurity.ServiceAccessToken">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.UPSSecurityUsernameToken">
+        <member name="T:Spring2.Core.UPSWS.Ship.UPSSecurityUsernameToken">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UPSSecurityUsernameToken.Username">
+        <member name="P:Spring2.Core.UPSWS.Ship.UPSSecurityUsernameToken.Username">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UPSSecurityUsernameToken.Password">
+        <member name="P:Spring2.Core.UPSWS.Ship.UPSSecurityUsernameToken.Password">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.HighValueReportType">
+        <member name="T:Spring2.Core.UPSWS.Ship.HighValueReportType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.HighValueReportType.Image">
+        <member name="P:Spring2.Core.UPSWS.Ship.HighValueReportType.Image">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ImageType">
+        <member name="T:Spring2.Core.UPSWS.Ship.ImageType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ImageType.ImageFormat">
+        <member name="P:Spring2.Core.UPSWS.Ship.ImageType.ImageFormat">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ImageType.GraphicImage">
+        <member name="P:Spring2.Core.UPSWS.Ship.ImageType.GraphicImage">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ImageFormatType">
+        <member name="T:Spring2.Core.UPSWS.Ship.ImageFormatType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ImageFormatType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.ImageFormatType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ImageFormatType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.ImageFormatType.Description">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ReceiptType">
+        <member name="T:Spring2.Core.UPSWS.Ship.ReceiptType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.LabelType">
+        <member name="T:Spring2.Core.UPSWS.Ship.LabelType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelType.InternationalSignatureGraphicImage">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelType.InternationalSignatureGraphicImage">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelType.HTMLImage">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelType.HTMLImage">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelType.PDF417">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelType.PDF417">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.SCReportType">
+        <member name="T:Spring2.Core.UPSWS.Ship.SCReportType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.SCReportType.Image">
+        <member name="P:Spring2.Core.UPSWS.Ship.SCReportType.Image">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.FormImageType">
+        <member name="T:Spring2.Core.UPSWS.Ship.FormImageType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.FormImageType.ImageFormat">
+        <member name="P:Spring2.Core.UPSWS.Ship.FormImageType.ImageFormat">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.FormImageType.GraphicImage">
+        <member name="P:Spring2.Core.UPSWS.Ship.FormImageType.GraphicImage">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.FormType">
+        <member name="T:Spring2.Core.UPSWS.Ship.FormType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.FormType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.FormType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.FormType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.FormType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.FormType.Image">
+        <member name="P:Spring2.Core.UPSWS.Ship.FormType.Image">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.FormType.FormGroupId">
+        <member name="P:Spring2.Core.UPSWS.Ship.FormType.FormGroupId">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.FormType.FormGroupIdName">
+        <member name="P:Spring2.Core.UPSWS.Ship.FormType.FormGroupIdName">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.AccessorialType">
+        <member name="T:Spring2.Core.UPSWS.Ship.AccessorialType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AccessorialType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.AccessorialType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AccessorialType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.AccessorialType.Description">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PackageResultsType">
+        <member name="T:Spring2.Core.UPSWS.Ship.PackageResultsType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.TrackingNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageResultsType.TrackingNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.ServiceOptionsCharges">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageResultsType.ServiceOptionsCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.ShippingLabel">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageResultsType.ShippingLabel">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.ShippingReceipt">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageResultsType.ShippingReceipt">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.USPSPICNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageResultsType.USPSPICNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.CN22Number">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageResultsType.CN22Number">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.Accessorial">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageResultsType.Accessorial">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageResultsType.Form">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageResultsType.Form">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipChargeType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageResultsType.ItemizedCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipChargeType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageResultsType.NegotiatedCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipChargeType.Description">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipChargeType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipChargeType.CurrencyCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipChargeType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipChargeType.MonetaryValue">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipChargeType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipChargeType.SubType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipChargeType.CurrencyCode">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.BillingUnitOfMeasurementType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipChargeType.MonetaryValue">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BillingUnitOfMeasurementType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipChargeType.SubType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BillingUnitOfMeasurementType.Description">
+        <member name="T:Spring2.Core.UPSWS.Ship.BillingUnitOfMeasurementType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.BillingWeightType">
+        <member name="P:Spring2.Core.UPSWS.Ship.BillingUnitOfMeasurementType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BillingWeightType.UnitOfMeasurement">
+        <member name="P:Spring2.Core.UPSWS.Ship.BillingUnitOfMeasurementType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BillingWeightType.Weight">
+        <member name="T:Spring2.Core.UPSWS.Ship.BillingWeightType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.TransportationChargeType">
+        <member name="P:Spring2.Core.UPSWS.Ship.BillingWeightType.UnitOfMeasurement">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.TransportationChargeType.GrossCharge">
+        <member name="P:Spring2.Core.UPSWS.Ship.BillingWeightType.Weight">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.TransportationChargeType.DiscountAmount">
+        <member name="T:Spring2.Core.UPSWS.Ship.HandlingUnitsResponseType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.TransportationChargeType.DiscountPercentage">
+        <member name="P:Spring2.Core.UPSWS.Ship.HandlingUnitsResponseType.Quantity">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.TransportationChargeType.NetCharge">
+        <member name="P:Spring2.Core.UPSWS.Ship.HandlingUnitsResponseType.Type">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.FRSShipmentDataType">
+        <member name="P:Spring2.Core.UPSWS.Ship.HandlingUnitsResponseType.Dimensions">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.FRSShipmentDataType.TransportationCharges">
+        <member name="P:Spring2.Core.UPSWS.Ship.HandlingUnitsResponseType.AdjustedHeight">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.NegotiatedRateChargesType">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipUnitOfMeasurementType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.NegotiatedRateChargesType.ItemizedCharges">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipUnitOfMeasurementType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.NegotiatedRateChargesType.TaxCharges">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipUnitOfMeasurementType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.NegotiatedRateChargesType.TotalCharge">
+        <member name="T:Spring2.Core.UPSWS.Ship.HandlingUnitsDimensionsType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.NegotiatedRateChargesType.TotalChargesWithTaxes">
+        <member name="P:Spring2.Core.UPSWS.Ship.HandlingUnitsDimensionsType.UnitOfMeasurement">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.TaxChargeType">
+        <member name="P:Spring2.Core.UPSWS.Ship.HandlingUnitsDimensionsType.Length">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.TaxChargeType.Type">
+        <member name="P:Spring2.Core.UPSWS.Ship.HandlingUnitsDimensionsType.Width">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.TaxChargeType.MonetaryValue">
+        <member name="P:Spring2.Core.UPSWS.Ship.HandlingUnitsDimensionsType.Height">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentChargesType">
+        <member name="T:Spring2.Core.UPSWS.Ship.AdjustedHeightType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.RateChart">
+        <member name="P:Spring2.Core.UPSWS.Ship.AdjustedHeightType.Value">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.TransportationCharges">
+        <member name="P:Spring2.Core.UPSWS.Ship.AdjustedHeightType.UnitOfMeasurement">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.ItemizedCharges">
+        <member name="T:Spring2.Core.UPSWS.Ship.FreightDensityRateType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.ServiceOptionsCharges">
+        <member name="P:Spring2.Core.UPSWS.Ship.FreightDensityRateType.Density">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.TaxCharges">
+        <member name="P:Spring2.Core.UPSWS.Ship.FreightDensityRateType.TotalCubicFeet">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.TotalCharges">
+        <member name="T:Spring2.Core.UPSWS.Ship.TransportationChargeType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargesType.TotalChargesWithTaxes">
+        <member name="P:Spring2.Core.UPSWS.Ship.TransportationChargeType.GrossCharge">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.DisclaimerType">
+        <member name="P:Spring2.Core.UPSWS.Ship.TransportationChargeType.DiscountAmount">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DisclaimerType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.TransportationChargeType.DiscountPercentage">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DisclaimerType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.TransportationChargeType.NetCharge">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentResultsType">
+        <member name="T:Spring2.Core.UPSWS.Ship.FRSShipmentDataType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.Disclaimer">
+        <member name="P:Spring2.Core.UPSWS.Ship.FRSShipmentDataType.TransportationCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.ShipmentCharges">
+        <member name="P:Spring2.Core.UPSWS.Ship.FRSShipmentDataType.FreightDensityRate">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.NegotiatedRateCharges">
+        <member name="P:Spring2.Core.UPSWS.Ship.FRSShipmentDataType.HandlingUnits">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.FRSShipmentData">
+        <member name="T:Spring2.Core.UPSWS.Ship.NegotiatedRateChargesType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.RatingMethod">
+        <member name="P:Spring2.Core.UPSWS.Ship.NegotiatedRateChargesType.ItemizedCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.BillableWeightCalculationMethod">
+        <member name="P:Spring2.Core.UPSWS.Ship.NegotiatedRateChargesType.TaxCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.BillingWeight">
+        <member name="P:Spring2.Core.UPSWS.Ship.NegotiatedRateChargesType.TotalCharge">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.ShipmentIdentificationNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.NegotiatedRateChargesType.TotalChargesWithTaxes">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.ShipmentDigest">
+        <member name="T:Spring2.Core.UPSWS.Ship.TaxChargeType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.PackageResults">
+        <member name="P:Spring2.Core.UPSWS.Ship.TaxChargeType.Type">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.ControlLogReceipt">
+        <member name="P:Spring2.Core.UPSWS.Ship.TaxChargeType.MonetaryValue">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.Form">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipmentChargesType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.CODTurnInPage">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentChargesType.RateChart">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.HighValueReport">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentChargesType.TransportationCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.LabelURL">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentChargesType.ItemizedCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.LocalLanguageLabelURL">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentChargesType.ServiceOptionsCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.ReceiptURL">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentChargesType.TaxCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResultsType.LocalLanguageReceiptURL">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentChargesType.TotalCharges">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.CodeDescriptionType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentChargesType.TotalChargesWithTaxes">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CodeDescriptionType.Code">
+        <member name="T:Spring2.Core.UPSWS.Ship.DisclaimerType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CodeDescriptionType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.DisclaimerType.Code">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ResponseType">
+        <member name="P:Spring2.Core.UPSWS.Ship.DisclaimerType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ResponseType.ResponseStatus">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipmentResultsType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ResponseType.Alert">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.Disclaimer">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ResponseType.TransactionReference">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.ShipmentCharges">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.TransactionReferenceType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.NegotiatedRateCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.TransactionReferenceType.CustomerContext">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.FRSShipmentData">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.TransactionReferenceType.TransactionIdentifier">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.RatingMethod">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ReceiptImageFormatType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.BillableWeightCalculationMethod">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ReceiptImageFormatType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.BillingWeight">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ReceiptImageFormatType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.ShipmentIdentificationNumber">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ReceiptSpecificationType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.ShipmentDigest">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ReceiptSpecificationType.ImageFormat">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.PackageResults">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.InstructionCodeDescriptionType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.ControlLogReceipt">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InstructionCodeDescriptionType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.Form">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InstructionCodeDescriptionType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.CODTurnInPage">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.LabelStockSizeType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.HighValueReport">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelStockSizeType.Height">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.LabelURL">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelStockSizeType.Width">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.LocalLanguageLabelURL">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.LabelImageFormatType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.ReceiptURL">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelImageFormatType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResultsType.LocalLanguageReceiptURL">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelImageFormatType.Description">
+        <member name="T:Spring2.Core.UPSWS.Ship.CodeDescriptionType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.LabelSpecificationType">
+        <member name="P:Spring2.Core.UPSWS.Ship.CodeDescriptionType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelSpecificationType.LabelImageFormat">
+        <member name="P:Spring2.Core.UPSWS.Ship.CodeDescriptionType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelSpecificationType.HTTPUserAgent">
+        <member name="T:Spring2.Core.UPSWS.Ship.ResponseType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelSpecificationType.LabelStockSize">
+        <member name="P:Spring2.Core.UPSWS.Ship.ResponseType.ResponseStatus">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelSpecificationType.Instruction">
+        <member name="P:Spring2.Core.UPSWS.Ship.ResponseType.Alert">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.NMFCType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ResponseType.TransactionReference">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.NMFCType.PrimeCode">
+        <member name="T:Spring2.Core.UPSWS.Ship.TransactionReferenceType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.NMFCType.SubCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.TransactionReferenceType.CustomerContext">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.CommodityType">
+        <member name="P:Spring2.Core.UPSWS.Ship.TransactionReferenceType.TransactionIdentifier">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CommodityType.FreightClass">
+        <member name="T:Spring2.Core.UPSWS.Ship.ReceiptImageFormatType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CommodityType.NMFC">
+        <member name="P:Spring2.Core.UPSWS.Ship.ReceiptImageFormatType.Code">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.DryIceWeightType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ReceiptImageFormatType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DryIceWeightType.UnitOfMeasurement">
+        <member name="T:Spring2.Core.UPSWS.Ship.ReceiptSpecificationType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DryIceWeightType.Weight">
+        <member name="P:Spring2.Core.UPSWS.Ship.ReceiptSpecificationType.ImageFormat">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipUnitOfMeasurementType">
+        <member name="T:Spring2.Core.UPSWS.Ship.InstructionCodeDescriptionType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipUnitOfMeasurementType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.InstructionCodeDescriptionType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipUnitOfMeasurementType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.InstructionCodeDescriptionType.Description">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.DryIceType">
+        <member name="T:Spring2.Core.UPSWS.Ship.LabelStockSizeType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DryIceType.RegulationSet">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelStockSizeType.Height">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DryIceType.DryIceWeight">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelStockSizeType.Width">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DryIceType.MedicalUseIndicator">
+        <member name="T:Spring2.Core.UPSWS.Ship.LabelImageFormatType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PSONotificationType">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelImageFormatType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PSONotificationType.NotificationCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelImageFormatType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PSONotificationType.EMail">
+        <member name="T:Spring2.Core.UPSWS.Ship.LabelSpecificationType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.EmailDetailsType">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelSpecificationType.LabelImageFormat">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.EMailAddress">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelSpecificationType.HTTPUserAgent">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.UndeliverableEMailAddress">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelSpecificationType.LabelStockSize">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.FromEMailAddress">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelSpecificationType.Instruction">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.FromName">
+        <member name="T:Spring2.Core.UPSWS.Ship.NMFCType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.Memo">
+        <member name="P:Spring2.Core.UPSWS.Ship.NMFCType.PrimeCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.Subject">
+        <member name="P:Spring2.Core.UPSWS.Ship.NMFCType.SubCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EmailDetailsType.SubjectCode">
+        <member name="T:Spring2.Core.UPSWS.Ship.CommodityType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ContactInfoType">
+        <member name="P:Spring2.Core.UPSWS.Ship.CommodityType.FreightClass">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ContactInfoType.Name">
+        <member name="P:Spring2.Core.UPSWS.Ship.CommodityType.NMFC">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ContactInfoType.Phone">
+        <member name="T:Spring2.Core.UPSWS.Ship.DryIceWeightType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipPhoneType">
+        <member name="P:Spring2.Core.UPSWS.Ship.DryIceWeightType.UnitOfMeasurement">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipPhoneType.Number">
+        <member name="P:Spring2.Core.UPSWS.Ship.DryIceWeightType.Weight">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipPhoneType.Extension">
+        <member name="T:Spring2.Core.UPSWS.Ship.DryIceType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.VerbalConfirmationType">
+        <member name="P:Spring2.Core.UPSWS.Ship.DryIceType.RegulationSet">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.VerbalConfirmationType.ContactInfo">
+        <member name="P:Spring2.Core.UPSWS.Ship.DryIceType.DryIceWeight">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PackageServiceOptionsAccessPointCODType">
+        <member name="P:Spring2.Core.UPSWS.Ship.DryIceType.MedicalUseIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsAccessPointCODType.CurrencyCode">
+        <member name="T:Spring2.Core.UPSWS.Ship.PSONotificationType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsAccessPointCODType.MonetaryValue">
+        <member name="P:Spring2.Core.UPSWS.Ship.PSONotificationType.NotificationCode">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PSOCODType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PSONotificationType.EMail">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PSOCODType.CODFundsCode">
+        <member name="T:Spring2.Core.UPSWS.Ship.EmailDetailsType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PSOCODType.CODAmount">
+        <member name="P:Spring2.Core.UPSWS.Ship.EmailDetailsType.EMailAddress">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.CurrencyMonetaryType">
+        <member name="P:Spring2.Core.UPSWS.Ship.EmailDetailsType.UndeliverableEMailAddress">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CurrencyMonetaryType.CurrencyCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.EmailDetailsType.FromEMailAddress">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CurrencyMonetaryType.MonetaryValue">
+        <member name="P:Spring2.Core.UPSWS.Ship.EmailDetailsType.FromName">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.DeclaredValueType">
+        <member name="P:Spring2.Core.UPSWS.Ship.EmailDetailsType.Memo">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DeclaredValueType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.EmailDetailsType.Subject">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DeclaredValueType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.EmailDetailsType.SubjectCode">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PackageDeclaredValueType">
+        <member name="T:Spring2.Core.UPSWS.Ship.ContactInfoType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageDeclaredValueType.Type">
+        <member name="P:Spring2.Core.UPSWS.Ship.ContactInfoType.Name">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageDeclaredValueType.CurrencyCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.ContactInfoType.Phone">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageDeclaredValueType.MonetaryValue">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipPhoneType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipPhoneType.Number">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.DeliveryConfirmation">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipPhoneType.Extension">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.DeclaredValue">
+        <member name="T:Spring2.Core.UPSWS.Ship.VerbalConfirmationType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.COD">
+        <member name="P:Spring2.Core.UPSWS.Ship.VerbalConfirmationType.ContactInfo">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.AccessPointCOD">
+        <member name="T:Spring2.Core.UPSWS.Ship.PackageServiceOptionsAccessPointCODType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.VerbalConfirmation">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageServiceOptionsAccessPointCODType.CurrencyCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.ShipperReleaseIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageServiceOptionsAccessPointCODType.MonetaryValue">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.Notification">
+        <member name="T:Spring2.Core.UPSWS.Ship.PSOCODType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.DryIce">
+        <member name="P:Spring2.Core.UPSWS.Ship.PSOCODType.CODFundsCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageServiceOptionsType.UPSPremiumCareIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.PSOCODType.CODAmount">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.DeliveryConfirmationType">
+        <member name="T:Spring2.Core.UPSWS.Ship.CurrencyMonetaryType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DeliveryConfirmationType.DCISType">
+        <member name="P:Spring2.Core.UPSWS.Ship.CurrencyMonetaryType.CurrencyCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DeliveryConfirmationType.DCISNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.CurrencyMonetaryType.MonetaryValue">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PackageWeightType">
+        <member name="T:Spring2.Core.UPSWS.Ship.DeclaredValueType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageWeightType.UnitOfMeasurement">
+        <member name="P:Spring2.Core.UPSWS.Ship.DeclaredValueType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageWeightType.Weight">
+        <member name="P:Spring2.Core.UPSWS.Ship.DeclaredValueType.Description">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.DimensionsType">
+        <member name="T:Spring2.Core.UPSWS.Ship.PackageDeclaredValueType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DimensionsType.UnitOfMeasurement">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageDeclaredValueType.Type">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DimensionsType.Length">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageDeclaredValueType.CurrencyCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DimensionsType.Width">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageDeclaredValueType.MonetaryValue">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DimensionsType.Height">
+        <member name="T:Spring2.Core.UPSWS.Ship.PackageServiceOptionsType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PackagingType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageServiceOptionsType.DeliveryConfirmation">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackagingType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageServiceOptionsType.DeclaredValue">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackagingType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageServiceOptionsType.COD">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PackageType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageServiceOptionsType.AccessPointCOD">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageServiceOptionsType.VerbalConfirmation">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.Packaging">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageServiceOptionsType.ShipperReleaseIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.Dimensions">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageServiceOptionsType.Notification">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.PackageWeight">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageServiceOptionsType.DryIce">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.LargePackageIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageServiceOptionsType.UPSPremiumCareIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.ReferenceNumber">
+        <member name="T:Spring2.Core.UPSWS.Ship.DeliveryConfirmationType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.AdditionalHandlingIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.DeliveryConfirmationType.DCISType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.PackageServiceOptions">
+        <member name="P:Spring2.Core.UPSWS.Ship.DeliveryConfirmationType.DCISNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageType.Commodity">
+        <member name="T:Spring2.Core.UPSWS.Ship.PackageWeightType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ReferenceNumberType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageWeightType.UnitOfMeasurement">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ReferenceNumberType.BarCodeIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageWeightType.Weight">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ReferenceNumberType.Code">
+        <member name="T:Spring2.Core.UPSWS.Ship.DimensionsType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ReferenceNumberType.Value">
+        <member name="P:Spring2.Core.UPSWS.Ship.DimensionsType.UnitOfMeasurement">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PreAlertTextMessageType">
+        <member name="P:Spring2.Core.UPSWS.Ship.DimensionsType.Length">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertTextMessageType.PhoneNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.DimensionsType.Width">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PreAlertVoiceMessageType">
+        <member name="P:Spring2.Core.UPSWS.Ship.DimensionsType.Height">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertVoiceMessageType.PhoneNumber">
+        <member name="T:Spring2.Core.UPSWS.Ship.PackagingType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PreAlertEMailMessageType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackagingType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertEMailMessageType.EMailAddress">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackagingType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertEMailMessageType.UndeliverableEMailAddress">
+        <member name="T:Spring2.Core.UPSWS.Ship.PackageType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PreAlertNotificationType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertNotificationType.EMailMessage">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageType.Packaging">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertNotificationType.VoiceMessage">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageType.Dimensions">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertNotificationType.TextMessage">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageType.PackageWeight">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PreAlertNotificationType.Locale">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageType.LargePackageIndicator">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.LocaleType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageType.ReferenceNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LocaleType.Language">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageType.AdditionalHandlingIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LocaleType.Dialect">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageType.PackageServiceOptions">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.LabelMethodType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageType.Commodity">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelMethodType.Code">
+        <member name="T:Spring2.Core.UPSWS.Ship.ReferenceNumberType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelMethodType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.ReferenceNumberType.BarCodeIndicator">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.LicenseType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ReferenceNumberType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LicenseType.Number">
+        <member name="P:Spring2.Core.UPSWS.Ship.ReferenceNumberType.Value">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LicenseType.Date">
+        <member name="T:Spring2.Core.UPSWS.Ship.PreAlertTextMessageType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LicenseType.ExceptionCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.PreAlertTextMessageType.PhoneNumber">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.BlanketPeriodType">
+        <member name="T:Spring2.Core.UPSWS.Ship.PreAlertVoiceMessageType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BlanketPeriodType.BeginDate">
+        <member name="P:Spring2.Core.UPSWS.Ship.PreAlertVoiceMessageType.PhoneNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BlanketPeriodType.EndDate">
+        <member name="T:Spring2.Core.UPSWS.Ship.PreAlertEMailMessageType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.OtherChargesType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PreAlertEMailMessageType.EMailAddress">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.OtherChargesType.MonetaryValue">
+        <member name="P:Spring2.Core.UPSWS.Ship.PreAlertEMailMessageType.UndeliverableEMailAddress">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.OtherChargesType.Description">
+        <member name="T:Spring2.Core.UPSWS.Ship.PreAlertNotificationType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.IFChargesType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PreAlertNotificationType.EMailMessage">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.IFChargesType.MonetaryValue">
+        <member name="P:Spring2.Core.UPSWS.Ship.PreAlertNotificationType.VoiceMessage">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.DDTCInformationType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PreAlertNotificationType.TextMessage">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.ITARExemptionNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.PreAlertNotificationType.Locale">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.USMLCategoryCode">
+        <member name="T:Spring2.Core.UPSWS.Ship.LocaleType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.EligiblePartyIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.LocaleType.Language">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.RegistrationNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.LocaleType.Dialect">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.Quantity">
+        <member name="T:Spring2.Core.UPSWS.Ship.LabelMethodType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.UnitOfMeasurement">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelMethodType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.SignificantMilitaryEquipmentIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelMethodType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.DDTCInformationType.ACMNumber">
+        <member name="T:Spring2.Core.UPSWS.Ship.LicenseType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.UnitOfMeasurementType">
+        <member name="P:Spring2.Core.UPSWS.Ship.LicenseType.Number">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UnitOfMeasurementType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.LicenseType.Date">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UnitOfMeasurementType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.LicenseType.ExceptionCode">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.EEILicenseType">
+        <member name="T:Spring2.Core.UPSWS.Ship.BlanketPeriodType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EEILicenseType.Number">
+        <member name="P:Spring2.Core.UPSWS.Ship.BlanketPeriodType.BeginDate">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EEILicenseType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.BlanketPeriodType.EndDate">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EEILicenseType.LicenseLineValue">
+        <member name="T:Spring2.Core.UPSWS.Ship.OtherChargesType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EEILicenseType.ECCNNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.OtherChargesType.MonetaryValue">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.EEIInformationType">
+        <member name="P:Spring2.Core.UPSWS.Ship.OtherChargesType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EEIInformationType.ExportInformation">
+        <member name="T:Spring2.Core.UPSWS.Ship.IFChargesType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EEIInformationType.License">
+        <member name="P:Spring2.Core.UPSWS.Ship.IFChargesType.MonetaryValue">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EEIInformationType.DDTCInformation">
+        <member name="T:Spring2.Core.UPSWS.Ship.DDTCInformationType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PackageAssociatedType">
+        <member name="P:Spring2.Core.UPSWS.Ship.DDTCInformationType.ITARExemptionNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageAssociatedType.PackageNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.DDTCInformationType.USMLCategoryCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PackageAssociatedType.ProductAmount">
+        <member name="P:Spring2.Core.UPSWS.Ship.DDTCInformationType.EligiblePartyIndicator">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ScheduleBType">
+        <member name="P:Spring2.Core.UPSWS.Ship.DDTCInformationType.RegistrationNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ScheduleBType.Number">
+        <member name="P:Spring2.Core.UPSWS.Ship.DDTCInformationType.Quantity">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ScheduleBType.Quantity">
+        <member name="P:Spring2.Core.UPSWS.Ship.DDTCInformationType.UnitOfMeasurement">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ScheduleBType.UnitOfMeasurement">
+        <member name="P:Spring2.Core.UPSWS.Ship.DDTCInformationType.SignificantMilitaryEquipmentIndicator">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.NetCostDateType">
+        <member name="P:Spring2.Core.UPSWS.Ship.DDTCInformationType.ACMNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.NetCostDateType.BeginDate">
+        <member name="T:Spring2.Core.UPSWS.Ship.UnitOfMeasurementType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.NetCostDateType.EndDate">
+        <member name="P:Spring2.Core.UPSWS.Ship.UnitOfMeasurementType.Code">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.UnitType">
+        <member name="P:Spring2.Core.UPSWS.Ship.UnitOfMeasurementType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UnitType.Number">
+        <member name="T:Spring2.Core.UPSWS.Ship.EEILicenseType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UnitType.UnitOfMeasurement">
+        <member name="P:Spring2.Core.UPSWS.Ship.EEILicenseType.Number">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UnitType.Value">
+        <member name="P:Spring2.Core.UPSWS.Ship.EEILicenseType.Code">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ProductType">
+        <member name="P:Spring2.Core.UPSWS.Ship.EEILicenseType.LicenseLineValue">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.EEILicenseType.ECCNNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.Unit">
+        <member name="T:Spring2.Core.UPSWS.Ship.EEIInformationType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.CommodityCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.EEIInformationType.ExportInformation">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.PartNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.EEIInformationType.License">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.OriginCountryCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.EEIInformationType.DDTCInformation">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.JointProductionIndicator">
+        <member name="T:Spring2.Core.UPSWS.Ship.PackageAssociatedType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.NetCostCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageAssociatedType.PackageNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.NetCostDateRange">
+        <member name="P:Spring2.Core.UPSWS.Ship.PackageAssociatedType.ProductAmount">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.PreferenceCriteria">
+        <member name="T:Spring2.Core.UPSWS.Ship.ScheduleBType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.ProducerInfo">
+        <member name="P:Spring2.Core.UPSWS.Ship.ScheduleBType.Number">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.MarksAndNumbers">
+        <member name="P:Spring2.Core.UPSWS.Ship.ScheduleBType.Quantity">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.NumberOfPackagesPerCommodity">
+        <member name="P:Spring2.Core.UPSWS.Ship.ScheduleBType.UnitOfMeasurement">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.ProductWeight">
+        <member name="T:Spring2.Core.UPSWS.Ship.NetCostDateType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.VehicleID">
+        <member name="P:Spring2.Core.UPSWS.Ship.NetCostDateType.BeginDate">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.ScheduleB">
+        <member name="P:Spring2.Core.UPSWS.Ship.NetCostDateType.EndDate">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.ExportType">
+        <member name="T:Spring2.Core.UPSWS.Ship.UnitType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.SEDTotalValue">
+        <member name="P:Spring2.Core.UPSWS.Ship.UnitType.Number">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.ExcludeFromForm">
+        <member name="P:Spring2.Core.UPSWS.Ship.UnitType.UnitOfMeasurement">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.ProductCurrencyCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.UnitType.Value">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.PackingListInfo">
+        <member name="T:Spring2.Core.UPSWS.Ship.ProductType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductType.EEIInformation">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.Description">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ProductWeightType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.Unit">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductWeightType.UnitOfMeasurement">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.CommodityCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProductWeightType.Weight">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.PartNumber">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.SoldToType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.OriginCountryCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.Name">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.JointProductionIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.AttentionName">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.NetCostCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.TaxIdentificationNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.NetCostDateRange">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.Phone">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.PreferenceCriteria">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.Option">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.ProducerInfo">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.Address">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.MarksAndNumbers">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.SoldToType.EMailAddress">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.NumberOfPackagesPerCommodity">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PhoneType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.ProductWeight">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PhoneType.Number">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.VehicleID">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PhoneType.Extension">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.ScheduleB">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.AddressType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.ExportType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AddressType.AddressLine">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.SEDTotalValue">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AddressType.City">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.ExcludeFromForm">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AddressType.StateProvinceCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.ProductCurrencyCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AddressType.Town">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.PackingListInfo">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AddressType.PostalCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductType.EEIInformation">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AddressType.CountryCode">
+        <member name="T:Spring2.Core.UPSWS.Ship.ProductWeightType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ProducerType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductWeightType.UnitOfMeasurement">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.Option">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProductWeightType.Weight">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.CompanyName">
+        <member name="T:Spring2.Core.UPSWS.Ship.SoldToType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.TaxIdentificationNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.SoldToType.Name">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.Address">
+        <member name="P:Spring2.Core.UPSWS.Ship.SoldToType.AttentionName">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.AttentionName">
+        <member name="P:Spring2.Core.UPSWS.Ship.SoldToType.TaxIdentificationNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.Phone">
+        <member name="P:Spring2.Core.UPSWS.Ship.SoldToType.Phone">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProducerType.EMailAddress">
+        <member name="P:Spring2.Core.UPSWS.Ship.SoldToType.Option">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.IntermediateConsigneeType">
+        <member name="P:Spring2.Core.UPSWS.Ship.SoldToType.Address">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.IntermediateConsigneeType.CompanyName">
+        <member name="P:Spring2.Core.UPSWS.Ship.SoldToType.EMailAddress">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.IntermediateConsigneeType.Address">
+        <member name="T:Spring2.Core.UPSWS.Ship.PhoneType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.UltimateConsigneeTypeType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PhoneType.Number">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UltimateConsigneeTypeType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.PhoneType.Extension">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UltimateConsigneeTypeType.Description">
+        <member name="T:Spring2.Core.UPSWS.Ship.AddressType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.UltimateConsigneeType">
+        <member name="P:Spring2.Core.UPSWS.Ship.AddressType.AddressLine">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UltimateConsigneeType.CompanyName">
+        <member name="P:Spring2.Core.UPSWS.Ship.AddressType.City">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UltimateConsigneeType.Address">
+        <member name="P:Spring2.Core.UPSWS.Ship.AddressType.StateProvinceCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UltimateConsigneeType.UltimateConsigneeType1">
+        <member name="P:Spring2.Core.UPSWS.Ship.AddressType.Town">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ForwardAgentType">
+        <member name="P:Spring2.Core.UPSWS.Ship.AddressType.PostalCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ForwardAgentType.CompanyName">
+        <member name="P:Spring2.Core.UPSWS.Ship.AddressType.CountryCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ForwardAgentType.TaxIdentificationNumber">
+        <member name="T:Spring2.Core.UPSWS.Ship.ProducerType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ForwardAgentType.Address">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProducerType.Option">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ContactType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProducerType.CompanyName">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ContactType.ForwardAgent">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProducerType.TaxIdentificationNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ContactType.UltimateConsignee">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProducerType.Address">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ContactType.IntermediateConsignee">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProducerType.AttentionName">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ContactType.Producer">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProducerType.Phone">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ContactType.SoldTo">
+        <member name="P:Spring2.Core.UPSWS.Ship.ProducerType.EMailAddress">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipperFiledType">
+        <member name="T:Spring2.Core.UPSWS.Ship.IntermediateConsigneeType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipperFiledType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.IntermediateConsigneeType.CompanyName">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipperFiledType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.IntermediateConsigneeType.Address">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipperFiledType.PreDepartureITNNumber">
+        <member name="T:Spring2.Core.UPSWS.Ship.UltimateConsigneeTypeType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipperFiledType.ExemptionLegend">
+        <member name="P:Spring2.Core.UPSWS.Ship.UltimateConsigneeTypeType.Code">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.POAType">
+        <member name="P:Spring2.Core.UPSWS.Ship.UltimateConsigneeTypeType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.POAType.Code">
+        <member name="T:Spring2.Core.UPSWS.Ship.UltimateConsigneeType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.POAType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.UltimateConsigneeType.CompanyName">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.UPSFiledType">
+        <member name="P:Spring2.Core.UPSWS.Ship.UltimateConsigneeType.Address">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UPSFiledType.POA">
+        <member name="P:Spring2.Core.UPSWS.Ship.UltimateConsigneeType.UltimateConsigneeType1">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.EEIFilingOptionType">
+        <member name="T:Spring2.Core.UPSWS.Ship.ForwardAgentType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EEIFilingOptionType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.ForwardAgentType.CompanyName">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EEIFilingOptionType.EMailAddress">
+        <member name="P:Spring2.Core.UPSWS.Ship.ForwardAgentType.TaxIdentificationNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EEIFilingOptionType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.ForwardAgentType.Address">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EEIFilingOptionType.UPSFiled">
+        <member name="T:Spring2.Core.UPSWS.Ship.ContactType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.EEIFilingOptionType.ShipperFiled">
+        <member name="P:Spring2.Core.UPSWS.Ship.ContactType.ForwardAgent">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.UPSPremiumCareFormType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ContactType.UltimateConsignee">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UPSPremiumCareFormType.ShipmentDate">
+        <member name="P:Spring2.Core.UPSWS.Ship.ContactType.IntermediateConsignee">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UPSPremiumCareFormType.PageSize">
+        <member name="P:Spring2.Core.UPSWS.Ship.ContactType.Producer">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UPSPremiumCareFormType.PrintType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ContactType.SoldTo">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UPSPremiumCareFormType.NumOfCopies">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipperFiledType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UPSPremiumCareFormType.LanguageForUPSPremiumCare">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipperFiledType.Code">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.CN22ContentType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipperFiledType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentQuantity">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipperFiledType.PreDepartureITNNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentDescription">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipperFiledType.ExemptionLegend">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentWeight">
+        <member name="T:Spring2.Core.UPSWS.Ship.POAType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentTotalValue">
+        <member name="P:Spring2.Core.UPSWS.Ship.POAType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentCurrencyCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.POAType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentCountryOfOrigin">
+        <member name="T:Spring2.Core.UPSWS.Ship.UPSFiledType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22ContentType.CN22ContentTariffNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.UPSFiledType.POA">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.CN22FormType">
+        <member name="T:Spring2.Core.UPSWS.Ship.EEIFilingOptionType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.LabelSize">
+        <member name="P:Spring2.Core.UPSWS.Ship.EEIFilingOptionType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.PrintsPerPage">
+        <member name="P:Spring2.Core.UPSWS.Ship.EEIFilingOptionType.EMailAddress">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.LabelPrintType">
+        <member name="P:Spring2.Core.UPSWS.Ship.EEIFilingOptionType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.CN22Type">
+        <member name="P:Spring2.Core.UPSWS.Ship.EEIFilingOptionType.UPSFiled">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.CN22OtherDescription">
+        <member name="P:Spring2.Core.UPSWS.Ship.EEIFilingOptionType.ShipperFiled">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.FoldHereText">
+        <member name="T:Spring2.Core.UPSWS.Ship.UPSPremiumCareFormType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CN22FormType.CN22Content">
+        <member name="P:Spring2.Core.UPSWS.Ship.UPSPremiumCareFormType.ShipmentDate">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.InternationalFormType">
+        <member name="P:Spring2.Core.UPSWS.Ship.UPSPremiumCareFormType.PageSize">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.FormType">
+        <member name="P:Spring2.Core.UPSWS.Ship.UPSPremiumCareFormType.PrintType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.UserCreatedForm">
+        <member name="P:Spring2.Core.UPSWS.Ship.UPSPremiumCareFormType.NumOfCopies">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.CN22Form">
+        <member name="P:Spring2.Core.UPSWS.Ship.UPSPremiumCareFormType.LanguageForUPSPremiumCare">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.UPSPremiumCareForm">
+        <member name="T:Spring2.Core.UPSWS.Ship.CN22ContentType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.AdditionalDocumentIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22ContentType.CN22ContentQuantity">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.FormGroupIdName">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22ContentType.CN22ContentDescription">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.SEDFilingOption">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22ContentType.CN22ContentWeight">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.EEIFilingOption">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22ContentType.CN22ContentTotalValue">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.Contacts">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22ContentType.CN22ContentCurrencyCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.Product">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22ContentType.CN22ContentCountryOfOrigin">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.InvoiceNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22ContentType.CN22ContentTariffNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.InvoiceDate">
+        <member name="T:Spring2.Core.UPSWS.Ship.CN22FormType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.PurchaseOrderNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22FormType.LabelSize">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.TermsOfShipment">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22FormType.PrintsPerPage">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ReasonForExport">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22FormType.LabelPrintType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.Comments">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22FormType.CN22Type">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.DeclarationStatement">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22FormType.CN22OtherDescription">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.Discount">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22FormType.FoldHereText">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.FreightCharges">
+        <member name="P:Spring2.Core.UPSWS.Ship.CN22FormType.CN22Content">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.InsuranceCharges">
+        <member name="T:Spring2.Core.UPSWS.Ship.InternationalFormType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.OtherCharges">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.FormType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.CurrencyCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.UserCreatedForm">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.BlanketPeriod">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.CN22Form">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ExportDate">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.UPSPremiumCareForm">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ExportingCarrier">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.AdditionalDocumentIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.CarrierID">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.FormGroupIdName">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.InBondCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.SEDFilingOption">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.EntryNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.EEIFilingOption">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.PointOfOrigin">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.Contacts">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.PointOfOriginType">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.Product">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ModeOfTransport">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.InvoiceNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.PortOfExport">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.InvoiceDate">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.PortOfUnloading">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.PurchaseOrderNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.LoadingPier">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.TermsOfShipment">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.PartiesToTransaction">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.ReasonForExport">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.RoutedExportTransactionIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.Comments">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ContainerizedIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.DeclarationStatement">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.License">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.Discount">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ECCNNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.FreightCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.OverridePaperlessIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.InsuranceCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.ShipperMemo">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.OtherCharges">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.InternationalFormType.MultiCurrencyInvoiceLineTotal">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.CurrencyCode">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.LabelDeliveryType">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.BlanketPeriod">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelDeliveryType.EMail">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.ExportDate">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.LabelDeliveryType.LabelLinksIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.ExportingCarrier">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsNotificationTextMessageType">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.CarrierID">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsNotificationTextMessageType.PhoneNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.InBondCode">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsNotificationVoiceMessageType">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.EntryNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsNotificationVoiceMessageType.PhoneNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.PointOfOrigin">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.NotificationType">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.PointOfOriginType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.NotificationType.NotificationCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.ModeOfTransport">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.NotificationType.EMail">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.PortOfExport">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.NotificationType.VoiceMessage">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.PortOfUnloading">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.NotificationType.TextMessage">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.LoadingPier">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.NotificationType.Locale">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.PartiesToTransaction">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsAccessPointCODType">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.RoutedExportTransactionIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsAccessPointCODType.CurrencyCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.ContainerizedIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsAccessPointCODType.MonetaryValue">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.License">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.CODType">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.ECCNNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CODType.CODFundsCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.OverridePaperlessIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CODType.CODAmount">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.ShipperMemo">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType">
+        <member name="P:Spring2.Core.UPSWS.Ship.InternationalFormType.MultiCurrencyInvoiceLineTotal">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.SaturdayDeliveryIndicator">
+        <member name="T:Spring2.Core.UPSWS.Ship.LabelDeliveryType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.COD">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelDeliveryType.EMail">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.AccessPointCOD">
+        <member name="P:Spring2.Core.UPSWS.Ship.LabelDeliveryType.LabelLinksIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.DeliverToAddresseeOnlyIndicator">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsNotificationTextMessageType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.DirectDeliveryOnlyIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsNotificationTextMessageType.PhoneNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.Notification">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsNotificationVoiceMessageType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.LabelDelivery">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsNotificationVoiceMessageType.PhoneNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.InternationalForms">
+        <member name="T:Spring2.Core.UPSWS.Ship.NotificationType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.DeliveryConfirmation">
+        <member name="P:Spring2.Core.UPSWS.Ship.NotificationType.NotificationCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.ReturnOfDocumentIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.NotificationType.EMail">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.ImportControlIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.NotificationType.VoiceMessage">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.LabelMethod">
+        <member name="P:Spring2.Core.UPSWS.Ship.NotificationType.TextMessage">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.CommercialInvoiceRemovalIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.NotificationType.Locale">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.UPScarbonneutralIndicator">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsAccessPointCODType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.PreAlertNotification">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsAccessPointCODType.CurrencyCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.ExchangeForwardIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsAccessPointCODType.MonetaryValue">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.HoldForPickupIndicator">
+        <member name="T:Spring2.Core.UPSWS.Ship.CODType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.DropoffAtUPSFacilityIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.CODType.CODFundsCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.LiftGateForPickUpIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.CODType.CODAmount">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.LiftGateForDeliveryIndicator">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.SDLShipmentIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.SaturdayDeliveryIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentServiceOptionsType.EPRAReleaseCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.COD">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.IndicationType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.AccessPointCOD">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.IndicationType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.DeliverToAddresseeOnlyIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.IndicationType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.DirectDeliveryOnlyIndicator">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ServiceType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.Notification">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ServiceType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.LabelDelivery">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ServiceType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.InternationalForms">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.RateInfoType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.DeliveryConfirmation">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.RateInfoType.NegotiatedRatesIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.ReturnOfDocumentIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.RateInfoType.FRSShipmentIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.ImportControlIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.RateInfoType.RateChartIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.LabelMethod">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PaymentType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.CommercialInvoiceRemovalIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PaymentType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.UPScarbonneutralIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PaymentType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.PreAlertNotification">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.FRSPaymentInfoType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.ExchangeForwardIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.FRSPaymentInfoType.Type">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.HoldForPickupIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.FRSPaymentInfoType.AccountNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.DropoffAtUPSFacilityIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.FRSPaymentInfoType.Address">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.LiftGateForPickUpIndicator">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.AccountAddressType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.LiftGateForDeliveryIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AccountAddressType.PostalCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.SDLShipmentIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AccountAddressType.CountryCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentServiceOptionsType.EPRAReleaseCode">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.BillThirdPartyChargeType">
+        <member name="T:Spring2.Core.UPSWS.Ship.IndicationType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BillThirdPartyChargeType.AccountNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.IndicationType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BillThirdPartyChargeType.Address">
+        <member name="P:Spring2.Core.UPSWS.Ship.IndicationType.Description">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.BillReceiverAddressType">
+        <member name="T:Spring2.Core.UPSWS.Ship.ServiceType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BillReceiverAddressType.PostalCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.ServiceType.Code">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.BillReceiverType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ServiceType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BillReceiverType.AccountNumber">
+        <member name="T:Spring2.Core.UPSWS.Ship.RateInfoType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BillReceiverType.Address">
+        <member name="P:Spring2.Core.UPSWS.Ship.RateInfoType.NegotiatedRatesIndicator">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.CreditCardAddressType">
+        <member name="P:Spring2.Core.UPSWS.Ship.RateInfoType.FRSShipmentIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardAddressType.AddressLine">
+        <member name="P:Spring2.Core.UPSWS.Ship.RateInfoType.RateChartIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardAddressType.City">
+        <member name="T:Spring2.Core.UPSWS.Ship.HandlingUnitsType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardAddressType.StateProvinceCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.HandlingUnitsType.Quantity">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardAddressType.PostalCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.HandlingUnitsType.Type">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardAddressType.CountryCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.HandlingUnitsType.Dimensions">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.CreditCardType">
+        <member name="T:Spring2.Core.UPSWS.Ship.FreightDensityInfoType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardType.Type">
+        <member name="P:Spring2.Core.UPSWS.Ship.FreightDensityInfoType.AdjustedHeightIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardType.Number">
+        <member name="P:Spring2.Core.UPSWS.Ship.FreightDensityInfoType.AdjustedHeight">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardType.ExpirationDate">
+        <member name="P:Spring2.Core.UPSWS.Ship.FreightDensityInfoType.HandlingUnits">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardType.SecurityCode">
+        <member name="T:Spring2.Core.UPSWS.Ship.FreightShipmentInformationType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CreditCardType.Address">
+        <member name="P:Spring2.Core.UPSWS.Ship.FreightShipmentInformationType.FreightDensityInfo">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.BillShipperType">
+        <member name="P:Spring2.Core.UPSWS.Ship.FreightShipmentInformationType.DensityEligibleIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BillShipperType.AccountNumber">
+        <member name="T:Spring2.Core.UPSWS.Ship.PaymentType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BillShipperType.CreditCard">
+        <member name="P:Spring2.Core.UPSWS.Ship.PaymentType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.BillShipperType.AlternatePaymentMethod">
+        <member name="P:Spring2.Core.UPSWS.Ship.PaymentType.Description">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentChargeType">
+        <member name="T:Spring2.Core.UPSWS.Ship.FRSPaymentInfoType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargeType.Type">
+        <member name="P:Spring2.Core.UPSWS.Ship.FRSPaymentInfoType.Type">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargeType.BillShipper">
+        <member name="P:Spring2.Core.UPSWS.Ship.FRSPaymentInfoType.AccountNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargeType.BillReceiver">
+        <member name="P:Spring2.Core.UPSWS.Ship.FRSPaymentInfoType.Address">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargeType.BillThirdParty">
+        <member name="T:Spring2.Core.UPSWS.Ship.AccountAddressType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentChargeType.ConsigneeBilledIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.AccountAddressType.PostalCode">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.PaymentInfoType">
+        <member name="P:Spring2.Core.UPSWS.Ship.AccountAddressType.CountryCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PaymentInfoType.ShipmentCharge">
+        <member name="T:Spring2.Core.UPSWS.Ship.BillThirdPartyChargeType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.PaymentInfoType.SplitDutyVATIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.BillThirdPartyChargeType.AccountNumber">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ADLAddressType">
+        <member name="P:Spring2.Core.UPSWS.Ship.BillThirdPartyChargeType.Address">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.AddressLine">
+        <member name="T:Spring2.Core.UPSWS.Ship.BillReceiverAddressType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.City">
+        <member name="P:Spring2.Core.UPSWS.Ship.BillReceiverAddressType.PostalCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.StateProvinceCode">
+        <member name="T:Spring2.Core.UPSWS.Ship.BillReceiverType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.PostalCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.BillReceiverType.AccountNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.CountryCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.BillReceiverType.Address">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.ResidentialAddressIndicator">
+        <member name="T:Spring2.Core.UPSWS.Ship.CreditCardAddressType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ADLAddressType.POBoxIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.CreditCardAddressType.AddressLine">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.AlternateDeliveryAddressType">
+        <member name="P:Spring2.Core.UPSWS.Ship.CreditCardAddressType.City">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AlternateDeliveryAddressType.Name">
+        <member name="P:Spring2.Core.UPSWS.Ship.CreditCardAddressType.StateProvinceCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AlternateDeliveryAddressType.AttentionName">
+        <member name="P:Spring2.Core.UPSWS.Ship.CreditCardAddressType.PostalCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AlternateDeliveryAddressType.UPSAccessPointID">
+        <member name="P:Spring2.Core.UPSWS.Ship.CreditCardAddressType.CountryCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.AlternateDeliveryAddressType.Address">
+        <member name="T:Spring2.Core.UPSWS.Ship.CreditCardType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipAddressType">
+        <member name="P:Spring2.Core.UPSWS.Ship.CreditCardType.Type">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipAddressType.AddressLine">
+        <member name="P:Spring2.Core.UPSWS.Ship.CreditCardType.Number">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipAddressType.City">
+        <member name="P:Spring2.Core.UPSWS.Ship.CreditCardType.ExpirationDate">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipAddressType.StateProvinceCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.CreditCardType.SecurityCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipAddressType.PostalCode">
+        <member name="P:Spring2.Core.UPSWS.Ship.CreditCardType.Address">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipAddressType.CountryCode">
+        <member name="T:Spring2.Core.UPSWS.Ship.BillShipperType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipToAddressType">
+        <member name="P:Spring2.Core.UPSWS.Ship.BillShipperType.AccountNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipToAddressType.ResidentialAddressIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.BillShipperType.CreditCard">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.TaxIDCodeDescType">
+        <member name="P:Spring2.Core.UPSWS.Ship.BillShipperType.AlternatePaymentMethod">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.TaxIDCodeDescType.Code">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipmentChargeType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.TaxIDCodeDescType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentChargeType.Type">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.CompanyInfoType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentChargeType.BillShipper">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CompanyInfoType.Name">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentChargeType.BillReceiver">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CompanyInfoType.AttentionName">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentChargeType.BillThirdParty">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CompanyInfoType.CompanyDisplayableName">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentChargeType.ConsigneeBilledIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CompanyInfoType.TaxIdentificationNumber">
+        <member name="T:Spring2.Core.UPSWS.Ship.PaymentInfoType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CompanyInfoType.TaxIDType">
+        <member name="P:Spring2.Core.UPSWS.Ship.PaymentInfoType.ShipmentCharge">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.CompanyInfoType.Phone">
+        <member name="P:Spring2.Core.UPSWS.Ship.PaymentInfoType.SplitDutyVATIndicator">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipFromType">
+        <member name="T:Spring2.Core.UPSWS.Ship.ADLAddressType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipFromType.FaxNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.ADLAddressType.AddressLine">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipFromType.Address">
+        <member name="P:Spring2.Core.UPSWS.Ship.ADLAddressType.City">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipToType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ADLAddressType.StateProvinceCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipToType.FaxNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.ADLAddressType.PostalCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipToType.EMailAddress">
+        <member name="P:Spring2.Core.UPSWS.Ship.ADLAddressType.CountryCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipToType.Address">
+        <member name="P:Spring2.Core.UPSWS.Ship.ADLAddressType.ResidentialAddressIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipToType.LocationID">
+        <member name="P:Spring2.Core.UPSWS.Ship.ADLAddressType.POBoxIndicator">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipperType">
+        <member name="T:Spring2.Core.UPSWS.Ship.AlternateDeliveryAddressType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipperType.ShipperNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.AlternateDeliveryAddressType.Name">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipperType.FaxNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.AlternateDeliveryAddressType.AttentionName">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipperType.EMailAddress">
+        <member name="P:Spring2.Core.UPSWS.Ship.AlternateDeliveryAddressType.UPSAccessPointID">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipperType.Address">
+        <member name="P:Spring2.Core.UPSWS.Ship.AlternateDeliveryAddressType.Address">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ReturnServiceType">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipAddressType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ReturnServiceType.Code">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipAddressType.AddressLine">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ReturnServiceType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipAddressType.City">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipAddressType.StateProvinceCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.Description">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipAddressType.PostalCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ReturnService">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipAddressType.CountryCode">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.DocumentsOnlyIndicator">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipToAddressType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.Shipper">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipToAddressType.ResidentialAddressIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ShipTo">
+        <member name="T:Spring2.Core.UPSWS.Ship.TaxIDCodeDescType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.AlternateDeliveryAddress">
+        <member name="P:Spring2.Core.UPSWS.Ship.TaxIDCodeDescType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ShipFrom">
+        <member name="P:Spring2.Core.UPSWS.Ship.TaxIDCodeDescType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.PaymentInformation">
+        <member name="T:Spring2.Core.UPSWS.Ship.CompanyInfoType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.FRSPaymentInformation">
+        <member name="P:Spring2.Core.UPSWS.Ship.CompanyInfoType.Name">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.GoodsNotInFreeCirculationIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.CompanyInfoType.AttentionName">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ShipmentRatingOptions">
+        <member name="P:Spring2.Core.UPSWS.Ship.CompanyInfoType.CompanyDisplayableName">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.MovementReferenceNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.CompanyInfoType.TaxIdentificationNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ReferenceNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.CompanyInfoType.TaxIDType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.Service">
+        <member name="P:Spring2.Core.UPSWS.Ship.CompanyInfoType.Phone">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.InvoiceLineTotal">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipFromType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.NumOfPiecesInShipment">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipFromType.FaxNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.USPSEndorsement">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipFromType.Address">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.MILabelCN22Indicator">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipToType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.SubClassification">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipToType.FaxNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.CostCenter">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipToType.EMailAddress">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.PackageID">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipToType.Address">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.IrregularIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipToType.LocationID">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ShipmentIndicationType">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipperType">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.RatingMethodRequestedIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipperType.ShipperNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.TaxInformationIndicator">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipperType.FaxNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.ShipmentServiceOptions">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipperType.EMailAddress">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentType.Package">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipperType.Address">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentTypeShipmentServiceOptions">
+        <member name="T:Spring2.Core.UPSWS.Ship.ReturnServiceType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.RequestType">
+        <member name="P:Spring2.Core.UPSWS.Ship.ReturnServiceType.Code">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.RequestType.RequestOption">
+        <member name="P:Spring2.Core.UPSWS.Ship.ReturnServiceType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.RequestType.TransactionReference">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipmentType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.UPSSecurityServiceAccessToken">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.Description">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.UPSSecurityServiceAccessToken.AccessLicenseNumber">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.ReturnService">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentRequest">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.DocumentsOnlyIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentRequest.Request">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.Shipper">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentRequest.Shipment">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.ShipTo">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentRequest.LabelSpecification">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.AlternateDeliveryAddress">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentRequest.ReceiptSpecification">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.ShipFrom">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipmentResponse">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.PaymentInformation">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResponse.Response">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.FRSPaymentInformation">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipmentResponse.ShipmentResults">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.FreightShipmentInformation">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipConfirmRequest">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.GoodsNotInFreeCirculationIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipConfirmRequest.Request">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.ShipmentRatingOptions">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipConfirmRequest.Shipment">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.MovementReferenceNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipConfirmRequest.LabelSpecification">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.ReferenceNumber">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipConfirmRequest.ReceiptSpecification">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.Service">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipConfirmResponse">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.InvoiceLineTotal">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipConfirmResponse.Response">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.NumOfPiecesInShipment">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipConfirmResponse.ShipmentResults">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.USPSEndorsement">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipAcceptRequest">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.MILabelCN22Indicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipAcceptRequest.Request">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.SubClassification">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipAcceptRequest.ShipmentDigest">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.CostCenter">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ShipAcceptResponse">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.PackageID">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipAcceptResponse.Response">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.IrregularIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ShipAcceptResponse.ShipmentResults">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.ShipmentIndicationType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ProcessShipmentCompletedEventHandler">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.RatingMethodRequestedIndicator">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ProcessShipmentCompletedEventArgs">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.TaxInformationIndicator">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProcessShipmentCompletedEventArgs.Result">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.ShipmentServiceOptions">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ProcessShipConfirmCompletedEventHandler">
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentType.Package">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ProcessShipConfirmCompletedEventArgs">
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipmentTypeShipmentServiceOptions">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProcessShipConfirmCompletedEventArgs.Result">
+        <member name="T:Spring2.Core.UPSWS.Ship.RequestType">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ProcessShipAcceptCompletedEventHandler">
+        <member name="P:Spring2.Core.UPSWS.Ship.RequestType.RequestOption">
             <remarks/>
         </member>
-        <member name="T:Spring2.Core.UPSMI.Ship.ProcessShipAcceptCompletedEventArgs">
+        <member name="P:Spring2.Core.UPSWS.Ship.RequestType.SubVersion">
             <remarks/>
         </member>
-        <member name="P:Spring2.Core.UPSMI.Ship.ProcessShipAcceptCompletedEventArgs.Result">
+        <member name="P:Spring2.Core.UPSWS.Ship.RequestType.TransactionReference">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Ship.UPSSecurityServiceAccessToken">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.UPSSecurityServiceAccessToken.AccessLicenseNumber">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipmentRequest">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentRequest.Request">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentRequest.Shipment">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentRequest.LabelSpecification">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentRequest.ReceiptSpecification">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipmentResponse">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResponse.Response">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipmentResponse.ShipmentResults">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipConfirmRequest">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipConfirmRequest.Request">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipConfirmRequest.Shipment">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipConfirmRequest.LabelSpecification">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipConfirmRequest.ReceiptSpecification">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipConfirmResponse">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipConfirmResponse.Response">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipConfirmResponse.ShipmentResults">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipAcceptRequest">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipAcceptRequest.Request">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipAcceptRequest.ShipmentDigest">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Ship.ShipAcceptResponse">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipAcceptResponse.Response">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ShipAcceptResponse.ShipmentResults">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Ship.ProcessShipmentCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Ship.ProcessShipmentCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ProcessShipmentCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Ship.ProcessShipConfirmCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Ship.ProcessShipConfirmCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ProcessShipConfirmCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Ship.ProcessShipAcceptCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Ship.ProcessShipAcceptCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Ship.ProcessShipAcceptCompletedEventArgs.Result">
             <remarks/>
         </member>
     </members>

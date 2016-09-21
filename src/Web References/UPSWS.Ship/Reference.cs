@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace Spring2.Core.UPSMI.Ship {
+namespace Spring2.Core.UPSWS.Ship {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -43,7 +43,7 @@ namespace Spring2.Core.UPSMI.Ship {
         
         /// <remarks/>
         public ShipService() {
-            this.Url = global::Spring2.Core.Properties.Settings.Default.Spring2_Core_PostageService_UPSMailInnovationsShip_ShipService;
+            this.Url = global::Spring2.Core.Properties.Settings.Default.Spring2_Core_PostageService_UPSMI_Ship_ShipService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -597,6 +597,10 @@ namespace Spring2.Core.UPSMI.Ship {
         
         private FormType formField;
         
+        private ShipChargeType[] itemizedChargesField;
+        
+        private ShipChargeType[] negotiatedChargesField;
+        
         /// <remarks/>
         public string TrackingNumber {
             get {
@@ -675,6 +679,28 @@ namespace Spring2.Core.UPSMI.Ship {
             }
             set {
                 this.formField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ItemizedCharges")]
+        public ShipChargeType[] ItemizedCharges {
+            get {
+                return this.itemizedChargesField;
+            }
+            set {
+                this.itemizedChargesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("ItemizedCharges", IsNullable=false)]
+        public ShipChargeType[] NegotiatedCharges {
+            get {
+                return this.negotiatedChargesField;
+            }
+            set {
+                this.negotiatedChargesField = value;
             }
         }
     }
@@ -820,6 +846,219 @@ namespace Spring2.Core.UPSMI.Ship {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.ups.com/XMLSchema/XOLTWS/Ship/v1.0")]
+    public partial class HandlingUnitsResponseType {
+        
+        private string quantityField;
+        
+        private ShipUnitOfMeasurementType typeField;
+        
+        private HandlingUnitsDimensionsType dimensionsField;
+        
+        private AdjustedHeightType adjustedHeightField;
+        
+        /// <remarks/>
+        public string Quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                this.quantityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ShipUnitOfMeasurementType Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public HandlingUnitsDimensionsType Dimensions {
+            get {
+                return this.dimensionsField;
+            }
+            set {
+                this.dimensionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public AdjustedHeightType AdjustedHeight {
+            get {
+                return this.adjustedHeightField;
+            }
+            set {
+                this.adjustedHeightField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.ups.com/XMLSchema/XOLTWS/Ship/v1.0")]
+    public partial class ShipUnitOfMeasurementType {
+        
+        private string codeField;
+        
+        private string descriptionField;
+        
+        /// <remarks/>
+        public string Code {
+            get {
+                return this.codeField;
+            }
+            set {
+                this.codeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.ups.com/XMLSchema/XOLTWS/Ship/v1.0")]
+    public partial class HandlingUnitsDimensionsType {
+        
+        private ShipUnitOfMeasurementType unitOfMeasurementField;
+        
+        private string lengthField;
+        
+        private string widthField;
+        
+        private string heightField;
+        
+        /// <remarks/>
+        public ShipUnitOfMeasurementType UnitOfMeasurement {
+            get {
+                return this.unitOfMeasurementField;
+            }
+            set {
+                this.unitOfMeasurementField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Length {
+            get {
+                return this.lengthField;
+            }
+            set {
+                this.lengthField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Width {
+            get {
+                return this.widthField;
+            }
+            set {
+                this.widthField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Height {
+            get {
+                return this.heightField;
+            }
+            set {
+                this.heightField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.ups.com/XMLSchema/XOLTWS/Ship/v1.0")]
+    public partial class AdjustedHeightType {
+        
+        private string valueField;
+        
+        private ShipUnitOfMeasurementType unitOfMeasurementField;
+        
+        /// <remarks/>
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ShipUnitOfMeasurementType UnitOfMeasurement {
+            get {
+                return this.unitOfMeasurementField;
+            }
+            set {
+                this.unitOfMeasurementField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.ups.com/XMLSchema/XOLTWS/Ship/v1.0")]
+    public partial class FreightDensityRateType {
+        
+        private string densityField;
+        
+        private string totalCubicFeetField;
+        
+        /// <remarks/>
+        public string Density {
+            get {
+                return this.densityField;
+            }
+            set {
+                this.densityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TotalCubicFeet {
+            get {
+                return this.totalCubicFeetField;
+            }
+            set {
+                this.totalCubicFeetField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.ups.com/XMLSchema/XOLTWS/Ship/v1.0")]
     public partial class TransportationChargeType {
         
         private ShipChargeType grossChargeField;
@@ -881,6 +1120,10 @@ namespace Spring2.Core.UPSMI.Ship {
         
         private TransportationChargeType transportationChargesField;
         
+        private FreightDensityRateType freightDensityRateField;
+        
+        private HandlingUnitsResponseType[] handlingUnitsField;
+        
         /// <remarks/>
         public TransportationChargeType TransportationCharges {
             get {
@@ -888,6 +1131,27 @@ namespace Spring2.Core.UPSMI.Ship {
             }
             set {
                 this.transportationChargesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public FreightDensityRateType FreightDensityRate {
+            get {
+                return this.freightDensityRateField;
+            }
+            set {
+                this.freightDensityRateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("HandlingUnits")]
+        public HandlingUnitsResponseType[] HandlingUnits {
+            get {
+                return this.handlingUnitsField;
+            }
+            set {
+                this.handlingUnitsField = value;
             }
         }
     }
@@ -1758,39 +2022,6 @@ namespace Spring2.Core.UPSMI.Ship {
             }
             set {
                 this.weightField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.ups.com/XMLSchema/XOLTWS/Ship/v1.0")]
-    public partial class ShipUnitOfMeasurementType {
-        
-        private string codeField;
-        
-        private string descriptionField;
-        
-        /// <remarks/>
-        public string Code {
-            get {
-                return this.codeField;
-            }
-            set {
-                this.codeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Description {
-            get {
-                return this.descriptionField;
-            }
-            set {
-                this.descriptionField = value;
             }
         }
     }
@@ -5774,6 +6005,130 @@ namespace Spring2.Core.UPSMI.Ship {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.ups.com/XMLSchema/XOLTWS/Ship/v1.0")]
+    public partial class HandlingUnitsType {
+        
+        private string quantityField;
+        
+        private ShipUnitOfMeasurementType typeField;
+        
+        private HandlingUnitsDimensionsType dimensionsField;
+        
+        /// <remarks/>
+        public string Quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                this.quantityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ShipUnitOfMeasurementType Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public HandlingUnitsDimensionsType Dimensions {
+            get {
+                return this.dimensionsField;
+            }
+            set {
+                this.dimensionsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.ups.com/XMLSchema/XOLTWS/Ship/v1.0")]
+    public partial class FreightDensityInfoType {
+        
+        private string adjustedHeightIndicatorField;
+        
+        private AdjustedHeightType adjustedHeightField;
+        
+        private HandlingUnitsType[] handlingUnitsField;
+        
+        /// <remarks/>
+        public string AdjustedHeightIndicator {
+            get {
+                return this.adjustedHeightIndicatorField;
+            }
+            set {
+                this.adjustedHeightIndicatorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public AdjustedHeightType AdjustedHeight {
+            get {
+                return this.adjustedHeightField;
+            }
+            set {
+                this.adjustedHeightField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("HandlingUnits")]
+        public HandlingUnitsType[] HandlingUnits {
+            get {
+                return this.handlingUnitsField;
+            }
+            set {
+                this.handlingUnitsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.ups.com/XMLSchema/XOLTWS/Ship/v1.0")]
+    public partial class FreightShipmentInformationType {
+        
+        private FreightDensityInfoType freightDensityInfoField;
+        
+        private string densityEligibleIndicatorField;
+        
+        /// <remarks/>
+        public FreightDensityInfoType FreightDensityInfo {
+            get {
+                return this.freightDensityInfoField;
+            }
+            set {
+                this.freightDensityInfoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DensityEligibleIndicator {
+            get {
+                return this.densityEligibleIndicatorField;
+            }
+            set {
+                this.densityEligibleIndicatorField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.ups.com/XMLSchema/XOLTWS/Ship/v1.0")]
     public partial class PaymentType {
         
         private string codeField;
@@ -6819,6 +7174,8 @@ namespace Spring2.Core.UPSMI.Ship {
         
         private FRSPaymentInfoType fRSPaymentInformationField;
         
+        private FreightShipmentInformationType freightShipmentInformationField;
+        
         private string goodsNotInFreeCirculationIndicatorField;
         
         private RateInfoType shipmentRatingOptionsField;
@@ -6942,6 +7299,16 @@ namespace Spring2.Core.UPSMI.Ship {
             }
             set {
                 this.fRSPaymentInformationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public FreightShipmentInformationType FreightShipmentInformation {
+            get {
+                return this.freightShipmentInformationField;
+            }
+            set {
+                this.freightShipmentInformationField = value;
             }
         }
         
@@ -7148,6 +7515,8 @@ namespace Spring2.Core.UPSMI.Ship {
         
         private string[] requestOptionField;
         
+        private string subVersionField;
+        
         private TransactionReferenceType transactionReferenceField;
         
         /// <remarks/>
@@ -7158,6 +7527,16 @@ namespace Spring2.Core.UPSMI.Ship {
             }
             set {
                 this.requestOptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SubVersion {
+            get {
+                return this.subVersionField;
+            }
+            set {
+                this.subVersionField = value;
             }
         }
         

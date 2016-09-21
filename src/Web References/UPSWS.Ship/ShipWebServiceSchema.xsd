@@ -65,6 +65,7 @@
       <xsd:element minOccurs="0" name="ShipFrom" type="ship:ShipFromType" />
       <xsd:element minOccurs="0" name="PaymentInformation" type="ship:PaymentInfoType" />
       <xsd:element minOccurs="0" name="FRSPaymentInformation" type="ship:FRSPaymentInfoType" />
+      <xsd:element minOccurs="0" name="FreightShipmentInformation" type="ship:FreightShipmentInformationType" />
       <xsd:element minOccurs="0" name="GoodsNotInFreeCirculationIndicator" type="xsd:string" />
       <xsd:element minOccurs="0" name="ShipmentRatingOptions" type="ship:RateInfoType" />
       <xsd:element minOccurs="0" name="MovementReferenceNumber" type="xsd:string" />
@@ -580,6 +581,8 @@
   <xsd:complexType name="FRSShipmentDataType">
     <xsd:sequence>
       <xsd:element name="TransportationCharges" type="ship:TransportationChargeType" />
+      <xsd:element minOccurs="0" name="FreightDensityRate" type="ship:FreightDensityRateType" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="HandlingUnits" type="ship:HandlingUnitsResponseType" />
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="TransportationChargeType">
@@ -612,6 +615,8 @@
       <xsd:element minOccurs="0" name="CN22Number" type="xsd:string" />
       <xsd:element minOccurs="0" maxOccurs="unbounded" name="Accessorial" type="ship:AccessorialType" />
       <xsd:element minOccurs="0" name="Form" type="ship:FormType" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="ItemizedCharges" type="ship:ShipChargeType" />
+      <xsd:element minOccurs="0" name="NegotiatedCharges" type="ship:NegotiatedChargesType" />
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="AccessorialType">
@@ -736,6 +741,59 @@
       <xsd:element name="CountryCode" type="xsd:string" />
       <xsd:element minOccurs="0" name="ResidentialAddressIndicator" type="xsd:string" />
       <xsd:element minOccurs="0" name="POBoxIndicator" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FreightShipmentInformationType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="FreightDensityInfo" type="ship:FreightDensityInfoType" />
+      <xsd:element minOccurs="0" name="DensityEligibleIndicator" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="HandlingUnitsType">
+    <xsd:sequence>
+      <xsd:element name="Quantity" type="xsd:string" />
+      <xsd:element name="Type" type="ship:ShipUnitOfMeasurementType" />
+      <xsd:element name="Dimensions" type="ship:HandlingUnitsDimensionsType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="HandlingUnitsResponseType">
+    <xsd:sequence>
+      <xsd:element name="Quantity" type="xsd:string" />
+      <xsd:element name="Type" type="ship:ShipUnitOfMeasurementType" />
+      <xsd:element name="Dimensions" type="ship:HandlingUnitsDimensionsType" />
+      <xsd:element minOccurs="0" name="AdjustedHeight" type="ship:AdjustedHeightType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="HandlingUnitsDimensionsType">
+    <xsd:sequence>
+      <xsd:element name="UnitOfMeasurement" type="ship:ShipUnitOfMeasurementType" />
+      <xsd:element name="Length" type="xsd:string" />
+      <xsd:element name="Width" type="xsd:string" />
+      <xsd:element name="Height" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FreightDensityRateType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="Density" type="xsd:string" />
+      <xsd:element minOccurs="0" name="TotalCubicFeet" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FreightDensityInfoType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="AdjustedHeightIndicator" type="xsd:string" />
+      <xsd:element minOccurs="0" name="AdjustedHeight" type="ship:AdjustedHeightType" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="HandlingUnits" type="ship:HandlingUnitsType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AdjustedHeightType">
+    <xsd:sequence>
+      <xsd:element name="Value" type="xsd:string" />
+      <xsd:element name="UnitOfMeasurement" type="ship:ShipUnitOfMeasurementType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NegotiatedChargesType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="ItemizedCharges" type="ship:ShipChargeType" />
     </xsd:sequence>
   </xsd:complexType>
 </xsd:schema>

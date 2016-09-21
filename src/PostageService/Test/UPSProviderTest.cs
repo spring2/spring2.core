@@ -19,6 +19,7 @@ namespace Spring2.Core.PostageService.Test {
 	    provider.Settings["PostageService.UPS.Username"] = "cortschaefer";
 	    provider.Settings["PostageService.UPS.Password"] = "3UpRJqCm73";
 	    provider.Settings["PostageService.UPS.ShipperNumber"] = "284A9V";
+	    provider.Settings["PostageService.UPS.ShipperName"] = "Spring2";
 	    provider.Settings["PostageService.UPS.costCenter"] = "CostCenter";
 	    provider.Settings["PostageService.UPS.PostageServerUrl"] = "https://wwwcie.ups.com/webservices/Ship";
 
@@ -53,6 +54,7 @@ namespace Spring2.Core.PostageService.Test {
 		ToCity = "Sandy",
 		ToState = "UT",
 		ToPostalCode = "84070",
+		ToPhone = "8015555555",
 		ShipDate = DateTime.Now.ToString("MM/dd/yyyy"),
 		ShipTime = DateTime.Now.ToString("hh:mm tt"),
 		ReferenceID = "123457"
@@ -62,7 +64,6 @@ namespace Spring2.Core.PostageService.Test {
 	    Assert.IsNotNull(data);
 	    Console.WriteLine(data.ErrorMessage);
 	    Assert.IsTrue(string.IsNullOrEmpty(data.ErrorMessage));
-	    Assert.IsTrue(!string.IsNullOrEmpty(data.Base64LabelImage));
 	}
     }
 }

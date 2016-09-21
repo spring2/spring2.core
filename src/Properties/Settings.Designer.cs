@@ -37,9 +37,9 @@ namespace Spring2.Core.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://wwwcie.ups.com/webservices/Ship")]
-        public string Spring2_Core_PostageService_UPSMailInnovationsShip_ShipService {
+        public string Spring2_Core_PostageService_UPSMI_Ship_ShipService {
             get {
-                return ((string)(this["Spring2_Core_PostageService_UPSMailInnovationsShip_ShipService"]));
+                return ((string)(this["Spring2_Core_PostageService_UPSMI_Ship_ShipService"]));
             }
         }
     }
