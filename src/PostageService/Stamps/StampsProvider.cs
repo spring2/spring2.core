@@ -139,6 +139,7 @@ namespace Spring2.Core.PostageService.Stamps {
 				    request.InternalTransactionNumber, request.PaperSize, request.EmailLabelTo, request.PayOnPrint, request.ReturnLabelExpirationDays,
 				    request.ImageDpi, request.RateToken, request.OrderId, out response.StampsTxID, out response.URL, out response.PostageBalance, 
 				    out response.Mac, out response.PostageHash, out response.ImageData);
+	    response.Rate = request.Rate;
 	    return assembler.ToPostageLabelData(response, accountInfo);
 	}
 

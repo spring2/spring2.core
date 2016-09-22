@@ -124,6 +124,6 @@ namespace Spring2.Core.PostageService.UPS {
 	    };
 	}
 
-	public static Dictionary<string, string> 
+	//public static Dictionary<string, string> 
     }
 }
