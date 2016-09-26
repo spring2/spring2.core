@@ -121,7 +121,5 @@ namespace Spring2.Core.PostageService.UPS {
 	    };
 	    shipService.Url = url;
 	}
-
-
     }
 }

@@ -69,8 +69,8 @@ namespace Spring2.Core.PostageService.UPS {
 			Number = src.ToPhone
 		    }
 		}))
-		.ForMember(x => x.Service, o => o.UseValue(new UPSWS.Ship.ServiceType() {
-		    Code = "M2"
+		.ForMember(x => x.Service, o => o.MapFrom(src => new UPSWS.Ship.ServiceType() {
+		    Code = mailClassToServiceCode[src.MailClass.ToString()]
 		}))
 		.ForMember(x => x.USPSEndorsement, o => o.UseValue("1"))
 		.ForMember(x => x.PackageID, o => o.UseValue(Guid.NewGuid().ToString().Replace("-", "").Substring(0, 30)))
@@ -124,6 +124,8 @@ namespace Spring2.Core.PostageService.UPS {
 	    };
 	}
 
-	//public static Dictionary<string, string> 
+	public static Dictionary<string, string> mailClassToServiceCode = new Dictionary<string, string>() {
+	    { MailClassEnum.FIRST.ToString(), "M2" }
+	};
     }
 }
