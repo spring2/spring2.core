@@ -42,5 +42,24 @@ namespace Spring2.Core.Properties {
                 return ((string)(this["Spring2_Core_PostageService_UPSMI_Ship_ShipService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://wwwcie.ups.com/webservices/Ship")]
+        public string Spring2_Core_PostageService_UPSWS_Ship_ShipService {
+            get {
+                return ((string)(this["Spring2_Core_PostageService_UPSWS_Ship_ShipService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://wwwcie.ups.com/webservices/Void")]
+        public string Spring2_Core_PostageService_UPSWS_Void_VoidService {
+            get {
+                return ((string)(this["Spring2_Core_PostageService_UPSWS_Void_VoidService"]));
+            }
+        }
     }
 }

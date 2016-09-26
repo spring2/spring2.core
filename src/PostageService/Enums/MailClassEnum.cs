@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,6 +46,8 @@ namespace Spring2.Core.PostageService.Enums {
 
 	public static readonly MailClassEnum IPA = new MailClassEnum("IPA", "International");
 	public static readonly MailClassEnum ISAL = new MailClassEnum("ISAL", "International");
+
+	public static readonly MailClassEnum UPSMIEXPEDITED = new MailClassEnum("UPSMIEXPEDITED", "UPS MI Expedited");
 
 
 	public static MailClassEnum GetInstance(Object value) {

@@ -7,6 +7,7 @@ using System.Text;
 namespace Spring2.Core.PostageService.UPS {
     public class UPSProvider : IPostageServiceProvider {
 	UPSWS.Ship.ShipService shipService;
+	UPSWS.Void.VoidService voidService;
 	UPSModelAssembler assembler;
 
 	string accessLicenseNumber;
@@ -63,7 +64,9 @@ namespace Spring2.Core.PostageService.UPS {
 	}
 
 	public RefundRequestData RefundRequest(String trackingNumber, bool isInternational) {
-	    throw new NotImplementedException();
+	    UPSWS.Void.VoidShipmentRequest request = assembler.ToVoidShipmentRequest(trackingNumber, isInternational);
+	    UPSWS.Void.VoidShipmentResponse response = voidService.ProcessVoid(request);
+	    return assembler.ToRefundRequestData(response);
 	}
 
 	public PostageRateData GetPostageRate(PostageRateInputData data) {
@@ -120,6 +123,18 @@ namespace Spring2.Core.PostageService.UPS {
 		}
 	    };
 	    shipService.Url = url;
+
+	    voidService = new UPSWS.Void.VoidService();
+	    voidService.UPSSecurityValue = new UPSWS.Void.UPSSecurity() {
+		ServiceAccessToken = new UPSWS.Void.UPSSecurityServiceAccessToken() {
+		    AccessLicenseNumber = accessLicenseNumber
+		},
+		UsernameToken = new UPSWS.Void.UPSSecurityUsernameToken() {
+		    Username = username,
+		    Password = password
+		}
+	    };
+	    voidService.Url = url;
 	}
     }
 }

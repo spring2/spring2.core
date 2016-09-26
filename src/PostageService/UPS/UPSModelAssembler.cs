@@ -72,7 +72,7 @@ namespace Spring2.Core.PostageService.UPS {
 		.ForMember(x => x.Service, o => o.MapFrom(src => new UPSWS.Ship.ServiceType() {
 		    Code = mailClassToServiceCode[src.MailClass.ToString()]
 		}))
-		.ForMember(x => x.USPSEndorsement, o => o.UseValue("1"))
+		.ForMember(x => x.USPSEndorsement, o => o.MapFrom(src => src.MailClass.Equals(MailClassEnum.UPSMIEXPEDITED) ? "4" : "1"))
 		.ForMember(x => x.PackageID, o => o.UseValue(Guid.NewGuid().ToString().Replace("-", "").Substring(0, 30)))
 		.ForMember(x => x.ShipmentServiceOptions, o => o.UseValue(new UPSWS.Ship.ShipmentTypeShipmentServiceOptions()))
 		.ForMember(x => x.Package, o => o.MapFrom(src => new UPSWS.Ship.PackageType[] {
@@ -84,7 +84,7 @@ namespace Spring2.Core.PostageService.UPS {
 			    }
 			},
 			Packaging = new UPSWS.Ship.PackagingType() {
-			    Code = "59"
+			    Code = mailpieceShapeToPackageTypeCode[src.MailpieceShape.ToString()]
 			}
 		    }
 		}));
@@ -124,8 +124,31 @@ namespace Spring2.Core.PostageService.UPS {
 	    };
 	}
 
+	public UPSWS.Void.VoidShipmentRequest ToVoidShipmentRequest(string trackingNumber, bool isInternational) {
+	    return new UPSWS.Void.VoidShipmentRequest() {
+		VoidShipment = new UPSWS.Void.VoidShipmentRequestVoidShipment() {
+		    ShipmentIdentificationNumber = trackingNumber
+		}
+	    };
+	}
+
+	public RefundRequestData ToRefundRequestData(UPSWS.Void.VoidShipmentResponse data) {
+	    return new RefundRequestData() {
+		IsApproved = data.Response.ResponseStatus.Code == "1",
+		ErrorMsg = data.Response.ResponseStatus.Description,
+	    };
+	}
+
 	public static Dictionary<string, string> mailClassToServiceCode = new Dictionary<string, string>() {
-	    { MailClassEnum.FIRST.ToString(), "M2" }
+	    { MailClassEnum.FIRST.ToString(), "M2" },
+	    { MailClassEnum.UPSMIEXPEDITED.ToString(), "M4" }
+	};
+	
+	public static Dictionary<string, string> mailpieceShapeToPackageTypeCode = new Dictionary<string, string>() {
+	    { MailpieceShapeEnum.LETTER.ToString(), "01" },
+	    { MailpieceShapeEnum.PARCEL.ToString(), "57" },
+	    { MailpieceShapeEnum.THICKENVELOPE.ToString(), "59" },
+	    { MailpieceShapeEnum.IRREGULARPARCEL.ToString(), "61" }
 	};
     }
 }

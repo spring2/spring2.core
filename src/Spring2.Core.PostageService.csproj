@@ -148,6 +148,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\UPSWS.Void\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -322,6 +327,26 @@
     <None Include="Web References\UPSWS.Ship\UPSSecurity.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Web References\UPSWS.Void\common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\UPSWS.Void\Error1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\UPSWS.Void\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\UPSWS.Void\UPSSecurity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\UPSWS.Void\Void.wsdl" />
+    <None Include="Web References\UPSWS.Void\VoidShipmentResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\UPSWS.Void\VoidWebServiceSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\EwsLabelService\" />
@@ -356,6 +381,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Spring2_Core_PostageService_UPSMI_Ship_ShipService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="F:\workspace\c6\c6 data\UPS\ShippingPACKAGE\PACKAGEWebServices\SCHEMA-WSDLs\Void.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\UPSWS.Void\</RelPath>
+      <UpdateFromURL>F:\workspace\c6\c6 data\UPS\ShippingPACKAGE\PACKAGEWebServices\SCHEMA-WSDLs\Void.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Spring2_Core_PostageService_UPSWS_Void_VoidService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://www.endicia.com/ELS/ELSServices.cfc%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

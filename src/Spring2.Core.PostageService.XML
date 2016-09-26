@@ -7195,5 +7195,155 @@
         <member name="P:Spring2.Core.UPSWS.Ship.ProcessShipAcceptCompletedEventArgs.Result">
             <remarks/>
         </member>
+        <member name="T:Spring2.Core.UPSWS.Void.VoidService">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSWS.Void.VoidService.#ctor">
+            <remarks/>
+        </member>
+        <member name="E:Spring2.Core.UPSWS.Void.VoidService.ProcessVoidCompleted">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSWS.Void.VoidService.ProcessVoid(Spring2.Core.UPSWS.Void.VoidShipmentRequest)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSWS.Void.VoidService.ProcessVoidAsync(Spring2.Core.UPSWS.Void.VoidShipmentRequest)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSWS.Void.VoidService.ProcessVoidAsync(Spring2.Core.UPSWS.Void.VoidShipmentRequest,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Spring2.Core.UPSWS.Void.VoidService.CancelAsync(System.Object)">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.UPSSecurity">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.UPSSecurity.UsernameToken">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.UPSSecurity.ServiceAccessToken">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.UPSSecurityUsernameToken">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.UPSSecurityUsernameToken.Username">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.UPSSecurityUsernameToken.Password">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.PackageLevelResult">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.PackageLevelResult.TrackingNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.PackageLevelResult.Status">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.CodeDescriptionType1">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.CodeDescriptionType1.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.CodeDescriptionType1.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.CodeDescriptionType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.CodeDescriptionType.Code">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.CodeDescriptionType.Description">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.ResponseType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.ResponseType.ResponseStatus">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.ResponseType.Alert">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.ResponseType.TransactionReference">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.TransactionReferenceType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.TransactionReferenceType.CustomerContext">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.TransactionReferenceType.TransactionIdentifier">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.RequestType">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.RequestType.RequestOption">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.RequestType.SubVersion">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.RequestType.TransactionReference">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.UPSSecurityServiceAccessToken">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.UPSSecurityServiceAccessToken.AccessLicenseNumber">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.VoidShipmentRequest">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.VoidShipmentRequest.Request">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.VoidShipmentRequest.VoidShipment">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.VoidShipmentRequestVoidShipment">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.VoidShipmentRequestVoidShipment.ShipmentIdentificationNumber">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.VoidShipmentRequestVoidShipment.TrackingNumber">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.VoidShipmentResponse">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.VoidShipmentResponse.Response">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.VoidShipmentResponse.SummaryResult">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.VoidShipmentResponse.PackageLevelResult">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.VoidShipmentResponseSummaryResult">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.VoidShipmentResponseSummaryResult.Status">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.ProcessVoidCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Spring2.Core.UPSWS.Void.ProcessVoidCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Spring2.Core.UPSWS.Void.ProcessVoidCompletedEventArgs.Result">
+            <remarks/>
+        </member>
     </members>
 </doc>
