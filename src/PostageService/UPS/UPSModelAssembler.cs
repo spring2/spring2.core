@@ -18,8 +18,7 @@ namespace Spring2.Core.PostageService.UPS {
 		    },
 		    LabelImageFormat = new UPSWS.Ship.LabelImageFormatType() {
 			Code = "GIF"
-		    },
-		    HTTPUserAgent = "Mozilla/4.5"
+		    }
 		}));
 	    AutoMapper.Mapper.CreateMap<PostageLabelInputData, UPSWS.Ship.ShipmentType>()
 		.ForMember(x => x.Shipper, o => o.MapFrom(src => AutoMapper.Mapper.Map<PostageLabelInputData, UPSWS.Ship.ShipperType>(src)))
@@ -97,7 +96,14 @@ namespace Spring2.Core.PostageService.UPS {
 		    CountryCode = "US"
 		}))
 		.ForMember(x => x.Name, o => o.MapFrom(src => src.FromCompany));
-	    AutoMapper.Mapper.CreateMap<UPSWS.Ship.ShipmentResponse, PostageLabelData>();
+	    AutoMapper.Mapper.CreateMap<UPSWS.Ship.ShipmentResponse, PostageLabelData>()
+		.ForMember(x => x.Status, o => o.MapFrom(src => src.Response.ResponseStatus.Code.Equals("1") ? 1 : 0))
+		.ForMember(x => x.TrackingNumber, o => o.MapFrom(src => src.ShipmentResults.PackageResults[0].TrackingNumber))
+		.ForMember(x => x.Base64LabelImage, o => o.MapFrom(src => src.ShipmentResults.PackageResults[0].ShippingLabel.GraphicImage))
+		.ForMember(x => x.PostagePrice, o => o.MapFrom(src => new PostageRatePrice() {
+		    TotalAmount = Decimal.Parse(src.ShipmentResults.ShipmentCharges.TotalCharges.MonetaryValue),
+		    MailClass = "UPSMIEXPEDITED"
+		}));
 	}
 
 	public UPSWS.Ship.ShipmentRequest ToShipmentRequest(PostageLabelInputData data, string shipperNumber, string shipperName, string costCenter) {
@@ -113,7 +119,6 @@ namespace Spring2.Core.PostageService.UPS {
 
 	public PostageLabelData ToPostageLabelData(UPSWS.Ship.ShipmentResponse response) {
 	    PostageLabelData labelData = AutoMapper.Mapper.Map<UPSWS.Ship.ShipmentResponse, PostageLabelData>(response);
-
 	    return labelData;
 	}
 
