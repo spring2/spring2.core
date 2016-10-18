@@ -153,7 +153,7 @@ namespace Spring2.Core.PostageService.UPS {
 	    { MailpieceShapeEnum.LETTER.ToString(), "01" },
 	    { MailpieceShapeEnum.PARCEL.ToString(), "57" },
 	    { MailpieceShapeEnum.THICKENVELOPE.ToString(), "59" },
-	    { MailpieceShapeEnum.IRREGULARPARCEL.ToString(), "61" }
+	    { MailpieceShapeEnum.IRREGULARPARCEL.ToString(), "62" }
 	};
     }
 }
