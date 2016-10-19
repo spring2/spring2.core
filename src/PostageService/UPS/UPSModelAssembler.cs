@@ -13,8 +13,8 @@ namespace Spring2.Core.PostageService.UPS {
 		.ForMember(x => x.Shipment, o => o.MapFrom(src => AutoMapper.Mapper.Map<PostageLabelInputData, UPSWS.Ship.ShipmentType>(src)))
 		.ForMember(x => x.LabelSpecification, o => o.UseValue(new UPSWS.Ship.LabelSpecificationType() {
 		    LabelStockSize = new UPSWS.Ship.LabelStockSizeType() {
-			Height = "6",
-			Width = "4"
+			Height = "4",
+			Width = "6"
 		    },
 		    LabelImageFormat = new UPSWS.Ship.LabelImageFormatType() {
 			Code = "GIF"
