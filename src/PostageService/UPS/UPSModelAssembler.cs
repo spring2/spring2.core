@@ -60,7 +60,7 @@ namespace Spring2.Core.PostageService.UPS {
 			City = src.ToCity,
 			PostalCode = src.ToPostalCode,
 			StateProvinceCode = src.ToState,
-			CountryCode = src.IsInternational ? src.ToCountry : "US",
+			CountryCode = src.IsInternational ? src.ToCountry : "US"
 		    },
 		    AttentionName = src.ToName,
 		    Name = src.ToName,

@@ -128,7 +128,7 @@ namespace Spring2.Core.PostageService.Stamps {
 
 	public PostageLabelData GetPostageLabel(PostageLabelInputData data) {
 	    SWSIMV52.CreateIndiciumRequest request = assembler.ToCreateIndiciumRequest(data);
-	    request.Rate = GetPostageRate(request.Rate, data.Services == null ? null : data.Services.InsuredMail);
+	    //request.Rate = GetPostageRate(request.Rate, data.Services == null ? null : data.Services.InsuredMail);
 	    request.Item = Authenticator;
 	    SWSIMV52.CreateIndiciumResponse response = new SWSIMV52.CreateIndiciumResponse();
 	    authenticator = client.CreateIndicium(request.Item, ref request.IntegratorTxID, ref response.TrackingNumber, ref request.Rate, request.From, request.To, 

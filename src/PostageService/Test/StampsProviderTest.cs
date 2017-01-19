@@ -151,9 +151,9 @@ namespace Spring2.Core.PostageService.Test {
 	    IPostageServiceProvider postage = new StampsProvider();
 
 	    PostageLabelInputData input = new PostageLabelInputData() {
-		MailClass = MailClassEnum.FIRST,
-		WeightOz = 5,		
-		MailpieceShape = MailpieceShapeEnum.THICKENVELOPE,
+		MailClass = MailClassEnum.PRIORITY,
+		WeightOz = 20,		
+		MailpieceShape = MailpieceShapeEnum.FLATRATEENVELOPE,
 		FromCompany = "Spring2",
 		ReturnAddress1 = "10150 S. Centennial Parkway",
 		ReturnAddress2 = "Suite 210",
