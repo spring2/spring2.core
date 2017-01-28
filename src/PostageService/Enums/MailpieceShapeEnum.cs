@@ -15,7 +15,8 @@ namespace Spring2.Core.PostageService.Enums {
 	public static readonly MailpieceShapeEnum LETTER = new MailpieceShapeEnum("Letter", "Letter");
 	public static readonly MailpieceShapeEnum FLAT = new MailpieceShapeEnum("Flat", "Flat");
 	public static readonly MailpieceShapeEnum PARCEL = new MailpieceShapeEnum("Parcel", "Parcel");
-	public static readonly MailpieceShapeEnum LARGEPARCEL = new MailpieceShapeEnum("LargeParcel", "Large Parcel");
+        public static readonly MailpieceShapeEnum PACKAGE = new MailpieceShapeEnum("Package", "Package");
+        public static readonly MailpieceShapeEnum LARGEPARCEL = new MailpieceShapeEnum("LargeParcel", "Large Parcel");
 	public static readonly MailpieceShapeEnum IRREGULARPARCEL = new MailpieceShapeEnum("IrregularParcel", "Irregular Parcel");
 	public static readonly MailpieceShapeEnum OVERSIZEDPARCEL = new MailpieceShapeEnum("OversizedParcel", "Oversized Parcel");
 	public static readonly MailpieceShapeEnum FLATRATEENVELOPE = new MailpieceShapeEnum("FlatRateEnvelope", "Flat Rate Envelope");
