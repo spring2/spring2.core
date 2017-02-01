@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Spring2.Core.Types;
 
 namespace Spring2.Core.PostageService.Enums {
