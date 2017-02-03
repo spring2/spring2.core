@@ -25,7 +25,8 @@ namespace Spring2.Core.PostageService.Enums {
 	public static readonly MailpieceShapeEnum SMALLFLATRATEENVELOPE = new MailpieceShapeEnum("SmallFlatRateEnvelope", "Small Flat Rate Envelope");
 	public static readonly MailpieceShapeEnum SMALLFLATRATEBOX = new MailpieceShapeEnum("SmallFlatRateBox", "Small Flat Rate Box");
 	public static readonly MailpieceShapeEnum MEDIUMFLATRATEBOX = new MailpieceShapeEnum("MediumFlatRateBox", "Medium Flat Rate Box");
-	public static readonly MailpieceShapeEnum LARGEFLATRATEBOX = new MailpieceShapeEnum("LargeFlatRateBox", "Large Flat Rate Box");
+        public static readonly MailpieceShapeEnum FLATRATEBOX = new MailpieceShapeEnum("FlatRateBox", "Flat Rate Box");
+        public static readonly MailpieceShapeEnum LARGEFLATRATEBOX = new MailpieceShapeEnum("LargeFlatRateBox", "Large Flat Rate Box");
 	public static readonly MailpieceShapeEnum DVDFLATRATEBOX = new MailpieceShapeEnum("DVDFlatRateBox", "DVD Flat Rate Box");
 	public static readonly MailpieceShapeEnum LARGEVIDEOFLATRATEBOX = new MailpieceShapeEnum("LargeVideoFlatRateBox", "Large Video Flat Rate Box");
 	public static readonly MailpieceShapeEnum REGIONALRATEBOXA = new MailpieceShapeEnum("RegionalRateBoxA", "Regional Rate Box A");
