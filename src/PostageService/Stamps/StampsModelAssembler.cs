@@ -67,7 +67,8 @@ namespace Spring2.Core.PostageService.Stamps {
 		.ForMember(x => x.PaperSize, o => o.UseValue(SWSIMV52.PaperSizeV1.LabelSize))
 		.ForMember(x => x.EltronPrinterDPIType, o => o.UseValue(SWSIMV52.EltronPrinterDPIType.High))
 		.ForMember(x => x.ImageDpi, o => o.UseValue(SWSIMV52.ImageDpi.ImageDpi300))
-		.ForMember(x => x.SampleOnly, o => o.MapFrom(src => src.Test));
+		.ForMember(x => x.SampleOnly, o => o.MapFrom(src => src.Test))
+        .ForMember(x => x.printInstructions, o => o.UseValue(false));
 
 	    AutoMapper.Mapper.CreateMap<PostageLabelInputData, SWSIMV52.RateV19>()
 		.ForMember(x => x.FromZIPCode, o => o.MapFrom(src => src.FromPostalCode))
