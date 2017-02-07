@@ -31,3 +31,6 @@ Cubby
 /Core/src/SWS_Test/bin/*
 Core/src/obj/*
 /Core/build/*
+/src/obj/*
+/src/SWS_Test/obj/*
+/src/SWS_Test/bin/*
