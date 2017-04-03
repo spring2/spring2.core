@@ -48,7 +48,9 @@ namespace Spring2.Core.PostageService.Enums {
 	public static readonly MailClassEnum ISAL = new MailClassEnum("ISAL", "International");
 
 	public static readonly MailClassEnum UPSMIEXPEDITED = new MailClassEnum("UPSMIEXPEDITED", "UPS MI Expedited");
-
+	public static readonly MailClassEnum UPSNEXTDAY = new MailClassEnum("UPSNEXTDAY", "UPS Next Day");
+	public static readonly MailClassEnum UPSSECONDDAY = new MailClassEnum("UPSSECONDDAY", "UPS Second Day");
+	public static readonly MailClassEnum UPSGROUND = new MailClassEnum("UPSGROUND", "UPS Ground");
 
 	public static MailClassEnum GetInstance(Object value) {
 	    if (value is String) {

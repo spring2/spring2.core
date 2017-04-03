@@ -145,12 +145,16 @@ namespace Spring2.Core.PostageService.UPS {
 	}
 
 	public static Dictionary<string, string> mailClassToServiceCode = new Dictionary<string, string>() {
+	    { MailClassEnum.UPSNEXTDAY.ToString(), "01" },
+	    { MailClassEnum.UPSSECONDDAY.ToString(), "02" },
+	    { MailClassEnum.UPSGROUND.ToString(), "03" },
 	    { MailClassEnum.FIRST.ToString(), "M2" },
 	    { MailClassEnum.UPSMIEXPEDITED.ToString(), "M4" }
 	};
 	
 	public static Dictionary<string, string> mailpieceShapeToPackageTypeCode = new Dictionary<string, string>() {
 	    { MailpieceShapeEnum.LETTER.ToString(), "01" },
+	    { MailpieceShapeEnum.PACKAGE.ToString(), "02" },
 	    { MailpieceShapeEnum.PARCEL.ToString(), "57" },
 	    { MailpieceShapeEnum.THICKENVELOPE.ToString(), "59" },
 	    { MailpieceShapeEnum.IRREGULARPARCEL.ToString(), "62" }
