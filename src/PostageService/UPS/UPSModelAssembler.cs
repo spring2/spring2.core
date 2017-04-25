@@ -84,6 +84,14 @@ namespace Spring2.Core.PostageService.UPS {
 			},
 			Packaging = new UPSWS.Ship.PackagingType() {
 			    Code = mailpieceShapeToPackageTypeCode[src.MailpieceShape.ToString()]
+			},
+			Dimensions = new UPSWS.Ship.DimensionsType() {
+			    Height = src.MailpieceDimensions.Height.ToString(),
+			    Length = src.MailpieceDimensions.Width.ToString(),
+			    Width = src.MailpieceDimensions.Length.ToString(),
+			    UnitOfMeasurement = new UPSWS.Ship.ShipUnitOfMeasurementType() {
+				Code = "IN"
+			    }
 			}
 		    }
 		}));
