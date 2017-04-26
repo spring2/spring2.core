@@ -77,21 +77,13 @@ namespace Spring2.Core.PostageService.UPS {
 		.ForMember(x => x.Package, o => o.MapFrom(src => new UPSWS.Ship.PackageType[] {
 		    new UPSWS.Ship.PackageType() {
 			PackageWeight = new UPSWS.Ship.PackageWeightType() {
-			    Weight = src.WeightOz.ToString(),
+			    Weight = mailClassToWeightUnitOfMeasure[src.MailClass.ToString()].Equals("LBS") ? (src.WeightOz / 16).ToString() : src.WeightOz.ToString(),
 			    UnitOfMeasurement = new UPSWS.Ship.ShipUnitOfMeasurementType() {
-				Code = "OZS"
+				Code = mailClassToWeightUnitOfMeasure[src.MailClass.ToString()]
 			    }
 			},
 			Packaging = new UPSWS.Ship.PackagingType() {
 			    Code = mailpieceShapeToPackageTypeCode[src.MailpieceShape.ToString()]
-			},
-			Dimensions = new UPSWS.Ship.DimensionsType() {
-			    Height = src.MailpieceDimensions.Height.ToString(),
-			    Length = src.MailpieceDimensions.Width.ToString(),
-			    Width = src.MailpieceDimensions.Length.ToString(),
-			    UnitOfMeasurement = new UPSWS.Ship.ShipUnitOfMeasurementType() {
-				Code = "IN"
-			    }
 			}
 		    }
 		}));
@@ -166,6 +158,14 @@ namespace Spring2.Core.PostageService.UPS {
 	    { MailpieceShapeEnum.PARCEL.ToString(), "57" },
 	    { MailpieceShapeEnum.THICKENVELOPE.ToString(), "59" },
 	    { MailpieceShapeEnum.IRREGULARPARCEL.ToString(), "62" }
+	};
+
+	public static Dictionary<string, string> mailClassToWeightUnitOfMeasure = new Dictionary<string, string>() {
+	    { MailClassEnum.UPSNEXTDAY.ToString(), "LBS" },
+	    { MailClassEnum.UPSSECONDDAY.ToString(), "LBS" },
+	    { MailClassEnum.UPSGROUND.ToString(), "LBS" },
+	    { MailClassEnum.FIRST.ToString(), "OZS" },
+	    { MailClassEnum.UPSMIEXPEDITED.ToString(), "OZS" }
 	};
     }
 }
