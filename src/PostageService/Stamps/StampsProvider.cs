@@ -23,11 +23,16 @@ namespace Spring2.Core.PostageService.Stamps {
 	bool passwordExpired;
 	bool codewordsSet;
 
-	public string Authenticator {
+	public SWSIMV52.Credentials Authenticator {
 	    get {
-		return authenticator;
+		return credentials;
 	    }
 	}
+	//public string Authenticator {
+	//    get {
+	//	return authenticator;
+	//    }
+	//}
 
 	public DateTime LastLoginTime {
 	    get {
@@ -96,7 +101,7 @@ namespace Spring2.Core.PostageService.Stamps {
 	public RefundRequestData RefundRequest(String trackingNumber, bool isInternational) {
 	    SWSIMV52.CancelIndiciumRequest request = new SWSIMV52.CancelIndiciumRequest(Authenticator, trackingNumber);
 	    authenticator = client.CancelIndicium(request.Item, request.Item1);
-	    SWSIMV52.CancelIndiciumResponse response = new SWSIMV52.CancelIndiciumResponse(Authenticator);
+	    SWSIMV52.CancelIndiciumResponse response = new SWSIMV52.CancelIndiciumResponse(authenticator);
 	    return AutoMapper.Mapper.Map<SWSIMV52.CancelIndiciumResponse, RefundRequestData>(response);
 	}
 
@@ -144,9 +149,10 @@ namespace Spring2.Core.PostageService.Stamps {
 	}
 
 	public PasswordChangedData ChangePassword(ChangePasswordInputData data) {
-	    SWSIMV52.ChangePasswordRequest request = assembler.ToChangePasswordRequest(data, Authenticator, credentials.Password);
+	    var authenticator = client.AuthenticateUser(credentials, out lastLoginTime, out clearCredential, out loginBannerText, out passwordExpired, out codewordsSet);
+	    SWSIMV52.ChangePasswordRequest request = assembler.ToChangePasswordRequest(data, authenticator, credentials.Password);
 	    authenticator = client.ChangePassword(request.Item, request.OldPassword, request.NewPassword);
-	    SWSIMV52.ChangePasswordResponse response = new SWSIMV52.ChangePasswordResponse(Authenticator);
+	    SWSIMV52.ChangePasswordResponse response = new SWSIMV52.ChangePasswordResponse(authenticator);
 	    return AutoMapper.Mapper.Map<SWSIMV52.ChangePasswordResponse, PasswordChangedData>(response);
 	}
 
@@ -162,7 +168,8 @@ namespace Spring2.Core.PostageService.Stamps {
 	}
 
 	public PurchasedPostageData BuyPostage(PostagePurchaseInputData data) {
-	    SWSIMV52.PurchasePostageRequest request = assembler.ToPurchasePostageRequest(data, Authenticator, accountInfo);
+	    var authenticator = client.AuthenticateUser(credentials, out lastLoginTime, out clearCredential, out loginBannerText, out passwordExpired, out codewordsSet);
+	    SWSIMV52.PurchasePostageRequest request = assembler.ToPurchasePostageRequest(data, authenticator, accountInfo);
 	    SWSIMV52.PurchasePostageResponse response = new SWSIMV52.PurchasePostageResponse();
 	    authenticator = client.PurchasePostage(request.Item, request.PurchaseAmount, request.ControlTotal, request.MI, request.IntegratorTxID, 
 				    out response.PurchaseStatus, out response.TransactionID, out response.PostageBalance,

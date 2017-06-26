@@ -250,5 +250,36 @@ namespace Spring2.Core.PostageService.Test {
 	    }
 	}
 
+	[Test]
+	public void ShouldSupportMultipleProvidersBeingAuthenticated() {
+	    IPostageServiceProvider postage1 = new StampsProvider();
+	    IPostageServiceProvider postage2 = new StampsProvider();
+
+	    DoRequest(postage1);
+	    DoRequest(postage2);
+	    DoRequest(postage1);
+	    DoRequest(postage2);
+
+	}
+
+	private static void DoRequest(IPostageServiceProvider postage) {
+	    PostageRateInputData input = new PostageRateInputData() {
+		MailClass = MailClassEnum.PRIORITYEXPRESS,
+		MailpieceShape = MailpieceShapeEnum.LETTER,
+		WeightOz = 16,
+		MailpieceDimensions = new PackageDimensions { Height = 10, Width = 5, Length = 15 },
+		Value = 100,
+		FromPostalCode = "84070",
+		ToPostalCode = "11375",
+		ShipDate = DateTime.Now.ToString("MM/dd/yyyy"),
+		ShipTime = DateTime.Now.ToString("hh:mm tt")
+	    };
+
+	    PostageRatesData data = postage.GetPostageRates(input);
+
+	    Assert.IsNotNull(data);
+	    Console.WriteLine(data.ErrorMessage);
+	    Assert.IsTrue(string.IsNullOrEmpty(data.ErrorMessage));
+	}
     }
 }
